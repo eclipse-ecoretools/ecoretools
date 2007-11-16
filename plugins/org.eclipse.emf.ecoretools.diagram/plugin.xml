@@ -210,7 +210,7 @@
       <?gmfgen generated="true"?>
       <page
             id="org.eclipse.emf.ecore.ediagram.general"
-            name="%preference.page.title.org.eclipse.emf.ecore.ediagram.general"
+            name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
