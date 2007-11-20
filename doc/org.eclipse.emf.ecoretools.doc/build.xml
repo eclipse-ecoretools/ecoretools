@@ -73,11 +73,12 @@
 
 		<antcall target="build.index"/>
 
+		<!-- Zip up all of the documentation artifacts - references(including javadoc), images, tutorials, etc. -->
 		<zip destfile="${build.result.folder}/doc.zip" compress="true">
-			<zipfileset dir="css" prefix="css"/>
-			<zipfileset dir="images" prefix="images"/>
+			<!--zipfileset dir="css" prefix="css"/>
+			<zipfileset dir="images" prefix="images"/-->
 			<zipfileset dir="references" prefix="references"/>
-			<zipfileset dir="tutorials" prefix="tutorials"/>
+			<!--zipfileset dir="tutorials" prefix="tutorials"/-->
 		</zip>
 	</target>
 
