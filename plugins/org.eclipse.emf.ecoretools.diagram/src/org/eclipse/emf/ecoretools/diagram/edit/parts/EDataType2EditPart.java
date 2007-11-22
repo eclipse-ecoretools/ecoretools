@@ -253,7 +253,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 
 			this.setLayoutManager(layoutThis);
 
-			this.setOutlineXOR(true);
 			this.setMinimumSize(new Dimension(getMapMode().DPtoLP(100), getMapMode().DPtoLP(30)));
 			createContents();
 		}

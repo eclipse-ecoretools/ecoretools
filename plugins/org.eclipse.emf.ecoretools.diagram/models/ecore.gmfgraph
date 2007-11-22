@@ -94,8 +94,7 @@
         name="DataTypeFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name=""
-          xorOutline="true">
+          name="">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"
