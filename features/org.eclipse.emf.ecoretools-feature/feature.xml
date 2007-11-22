@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.emf.ecoretools"
-      label="%featureName (Incubation)"
+      label="%featureName"
       version="0.8.0.qualifier"
       provider-name="%providerName">
 
    <description url="http://www.eclipse.org/modeling/emft">
-      %description (Incubation)
+      %description
    </description>
 
    <copyright url="http://www.eclipse.org/legal/epl-v10.html">
