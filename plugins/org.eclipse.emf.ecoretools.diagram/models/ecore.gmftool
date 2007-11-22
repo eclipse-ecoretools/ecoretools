@@ -56,11 +56,11 @@
           description="Create Enumeration">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons\EENum.gif"
+            path="icons\EEnum.gif"
             bundle="org.eclipse.emf.ecoretools.diagram"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons\EENum_24.gif"
+            path="icons\EEnum_24.gif"
             bundle="org.eclipse.emf.ecoretools.diagram"/>
       </tools>
       <tools

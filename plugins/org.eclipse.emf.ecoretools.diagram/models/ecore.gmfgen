@@ -925,8 +925,8 @@
             xsi:type="gmfgen:ToolEntry"
             title="EEnum"
             description="Create Enumeration"
-            largeIconPath="/org.eclipse.emf.ecoretools.diagram/icons/EENum_24.gif"
-            smallIconPath="/org.eclipse.emf.ecoretools.diagram/icons/EENum.gif"
+            largeIconPath="/org.eclipse.emf.ecoretools.diagram/icons/EEnum_24.gif"
+            smallIconPath="/org.eclipse.emf.ecoretools.diagram/icons/EEnum.gif"
             genNodes="//@diagram/@childNodes.4 //@diagram/@topLevelNodes.4"/>
         <entries
             xsi:type="gmfgen:ToolEntry"

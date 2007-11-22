@@ -119,8 +119,8 @@ public class EcorePaletteFactory {
 		types.add(EcoreElementTypes.EEnum_2005);
 		types.add(EcoreElementTypes.EEnum_1005);
 		NodeToolEntry entry = new NodeToolEntry(Messages.EEnum4CreationTool_title, Messages.EEnum4CreationTool_desc, types);
-		entry.setSmallIcon(EcoreDiagramEditorPlugin.findImageDescriptor("/org.eclipse.emf.ecoretools.diagram/icons/EENum.gif")); //$NON-NLS-1$
-		entry.setLargeIcon(EcoreDiagramEditorPlugin.findImageDescriptor("/org.eclipse.emf.ecoretools.diagram/icons/EENum_24.gif")); //$NON-NLS-1$
+		entry.setSmallIcon(EcoreDiagramEditorPlugin.findImageDescriptor("/org.eclipse.emf.ecoretools.diagram/icons/EEnum.gif")); //$NON-NLS-1$
+		entry.setLargeIcon(EcoreDiagramEditorPlugin.findImageDescriptor("/org.eclipse.emf.ecoretools.diagram/icons/EEnum_24.gif")); //$NON-NLS-1$
 		return entry;
 	}
 
