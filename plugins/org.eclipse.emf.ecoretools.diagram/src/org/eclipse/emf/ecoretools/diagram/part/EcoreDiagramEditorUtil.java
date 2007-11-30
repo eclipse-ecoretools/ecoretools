@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -197,6 +198,54 @@ public class EcoreDiagramEditorUtil {
 	}
 
 	/**
+	 * This method should be called within a workspace modify operation since it
+	 * creates resources.<br>
+	 * <b>Updated</b> : here we only need to create the diagram resource, the domain
+	 * resource already exist, we just load it
+	 * 
+	 * @param diagramURI the diagram model EMF URI
+	 * @param modelURI the domain model EMF URI
+	 * @param domainElement the domain element that should be associated with the Diagram
+	 * @param progressMonitor the progressMonitor
+	 * 
+	 * @return Resource the diagram resource 
+	 */
+	public static Resource createDiagramOnly(URI diagramURI, URI modelURI, EObject domainElement, boolean initializeDiagram, IProgressMonitor progressMonitor) {
+		TransactionalEditingDomain editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
+		progressMonitor.beginTask(Messages.EcoreDiagramEditorUtil_CreateDiagramProgressTask, 3);
+		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
+		final EObject model = domainElement;
+		final String diagramName = diagramURI.lastSegment();
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
+
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+				// TODO Handle diagram initialization or not
+				Diagram diagram = ViewService.createDiagram(model, EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				if (diagram != null) {
+					diagramResource.getContents().add(diagram);
+					diagram.setName(diagramName);
+					diagram.setElement(model);
+				}
+
+				try {
+					diagramResource.save(org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorUtil.getSaveOptions());
+				} catch (IOException e) {
+
+					EcoreDiagramEditorPlugin.getInstance().logError("Unable to store diagram resources", e); //$NON-NLS-1$
+				}
+				return CommandResult.newOKCommandResult();
+			}
+		};
+		try {
+			OperationHistoryFactory.getOperationHistory().execute(command, new SubProgressMonitor(progressMonitor, 1), null);
+		} catch (ExecutionException e) {
+			EcoreDiagramEditorPlugin.getInstance().logError("Unable to create diagram", e); //$NON-NLS-1$
+		}
+		setCharset(WorkspaceSynchronizer.getFile(diagramResource));
+		return diagramResource;
+	}
+
+	/**
 	 * Create a new instance of domain element associated with canvas. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -346,10 +395,10 @@ public class EcoreDiagramEditorUtil {
 						View view = (View) element;
 						if (view.getDiagram() == scope.getDiagram()) {
 							element2ViewMap.put(element, element); // take only
-																	// those
-																	// that part
-																	// of our
-																	// diagram
+							// those
+							// that part
+							// of our
+							// diagram
 						}
 					}
 				}

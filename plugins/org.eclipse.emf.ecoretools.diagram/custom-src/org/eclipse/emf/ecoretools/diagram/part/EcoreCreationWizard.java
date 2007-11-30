@@ -27,111 +27,63 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 /**
- * @generated
+ * Wizard that offers creation facilities for the initialization of an empty
+ * Ecore diagram/domain files, or initialization of an Ecore diagram from an
+ * existing domain file.<br>
+ * 
+ * Creation : 26 Nov. 2007
+ * 
+ * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public class EcoreCreationWizard extends Wizard implements INewWizard {
 
-	/**
-	 * @generated
-	 */
-	private IWorkbench workbench;
+	private IStructuredSelection selection;
 
-	/**
-	 * @generated
-	 */
-	protected IStructuredSelection selection;
+	private EcoreCreationWizardPage diagPage;
 
-	/**
-	 * @generated
-	 */
-	protected EcoreCreationWizardPage diagramModelFilePage;
-
-	/**
-	 * @generated
-	 */
-	protected EcoreCreationWizardPage domainModelFilePage;
-
-	/**
-	 * @generated
-	 */
+	/** The EMF Resource associated with the Diagram */
 	protected Resource diagram;
 
 	/**
-	 * @generated
-	 */
-	private boolean openNewlyCreatedDiagramEditor = true;
-
-	/**
-	 * @generated
-	 */
-	public IWorkbench getWorkbench() {
-		return workbench;
-	}
-
-	/**
-	 * @generated
+	 * Get the initial selection when executing this wizard
+	 * 
+	 * @return IStructuredSelection
 	 */
 	public IStructuredSelection getSelection() {
 		return selection;
 	}
 
 	/**
-	 * @generated
+	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
+	 *      org.eclipse.jface.viewers.IStructuredSelection)
 	 */
-	public final Resource getDiagram() {
-		return diagram;
-	}
-
-	/**
-	 * @generated
-	 */
-	public final boolean isOpenNewlyCreatedDiagramEditor() {
-		return openNewlyCreatedDiagramEditor;
-	}
-
-	/**
-	 * @generated
-	 */
-	public void setOpenNewlyCreatedDiagramEditor(boolean openNewlyCreatedDiagramEditor) {
-		this.openNewlyCreatedDiagramEditor = openNewlyCreatedDiagramEditor;
-	}
-
-	/**
-	 * @generated
-	 */
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		this.workbench = workbench;
-		this.selection = selection;
+	public void init(IWorkbench workbench, IStructuredSelection theSelection) {
+		this.selection = theSelection;
 		setWindowTitle(Messages.EcoreCreationWizardTitle);
 		setDefaultPageImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/wizban/NewEcoreWizard.gif")); //$NON-NLS-1$
+		setDialogSettings(EcoreDiagramEditorPlugin.getInstance().getDialogSettings());
 		setNeedsProgressMonitor(true);
 	}
 
 	/**
-	 * @generated
-	 */
-	public void addPages() {
-		diagramModelFilePage = new EcoreCreationWizardPage("DiagramModelFile", getSelection(), "ecorediag"); //$NON-NLS-1$ //$NON-NLS-2$
-		diagramModelFilePage.setTitle(Messages.EcoreCreationWizard_DiagramModelFilePageTitle);
-		diagramModelFilePage.setDescription(Messages.EcoreCreationWizard_DiagramModelFilePageDescription);
-		addPage(diagramModelFilePage);
-
-		domainModelFilePage = new EcoreCreationWizardPage("DomainModelFile", getSelection(), "ecore"); //$NON-NLS-1$ //$NON-NLS-2$
-		domainModelFilePage.setTitle(Messages.EcoreCreationWizard_DomainModelFilePageTitle);
-		domainModelFilePage.setDescription(Messages.EcoreCreationWizard_DomainModelFilePageDescription);
-		addPage(domainModelFilePage);
-	}
-
-	/**
-	 * @generated
+	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 */
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
 			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
-				diagram = EcoreDiagramEditorUtil.createDiagram(diagramModelFilePage.getURI(), domainModelFilePage.getURI(), monitor);
-				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
+				if (diagPage.isNewModel()) {
+					// case of creating an empty domain/diagram Resources
+					diagram = EcoreDiagramEditorUtil.createDiagram(diagPage.getDiagramModelURI(), diagPage.getDomainModelURI(), monitor);
+				} else {
+					// case of creating only a diagram Resource (the domain file
+					// already exists)
+					diagram = EcoreDiagramEditorUtil.createDiagramOnly(diagPage.getDiagramModelURI(), diagPage.getDomainModelURI(), diagPage.getDiagramEObject(), diagPage.isInitialized(), monitor);
+				}
+				if (diagram != null) {
 					try {
+						// try to open the current diagram resource into the
+						// appropriate editor
 						EcoreDiagramEditorUtil.openDiagram(diagram);
 					} catch (PartInitException e) {
 						ErrorDialog.openError(getContainer().getShell(), Messages.EcoreCreationWizardOpenEditorError, null, e.getStatus());
@@ -147,10 +99,30 @@ public class EcoreCreationWizard extends Wizard implements INewWizard {
 			if (e.getTargetException() instanceof CoreException) {
 				ErrorDialog.openError(getContainer().getShell(), Messages.EcoreCreationWizardCreationError, null, ((CoreException) e.getTargetException()).getStatus());
 			} else {
-				EcoreDiagramEditorPlugin.getInstance().logError("Error creating diagram", e.getTargetException()); //$NON-NLS-1$
+				EcoreDiagramEditorPlugin.getInstance().logError("Error creating diagram", e.getTargetException());
 			}
 			return false;
 		}
 		return diagram != null;
 	}
+
+	/**
+	 * @see org.eclipse.jface.wizard.IWizard#addPages()
+	 */
+	public void addPages() {
+		// Add the single wizard page used to configure the diagram resource
+		// creation
+		diagPage = new EcoreCreationWizardPage("NewEcoreToolsDiagram", getSelection()); //$NON-NLS-1$
+		diagPage.setTitle(Messages.EcoreCreationWizard_DiagramModelFilePageTitle);
+		diagPage.setDescription(Messages.EcoreCreationWizard_DiagramModelFilePageDescription);
+		addPage(diagPage);
+	}
+
+	/**
+	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
+	 */
+	public boolean canFinish() {
+		return diagPage.isPageComplete();
+	}
+
 }
