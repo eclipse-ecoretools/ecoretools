@@ -200,15 +200,19 @@ public class EcoreDiagramEditorUtil {
 	/**
 	 * This method should be called within a workspace modify operation since it
 	 * creates resources.<br>
-	 * <b>Updated</b> : here we only need to create the diagram resource, the domain
-	 * resource already exist, we just load it
+	 * <b>Updated</b> : here we only need to create the diagram resource, the
+	 * domain resource already exist, we just load it
 	 * 
-	 * @param diagramURI the diagram model EMF URI
-	 * @param modelURI the domain model EMF URI
-	 * @param domainElement the domain element that should be associated with the Diagram
-	 * @param progressMonitor the progressMonitor
+	 * @param diagramURI
+	 *            the diagram model EMF URI
+	 * @param modelURI
+	 *            the domain model EMF URI
+	 * @param domainElement
+	 *            the domain element that should be associated with the Diagram
+	 * @param progressMonitor
+	 *            the progressMonitor
 	 * 
-	 * @return Resource the diagram resource 
+	 * @return Resource the diagram resource
 	 */
 	public static Resource createDiagramOnly(URI diagramURI, URI modelURI, EObject domainElement, boolean initializeDiagram, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
@@ -395,10 +399,10 @@ public class EcoreDiagramEditorUtil {
 						View view = (View) element;
 						if (view.getDiagram() == scope.getDiagram()) {
 							element2ViewMap.put(element, element); // take only
-							// those
-							// that part
-							// of our
-							// diagram
+																	// those
+																	// that part
+																	// of our
+																	// diagram
 						}
 					}
 				}

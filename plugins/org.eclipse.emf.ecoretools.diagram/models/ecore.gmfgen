@@ -13,7 +13,10 @@
       canonicalEditPolicyClassName="EPackageCanonicalEditPolicy"
       iconProviderPriority="Low"
       creationWizardIconPath="icons/Ecore.gif"
-      validationProviderPriority="Low">
+      validationProviderPriority="Low"
+      validationEnabled="true"
+      validationDecorators="true"
+      liveValidationUIFeedback="true">
     <diagramRunTimeClass
         href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType
@@ -995,8 +998,8 @@
     </palette>
     <preferencePages
         xsi:type="gmfgen:GenStandardPreferencePage"
-        iD="org.eclipse.emf.ecore.ediagram.general"
-        name="Ecore Diagram (2)">
+        iD="org.eclipse.emf.ecoretools.diagram.general"
+        name="Ecore Tools Diagram">
       <children
           xsi:type="gmfgen:GenStandardPreferencePage"
           iD="org.eclipse.emf.ecoretools.diagram.appearance"
@@ -1028,7 +1031,8 @@
       iD="org.eclipse.emf.ecoretools.diagram"
       name="Ecore Tools Diagram (Incubation)"
       provider="Eclipse.org"
-      version="0.8.0.qualifier"/>
+      version="0.8.0.qualifier"
+      printingEnabled="true"/>
   <editor
       iconPath="icons/Ecore.gif"/>
   <navigator>
@@ -1393,8 +1397,8 @@
         iD="diagram"/>
     <tabs
         xsi:type="gmfgen:GenCustomPropertyTab"
-        iD="domain"
-        label="Core">
+        iD="all"
+        label="All">
       <filter
           xsi:type="gmfgen:TypeTabFilter">
         <types>org.eclipse.gmf.runtime.notation.View</types>

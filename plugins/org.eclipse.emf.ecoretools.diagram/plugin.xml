@@ -125,6 +125,16 @@
          </ViewId>
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
+         id="EcorePresentationPrint">
+         <Priority name="Lowest"/>
+         <ViewId id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="print"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
          id="EcorePresentationIDE">
          <Priority name="Lowest"/>
@@ -692,10 +702,12 @@
          sequence="F5"/>
    </extension>
    
-   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
       <?gmfgen generated="true"?>
-      <decoratorProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreShortcutsDecoratorProvider">
+      <decoratorProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreValidationDecoratorProvider">
          <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
    
@@ -712,6 +724,14 @@
    
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <?gmfgen generated="true"?>
+      <contributionItemProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreContributionItemProvider">
+         <Priority name="Low">
+         </Priority>
+         <partContribution id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
+            <partAction menubarPath="/file/print" id="printPreviewAction">
+            </partAction>
+         </partContribution>
+      </contributionItemProvider>
       <contributionItemProvider
             class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
@@ -738,14 +758,36 @@
          </popupContribution>
       </contributionItemProvider>
    </extension>
-   
-   
-   
-   
-   
-   
-   
-   
-   
+   <extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="org.eclipse.emf.ecoretools.diagram.providers.EcoreValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
+            <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreMarkerNavigationProvider">
+         <MarkerType name="org.eclipse.emf.ecoretools.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+   <extension id="diagnostic" name="Ecore Tools Diagram (Incubation) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+      </decoratorProvider>
+   </extension>
 
 </plugin>
