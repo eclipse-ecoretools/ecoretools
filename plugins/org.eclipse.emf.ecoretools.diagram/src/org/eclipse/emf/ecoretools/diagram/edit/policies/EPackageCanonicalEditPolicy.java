@@ -40,6 +40,7 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreNodeDescriptor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
@@ -149,11 +150,11 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void refreshSemantic() {
 		List createdViews = new LinkedList();
-		createdViews.addAll(refreshSemanticChildren());
+//		createdViews.addAll(refreshSemanticChildren());
 		List createdConnectionViews = new LinkedList();
 		createdConnectionViews.addAll(refreshSemanticConnections());
 		createdConnectionViews.addAll(refreshConnections());
@@ -357,5 +358,13 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			return (EditPart) getHost().getViewer().getEditPartRegistry().get(view);
 		}
 		return null;
+	}
+
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public boolean understandsRequest(Request req) {
+		return RequestConstants.REQ_CREATE.equals(req.getType());
 	}
 }

@@ -12,6 +12,7 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackageCanonicalEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackageItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.PackageDiagramDragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -46,8 +47,7 @@ public class EPackageEditPart extends DiagramEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EPackageItemSemanticEditPolicy());
-		// installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new
-		// EPackageCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new EPackageCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new PackageDiagramDragDropEditPolicy());
 
 		removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
