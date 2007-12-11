@@ -24,6 +24,7 @@
        <javadoc path="doc.zip!/references/javadoc" archive="true">
           <!-- @pluginIDs@ -->
           <!-- list plugin IDs here, eg. <plugin id="org.eclipse.foo.bar"/> <plugin id="org.eclipse.foo.baz"/> -->
+          <plugin id="org.eclipse.emf.ecoretools"/>
           <plugin id="org.eclipse.emf.ecoretools.diagram"/>
           <plugin id="org.eclipse.emf.ecoretools.properties"/>
           <plugin id="org.eclipse.emf.tabbedproperties"/>
