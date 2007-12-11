@@ -2,5 +2,14 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="EMF Ecore Tools Developer Guide">
-	<topic label="Javadoc" href="references/javadoc/index.html"/>
+
+	<topic label="Online Docs">
+		<topic label="Ecore Tools Wiki Page" href="http://wiki.eclipse.org/Ecore_Tools" />
+		<topic label="Ecore Tools FAQ" href="http://wiki.eclipse.org/EcoreTools_FAQ" />
+	</topic>
+
+	<topic label="Reference">
+		<link toc="topics_Reference.xml"/>
+	</topic>
+
 </toc>
