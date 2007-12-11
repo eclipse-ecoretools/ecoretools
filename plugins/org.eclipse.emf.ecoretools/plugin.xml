@@ -44,4 +44,12 @@
 		</objectContribution>
 	</extension>
 
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective
+			id="org.eclipse.emf.ecoretools.perspective"
+			class="org.eclipse.emf.ecoretools.internal.ui.EcoreToolsPerspective"
+			name="Ecore Tools Perspective"
+			icon="icons/perspective.png"/>
+	</extension>
+
 </plugin>
