@@ -13,7 +13,7 @@
       label="%featureName"
       version="0.8.0.qualifier"
       provider-name="%providerName"
-      image="eclipse_update_120.jpg">
+      image="modeling32.png">
 
    <description>
       %description
