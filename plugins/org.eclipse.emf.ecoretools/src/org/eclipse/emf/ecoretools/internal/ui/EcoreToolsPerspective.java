@@ -17,11 +17,12 @@ import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IViewLayout;
+import org.eclipse.ui.navigator.resources.ProjectExplorer;
 
 /**
  * This class defines the Ecore Tools perspective. Default views are :
  * <ul>
- * <li>Resource Navigator</li>
+ * <li>Project Explorer</li>
  * <li>Outline</li>
  * <li>Properties</li>
  * <li>Problems</li>
@@ -41,12 +42,12 @@ public class EcoreToolsPerspective implements IPerspectiveFactory {
 		String editorArea = layout.getEditorArea();
 
 		// Top Left
-		layout.addView(IPageLayout.ID_RES_NAV, IPageLayout.LEFT, (float) 0.25, editorArea);
-		IViewLayout navigator = layout.getViewLayout(IPageLayout.ID_RES_NAV);
-		navigator.setCloseable(false);
+		layout.addView(ProjectExplorer.VIEW_ID, IPageLayout.LEFT, (float) 0.25, editorArea);
+		IViewLayout explorer = layout.getViewLayout(ProjectExplorer.VIEW_ID);
+		explorer.setCloseable(false);
 
 		// Bottom Left
-		layout.addView(IPageLayout.ID_OUTLINE, IPageLayout.BOTTOM, (float) 0.50, IPageLayout.ID_RES_NAV);
+		layout.addView(IPageLayout.ID_OUTLINE, IPageLayout.BOTTOM, (float) 0.50, ProjectExplorer.VIEW_ID);
 		IViewLayout outline = layout.getViewLayout(IPageLayout.ID_OUTLINE);
 		outline.setCloseable(false);
 
