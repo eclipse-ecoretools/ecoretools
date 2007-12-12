@@ -69,7 +69,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	}
 
 	/**
-	 * Retusn the analyzed object
+	 * Return the analyzed object
 	 * 
 	 * @return the EObject analyzed by this view
 	 */
@@ -78,10 +78,10 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	}
 
 	/**
-	 * Changes the anaylzed object and refresh the view
+	 * Changes the analyzed object and refresh the view
 	 * 
 	 * @param obj
-	 *            the EObject that mus be analyzed
+	 *            the EObject that must be analyzed
 	 */
 	public void setAnalyzedObject(EObject obj) {
 		if (obj != null) {
