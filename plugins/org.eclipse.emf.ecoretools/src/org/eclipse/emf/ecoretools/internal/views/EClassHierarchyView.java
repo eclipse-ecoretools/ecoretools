@@ -42,7 +42,7 @@ public class EClassHierarchyView extends AnalysisView {
 	/**
 	 * The ID of the view
 	 */
-	public static final String VIEW_ID = "org.topcased.ecore.ui.views.EClassHierarchyView";
+	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView";
 
 	private static final int ASCENDANT = 0;
 

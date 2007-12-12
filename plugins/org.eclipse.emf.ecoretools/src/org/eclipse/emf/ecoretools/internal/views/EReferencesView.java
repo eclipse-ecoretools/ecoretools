@@ -35,7 +35,7 @@ public class EReferencesView extends AnalysisView {
 	/**
 	 * The ID of the view
 	 */
-	public static final String VIEW_ID = "org.topcased.ecore.ui.views.EReferencesView";
+	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EReferencesView";
 
 	private TreeViewer referencesTree;
 
