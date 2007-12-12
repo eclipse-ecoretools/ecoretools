@@ -22,6 +22,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributes2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassName2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassNameEditPart;
@@ -45,7 +46,6 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageContentsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageNameEditPart;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceLowerBoundUpperBoundEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceNameEditPart;
@@ -59,6 +59,7 @@ import org.eclipse.emf.ecoretools.diagram.view.factories.EAttributeViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClass2ViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClassAttributes2ViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClassAttributesViewFactory;
+import org.eclipse.emf.ecoretools.diagram.view.factories.EClassESuperTypesViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClassName2ViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClassNameViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EClassOperations2ViewFactory;
@@ -82,7 +83,6 @@ import org.eclipse.emf.ecoretools.diagram.view.factories.EPackage2ViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EPackageContentsViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EPackageNameViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EPackageViewFactory;
-import org.eclipse.emf.ecoretools.diagram.view.factories.EReference2ViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EReferenceLowerBoundUpperBoundViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EReferenceNameViewFactory;
 import org.eclipse.emf.ecoretools.diagram.view.factories.EReferenceViewFactory;
@@ -351,8 +351,8 @@ public class EcoreViewProvider extends AbstractViewProvider {
 			return EAnnotationReferencesViewFactory.class;
 		case EReferenceEditPart.VISUAL_ID:
 			return EReferenceViewFactory.class;
-		case EReference2EditPart.VISUAL_ID:
-			return EReference2ViewFactory.class;
+		case EClassESuperTypesEditPart.VISUAL_ID:
+			return EClassESuperTypesViewFactory.class;
 		}
 		return null;
 	}

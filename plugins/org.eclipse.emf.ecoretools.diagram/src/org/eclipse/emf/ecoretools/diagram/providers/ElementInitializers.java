@@ -20,9 +20,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.expressions.EcoreAbstractExpression;
-import org.eclipse.emf.ecoretools.diagram.expressions.EcoreOCLFactory;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 
 /**
@@ -34,17 +32,6 @@ public class ElementInitializers {
 	 * @generated
 	 */
 	public static class Initializers {
-
-		/**
-		 * @generated
-		 */
-		public static final IObjectInitializer EReference_3002 = new ObjectInitializer(EcorePackage.eINSTANCE.getEReference()) {
-
-			protected void init() {
-				add(createExpressionFeatureInitializer(EcorePackage.eINSTANCE.getEReference_Containment(), EcoreOCLFactory.getExpression("false", //$NON-NLS-1$
-						EcorePackage.eINSTANCE.getEReference())));
-			}
-		}; // EReference_3002 ObjectInitializer
 
 		/**
 		 * @generated

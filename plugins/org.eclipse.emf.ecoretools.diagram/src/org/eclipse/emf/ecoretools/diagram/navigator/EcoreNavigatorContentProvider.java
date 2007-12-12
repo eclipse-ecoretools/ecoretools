@@ -29,6 +29,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributes2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassOperations2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassOperationsEditPart;
@@ -43,7 +44,6 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageContentsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EStringToStringMapEntryEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
@@ -265,7 +265,7 @@ public class EcoreNavigatorContentProvider implements ICommonContentProvider {
 			links.addChildren(createNavigatorItems(connectedViews, links, false));
 			connectedViews = getDiagramLinksByType(Collections.singleton(view), EReferenceEditPart.VISUAL_ID);
 			links.addChildren(createNavigatorItems(connectedViews, links, false));
-			connectedViews = getDiagramLinksByType(Collections.singleton(view), EReference2EditPart.VISUAL_ID);
+			connectedViews = getDiagramLinksByType(Collections.singleton(view), EClassESuperTypesEditPart.VISUAL_ID);
 			links.addChildren(createNavigatorItems(connectedViews, links, false));
 			if (!links.isEmpty()) {
 				result.add(links);
@@ -289,9 +289,9 @@ public class EcoreNavigatorContentProvider implements ICommonContentProvider {
 			incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
 			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EReferenceEditPart.VISUAL_ID);
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(view), EReference2EditPart.VISUAL_ID);
+			connectedViews = getIncomingLinksByType(Collections.singleton(view), EClassESuperTypesEditPart.VISUAL_ID);
 			incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EReference2EditPart.VISUAL_ID);
+			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EClassESuperTypesEditPart.VISUAL_ID);
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
 			if (!incominglinks.isEmpty()) {
 				result.add(incominglinks);
@@ -409,9 +409,9 @@ public class EcoreNavigatorContentProvider implements ICommonContentProvider {
 			incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
 			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EReferenceEditPart.VISUAL_ID);
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
-			connectedViews = getIncomingLinksByType(Collections.singleton(view), EReference2EditPart.VISUAL_ID);
+			connectedViews = getIncomingLinksByType(Collections.singleton(view), EClassESuperTypesEditPart.VISUAL_ID);
 			incominglinks.addChildren(createNavigatorItems(connectedViews, incominglinks, true));
-			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EReference2EditPart.VISUAL_ID);
+			connectedViews = getOutgoingLinksByType(Collections.singleton(view), EClassESuperTypesEditPart.VISUAL_ID);
 			outgoinglinks.addChildren(createNavigatorItems(connectedViews, outgoinglinks, true));
 			if (!incominglinks.isEmpty()) {
 				result.add(incominglinks);
@@ -528,7 +528,7 @@ public class EcoreNavigatorContentProvider implements ICommonContentProvider {
 			return result.toArray();
 		}
 
-		case EReference2EditPart.VISUAL_ID: {
+		case EClassESuperTypesEditPart.VISUAL_ID: {
 			Collection result = new ArrayList();
 			EcoreNavigatorGroup target = new EcoreNavigatorGroup(Messages.NavigatorGroupName_EClassESuperTypes_3003_target, "icons/linkTargetNavigatorGroup.gif", parentElement); //$NON-NLS-1$
 			EcoreNavigatorGroup source = new EcoreNavigatorGroup(Messages.NavigatorGroupName_EClassESuperTypes_3003_source, "icons/linkSourceNavigatorGroup.gif", parentElement); //$NON-NLS-1$

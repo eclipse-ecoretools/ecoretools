@@ -31,7 +31,7 @@ public class EClassESuperTypesEditPart extends ConnectionNodeEditPart {
 	/**
 	 * @generated
 	 */
-	public static final int VISUAL_ID = 3004;
+	public static final int VISUAL_ID = 3003;
 
 	/**
 	 * @generated
@@ -57,8 +57,14 @@ public class EClassESuperTypesEditPart extends ConnectionNodeEditPart {
 	 * @generated
 	 */
 	protected Connection createConnectionFigure() {
-
 		return new SolidLineWDstClosedArrow();
+	}
+
+	/**
+	 * @generated
+	 */
+	public SolidLineWDstClosedArrow getPrimaryShape() {
+		return (SolidLineWDstClosedArrow) getFigure();
 	}
 
 	/**

@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreBaseItemSemanticEditPolicy;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelationshipRequest;
@@ -81,7 +82,7 @@ public class EClassESuperTypesReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof EClass && newEnd instanceof EClass)) {
 			return false;
 		}
-		return true;
+		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canExistEClassESuperTypes_3003(getNewSource(), getOldTarget());
 	}
 
 	/**
@@ -91,7 +92,7 @@ public class EClassESuperTypesReorientCommand extends EditElementCommand {
 		if (!(oldEnd instanceof EClass && newEnd instanceof EClass)) {
 			return false;
 		}
-		return true;
+		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canExistEClassESuperTypes_3003(getOldSource(), getNewTarget());
 	}
 
 	/**

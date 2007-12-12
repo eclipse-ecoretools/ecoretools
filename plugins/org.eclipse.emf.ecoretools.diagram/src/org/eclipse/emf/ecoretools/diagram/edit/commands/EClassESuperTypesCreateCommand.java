@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreBaseItemSemanticEditPolicy;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
@@ -62,8 +63,8 @@ public class EClassESuperTypesCreateCommand extends EditElementCommand {
 			return true; // link creation is in progress; source is not
 			// defined yet
 		}
-		return true;
 		// target may be null here but it's possible to check constraint
+		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEClassESuperTypes_3003(getSource(), getTarget());
 	}
 
 	/**

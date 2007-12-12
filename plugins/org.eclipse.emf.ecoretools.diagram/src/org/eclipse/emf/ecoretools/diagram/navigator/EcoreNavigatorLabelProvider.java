@@ -19,6 +19,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPa
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationSourceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassName2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassNameEditPart;
@@ -35,7 +36,6 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageNameEditPart;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceNameEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EStringToStringMapEntryEditPart;
@@ -147,7 +147,7 @@ public class EcoreNavigatorLabelProvider extends LabelProvider implements ICommo
 			return getImage("Navigator?Link?http://www.eclipse.org/emf/2002/Ecore?EAnnotation?references", EcoreElementTypes.EAnnotationReferences_3001); //$NON-NLS-1$
 		case EReferenceEditPart.VISUAL_ID:
 			return getImage("Navigator?Link?http://www.eclipse.org/emf/2002/Ecore?EReference", EcoreElementTypes.EReference_3002); //$NON-NLS-1$
-		case EReference2EditPart.VISUAL_ID:
+		case EClassESuperTypesEditPart.VISUAL_ID:
 			return getImage("Navigator?Link?http://www.eclipse.org/emf/2002/Ecore?EClass?eSuperTypes", EcoreElementTypes.EClassESuperTypes_3003); //$NON-NLS-1$
 		}
 		return getImage("Navigator?UnknownElement", null); //$NON-NLS-1$
@@ -237,7 +237,7 @@ public class EcoreNavigatorLabelProvider extends LabelProvider implements ICommo
 			return getEAnnotationReferences_3001Text(view);
 		case EReferenceEditPart.VISUAL_ID:
 			return getEReference_3002Text(view);
-		case EReference2EditPart.VISUAL_ID:
+		case EClassESuperTypesEditPart.VISUAL_ID:
 			return getEClassESuperTypes_3003Text(view);
 		}
 		return getUnknownElementText(view);

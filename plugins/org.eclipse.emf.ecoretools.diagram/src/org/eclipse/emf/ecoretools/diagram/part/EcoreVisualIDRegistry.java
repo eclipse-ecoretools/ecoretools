@@ -83,11 +83,6 @@ public class EcoreVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static final EcoreAbstractExpression EReference_3002_Constraint = EcoreOCLFactory.getExpression("not containment and not container", EcorePackage.eINSTANCE.getEReference());
-
-	/**
-	 * @generated
-	 */
 	public static int getVisualID(View view) {
 		if (view instanceof Diagram) {
 			if (EPackageEditPart.MODEL_ID.equals(view.getType())) {
@@ -408,7 +403,7 @@ public class EcoreVisualIDRegistry {
 		if (domainElement == null) {
 			return -1;
 		}
-		if (EcorePackage.eINSTANCE.getEReference().isSuperTypeOf(domainElement.eClass()) && evaluate(EReference_3002_Constraint, domainElement)) {
+		if (EcorePackage.eINSTANCE.getEReference().isSuperTypeOf(domainElement.eClass())) {
 			return EReferenceEditPart.VISUAL_ID;
 		}
 		return -1;

@@ -267,18 +267,6 @@
   <links>
     <domainMetaElement
         href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-    <domainSpecialization
-        body="not containment and not container"/>
-    <domainInitializer
-        xsi:type="gmfmap:FeatureSeqInitializer">
-      <initializers
-          xsi:type="gmfmap:FeatureValueSpec"
-          body="false">
-        <feature
-            xsi:type="ecore:EAttribute"
-            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference/containment"/>
-      </initializers>
-    </domainInitializer>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel

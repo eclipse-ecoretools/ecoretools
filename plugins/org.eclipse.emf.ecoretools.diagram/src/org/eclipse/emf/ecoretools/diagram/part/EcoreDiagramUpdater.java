@@ -40,6 +40,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributes2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassOperations2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassOperationsEditPart;
@@ -54,7 +55,6 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageContentsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EStringToStringMapEntryEditPart;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
@@ -877,7 +877,7 @@ public class EcoreDiagramUpdater {
 		for (Iterator it = settings.iterator(); it.hasNext();) {
 			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) it.next();
 			if (setting.getEStructuralFeature() == EcorePackage.eINSTANCE.getEClass_ESuperTypes()) {
-				result.add(new EcoreLinkDescriptor(setting.getEObject(), target, EcoreElementTypes.EClassESuperTypes_3003, EReference2EditPart.VISUAL_ID));
+				result.add(new EcoreLinkDescriptor(setting.getEObject(), target, EcoreElementTypes.EClassESuperTypes_3003, EClassESuperTypesEditPart.VISUAL_ID));
 			}
 		}
 		return result;
@@ -902,7 +902,7 @@ public class EcoreDiagramUpdater {
 		Collection result = new LinkedList();
 		for (Iterator destinations = source.getESuperTypes().iterator(); destinations.hasNext();) {
 			EClass destination = (EClass) destinations.next();
-			result.add(new EcoreLinkDescriptor(source, destination, EcoreElementTypes.EClassESuperTypes_3003, EReference2EditPart.VISUAL_ID));
+			result.add(new EcoreLinkDescriptor(source, destination, EcoreElementTypes.EClassESuperTypes_3003, EClassESuperTypesEditPart.VISUAL_ID));
 		}
 		return result;
 	}

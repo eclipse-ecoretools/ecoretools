@@ -219,38 +219,38 @@
    <extension point="org.eclipse.ui.preferencePages">
       <?gmfgen generated="true"?>
       <page
-            id="org.eclipse.emf.ecore.ediagram.general"
+            id="org.eclipse.emf.ecoretools.diagram.general"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramGeneralPreferencePage">
       </page>
       <page
             id="org.eclipse.emf.ecoretools.diagram.appearance"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.appearance"
-            category="org.eclipse.emf.ecore.ediagram.general"
+            category="org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramAppearancePreferencePage">
       </page>
       <page
             id="org.eclipse.emf.ecoretools.diagram.connections"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.connections"
-            category="org.eclipse.emf.ecore.ediagram.general"
+            category="org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramConnectionsPreferencePage">
       </page>
       <page
             id="org.eclipse.emf.ecoretools.diagram.printing"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.printing"
-            category="org.eclipse.emf.ecore.ediagram.general"
+            category="org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramPrintingPreferencePage">
       </page>
       <page
             id="org.eclipse.emf.ecoretools.diagram.rulersAndGrid"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.rulersAndGrid"
-            category="org.eclipse.emf.ecore.ediagram.general"
+            category="org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.emf.ecoretools.diagram.preferences.DiagramRulersAndGridPreferencePage">
       </page>
       <page
             id="org.eclipse.emf.ecoretools.diagram.pathmaps"
             name="%preference.page.title.org.eclipse.emf.ecoretools.diagram.pathmaps"
-            category="org.eclipse.emf.ecore.ediagram.general"
+            category="org.eclipse.emf.ecoretools.diagram.general"
             class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
       </page>
    </extension>
@@ -752,7 +752,7 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart"/>
+            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart"/>
             <popupAction path="/editGroup" id="deleteFromModelAction"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
          </popupContribution>

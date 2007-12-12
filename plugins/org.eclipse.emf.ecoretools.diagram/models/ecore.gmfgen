@@ -657,17 +657,6 @@
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eStructuralFeatures"/>
         <childMetaFeature
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eStructuralFeatures"/>
-        <modelElementSelector
-            body="not containment and not container"/>
-        <modelElementInitializer
-            xsi:type="gmfgen:GenFeatureSeqInitializer">
-          <initializers
-              xsi:type="gmfgen:GenFeatureValueSpec"
-              body="false">
-            <feature
-                href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EReference/containment"/>
-          </initializers>
-        </modelElementInitializer>
         <targetMetaFeature
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/ETypedElement/eType"/>
       </modelFacet>
@@ -728,11 +717,11 @@
     </links>
     <links
         visualID="3003"
-        editPartClassName="EReference2EditPart"
-        itemSemanticEditPolicyClassName="EReference2ItemSemanticEditPolicy"
-        notationViewFactoryClassName="EReference2ViewFactory"
-        createCommandClassName="EReference2CreateCommand"
-        reorientCommandClassName="EReference2ReorientCommand">
+        editPartClassName="EClassESuperTypesEditPart"
+        itemSemanticEditPolicyClassName="EClassESuperTypesItemSemanticEditPolicy"
+        notationViewFactoryClassName="EClassESuperTypesViewFactory"
+        createCommandClassName="EClassESuperTypesCreateCommand"
+        reorientCommandClassName="EClassESuperTypesReorientCommand">
       <diagramRunTimeClass
           href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType
@@ -1412,6 +1401,6 @@
   <expressionProviders>
     <providers
         xsi:type="gmfgen:GenExpressionInterpreter"
-        expressions="//@diagram/@childNodes.3/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementSelector //@diagram/@links.1/@modelFacet/@modelElementInitializer/@initializers.0 //@diagram/@links.1/@creationConstraints/@targetEnd //@diagram/@links.2/@creationConstraints/@targetEnd"/>
+        expressions="//@diagram/@childNodes.3/@modelFacet/@modelElementSelector //@diagram/@links.1/@creationConstraints/@targetEnd //@diagram/@links.2/@creationConstraints/@targetEnd"/>
   </expressionProviders>
 </gmfgen:GenEditorGenerator>

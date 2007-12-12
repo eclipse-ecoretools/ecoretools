@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreBaseItemSemanticEditPolicy;
-import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
@@ -87,7 +86,6 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 		EReference newElement = EcoreFactory.eINSTANCE.createEReference();
 		getSource().getEStructuralFeatures().add(newElement);
 		newElement.setEType(getTarget());
-		EcoreElementTypes.Initializers.EReference_3002.init(newElement);
 		return newElement;
 	}
 

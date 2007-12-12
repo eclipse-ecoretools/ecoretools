@@ -145,8 +145,8 @@ public class EcoreEditPartFactory implements EditPartFactory {
 			case EReferenceLowerBoundUpperBoundEditPart.VISUAL_ID:
 				return new EReferenceLowerBoundUpperBoundEditPart(view);
 
-			case EReference2EditPart.VISUAL_ID:
-				return new EReference2EditPart(view);
+			case EClassESuperTypesEditPart.VISUAL_ID:
+				return new EClassESuperTypesEditPart(view);
 			}
 		}
 		return createUnrecognizedEditPart(context, model);

@@ -17,16 +17,16 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationReferencesCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationReferencesReorientCommand;
-import org.eclipse.emf.ecoretools.diagram.edit.commands.EReference2CreateCommand;
-import org.eclipse.emf.ecoretools.diagram.edit.commands.EReference2ReorientCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.EClassESuperTypesCreateCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.EClassESuperTypesReorientCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EReferenceCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EReferenceReorientCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassAttributesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassOperationsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReference2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
@@ -115,7 +115,7 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 			return getGEFWrapper(new EReferenceCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		if (EcoreElementTypes.EClassESuperTypes_3003 == req.getElementType()) {
-			return getGEFWrapper(new EReference2CreateCommand(req, req.getSource(), req.getTarget()));
+			return getGEFWrapper(new EClassESuperTypesCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -131,7 +131,7 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 			return getGEFWrapper(new EReferenceCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		if (EcoreElementTypes.EClassESuperTypes_3003 == req.getElementType()) {
-			return getGEFWrapper(new EReference2CreateCommand(req, req.getSource(), req.getTarget()));
+			return getGEFWrapper(new EClassESuperTypesCreateCommand(req, req.getSource(), req.getTarget()));
 		}
 		return null;
 	}
@@ -160,8 +160,8 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 		switch (getVisualID(req)) {
 		case EAnnotationReferencesEditPart.VISUAL_ID:
 			return getGEFWrapper(new EAnnotationReferencesReorientCommand(req));
-		case EReference2EditPart.VISUAL_ID:
-			return getGEFWrapper(new EReference2ReorientCommand(req));
+		case EClassESuperTypesEditPart.VISUAL_ID:
+			return getGEFWrapper(new EClassESuperTypesReorientCommand(req));
 		}
 		return super.getReorientReferenceRelationshipCommand(req);
 	}
