@@ -13,9 +13,14 @@
 package org.eclipse.gmf.runtime.diagram.ui.outline;
 
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.jface.viewers.IFontProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This Label Provider displays informations about model and diagrams. For the
@@ -25,8 +30,10 @@ import org.eclipse.swt.graphics.Image;
  * 
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma </a>
  */
-public class NavigatorLabelProvider extends LabelProvider {
+public class NavigatorLabelProvider extends LabelProvider implements IFontProvider {
 
+    private Font boldFont = null;
+    
 	/** The delegated model label provider */
 	private ILabelProvider delegatedModelProvider;
 
@@ -118,4 +125,39 @@ public class NavigatorLabelProvider extends LabelProvider {
 
 		return delegatedModelProvider.getImage(d);
 	}
+	
+    /**
+     * @see org.eclipse.jface.viewers.IFontProvider#getFont(java.lang.Object)
+     */
+    public Font getFont(Object element)
+    {
+        if (element instanceof Diagram)
+        {
+            if (boldFont == null)
+            {
+                Font originalFont = Display.getDefault().getSystemFont();
+                FontData[] fontData = originalFont.getFontData();
+                // Adding the bold attribute
+                for (int i = 0; i < fontData.length; i++)
+                {
+                    fontData[i].setStyle(fontData[i].getStyle() | SWT.BOLD);
+                }
+                boldFont = new Font(Display.getDefault(), fontData);
+            }
+            return boldFont;
+        }
+        return null;
+    }
+
+    /**
+     * @see org.eclipse.jface.viewers.LabelProvider#dispose()
+     */
+    public void dispose()
+    {
+        super.dispose();
+        if (boldFont != null)
+        {
+            boldFont.dispose();
+        }
+    }
 }
