@@ -313,7 +313,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showTreeAction.setToolTipText(showTreeAction.getText());
-		showTreeAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/tree.gif"));
+		showTreeAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/tree_co.gif"));
 		tbm.add(showTreeAction);
 
 		showOverviewAction = new Action("Show Overview", IAction.AS_RADIO_BUTTON) {
@@ -325,7 +325,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showOverviewAction.setToolTipText(showOverviewAction.getText());
-		showOverviewAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/overview.gif"));
+		showOverviewAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/overview_co.gif"));
 		tbm.add(showOverviewAction);
 
 		showAllAction = new Action("Show both", IAction.AS_RADIO_BUTTON) {
@@ -337,7 +337,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showAllAction.setToolTipText(showAllAction.getText());
-		showAllAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/all.gif"));
+		showAllAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/all_co.gif"));
 		tbm.add(showAllAction);
 
 		if (ps != null) {
