@@ -36,7 +36,8 @@ public class RefreshAction extends Action {
 		super("Refresh");
 		setDescription("Refresh the view for the current object");
 		setToolTipText("Refresh the view");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/refresh.gif"));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/refresh.gif"));
+		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/refresh.gif"));
 
 		analysisView = view;
 	}

@@ -171,7 +171,7 @@ public class EClassHierarchyView extends AnalysisView {
 				EClassHierarchyView.this.setKind(ASCENDANT);
 			}
 		};
-		ascendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/AscendantHierarchy.gif"));
+		ascendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/super_co.gif"));
 		ascendantAction.setChecked(true);
 
 		IAction descendantAction = new Action("Descendant", IAction.AS_RADIO_BUTTON) {
@@ -180,7 +180,7 @@ public class EClassHierarchyView extends AnalysisView {
 				EClassHierarchyView.this.setKind(DESCENDANT);
 			}
 		};
-		descendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/DescendantHierarchy.gif"));
+		descendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/sub_co.gif"));
 
 		toolBar.add(ascendantAction);
 		toolBar.add(descendantAction);

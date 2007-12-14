@@ -36,7 +36,8 @@ public class ToggleSynchronizeAction extends Action {
 		super("Synchronize");
 		setDescription("Synchronize the view with the workbench selection");
 		setToolTipText("Synchronize with workbench");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/synchronize.gif"));
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif"));
+		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/synced.gif"));
 		setChecked(view.isSynchronized());
 
 		analysisView = view;
