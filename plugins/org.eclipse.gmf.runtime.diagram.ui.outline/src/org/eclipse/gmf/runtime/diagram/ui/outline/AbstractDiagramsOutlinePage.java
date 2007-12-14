@@ -12,14 +12,24 @@
 
 package org.eclipse.gmf.runtime.diagram.ui.outline;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OverviewComposite;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
+import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -30,7 +40,9 @@ import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridData;
@@ -69,6 +81,8 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	private IAction showOverviewAction;
 
 	private IAction showAllAction;
+
+	private IAction linkWithEditorAction;
 
 	private DiagramEditor editor;
 
@@ -118,10 +132,24 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	/**
 	 * Add listeners on the tree :
 	 * <ul>
+	 * <li>Listen to simple click (used when "Link with Editor" enabled)</li>
 	 * <li>Listen to double-click</li>
 	 * </ul>
 	 */
 	protected void hookListeners() {
+		navigator.getTreeViewer().addSelectionChangedListener(new ISelectionChangedListener() {
+
+			public void selectionChanged(SelectionChangedEvent event) {
+				if (linkWithEditorAction.isChecked()) {
+					if (isDispatching) {
+						return;
+					}
+					// Try to select the element in the current active diagram
+					selectAssociatedPartsInEditor();
+				}
+			}
+		});
+
 		navigator.getTreeViewer().addDoubleClickListener(new IDoubleClickListener() {
 
 			public void doubleClick(DoubleClickEvent event) {
@@ -153,6 +181,33 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 		// editor.gotoEObject((EObject)
 		// AdapterFactoryEditingDomain.unwrap(selectedObject));
 		// }
+	}
+
+	/**
+	 * When the outline is linked with the editor, try to select the graphical
+	 * occurrence(s) of the selected element(s) in the outline
+	 */
+	protected void selectAssociatedPartsInEditor() {
+		isDispatching = true;
+		IStructuredSelection selection = (IStructuredSelection) navigator.getTreeViewer().getSelection();
+
+		// Create the list of EditParts that should be selected
+		ArrayList<EditPart> editPartsToSelect = new ArrayList<EditPart>();
+
+		for (Object selectedObject : selection.toList()) {
+			if (AdapterFactoryEditingDomain.unwrap(selectedObject) instanceof EObject) {
+				editPartsToSelect.addAll(editor.getDiagramGraphicalViewer().findEditPartsForElement(EMFCoreUtil.getProxyID(((EObject) AdapterFactoryEditingDomain.unwrap(selectedObject))),
+						EditPart.class));
+			}
+		}
+
+		// TODO Probably filter to avoid selecting Compartment and external
+		// Labels
+		editor.getDiagramGraphicalViewer().setSelection(new StructuredSelection(editPartsToSelect));
+		if (editPartsToSelect.size() > 0) {
+			viewer.reveal(editPartsToSelect.get(editPartsToSelect.size() - 1));
+		}
+		isDispatching = false;
 	}
 
 	/**
@@ -239,6 +294,16 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	 */
 	private void createShowOutlineActions(IToolBarManager tbm) {
 		final IPreferenceStore ps = getPreferenceStore();
+		linkWithEditorAction = new Action("Link with Editor", IAction.AS_CHECK_BOX) {
+
+			public void run() {
+				// Do nothing
+			}
+		};
+		linkWithEditorAction.setToolTipText(linkWithEditorAction.getText());
+		linkWithEditorAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif"));
+		tbm.add(linkWithEditorAction);
+
 		showTreeAction = new Action("Show Navigator", IAction.AS_RADIO_BUTTON) {
 
 			public void run() {
@@ -277,7 +342,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 
 		if (ps != null) {
 			int showAction = 0;// TODO restore
-								// ps.getInt(ModelerPreferenceConstants.OUTLINE_SHOW_ACTION_PREF);
+			// ps.getInt(ModelerPreferenceConstants.OUTLINE_SHOW_ACTION_PREF);
 			Control control = null;
 			switch (showAction) {
 			case 1:
@@ -453,66 +518,44 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	/**
 	 * Called when the selection changed in the editor
 	 * 
-	 * @param event
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
 	 */
 	public void selectionChanged(SelectionChangedEvent event) {
 		if (isDispatching) {
 			return;
 		}
 
-		ISelection selection = event.getSelection();
-		syncSelection(selection);
+		// Select only the element in the outline when the "Link with Editor"
+		// button is activated
+		if (linkWithEditorAction.isChecked()) {
+			ISelection selection = event.getSelection();
+			syncSelection(selection);
+		}
 	}
 
 	/**
-	 * Synchronize the outline with the given selection. It also filters the
+	 * Synchronize the outline with the given selection.
 	 * 
 	 * @param selection
 	 */
 	private void syncSelection(ISelection selection) {
 		isDispatching = true;
 
-		// TODO restore
-		// List newSelection = new ArrayList();
-		// if (selection instanceof IStructuredSelection)
-		// {
-		// Iterator it = ((IStructuredSelection) selection).iterator();
-		// while (it.hasNext())
-		// {
-		// Object selectedObject = it.next();
-		// if (selectedObject instanceof EMFGraphNodeEditPart)
-		// {
-		// newSelection.add(((MixedEditDomain)
-		// editor.getAdapter(MixedEditDomain.class)).getEMFEditingDomain().getWrapper(
-		// ((EMFGraphNodeEditPart) selectedObject).getEObject()));
-		// }
-		// else if (selectedObject instanceof EMFGraphEdgeEditPart)
-		// {
-		// newSelection.add(((MixedEditDomain)
-		// editor.getAdapter(MixedEditDomain.class)).getEMFEditingDomain().getWrapper(
-		// ((EMFGraphEdgeEditPart) selectedObject).getEObject()));
-		// }
-		// else if (selectedObject instanceof GraphElement)
-		// {
-		// EObject model = Utils.getElement((GraphElement) selectedObject);
-		// if (model != null)
-		// {
-		// newSelection.add(model);
-		// }
-		// }
-		// else if (selectedObject instanceof EObject)
-		// {
-		// newSelection.add(selectedObject);
-		// }
-		// else if (selectedObject instanceof DiagramEditPart)
-		// {
-		// newSelection.add(Utils.getElement((GraphElement) ((MixedEditDomain)
-		// editor.getAdapter(MixedEditDomain.class)).getEMFEditingDomain().getWrapper(
-		// ((DiagramEditPart) selectedObject).getModel())));
-		// }
-		// }
-		// }
-		// setSelection(new StructuredSelection(newSelection));
+		List<Object> newSelection = new ArrayList<Object>();
+		if (selection instanceof IStructuredSelection) {
+			Iterator it = ((IStructuredSelection) selection).iterator();
+			while (it.hasNext()) {
+				Object selectedObject = it.next();
+				if (selectedObject instanceof GraphicalEditPart) {
+					newSelection.add(((GraphicalEditPart) selectedObject).resolveSemanticElement());
+				} else if (selectedObject instanceof ConnectionEditPart) {
+					newSelection.add(((ConnectionEditPart) selectedObject).resolveSemanticElement());
+				} else if (selectedObject instanceof EObject) {
+					newSelection.add(selectedObject);
+				}
+			}
+		}
+		setSelection(new StructuredSelection(newSelection));
 
 		isDispatching = false;
 	}
