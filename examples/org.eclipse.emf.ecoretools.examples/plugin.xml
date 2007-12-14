@@ -22,7 +22,7 @@
 				class="org.eclipse.emf.ecoretools.examples.internal.wizard.EcoreDiagramExampleWizard"
 				project="true"
 				name="%EcoreTools_Ecore_name"
-				icon="icons/Ecore.gif">
+				icon="icons/etool16/ediag_wiz.gif">
 				<description>%EcoreTools_Ecore_description</description>
 			</wizard>
 		</extension>
