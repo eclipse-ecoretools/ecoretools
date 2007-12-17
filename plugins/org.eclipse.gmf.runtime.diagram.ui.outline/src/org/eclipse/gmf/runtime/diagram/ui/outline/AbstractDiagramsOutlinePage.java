@@ -25,6 +25,8 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OverviewComposite;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -196,13 +198,18 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 
 		for (Object selectedObject : selection.toList()) {
 			if (AdapterFactoryEditingDomain.unwrap(selectedObject) instanceof EObject) {
-				editPartsToSelect.addAll(editor.getDiagramGraphicalViewer().findEditPartsForElement(EMFCoreUtil.getProxyID(((EObject) AdapterFactoryEditingDomain.unwrap(selectedObject))),
-						EditPart.class));
+				List<EditPart> editPartsToFilter = editor.getDiagramGraphicalViewer().findEditPartsForElement(EMFCoreUtil.getProxyID(((EObject) AdapterFactoryEditingDomain.unwrap(selectedObject))),
+						EditPart.class);
+				for (EditPart currentEP : editPartsToFilter) {
+					// Filter to avoid selecting Compartments and external
+					// Labels
+					if (!(currentEP instanceof ResizableCompartmentEditPart || currentEP instanceof LabelEditPart)) {
+						editPartsToSelect.add(currentEP);
+					}
+				}
 			}
 		}
 
-		// TODO Probably filter to avoid selecting Compartment and external
-		// Labels
 		editor.getDiagramGraphicalViewer().setSelection(new StructuredSelection(editPartsToSelect));
 		if (editPartsToSelect.size() > 0) {
 			viewer.reveal(editPartsToSelect.get(editPartsToSelect.size() - 1));
