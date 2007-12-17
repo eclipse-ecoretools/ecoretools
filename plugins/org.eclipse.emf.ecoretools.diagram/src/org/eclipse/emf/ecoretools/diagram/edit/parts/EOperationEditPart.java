@@ -608,23 +608,28 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 				case EcorePackage.EOPERATION__EEXCEPTIONS:
 				case EcorePackage.EOPERATION__EPARAMETERS:
 					updateModelListening(oldObject, newObject);
+					refreshLabel();
+					break;
+				case EcorePackage.EOPERATION__ETYPE:
+					updateModelListening(oldObject, newObject);
+					refreshLabel();
+					break;
+				case EcorePackage.EOPERATION__NAME:
+					refreshLabel();
 					break;
 				default:
 					break;
 				}
-				super.handleNotificationEvent(event);
-			} else {
-				refreshLabel();
 			}
 		} else if (notifier instanceof EParameter) {
 			switch (event.getFeatureID(EParameter.class)) {
 			case EcorePackage.EPARAMETER__ETYPE:
 				updateModelListening(oldObject, newObject);
+				refreshLabel();
 				break;
 			default:
 				break;
 			}
-			refreshLabel();
 		} else if (notifier instanceof EClassifier) {
 			switch (event.getFeatureID(EClassifier.class)) {
 			case EcorePackage.ECLASSIFIER__NAME:
