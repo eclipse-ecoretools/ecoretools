@@ -159,7 +159,15 @@
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="false"?>
+      <?gmfgen generated="true"?>
+      <contributionItemProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreContributionItemProvider">
+         <Priority name="Low">
+         </Priority>
+         <partContribution id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
+            <partAction menubarPath="/file/print" id="printPreviewAction">
+            </partAction>
+         </partContribution>
+      </contributionItemProvider>
       <contributionItemProvider
             class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
             checkPluginLoaded="false">
@@ -180,33 +188,21 @@
             <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
          </popupContribution>
          <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceName2EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceLowerBoundUpperBound2EditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
             <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart"/>
             <popupAction path="/editGroup" id="deleteFromModelAction"/>
             <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
          </popupContribution>
-         <popupContribution
-               class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria
-                  objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart">
-            </popupStructuredContributionCriteria>
-            <popupPredefinedItem
-                  id="deleteFromModelAction"
-                  remove="true">
-            </popupPredefinedItem>
-            <popupPredefinedItem
-                  id="deleteFromDiagramAction"
-                  remove="true">
-            </popupPredefinedItem>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="false"?>
+      <contributionItemProvider class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider" checkPluginLoaded="false">
+         <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
          </popupContribution>
       </contributionItemProvider>
    </extension>
@@ -722,42 +718,6 @@
        </propertyTester>
    </extension>
    
-   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="true"?>
-      <contributionItemProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreContributionItemProvider">
-         <Priority name="Low">
-         </Priority>
-         <partContribution id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
-            <partAction menubarPath="/file/print" id="printPreviewAction">
-            </partAction>
-         </partContribution>
-      </contributionItemProvider>
-      <contributionItemProvider
-            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
-            checkPluginLoaded="false">
-         <Priority name="Low"/>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart"/>
-            <popupAction path="/editGroup" id="deleteFromModelAction"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceNameEditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceLowerBoundUpperBoundEditPart"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
-         </popupContribution>
-         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
-            <popupStructuredContributionCriteria objectClass="org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart"/>
-            <popupAction path="/editGroup" id="deleteFromModelAction"/>
-            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
-         </popupContribution>
-      </contributionItemProvider>
-   </extension>
    <extension id="ValidationContributionItemProvider" name="Validation"
       point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
       <?gmfgen generated="true"?>
@@ -770,6 +730,7 @@
          </partContribution>
       </contributionItemProvider>
    </extension>
+   
    <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
       <?gmfgen generated="true"?>
       <MarkerNavigationProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreMarkerNavigationProvider">
