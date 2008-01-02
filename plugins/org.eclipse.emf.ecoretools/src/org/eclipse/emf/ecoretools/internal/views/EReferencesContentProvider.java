@@ -30,15 +30,35 @@ import org.eclipse.jface.viewers.Viewer;
  */
 public class EReferencesContentProvider implements ITreeContentProvider {
 
+	private EClass selectedEClass;
+
 	/**
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
 	public Object[] getChildren(Object element) {
-		if (element instanceof EStructuralFeature.Setting) {
-			EStructuralFeature.Setting setting = (EStructuralFeature.Setting) element;
-			return new Object[] { setting.getEObject() };
+		if (element instanceof WrappedEClass) {
+			EClass eClass = ((WrappedEClass) element).getWrappedEClass();
+			List<EReference> result = new ArrayList<EReference>();
+			for (EStructuralFeature.Setting setting : EcoreUtil.UsageCrossReferencer.find(selectedEClass, eClass)) {
+				if (setting.getEObject() instanceof EReference && !isContained(result, (EReference) setting.getEObject())) {
+					result.add((EReference) setting.getEObject());
+				}
+			}
+			return result.toArray();
 		}
 		return new Object[0];
+	}
+
+	private boolean isContained(List<EReference> l, EReference eRef) {
+		boolean found = false;
+		Iterator<EReference> it = l.iterator();
+		while (it.hasNext() && !found) {
+			EReference contained = it.next();
+			if (contained.equals(eRef)) {
+				found = true;
+			}
+		}
+		return found;
 	}
 
 	/**
@@ -52,7 +72,7 @@ public class EReferencesContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
 	 */
 	public boolean hasChildren(Object element) {
-		return false;
+		return element instanceof WrappedEClass;
 	}
 
 	/**
@@ -61,10 +81,17 @@ public class EReferencesContentProvider implements ITreeContentProvider {
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof EClass) {
 			EClass eClass = (EClass) inputElement;
-			List<EStructuralFeature.Setting> result = new ArrayList<EStructuralFeature.Setting>();
+			List<WrappedEClass> result = new ArrayList<WrappedEClass>();
+			// Search for all the EClass that have an EReference to the selected
+			// EClass
 			for (EStructuralFeature.Setting setting : EcoreUtil.UsageCrossReferencer.find(eClass, eClass.eResource())) {
-				if (setting.getEObject() instanceof EReference && !isContained(result, setting)) {
-					result.add(setting);
+				if (setting.getEObject() instanceof EReference && setting.getEObject().eContainer() instanceof EClass) {
+					EClass eClass2 = (EClass) setting.getEObject().eContainer();
+					if (!isContained(result, eClass2)) {
+						// We need to wrap the EClass to avoid an infinite loop
+						// for self EReferences
+						result.add(new WrappedEClass(eClass2));
+					}
 				}
 			}
 			return result.toArray();
@@ -73,16 +100,26 @@ public class EReferencesContentProvider implements ITreeContentProvider {
 		return getChildren(inputElement);
 	}
 
-	private boolean isContained(List<EStructuralFeature.Setting> l, EStructuralFeature.Setting setting) {
+	/**
+	 * Search whether the given EClass is already wrapped into a WrappedEClass
+	 * in the given list.
+	 * 
+	 * @param l
+	 *            a list of WrappedEClass
+	 * @param eClass
+	 *            the EClass to look for
+	 * @return true whether the given EClass is already wrapped into a
+	 *         WrappedEClass
+	 */
+	private boolean isContained(List<WrappedEClass> l, EClass eClass) {
 		boolean found = false;
-		Iterator<EStructuralFeature.Setting> it = l.iterator();
+		Iterator<WrappedEClass> it = l.iterator();
 		while (it.hasNext() && !found) {
-			EStructuralFeature.Setting contained = it.next();
-			if (contained.getEObject().equals(setting.getEObject())) {
+			WrappedEClass contained = it.next();
+			if (contained.getWrappedEClass().equals(eClass)) {
 				found = true;
 			}
 		}
-
 		return found;
 	}
 
@@ -91,7 +128,6 @@ public class EReferencesContentProvider implements ITreeContentProvider {
 	 */
 	public void dispose() {
 		// Do nothing
-
 	}
 
 	/**
@@ -99,7 +135,36 @@ public class EReferencesContentProvider implements ITreeContentProvider {
 	 *      java.lang.Object, java.lang.Object)
 	 */
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		// Do nothing
+		if (newInput instanceof EClass) {
+			this.selectedEClass = (EClass) newInput;
+		}
+	}
+
+	/**
+	 * Define a wrapper for an EClass. This is used to distinguish the current
+	 * selected EClass (from which we are searching EReferences) from the same
+	 * EClass that may be represented in the view in the case of a self
+	 * reference.
+	 */
+	protected class WrappedEClass {
+
+		private EClass wrappedEClass;
+
+		/**
+		 * Constructor
+		 * 
+		 * @param eClassToWrap
+		 */
+		public WrappedEClass(EClass eClassToWrap) {
+			this.wrappedEClass = eClassToWrap;
+		}
+
+		/**
+		 * @return the wrappedEClass
+		 */
+		public EClass getWrappedEClass() {
+			return wrappedEClass;
+		}
 	}
 
 }

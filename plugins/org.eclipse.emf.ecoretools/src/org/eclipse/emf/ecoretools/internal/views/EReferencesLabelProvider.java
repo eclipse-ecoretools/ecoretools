@@ -12,8 +12,8 @@
 
 package org.eclipse.emf.ecoretools.internal.views;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.internal.views.EReferencesContentProvider.WrappedEClass;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -39,8 +39,8 @@ public class EReferencesLabelProvider extends LabelProvider {
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object element) {
-		if (element instanceof EStructuralFeature.Setting) {
-			return delegateProvider.getImage(((EStructuralFeature.Setting) element).getEObject().eContainer());
+		if (element instanceof WrappedEClass) {
+			return delegateProvider.getImage(((WrappedEClass) element).getWrappedEClass());
 		}
 		return delegateProvider.getImage(element);
 	}
@@ -49,8 +49,8 @@ public class EReferencesLabelProvider extends LabelProvider {
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
 	public String getText(Object element) {
-		if (element instanceof EStructuralFeature.Setting) {
-			return delegateProvider.getText(((EStructuralFeature.Setting) element).getEObject().eContainer());
+		if (element instanceof WrappedEClass) {
+			return delegateProvider.getText(((WrappedEClass) element).getWrappedEClass());
 		}
 		return delegateProvider.getText(element);
 	}

@@ -84,6 +84,9 @@ public class EReferencesView extends AnalysisView {
 			} else {
 				getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Invalid selection");
 			}
+//		// TODO see whether we want to refresh the view even if the selected element is not an EClass
+//		} else {
+//			referencesTree.setInput(object);
 		}
 	}
 
@@ -100,6 +103,7 @@ public class EReferencesView extends AnalysisView {
 				try {
 					referencesTree.getControl().setRedraw(false);
 
+					// TODO Calling setInput() and then refresh() causes a refreshment of the view twice : setInput() should be performed elsewhere.
 					referencesTree.setInput(selection);
 					referencesTree.refresh();
 					referencesTree.expandAll();
