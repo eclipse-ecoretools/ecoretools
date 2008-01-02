@@ -33,14 +33,20 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 
 	private MultiDiagramLinkStyle diagramFacet;
 
+	/**
+	 * Constructor
+	 */
 	public RemoveDiagramCommand(MultiDiagramLinkStyle linkStyle) {
-		// editing domain is taken for original diagram,
-		// if we open diagram from another file, we should use another editing
-		// domain
+		// editing domain is taken for original diagram, if we open diagram from
+		// another file, we should use another editing domain
 		super(TransactionUtil.getEditingDomain(linkStyle), "RemoveDiagram", null);
 		diagramFacet = linkStyle;
 	}
 
+	/**
+	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
+	 *      org.eclipse.core.runtime.IAdaptable)
+	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		try {
 			for (Iterator it = diagramFacet.getDiagramLinks().iterator(); it.hasNext();) {
@@ -55,7 +61,7 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 					if (editor != null) {
 						page.closeEditor(editor, true);
 					}
-					// Remove from ressource
+					// Remove from resource
 					assert diagramFacet.eResource() != null;
 					diagramFacet.eResource().getContents().remove(diagram);
 				}
