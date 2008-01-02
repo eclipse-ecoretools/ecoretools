@@ -577,5 +577,7 @@ public class Messages extends NLS {
 	 */
 	public static String EcoreModelingAssistantProviderMessage;
 
+	public static String CommandName_UpdateEditPart;
+
 	// TODO: put accessor fields manually
 }
