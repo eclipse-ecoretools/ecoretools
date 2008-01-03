@@ -74,7 +74,7 @@ public class EClassAttributes2CanonicalEditPolicy extends CanonicalEditPolicy {
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
-			myFeaturesToSynchronize.add(EcorePackage.eINSTANCE.getEClass_EAttributes());
+			myFeaturesToSynchronize.add(EcorePackage.eINSTANCE.getEClass_EStructuralFeatures());
 		}
 		return myFeaturesToSynchronize;
 	}

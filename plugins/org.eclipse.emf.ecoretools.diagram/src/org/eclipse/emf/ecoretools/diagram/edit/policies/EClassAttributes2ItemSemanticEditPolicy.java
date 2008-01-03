@@ -29,7 +29,7 @@ public class EClassAttributes2ItemSemanticEditPolicy extends EcoreBaseItemSemant
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EAttribute_2001 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEClass_EAttributes());
+				req.setContainmentFeature(EcorePackage.eINSTANCE.getEClass_EStructuralFeatures());
 			}
 			return getGEFWrapper(new EAttributeCreateCommand(req));
 		}
