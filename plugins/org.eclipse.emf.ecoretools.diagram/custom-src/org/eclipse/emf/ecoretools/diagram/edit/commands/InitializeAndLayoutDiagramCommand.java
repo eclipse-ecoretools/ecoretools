@@ -45,6 +45,10 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+		if (diagram == null)
+		{
+			return CommandResult.newWarningCommandResult("Unable to proceed with null diagam", null);
+		}
 		// Initialize diagram content
 		EcoreDiagramContentInitializer intializer = new EcoreDiagramContentInitializer();
 		intializer.initDiagramContent(diagram);

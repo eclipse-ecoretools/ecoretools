@@ -41,6 +41,10 @@ public class UpdateEditPartCommand extends AbstractTransactionalCommand {
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+		if (part == null)
+		{
+			return CommandResult.newWarningCommandResult("Unable to proceed with null part", null);
+		}
 		EditPolicy editPolicy = part.getEditPolicy(EditPolicyRoles.CANONICAL_ROLE);
 		if (editPolicy instanceof CanonicalEditPolicy)
 		{
