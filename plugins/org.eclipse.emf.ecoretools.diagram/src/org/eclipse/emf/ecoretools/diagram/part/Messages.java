@@ -579,5 +579,7 @@ public class Messages extends NLS {
 
 	public static String CommandName_UpdateEditPart;
 
+	public static String CommandName_InitializeAndLayoutDiagram;
+
 	// TODO: put accessor fields manually
 }

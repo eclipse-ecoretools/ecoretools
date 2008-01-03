@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.InitializeAndLayoutDiagramCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -103,7 +104,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public boolean performFinish() {
 		List affectedFiles = new LinkedList();
@@ -121,13 +122,25 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 					return CommandResult.newErrorCommandResult(Messages.EcoreNewDiagramFileWizard_IncorrectRootError);
 				}
 				Diagram diagram = ViewService.createDiagram(diagramRootElementSelectionPage.getModelElement(), EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+
 				diagramResource.getContents().add(diagram);
+
 				return CommandResult.newOKCommandResult();
 			}
 		};
 		try {
+			// Create Diagram
 			OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);
 			diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
+
+			// Initialize and Layout Diagram
+			if (diagramResource.getContents().get(0) instanceof Diagram)
+			{
+				InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(myEditingDomain, (Diagram) diagramResource.getContents().get(0));
+				OperationHistoryFactory.getOperationHistory().execute(initializeAndLayoutDiagram, new NullProgressMonitor(), null);
+				diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
+			}
+			
 			EcoreDiagramEditorUtil.openDiagram(diagramResource);
 		} catch (ExecutionException e) {
 			EcoreDiagramEditorPlugin.getInstance().logError("Unable to create model and diagram", e); //$NON-NLS-1$
