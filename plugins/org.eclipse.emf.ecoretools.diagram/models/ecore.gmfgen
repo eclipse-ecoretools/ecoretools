@@ -702,7 +702,7 @@
         </viewmap>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet"
-            viewPattern="{0}..{1,choice,-1#*|-1&lt;{1}}"
+            viewPattern="{0}..{1,choice,-2#?|-1#*|-1&lt;{1}}"
             editPattern="{0}..{1}">
           <metaFeatures
               href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/ETypedElement/lowerBound"/>

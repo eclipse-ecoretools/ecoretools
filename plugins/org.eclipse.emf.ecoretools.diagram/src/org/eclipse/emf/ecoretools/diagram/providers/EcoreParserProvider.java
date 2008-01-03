@@ -435,8 +435,8 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 	protected IParser createEReferenceLowerBoundUpperBound_4012Parser() {
 		EAttribute[] features = new EAttribute[] { EcorePackage.eINSTANCE.getETypedElement_LowerBound(), EcorePackage.eINSTANCE.getETypedElement_UpperBound(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
-		parser.setViewPattern("{0}..{1,choice,-1#*|-1<{1}}");
-		parser.setEditorPattern("{0}..{1,choice,-1#*|-1<{1}}");
+		parser.setViewPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}");
+		parser.setEditorPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}");
 		parser.setEditPattern("{0}..{1}");
 		return parser;
 	}
