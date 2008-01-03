@@ -28,11 +28,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.swt.dnd.DragSource;
 import org.eclipse.swt.dnd.DragSourceAdapter;
 import org.eclipse.swt.dnd.DragSourceEvent;
 import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.part.PluginTransfer;
 
 /**
@@ -104,20 +102,24 @@ public class OutlineDragAdapter extends DragSourceAdapter {
 	 */
 	public void dragStart(DragSourceEvent event) {
 		try {
+			// TODO What is this 1GEUS9V workaround exactly ? Removing the
+			// following check would solve the problem of initializing the focus
+			// to the navigator while it is not activated by default
+
 			// Workaround for 1GEUS9V
-			DragSource dragSource = (DragSource) event.widget;
-			Control control = dragSource.getControl();
-			if (control == control.getDisplay().getFocusControl()) {
-				ISelection selection = getSelection();
-				if (!selection.isEmpty()) {
-					LocalSelectionTransfer.getTransfer().setSelection(selection);
-					event.doit = true;
-				} else {
-					event.doit = false;
-				}
+			// DragSource dragSource = (DragSource) event.widget;
+			// Control control = dragSource.getControl();
+			// if (control == control.getDisplay().getFocusControl()) {
+			ISelection selection = getSelection();
+			if (!selection.isEmpty()) {
+				LocalSelectionTransfer.getTransfer().setSelection(selection);
+				event.doit = true;
 			} else {
 				event.doit = false;
 			}
+			// } else {
+			// event.doit = false;
+			// }
 		} catch (RuntimeException e) {
 			// TODO log exception
 			// NavigatorPlugin.logError(0, e.getMessage(), e);
