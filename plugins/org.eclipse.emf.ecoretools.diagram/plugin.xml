@@ -113,7 +113,7 @@
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
-         id="EcorePresentation">
+         id="EcoreToolsPresentation">
          <Priority name="Lowest"/>
          <ViewId id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
@@ -126,7 +126,7 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.printing.render.providers.DiagramWithPrintGlobalActionHandlerProvider"
-         id="EcorePresentationPrint">
+         id="EcoreToolsPresentationPrint">
          <Priority name="Lowest"/>
          <ViewId id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
@@ -136,7 +136,7 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
          class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
-         id="EcorePresentationIDE">
+         id="EcoreToolsPresentationIDE">
          <Priority name="Lowest"/>
          <ViewId id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
@@ -146,7 +146,7 @@
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
             class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
-            id="EcoreRender">
+            id="EcoreToolsRender">
          <Priority name="Lowest"/>
          <ViewId id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
             <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
@@ -319,7 +319,7 @@
       <?gmfgen generated="true"?>
       <viewProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreViewProvider">
          <Priority name="Lowest"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Ecore"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="EcoreTools"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
       </viewProvider>
@@ -513,14 +513,14 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="EcoreClientContext">
+      <clientContext id="EcoreToolsClientContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="org.eclipse.emf.ecoretools.diagram.EditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="EcoreClientContext">
+      <binding context="EcoreToolsClientContext">
          <elementType ref="org.eclipse.emf.ecoretools.diagram.EPackage_79"/>
          <elementType ref="org.eclipse.emf.ecoretools.diagram.EClass_1001"/>
          <elementType ref="org.eclipse.emf.ecoretools.diagram.EPackage_1002"/>

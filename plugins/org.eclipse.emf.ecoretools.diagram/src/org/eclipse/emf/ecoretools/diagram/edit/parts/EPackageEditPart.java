@@ -27,7 +27,7 @@ public class EPackageEditPart extends DiagramEditPart {
 	/**
 	 * @generated
 	 */
-	public final static String MODEL_ID = "Ecore"; //$NON-NLS-1$
+	public final static String MODEL_ID = "EcoreTools"; //$NON-NLS-1$
 
 	/**
 	 * @generated
