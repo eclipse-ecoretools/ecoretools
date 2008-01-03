@@ -28,8 +28,11 @@ import org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection;
  */
 public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 
-	/** Predefined string pattern value for numerics and absloute with '-' : -25 */
-	public static final String UPPER_BOUND_PATTERN = "\\*|^[-\\d][\\d]*"; //$NON-NLS-1$   
+	/**
+	 * Predefined string pattern value for numerics and absolute with '-' : -25
+	 * '?' (for -2 value) and '*' (for -1 value) characters are also accepted
+	 * */
+	public static final String UPPER_BOUND_PATTERN = "\\*|\\?|^[-\\d][\\d]*"; //$NON-NLS-1$   
 
 	/** The Pattern used to check an Integer value */
 	public static final Pattern UPPER_PATTERN = Pattern.compile(UPPER_BOUND_PATTERN);
@@ -69,6 +72,8 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 		String text = newText;
 		if ("*".equals(newText)) {
 			text = "-1";
+		} else if ("?".equals(newText)) {
+			text = "-2";
 		}
 		return new Integer(Integer.parseInt(text));
 	}
@@ -80,6 +85,8 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 		Integer upper = getFeatureInteger();
 		if (upper.intValue() == -1) {
 			return "*";
+		} else if (upper.intValue() == -2) {
+			return "?";
 		} else {
 			return getFeatureInteger().toString();
 		}
