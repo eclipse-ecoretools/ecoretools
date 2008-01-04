@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.InitializeAndLayoutDiagramCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.WorkspaceEditingDomainFactory;
@@ -209,13 +210,16 @@ public class EcoreDiagramEditorUtil {
 	 *            the domain model EMF URI
 	 * @param domainElement
 	 *            the domain element that should be associated with the Diagram
+	 * @param initializeDiagram
+	 *            indicate whether the diagram should be initialized with domain
+	 *            contents
 	 * @param progressMonitor
 	 *            the progressMonitor
 	 * 
 	 * @return Resource the diagram resource
 	 */
-	public static Resource createDiagramOnly(URI diagramURI, URI modelURI, EObject domainElement, boolean initializeDiagram, IProgressMonitor progressMonitor) {
-		TransactionalEditingDomain editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
+	public static Resource createDiagramOnly(URI diagramURI, URI modelURI, EObject domainElement, final boolean initializeDiagram, IProgressMonitor progressMonitor) {
+		final TransactionalEditingDomain editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask(Messages.EcoreDiagramEditorUtil_CreateDiagramProgressTask, 3);
 		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
 		final EObject model = domainElement;
@@ -223,7 +227,6 @@ public class EcoreDiagramEditorUtil {
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
 
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-				// TODO Handle diagram initialization or not
 				Diagram diagram = ViewService.createDiagram(model, EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {
 					diagramResource.getContents().add(diagram);
@@ -233,6 +236,14 @@ public class EcoreDiagramEditorUtil {
 
 				try {
 					diagramResource.save(org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorUtil.getSaveOptions());
+
+					// Initialize and Layout Diagram
+					if (initializeDiagram && diagramResource.getContents().get(0) instanceof Diagram) {
+						InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(editingDomain, (Diagram) diagramResource.getContents().get(0));
+						OperationHistoryFactory.getOperationHistory().execute(initializeAndLayoutDiagram, new NullProgressMonitor(), null);
+						diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
+					}
+
 				} catch (IOException e) {
 
 					EcoreDiagramEditorPlugin.getInstance().logError("Unable to store diagram resources", e); //$NON-NLS-1$
