@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -205,7 +205,8 @@ public class EClassNameEditPart extends CompartmentEditPart implements ITextAwar
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		if (resolveSemanticElement() != null && ((EClass) resolveSemanticElement()).isInterface()) {
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && ((EClass) semanticElement).isInterface()) {
 			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif");
 		} else {
 			EObject parserElement = getParserElement();
@@ -572,9 +573,16 @@ public class EClassNameEditPart extends CompartmentEditPart implements ITextAwar
 		super.notifyChanged(notification);
 	}
 
-	@Override
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart#setFont(org.eclipse.swt.graphics.FontData)
+	 */
 	protected void setFont(FontData fontData) {
 		// Enforce the Font Style as italic when the EClass is abstract
-		super.setFont(new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | (((EClass) resolveSemanticElement()).isAbstract() ? SWT.ITALIC : SWT.NONE)));
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && semanticElement instanceof EClass) {
+			super.setFont(new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | (((EClass) resolveSemanticElement()).isAbstract() ? SWT.ITALIC : SWT.NONE)));
+		} else {
+			super.setFont(fontData);
+		}
 	}
 }

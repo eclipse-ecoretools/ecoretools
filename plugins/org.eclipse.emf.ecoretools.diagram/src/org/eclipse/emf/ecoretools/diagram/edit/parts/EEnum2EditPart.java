@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -300,7 +300,7 @@ public class EEnum2EditPart extends ShapeNodeEditPart {
 			fFigureEnumerationNameLabel.setText("<..>");
 
 			this.add(fFigureEnumerationNameLabel);
-			
+
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
 			fFigureFromLabel.setText("<..>");

@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -208,38 +208,41 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	protected Image getLabelIcon() {
 		String imageName = "EOccurrence";
-		int minOccurs = ((EAttribute) resolveSemanticElement()).getLowerBound();
-		int maxOccurs = ((EAttribute) resolveSemanticElement()).getUpperBound();
-		if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == -1)) {
-			switch (minOccurs) {
-			case 0:
-				imageName += "Zero";
-				break;
-			case 1:
-				imageName += "One";
-				break;
-			default:
-				imageName += "N";
-				break;
-			}
-
-			if (minOccurs != maxOccurs) {
-				switch (maxOccurs) {
-				case -1:
-					imageName += "ToUnbounded";
-					break;
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && semanticElement instanceof EAttribute) {
+			int minOccurs = ((EAttribute) semanticElement).getLowerBound();
+			int maxOccurs = ((EAttribute) semanticElement).getUpperBound();
+			if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == -1)) {
+				switch (minOccurs) {
 				case 0:
-					return null;
+					imageName += "Zero";
+					break;
 				case 1:
-					imageName += "ToOne";
+					imageName += "One";
 					break;
 				default:
-					imageName += minOccurs <= 1 ? "ToN" : "ToM";
+					imageName += "N";
 					break;
 				}
+
+				if (minOccurs != maxOccurs) {
+					switch (maxOccurs) {
+					case -1:
+						imageName += "ToUnbounded";
+						break;
+					case 0:
+						return null;
+					case 1:
+						imageName += "ToOne";
+						break;
+					default:
+						imageName += minOccurs <= 1 ? "ToN" : "ToM";
+						break;
+					}
+				}
+			} else {
+				imageName += "NToM";
 			}
-		} else {
-			imageName += "NToM";
 		}
 
 		return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/multiplicity/" + imageName + ".gif");

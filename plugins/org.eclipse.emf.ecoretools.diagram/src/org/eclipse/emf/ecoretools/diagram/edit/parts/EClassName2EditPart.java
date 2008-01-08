@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -205,7 +206,8 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		if (((EClass) resolveSemanticElement()).isInterface()) {
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && ((EClass) semanticElement).isInterface()) {
 			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif");
 		} else {
 			EObject parserElement = getParserElement();
@@ -557,7 +559,9 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 		return null;
 	}
 
-	@Override
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart#notifyChanged(org.eclipse.emf.common.notify.Notification)
+	 */
 	public void notifyChanged(Notification notification) {
 
 		if (notification.getNotifier() instanceof EClass)
@@ -572,9 +576,16 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 		super.notifyChanged(notification);
 	}
 
-	@Override
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart#setFont(org.eclipse.swt.graphics.FontData)
+	 */
 	protected void setFont(FontData fontData) {
 		// Enforce the Font Style as italic when the EClass is abstract
-		super.setFont(new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | (((EClass) resolveSemanticElement()).isAbstract() ? SWT.ITALIC : SWT.NONE)));
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && semanticElement instanceof EClass) {
+			super.setFont(new FontData(fontData.getName(), fontData.getHeight(), fontData.getStyle() | (((EClass) semanticElement).isAbstract() ? SWT.ITALIC : SWT.NONE)));
+		} else {
+			super.setFont(fontData);
+		}
 	}
 }

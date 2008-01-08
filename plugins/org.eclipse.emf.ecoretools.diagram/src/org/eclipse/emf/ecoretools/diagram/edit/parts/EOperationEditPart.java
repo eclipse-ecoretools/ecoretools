@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,6 +20,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -232,31 +233,37 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 
 	private String getSuffixText() {
 		String text = "";
-		text += "(";
-		text += getParametersText();
-		text += ")";
-		if (((EOperation) resolveSemanticElement()).getEType() != null) {
-			text += " : " + ((EOperation) resolveSemanticElement()).getEType().getName();
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && semanticElement instanceof EOperation) {
+			text += "(";
+			text += getParametersText();
+			text += ")";
+			if (((EOperation) semanticElement).getEType() != null) {
+				text += " : " + ((EOperation) semanticElement).getEType().getName();
+			}
+			text += getExceptionsText();
 		}
-		text += getExceptionsText();
 		return text;
 	}
 
 	private String getParametersText() {
 		StringBuffer text = new StringBuffer();
 		boolean first = true;
-		for (EParameter param : ((EOperation) resolveSemanticElement()).getEParameters()) {
-			if (first) {
-				first = false;
-			} else {
-				text.append(",");
-			}
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null && semanticElement instanceof EOperation) {
+			for (EParameter param : ((EOperation) semanticElement).getEParameters()) {
+				if (first) {
+					first = false;
+				} else {
+					text.append(",");
+				}
 
-			EClassifier eType = param.getEType();
-			if (eType == null) {
-				text.append("null");
-			} else {
-				text.append(param.getEType().getName());
+				EClassifier eType = param.getEType();
+				if (eType == null) {
+					text.append("null");
+				} else {
+					text.append(param.getEType().getName());
+				}
 			}
 		}
 
@@ -266,17 +273,19 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	private String getExceptionsText() {
 		StringBuffer text = new StringBuffer();
 		boolean first = true;
-		for (EClassifier ex : ((EOperation) resolveSemanticElement()).getEExceptions()) {
-			if (first) {
-				text.append(" throws ");
-				first = false;
-			} else {
-				text.append(", ");
+		EObject model = resolveSemanticElement();
+		if (model != null && model instanceof EOperation) {
+			for (EClassifier ex : ((EOperation) model).getEExceptions()) {
+				if (first) {
+					text.append(" throws ");
+					first = false;
+				} else {
+					text.append(", ");
+				}
+
+				text.append(ex.getName());
 			}
-
-			text.append(ex.getName());
 		}
-
 		return text.toString();
 	}
 
@@ -671,8 +680,8 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 		super.activate();
 		EObject model = resolveSemanticElement();
 		if (model instanceof EOperation) {
-			listenParameters((EOperation) resolveSemanticElement());
-			listenExceptions((EOperation) resolveSemanticElement());
+			listenParameters((EOperation) model);
+			listenExceptions((EOperation) model);
 		}
 	}
 
@@ -682,8 +691,8 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	public void deactivate() {
 		EObject model = resolveSemanticElement();
 		if (model instanceof EOperation) {
-			unlistenExceptions((EOperation) resolveSemanticElement());
-			unlistenParameters((EOperation) resolveSemanticElement());
+			unlistenExceptions((EOperation) model);
+			unlistenParameters((EOperation) model);
 		}
 		super.deactivate();
 	}

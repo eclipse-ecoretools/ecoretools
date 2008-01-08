@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +18,7 @@ import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EReferenceItemSemanticEditPolicy;
@@ -152,14 +153,23 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 
 	}
 
-	@Override
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart#refreshVisuals()
+	 */
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshSourceDecoration();
 	}
 
+	/**
+	 * Update the source decoration depending on the containment property of the
+	 * EReference
+	 */
 	protected void refreshSourceDecoration() {
-		((SolidLineWDstArrow) getFigure()).displaySourceDecoration(((EReference) resolveSemanticElement()).isContainment());
+		EObject semanticElement = resolveSemanticElement();
+		if (semanticElement != null) {
+			((SolidLineWDstArrow) getFigure()).displaySourceDecoration(((EReference) semanticElement).isContainment());
+		}
 	}
 
 }
