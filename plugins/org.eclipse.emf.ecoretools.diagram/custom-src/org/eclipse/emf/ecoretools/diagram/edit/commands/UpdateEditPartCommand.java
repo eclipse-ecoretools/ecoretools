@@ -28,7 +28,8 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
  * TODO Describe the class here <br>
  * creation : 2 janv. 2008
  * 
- * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles Cannenterre</a>
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
  */
 public class UpdateEditPartCommand extends AbstractTransactionalCommand {
 
@@ -41,16 +42,14 @@ public class UpdateEditPartCommand extends AbstractTransactionalCommand {
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		if (part == null)
-		{
+		if (part == null) {
 			return CommandResult.newWarningCommandResult("Unable to proceed with null part", null);
 		}
 		EditPolicy editPolicy = part.getEditPolicy(EditPolicyRoles.CANONICAL_ROLE);
-		if (editPolicy instanceof CanonicalEditPolicy)
-		{
-			((CanonicalEditPolicy)editPolicy).refresh();
+		if (editPolicy instanceof CanonicalEditPolicy) {
+			((CanonicalEditPolicy) editPolicy).refresh();
 		}
 		return CommandResult.newOKCommandResult();
 	}
-	
+
 }

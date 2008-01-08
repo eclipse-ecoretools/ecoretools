@@ -58,8 +58,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		}
 		for (Iterator it = getView(request).getDiagram().getChildren().iterator(); it.hasNext();) {
 			View nextView = (View) it.next();
-			if(nextView.getElement() == null)
-			{
+			if (nextView.getElement() == null) {
 				continue;
 			}
 			if (nextView.getElement().equals(nextObject)) {
@@ -72,17 +71,16 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	private Command createShortcutsCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
 		Command command = createViewsAndArrangeCommand(dropRequest, viewDescriptors);
 		if (command instanceof CompoundCommand) {
-			((CompoundCommand)command).add(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
-			
+			((CompoundCommand) command).add(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
+
 			return command;
 		}
 		return null;
 	}
 
 	private TransactionalEditingDomain getEditingDomain() {
-		if (getHost() instanceof IGraphicalEditPart)
-		{
-			return ((IGraphicalEditPart)getHost()).getEditingDomain();
+		if (getHost() instanceof IGraphicalEditPart) {
+			return ((IGraphicalEditPart) getHost()).getEditingDomain();
 		}
 		return null;
 	}

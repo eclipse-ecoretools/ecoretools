@@ -32,7 +32,8 @@ import org.eclipse.gmf.runtime.notation.Node;
  * TODO Describe the class here <br>
  * creation : 3 janv. 2008
  * 
- * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles Cannenterre</a>
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
  */
 public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalCommand {
 
@@ -45,27 +46,24 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		if (diagram == null)
-		{
+		if (diagram == null) {
 			return CommandResult.newWarningCommandResult("Unable to proceed with null diagam", null);
 		}
 		// Initialize diagram content
 		EcoreDiagramContentInitializer intializer = new EcoreDiagramContentInitializer();
 		intializer.initDiagramContent(diagram);
-		
+
 		// Layout diagram content if necessary
-		if (false == diagram.getChildren().isEmpty())
-		{
+		if (false == diagram.getChildren().isEmpty()) {
 			List<Node> nodes = new ArrayList<Node>();
-			for(Object view : diagram.getChildren())
-			{
+			for (Object view : diagram.getChildren()) {
 				if (view instanceof Node) {
-					nodes.add((Node)view);
+					nodes.add((Node) view);
 				}
 			}
 			LayoutService.getInstance().layoutNodes(nodes, true, LayoutType.DEFAULT);
 		}
-		
+
 		return CommandResult.newOKCommandResult();
 	}
 
