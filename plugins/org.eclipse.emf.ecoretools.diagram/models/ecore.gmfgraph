@@ -24,22 +24,26 @@
           fill="false"
           lineWidth="2">
         <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"
-            matchMinorSize="true"
-            forceSingleLine="true"
-            minorAlignment="CENTER"
-            majorSpacing="0"
-            minorSpacing="0"/>
+            xsi:type="gmfgraph:GridLayout"
+            numColumns="2"
+            equalWidth="false">
+          <margins/>
+          <spacing/>
+        </layout>
         <minimumSize
-            dx="100"
+            dx="110"
             dy="100"/>
         <children
             xsi:type="gmfgraph:Rectangle"
             name="PackageLabelRectangle"
             lineWidth="2">
+          <layoutData
+              xsi:type="gmfgraph:GridLayoutData"
+              verticalAlignment="BEGINNING"
+              horizontalAlignment="BEGINNING"/>
           <layout
               xsi:type="gmfgraph:FlowLayout"
+              vertical="true"
               forceSingleLine="true"/>
           <insets
               top="5"
@@ -53,11 +57,24 @@
         </children>
         <children
             xsi:type="gmfgraph:Rectangle"
+            name="FillerFigure">
+          <layoutData
+              xsi:type="gmfgraph:GridLayoutData"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Rectangle"
             name="PackageBodyRectangle"
-            lineWidth="2"/>
+            lineWidth="2">
+          <layoutData
+              xsi:type="gmfgraph:GridLayoutData"
+              grabExcessHorizontalSpace="true"
+              grabExcessVerticalSpace="true"
+              verticalAlignment="FILL"
+              horizontalAlignment="FILL"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.2"/>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0/@children.0"/>
     </descriptors>
