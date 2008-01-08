@@ -19,7 +19,12 @@ import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClassItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
@@ -256,6 +261,18 @@ public class EClassEditPart extends ShapeNodeEditPart {
 		}
 	}
 
+	@Override
+	protected void refreshVisuals() {
+		EObject semanticElement = resolveSemanticElement();
+		if (FigureFromLabelUtils.needFromLabel(semanticElement, getNotationView())) {
+			getPrimaryShape().updateFromLabel(FigureFromLabelUtils.getQualifiedName(semanticElement));
+			getPrimaryShape().addFromLabel();
+		} else {
+			getPrimaryShape().removeFromLabel();
+		}
+		super.refreshVisuals();
+	}
+
 	/**
 	 * @generated
 	 */
@@ -294,13 +311,20 @@ public class EClassEditPart extends ShapeNodeEditPart {
 			fFigureClassNameLabel.setText("<..>");
 
 			this.add(fFigureClassNameLabel);
-
+			
+			fFigureFromLabel = new WrappingLabel();
+			fFigureFromLabel.setAlignment(PositionConstants.TOP);
+			fFigureFromLabel.setText("<..>");
 		}
 
 		/**
 		 * @generated
 		 */
 		private boolean myUseLocalCoordinates = false;
+
+		private WrappingLabel fFigureFromLabel;
+
+		private boolean canRemovedFromLabel;
 
 		/**
 		 * @generated
@@ -321,6 +345,26 @@ public class EClassEditPart extends ShapeNodeEditPart {
 		 */
 		public WrappingLabel getFigureClassNameLabel() {
 			return fFigureClassNameLabel;
+		}
+
+		public WrappingLabel getFigureFromLabel() {
+			return fFigureFromLabel;
+		}
+
+		public void addFromLabel() {
+			this.add(getFigureFromLabel(), 1);
+			canRemovedFromLabel = true;
+		}
+
+		public void removeFromLabel() {
+			if (canRemovedFromLabel) {
+				this.remove(getFigureFromLabel());
+				canRemovedFromLabel = false;
+			}
+		}
+
+		public void updateFromLabel(String text) {
+			getFigureFromLabel().setText(text);
 		}
 
 	}

@@ -23,7 +23,12 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EAnnotationItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
@@ -256,6 +261,18 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 		}
 	}
 
+	@Override
+	protected void refreshVisuals() {
+		EObject semanticElement = resolveSemanticElement();
+		if (FigureFromLabelUtils.needFromLabel(semanticElement, getNotationView())) {
+			getPrimaryShape().updateFromLabel(FigureFromLabelUtils.getQualifiedName(semanticElement));
+			getPrimaryShape().addFromLabel();
+		} else {
+			getPrimaryShape().removeFromLabel();
+		}
+		super.refreshVisuals();
+	}
+
 	/**
 	 * @generated
 	 */
@@ -351,12 +368,19 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 
 			this.add(fFigureAnnotationNameLabel);
 
+			fFigureFromLabel = new WrappingLabel();
+			fFigureFromLabel.setAlignment(PositionConstants.TOP);
+			fFigureFromLabel.setText("<..>");
 		}
 
 		/**
 		 * @generated
 		 */
 		private boolean myUseLocalCoordinates = false;
+
+		private boolean canRemovedFromLabel;
+
+		private WrappingLabel fFigureFromLabel;
 
 		/**
 		 * @generated
@@ -377,6 +401,26 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 		 */
 		public WrappingLabel getFigureAnnotationNameLabel() {
 			return fFigureAnnotationNameLabel;
+		}
+
+		public void addFromLabel() {
+			this.add(getFigureFromLabel(), 1);
+			canRemovedFromLabel = true;
+		}
+
+		public WrappingLabel getFigureFromLabel() {
+			return fFigureFromLabel;
+		}
+
+		public void removeFromLabel() {
+			if (canRemovedFromLabel) {
+				this.remove(getFigureFromLabel());
+				canRemovedFromLabel = false;
+			}
+		}
+
+		public void updateFromLabel(String text) {
+			getFigureFromLabel().setText(text);
 		}
 
 	}

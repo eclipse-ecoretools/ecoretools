@@ -22,7 +22,12 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EDataTypeItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
@@ -235,6 +240,18 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 		}
 	}
 
+	@Override
+	protected void refreshVisuals() {
+		EObject semanticElement = resolveSemanticElement();
+		if (FigureFromLabelUtils.needFromLabel(semanticElement, getNotationView())) {
+			getPrimaryShape().updateFromLabel(FigureFromLabelUtils.getQualifiedName(semanticElement));
+			getPrimaryShape().addFromLabel();
+		} else {
+			getPrimaryShape().removeFromLabel();
+		}
+		super.refreshVisuals();
+	}
+
 	/**
 	 * @generated
 	 */
@@ -271,7 +288,7 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 		}
 
 		/**
-		 * @generated NOT
+		 * @generated
 		 */
 		private void createContents() {
 
@@ -293,12 +310,19 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 
 			this.add(fFigureDataTypeJavaLabel);
 
+			fFigureFromLabel = new WrappingLabel();
+			fFigureFromLabel.setAlignment(PositionConstants.TOP);
+			fFigureFromLabel.setText("<..>");
 		}
 
 		/**
 		 * @generated
 		 */
 		private boolean myUseLocalCoordinates = false;
+
+		private boolean canRemovedFromLabel;
+
+		private WrappingLabel fFigureFromLabel;
 
 		/**
 		 * @generated
@@ -335,11 +359,31 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 			int y = r.y + lineWidth / 2;
 			int w = r.width - Math.max(1, lineWidth);
 			int h = r.height - Math.max(1, lineWidth);
-			int labelHeight = getFigureDataTypeNameLabel().getBounds().height + dataTypeFixedNameLabel0.getBounds().height + ((ToolbarLayout) getLayoutManager()).getSpacing();
+			int labelHeight = getFigureDataTypeJavaLabel().getBounds().y - dataTypeFixedNameLabel0.getBounds().y;
 			Point point1 = new Point(x, y + labelHeight);
 			Point point2 = new Point(x + w, y + labelHeight);
 			graphics.drawLine(point1, point2);
 			graphics.drawRectangle(x, y, w, h);
+		}
+
+		public void addFromLabel() {
+			this.add(getFigureFromLabel(), 2);
+			canRemovedFromLabel = true;
+		}
+
+		public WrappingLabel getFigureFromLabel() {
+			return fFigureFromLabel;
+		}
+
+		public void removeFromLabel() {
+			if (canRemovedFromLabel) {
+				this.remove(getFigureFromLabel());
+				canRemovedFromLabel = false;
+			}
+		}
+
+		public void updateFromLabel(String text) {
+			getFigureFromLabel().setText(text);
 		}
 
 	}
