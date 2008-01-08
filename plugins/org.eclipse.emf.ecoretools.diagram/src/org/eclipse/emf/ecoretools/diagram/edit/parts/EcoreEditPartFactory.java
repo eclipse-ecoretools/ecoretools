@@ -179,20 +179,20 @@ public class EcoreEditPartFactory implements EditPartFactory {
 		/**
 		 * @generated
 		 */
-		private WrappingLabel wrappingLabel;
+		private WrappingLabel wrapLabel;
 
 		/**
 		 * @generated
 		 */
-		public TextCellEditorLocator(WrappingLabel wrappingLabel) {
-			this.wrappingLabel = wrappingLabel;
+		public TextCellEditorLocator(WrappingLabel wrapLabel) {
+			this.wrapLabel = wrapLabel;
 		}
 
 		/**
 		 * @generated
 		 */
 		public WrappingLabel getWrapLabel() {
-			return wrappingLabel;
+			return wrapLabel;
 		}
 
 		/**
