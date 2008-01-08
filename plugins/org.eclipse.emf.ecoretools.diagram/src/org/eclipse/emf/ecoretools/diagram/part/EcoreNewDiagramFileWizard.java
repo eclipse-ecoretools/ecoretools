@@ -134,13 +134,12 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 			diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
 
 			// Initialize and Layout Diagram
-			if (diagramResource.getContents().get(0) instanceof Diagram)
-			{
+			if (diagramResource.getContents().get(0) instanceof Diagram) {
 				InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(myEditingDomain, (Diagram) diagramResource.getContents().get(0));
 				OperationHistoryFactory.getOperationHistory().execute(initializeAndLayoutDiagram, new NullProgressMonitor(), null);
 				diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
 			}
-			
+
 			EcoreDiagramEditorUtil.openDiagram(diagramResource);
 		} catch (ExecutionException e) {
 			EcoreDiagramEditorPlugin.getInstance().logError("Unable to create model and diagram", e); //$NON-NLS-1$

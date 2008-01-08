@@ -335,8 +335,10 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	 */
 	protected ScrollingGraphicalViewer createScrollingGraphicalViewer() {
 		return new DiagramGraphicalViewer() {
+
 			/**
-			 * Use the GEF implementation. Do not use asynchronous events. See bug#203520
+			 * Use the GEF implementation. Do not use asynchronous events. See
+			 * bug#203520
 			 * 
 			 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer#fireSelectionChanged()
 			 */
@@ -344,12 +346,11 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 				Object listeners[] = selectionListeners.toArray();
 				SelectionChangedEvent event = new SelectionChangedEvent(this, getSelection());
 				for (int i = 0; i < listeners.length; i++)
-					((ISelectionChangedListener)listeners[i])
-						.selectionChanged(event);
+					((ISelectionChangedListener) listeners[i]).selectionChanged(event);
 			}
 		};
 	}
-	
+
 	/**
 	 * @generated
 	 */
