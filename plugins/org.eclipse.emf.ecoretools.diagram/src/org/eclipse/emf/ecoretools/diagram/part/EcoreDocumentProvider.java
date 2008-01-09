@@ -67,12 +67,12 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 
 /**
- * @generated
+ * @generated NOT
  */
 public class EcoreDocumentProvider extends AbstractDocumentProvider implements IDiagramDocumentProvider {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
@@ -86,11 +86,17 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		ResourceSetInfo info = new ResourceSetInfo(document, editorInput);
 		info.setModificationStamp(computeModificationStamp(info));
 		info.fStatus = null;
+
+		if (synchronizerManager == null) {
+			synchronizerManager = new SynchronizerManager();
+		}
+		synchronizerManager.startResourceListening(info);
+
 		return info;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IDocument createDocument(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
@@ -98,6 +104,10 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 					"org.eclipse.ui.part.FileEditorInput", "org.eclipse.emf.common.ui.URIEditorInput" }), //$NON-NLS-1$ //$NON-NLS-2$ 
 					null));
 		}
+
+		// Create one editing domain per model file
+		setCurrentEditorInput((IEditorInput) element);
+
 		IDocument document = createEmptyDocument();
 		setDocumentContent(document, (IEditorInput) element);
 		setupDocument(element, document);
@@ -148,11 +158,18 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	private TransactionalEditingDomain createEditingDomain() {
-		TransactionalEditingDomain editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
-		editingDomain.setID("org.eclipse.emf.ecoretools.diagram.EditingDomain"); //$NON-NLS-1$
+		TransactionalEditingDomain editingDomain = null;
+
+		editingDomain = TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(getEditingDomainID());
+		if (editingDomain == null) {
+			editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
+			editingDomain.setID(getEditingDomainID()); //$NON-NLS-1$
+			TransactionalEditingDomain.Registry.INSTANCE.add(editingDomain.getID(), editingDomain);
+		}
+
 		final NotificationFilter diagramResourceModifiedFilter = NotificationFilter.createNotifierFilter(editingDomain.getResourceSet())
 				.and(NotificationFilter.createEventTypeFilter(Notification.ADD)).and(NotificationFilter.createFeatureFilter(ResourceSet.class, ResourceSet.RESOURCE_SET__RESOURCES));
 		editingDomain.getResourceSet().eAdapters().add(new Adapter() {
@@ -522,12 +539,15 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			if (!overwrite && !info.isSynchronized()) {
 				throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, IResourceStatus.OUT_OF_SYNC_LOCAL, Messages.EcoreDocumentProvider_UnsynchronizedFileSaveError, null));
 			}
-			info.stopResourceListening();
+
+			// info.stopResourceListening();
+			synchronizerManager.stopResourceListening(info);
+
 			fireElementStateChanging(element);
 			List resources = info.getResourceSet().getResources();
 			try {
 				monitor.beginTask(Messages.EcoreDocumentProvider_SaveDiagramTask, resources.size() + 1); // "Saving
-																											// diagram"
+				// diagram"
 				for (Iterator it = resources.iterator(); it.hasNext();) {
 					Resource nextResource = (Resource) it.next();
 					monitor.setTaskName(NLS.bind(Messages.EcoreDocumentProvider_SaveNextResourceTask, nextResource.getURI()));
@@ -542,12 +562,16 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 					monitor.worked(1);
 				}
 				monitor.done();
-				info.setModificationStamp(computeModificationStamp(info));
+				// info.setModificationStamp(computeModificationStamp(info));
+				synchronizerManager.setModificationStamp(info.getResourceSet());
 			} catch (RuntimeException x) {
 				fireElementStateChangeFailed(element);
 				throw x;
 			} finally {
-				info.startResourceListening();
+
+				// info.startResourceListening();
+				synchronizerManager.startResourceListening(info);
+
 			}
 		} else {
 			URI newResoruceURI;
@@ -593,9 +617,10 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void handleElementChanged(ResourceSetInfo info, Resource changedResource, IProgressMonitor monitor) {
+		System.out.println("Tentative de tirage de chasse");
 		IFile file = WorkspaceSynchronizer.getFile(changedResource);
 		if (file != null) {
 			try {
@@ -607,12 +632,15 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			}
 		}
 		changedResource.unload();
+		System.out.println("Chasse tiré");
 
 		fireElementContentAboutToBeReplaced(info.getEditorInput());
 		removeUnchangedElementListeners(info.getEditorInput(), info);
 		info.fStatus = null;
 		try {
+			System.out.println("Tentative de setage de document");
 			setDocumentContent(info.fDocument, info.getEditorInput());
+			System.out.println("setage de document effectué");
 		} catch (CoreException e) {
 			info.fStatus = e.getStatus();
 		}
@@ -662,7 +690,9 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
+	 * 
+	 * Remove inside the workspace synchronizer
 	 */
 	protected class ResourceSetInfo extends ElementInfo {
 
@@ -674,17 +704,12 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		/**
 		 * @generated
 		 */
-		private WorkspaceSynchronizer mySynchronizer;
-
-		/**
-		 * @generated
-		 */
 		private Collection myUnSynchronizedResources = new ArrayList();
 
 		/**
 		 * @generated
 		 */
-		private IDiagramDocument myDocument;
+		public IDiagramDocument myDocument;
 
 		/**
 		 * @generated
@@ -712,13 +737,13 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		private ResourceSetModificationListener myResourceSetListener;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public ResourceSetInfo(IDiagramDocument document, IEditorInput editorInput) {
 			super(document);
 			myDocument = document;
 			myEditorInput = editorInput;
-			startResourceListening();
+			// startResourceListening();
 			myResourceSetListener = new ResourceSetModificationListener(this);
 			getResourceSet().eAdapters().add(myResourceSetListener);
 		}
@@ -759,10 +784,10 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public void dispose() {
-			stopResourceListening();
+			// stopResourceListening();
 			getResourceSet().eAdapters().remove(myResourceSetListener);
 			for (Iterator it = getResourceSet().getResources().iterator(); it.hasNext();) {
 				Resource resource = (Resource) it.next();
@@ -792,18 +817,19 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public final void stopResourceListening() {
-			mySynchronizer.dispose();
-			mySynchronizer = null;
+			// mySynchronizer.dispose();
+			// mySynchronizer = null;
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public final void startResourceListening() {
-			mySynchronizer = new WorkspaceSynchronizer(getEditingDomain(), new SynchronizerDelegate());
+			// mySynchronizer = new WorkspaceSynchronizer(getEditingDomain(),
+			// new SynchronizerDelegate());
 		}
 
 		/**
@@ -846,80 +872,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		 */
 		public void setReadOnly(boolean readOnly) {
 			myReadOnly = readOnly;
-		}
-
-		/**
-		 * @generated
-		 */
-		private class SynchronizerDelegate implements WorkspaceSynchronizer.Delegate {
-
-			/**
-			 * @generated
-			 */
-			public void dispose() {
-			}
-
-			/**
-			 * @generated
-			 */
-			public boolean handleResourceChanged(final Resource resource) {
-				synchronized (ResourceSetInfo.this) {
-					if (ResourceSetInfo.this.fCanBeSaved) {
-						ResourceSetInfo.this.setUnSynchronized(resource);
-						return true;
-					}
-				}
-				Display.getDefault().asyncExec(new Runnable() {
-
-					public void run() {
-						handleElementChanged(ResourceSetInfo.this, resource, null);
-					}
-				});
-				return true;
-			}
-
-			/**
-			 * @generated
-			 */
-			public boolean handleResourceDeleted(Resource resource) {
-				synchronized (ResourceSetInfo.this) {
-					if (ResourceSetInfo.this.fCanBeSaved) {
-						ResourceSetInfo.this.setUnSynchronized(resource);
-						return true;
-					}
-				}
-				Display.getDefault().asyncExec(new Runnable() {
-
-					public void run() {
-						fireElementDeleted(ResourceSetInfo.this.getEditorInput());
-					}
-				});
-				return true;
-			}
-
-			/**
-			 * @generated
-			 */
-			public boolean handleResourceMoved(Resource resource, final URI newURI) {
-				synchronized (ResourceSetInfo.this) {
-					if (ResourceSetInfo.this.fCanBeSaved) {
-						ResourceSetInfo.this.setUnSynchronized(resource);
-						return true;
-					}
-				}
-				if (myDocument.getDiagram().eResource() == resource) {
-					Display.getDefault().asyncExec(new Runnable() {
-
-						public void run() {
-							handleElementMoved(ResourceSetInfo.this.getEditorInput(), newURI);
-						}
-					});
-				} else {
-					handleResourceDeleted(resource);
-				}
-				return true;
-			}
-
 		}
 
 	}
@@ -989,5 +941,172 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		}
 
 	}
+
+	/***************************************************************************
+	 * - Create one editing domain per model file - Use one workspace
+	 * synchronizer per editing domain
+	 * 
+	 **************************************************************************/
+	/** **************************************************************************************** */
+
+	private IEditorInput currentEditorInput;
+
+	protected SynchronizerManager synchronizerManager;
+
+	private void setCurrentEditorInput(IEditorInput element) {
+		currentEditorInput = element;
+	}
+
+	private IEditorInput getCurrentEditorInput() {
+		return currentEditorInput;
+	}
+
+	public String getEditingDomainID() {
+		String base = "org.eclipse.emf.ecoretools.diagram.EditingDomain";
+		IEditorInput element = getCurrentEditorInput();
+		if (element.getAdapter(IFile.class) instanceof IFile) {
+			IFile iFile = (IFile) element.getAdapter(IFile.class);
+			base = base + iFile.getLocation();
+		}
+		return base;
+	}
+
+	protected void disconnected() {
+		synchronizerManager.disconnect();
+	};
+
+	protected class SynchronizerManager {
+
+		private class SynchronizerDelegate implements WorkspaceSynchronizer.Delegate {
+
+			public void dispose() {
+			}
+
+			public boolean handleResourceChanged(final Resource resource) {
+				for (final ResourceSetInfo info : resourceSetInfos) {
+
+					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+						continue;
+					}
+
+					synchronized (info) {
+						if (info.fCanBeSaved) {
+							info.setUnSynchronized(resource);
+							continue;
+						}
+					}
+
+					Display.getDefault().asyncExec(new Runnable() {
+
+						public void run() {
+							handleElementChanged(info, resource, null);
+						}
+					});
+				}
+				return true;
+			}
+
+			public boolean handleResourceDeleted(Resource resource) {
+				for (final ResourceSetInfo info : resourceSetInfos) {
+
+					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+						continue;
+					}
+
+					synchronized (info) {
+						if (info.fCanBeSaved) {
+							info.setUnSynchronized(resource);
+							return true;
+						}
+					}
+
+					Display.getDefault().asyncExec(new Runnable() {
+
+						public void run() {
+							fireElementDeleted(info.getEditorInput());
+						}
+					});
+				}
+				return true;
+			}
+
+			public boolean handleResourceMoved(Resource resource, final URI newURI) {
+				for (final ResourceSetInfo info : resourceSetInfos) {
+
+					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+						continue;
+					}
+
+					synchronized (info) {
+						if (info.fCanBeSaved) {
+							info.setUnSynchronized(resource);
+							return true;
+						}
+					}
+
+					if (info.myDocument.getDiagram().eResource() == resource) {
+						Display.getDefault().asyncExec(new Runnable() {
+
+							public void run() {
+								handleElementMoved(info.getEditorInput(), newURI);
+							}
+						});
+					} else {
+						handleResourceDeleted(resource);
+					}
+				}
+				return true;
+			}
+
+		}
+
+		private Map<TransactionalEditingDomain, WorkspaceSynchronizer> editingDomainWkpsSync = new HashMap<TransactionalEditingDomain, WorkspaceSynchronizer>();
+
+		private List<ResourceSetInfo> resourceSetInfos = new ArrayList<ResourceSetInfo>();
+
+		public void startResourceListening(ResourceSetInfo info) {
+			if (false == resourceSetInfos.contains(info)) {
+				resourceSetInfos.add(info);
+			}
+			WorkspaceSynchronizer synchronizer = editingDomainWkpsSync.get(info.getEditingDomain());
+			if (synchronizer == null) {
+				synchronizer = new WorkspaceSynchronizer(info.getEditingDomain(), new SynchronizerDelegate());
+				editingDomainWkpsSync.put(info.getEditingDomain(), synchronizer);
+			}
+		}
+
+		public void stopResourceListening(ResourceSetInfo info) {
+			WorkspaceSynchronizer synchronizer = editingDomainWkpsSync.get(info.getEditingDomain());
+			if (synchronizer == null) {
+				return;
+			}
+			synchronizer.dispose();
+			editingDomainWkpsSync.put(info.getEditingDomain(), null);
+		}
+
+		public void setModificationStamp(ResourceSet resourceSet) {
+			for (final ResourceSetInfo info : resourceSetInfos) {
+
+				if (info.getEditingDomain().getResourceSet() != resourceSet) {
+					continue;
+				}
+
+				info.setModificationStamp(computeModificationStamp(info));
+			}
+		}
+
+		public void disconnect() {
+			for (final ResourceSetInfo info : resourceSetInfos) {
+				stopResourceListening(info);
+			}
+			resourceSetInfos.clear();
+			for (TransactionalEditingDomain domain : synchronizerManager.editingDomainWkpsSync.keySet()) {
+				TransactionalEditingDomain.Registry.INSTANCE.remove(domain.getID());
+			}
+			synchronizerManager.editingDomainWkpsSync.clear();
+		}
+	}
+
+	/** **************************************************************************************** */
 
 }
