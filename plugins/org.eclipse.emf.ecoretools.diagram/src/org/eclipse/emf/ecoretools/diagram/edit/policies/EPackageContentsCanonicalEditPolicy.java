@@ -12,6 +12,7 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -55,6 +56,9 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	 * @generated
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
+		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
+			return EcoreDiagramUpdater.isShortcutOrphaned(view);
+		}
 		int visualID = EcoreVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case EClass2EditPart.VISUAL_ID:
@@ -83,4 +87,34 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 		return myFeaturesToSynchronize;
 	}
 
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy#refreshSemantic()
+	 */
+	protected void refreshSemantic() {
+		deleteOrphanedViews();
+	}
+
+	/**
+	 * Delete orphaned views
+	 */
+	protected void deleteOrphanedViews() {
+
+		// Don't try to refresh children if the semantic element
+		// cannot be resolved.
+		if (resolveSemanticElement() == null) {
+			return;
+		}
+
+		// Current views
+		List viewChildren = getViewChildren();
+		List semanticChildren = new ArrayList(getSemanticChildrenList());
+
+		List orphaned = cleanCanonicalSemanticChildren(viewChildren, semanticChildren);
+		boolean changed = false;
+
+		// Delete all the remaining oprphaned views
+		if (!orphaned.isEmpty()) {
+			changed = deleteViews(orphaned.iterator());
+		}
+	}
 }

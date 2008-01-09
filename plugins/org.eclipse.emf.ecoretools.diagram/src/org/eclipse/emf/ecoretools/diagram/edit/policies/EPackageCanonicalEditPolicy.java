@@ -12,6 +12,7 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,8 +44,6 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
-import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalConnectionEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
@@ -153,20 +152,34 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	 * @generated NOT
 	 */
 	protected void refreshSemantic() {
-		List createdViews = new LinkedList();
-//		createdViews.addAll(refreshSemanticChildren());
+		deleteOrphanedViews();
 		List createdConnectionViews = new LinkedList();
 		createdConnectionViews.addAll(refreshSemanticConnections());
 		createdConnectionViews.addAll(refreshConnections());
+	}
 
-		if (createdViews.size() > 1) {
-			// perform a layout of the container
-			DeferredLayoutCommand layoutCmd = new DeferredLayoutCommand(host().getEditingDomain(), createdViews, host());
-			executeCommand(new ICommandProxy(layoutCmd));
+	/**
+	 * Delete orphaned views
+	 */
+	protected void deleteOrphanedViews() {
+
+		// Don't try to refresh children if the semantic element
+		// cannot be resolved.
+		if (resolveSemanticElement() == null) {
+			return;
 		}
 
-		createdViews.addAll(createdConnectionViews);
-		makeViewsImmutable(createdViews);
+		// Current views
+		List viewChildren = getViewChildren();
+		List semanticChildren = new ArrayList(getSemanticChildrenList());
+
+		List orphaned = cleanCanonicalSemanticChildren(viewChildren, semanticChildren);
+		boolean changed = false;
+
+		// Delete all the remaining oprphaned views
+		if (!orphaned.isEmpty()) {
+			changed = deleteViews(orphaned.iterator());
+		}
 	}
 
 	/**
