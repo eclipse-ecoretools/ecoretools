@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension-point id="filteredDiagramType" name="org.eclipse.emf.ecoretools.filters.filteredDiagramType" schema="schema/filteredDiagramType.exsd"/>
+	
+	<extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+   		<contributionItemProvider
+           checkPluginLoaded="false"
+           class="org.eclipse.emf.ecoretools.filters.internal.providers.FilteredDiagramContributionItemProvider">
+         	<Priority name="Low">
+         	</Priority>       	
+         	<partContribution
+               	class="org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart">
+            	<partAction
+                   global="false"
+                   id="diagramFilterActionMenu"
+                   toolbarPath="/toolbarFilterGroup">
+            	</partAction>
+         	</partContribution>
+      	</contributionItemProvider>
+    </extension>
+    
+</plugin>

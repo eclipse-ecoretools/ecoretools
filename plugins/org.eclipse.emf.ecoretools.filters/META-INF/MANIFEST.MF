@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ecoretools Filters Plug-in
+Bundle-SymbolicName: org.eclipse.emf.ecoretools.filters;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: org.eclipse.emf.ecoretools.filters.internal.FilterPlugin
+Bundle-Vendor: ANWRT
+Require-Bundle: org.eclipse.gmf.runtime.diagram.ui.properties,
+ org.eclipse.emf.ecore.edit;visibility:=reexport,
+ org.eclipse.ocl.ecore;visibility:=reexport
+Eclipse-LazyStart: true
+Export-Package: org.eclipse.emf.ecoretools.filters.diagramfilters,
+ org.eclipse.emf.ecoretools.filters.internal;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.actions;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.commands;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.dialogs;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.extension;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.providers;x-internal:=true,
+ org.eclipse.emf.ecoretools.filters.internal.utils;x-internal:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
