@@ -18,10 +18,9 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EEnum2ItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
@@ -254,6 +253,19 @@ public class EEnum2EditPart extends ShapeNodeEditPart {
 			getPrimaryShape().removeFromLabel();
 		}
 		super.refreshVisuals();
+	}
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart#handleNotificationEvent(org.eclipse.emf.common.notify.Notification)
+	 */
+	protected void handleNotificationEvent(Notification event) {
+		if (event.getNotifier() == getModel() && EcorePackage.eINSTANCE.getEModelElement_EAnnotations().equals(event.getFeature())) {
+			handleMajorSemanticChange();
+		} else {
+			super.handleNotificationEvent(event);
+		}
 	}
 
 	/**
