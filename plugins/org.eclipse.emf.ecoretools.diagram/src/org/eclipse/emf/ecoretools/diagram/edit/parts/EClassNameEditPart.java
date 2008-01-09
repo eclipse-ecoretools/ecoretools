@@ -206,7 +206,7 @@ public class EClassNameEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	protected Image getLabelIcon() {
 		EObject semanticElement = resolveSemanticElement();
-		if (semanticElement != null && ((EClass) semanticElement).isInterface()) {
+		if (semanticElement instanceof EClass && ((EClass) semanticElement).isInterface()) {
 			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif");
 		} else {
 			EObject parserElement = getParserElement();

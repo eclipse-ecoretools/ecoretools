@@ -21,7 +21,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -207,7 +206,7 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	 */
 	protected Image getLabelIcon() {
 		EObject semanticElement = resolveSemanticElement();
-		if (semanticElement != null && ((EClass) semanticElement).isInterface()) {
+		if (semanticElement instanceof EClass && ((EClass) semanticElement).isInterface()) {
 			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif");
 		} else {
 			EObject parserElement = getParserElement();
