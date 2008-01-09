@@ -17,13 +17,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateEditPartCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -44,19 +43,22 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 				continue;
 			}
 			// Continue if element already in diagram
-			if (isElementInDiagram(nextObject, dropRequest)) {
+			// if (isElementInView(nextObject, dropRequest)) {
+			// continue;
+			// }
+
+			// Continue if element is the diagram canvas
+			if (getView().getElement().equals(nextObject)) {
 				continue;
 			}
+
 			viewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
 		}
 		return createShortcutsCommand(dropRequest, viewDescriptors);
 	}
 
-	private boolean isElementInDiagram(Object nextObject, Request request) {
-		if (getView(request).getDiagram().getElement().equals(nextObject)) {
-			return true;
-		}
-		for (Iterator it = getView(request).getDiagram().getChildren().iterator(); it.hasNext();) {
+	private boolean isElementInView(Object nextObject, Request request) {
+		for (Iterator it = getView().getChildren().iterator(); it.hasNext();) {
 			View nextView = (View) it.next();
 			if (nextView.getElement() == null) {
 				continue;
@@ -69,13 +71,23 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	}
 
 	private Command createShortcutsCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
-		Command command = createViewsAndArrangeCommand(dropRequest, viewDescriptors);
-		if (command instanceof CompoundCommand) {
-			((CompoundCommand) command).add(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
-
+		Command command = createViews(dropRequest, viewDescriptors);
+		if (command != null) {
+			Command createShorcutCommand = command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
+			if (createShorcutCommand != null) {
+				return createShorcutCommand.chain(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
+			}
 			return command;
 		}
 		return null;
+	}
+
+	protected Command createViews(DropObjectsRequest dropRequest, List viewDescriptors) {
+		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
+		createViewRequest.setLocation(dropRequest.getLocation());
+		Command createCommand = getHost().getCommand(createViewRequest);
+
+		return createCommand;
 	}
 
 	private TransactionalEditingDomain getEditingDomain() {
@@ -85,9 +97,8 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return null;
 	}
 
-	protected View getView(Request request) {
-		EditPart targetEditPart = getTargetEditPart(request);
-		return (View) targetEditPart.getModel();
+	protected View getView() {
+		return (View) getHost().getModel();
 	}
 
 	protected PreferencesHint getDiagramPreferencesHint() {
