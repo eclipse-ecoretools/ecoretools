@@ -12,24 +12,19 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
-import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorUtil;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPart;
@@ -68,7 +63,6 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 /**
@@ -372,27 +366,27 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			multiDiagramFacet.getDiagramLinks().add(d);
 			assert multiDiagramFacet.eResource() != null;
 			multiDiagramFacet.eResource().getContents().add(d);
-			try {
-				new WorkspaceModifyOperation() {
 
-					protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-						try {
-							for (Iterator it = multiDiagramFacet.eResource().getResourceSet().getResources().iterator(); it.hasNext();) {
-								Resource nextResource = (Resource) it.next();
-								if (nextResource.isLoaded() && !getEditingDomain().isReadOnly(nextResource)) {
-									nextResource.save(EcoreDiagramEditorUtil.getSaveOptions());
-								}
-							}
-						} catch (IOException ex) {
-							throw new InvocationTargetException(ex, "Save operation failed");
-						}
-					}
-				}.run(null);
-			} catch (InvocationTargetException e) {
-				throw new ExecutionException("Can't create diagram of '" + getDiagramKind() + "' kind", e);
-			} catch (InterruptedException e) {
-				throw new ExecutionException("Can't create diagram of '" + getDiagramKind() + "' kind", e);
-			}
+			/*
+			 * try { new WorkspaceModifyOperation() {
+			 * 
+			 * protected void execute(IProgressMonitor monitor) throws
+			 * CoreException, InvocationTargetException, InterruptedException {
+			 * try { for (Iterator it =
+			 * multiDiagramFacet.eResource().getResourceSet().getResources().iterator();
+			 * it.hasNext();) { Resource nextResource = (Resource) it.next(); if
+			 * (nextResource.isLoaded() &&
+			 * !getEditingDomain().isReadOnly(nextResource)) {
+			 * nextResource.save(EcoreDiagramEditorUtil.getSaveOptions()); } } }
+			 * catch (IOException ex) { throw new InvocationTargetException(ex,
+			 * "Save operation failed"); } } }.run(null); } catch
+			 * (InvocationTargetException e) { throw new
+			 * ExecutionException("Can't create diagram of '" + getDiagramKind() +
+			 * "kind", e); } catch (InterruptedException e) { throw new
+			 * ExecutionException("Can't create diagram of '" + getDiagramKind() +
+			 * "kind", e); }
+			 */
+
 			return d;
 		}
 
