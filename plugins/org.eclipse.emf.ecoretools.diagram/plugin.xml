@@ -3,11 +3,11 @@
 <plugin>
 	<!--Shared Editing Domain -->
    
-   <extension point="org.eclipse.emf.transaction.editingDomains">
+   <!-- <extension point="org.eclipse.emf.transaction.editingDomains">
       <editingDomain 
       	factory="org.eclipse.emf.workspace.WorkspaceEditingDomainFactory" 
       	id="org.eclipse.emf.ecoretools.diagram.EditingDomain"/>
-   </extension>
+   </extension> -->
    
    <extension point="org.eclipse.team.core.fileTypes">
       <?gmfgen generated="true"?>
@@ -59,10 +59,6 @@
   	     id="org.eclipse.emf.ecoretools.diagram.part.EcoreCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
-      <category
-           id="org.eclipse.emf.ecoretools.diagram"
-           name="Ecore Tools">
-     </category>
    </extension>
 
    <extension point="org.eclipse.ui.popupMenus">
@@ -749,6 +745,13 @@
       <decoratorProvider class="org.eclipse.emf.ecoretools.diagram.providers.EcoreShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
       </decoratorProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecoretools.filters.filteredDiagramType">
+      <filteredDiagramType
+            diagramFilter="org.eclipse.emf.ecoretools.diagram.filter.EcoreDiagramFilter"
+            modelId="EcoreTools">
+      </filteredDiagramType>
    </extension>
 
 </plugin>
