@@ -41,12 +41,16 @@ import org.eclipse.gmf.runtime.notation.View;
 public class EEnum2ItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolicy {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		CompoundCommand cc = getDestroyEdgesCommand();
 		addDestroyChildNodesCommand(cc);
 		addDestroyShortcutsCommand(cc);
+		View view = (View) getHost().getModel();
+		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
+			req.setElementToDestroy(view);
+		}
 		cc.add(getGEFWrapper(new DestroyElementCommand(req)));
 		return cc.unwrap();
 	}
