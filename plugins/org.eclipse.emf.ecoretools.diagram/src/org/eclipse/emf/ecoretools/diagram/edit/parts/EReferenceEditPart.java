@@ -167,7 +167,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	 */
 	protected void refreshSourceDecoration() {
 		EObject semanticElement = resolveSemanticElement();
-		if (semanticElement != null) {
+		if (semanticElement instanceof EReference) {
 			((SolidLineWDstArrow) getFigure()).displaySourceDecoration(((EReference) semanticElement).isContainment());
 		}
 	}
