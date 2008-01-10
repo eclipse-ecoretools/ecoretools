@@ -50,7 +50,7 @@
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
   	  <wizard
   	     name="%newWizardName"
   	     icon="icons/Ecore.gif"
@@ -59,6 +59,10 @@
   	     id="org.eclipse.emf.ecoretools.diagram.part.EcoreCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
       </wizard>
+      <category
+           id="org.eclipse.emf.ecoretools.diagram"
+           name="Ecore Tools">
+     </category>
    </extension>
 
    <extension point="org.eclipse.ui.popupMenus">
