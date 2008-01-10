@@ -620,27 +620,24 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 * @generated NOT
 	 */
 	protected void handleElementChanged(ResourceSetInfo info, Resource changedResource, IProgressMonitor monitor) {
-		System.out.println("Tentative de tirage de chasse");
-		IFile file = WorkspaceSynchronizer.getFile(changedResource);
-		if (file != null) {
-			try {
-				file.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-			} catch (CoreException ex) {
-				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreDocumentProvider_handleElementContentChanged, ex);
-				// Error message to log was initially taken from
-				// org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.internal.l10n.EditorMessages.FileDocumentProvider_handleElementContentChanged
-			}
-		}
-		changedResource.unload();
-		System.out.println("Chasse tiré");
-
+		// IFile file = WorkspaceSynchronizer.getFile(changedResource);
+		// if (file != null) {
+		// try {
+		// file.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		// } catch (CoreException ex) {
+		// EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreDocumentProvider_handleElementContentChanged,
+		// ex);
+		// // Error message to log was initially taken from
+		// //
+		// org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.internal.l10n.EditorMessages.FileDocumentProvider_handleElementContentChanged
+		// }
+		// }
+		// changedResource.unload();
 		fireElementContentAboutToBeReplaced(info.getEditorInput());
 		removeUnchangedElementListeners(info.getEditorInput(), info);
 		info.fStatus = null;
 		try {
-			System.out.println("Tentative de setage de document");
 			setDocumentContent(info.fDocument, info.getEditorInput());
-			System.out.println("setage de document effectué");
 		} catch (CoreException e) {
 			info.fStatus = e.getStatus();
 		}
@@ -949,6 +946,8 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 **************************************************************************/
 	/** **************************************************************************************** */
 
+	public static String editingDomainBaseID = "org.eclipse.emf.ecoretools.diagram.EditingDomain";
+
 	private IEditorInput currentEditorInput;
 
 	protected SynchronizerManager synchronizerManager;
@@ -962,13 +961,14 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	}
 
 	public String getEditingDomainID() {
-		String base = "org.eclipse.emf.ecoretools.diagram.EditingDomain";
+		String result = editingDomainBaseID;
 		IEditorInput element = getCurrentEditorInput();
-		if (element.getAdapter(IFile.class) instanceof IFile) {
-			IFile iFile = (IFile) element.getAdapter(IFile.class);
-			base = base + iFile.getLocation();
+		if (element.getAdapter(IResource.class) instanceof IResource) {
+			IResource iResource = (IResource) element.getAdapter(IResource.class);
+			result = editingDomainBaseID + iResource.getLocation();
 		}
-		return base;
+
+		return result;
 	}
 
 	protected void disconnected() {
@@ -983,9 +983,18 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			}
 
 			public boolean handleResourceChanged(final Resource resource) {
+				IFile file = WorkspaceSynchronizer.getFile(resource);
+				if (file != null) {
+					try {
+						file.refreshLocal(IResource.DEPTH_INFINITE, null);
+					} catch (CoreException ex) {
+						EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreDocumentProvider_handleElementContentChanged, ex);
+					}
+				}
+				resource.unload();
 				for (final ResourceSetInfo info : resourceSetInfos) {
-
-					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+					// not concerned by the change
+					if (info.getResourceSet() != resource.getResourceSet()) {
 						continue;
 					}
 
@@ -1008,8 +1017,8 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 
 			public boolean handleResourceDeleted(Resource resource) {
 				for (final ResourceSetInfo info : resourceSetInfos) {
-
-					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+					// not concerned by the change
+					if (info.getResourceSet() != resource.getResourceSet()) {
 						continue;
 					}
 
@@ -1032,15 +1041,15 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 
 			public boolean handleResourceMoved(Resource resource, final URI newURI) {
 				for (final ResourceSetInfo info : resourceSetInfos) {
-
-					if (info.getEditingDomain().getResourceSet() != resource.getResourceSet()) {
+					// not concerned by the change
+					if (info.getResourceSet() != resource.getResourceSet()) {
 						continue;
 					}
 
 					synchronized (info) {
 						if (info.fCanBeSaved) {
 							info.setUnSynchronized(resource);
-							return true;
+							continue;
 						}
 					}
 
@@ -1087,6 +1096,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		public void setModificationStamp(ResourceSet resourceSet) {
 			for (final ResourceSetInfo info : resourceSetInfos) {
 
+				// not concerned
 				if (info.getEditingDomain().getResourceSet() != resourceSet) {
 					continue;
 				}
