@@ -50,7 +50,7 @@ public class EPackageEditPart extends DiagramEditPart {
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new EPackageCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new PackageDiagramDragDropEditPolicy());
 
-		removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
+		// removeEditPolicy(org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.POPUPBAR_ROLE);
 	}
 
 }
