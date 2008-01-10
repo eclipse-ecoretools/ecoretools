@@ -37,6 +37,9 @@ public class FigureFromLabelUtils {
 		if (semanticElement.eContainer() instanceof ENamedElement) {
 			return ((ENamedElement) semanticElement.eContainer()).getName();
 		}
+		if (semanticElement.eResource() != null) {
+			return semanticElement.eResource().getURI().lastSegment();
+		}
 		return "Unknown Element";
 	}
 
