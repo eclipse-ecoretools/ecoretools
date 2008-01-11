@@ -784,12 +784,22 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		 * @generated NOT
 		 */
 		public void dispose() {
-			// stopResourceListening();
 			getResourceSet().eAdapters().remove(myResourceSetListener);
-//			for (Iterator it = getResourceSet().getResources().iterator(); it.hasNext();) {
-//				Resource resource = (Resource) it.next();
-//				resource.unload();
-//			}
+			// Unload resource if there no more info on it
+			synchronizerManager.getResourceSetInfos().remove(this);
+			boolean mustUnloadResource = true;
+			for (ResourceSetInfo otherInfos : synchronizerManager.getResourceSetInfos()) {
+				if (otherInfos.getEditingDomain() == this.getEditingDomain()) {
+					mustUnloadResource = false;
+					break;
+				}
+			}
+			if (mustUnloadResource) {
+				for (Iterator it = getResourceSet().getResources().iterator(); it.hasNext();) {
+					Resource resource = (Resource) it.next();
+					resource.unload();
+				}
+			}
 		}
 
 		/**
@@ -1114,6 +1124,20 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 				TransactionalEditingDomain.Registry.INSTANCE.remove(domain.getID());
 			}
 			synchronizerManager.editingDomainWkpsSync.clear();
+		}
+
+		/**
+		 * @return the editingDomainWkpsSync
+		 */
+		public Map<TransactionalEditingDomain, WorkspaceSynchronizer> getEditingDomainWkpsSync() {
+			return editingDomainWkpsSync;
+		}
+
+		/**
+		 * @return the resourceSetInfos
+		 */
+		public List<ResourceSetInfo> getResourceSetInfos() {
+			return resourceSetInfos;
 		}
 	}
 
