@@ -13,6 +13,7 @@
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationReferencesCreateCommand;
@@ -37,7 +38,7 @@ import org.eclipse.gmf.runtime.notation.View;
 public class EAnnotationItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolicy {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		CompoundCommand cc = getDestroyEdgesCommand();
@@ -46,7 +47,14 @@ public class EAnnotationItemSemanticEditPolicy extends EcoreBaseItemSemanticEdit
 		View view = (View) getHost().getModel();
 		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 			req.setElementToDestroy(view);
+		} else {
+			// Destoy shorcuts all over from all over the notation model file
+			List<View> shortcutViews = DestroyElementUtils.findShortcutViews(getSemanticElement(), (View) getHost().getModel());
+			for (View shortcutViewToDelete : shortcutViews) {
+				cc.add(getGEFWrapper(new DestroyElementCommand(new DestroyElementRequest(getEditingDomain(), shortcutViewToDelete, false))));
+			}
 		}
+
 		cc.add(getGEFWrapper(new DestroyElementCommand(req)));
 		return cc.unwrap();
 	}
