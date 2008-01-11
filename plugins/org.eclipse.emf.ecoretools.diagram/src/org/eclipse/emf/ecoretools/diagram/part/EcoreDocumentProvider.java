@@ -786,10 +786,10 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		public void dispose() {
 			// stopResourceListening();
 			getResourceSet().eAdapters().remove(myResourceSetListener);
-			for (Iterator it = getResourceSet().getResources().iterator(); it.hasNext();) {
-				Resource resource = (Resource) it.next();
-				resource.unload();
-			}
+//			for (Iterator it = getResourceSet().getResources().iterator(); it.hasNext();) {
+//				Resource resource = (Resource) it.next();
+//				resource.unload();
+//			}
 		}
 
 		/**
