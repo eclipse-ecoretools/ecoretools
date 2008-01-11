@@ -540,9 +540,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 				throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, IResourceStatus.OUT_OF_SYNC_LOCAL, Messages.EcoreDocumentProvider_UnsynchronizedFileSaveError, null));
 			}
 
-			// info.stopResourceListening();
 			synchronizerManager.stopResourceListening(info);
-
 			fireElementStateChanging(element);
 			List resources = info.getResourceSet().getResources();
 			try {
@@ -562,8 +560,8 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 					monitor.worked(1);
 				}
 				monitor.done();
-				// info.setModificationStamp(computeModificationStamp(info));
 				synchronizerManager.setModificationStamp(info.getResourceSet());
+
 			} catch (RuntimeException x) {
 				fireElementStateChangeFailed(element);
 				throw x;
@@ -740,7 +738,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			super(document);
 			myDocument = document;
 			myEditorInput = editorInput;
-			// startResourceListening();
 			myResourceSetListener = new ResourceSetModificationListener(this);
 			getResourceSet().eAdapters().add(myResourceSetListener);
 		}
