@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 
 /**
  * This object computes all the loaded resources from a resource set. <br>
@@ -46,12 +47,20 @@ public class AdditionalResources {
 	 * @return the list of additional resources
 	 */
 	public List<Resource> getResources() {
-		List<Resource> res = new ArrayList<Resource>(resourceSet.getResources());
+		List<Resource> additionnalResources = new ArrayList<Resource>();
+		for (Resource resource : resourceSet.getResources()) {
+			// remove DI and domain resources
+			if (resource instanceof GMFResource) {
+				continue;
+			}
+			if (resourceSet.getResources().get(1) == resource) {
+				continue;
+			}
+			additionnalResources.add(resource);
+			// res.remove(res.size() - 1);
+			// res.remove(res.size() - 1);
+		}
 
-		// remove DI and domain resources
-		res.remove(res.size() - 1);
-		res.remove(res.size() - 1);
-
-		return res;
+		return additionnalResources;
 	}
 }
