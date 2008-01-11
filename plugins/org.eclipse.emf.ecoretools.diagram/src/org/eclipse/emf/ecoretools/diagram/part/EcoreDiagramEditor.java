@@ -18,6 +18,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.commands.operations.IUndoContext;
+import org.eclipse.core.commands.operations.IUndoableOperation;
+import org.eclipse.core.commands.operations.ObjectUndoContext;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -406,4 +409,30 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		protected abstract Object getJavaObject(TransferData data);
 
 	}
+	
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#shouldAddUndoContext(org.eclipse.core.commands.operations.IUndoableOperation)
+	 */
+	@Override
+	protected boolean shouldAddUndoContext(IUndoableOperation operation)
+    {
+        return false;
+    }
+
+    private IUndoContext localUndoContext;
+
+    /**       
+     * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#getUndoContext()
+     */
+    @Override
+    protected IUndoContext getUndoContext()
+    {
+        if (localUndoContext == null)
+        {
+            localUndoContext = new ObjectUndoContext(this);
+            setUndoContext(localUndoContext);
+            getOperationHistory().setLimit(localUndoContext, 50);
+        }
+        return localUndoContext;
+    }
 }
