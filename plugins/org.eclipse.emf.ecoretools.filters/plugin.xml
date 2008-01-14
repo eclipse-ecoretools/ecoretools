@@ -26,6 +26,36 @@
                    toolbarPath="/toolbarFilterGroup">
             	</partAction>
          	</partContribution>
+          <popupContribution
+                class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+             <popupStructuredContributionCriteria
+                   objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+             </popupStructuredContributionCriteria>
+             <popupAction
+                   id="hideSelectionAction"
+                   path="/filtersMenu/miscellaneousGroup">
+             </popupAction>
+             <popupAction
+                   id="hideTypeAction"
+                   path="/filtersMenu/miscellaneousGroup">
+             </popupAction>
+             <popupAction
+                   id="hideSemanticAction"
+                   path="/filtersMenu/miscellaneousGroup">
+             </popupAction>
+             <popupAction
+                   id="showHiddenPartAction"
+                   path="/filtersMenu/miscellaneousGroup">
+             </popupAction>
+             <popupAction
+                   id="hideInheritanceTypeAction"
+                   path="/filtersMenu/additions">
+             </popupAction>
+             <popupAction
+                   id="hideReferenceTypeAction"
+                   path="/filtersMenu/additions">
+             </popupAction>
+          </popupContribution>
       	</contributionItemProvider>
     </extension>
     

@@ -27,7 +27,6 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Image;
 
-
 /**
  * 
  * TODO Describe the class here <br>
@@ -37,6 +36,7 @@ import org.eclipse.swt.graphics.Image;
  *         Cannenterre</a>
  */
 public class DiagramFilterUtil {
+
 	/**
 	 * 
 	 */
@@ -51,22 +51,18 @@ public class DiagramFilterUtil {
 		if (diagram == null) {
 			return Collections.emptyList();
 		}
-		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager
-				.getInstance().getFilteredDiagramTypeExtension(
-						diagram.getType());
+		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager.getInstance().getFilteredDiagramTypeExtension(diagram.getType());
 		if (filteredDiagramTypeExtension == null) {
 			return Collections.emptyList();
 		}
-		IDiagramFilter diagramFilter = filteredDiagramTypeExtension
-				.getDiagramFilter();
+		IDiagramFilter diagramFilter = filteredDiagramTypeExtension.getDiagramFilter();
 		if (diagramFilter == null) {
 			return Collections.emptyList();
 		}
 
 		List<String> keyEntries = new ArrayList<String>();
 		for (String key : diagramFilter.getFilteredTypeDescription().keySet()) {
-			StringTokenizer stringTokenizer = new StringTokenizer(key,
-					DIAGRAM_FILTER_STRING_DELIMITER);
+			StringTokenizer stringTokenizer = new StringTokenizer(key, DIAGRAM_FILTER_STRING_DELIMITER);
 
 			while (stringTokenizer.hasMoreTokens()) {
 				keyEntries.add(stringTokenizer.nextToken());
@@ -80,19 +76,15 @@ public class DiagramFilterUtil {
 	 * @param diagram
 	 * @return
 	 */
-	public static List<String> getCurrentFilteredTypeConfiguration(
-			Diagram diagram) {
+	public static List<String> getCurrentFilteredTypeConfiguration(Diagram diagram) {
 		if (diagram == null) {
 			return Collections.emptyList();
 		}
-		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager
-				.getInstance().getFilteredDiagramTypeExtension(
-						diagram.getType());
+		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager.getInstance().getFilteredDiagramTypeExtension(diagram.getType());
 		if (filteredDiagramTypeExtension == null) {
 			return Collections.emptyList();
 		}
-		IDiagramFilter diagramFilter = filteredDiagramTypeExtension
-				.getDiagramFilter();
+		IDiagramFilter diagramFilter = filteredDiagramTypeExtension.getDiagramFilter();
 		if (diagramFilter == null) {
 			return Collections.emptyList();
 		}
@@ -129,19 +121,15 @@ public class DiagramFilterUtil {
 	 * @param diagram
 	 * @return
 	 */
-	public static Map<String, String> getDiagramFilteredTypeDescription(
-			Diagram diagram) {
+	public static Map<String, String> getDiagramFilteredTypeDescription(Diagram diagram) {
 		if (diagram == null) {
 			return Collections.emptyMap();
 		}
-		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager
-				.getInstance().getFilteredDiagramTypeExtension(
-						diagram.getType());
+		FilteredDiagramTypeExtension filteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager.getInstance().getFilteredDiagramTypeExtension(diagram.getType());
 		if (filteredDiagramTypeExtension == null) {
 			return Collections.emptyMap();
 		}
-		IDiagramFilter diagramFilter = filteredDiagramTypeExtension
-				.getDiagramFilter();
+		IDiagramFilter diagramFilter = filteredDiagramTypeExtension.getDiagramFilter();
 		if (diagramFilter == null) {
 			return Collections.emptyMap();
 		}
@@ -156,8 +144,7 @@ public class DiagramFilterUtil {
 	 */
 	public static boolean isDiagramFiltered(Diagram diagramToFilter) {
 		List<String> allTypes = getAllPossibleFilteredType(diagramToFilter);
-		for (TreeIterator<EObject> it = diagramToFilter.eAllContents(); it
-				.hasNext();) {
+		for (TreeIterator<EObject> it = diagramToFilter.eAllContents(); it.hasNext();) {
 			EObject currentDiagramElement = it.next();
 			if (false == currentDiagramElement instanceof View) {
 				continue;
@@ -194,8 +181,7 @@ public class DiagramFilterUtil {
 	public static boolean isInKey(String key, List<String> savedConfiguration) {
 		List<String> keyEntries = new ArrayList<String>();
 
-		StringTokenizer stringTokenizer = new StringTokenizer(key,
-				DIAGRAM_FILTER_STRING_DELIMITER);
+		StringTokenizer stringTokenizer = new StringTokenizer(key, DIAGRAM_FILTER_STRING_DELIMITER);
 		while (stringTokenizer.hasMoreTokens()) {
 			keyEntries.add(stringTokenizer.nextToken());
 		}
@@ -213,24 +199,30 @@ public class DiagramFilterUtil {
 	 * @param diagram
 	 * @param result
 	 */
-	public static void setCurrentFilteredTypeConfiguration(Diagram diagram,
-			List<String> result) {
+	public static void setCurrentFilteredTypeConfiguration(Diagram diagram, List<String> result) {
 		if (diagram == null) {
 			return;
 		}
-		FilteredDiagramTypeExtension autosarFilteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager
-				.getInstance().getFilteredDiagramTypeExtension(
-						diagram.getType());
+		FilteredDiagramTypeExtension autosarFilteredDiagramTypeExtension = FilteredDiagramTypeExtensionManager.getInstance().getFilteredDiagramTypeExtension(diagram.getType());
 		if (autosarFilteredDiagramTypeExtension == null) {
 			return;
 		}
-		IDiagramFilter diagramFilter = autosarFilteredDiagramTypeExtension
-				.getDiagramFilter();
+		IDiagramFilter diagramFilter = autosarFilteredDiagramTypeExtension.getDiagramFilter();
 		if (diagramFilter == null) {
 			return;
 		}
 
 		diagramFilter.setCurrentFilteredTypeConfiguration(result);
+	}
+
+	/**
+	 * 
+	 */
+	public static boolean isFilteredSemantic(View view, List<EObject> typesToFilter) {
+		if (view == null) {
+			return false;
+		}
+		return typesToFilter.contains(view.getElement());
 	}
 
 }

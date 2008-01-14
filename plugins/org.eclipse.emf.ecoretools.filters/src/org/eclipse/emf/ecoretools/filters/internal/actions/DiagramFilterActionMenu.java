@@ -20,11 +20,14 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IMenuCreator;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-
 
 /**
  * 
@@ -34,23 +37,67 @@ import org.eclipse.ui.PlatformUI;
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
  *         Cannenterre</a>
  */
-public class DiagramFilterActionMenu extends Action {
+public class DiagramFilterActionMenu extends Action implements ISelectionChangedListener {
 
 	private class MenuCreator implements IMenuCreator {
+
+		/**
+		 * @see org.eclipse.jface.action.IMenuCreator#dispose()
+		 */
 		public void dispose() {
-			// Menu will not be disposed
+			if (menu != null) {
+				menu.dispose();
+				menu = null;
+			}
 		}
 
+		/**
+		 * @see org.eclipse.jface.action.IMenuCreator#getMenu(org.eclipse.swt.widgets.Control)
+		 */
 		public Menu getMenu(Control parent) {
-			if (menu == null) {
-				menu = new Menu(parent);
-				initialize();
+			if (menu != null) {
+				menu.dispose();
 			}
+			menu = new Menu(parent);
+			initialize();
 			return menu;
 		}
 
+		/**
+		 * @see org.eclipse.jface.action.IMenuCreator#getMenu(org.eclipse.swt.widgets.Menu)
+		 */
 		public Menu getMenu(Menu parent) {
 			return null;
+		}
+
+		private void initialize() {
+			// ActionContributionItem configure = new ActionContributionItem(
+			// new ConfigureFilterDiagramAction());
+			// configure.fill(menu, -1);
+			//
+			// ActionContributionItem apply = new ActionContributionItem(
+			// new ApplyFilterDiagramAction());
+			// apply.fill(menu, 1);
+
+			ActionContributionItem hideSelectionAction = new ActionContributionItem(new HideSelectionAction());
+			hideSelectionAction.fill(menu, -1);
+
+			ActionContributionItem hideTypeAction = new ActionContributionItem(new HideTypeAction());
+			hideTypeAction.fill(menu, 1);
+
+			ActionContributionItem hideSemanticAction = new ActionContributionItem(new HideSemanticAction());
+			hideSemanticAction.fill(menu, 2);
+
+			ActionContributionItem showHiddenPartAction = new ActionContributionItem(new ShowHiddenPartAction());
+			showHiddenPartAction.fill(menu, 3);
+
+			new MenuItem(menu, SWT.SEPARATOR, 4);
+
+			ActionContributionItem hideInheritanceTypeAction = new ActionContributionItem(new HideInheritanceTypeAction());
+			hideInheritanceTypeAction.fill(menu, 5);
+
+			ActionContributionItem hideReferenceTypeAction = new ActionContributionItem(new HideReferenceTypeAction());
+			hideReferenceTypeAction.fill(menu, 6);
 		}
 	}
 
@@ -65,13 +112,12 @@ public class DiagramFilterActionMenu extends Action {
 		setId(ID);
 		setText("Filter Elements");
 		setToolTipText("Filter Elements");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/filter_edit.gif"));		
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/filter_edit.gif"));
 		setMenuCreator(new MenuCreator()); // set menu creator for sub menus
 	}
 
 	private Diagram getCurrentDiagram() {
-		IEditorPart editorPart = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (false == editorPart instanceof DiagramEditor) {
 			return null;
 		}
@@ -86,16 +132,6 @@ public class DiagramFilterActionMenu extends Action {
 		return diagram;
 	}
 
-	private void initialize() {
-		ActionContributionItem configure = new ActionContributionItem(
-				new ConfigureFilterDiagramAction());
-		configure.fill(menu, -1);
-
-		ActionContributionItem apply = new ActionContributionItem(
-				new ApplyFilterDiagramAction());
-		apply.fill(menu, 1);
-	}
-
 	@Override
 	public boolean isHandled() {
 		Diagram diagram = getCurrentDiagram();
@@ -103,13 +139,19 @@ public class DiagramFilterActionMenu extends Action {
 			return false;
 		}
 
-		return (FilteredDiagramTypeExtensionManager.getInstance()
-				.getFilteredDiagramTypeExtension(diagram.getType()) != null);
+		return (FilteredDiagramTypeExtensionManager.getInstance().getFilteredDiagramTypeExtension(diagram.getType()) != null);
 	}
 
 	@Override
 	public void run() {
 		// do something for top menu
+	}
+
+	/**
+	 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged(org.eclipse.jface.viewers.SelectionChangedEvent)
+	 */
+	public void selectionChanged(SelectionChangedEvent event) {
+		System.out.println("ponthewall");
 	}
 
 }
