@@ -126,7 +126,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			@Override
 			protected Control createDialogArea(Composite parent) {
 				Composite composite = (Composite) super.createDialogArea(parent);
-				getShell().setText("Manages diagrams");
+				getShell().setText("Manage diagrams");
 				createDiagramTreeBrowser(composite);
 				return composite;
 			}

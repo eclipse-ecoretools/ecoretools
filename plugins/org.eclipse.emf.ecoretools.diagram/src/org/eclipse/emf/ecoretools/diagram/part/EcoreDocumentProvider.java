@@ -618,19 +618,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 * @generated NOT
 	 */
 	protected void handleElementChanged(ResourceSetInfo info, Resource changedResource, IProgressMonitor monitor) {
-		// IFile file = WorkspaceSynchronizer.getFile(changedResource);
-		// if (file != null) {
-		// try {
-		// file.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-		// } catch (CoreException ex) {
-		// EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreDocumentProvider_handleElementContentChanged,
-		// ex);
-		// // Error message to log was initially taken from
-		// //
-		// org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.internal.l10n.EditorMessages.FileDocumentProvider_handleElementContentChanged
-		// }
-		// }
-		// changedResource.unload();
 		fireElementContentAboutToBeReplaced(info.getEditorInput());
 		removeUnchangedElementListeners(info.getEditorInput(), info);
 		info.fStatus = null;

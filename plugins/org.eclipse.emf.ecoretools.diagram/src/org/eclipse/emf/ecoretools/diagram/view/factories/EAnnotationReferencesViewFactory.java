@@ -23,7 +23,6 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.notation.ConnectorStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.Routing;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
@@ -39,7 +38,6 @@ public class EAnnotationReferencesViewFactory extends ConnectionViewFactory {
 		super.initializeFromPreferences(view);
 		ConnectorStyle connectorStyle = (ConnectorStyle) view.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
 		connectorStyle.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
-		connectorStyle.setRouting(Routing.MANUAL_LITERAL);
 	}
 
 	/**

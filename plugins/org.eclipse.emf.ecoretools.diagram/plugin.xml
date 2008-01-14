@@ -750,12 +750,5 @@
          <Priority name="Lowest"/>
       </decoratorProvider>
    </extension>
-   <extension
-         point="org.eclipse.emf.ecoretools.filters.filteredDiagramType">
-      <filteredDiagramType
-            diagramFilter="org.eclipse.emf.ecoretools.diagram.filter.EcoreDiagramFilter"
-            modelId="EcoreTools">
-      </filteredDiagramType>
-   </extension>
 
 </plugin>

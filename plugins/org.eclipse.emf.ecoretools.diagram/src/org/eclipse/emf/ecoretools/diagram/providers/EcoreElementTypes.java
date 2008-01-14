@@ -31,7 +31,7 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 
 /**
- * @generated NOT
+ * @generated
  */
 public class EcoreElementTypes extends ElementInitializers {
 
@@ -235,53 +235,10 @@ public class EcoreElementTypes extends ElementInitializers {
 	/**
 	 * Returns 'type' of the ecore object associated with the hint.
 	 * 
-	 * @generated NOT
+	 * @generated
 	 */
 	public static ENamedElement getElement(IAdaptable hint) {
 		Object type = hint.getAdapter(IElementType.class);
-
-		return (ENamedElement) getElements().get(type);
-	}
-
-	/**
-	 * @generated
-	 */
-	private static IElementType getElementType(String id) {
-		return ElementTypeRegistry.getInstance().getType(id);
-	}
-
-	/**
-	 * @generated
-	 */
-	public static boolean isKnownElementType(IElementType elementType) {
-		if (KNOWN_ELEMENT_TYPES == null) {
-			KNOWN_ELEMENT_TYPES = new HashSet();
-			KNOWN_ELEMENT_TYPES.add(EPackage_79);
-			KNOWN_ELEMENT_TYPES.add(EClass_1001);
-			KNOWN_ELEMENT_TYPES.add(EPackage_1002);
-			KNOWN_ELEMENT_TYPES.add(EAnnotation_1003);
-			KNOWN_ELEMENT_TYPES.add(EDataType_1004);
-			KNOWN_ELEMENT_TYPES.add(EEnum_1005);
-			KNOWN_ELEMENT_TYPES.add(EAttribute_2001);
-			KNOWN_ELEMENT_TYPES.add(EOperation_2002);
-			KNOWN_ELEMENT_TYPES.add(EClass_2003);
-			KNOWN_ELEMENT_TYPES.add(EDataType_2004);
-			KNOWN_ELEMENT_TYPES.add(EEnum_2005);
-			KNOWN_ELEMENT_TYPES.add(EEnumLiteral_2006);
-			KNOWN_ELEMENT_TYPES.add(EStringToStringMapEntry_2007);
-			KNOWN_ELEMENT_TYPES.add(EAnnotationReferences_3001);
-			KNOWN_ELEMENT_TYPES.add(EReference_3002);
-			KNOWN_ELEMENT_TYPES.add(EClassESuperTypes_3003);
-		}
-		return KNOWN_ELEMENT_TYPES.contains(elementType);
-	}
-
-	/**
-	 * Filter issues
-	 * 
-	 * @return elements map
-	 */
-	public static Map<IElementType, EClass> getElements() {
 		if (elements == null) {
 			elements = new IdentityHashMap();
 
@@ -317,7 +274,40 @@ public class EcoreElementTypes extends ElementInitializers {
 
 			elements.put(EClassESuperTypes_3003, EcorePackage.eINSTANCE.getEClass_ESuperTypes());
 		}
-		return elements;
+		return (ENamedElement) elements.get(type);
+	}
+
+	/**
+	 * @generated
+	 */
+	private static IElementType getElementType(String id) {
+		return ElementTypeRegistry.getInstance().getType(id);
+	}
+
+	/**
+	 * @generated
+	 */
+	public static boolean isKnownElementType(IElementType elementType) {
+		if (KNOWN_ELEMENT_TYPES == null) {
+			KNOWN_ELEMENT_TYPES = new HashSet();
+			KNOWN_ELEMENT_TYPES.add(EPackage_79);
+			KNOWN_ELEMENT_TYPES.add(EClass_1001);
+			KNOWN_ELEMENT_TYPES.add(EPackage_1002);
+			KNOWN_ELEMENT_TYPES.add(EAnnotation_1003);
+			KNOWN_ELEMENT_TYPES.add(EDataType_1004);
+			KNOWN_ELEMENT_TYPES.add(EEnum_1005);
+			KNOWN_ELEMENT_TYPES.add(EAttribute_2001);
+			KNOWN_ELEMENT_TYPES.add(EOperation_2002);
+			KNOWN_ELEMENT_TYPES.add(EClass_2003);
+			KNOWN_ELEMENT_TYPES.add(EDataType_2004);
+			KNOWN_ELEMENT_TYPES.add(EEnum_2005);
+			KNOWN_ELEMENT_TYPES.add(EEnumLiteral_2006);
+			KNOWN_ELEMENT_TYPES.add(EStringToStringMapEntry_2007);
+			KNOWN_ELEMENT_TYPES.add(EAnnotationReferences_3001);
+			KNOWN_ELEMENT_TYPES.add(EReference_3002);
+			KNOWN_ELEMENT_TYPES.add(EClassESuperTypes_3003);
+		}
+		return KNOWN_ELEMENT_TYPES.contains(elementType);
 	}
 
 }

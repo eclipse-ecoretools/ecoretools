@@ -19,13 +19,26 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
+import org.eclipse.gmf.runtime.notation.ConnectorStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 
 /**
  * @generated
  */
 public class EClassESuperTypesViewFactory extends ConnectionViewFactory {
+
+	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+
+	@Override
+	protected void initializeFromPreferences(View view) {
+		super.initializeFromPreferences(view);
+		ConnectorStyle connectorStyle = (ConnectorStyle) view.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
+		connectorStyle.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
+	}
 
 	/**
 	 * @generated

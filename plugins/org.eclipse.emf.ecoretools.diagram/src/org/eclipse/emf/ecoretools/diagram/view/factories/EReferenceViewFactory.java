@@ -29,7 +29,6 @@ import org.eclipse.gmf.runtime.notation.ConnectorStyle;
 import org.eclipse.gmf.runtime.notation.FontStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.Routing;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
@@ -50,7 +49,6 @@ public class EReferenceViewFactory extends ConnectionViewFactory {
 		fontStyle.setFontColor(FigureUtilities.colorToInteger(THIS_FORE));
 		ConnectorStyle connectorStyle = (ConnectorStyle) view.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
 		connectorStyle.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
-		connectorStyle.setRouting(Routing.MANUAL_LITERAL);
 	}
 
 	/**
