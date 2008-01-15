@@ -178,8 +178,9 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 
 			if (initializeContent) {
 				// Initialize diagram content
-				EcoreDiagramContentInitializer intializer = new EcoreDiagramContentInitializer();
-				intializer.initDiagramContent(diagram);
+				EcoreDiagramContentInitializer initializer = new EcoreDiagramContentInitializer();
+				initializer.setInitEPackageContent(false);
+				initializer.initDiagramContent(diagram);
 
 				// Layout diagram content if necessary
 				if (false == diagram.getChildren().isEmpty()) {

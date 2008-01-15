@@ -53,9 +53,9 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 			return CommandResult.newWarningCommandResult("Unable to proceed with null diagam", null);
 		}
 		// Initialize diagram content
-		EcoreDiagramContentInitializer intializer = new EcoreDiagramContentInitializer();
-		intializer.setInitEPackageContent(initEPackageContent);
-		intializer.initDiagramContent(diagram);
+		EcoreDiagramContentInitializer initializer = new EcoreDiagramContentInitializer();
+		initializer.setInitEPackageContent(initEPackageContent);
+		initializer.initDiagramContent(diagram);
 
 		// Layout diagram content if necessary
 		if (false == diagram.getChildren().isEmpty()) {
