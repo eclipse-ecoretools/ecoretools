@@ -14,13 +14,13 @@ package org.eclipse.emf.ecoretools.diagram.edit.commands;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoretoolsEditPolicyRoles;
 import org.eclipse.emf.ecoretools.diagram.part.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 
 /**
@@ -45,7 +45,7 @@ public class UpdateEditPartCommand extends AbstractTransactionalCommand {
 		if (part == null) {
 			return CommandResult.newWarningCommandResult("Unable to proceed with null part", null);
 		}
-		EditPolicy editPolicy = part.getEditPolicy(EditPolicyRoles.CANONICAL_ROLE);
+		EditPolicy editPolicy = part.getEditPolicy(EcoretoolsEditPolicyRoles.PSEUDO_CANONICAL_ROLE);
 		if (editPolicy instanceof CanonicalEditPolicy) {
 			((CanonicalEditPolicy) editPolicy).refresh();
 		}
