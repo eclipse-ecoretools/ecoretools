@@ -12,6 +12,8 @@
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
 import org.eclipse.emf.ecoretools.filters.internal.commands.ShowHiddenPartsCommand;
 import org.eclipse.gef.commands.Command;
@@ -77,6 +79,26 @@ public class ShowHiddenPartAction extends Action {
 
 		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
 		commandStack.execute(cmd, new NullProgressMonitor());
+	}
+
+	/**
+	 * @see org.eclipse.jface.action.Action#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		if (getCurrentDiagram() == null) {
+			return false;
+		}
+		for (TreeIterator<EObject> it = getCurrentDiagram().eAllContents(); it.hasNext();) {
+			EObject currentDiagramElement = it.next();
+			if (false == currentDiagramElement instanceof View) {
+				continue;
+			}
+			if (((View) currentDiagramElement).isVisible() == false) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
