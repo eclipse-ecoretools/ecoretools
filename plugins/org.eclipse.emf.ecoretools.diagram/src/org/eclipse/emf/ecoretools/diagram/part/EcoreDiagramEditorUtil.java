@@ -239,7 +239,7 @@ public class EcoreDiagramEditorUtil {
 
 					// Initialize and Layout Diagram
 					if (initializeDiagram && diagramResource.getContents().get(0) instanceof Diagram) {
-						InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(editingDomain, (Diagram) diagramResource.getContents().get(0));
+						InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(editingDomain, (Diagram) diagramResource.getContents().get(0), false);
 						OperationHistoryFactory.getOperationHistory().execute(initializeAndLayoutDiagram, new NullProgressMonitor(), null);
 						diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
 					}
@@ -410,10 +410,10 @@ public class EcoreDiagramEditorUtil {
 						View view = (View) element;
 						if (view.getDiagram() == scope.getDiagram()) {
 							element2ViewMap.put(element, element); // take only
-																	// those
-																	// that part
-																	// of our
-																	// diagram
+							// those
+							// that part
+							// of our
+							// diagram
 						}
 					}
 				}

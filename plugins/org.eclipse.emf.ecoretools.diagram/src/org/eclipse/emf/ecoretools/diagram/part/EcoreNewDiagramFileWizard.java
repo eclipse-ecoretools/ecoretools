@@ -135,7 +135,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 
 			// Initialize and Layout Diagram
 			if (diagramResource.getContents().get(0) instanceof Diagram) {
-				InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(myEditingDomain, (Diagram) diagramResource.getContents().get(0));
+				InitializeAndLayoutDiagramCommand initializeAndLayoutDiagram = new InitializeAndLayoutDiagramCommand(myEditingDomain, (Diagram) diagramResource.getContents().get(0), false);
 				OperationHistoryFactory.getOperationHistory().execute(initializeAndLayoutDiagram, new NullProgressMonitor(), null);
 				diagramResource.save(EcoreDiagramEditorUtil.getSaveOptions());
 			}

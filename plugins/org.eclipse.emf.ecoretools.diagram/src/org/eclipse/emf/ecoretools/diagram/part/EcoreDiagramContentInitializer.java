@@ -63,6 +63,8 @@ public class EcoreDiagramContentInitializer {
 	 */
 	private Collection myLinkDescriptors = new LinkedList();
 
+	private boolean initEPackageContent = true;
+
 	/**
 	 * @generated
 	 */
@@ -286,7 +288,7 @@ public class EcoreDiagramContentInitializer {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	private void createNode(View parentView, EcoreNodeDescriptor nodeDescriptor) {
 		Node node = ViewService.createNode(parentView, nodeDescriptor.getModelElement(), nodeDescriptor.getType(), EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
@@ -295,7 +297,9 @@ public class EcoreDiagramContentInitializer {
 			createEClass_1001Children(node);
 			return;
 		case EPackage2EditPart.VISUAL_ID:
-			createEPackage_1002Children(node);
+			if (initEPackageContent) {
+				createEPackage_1002Children(node);
+			}
 			return;
 		case EAnnotationEditPart.VISUAL_ID:
 			createEAnnotation_1003Children(node);
@@ -375,6 +379,21 @@ public class EcoreDiagramContentInitializer {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return the initEPackageContent
+	 */
+	public boolean isInitEPackageContent() {
+		return initEPackageContent;
+	}
+
+	/**
+	 * @param initEPackageContent
+	 *            the initEPackageContent to set
+	 */
+	public void setInitEPackageContent(boolean initEPackageContent) {
+		this.initEPackageContent = initEPackageContent;
 	}
 
 }

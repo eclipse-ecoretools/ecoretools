@@ -39,9 +39,12 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 
 	private Diagram diagram;
 
-	public InitializeAndLayoutDiagramCommand(TransactionalEditingDomain domain, Diagram diagram) {
+	private boolean initEPackageContent;
+
+	public InitializeAndLayoutDiagramCommand(TransactionalEditingDomain domain, Diagram diagram, boolean initEPackageContent) {
 		super(domain, Messages.CommandName_InitializeAndLayoutDiagram, null);
 		this.diagram = diagram;
+		this.initEPackageContent = initEPackageContent;
 	}
 
 	@Override
@@ -51,6 +54,7 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 		}
 		// Initialize diagram content
 		EcoreDiagramContentInitializer intializer = new EcoreDiagramContentInitializer();
+		intializer.setInitEPackageContent(initEPackageContent);
 		intializer.initDiagramContent(diagram);
 
 		// Layout diagram content if necessary
