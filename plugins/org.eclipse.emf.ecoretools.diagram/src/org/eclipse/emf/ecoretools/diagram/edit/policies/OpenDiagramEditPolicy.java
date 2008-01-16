@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.diagram.edit.dialogs.ManageDiagramsDialog;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageNameEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramContentInitializer;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
@@ -64,9 +65,13 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 	@Override
 	protected Command getOpenCommand(Request request) {
 		EditPart targetEditPart = getTargetEditPart(request);
+		if (targetEditPart instanceof EPackageNameEditPart && targetEditPart.getParent() != null) {
+			targetEditPart = targetEditPart.getParent();
+		}
 		if (false == targetEditPart instanceof IGraphicalEditPart) {
 			return UnexecutableCommand.INSTANCE;
 		}
+
 		View view = ((IGraphicalEditPart) targetEditPart).getNotationView();
 		Style link = view.getStyle(NotationPackage.eINSTANCE.getMultiDiagramLinkStyle());
 		if (false == link instanceof MultiDiagramLinkStyle) {
