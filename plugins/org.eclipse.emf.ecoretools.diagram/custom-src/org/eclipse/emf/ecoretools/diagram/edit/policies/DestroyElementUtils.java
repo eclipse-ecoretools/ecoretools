@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2008 {INITIAL COPYRIGHT OWNER}
+ * Copyright (c) 2008 Anyware Technologies and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,7 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *    Lucas Bigeardel - fix EPL header
  */
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
