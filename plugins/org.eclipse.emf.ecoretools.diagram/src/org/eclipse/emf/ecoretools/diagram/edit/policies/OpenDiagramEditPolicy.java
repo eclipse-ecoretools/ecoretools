@@ -81,11 +81,11 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		return new ICommandProxy(new OpenDiagramCommand((MultiDiagramLinkStyle) link));
 	}
 
-	private static class OpenDiagramCommand extends AbstractTransactionalCommand {
+	public static class OpenDiagramCommand extends AbstractTransactionalCommand {
 
 		private MultiDiagramLinkStyle multiDiagramFacet;
 
-		OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
+		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
 			super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle), "Open Diagram", null);
 			multiDiagramFacet = multiDiagramLinkStyle;
 		}
@@ -134,7 +134,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			return new URIEditorInput(uri);
 		}
 
-		private void openEditor(Diagram diagram) {
+		protected void openEditor(Diagram diagram) {
 			if (diagram != null) {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
@@ -145,12 +145,15 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			}
 		}
 
-		private void createPressed(boolean initializeContent) {
+		protected Diagram createPressed(boolean initializeContent) {
 			try {
-				openEditor(intializeNewDiagram(initializeContent));
+				Diagram diagram = intializeNewDiagram(initializeContent);
+				openEditor(diagram);
+				return diagram;
 			} catch (ExecutionException e) {
 				EcoreDiagramEditorPlugin.getInstance().logError("Can't open Ecore Diagram Editor !");
 			}
+			return null;
 		}
 
 		protected void deletePressed(Diagram diagram) {
