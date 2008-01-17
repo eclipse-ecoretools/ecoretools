@@ -26,7 +26,7 @@ public class EcoreNature implements IProjectNature {
     /** The Ecore Nature ID */
     public static final String ECORE_NATURE_ID = Activator.PLUGIN_ID + ".ecorenature";
 
-    private IProject project;
+    private IProject project; 
 
     /**
      * @see org.eclipse.core.resources.IProjectNature#configure()
