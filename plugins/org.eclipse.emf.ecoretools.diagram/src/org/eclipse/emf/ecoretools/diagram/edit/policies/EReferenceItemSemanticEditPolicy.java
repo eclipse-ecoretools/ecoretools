@@ -12,15 +12,19 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
+import java.util.List;
+
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationReferencesCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationReferencesReorientCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelationshipRequest;
+import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * @generated
@@ -28,10 +32,17 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ReorientReferenceRelations
 public class EReferenceItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolicy {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
-		return getGEFWrapper(new DestroyElementCommand(req));
+		// Destroy representations from all over the notation model file
+		CompoundCommand cc = getDestroyEdgesCommand();
+		List<View> representations = DestroyElementUtils.findRepresentations(getSemanticElement(), (View) getHost().getModel());
+		for (View representationViewToDelete : representations) {
+			cc.add(getGEFWrapper(new DestroyElementCommand(new DestroyElementRequest(getEditingDomain(), representationViewToDelete, false))));
+		}
+		cc.add(getGEFWrapper(new DestroyElementCommand(req)));
+		return cc.unwrap();
 	}
 
 	/**
