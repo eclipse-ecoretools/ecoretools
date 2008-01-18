@@ -409,30 +409,27 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		protected abstract Object getJavaObject(TransferData data);
 
 	}
-	
+
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#shouldAddUndoContext(org.eclipse.core.commands.operations.IUndoableOperation)
 	 */
 	@Override
-	protected boolean shouldAddUndoContext(IUndoableOperation operation)
-    {
-        return false;
-    }
+	protected boolean shouldAddUndoContext(IUndoableOperation operation) {
+		return false;
+	}
 
-    private IUndoContext localUndoContext;
+	private IUndoContext localUndoContext;
 
-    /**       
-     * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#getUndoContext()
-     */
-    @Override
-    protected IUndoContext getUndoContext()
-    {
-        if (localUndoContext == null)
-        {
-            localUndoContext = new ObjectUndoContext(this);
-            setUndoContext(localUndoContext);
-            getOperationHistory().setLimit(localUndoContext, 50);
-        }
-        return localUndoContext;
-    }
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#getUndoContext()
+	 */
+	@Override
+	protected IUndoContext getUndoContext() {
+		if (localUndoContext == null) {
+			localUndoContext = new ObjectUndoContext(this);
+			setUndoContext(localUndoContext);
+			getOperationHistory().setLimit(localUndoContext, 50);
+		}
+		return localUndoContext;
+	}
 }
