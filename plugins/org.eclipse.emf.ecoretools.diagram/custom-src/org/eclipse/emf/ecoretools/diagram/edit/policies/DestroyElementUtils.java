@@ -60,4 +60,32 @@ public class DestroyElementUtils {
 		}
 		return views;
 	}
+
+	/**
+	 * Returns the list of views to be deleted
+	 */
+	public static List<View> findRepresentations(EObject semanticElement, View notationElement) {
+		if (notationElement == null || notationElement.eResource() == null) {
+			return Collections.emptyList();
+		}
+		if (semanticElement == null || semanticElement.eResource() == null) {
+			return Collections.emptyList();
+		}
+		List<View> views = new ArrayList<View>();
+		for (Iterator<EObject> it = notationElement.eResource().getAllContents(); it.hasNext();) {
+			EObject eObject = it.next();
+			if (false == eObject instanceof View) {
+				continue;
+			}
+			View potentialView = (View) eObject;
+			if (potentialView.getElement() != semanticElement) {
+				continue;
+			}
+			if ((potentialView.eContainer() instanceof View) && (semanticElement.eContainer() instanceof EObject) && (semanticElement.eContainer() == ((View) potentialView.eContainer()).getElement())) {
+				continue;
+			}
+			views.add(potentialView);
+		}
+		return views;
+	}
 }
