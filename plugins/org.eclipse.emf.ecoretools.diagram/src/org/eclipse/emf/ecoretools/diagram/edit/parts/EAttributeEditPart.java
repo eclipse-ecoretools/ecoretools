@@ -253,8 +253,9 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	protected String getLabelText() {
 		String text = null;
-		if (getParser() != null) {
-			text = getParser().getPrintString(new EObjectAdapter(getParserElement()), getParserOptions().intValue()) + getETypeString();
+		EObject parserElement = getParserElement();
+		if (parserElement != null && getParser() != null) {
+			text = getParser().getPrintString(new EObjectAdapter(parserElement), getParserOptions().intValue()) + getETypeString();
 		}
 		if (text == null || text.length() == 0) {
 			text = defaultText;
