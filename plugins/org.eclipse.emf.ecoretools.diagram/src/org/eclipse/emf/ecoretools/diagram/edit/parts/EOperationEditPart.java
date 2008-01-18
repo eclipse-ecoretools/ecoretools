@@ -20,7 +20,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -222,8 +221,9 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	protected String getLabelText() {
 		String text = null;
-		if (getParser() != null) {
-			text = getParser().getPrintString(new EObjectAdapter(getParserElement()), getParserOptions().intValue()) + getSuffixText();
+		EObject parserElement = getParserElement();
+		if (parserElement != null && getParser() != null) {
+			text = getParser().getPrintString(new EObjectAdapter(parserElement), getParserOptions().intValue()) + getSuffixText();
 		}
 		if (text == null || text.length() == 0) {
 			text = defaultText;
