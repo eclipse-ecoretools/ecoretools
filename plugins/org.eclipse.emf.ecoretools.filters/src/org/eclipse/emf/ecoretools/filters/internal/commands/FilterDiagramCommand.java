@@ -1,7 +1,14 @@
-// ------------------------------------------------
-// $Id: FilterDiagramCommand.java,v 1.1 2008/01/09 17:10:09 gcannente Exp $
-// (c) Anyware Technologies 2007 www.anyware-tech.com
-// ------------------------------------------------
+/**
+ * Copyright (c) 2008 Anyware Technologies
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Anyware Technologies - initial API and implementation
+ */
 package org.eclipse.emf.ecoretools.filters.internal.commands;
 
 import java.util.List;
@@ -16,7 +23,6 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
-
 
 /**
  * 
@@ -34,8 +40,7 @@ public class FilterDiagramCommand extends AbstractTransactionalCommand {
 
 	private boolean show;
 
-	public FilterDiagramCommand(TransactionalEditingDomain domain,
-			Diagram diagramToFilter, List<String> typesToFilter, boolean show) {
+	public FilterDiagramCommand(TransactionalEditingDomain domain, Diagram diagramToFilter, List<String> typesToFilter, boolean show) {
 		super(domain, "FilterDiagram", null);
 		this.diagramToFilter = diagramToFilter;
 		this.typesToFilter = typesToFilter;
@@ -43,24 +48,19 @@ public class FilterDiagramCommand extends AbstractTransactionalCommand {
 	}
 
 	@Override
-	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-			IAdaptable info) {
-		List<String> allTypes = DiagramFilterUtil
-				.getAllPossibleFilteredType(diagramToFilter);
-		for (TreeIterator<EObject> it = diagramToFilter.eAllContents(); it
-				.hasNext();) {
+	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) {
+		List<String> allTypes = DiagramFilterUtil.getAllPossibleFilteredType(diagramToFilter);
+		for (TreeIterator<EObject> it = diagramToFilter.eAllContents(); it.hasNext();) {
 			EObject currentDiagramElement = it.next();
 			if (false == currentDiagramElement instanceof View) {
 				continue;
 			}
 			// Show all types
-			if (DiagramFilterUtil.isFilteredType((View) currentDiagramElement,
-					allTypes)) {
+			if (DiagramFilterUtil.isFilteredType((View) currentDiagramElement, allTypes)) {
 				((View) currentDiagramElement).setVisible(true);
 			}
 			// Hide selected types
-			if (DiagramFilterUtil.isFilteredType((View) currentDiagramElement,
-					typesToFilter)) {
+			if (DiagramFilterUtil.isFilteredType((View) currentDiagramElement, typesToFilter)) {
 				((View) currentDiagramElement).setVisible(show);
 			}
 		}
