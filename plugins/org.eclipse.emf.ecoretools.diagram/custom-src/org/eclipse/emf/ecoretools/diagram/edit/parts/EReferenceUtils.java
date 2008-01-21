@@ -22,8 +22,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateAnchorLinkedEReferenceDeferredCommand;
-import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateBendpointsLinkedEReferenceDeferredCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateLinkedEReferenceDeferredCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.transaction.Transaction;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -56,7 +55,7 @@ public class EReferenceUtils {
 		return (eReference.getEOpposite() != null);
 	}
 
-	public static void updateReferences(EReferenceEditPart referenceEditPart) {
+	public static void trackReferences(EReferenceEditPart referenceEditPart) {
 		EObject eReference = referenceEditPart.resolveSemanticElement();
 		if (false == eReference instanceof EReference) {
 			return;
@@ -75,10 +74,13 @@ public class EReferenceUtils {
 				break;
 			}
 		}
-		TransactionalEditingDomain editingDomain = referenceEditPart.getEditingDomain();
-		Command cmd = new ICommandProxy(new UpdateAnchorLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
+		if (oppositeEditPart == null) {
+			return;
+		}
 
-		executeCommand(cmd, referenceEditPart);
+		TransactionalEditingDomain editingDomain = oppositeEditPart.getEditingDomain();
+		Command cmd = new ICommandProxy(new UpdateLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
+		executeCommand(cmd, oppositeEditPart);
 	}
 
 	protected static void executeCommand(final Command cmd, IGraphicalEditPart part) {
@@ -110,34 +112,5 @@ public class EReferenceUtils {
 		} catch (ExecutionException e) {
 			EcoreDiagramEditorPlugin.getInstance().logError("Can't execute command!", e);
 		}
-	}
-
-	public static void trackReferences(EReferenceEditPart referenceEditPart) {
-		EObject eReference = referenceEditPart.resolveSemanticElement();
-		if (false == eReference instanceof EReference) {
-			return;
-		}
-		EditPart targetPart = referenceEditPart.getTarget();
-		if (false == targetPart instanceof IGraphicalEditPart) {
-			return;
-		}
-		EReferenceEditPart oppositeEditPart = null;
-		for (Object part : ((IGraphicalEditPart) targetPart).getSourceConnections()) {
-			if (false == part instanceof EReferenceEditPart) {
-				continue;
-			}
-			if (((EReferenceEditPart) part).resolveSemanticElement() == ((EReference) eReference).getEOpposite()) {
-				oppositeEditPart = (EReferenceEditPart) part;
-				break;
-			}
-		}
-		TransactionalEditingDomain editingDomain = referenceEditPart.getEditingDomain();
-		Command cmd = new ICommandProxy(new UpdateAnchorLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
-
-		executeCommand(cmd, referenceEditPart);
-
-		cmd = new ICommandProxy(new UpdateBendpointsLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
-
-		executeCommand(cmd, referenceEditPart);
 	}
 }

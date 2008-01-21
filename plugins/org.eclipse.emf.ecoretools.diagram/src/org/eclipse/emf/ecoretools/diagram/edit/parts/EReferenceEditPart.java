@@ -26,6 +26,9 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.gmf.runtime.notation.Anchor;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
@@ -40,9 +43,39 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 			case EcorePackage.EREFERENCE__CONTAINMENT:
 				refreshSourceDecoration();
 				break;
+			case EcorePackage.EREFERENCE__EOPPOSITE:
+				refreshLinkedReference();
+				trackLinkedReference();
+				break;
 			}
 		}
+		if (NotationPackage.Literals.ROUTING_STYLE__ROUTING.equals(notification.getFeature()) || notification.getNotifier() instanceof RelativeBendpoints
+				|| notification.getNotifier() instanceof Anchor) {
+			trackLinkedReference();
+		}
 		super.handleNotificationEvent(notification);
+	}
+
+	protected void trackLinkedReference() {
+		EObject semanticElement = resolveSemanticElement();
+		if (false == semanticElement instanceof EReference) {
+			return;
+		}
+		if (((EReference) semanticElement).getEOpposite() != null) {
+			EReferenceUtils.trackReferences(this);
+		}
+	}
+
+	protected void refreshLinkedReference() {
+		EObject semanticElement = resolveSemanticElement();
+		if (false == semanticElement instanceof EReference) {
+			return;
+		}
+		if (((EReference) semanticElement).getEOpposite() != null) {
+			((SolidLineWDstArrow) getFigure()).displayTargetDecoration(false);
+		} else {
+			((SolidLineWDstArrow) getFigure()).displayTargetDecoration(true);
+		}
 	}
 
 	/**
@@ -113,6 +146,16 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 			setTargetDecoration(createTargetDecoration());
 		}
 
+		public void displayTargetDecoration(boolean display) {
+			if (display == true) {
+				setTargetDecoration(createTargetDecoration());
+			} else {
+				if (getTargetDecoration() != null) {
+					setTargetDecoration(null);
+				}
+			}
+		}
+
 		public void displaySourceDecoration(boolean display) {
 			if (display == true) {
 				setSourceDecoration(createSourceDecoration());
@@ -121,7 +164,6 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 					setSourceDecoration(null);
 				}
 			}
-
 		}
 
 		/**
@@ -159,6 +201,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshSourceDecoration();
+		refreshLinkedReference();
 	}
 
 	/**
