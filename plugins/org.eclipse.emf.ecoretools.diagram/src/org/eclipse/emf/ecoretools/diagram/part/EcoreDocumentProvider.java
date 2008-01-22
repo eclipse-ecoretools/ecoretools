@@ -531,7 +531,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
@@ -540,7 +540,14 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 				throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, IResourceStatus.OUT_OF_SYNC_LOCAL, Messages.EcoreDocumentProvider_UnsynchronizedFileSaveError, null));
 			}
 
-			synchronizerManager.stopResourceListening(info);
+			for (final ResourceSetInfo currentInfo : synchronizerManager.getResourceSetInfos()) {
+				// not concerned by the change
+				if (currentInfo.getResourceSet() != ((IDiagramDocument) document).getEditingDomain().getResourceSet()) {
+					continue;
+				}
+				synchronizerManager.stopResourceListening(info);
+			}
+
 			fireElementStateChanging(element);
 			List resources = info.getResourceSet().getResources();
 			try {
@@ -567,8 +574,13 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 				throw x;
 			} finally {
 
-				// info.startResourceListening();
-				synchronizerManager.startResourceListening(info);
+				for (final ResourceSetInfo currentInfo : synchronizerManager.getResourceSetInfos()) {
+					// not concerned by the change
+					if (currentInfo.getResourceSet() != ((IDiagramDocument) document).getEditingDomain().getResourceSet()) {
+						continue;
+					}
+					synchronizerManager.startResourceListening(info);
+				}
 
 			}
 		} else {
