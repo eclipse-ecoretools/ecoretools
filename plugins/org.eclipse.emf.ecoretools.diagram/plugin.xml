@@ -750,5 +750,24 @@
          <Priority name="Lowest"/>
       </decoratorProvider>
    </extension>
+   
+   <!-- Add validation markers in the outline -->
+   <extension point="org.eclipse.ui.decorators">
+      <decorator
+            id="validationDecorator"
+            class="org.eclipse.emf.ecoretools.diagram.decorator.EcoreValidationMarkerDecorator"
+            label="Validation Problems"
+            adaptable="true"
+            lightweight="true"
+            location="BOTTOM_LEFT"
+            state="true">
+         <description>
+            Shows errors and warnings from a EcoreTools Validation
+         </description>
+         <enablement>
+            <objectClass name="org.eclipse.emf.ecore.EObject"/>
+         </enablement>
+      </decorator>
+   </extension>
 
 </plugin>
