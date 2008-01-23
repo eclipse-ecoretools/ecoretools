@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,7 +12,9 @@
 
 package org.eclipse.emf.ecoretools.tests.internal;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -56,6 +58,18 @@ public class Activator extends Plugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+
+	/**
+	 * Log an error
+	 * 
+	 * @param message
+	 *            the message to display
+	 * @param exception
+	 *            the Throwable
+	 */
+	public static void logError(String message, Throwable exception) {
+		getDefault().getLog().log(new Status(IStatus.ERROR, PLUGIN_ID, message, exception));
 	}
 
 }

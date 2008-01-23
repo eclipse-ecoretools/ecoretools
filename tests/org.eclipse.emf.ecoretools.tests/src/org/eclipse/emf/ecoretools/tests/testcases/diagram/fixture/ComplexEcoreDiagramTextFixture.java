@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,14 +10,13 @@
  *    Anyware Technologies - initial API and implementation
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.tests.testcases;
+package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
 
-import junit.framework.Assert;
-import junit.framework.TestCase;
-
-public class DummyTestCase extends TestCase {
-
-	public void testAlwaysTrue() {
-		Assert.assertTrue(true);
-	}
+/**
+ * A fixture for test on an complex Ecore diagram
+ * 
+ * @author Simon Bernard
+ */
+public class ComplexEcoreDiagramTextFixture {
+	// TODO Implement this
 }

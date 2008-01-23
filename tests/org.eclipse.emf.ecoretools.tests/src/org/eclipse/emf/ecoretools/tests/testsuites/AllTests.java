@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,16 +15,44 @@ package org.eclipse.emf.ecoretools.tests.testsuites;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.eclipse.emf.ecoretools.tests.testcases.DummyTestCase;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.connector.EReferenceCreationTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.shape.EClassCreationTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.shape.EPackageCreationTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.deletion.shape.EPackageDeletionTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.dragndrop.DropInEPackageTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.helpers.DefaultNameTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.multidiagram.MultiDiagramTest;
+import org.eclipse.emf.ecoretools.tests.testcases.diagram.openclose.OpenSimpleDiagramTest;
 
+/**
+ * @author Simon Bernard
+ */
 public class AllTests {
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for org.eclipse.emf.ecoretools.tests.testcases");
+	/**
+	 * The main class for running all the testcases
+	 * 
+	 * @return Test
+	 */
+	public static Test suite() {
+		TestSuite suite = new TestSuite("Test for org.eclipse.emf.ecoretools.tests.testcases");
 		// $JUnit-BEGIN$
-		suite.addTestSuite(DummyTestCase.class);
+		suite.addTestSuite(DefaultNameTest.class);
+
+		suite.addTestSuite(DropInEPackageTest.class);
+
+		suite.addTestSuite(EPackageCreationTest.class);
+		suite.addTestSuite(EClassCreationTest.class);
+
+		suite.addTestSuite(EReferenceCreationTest.class);
+
+		suite.addTestSuite(EPackageDeletionTest.class);
+
+		suite.addTestSuite(OpenSimpleDiagramTest.class);
+
+		suite.addTestSuite(MultiDiagramTest.class);
 		// $JUnit-END$
-        return suite;
-    }
+		return suite;
+	}
 
 }
