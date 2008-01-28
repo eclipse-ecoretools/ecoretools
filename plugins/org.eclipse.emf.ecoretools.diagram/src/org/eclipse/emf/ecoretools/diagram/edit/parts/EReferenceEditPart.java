@@ -13,6 +13,7 @@
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
 import org.eclipse.draw2d.Connection;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
@@ -35,6 +36,8 @@ import org.eclipse.gmf.runtime.notation.View;
  * @generated
  */
 public class EReferenceEditPart extends ConnectionNodeEditPart {
+
+	private boolean selectable;
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
@@ -72,9 +75,10 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 			return;
 		}
 		if (((EReference) semanticElement).getEOpposite() != null) {
-			((SolidLineWDstArrow) getFigure()).displayTargetDecoration(false);
+			getPrimaryShape().displayTargetDecoration(false);
 		} else {
-			((SolidLineWDstArrow) getFigure()).displayTargetDecoration(true);
+			getPrimaryShape().setHideLine(false);
+			getPrimaryShape().displayTargetDecoration(true);
 		}
 	}
 
@@ -139,6 +143,31 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	 */
 	public class SolidLineWDstArrow extends PolylineConnectionEx {
 
+		private boolean hideLine;
+
+		/**
+		 * @return the hideLine
+		 */
+		public boolean isHideLine() {
+			return hideLine;
+		}
+
+		/**
+		 * @param hideLine
+		 *            the hideLine to set
+		 */
+		public void setHideLine(boolean hideLine) {
+			this.hideLine = hideLine;
+			synchronized (EReferenceEditPart.this) {
+				if (hideLine && EReferenceEditPart.this.getSelected() != SELECTED_NONE) {
+					getViewer().deselect(EReferenceEditPart.this);
+					EReferenceEditPart.this.setSelectable(false);
+				} else {
+					EReferenceEditPart.this.setSelectable(true);
+				}
+			}
+		}
+
 		/**
 		 * @generated NOT
 		 */
@@ -193,6 +222,17 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 			return df;
 		}
 
+		/**
+		 * @see org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx#paintFigure(org.eclipse.draw2d.Graphics)
+		 */
+		@Override
+		public void paintFigure(Graphics graphics) {
+			if (hideLine) {
+				return;
+			}
+			super.paintFigure(graphics);
+		}
+
 	}
 
 	/**
@@ -213,6 +253,22 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 		if (semanticElement instanceof EReference) {
 			((SolidLineWDstArrow) getFigure()).displaySourceDecoration(((EReference) semanticElement).isContainment());
 		}
+	}
+
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart#isSelectable()
+	 */
+	@Override
+	public boolean isSelectable() {
+		return selectable;
+	}
+
+	/**
+	 * @param selectable
+	 *            the selectable to set
+	 */
+	public void setSelectable(boolean selectable) {
+		this.selectable = selectable;
 	}
 
 }
