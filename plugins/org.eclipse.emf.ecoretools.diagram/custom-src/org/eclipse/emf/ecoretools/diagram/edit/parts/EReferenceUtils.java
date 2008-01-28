@@ -77,7 +77,9 @@ public class EReferenceUtils {
 		if (oppositeEditPart == null) {
 			return;
 		}
-
+		if (false == referenceEditPart.getPrimaryShape().isHideLine() && false == oppositeEditPart.getPrimaryShape().isHideLine()) {
+			oppositeEditPart.getPrimaryShape().setHideLine(true);
+		}
 		TransactionalEditingDomain editingDomain = oppositeEditPart.getEditingDomain();
 		Command cmd = new ICommandProxy(new UpdateLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
 		executeCommand(cmd, oppositeEditPart);
