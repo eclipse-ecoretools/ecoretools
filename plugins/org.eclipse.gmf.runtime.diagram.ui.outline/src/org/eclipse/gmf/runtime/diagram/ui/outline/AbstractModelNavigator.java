@@ -251,6 +251,13 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Add listeners : <br> - on the model<br>
 	 */
 	protected void hookListeners() {
+		if (getModelResource() == null) {
+			return;
+		}
+		if (getModelResource().getResourceSet() == null) {
+			return;
+		}
+
 		getModelResource().getResourceSet().eAdapters().add(modelListener);
 	}
 
@@ -258,6 +265,13 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Remove listeners
 	 */
 	protected void unhookListeners() {
+		if (getModelResource() == null) {
+			return;
+		}
+		if (getModelResource().getResourceSet() == null) {
+			return;
+		}
+
 		getModelResource().getResourceSet().eAdapters().remove(modelListener);
 	}
 
@@ -325,8 +339,8 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		// Create context menu if the resource associated to the current
 		// selection is writable.
 		if ((currentSel instanceof AdditionalResources))// ADD this ||
-														// ((resource != null)
-														// &&
+		// ((resource != null)
+		// &&
 		// !ResourceUtils.isReadOnly(resource)))
 		{
 			if (sel.size() == 1) {
