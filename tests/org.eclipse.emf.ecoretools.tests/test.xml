@@ -27,6 +27,7 @@
       <property name="data-dir" value="${emft-folder}"/>
       <property name="plugin-name" value="${plugin-name}"/>
       <property name="classname" value="org.eclipse.emf.ecoretools.tests.testsuites.AllTests"/>
+      <property name="vmargs" value="-ea -Xmx512M"/>
     </ant>
   </target>
 
