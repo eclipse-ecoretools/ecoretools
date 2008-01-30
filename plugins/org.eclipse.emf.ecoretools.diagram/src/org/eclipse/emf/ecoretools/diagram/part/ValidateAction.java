@@ -63,11 +63,14 @@ public class ValidateAction extends Action {
 	private IWorkbenchPartDescriptor workbenchPartDescriptor;
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public ValidateAction(IWorkbenchPartDescriptor workbenchPartDescriptor) {
 		setId(VALIDATE_ACTION_KEY);
 		setText(Messages.ValidateActionMessage);
+		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif"));
+		setDisabledImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/dlcl16/validate.gif"));
+		setHoverImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif"));
 		this.workbenchPartDescriptor = workbenchPartDescriptor;
 	}
 

@@ -720,13 +720,13 @@
    
    <extension id="ValidationContributionItemProvider" name="Validation"
       point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
       <contributionItemProvider
          class="org.eclipse.emf.ecoretools.diagram.providers.EcoreValidationProvider">
          <Priority name="Low"/>
          <partContribution id="org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID">
             <partMenuGroup menubarPath="/diagramMenu/" id="validationGroup"/>
-            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+            <partAction id="validateAction" menubarPath="/diagramMenu/validationGroup" toolbarPath="/toolbarAdditions"/>
          </partContribution>
       </contributionItemProvider>
    </extension>
