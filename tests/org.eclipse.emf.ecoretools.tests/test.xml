@@ -7,6 +7,7 @@
 
   <!-- sets the properties plugin-name, and library-file -->
   <property name="plugin-name" value="org.eclipse.emf.ecoretools.tests"/>
+  <property name="classname" value="org.eclipse.emf.ecoretools.tests.testsuites.AllTests"/>
   <property name="library-file" value="${eclipse-home}/plugins/org.eclipse.test/library.xml"/>
 
   <!-- This target holds all initialization code that needs to be done for -->
@@ -21,13 +22,17 @@
 
   <!-- This target defines the tests that need to be run. -->
   <target name="suite">
-    <property name="emft-folder" value="${eclipse-home}/emft_folder"/>
-    <delete dir="${emft-folder}" quiet="true"/>
+    <property name="test-folder" value="${eclipse-home}/test_folder"/>
+    <delete dir="${test-folder}" quiet="true"/>
     <ant target="ui-test" antfile="${library-file}" dir="${eclipse-home}">
-      <property name="data-dir" value="${emft-folder}"/>
+      <property name="data-dir" value="${test-folder}"/>
       <property name="plugin-name" value="${plugin-name}"/>
-      <property name="classname" value="org.eclipse.emf.ecoretools.tests.testsuites.AllTests"/>
-      <property name="vmargs" value="-ea -Xmx512M"/>
+      <property name="os" value="${baseos}"/>
+      <property name="ws" value="${basews}"/>
+      <property name="arch" value="${basearch}"/>
+      <property name="report" value="${plugin-name}"/>
+      <property name="classname" value="${classname}"/>
+      <property name="vmargs" value="-ea -XX:MaxPermSize=128m -Xmx1024m"/>
     </ant>
   </target>
 
