@@ -260,6 +260,7 @@
          <propertyCategory category="domain"/>
          <propertyCategory category="visual"/>
          <propertyCategory category="extra"/>
+         <propertyCategory category="documentation"/>
          <propertyCategory category="advanced"/>
       </propertyContributor>
    </extension>
