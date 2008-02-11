@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!--
+  Copyright (c) 2007,2008 Harman/Becker Automotive Systems GmbH and others.
+  
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  plugin.xml
+  
+  Contributors:
+     Harman/Becker - initial API and implementation
+     Lucas Bigeardel - IP integration
+-->
+<plugin>
+
+   <extension
+         id="genModelBuilder"
+         name="EMF GenModel Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            hasNature="true">
+         <run
+               class="org.eclipse.emf.codegen.builder.genmodelBuilder.GenModelBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         id="emfProjectNature"
+         name="EMF Project Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.eclipse.emf.codegen.builder.genmodelBuilder.EcoreProjectNature">
+         </run>
+      </runtime>
+      <builder
+            id="org.eclipse.emf.codegen.builder.genModelBuilder">
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            nameFilter="*"
+            id="org.eclipse.emf.codegen.builder.contribution1">
+         <action
+               label="Add/Remove EMF Nature"
+               class="org.eclipse.emf.codegen.builder.genmodelBuilder.ToggleNatureAction"
+               menubarPath="additions"
+               enablesFor="+"
+               id="org.eclipse.emf.codegen.builder.addRemoveNatureAction">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.eclipse.emf.codegen.builder.EmfBuilderPrefsInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="org.eclipse.emf.codegen.builder.ui.ProjectPropertyPage"
+            id="org.eclipse.emf.codegen.builder.emfBuilderPropertyPage"
+            name="EMF Builder">
+         <enabledWhen>
+            <adapt
+                  type="org.eclipse.core.resources.IProject">
+            </adapt>
+         </enabledWhen>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/ovr16/enature_ovr.gif"
+            id="org.eclipse.emf.codegen.nature.image"
+            natureId="org.eclipse.emf.ecoretools.codegen.builder.ecoreProjectNature">
+      </image>
+   </extension>
+</plugin>
