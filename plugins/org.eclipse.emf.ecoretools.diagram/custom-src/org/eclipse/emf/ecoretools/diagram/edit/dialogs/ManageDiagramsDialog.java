@@ -12,11 +12,11 @@
 package org.eclipse.emf.ecoretools.diagram.edit.dialogs;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -38,11 +38,13 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 
 /**
  * 
- * TODO Describe the class here <br>
- * creation : 14 janv. 08
+ * 
+ * Creation : 14 janv. 08<br>
+ * Updated : 14 feb. 08
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
  *         Cannenterre</a>
+ * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public class ManageDiagramsDialog extends Dialog {
 
@@ -56,7 +58,7 @@ public class ManageDiagramsDialog extends Dialog {
 
 	private TreeViewer myTreeViewer;
 
-	private MultiDiagramLinkStyle multiDiagramFacet;
+	private List<Diagram> diagramList;
 
 	private Diagram selectedDiagram;
 
@@ -64,17 +66,30 @@ public class ManageDiagramsDialog extends Dialog {
 
 	private boolean initializeContentButtonState;
 
+	/** Return code when the create button is pressed */
 	public static final int CREATE = 1020;
 
+	/** Return code when the delete button is pressed */
 	public static final int DELETE = 1010;
 
-	public ManageDiagramsDialog(Shell parentShell, MultiDiagramLinkStyle multiDiagramFacet) {
+	/**
+	 * Constructor
+	 * 
+	 * @param parentShell
+	 *            the parent Shell
+	 * @param initialDiagrams
+	 *            the list of Diagrams associated with the same domain element
+	 */
+	public ManageDiagramsDialog(Shell parentShell, List<Diagram> initialDiagrams) {
 		super(parentShell);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
-		this.multiDiagramFacet = multiDiagramFacet;
+		this.diagramList = initialDiagrams;
 
 	}
 
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
@@ -83,16 +98,19 @@ public class ManageDiagramsDialog extends Dialog {
 		return composite;
 	}
 
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#createButtonBar(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	protected Control createButtonBar(Composite parent) {
-		Control buttonBar = super.createButtonBar(parent);
+		Control btnBar = super.createButtonBar(parent);
 		getButton(IDialogConstants.OK_ID).setText("Open");
 		getButton(IDialogConstants.OK_ID).setToolTipText("Open selected diagram");
 		getButton(CREATE_ID).setToolTipText("Create a new diagram an open it");
 		getButton(DELETE_ID).setToolTipText("Delete selected diagram");
 		getButton(IDialogConstants.CANCEL_ID).setToolTipText("Close the dialog");
 		validateDialog();
-		return buttonBar;
+		return btnBar;
 	}
 
 	private void validateDialog() {
@@ -105,6 +123,9 @@ public class ManageDiagramsDialog extends Dialog {
 		}
 	}
 
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#createButtonsForButtonBar(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
@@ -121,7 +142,7 @@ public class ManageDiagramsDialog extends Dialog {
 		myTreeViewer.getTree().setLayoutData(layoutData);
 		myTreeViewer.setContentProvider(new DiagramTreeContentProvider());
 		myTreeViewer.setLabelProvider(new DiagramTreeLabelProvider());
-		myTreeViewer.setInput(multiDiagramFacet);
+		myTreeViewer.setInput(diagramList);
 		myTreeViewer.addSelectionChangedListener(new DiagramTreeSelectionChangedListener());
 		initializeContentButton = new Button(composite, SWT.CHECK);
 		initializeContentButton.setText("Initialize newly created diagram content");
@@ -131,8 +152,8 @@ public class ManageDiagramsDialog extends Dialog {
 	private class DiagramTreeContentProvider implements ITreeContentProvider {
 
 		public Object[] getChildren(Object parentElement) {
-			if (parentElement instanceof MultiDiagramLinkStyle) {
-				return ((MultiDiagramLinkStyle) parentElement).getDiagramLinks().toArray();
+			if (parentElement instanceof List<?>) {
+				return ((List<?>) parentElement).toArray();
 			}
 			return Collections.EMPTY_LIST.toArray();
 		}
@@ -142,8 +163,8 @@ public class ManageDiagramsDialog extends Dialog {
 		}
 
 		public boolean hasChildren(Object element) {
-			if (element instanceof MultiDiagramLinkStyle) {
-				return ((MultiDiagramLinkStyle) element).getDiagramLinks().isEmpty();
+			if (element instanceof List<?>) {
+				return ((List<?>) element).isEmpty();
 			}
 			return false;
 		}
@@ -153,9 +174,11 @@ public class ManageDiagramsDialog extends Dialog {
 		}
 
 		public void dispose() {
+			// Do nothing
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			// Do nothing
 		}
 	}
 
@@ -212,6 +235,9 @@ public class ManageDiagramsDialog extends Dialog {
 		}
 	}
 
+	/**
+	 * @see org.eclipse.jface.dialogs.Dialog#buttonPressed(int)
+	 */
 	@Override
 	protected void buttonPressed(int buttonId) {
 		switch (buttonId) {
@@ -235,10 +261,11 @@ public class ManageDiagramsDialog extends Dialog {
 		}
 	}
 
-	public MultiDiagramLinkStyle getMultiDiagramFacet() {
-		return multiDiagramFacet;
-	}
-
+	/**
+	 * Return the selected diagram
+	 * 
+	 * @return Diagram the selected diagram in the list
+	 */
 	public Diagram getSelectedDiagram() {
 		return selectedDiagram;
 	}

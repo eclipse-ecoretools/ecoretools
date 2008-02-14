@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,7 +13,6 @@
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -23,6 +22,7 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.diagram.edit.dialogs.ManageDiagramsDialog;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageNameEditPart;
@@ -38,7 +38,7 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.OpenEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutService;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
@@ -46,8 +46,6 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.Node;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -62,39 +60,87 @@ import org.eclipse.ui.PlatformUI;
  */
 public class OpenDiagramEditPolicy extends OpenEditPolicy {
 
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.OpenEditPolicy#getOpenCommand(org.eclipse.gef.Request)
+	 */
 	@Override
 	protected Command getOpenCommand(Request request) {
 		EditPart targetEditPart = getTargetEditPart(request);
 		if (targetEditPart instanceof EPackageNameEditPart && targetEditPart.getParent() != null) {
 			targetEditPart = targetEditPart.getParent();
 		}
-		if (false == targetEditPart instanceof IGraphicalEditPart) {
+		if (false == targetEditPart instanceof GraphicalEditPart) {
 			return UnexecutableCommand.INSTANCE;
 		}
 
-		View view = ((IGraphicalEditPart) targetEditPart).getNotationView();
-		Style link = view.getStyle(NotationPackage.eINSTANCE.getMultiDiagramLinkStyle());
-		if (false == link instanceof MultiDiagramLinkStyle) {
-			return UnexecutableCommand.INSTANCE;
-		}
-
-		return new ICommandProxy(new OpenDiagramCommand((MultiDiagramLinkStyle) link));
+		return new ICommandProxy(new OpenDiagramCommand(((GraphicalEditPart) targetEditPart).resolveSemanticElement(), ((EObject) targetEditPart.getModel()).eResource()));
 	}
 
+	/**
+	 * This command open a Dialog used to manage existing diagrams. It is
+	 * possible to create new one, delete/rename an existing one, or open the
+	 * selected in a new editor.
+	 */
 	public static class OpenDiagramCommand extends AbstractTransactionalCommand {
 
-		private MultiDiagramLinkStyle multiDiagramFacet;
+		/** The list of Diagrams that are associated with the given domain Element */
+		private List<Diagram> allDiagrams = new ArrayList<Diagram>();
 
-		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
-			super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle), "Open Diagram", null);
-			multiDiagramFacet = multiDiagramLinkStyle;
+		/** A given model element */
+		private EObject domainElement;
+
+		/** The diagram resource where Diagrams are created */
+		private Resource diagramResource;
+
+		/**
+		 * Constructor
+		 * 
+		 * @param domainElt
+		 *            the domain element on which the diagram should be
+		 *            associated
+		 * @param diagResource
+		 */
+		public OpenDiagramCommand(EObject domainElt, Resource diagResource) {
+			super(TransactionUtil.getEditingDomain(domainElt), "Open Diagram", null);
+			this.domainElement = domainElt;
+			this.diagramResource = diagResource;
+
+			if (domainElement instanceof EPackage) {
+				for (EObject currentDiag : diagramResource.getContents()) {
+					if (currentDiag instanceof Diagram && domainElement.equals(((Diagram) currentDiag).getElement())) {
+						allDiagrams.add((Diagram) currentDiag);
+					}
+				}
+			}
 		}
 
+		/**
+		 * @param multiDiagramLinkStyle
+		 * @deprecated use the other constructor
+		 */
+		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
+			this(((View) multiDiagramLinkStyle.eContainer()).getElement(), multiDiagramLinkStyle.eResource());
+//			super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle), "Open Diagram", null);
+//			this.domainElement = ((View) multiDiagramLinkStyle.eContainer()).getElement();
+//			this.diagramResource = multiDiagramLinkStyle.eResource();
+//
+//			if (domainElement instanceof EPackage) {
+//				for (EObject currentDiag : diagramResource.getContents()) {
+//					if (currentDiag instanceof Diagram && domainElement.equals(((Diagram) currentDiag).getElement())) {
+//						allDiagrams.add((Diagram) currentDiag);
+//					}
+//				}
+//			}
+		}
+
+		/**
+		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
+		 */
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 			// Open dialog
 			final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getSite().getShell();
-			ManageDiagramsDialog manageDiagramsDialog = new ManageDiagramsDialog(shell, multiDiagramFacet);
+			ManageDiagramsDialog manageDiagramsDialog = new ManageDiagramsDialog(shell, allDiagrams);
 			switch (manageDiagramsDialog.open()) {
 			// Cancel pressed
 			case Window.CANCEL: {
@@ -134,6 +180,9 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			return new URIEditorInput(uri);
 		}
 
+		/**
+		 * @param diagram 
+		 */
 		protected void openEditor(Diagram diagram) {
 			if (diagram != null) {
 				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -145,6 +194,10 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			}
 		}
 
+		/**
+		 * @param initializeContent 
+		 * @return Diagram
+		 */
 		protected Diagram createPressed(boolean initializeContent) {
 			try {
 				Diagram diagram = intializeNewDiagram(initializeContent);
@@ -156,6 +209,9 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			return null;
 		}
 
+		/**
+		 * @param diagram 
+		 */
 		protected void deletePressed(Diagram diagram) {
 			if (diagram != null) {
 				// Close associated diagram
@@ -164,14 +220,16 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 				if (editor != null) {
 					page.closeEditor(editor, true);
 				}
-				assert multiDiagramFacet.eResource() != null;
-				multiDiagramFacet.eResource().getContents().remove(diagram);
-				multiDiagramFacet.getDiagramLinks().remove(diagram);
+				assert diagramResource != null;
+				diagramResource.getContents().remove(diagram);
+				// multiDiagramFacet.getDiagramLinks().remove(diagram);
 			}
 		}
 
 		/**
 		 * @param initializeContent
+		 * @return Diagram
+		 * @throws ExecutionException 
 		 * @generated
 		 */
 		protected Diagram intializeNewDiagram(boolean initializeContent) throws ExecutionException {
@@ -180,9 +238,10 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 				throw new ExecutionException("Can't create diagram of '" + getDiagramKind() + "' kind");
 			}
 			setDefaultNameForDiagram(diagram);
-			multiDiagramFacet.getDiagramLinks().add(diagram);
-			assert multiDiagramFacet.eResource() != null;
-			multiDiagramFacet.eResource().getContents().add(diagram);
+
+			// multiDiagramFacet.getDiagramLinks().add(diagram);
+			assert diagramResource != null;
+			diagramResource.getContents().add(diagram);
 
 			if (initializeContent) {
 				// Initialize diagram content
@@ -204,28 +263,27 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			return diagram;
 		}
 
-		protected EObject getDiagramDomainElement() {
-			return ((View) multiDiagramFacet.eContainer()).getElement();
+		private EObject getDiagramDomainElement() {
+			return domainElement;
 		}
 
-		protected PreferencesHint getPreferencesHint() {
+		private PreferencesHint getPreferencesHint() {
 			return EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT;
 		}
 
-		protected String getDiagramKind() {
+		private String getDiagramKind() {
 			return EPackageEditPart.MODEL_ID;
 		}
 
-		protected String getEditorID() {
+		private String getEditorID() {
 			return EcoreDiagramEditor.ID;
 		}
 
-		protected void setDefaultNameForDiagram(Diagram elementToConfigure) {
+		private void setDefaultNameForDiagram(Diagram elementToConfigure) {
 			EPackage pseudoContainer = (EPackage) elementToConfigure.getElement();
 			String baseString = pseudoContainer.getName() + "_Diagram";
 			int count = 0;
-			for (Iterator it = multiDiagramFacet.getDiagramLinks().iterator(); it.hasNext();) {
-				Diagram diagram = (Diagram) it.next();
+			for (Diagram diagram : allDiagrams) {
 				if (diagram.getName().equals(baseString + count)) {
 					count++;
 				}
