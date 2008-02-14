@@ -14,12 +14,13 @@ package org.eclipse.emf.ecoretools.tests.testcases.diagram.util;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.OpenDiagramEditPolicy.OpenDiagramCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
-import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
@@ -31,18 +32,14 @@ import org.eclipse.ui.PlatformUI;
 /**
  * Some useful methods to handle multi diagram file
  * 
+ * Updated 14 feb. 08
+ * 
  * @author sbernard
+ * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public class MultiDiagramUtil {
 
 	private static class OpenDiagramTestCommand extends OpenDiagramCommand {
-
-		/**
-		 * Constructor
-		 */
-		public OpenDiagramTestCommand() {
-			super(NotationFactory.eINSTANCE.createMultiDiagramLinkStyle());
-		}
 
 		/**
 		 * Constructor with a MultiDiagramLinkStyle as input
@@ -52,6 +49,18 @@ public class MultiDiagramUtil {
 		 */
 		public OpenDiagramTestCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
 			super(multiDiagramLinkStyle);
+		}
+
+		/**
+		 * Constructor
+		 * 
+		 * @param domainElt
+		 *            the model element
+		 * @param diagResource
+		 *            the Resource associated with the diagram file
+		 */
+		public OpenDiagramTestCommand(EObject domainElt, Resource diagResource) {
+			super(domainElt, diagResource);
 		}
 
 		/**
@@ -138,7 +147,7 @@ public class MultiDiagramUtil {
 	 * @param diagram
 	 */
 	public static void openDiagram(Diagram diagram) {
-		OpenDiagramTestCommand Command = new OpenDiagramTestCommand();
+		OpenDiagramTestCommand Command = new OpenDiagramTestCommand(diagram.getElement(), diagram.eResource());
 
 		Command.openEditor(diagram);
 	}
