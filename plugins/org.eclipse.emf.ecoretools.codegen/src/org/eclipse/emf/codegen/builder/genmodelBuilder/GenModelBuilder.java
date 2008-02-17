@@ -115,7 +115,7 @@ public class GenModelBuilder extends IncrementalProjectBuilder
       }
    }
 
-   public static final String          BUILDER_ID = "org.eclipse.emf.codegen.builder.genModelBuilder"; //$NON-NLS-1$
+   public static final String          BUILDER_ID = "org.eclipse.emf.ecoretools.codegen.genModelBuilder"; //$NON-NLS-1$
 
    private ComposedAdapterFactory      adapterFactory;
 

@@ -33,11 +33,11 @@
          point="org.eclipse.core.resources.natures">
       <runtime>
          <run
-               class="org.eclipse.emf.codegen.builder.genmodelBuilder.EcoreProjectNature">
+               class="org.eclipse.emf.codegen.builder.genmodelBuilder.EMFProjectNature">
          </run>
       </runtime>
       <builder
-            id="org.eclipse.emf.codegen.builder.genModelBuilder">
+            id="org.eclipse.emf.ecoretools.codegen.genModelBuilder">
       </builder>
    </extension>
    <extension
@@ -80,7 +80,7 @@
       <image
             icon="icons/ovr16/enature_ovr.gif"
             id="org.eclipse.emf.codegen.nature.image"
-            natureId="org.eclipse.emf.ecoretools.codegen.builder.ecoreProjectNature">
+            natureId="org.eclipse.emf.ecoretools.codegen.emfProjectNature">
       </image>
    </extension>
 </plugin>

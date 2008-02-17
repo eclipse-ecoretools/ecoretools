@@ -22,12 +22,12 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 
-public class EcoreProjectNature implements IProjectNature {
+public class EMFProjectNature implements IProjectNature {
 
 	/**
 	 * ID of this project nature
 	 */
-	public static final String NATURE_ID = "org.eclipse.emf.ecoretools.codegen.builder.ecoreProjectNature"; //$NON-NLS-1$
+	public static final String NATURE_ID = "org.eclipse.emf.ecoretools.codegen.emfProjectNature"; //$NON-NLS-1$
 
 	private IProject project;
 
