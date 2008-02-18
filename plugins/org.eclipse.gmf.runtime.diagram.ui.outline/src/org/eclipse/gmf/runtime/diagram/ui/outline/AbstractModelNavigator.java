@@ -476,6 +476,9 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	/**
 	 * Subclasses should override this method to add their own actions related
 	 * to EMF stuff
+	 * 
+	 * @param manager the IMenuManager 
+	 * @param selectedObject the selected model object
 	 */
 	protected void createEMFMenu(IMenuManager manager, EObject selectedObject) {
 
@@ -534,6 +537,9 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	/**
 	 * Subclasses should override this method to add their own actions related
 	 * to Diagram stuff
+	 * 
+	 * @param manager the IMenuManager
+	 * @param selectedObject the selected model object
 	 */
 	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
 		// Do nothing by default
@@ -556,6 +562,8 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	/**
 	 * Subclasses should override this method to add their own actions related
 	 * to Control/Uncontrol actions
+	 * 
+	 * @param manager the IMenuManager 
 	 */
 	private void createControlActions(IMenuManager manager) {
 		// Empty implementation
