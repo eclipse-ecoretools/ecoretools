@@ -41,6 +41,8 @@ import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.MouseWheelHandler;
+import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
@@ -64,6 +66,7 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.Shell;
@@ -431,5 +434,17 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 			getOperationHistory().setLimit(localUndoContext, 50);
 		}
 		return localUndoContext;
+	}
+	
+	/**
+	 * Remove this method when the feature 210642 will be implemented
+	 * 
+	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#initializeGraphicalViewerContents()
+	 */
+	@Override
+	protected void initializeGraphicalViewerContents() {
+		super.initializeGraphicalViewerContents();
+		// Scroll-wheel Zoom
+		getGraphicalViewer().setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.CTRL), MouseWheelZoomHandler.SINGLETON);
 	}
 }
