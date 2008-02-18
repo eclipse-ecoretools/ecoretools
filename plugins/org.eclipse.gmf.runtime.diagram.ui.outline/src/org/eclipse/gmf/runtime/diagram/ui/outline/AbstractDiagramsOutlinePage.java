@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -17,6 +17,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.ui.URIEditorInput;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -31,7 +35,9 @@ import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OverviewComposite;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
+import org.eclipse.gmf.runtime.diagram.ui.util.SelectInDiagramHelper;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -50,6 +56,10 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -167,22 +177,38 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	 * diagram, the currently edited diagram is switch in the editor.
 	 */
 	protected void handleDoubleClickEvent() {
-		// IStructuredSelection selection = (IStructuredSelection)
-		// navigator.getTreeViewer().getSelection();
-		// Object selectedObject = selection.getFirstElement();
-		//
-		// // TODO Handle Double-click
-		// if (selectedObject instanceof Diagram && editor.getActiveDiagram() !=
-		// (Diagram) selectedObject)
-		// {
-		// editor.setActiveDiagram((Diagram) selectedObject);
-		// }
-		// else if (AdapterFactoryEditingDomain.unwrap(selectedObject)
-		// instanceof EObject)
-		// {
-		// editor.gotoEObject((EObject)
-		// AdapterFactoryEditingDomain.unwrap(selectedObject));
-		// }
+		IStructuredSelection selection = (IStructuredSelection) navigator.getTreeViewer().getSelection();
+		Object selectedObject = selection.getFirstElement();
+
+		if (selectedObject != null && selectedObject instanceof Diagram && editor.getDiagram() != selectedObject) {
+			// activate the selected Diagram
+			if (SelectInDiagramHelper.activateDiagram((Diagram) selectedObject) == null) {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				try {
+					// Bug when double clicking on the root diagram : we try to
+					// open the diagram within an URIEditorInput, and while
+					// opening it from the Navigator, this is a FileEditorInput
+					// which is used. So a new editor is opened with the "same"
+					// content
+					page.openEditor(getEditorInput((Diagram) selectedObject), getEditorID());
+				} catch (PartInitException e) {
+					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Can't open Ecore Diagram Editor !"));
+				}
+				// editor.setActiveDiagram((Diagram) selectedObject);
+			}
+		} else if (AdapterFactoryEditingDomain.unwrap(selectedObject) instanceof EObject) {
+			// Search for all references of the selected element in all the
+			// existing diagrams and propose a way to choose the corresponding
+			// one
+			// editor.gotoEObject((EObject)
+			// AdapterFactoryEditingDomain.unwrap(selectedObject));
+		}
+	}
+
+	private IEditorInput getEditorInput(Diagram diagram) {
+		URI parentUri = diagram.eResource().getURI();
+		URI uri = parentUri.appendFragment(diagram.eResource().getURIFragment(diagram));
+		return new URIEditorInput(uri);
 	}
 
 	/**
@@ -234,7 +260,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			overview.setLayoutData(new GridData(GridData.FILL_BOTH));
 		}
 
-		navigator = createNavigator(sashComp, viewer, getSite());
+		navigator = createNavigator(sashComp, getSite());
 
 		sashComp.setWeights(new int[] { 30, 70 });
 
@@ -258,20 +284,6 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	}
 
 	/**
-	 * Create the composite that shows a tree view of the model
-	 * 
-	 * @param parent
-	 *            the parent
-	 * @param viewer
-	 *            the Viewer
-	 * @param pageSite
-	 *            the IPageSite
-	 * 
-	 * @return the navigation composite
-	 */
-	protected abstract AbstractModelNavigator createNavigator(Composite parent, IDiagramGraphicalViewer viewer, IPageSite pageSite);
-
-	/**
 	 * Add the actions to the view toolbar
 	 */
 	protected void createActions() {
@@ -285,13 +297,6 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 
 		fillDropDownMenu(getSite().getActionBars().getMenuManager());
 	}
-
-	/**
-	 * Returns the PreferenceStore to use
-	 * 
-	 * @return IPreferenceStore
-	 */
-	protected abstract IPreferenceStore getPreferenceStore();
 
 	/**
 	 * Create the show outline actions in the given tool bar manager.
@@ -448,15 +453,17 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	}
 
 	private void fillDropDownMenu(IMenuManager menu) {
-		// TODO Restore
+
+		// // TODO Restore
 		// Collection configs =
 		// OutlineManager.getInstance().getCreateChildMenus(editor.getSite().getId());
-		// final IPreferenceStore ps = editor.getPreferenceStore();
+		// final IPreferenceStore ps =
+		// editor.getWorkspaceViewerPreferenceStore();
 		// if (configs.size() > 1 && ps != null)
 		// {
 		// IMenuManager createChildMenu = new MenuManager("Create child menu");
 		// menu.add(createChildMenu);
-		//
+		//		
 		// for (Iterator it = configs.iterator(); it.hasNext();)
 		// {
 		// final CreateChildMenuConfiguration config =
@@ -471,13 +478,13 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 		// }
 		// };
 		// action.setChecked(ps.getString(ModelerPreferenceConstants.CREATE_CHILD_MENU_PREF).equals(config.getId()));
-		//
+		//		
 		// createChildMenu.add(action);
 		// }
 		// }
-		//
+		//		
 		// menu.add(new Separator());
-		//
+		//		
 		// menu.add(new FiltersAction(navigator.getTreeViewer(), editor));
 	}
 
@@ -585,4 +592,38 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	protected void unhookListeners() {
 		viewer.removeSelectionChangedListener(this);
 	}
+
+	/**
+	 * @return the editor
+	 */
+	protected DiagramEditor getEditor() {
+		return editor;
+	}
+
+	/**
+	 * Create the composite that shows a tree view of the model
+	 * 
+	 * @param parent
+	 *            the parent composite
+	 * @param pageSite
+	 *            the IPageSite
+	 * 
+	 * @return the navigation composite
+	 */
+	protected abstract AbstractModelNavigator createNavigator(Composite parent, IPageSite pageSite);
+
+	/**
+	 * Returns the PreferenceStore to use
+	 * 
+	 * @return IPreferenceStore
+	 */
+	protected abstract IPreferenceStore getPreferenceStore();
+
+	/**
+	 * Return the Editor ID
+	 * 
+	 * @return String the editor ID
+	 */
+	protected abstract String getEditorID();
+
 }

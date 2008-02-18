@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -29,13 +29,13 @@ import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.ModelElementComparer;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OutlineDragAdapter;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -57,12 +57,16 @@ import org.eclipse.ui.part.IPageSite;
  * <b>Model navigator :</b><br>
  * Display the model as a tree and fill the contextual menu with diagrams and
  * EMF actions. <br>
- * creation : 30 mai 2005
+ * 
+ * Updated	: 18 feb. 2008
  * 
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
+ * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public abstract class AbstractModelNavigator extends Composite implements IMenuListener {
 
+	private IDiagramWorkbenchPart editor;
+	
 	private IDiagramGraphicalViewer diagramViewer;
 
 	private TreeViewer viewer;
@@ -124,15 +128,16 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * 
 	 * @param parent
 	 *            the parent composite
-	 * @param viewer
+	 * @param diagEditor
 	 *            the viewer to edit as tree
 	 * @param pageSite
 	 *            the site
 	 */
-	public AbstractModelNavigator(Composite parent, IDiagramGraphicalViewer viewer, IPageSite pageSite) {
+	public AbstractModelNavigator(Composite parent, IDiagramWorkbenchPart diagEditor, IPageSite pageSite) {
 		super(parent, SWT.BORDER);
 
-		this.diagramViewer = viewer;
+		this.editor = diagEditor;
+		this.diagramViewer = diagEditor.getDiagramGraphicalViewer();
 		site = pageSite;
 		GridLayout gl = new GridLayout();
 		gl.marginHeight = 0;
@@ -176,6 +181,25 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		refreshViewer();
 	}
 
+	/**
+	 * The diagram model Resource
+	 * 
+	 * @return Resource
+	 */
+	protected Resource getDiagramResource() {
+		Object model = diagramViewer.getContents().getModel();
+		if (model instanceof Diagram) {
+			return ((Diagram) model).eResource();
+		}
+
+		return null;
+	}
+
+	/**
+	 * The domain model Resource
+	 * 
+	 * @return Resource
+	 */
 	protected Resource getModelResource() {
 		Object model = diagramViewer.getContents().getModel();
 		if (model instanceof Diagram) {
@@ -224,10 +248,6 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		viewer.setLabelProvider(fullLabelProvider);
 	}
 
-	protected abstract AdapterFactory getAdapterFactory();
-
-	protected abstract IPreferenceStore getPreferenceStore();
-
 	/**
 	 * Set the tree filters for the outline
 	 * 
@@ -251,28 +271,24 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Add listeners : <br> - on the model<br>
 	 */
 	protected void hookListeners() {
-		if (getModelResource() == null) {
-			return;
+		if (getModelResource() != null && getModelResource().getResourceSet() != null) {
+			getModelResource().getResourceSet().eAdapters().add(modelListener);
 		}
-		if (getModelResource().getResourceSet() == null) {
-			return;
+		if (getDiagramResource() != null) {
+			getDiagramResource().eAdapters().add(modelListener);
 		}
-
-		getModelResource().getResourceSet().eAdapters().add(modelListener);
 	}
 
 	/**
 	 * Remove listeners
 	 */
 	protected void unhookListeners() {
-		if (getModelResource() == null) {
-			return;
+		if (getDiagramResource() != null) {
+			getDiagramResource().eAdapters().remove(modelListener);
 		}
-		if (getModelResource().getResourceSet() == null) {
-			return;
+		if (getModelResource() != null && getModelResource().getResourceSet() != null) {
+			getModelResource().getResourceSet().eAdapters().remove(modelListener);
 		}
-
-		getModelResource().getResourceSet().eAdapters().remove(modelListener);
 	}
 
 	/**
@@ -316,6 +332,27 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	}
 
 	/**
+	 * Get the resource associated with the given selected object
+	 * 
+	 * @param selection
+	 *            the selected object
+	 * @return the EMF resource
+	 */
+	private Resource getResourceFromSelection(Object selection) {
+		Resource resource = null;
+
+		if (selection instanceof EObject) {
+			resource = ((EObject) selection).eResource();
+		} else if (selection instanceof Resource) {
+			resource = (Resource) selection;
+		} else if ((selection instanceof IWrapperItemProvider) || (selection instanceof FeatureMap.Entry)) {
+			resource = ((EObject) AdapterFactoryEditingDomain.unwrap(selection)).eResource();
+		}
+
+		return resource;
+	}
+
+	/**
 	 * This implements {@link org.eclipse.jface.action.IMenuListener}to help
 	 * fill the context menus with contributions from the Edit menu.
 	 * 
@@ -335,12 +372,11 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		IStructuredSelection sel = (IStructuredSelection) viewer.getSelection();
 
 		Object currentSel = sel.getFirstElement();
+		Resource resource = getResourceFromSelection(currentSel);
 
 		// Create context menu if the resource associated to the current
 		// selection is writable.
-		if ((currentSel instanceof AdditionalResources))// ADD this ||
-		// ((resource != null)
-		// &&
+		if (currentSel instanceof AdditionalResources || resource != null) // &&
 		// !ResourceUtils.isReadOnly(resource)))
 		{
 			if (sel.size() == 1) {
@@ -400,7 +436,7 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * @param selection
 	 *            the selected object
 	 */
-	protected void createSingleSelectionMenu(IMenuManager manager, Object selection) {
+	private void createSingleSelectionMenu(IMenuManager manager, Object selection) {
 		EObject selectedObject = null;
 
 		if (selection instanceof EObject) {
@@ -409,38 +445,39 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 			selectedObject = (EObject) AdapterFactoryEditingDomain.unwrap(selection);
 		}
 
-		// The following menu are disable for the diagram objects
-		if ((selectedObject != null) && !(selectedObject instanceof View)) {
-			createEMFMenu(manager, selectedObject);
-			createDiagramsMenu(manager, selectedObject);
-			createControlActions(manager);
+		if (selectedObject != null) {
+			if (isEMFMenuEnabledFor(selectedObject)) {
+				createEMFMenu(manager, selectedObject);
+			}
+			if (isDiagramsMenuEnabledFor(selectedObject)) {
+				createDiagramsMenu(manager, selectedObject);
+			}
+			if (isControlActionEnabledFor(selectedObject)) {
+				createControlActions(manager);
+			}
 		}
 
 	}
 
-	private void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
-		if (!isDiagramsMenuEnabledFor(selectedObject)) {
-			return;
-		}
-		MenuManager submenuManager = new MenuManager("Add diagram");
-
-		// Restore this
-		// DiagramDescriptor[] diagramDescriptors =
-		// DiagramsManager.getInstance().getDiagrams();
-		// for (int i = 0; i < diagramDescriptors.length; i++)
-		// {
-		// if (diagramDescriptors[i].canCreateDiagramOn(selectedObject))
-		// {
-		// CreateDiagramAction action = new CreateDiagramAction(modeler,
-		// selectedObject, diagramDescriptors[i]);
-		// submenuManager.add(action);
-		// }
-		// }
-
-		manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, submenuManager);
+	/**
+	 * Subclasses should override this method to control enabling/disabling the
+	 * EMF menu for the current selection.
+	 * 
+	 * Default returns true.
+	 * 
+	 * @param selectedObject
+	 * @return whether the control action is enabled for the current selection
+	 *         or not.
+	 */
+	protected boolean isEMFMenuEnabledFor(EObject selectedObject) {
+		return true;
 	}
 
-	private void createEMFMenu(IMenuManager manager, EObject selectedObject) {
+	/**
+	 * Subclasses should override this method to add their own actions related
+	 * to EMF stuff
+	 */
+	protected void createEMFMenu(IMenuManager manager, EObject selectedObject) {
 
 		if (!isEMFMenuEnabledFor(selectedObject)) {
 			return;
@@ -495,17 +532,11 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	}
 
 	/**
-	 * Subclasses should override this method to control enabling/disabling the
-	 * EMF menu for the current selection.
-	 * 
-	 * Default returns true.
-	 * 
-	 * @param selectedObject
-	 * @return whether the control action is enabled for the current selection
-	 *         or not.
+	 * Subclasses should override this method to add their own actions related
+	 * to Diagram stuff
 	 */
-	protected boolean isEMFMenuEnabledFor(EObject selectedObject) {
-		return true;
+	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
+		// Do nothing by default
 	}
 
 	/**
@@ -522,36 +553,23 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		return true;
 	}
 
+	/**
+	 * Subclasses should override this method to add their own actions related
+	 * to Control/Uncontrol actions
+	 */
 	private void createControlActions(IMenuManager manager) {
-		EObject selectedObject = null;
-		Object sel = getTreeViewer().getSelection();
-		Object selection = null;
-		if (sel instanceof IStructuredSelection) {
-			if (!((IStructuredSelection) sel).isEmpty()) {
-				selection = ((IStructuredSelection) sel).getFirstElement();
-			}
-		}
-
-		if (selection instanceof EObject) {
-			selectedObject = (EObject) selection;
-		} else if ((selection instanceof IWrapperItemProvider) || (selection instanceof FeatureMap.Entry)) {
-			selectedObject = (EObject) AdapterFactoryEditingDomain.unwrap(selection);
-		}
-
-		if (!isControlActionEnabledFor(selectedObject)) {
-			return;
-		}
+		// Empty implementation
 	}
 
 	/**
-	 * Rfersh the treeviewer in the UI thread if we are in a different thread
+	 * Refresh the tree viewer in the UI thread if we are in a different thread
 	 */
 	protected final void refreshViewer() {
 		refreshViewer(false);
 	}
 
 	/**
-	 * Rfersh the treeviewer in the UI thread if we are in a different thread
+	 * Refresh the tree viewer in the UI thread if we are in a different thread
 	 * 
 	 * @param updateLabel
 	 *            <code>true</code> if the label must be refreshed
@@ -567,7 +585,7 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	}
 
 	/**
-	 * Refesh the tree viewer in the UI thread
+	 * Refresh the tree viewer in the UI thread
 	 * 
 	 * @param updateLabel
 	 *            <code>true</code> if the label must be refreshed
@@ -589,4 +607,22 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		unhookListeners();
 		super.dispose();
 	}
+
+	/**
+	 * Return the IDiagramWorkbenchPart
+	 * 
+	 * @return IDiagramWorkbenchPart
+	 */
+	protected IDiagramWorkbenchPart getEditor() {
+		return editor;
+	}
+
+	/**
+	 * Get the AdapterFactory associated with an editor
+	 * 
+	 * @return AdapterFactory
+	 */
+	protected abstract AdapterFactory getAdapterFactory();
+
+
 }
