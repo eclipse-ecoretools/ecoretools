@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,7 +16,6 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage;
 import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.IPageSite;
@@ -26,6 +25,7 @@ import org.eclipse.ui.part.IPageSite;
  * and/or a tree structure of the underlying model
  * 
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
+ * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
  */
 public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 
@@ -41,12 +41,11 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage#createNavigator(org.eclipse.swt.widgets.Composite,
-	 *      org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer,
 	 *      org.eclipse.ui.part.IPageSite)
 	 */
 	@Override
-	protected AbstractModelNavigator createNavigator(Composite parent, IDiagramGraphicalViewer viewer, IPageSite pageSite) {
-		return new EcoreModelNavigator(parent, viewer, pageSite);
+	protected AbstractModelNavigator createNavigator(Composite parent, IPageSite pageSite) {
+		return new EcoreModelNavigator(parent, getEditor(), pageSite);
 	}
 
 	/**
@@ -55,5 +54,13 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	@Override
 	protected IPreferenceStore getPreferenceStore() {
 		return EcoreDiagramEditorPlugin.getInstance().getPreferenceStore();
+	}
+
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage#getEditorID()
+	 */
+	@Override
+	protected String getEditorID() {
+		return "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID";
 	}
 }
