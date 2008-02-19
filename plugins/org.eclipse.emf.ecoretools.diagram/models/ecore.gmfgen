@@ -436,6 +436,10 @@
             xsi:type="gmfgen:ParentAssignedViewmap"
             getterName="getFigurePackageNameLabel"
             figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+        <behaviour
+            xsi:type="gmfgen:CustomBehaviour"
+            key="EditPolicyRoles.OPEN_ROLE"
+            editPolicyQualifiedClassName="org.eclipse.emf.ecoretools.diagram.edit.policies.OpenDiagramEditPolicy"/>
         <modelFacet
             xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures
