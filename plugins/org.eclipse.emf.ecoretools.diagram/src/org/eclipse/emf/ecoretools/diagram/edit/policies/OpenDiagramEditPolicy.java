@@ -83,7 +83,10 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 	 */
 	public static class OpenDiagramCommand extends AbstractTransactionalCommand {
 
-		/** The list of Diagrams that are associated with the given domain Element */
+		/**
+		 * The list of Diagrams that are associated with the given domain
+		 * Element
+		 */
 		private List<Diagram> allDiagrams = new ArrayList<Diagram>();
 
 		/** A given model element */
@@ -120,21 +123,25 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		 */
 		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
 			this(((View) multiDiagramLinkStyle.eContainer()).getElement(), multiDiagramLinkStyle.eResource());
-//			super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle), "Open Diagram", null);
-//			this.domainElement = ((View) multiDiagramLinkStyle.eContainer()).getElement();
-//			this.diagramResource = multiDiagramLinkStyle.eResource();
-//
-//			if (domainElement instanceof EPackage) {
-//				for (EObject currentDiag : diagramResource.getContents()) {
-//					if (currentDiag instanceof Diagram && domainElement.equals(((Diagram) currentDiag).getElement())) {
-//						allDiagrams.add((Diagram) currentDiag);
-//					}
-//				}
-//			}
+			// super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle),
+			// "Open Diagram", null);
+			// this.domainElement = ((View)
+			// multiDiagramLinkStyle.eContainer()).getElement();
+			// this.diagramResource = multiDiagramLinkStyle.eResource();
+			//
+			// if (domainElement instanceof EPackage) {
+			// for (EObject currentDiag : diagramResource.getContents()) {
+			// if (currentDiag instanceof Diagram &&
+			// domainElement.equals(((Diagram) currentDiag).getElement())) {
+			// allDiagrams.add((Diagram) currentDiag);
+			// }
+			// }
+			// }
 		}
 
 		/**
-		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
+		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
+		 *      org.eclipse.core.runtime.IAdaptable)
 		 */
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
@@ -181,7 +188,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		}
 
 		/**
-		 * @param diagram 
+		 * @param diagram
 		 */
 		protected void openEditor(Diagram diagram) {
 			if (diagram != null) {
@@ -195,7 +202,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		}
 
 		/**
-		 * @param initializeContent 
+		 * @param initializeContent
 		 * @return Diagram
 		 */
 		protected Diagram createPressed(boolean initializeContent) {
@@ -210,7 +217,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		}
 
 		/**
-		 * @param diagram 
+		 * @param diagram
 		 */
 		protected void deletePressed(Diagram diagram) {
 			if (diagram != null) {
@@ -229,7 +236,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		/**
 		 * @param initializeContent
 		 * @return Diagram
-		 * @throws ExecutionException 
+		 * @throws ExecutionException
 		 * @generated
 		 */
 		protected Diagram intializeNewDiagram(boolean initializeContent) throws ExecutionException {

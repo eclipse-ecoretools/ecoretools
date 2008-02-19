@@ -436,7 +436,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		}
 		return localUndoContext;
 	}
-	
+
 	/**
 	 * Remove this method when the feature 210642 will be implemented
 	 * 
@@ -448,7 +448,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		// Scroll-wheel Zoom
 		getGraphicalViewer().setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.CTRL), MouseWheelZoomHandler.SINGLETON);
 	}
-	
+
 	@Override
 	protected int getInitialDockLocation() {
 		return PositionConstants.WEST;
