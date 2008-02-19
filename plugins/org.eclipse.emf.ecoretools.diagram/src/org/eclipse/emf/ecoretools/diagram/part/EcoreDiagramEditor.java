@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -446,5 +447,10 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		super.initializeGraphicalViewerContents();
 		// Scroll-wheel Zoom
 		getGraphicalViewer().setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.CTRL), MouseWheelZoomHandler.SINGLETON);
+	}
+	
+	@Override
+	protected int getInitialDockLocation() {
+		return PositionConstants.WEST;
 	}
 }
