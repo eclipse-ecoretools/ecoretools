@@ -22,9 +22,7 @@ import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.PackageLabelRectangle;
@@ -142,7 +140,8 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		}
 		if (childEditPart instanceof EPackageContentsEditPart) {
 			IFigure pane = getPrimaryShape().getFigurePackageBodyRectangle();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			setupContentPane(pane); // FIXME each comparment should handle his
+									// content pane in his own way
 			pane.add(((EPackageContentsEditPart) childEditPart).getFigure());
 			return true;
 		}
@@ -156,7 +155,8 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 
 		if (childEditPart instanceof EPackageContentsEditPart) {
 			IFigure pane = getPrimaryShape().getFigurePackageBodyRectangle();
-			setupContentPane(pane); // FIXME each comparment should handle his content pane in his own way 
+			setupContentPane(pane); // FIXME each comparment should handle his
+									// content pane in his own way
 			pane.remove(((EPackageContentsEditPart) childEditPart).getFigure());
 			return true;
 		}
