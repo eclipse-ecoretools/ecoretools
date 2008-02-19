@@ -31,7 +31,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	public static final String EDIT_POLICY_COMMAND = "edit policy command"; //$NON-NLS-1$
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected ICommand getInsteadCommand(IEditCommandRequest req) {
 		ICommand epCommand = (ICommand) req.getParameter(EDIT_POLICY_COMMAND);

@@ -53,7 +53,7 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
