@@ -10,9 +10,9 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.tabbedproperties
-Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.properties.internal;x-internal:=true,
  org.eclipse.emf.ecoretools.properties.internal.metadata;x-internal:=true,
  org.eclipse.emf.ecoretools.properties.internal.sections;x-internal:=true
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .
+Bundle-ActivationPolicy: lazy
