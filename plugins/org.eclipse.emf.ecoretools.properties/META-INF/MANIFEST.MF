@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.tabbedproperties
-Eclipse-LazyStart: true
+Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.properties.internal;x-internal:=true,
  org.eclipse.emf.ecoretools.properties.internal.metadata;x-internal:=true,
  org.eclipse.emf.ecoretools.properties.internal.sections;x-internal:=true
