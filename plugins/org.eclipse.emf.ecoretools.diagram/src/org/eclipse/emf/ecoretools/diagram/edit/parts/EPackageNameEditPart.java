@@ -105,7 +105,6 @@ public class EPackageNameEditPart extends CompartmentEditPart implements ITextAw
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.OPEN_ROLE, new OpenDiagramEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicy() {
 
@@ -123,6 +122,7 @@ public class EPackageNameEditPart extends CompartmentEditPart implements ITextAw
 				return false;
 			}
 		});
+		installEditPolicy(EditPolicyRoles.OPEN_ROLE, new OpenDiagramEditPolicy());
 	}
 
 	/**
