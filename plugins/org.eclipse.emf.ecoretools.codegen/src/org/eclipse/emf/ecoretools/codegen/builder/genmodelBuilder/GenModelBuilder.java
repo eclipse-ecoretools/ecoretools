@@ -14,7 +14,7 @@
  *    Lucas Bigeardel - IP integration
  **********************************************************************/
 
-package org.eclipse.emf.codegen.builder.genmodelBuilder;
+package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder;
 
 import java.util.Map;
 
@@ -30,8 +30,6 @@ import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.codegen.builder.EmfBuilderPrefsInitializer;
-import org.eclipse.emf.codegen.builder.genmodelBuilder.l10n.Messages;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
@@ -44,6 +42,8 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecoretools.codegen.builder.EmfBuilderPrefsInitializer;
+import org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder.l10n.Messages;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;

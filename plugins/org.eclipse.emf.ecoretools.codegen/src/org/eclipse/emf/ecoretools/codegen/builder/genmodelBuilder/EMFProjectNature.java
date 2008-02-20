@@ -14,7 +14,7 @@
  *    Lucas Bigeardel - IP integration
  **********************************************************************/
 
-package org.eclipse.emf.codegen.builder.genmodelBuilder;
+package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder;
 
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;

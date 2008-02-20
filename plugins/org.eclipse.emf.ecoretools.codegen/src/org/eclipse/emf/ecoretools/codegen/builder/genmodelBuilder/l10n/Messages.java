@@ -11,7 +11,7 @@
  * 
  ******************************************************************************/
 
-package org.eclipse.emf.codegen.builder.genmodelBuilder.l10n;
+package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder.l10n;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
