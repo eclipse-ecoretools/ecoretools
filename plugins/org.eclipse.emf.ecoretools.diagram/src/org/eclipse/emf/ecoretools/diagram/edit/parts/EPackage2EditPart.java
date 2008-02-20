@@ -317,7 +317,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
 
@@ -378,6 +378,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			constraintFFigurePackageBodyRectangle.grabExcessHorizontalSpace = true;
 			constraintFFigurePackageBodyRectangle.grabExcessVerticalSpace = true;
 			this.add(fFigurePackageBodyRectangle, constraintFFigurePackageBodyRectangle);
+
 		}
 
 		/**
