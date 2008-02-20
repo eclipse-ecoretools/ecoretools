@@ -116,7 +116,7 @@ public abstract class AbstractDiagramTestFixture extends AbstractPresentationTes
 		getCommandStack().execute(cmd);
 		assertEquals(previousNumChildren + 1, containerEP.getChildren().size());
 
-		Object newView = ((IAdaptable) ((List) request.getNewObject()).get(0)).getAdapter(View.class);
+		Object newView = ((IAdaptable) ((List<Object>) request.getNewObject()).get(0)).getAdapter(View.class);
 		assertNotNull(newView);
 		assertTrue(!ViewUtil.isTransient((View) newView));
 
@@ -130,8 +130,8 @@ public abstract class AbstractDiagramTestFixture extends AbstractPresentationTes
 
 		IGraphicalEditPart newShape = null;
 		if (element != null) {
-			List children = containerEP.getChildren();
-			ListIterator li = children.listIterator();
+			List<EditPart> children = containerEP.getChildren();
+			ListIterator<EditPart> li = children.listIterator();
 			while (li.hasNext()) {
 				IGraphicalEditPart gep = (IGraphicalEditPart) li.next();
 				if (gep.getNotationView() != null && element.equals(gep.getNotationView().getElement())) {
@@ -261,7 +261,7 @@ public abstract class AbstractDiagramTestFixture extends AbstractPresentationTes
 	 * @param objectBeingDropped
 	 */
 	public void dropObject(EditPart target, Point location, Object objectBeingDropped) {
-		List objectsBeingDropped = new ArrayList();
+		List<Object> objectsBeingDropped = new ArrayList<Object>();
 		objectsBeingDropped.add(objectBeingDropped);
 		dropObject(target, location, objectsBeingDropped);
 	}
@@ -273,7 +273,7 @@ public abstract class AbstractDiagramTestFixture extends AbstractPresentationTes
 	 * @param location
 	 * @param objectBeingDropped
 	 */
-	public void dropObject(EditPart target, Point location, List objectsBeingDropped) {
+	public void dropObject(EditPart target, Point location, List<Object> objectsBeingDropped) {
 		DropObjectsRequest request = new DropObjectsRequest();
 
 		request.setObjects(objectsBeingDropped);

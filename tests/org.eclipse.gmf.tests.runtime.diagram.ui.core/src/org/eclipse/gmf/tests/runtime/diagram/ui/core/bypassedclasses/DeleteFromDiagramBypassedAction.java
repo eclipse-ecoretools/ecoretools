@@ -27,21 +27,21 @@ import org.eclipse.ui.IWorkbenchPart;
  */
 public class DeleteFromDiagramBypassedAction extends DeleteFromDiagramAction {
 
-	public List partsToDelete;
+	public List<EditPart> partsToDelete;
 
 	public DeleteFromDiagramBypassedAction(IWorkbenchPart part, EditPart objectToDelete) {
 		super(part);
-		partsToDelete = new ArrayList();
+		partsToDelete = new ArrayList<EditPart>();
 		partsToDelete.add(objectToDelete);
 	}
 
-	public DeleteFromDiagramBypassedAction(IWorkbenchPart part, List objectsToDelete) {
+	public DeleteFromDiagramBypassedAction(IWorkbenchPart part, List<EditPart> objectsToDelete) {
 		super(part);
 		this.partsToDelete = objectsToDelete;
 	}
 
 	@Override
-	protected List createOperationSet() {
+	protected List<EditPart> createOperationSet() {
 		return partsToDelete;
 	}
 

@@ -27,23 +27,23 @@ import org.eclipse.ui.IWorkbenchPart;
  */
 public class DeleteFromModelBypassedAction extends DeleteFromModelAction {
 
-	public List partsToDelete;
+	public List<EditPart> partsToDelete;
 
 	public DeleteFromModelBypassedAction(IWorkbenchPart part, EditPart objectToDelete) {
 		super(part);
-		partsToDelete = new ArrayList();
+		partsToDelete = new ArrayList<EditPart>();
 		partsToDelete.add(objectToDelete);
 		refresh();
 	}
 
-	public DeleteFromModelBypassedAction(IWorkbenchPart part, List objectsToDelete) {
+	public DeleteFromModelBypassedAction(IWorkbenchPart part, List<EditPart> objectsToDelete) {
 		super(part);
 		this.partsToDelete = objectsToDelete;
 		refresh();
 	}
 
 	@Override
-	protected List createOperationSet() {
+	protected List<EditPart> createOperationSet() {
 		return partsToDelete;
 	}
 

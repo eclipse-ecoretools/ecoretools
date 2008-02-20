@@ -15,7 +15,6 @@ package org.eclipse.gmf.tests.runtime.diagram.ui.core.test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -30,20 +29,20 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class DiagramState {
 
-	public ArrayList props = new ArrayList();
+	public ArrayList<String> props = new ArrayList<String>();
 
 	public DiagramState(DiagramEditPart diagramEditPart) {
 
 		// EditPartViewer viewer = diagramEditPart.getViewer();
 		final Diagram d = (Diagram) diagramEditPart.getModel();
 
-		ArrayList views = new ArrayList();
+		ArrayList<View> views = new ArrayList<View>();
 		views.addAll(d.getChildren());
 
-		Collections.sort(views, new Comparator() {
+		Collections.sort(views, new Comparator<View>() {
 
-			public int compare(Object o1, Object o2) {
-				return (ViewUtil.getIdStr((View) o1).compareTo(ViewUtil.getIdStr(((View) o2))));
+			public int compare(View o1, View o2) {
+				return (ViewUtil.getIdStr(o1).compareTo(ViewUtil.getIdStr((o2))));
 			}
 		});
 
@@ -108,8 +107,7 @@ public class DiagramState {
 		}
 
 		int i = 0;
-		for (Iterator it = props.iterator(); it.hasNext();) {
-			String s1 = (String) it.next();
+		for (String s1 : props) {
 			String s2 = (String) state.props.get(i);
 			if (!s1.equals(s2)) {
 				reportDifference(i, state);

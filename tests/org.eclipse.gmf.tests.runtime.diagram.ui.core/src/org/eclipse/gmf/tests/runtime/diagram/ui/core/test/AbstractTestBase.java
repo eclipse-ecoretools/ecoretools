@@ -13,7 +13,6 @@
 package org.eclipse.gmf.tests.runtime.diagram.ui.core.test;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +27,7 @@ import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.ConnectionEditPart;
 import org.eclipse.gef.Disposable;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.RootEditPart;
@@ -473,7 +473,7 @@ public abstract class AbstractTestBase extends TestCase {
 
 		getCommandStack().execute(cc);
 
-		return (View) ((IAdaptable) ((List) request.getNewObject()).get(0)).getAdapter(View.class);
+		return (View) ((IAdaptable) ((List<Object>) request.getNewObject()).get(0)).getAdapter(View.class);
 	}
 
 	protected void clearDiagram() {
@@ -501,13 +501,11 @@ public abstract class AbstractTestBase extends TestCase {
 	}
 
 	/** Return the supplied editpart's {@link ShapeNodeEditPart}children. */
-	protected List getShapesIn(IGraphicalEditPart parent) {
+	protected List<EditPart> getShapesIn(IGraphicalEditPart parent) {
 		assertNotNull(parent);
-		List shapes = new ArrayList();
+		List<EditPart> shapes = new ArrayList<EditPart>();
 
-		Iterator it = parent.getChildren().iterator();
-		while (it.hasNext()) {
-			Object child = it.next();
+		for (EditPart child : (List<EditPart>) parent.getChildren()) {
 			if (child instanceof ShapeNodeEditPart) {
 				shapes.add(child);
 			}
@@ -516,7 +514,7 @@ public abstract class AbstractTestBase extends TestCase {
 	}
 
 	/** Return <code>getDiagramEditPart().getConnectors()</code>. */
-	protected List getConnectors() {
+	protected List<ConnectionEditPart> getConnectors() {
 		return getDiagramEditPart().getConnections();
 	}
 
