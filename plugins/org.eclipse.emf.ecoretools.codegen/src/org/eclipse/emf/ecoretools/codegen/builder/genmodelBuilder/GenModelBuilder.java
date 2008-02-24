@@ -10,7 +10,7 @@
  * GenModelBuilder.java
  * 
  * Contributors:
- *    Harman/Becker - initial API and implementation
+ *    Daniel Weber - initial API and implementation
  *    Lucas Bigeardel - IP integration
  **********************************************************************/
 
