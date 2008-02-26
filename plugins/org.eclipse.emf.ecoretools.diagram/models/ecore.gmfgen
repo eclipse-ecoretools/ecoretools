@@ -5,7 +5,7 @@
     xmlns:gmfgen="http://www.eclipse.org/gmf/2006/GenModel" packageNamePrefix="org.eclipse.emf.ecoretools.diagram"
     modelID="EcoreTools"
     diagramFileExtension="ecorediag"
-    copyrightText="Copyright (c) 2007 Anyware Technologies&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;   Anyware Technologies - initial API and implementation">
+    copyrightText="Copyright (c) 2007, 2008 Anyware Technologies&#xD;&#xA;&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;&#xD;&#xA;Contributors:&#xD;&#xA;   Anyware Technologies - initial API and implementation">
   <diagram
       visualID="79"
       editPartClassName="EPackageEditPart"
@@ -61,10 +61,7 @@
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eAttributes"/>
       </modelFacet>
       <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet"
-          viewPattern=""
-          editorPattern=""
-          editPattern="">
+          xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/ENamedElement/name"/>
       </labelModelFacet>
@@ -99,10 +96,7 @@
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eOperations"/>
       </modelFacet>
       <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet"
-          viewPattern=""
-          editorPattern=""
-          editPattern="">
+          xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/ENamedElement/name"/>
       </labelModelFacet>
@@ -339,9 +333,7 @@
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EAnnotation/details"/>
       </modelFacet>
       <labelModelFacet
-          xsi:type="gmfgen:FeatureLabelModelFacet"
-          viewPattern=""
-          editPattern="">
+          xsi:type="gmfgen:FeatureLabelModelFacet">
         <metaFeatures
             href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EStringToStringMapEntry/key"/>
       </labelModelFacet>
