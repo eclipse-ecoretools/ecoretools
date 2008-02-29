@@ -82,6 +82,11 @@ public abstract class AbstractValidationMarkerReader implements IMarkerReader {
 							if (locationAttribute != null && locationAttribute.equals(objectLocation)) {
 								markerList.add(marker);
 							}
+							// Bug #216296 : Marker decorators should be present
+							// in the parent hierarchy too
+							else if (locationAttribute != null && locationAttribute.startsWith(objectLocation)) {
+								markerList.add(marker);
+							}
 						}
 					} catch (CoreException ce) {
 						// Ignore bad files
