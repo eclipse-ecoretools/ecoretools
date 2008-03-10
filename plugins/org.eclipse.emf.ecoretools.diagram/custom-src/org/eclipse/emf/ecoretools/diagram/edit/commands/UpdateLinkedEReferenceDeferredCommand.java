@@ -35,25 +35,36 @@ import org.eclipse.gmf.runtime.notation.RelativeBendpoints;
 import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
 
 /**
+ * Update the two EReference views so that the two views overlay each other. The
+ * target and source anchor are the same on each connection, and bendpoints are
+ * the same but on an inverted list.<br>
  * 
- * TODO Describe the class here <br>
- * creation : 17 janv. 08
+ * Creation : 17 janv. 08
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
  *         Cannenterre</a>
  */
 public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactionalCommand {
 
+	// The first EReference part
 	private EReferenceEditPart part1;
 
+	// The second EReference part (as the EOpposite of the first one)
 	private EReferenceEditPart part2;
 
+	/**
+	 * Command used to synchronize two References parts defined as EOpposite
+	 * each other. Graphical representation should overlay each other.
+	 */
 	public UpdateLinkedEReferenceDeferredCommand(TransactionalEditingDomain domain, EReferenceEditPart part1, EReferenceEditPart part2) {
 		super(domain, "LinkEReferenceDeferredCommand", null);
 		this.part1 = part1;
 		this.part2 = part2;
 	}
 
+	/**
+	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
+	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (part1 == null || part2 == null) {
@@ -119,7 +130,7 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 					return;
 				}
 
-				List relativePoints = new ArrayList();
+				List<RelativeBendpoint> relativePoints = new ArrayList<RelativeBendpoint>();
 				for (int index = edge1Benpoints.getPoints().size() - 1; index >= 0; index--) {
 					RelativeBendpoint relativePoint = (RelativeBendpoint) edge1Benpoints.getPoints().get(index);
 					relativePoints.add(new RelativeBendpoint(relativePoint.getTargetX(), relativePoint.getTargetY(), relativePoint.getSourceX(), relativePoint.getSourceY()));
