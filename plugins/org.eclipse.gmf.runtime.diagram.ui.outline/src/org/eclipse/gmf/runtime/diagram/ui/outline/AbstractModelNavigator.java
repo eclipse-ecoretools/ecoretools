@@ -21,8 +21,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.IViewerNotification;
 import org.eclipse.emf.edit.provider.IWrapperItemProvider;
+import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
@@ -58,7 +60,7 @@ import org.eclipse.ui.part.IPageSite;
  * Display the model as a tree and fill the contextual menu with diagrams and
  * EMF actions. <br>
  * 
- * Updated	: 18 feb. 2008
+ * Updated : 18 feb. 2008
  * 
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
  * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
@@ -66,7 +68,7 @@ import org.eclipse.ui.part.IPageSite;
 public abstract class AbstractModelNavigator extends Composite implements IMenuListener {
 
 	private IDiagramWorkbenchPart editor;
-	
+
 	private IDiagramGraphicalViewer diagramViewer;
 
 	private TreeViewer viewer;
@@ -386,18 +388,6 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 
 			createMultiSelectionMenu(menuManager, sel);
 		}
-
-		// TODO Restore this
-		// if (loadMenu == null)
-		// {
-		// MixedEditDomain domain = (MixedEditDomain)
-		// modeler.getAdapter(MixedEditDomain.class);
-		// String metamodelURI =
-		// modeler.getDiagrams().getModel().eClass().getEPackage().getNsURI();
-		// loadMenu = new RegisteredModelMenu("Load",
-		// domain.getEMFEditingDomain(), metamodelURI);
-		// }
-		// menuManager.add(loadMenu);
 	}
 
 	/**
@@ -409,23 +399,19 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 *            the selection
 	 */
 	protected void createMultiSelectionMenu(IMenuManager manager, IStructuredSelection selection) {
-		// TODO Restore this
-		// MixedEditDomain domain = (MixedEditDomain)
-		// modeler.getAdapter(MixedEditDomain.class);
-		// if (domain != null)
-		// {
-		// // Add the delete from model action
-		// DeleteAction deleteAction = new DeleteAction(domain,
-		// modeler.getDiagrams(), selection);
-		// manager.appendToGroup(IOutlineMenuConstants.EDIT_GROUP,
-		// deleteAction);
-		//
-		// // Add load resource action
-		// LoadResourceAction loadAction = new
-		// LoadResourceAction(domain.getEMFEditingDomain());
-		// manager.appendToGroup(IOutlineMenuConstants.ADDITIONS_GROUP,
-		// loadAction);
-		// }
+		IEditingDomainProvider domainProvider = (IEditingDomainProvider) editor.getAdapter(IEditingDomainProvider.class);
+		if (domainProvider != null) {
+			// TODO Restore this
+			// Add the delete from model action
+			// DeleteAction deleteAction = new DeleteAction(domain,
+			// editor.getDiagram(), selection);
+			// manager.appendToGroup(IOutlineMenuConstants.EDIT_GROUP,
+			// deleteAction);
+
+			// Add load resource action
+			LoadResourceAction loadAction = new LoadResourceAction(domainProvider.getEditingDomain());
+			manager.appendToGroup(IOutlineMenuConstants.ADDITIONS_END_GROUP, loadAction);
+		}
 	}
 
 	/**
@@ -477,8 +463,10 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Subclasses should override this method to add their own actions related
 	 * to EMF stuff
 	 * 
-	 * @param manager the IMenuManager 
-	 * @param selectedObject the selected model object
+	 * @param manager
+	 *            the IMenuManager
+	 * @param selectedObject
+	 *            the selected model object
 	 */
 	protected void createEMFMenu(IMenuManager manager, EObject selectedObject) {
 
@@ -538,8 +526,10 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Subclasses should override this method to add their own actions related
 	 * to Diagram stuff
 	 * 
-	 * @param manager the IMenuManager
-	 * @param selectedObject the selected model object
+	 * @param manager
+	 *            the IMenuManager
+	 * @param selectedObject
+	 *            the selected model object
 	 */
 	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
 		// Do nothing by default
@@ -563,7 +553,8 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * Subclasses should override this method to add their own actions related
 	 * to Control/Uncontrol actions
 	 * 
-	 * @param manager the IMenuManager 
+	 * @param manager
+	 *            the IMenuManager
 	 */
 	private void createControlActions(IMenuManager manager) {
 		// Empty implementation
@@ -631,6 +622,5 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * @return AdapterFactory
 	 */
 	protected abstract AdapterFactory getAdapterFactory();
-
 
 }
