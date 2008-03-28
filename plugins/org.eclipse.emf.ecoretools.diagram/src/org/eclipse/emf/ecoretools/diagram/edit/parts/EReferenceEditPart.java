@@ -37,7 +37,7 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class EReferenceEditPart extends ConnectionNodeEditPart {
 
-	private boolean selectable;
+	private boolean selectable = true;
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
@@ -69,6 +69,9 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 		}
 	}
 
+	/**
+	 * TODO Comment this method
+	 */
 	protected void refreshLinkedReference() {
 		EObject semanticElement = resolveSemanticElement();
 		if (false == semanticElement instanceof EReference) {
