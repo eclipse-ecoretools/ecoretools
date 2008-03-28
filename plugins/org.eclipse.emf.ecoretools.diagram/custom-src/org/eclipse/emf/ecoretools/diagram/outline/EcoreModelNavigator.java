@@ -64,12 +64,13 @@ public class EcoreModelNavigator extends AbstractModelNavigator {
 	 */
 	@Override
 	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
+		super.createDiagramsMenu(manager, selectedObject);
+		
 		if (selectedObject instanceof EPackage) {
 			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new CreateDiagramAction(selectedObject, getDiagramResource(), EPackageEditPart.MODEL_ID,
 					EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT));
 		}
 		if (selectedObject instanceof Diagram) {
-			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new RenameDiagramAction((Diagram) selectedObject));
 			// Check that this is not the current diagram
 			if (getEditor().getDiagram() != selectedObject) {
 				manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new DeleteDiagramAction((Diagram) selectedObject));
