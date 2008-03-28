@@ -27,6 +27,8 @@ import org.eclipse.emf.edit.provider.IWrapperItemProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.gmf.runtime.diagram.ui.outline.actions.DuplicateDiagramAction;
+import org.eclipse.gmf.runtime.diagram.ui.outline.actions.RenameDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.ModelElementComparer;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OutlineDragAdapter;
@@ -532,7 +534,10 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 *            the selected model object
 	 */
 	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
-		// Do nothing by default
+		if (selectedObject instanceof Diagram) {
+			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new DuplicateDiagramAction((Diagram) selectedObject));
+			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new RenameDiagramAction((Diagram) selectedObject));
+		}
 	}
 
 	/**
