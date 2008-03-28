@@ -74,8 +74,8 @@ public class EcoreDiagramEditorUtil {
 	/**
 	 * @generated
 	 */
-	public static Map getSaveOptions() {
-		Map saveOptions = new HashMap();
+	public static Map<String, String> getSaveOptions() {
+		Map<String, String> saveOptions = new HashMap<String, String>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
@@ -157,7 +157,7 @@ public class EcoreDiagramEditorUtil {
 	 * This method should be called within a workspace modify operation since it
 	 * creates resources.
 	 * 
-	 * @generated
+	 * @generated NOT
 	 */
 	public static Resource createDiagram(URI diagramURI, URI modelURI, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
@@ -169,6 +169,12 @@ public class EcoreDiagramEditorUtil {
 
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				EPackage model = createInitialModel();
+				
+				// Bug #224334 : Initialize root EPackage properties
+				model.setName(diagramName.toLowerCase());
+				model.setNsPrefix(diagramName.toLowerCase());
+				model.setNsURI("http://".concat(diagramName.toLowerCase()).concat("/1.0"));
+				
 				attachModelToResource(model, modelResource);
 
 				Diagram diagram = ViewService.createDiagram(model, EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
