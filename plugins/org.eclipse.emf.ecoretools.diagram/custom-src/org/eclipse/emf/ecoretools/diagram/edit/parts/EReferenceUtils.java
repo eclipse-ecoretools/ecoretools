@@ -35,7 +35,6 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.util.EditPartUtil;
-import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
@@ -47,14 +46,9 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class EReferenceUtils {
 
-	public static boolean isEOpposite(View view) {
-		if (view == null || view.getElement() == null) {
-			return false;
-		}
-		EReference eReference = (EReference) view.getElement();
-		return (eReference.getEOpposite() != null);
-	}
-
+	/**
+	 * TODO Comment this method
+	 */
 	public static void trackReferences(EReferenceEditPart referenceEditPart) {
 		EObject eReference = referenceEditPart.resolveSemanticElement();
 		if (false == eReference instanceof EReference) {
@@ -85,13 +79,15 @@ public class EReferenceUtils {
 		executeCommand(cmd, oppositeEditPart);
 	}
 
+	/**
+	 * TODO Comment this method
+	 */
 	protected static void executeCommand(final Command cmd, IGraphicalEditPart part) {
-		Map options = null;
+		Map<String, Boolean> options = null;
 		boolean isActivating = true;
 		// use the viewer to determine if we are still initializing the diagram
 		// do not use the DiagramEditPart.isActivating since
-		// ConnectionEditPart's
-		// parent will not be a diagram edit part
+		// ConnectionEditPart's parent will not be a diagram edit part
 		EditPartViewer viewer = part.getViewer();
 		if (viewer instanceof DiagramGraphicalViewer) {
 			isActivating = ((DiagramGraphicalViewer) viewer).isInitializing();
