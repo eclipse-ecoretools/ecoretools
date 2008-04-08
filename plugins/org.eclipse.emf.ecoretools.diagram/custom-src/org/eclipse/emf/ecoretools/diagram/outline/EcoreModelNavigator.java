@@ -21,7 +21,6 @@ import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.IOutlineMenuConstants;
 import org.eclipse.gmf.runtime.diagram.ui.outline.actions.CreateDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.outline.actions.DeleteDiagramAction;
-import org.eclipse.gmf.runtime.diagram.ui.outline.actions.RenameDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.IMenuManager;
@@ -65,16 +64,10 @@ public class EcoreModelNavigator extends AbstractModelNavigator {
 	@Override
 	protected void createDiagramsMenu(IMenuManager manager, EObject selectedObject) {
 		super.createDiagramsMenu(manager, selectedObject);
-		
+
 		if (selectedObject instanceof EPackage) {
 			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new CreateDiagramAction(selectedObject, getDiagramResource(), EPackageEditPart.MODEL_ID,
 					EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT));
-		}
-		if (selectedObject instanceof Diagram) {
-			// Check that this is not the current diagram
-			if (getEditor().getDiagram() != selectedObject) {
-				manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new DeleteDiagramAction((Diagram) selectedObject));
-			}
 		}
 	}
 
