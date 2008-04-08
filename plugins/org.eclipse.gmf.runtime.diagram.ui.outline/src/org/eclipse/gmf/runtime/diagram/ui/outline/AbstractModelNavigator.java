@@ -586,7 +586,7 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 *            <code>true</code> if the label must be refreshed
 	 */
 	protected final void refreshViewer(final boolean updateLabel) {
-		if ((viewer != null) && !viewer.getTree().isDisposed()) {
+		if ((viewer != null) && !viewer.getTree().isDisposed() && diagramViewer.getContents() != null) {
 			if (Display.getCurrent() != Display.getDefault()) {
 				syncRefreshViewer(updateLabel);
 			} else {
