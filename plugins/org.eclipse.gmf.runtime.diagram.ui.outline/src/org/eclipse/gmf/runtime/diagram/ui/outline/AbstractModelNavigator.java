@@ -27,6 +27,7 @@ import org.eclipse.emf.edit.provider.IWrapperItemProvider;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.gmf.runtime.diagram.ui.outline.actions.DeleteDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.outline.actions.DuplicateDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.outline.actions.RenameDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
@@ -191,9 +192,11 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 * @return Resource
 	 */
 	protected Resource getDiagramResource() {
-		Object model = diagramViewer.getContents().getModel();
-		if (model instanceof Diagram) {
-			return ((Diagram) model).eResource();
+		if (diagramViewer != null && diagramViewer.getContents() != null) {
+			Object model = diagramViewer.getContents().getModel();
+			if (model instanceof Diagram) {
+				return ((Diagram) model).eResource();
+			}
 		}
 
 		return null;
@@ -537,6 +540,10 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		if (selectedObject instanceof Diagram) {
 			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new DuplicateDiagramAction((Diagram) selectedObject));
 			manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new RenameDiagramAction((Diagram) selectedObject));
+			// Check that this is not the current diagram
+			if (getEditor().getDiagram() != selectedObject) {
+				manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP, new DeleteDiagramAction((Diagram) selectedObject));
+			}
 		}
 	}
 
