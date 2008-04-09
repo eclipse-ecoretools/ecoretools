@@ -45,11 +45,9 @@ import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.MouseWheelHandler;
 import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.palette.PaletteRoot;
-import org.eclipse.gef.ui.parts.ScrollingGraphicalViewer;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramDropTargetListener;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
@@ -61,9 +59,7 @@ import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.util.NLS;
@@ -335,27 +331,6 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 			}
 
 		});
-	}
-
-	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#createScrollingGraphicalViewer()
-	 */
-	protected ScrollingGraphicalViewer createScrollingGraphicalViewer() {
-		return new DiagramGraphicalViewer() {
-
-			/**
-			 * Use the GEF implementation. Do not use asynchronous events. See
-			 * bug#203520
-			 * 
-			 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer#fireSelectionChanged()
-			 */
-			protected void fireSelectionChanged() {
-				Object listeners[] = selectionListeners.toArray();
-				SelectionChangedEvent event = new SelectionChangedEvent(this, getSelection());
-				for (int i = 0; i < listeners.length; i++)
-					((ISelectionChangedListener) listeners[i]).selectionChanged(event);
-			}
-		};
 	}
 
 	/**
