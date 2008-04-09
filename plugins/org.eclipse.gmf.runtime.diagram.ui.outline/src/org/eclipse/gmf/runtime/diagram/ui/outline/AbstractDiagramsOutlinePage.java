@@ -236,8 +236,9 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		}
 
-		editor.getDiagramGraphicalViewer().setSelection(new StructuredSelection(editPartsToSelect));
+		// Bug #226235 : manage the case when there is no element to select in the diagram
 		if (editPartsToSelect.size() > 0) {
+			editor.getDiagramGraphicalViewer().setSelection(new StructuredSelection(editPartsToSelect));
 			viewer.reveal(editPartsToSelect.get(editPartsToSelect.size() - 1));
 		}
 		isDispatching = false;
