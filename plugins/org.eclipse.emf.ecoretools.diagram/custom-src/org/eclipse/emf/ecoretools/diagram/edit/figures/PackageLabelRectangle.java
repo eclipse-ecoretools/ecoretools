@@ -17,6 +17,14 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+/**
+ * 
+ * Figure of the label EPackage <br>
+ * creation : 01 sept. 2007
+ * 
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
+ */
 public class PackageLabelRectangle extends RectangleFigure {
 
 	@Override

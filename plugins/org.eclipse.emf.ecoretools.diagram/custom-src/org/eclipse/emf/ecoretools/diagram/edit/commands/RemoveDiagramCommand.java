@@ -29,6 +29,14 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * 
+ * Remove package associated diagrams <br>
+ * creation : 01 sept. 2007
+ * 
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
+ */
 public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 
 	private MultiDiagramLinkStyle diagramFacet;

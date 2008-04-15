@@ -22,7 +22,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
- * TODO Describe the class here <br>
+ * Utility methods to destroy all associated view of an EObject <br>
  * creation : 11 janv. 08
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles

@@ -29,7 +29,7 @@ import org.eclipse.gmf.runtime.notation.Node;
 
 /**
  * 
- * TODO Describe the class here <br>
+ * Initialize diagram content and perform default layout <br>
  * creation : 3 janv. 2008
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles

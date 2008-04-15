@@ -29,6 +29,16 @@ import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 
+/**
+ * 
+ * Remove package associated diagrams <br>
+ * creation : 01 sept. 2007
+ * 
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
+ * @author <a href="mailto:david.sciamma@anyware-tech.com">David
+ *         Sciamma</a>
+ */
 public class PackageComponentEditPolicy extends ComponentEditPolicy {
 
 	/**

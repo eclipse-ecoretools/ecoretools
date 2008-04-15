@@ -25,7 +25,7 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 
 /**
  * 
- * TODO Describe the class here <br>
+ * Update and editpart triggering the pseudo canonical edit policy <br>
  * creation : 2 janv. 2008
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles

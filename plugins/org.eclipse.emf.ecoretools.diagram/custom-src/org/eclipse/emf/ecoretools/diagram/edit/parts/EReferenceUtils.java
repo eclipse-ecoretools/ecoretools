@@ -47,7 +47,7 @@ import org.eclipse.gmf.runtime.diagram.ui.util.EditPartUtil;
 public class EReferenceUtils {
 
 	/**
-	 * TODO Comment this method
+	 * Track eopposite link
 	 */
 	public static void trackReferences(EReferenceEditPart referenceEditPart) {
 		EObject eReference = referenceEditPart.resolveSemanticElement();
@@ -80,7 +80,7 @@ public class EReferenceUtils {
 	}
 
 	/**
-	 * TODO Comment this method
+	 * Execute a command outsite the editor command stack
 	 */
 	protected static void executeCommand(final Command cmd, IGraphicalEditPart part) {
 		Map<String, Boolean> options = null;

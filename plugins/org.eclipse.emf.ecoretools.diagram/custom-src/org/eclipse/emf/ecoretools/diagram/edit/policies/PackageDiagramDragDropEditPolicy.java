@@ -34,6 +34,15 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 
+/**
+ * 
+ * Custom drag and drop edit policy that creates shorcuts only for elements
+ * already present in target diagram <br>
+ * creation : 01 sept. 2007
+ * 
+ * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
+ *         Cannenterre</a>
+ */
 public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy {
 
 	public Command getDropObjectsCommand(DropObjectsRequest dropRequest) {

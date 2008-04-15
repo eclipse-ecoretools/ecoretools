@@ -13,7 +13,7 @@ package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 /**
  * 
- * TODO Describe the class here <br>
+ * Creates an edit policy key to support custom synchronization behavior <br>
  * creation : 10 janv. 08
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
