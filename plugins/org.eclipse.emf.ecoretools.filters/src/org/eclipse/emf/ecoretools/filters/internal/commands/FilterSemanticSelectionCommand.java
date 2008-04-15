@@ -41,7 +41,7 @@ public class FilterSemanticSelectionCommand extends AbstractTransactionalCommand
 	private boolean show;
 
 	public FilterSemanticSelectionCommand(TransactionalEditingDomain domain, Diagram diagramToFilter, List<EObject> typesToFilter, boolean show) {
-		super(domain, "FilterSemantic", null);
+		super(domain, "Filter Semantic", null);
 		this.diagramToFilter = diagramToFilter;
 		this.typesToFilter = typesToFilter;
 		this.show = show;

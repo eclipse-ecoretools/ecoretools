@@ -34,7 +34,7 @@ public class ShowHiddenPartsCommand extends AbstractTransactionalCommand {
 	private Diagram diagramToFilter;
 
 	public ShowHiddenPartsCommand(TransactionalEditingDomain domain, Diagram diagramToFilter) {
-		super(domain, "ShowHiddenParts", null);
+		super(domain, "Show Hidden Parts", null);
 		this.diagramToFilter = diagramToFilter;
 	}
 

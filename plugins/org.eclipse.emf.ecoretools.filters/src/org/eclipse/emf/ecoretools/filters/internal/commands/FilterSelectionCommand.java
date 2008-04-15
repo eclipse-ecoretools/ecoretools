@@ -36,7 +36,7 @@ public class FilterSelectionCommand extends AbstractTransactionalCommand {
 	private boolean show;
 
 	public FilterSelectionCommand(TransactionalEditingDomain domain, List<IGraphicalEditPart> selection, boolean show) {
-		super(domain, "FilterSelection", null);
+		super(domain, "Filter Selection", null);
 		this.selection = selection;
 		this.show = show;
 	}

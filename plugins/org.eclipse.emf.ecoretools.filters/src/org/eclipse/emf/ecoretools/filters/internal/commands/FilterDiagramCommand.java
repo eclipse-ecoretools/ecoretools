@@ -41,7 +41,7 @@ public class FilterDiagramCommand extends AbstractTransactionalCommand {
 	private boolean show;
 
 	public FilterDiagramCommand(TransactionalEditingDomain domain, Diagram diagramToFilter, List<String> typesToFilter, boolean show) {
-		super(domain, "FilterDiagram", null);
+		super(domain, "Filter Diagram", null);
 		this.diagramToFilter = diagramToFilter;
 		this.typesToFilter = typesToFilter;
 		this.show = show;
