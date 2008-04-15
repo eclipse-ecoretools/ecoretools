@@ -72,6 +72,8 @@ import org.eclipse.ui.part.FileEditorInput;
 public class EcoreDocumentProvider extends AbstractDocumentProvider implements IDiagramDocumentProvider {
 
 	/**
+	 * Register one workspace synchronizer per editing domain
+	 * 
 	 * @generated NOT
 	 */
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
