@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
+import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramUpdater;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -82,6 +83,10 @@ public class RestoreRelatedLinksAction extends Action {
 			if (object instanceof DiagramEditPart) {
 				continue;
 			}
+			View view = ((IGraphicalEditPart) object).getNotationView();
+			if (view.getEAnnotation("Shortcut") != null) {
+				continue;
+			}
 			partSelected.add((IGraphicalEditPart) object);
 		}
 		return partSelected;
@@ -114,7 +119,7 @@ public class RestoreRelatedLinksAction extends Action {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return getCurrentDiagram().getType().equals("EcoreTools");
+		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools"));
 	}
 
 }

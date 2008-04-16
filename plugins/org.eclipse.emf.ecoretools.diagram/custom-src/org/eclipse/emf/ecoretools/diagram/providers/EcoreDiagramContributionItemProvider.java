@@ -32,30 +32,9 @@ public class EcoreDiagramContributionItemProvider extends AbstractContributionIt
 	 */
 	@Override
 	protected IAction createAction(String actionId, IWorkbenchPartDescriptor partDescriptor) {
-		 if (actionId.equals(RestoreRelatedLinksAction.ID)) {
-		 return new RestoreRelatedLinksAction();
-		 }
-		// if (actionId.equals(ApplyFilterDiagramAction.ID)) {
-		// return new ApplyFilterDiagramAction();
-		// }
-		// if (actionId.equals(HideSelectionAction.ID)) {
-		// return new HideSelectionAction();
-		// }
-		// if (actionId.equals(HideTypeAction.ID)) {
-		// return new HideTypeAction();
-		// }
-		// if (actionId.equals(HideSemanticAction.ID)) {
-		// return new HideSemanticAction();
-		// }
-		// if (actionId.equals(ShowHiddenPartAction.ID)) {
-		// return new ShowHiddenPartAction();
-		// }
-		// if (actionId.equals(HideInheritanceTypeAction.ID)) {
-		// return new HideInheritanceTypeAction();
-		// }
-		// if (actionId.equals(HideReferenceTypeAction.ID)) {
-		// return new HideReferenceTypeAction();
-		//		}
+		if (actionId.equals(RestoreRelatedLinksAction.ID)) {
+			return new RestoreRelatedLinksAction();
+		}
 
 		return super.createAction(actionId, partDescriptor);
 	}

@@ -70,7 +70,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	}
 
 	/**
-	 * TODO Comment this method
+	 * Refresh reference decoration and visibility
 	 */
 	protected void refreshLinkedReference() {
 		EObject semanticElement = resolveSemanticElement();
@@ -162,8 +162,9 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 		public void setHideLine(boolean hideLine) {
 			this.hideLine = hideLine;
 			synchronized (EReferenceEditPart.this) {
-				if (hideLine && EReferenceEditPart.this.getSelected() != SELECTED_NONE) {
+				if (hideLine) {
 					getViewer().deselect(EReferenceEditPart.this);
+					EReferenceEditPart.this.setSelected(SELECTED_NONE);
 					EReferenceEditPart.this.setSelectable(false);
 				} else {
 					EReferenceEditPart.this.setSelectable(true);

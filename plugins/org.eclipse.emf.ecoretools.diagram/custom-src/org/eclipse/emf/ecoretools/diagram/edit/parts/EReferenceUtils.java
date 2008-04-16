@@ -76,12 +76,25 @@ public class EReferenceUtils {
 		if (oppositeEditPart == null) {
 			return;
 		}
-		if (false == referenceEditPart.getPrimaryShape().isHideLine() && false == oppositeEditPart.getPrimaryShape().isHideLine()) {
+		// Hide line of the non selected reference
+		EReferenceEditPart masterPart;
+		EReferenceEditPart slavePart;
+		if (oppositeEditPart.getSelected() != EditPart.SELECTED_NONE)
+		{
+			referenceEditPart.getPrimaryShape().setHideLine(true);
+			oppositeEditPart.getPrimaryShape().setHideLine(false);
+			masterPart = oppositeEditPart;
+			slavePart = referenceEditPart;
+		} else {
 			oppositeEditPart.getPrimaryShape().setHideLine(true);
+			referenceEditPart.getPrimaryShape().setHideLine(false);
+			masterPart = referenceEditPart;
+			slavePart = oppositeEditPart;			
 		}
-		TransactionalEditingDomain editingDomain = oppositeEditPart.getEditingDomain();
-		Command cmd = new ICommandProxy(new UpdateLinkedEReferenceDeferredCommand(editingDomain, referenceEditPart, oppositeEditPart));
-		executeCommand(cmd, oppositeEditPart);
+
+		TransactionalEditingDomain editingDomain = masterPart.getEditingDomain();
+		Command cmd = new ICommandProxy(new UpdateLinkedEReferenceDeferredCommand(editingDomain, masterPart, slavePart));
+		executeCommand(cmd, masterPart);
 	}
 
 	/**
