@@ -12,7 +12,6 @@
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -40,12 +39,17 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.core.commands.SetPropertyCommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.internal.properties.Properties;
+import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
@@ -87,7 +91,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	}
 
 	private void createConnections(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
-		// complete map
+		// map elements
 		mapModel(diagram, domain2NotationMap);
 
 		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
@@ -144,7 +148,10 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			}
 		}
 
-		// Do the math
+		// Set all existing related link visible
+		setConnectionsVisible(graphicalEditPart, existingLinks);
+
+		// Remove already existing links
 		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
 			Edge nextDiagramLink = (Edge) linksIterator.next();
 			int diagramLinkVisualID = EcoreVisualIDRegistry.getVisualID(nextDiagramLink);
@@ -169,6 +176,19 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 
 		// Create connection for all semantic link not yet in graphical model
 		createConnections(graphicalEditPart, linkDescriptors, domain2NotationMap);
+	}
+
+	private void setConnectionsVisible(IGraphicalEditPart part, Collection existingLinks) {
+		for (Iterator it = existingLinks.iterator(); it.hasNext();) {
+			Edge edge = (Edge) it.next();
+			if (edge.isVisible()) {
+				continue;
+			}
+			SetPropertyCommand cmd = new SetPropertyCommand(part.getEditingDomain(), DiagramUIMessages.Command_hideLabel_Label, new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
+			if (cmd != null && cmd.canExecute()) {
+				EReferenceUtils.executeCommand(new ICommandProxy(cmd), part);
+			}
+		}
 	}
 
 	private Collection collectPartRelatedLinks(View view, Map domain2NotationMap) {
