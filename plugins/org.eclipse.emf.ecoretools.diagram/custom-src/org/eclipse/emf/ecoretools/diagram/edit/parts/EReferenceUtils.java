@@ -30,9 +30,14 @@ import org.eclipse.emf.workspace.AbstractEMFOperation;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gmf.runtime.common.core.util.Log;
 import org.eclipse.gmf.runtime.common.core.util.StringStatics;
+import org.eclipse.gmf.runtime.common.core.util.Trace;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIDebugOptions;
+import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIPlugin;
+import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIStatusCodes;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.util.EditPartUtil;
 
@@ -80,9 +85,13 @@ public class EReferenceUtils {
 	}
 
 	/**
-	 * Execute a command outsite the editor command stack
+	 * Executes the supplied command inside an <code>unchecked action</code>
+	 * Taken from the CanonicalEditPolicy class
+	 * 
+	 * @param cmd command that can be executed (i.e., cmd.canExecute() == true)
+	 * @param part
 	 */
-	protected static void executeCommand(final Command cmd, IGraphicalEditPart part) {
+	public static void executeCommand(final Command cmd, IGraphicalEditPart part) {
 		Map<String, Boolean> options = null;
 		boolean isActivating = true;
 		// use the viewer to determine if we are still initializing the diagram
@@ -111,4 +120,5 @@ public class EReferenceUtils {
 			EcoreDiagramEditorPlugin.getInstance().logError("Can't execute command!", e);
 		}
 	}
+	
 }

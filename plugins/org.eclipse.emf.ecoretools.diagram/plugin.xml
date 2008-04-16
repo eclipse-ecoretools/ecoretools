@@ -777,5 +777,16 @@
 			<Priority name="Medium"/>
 		</layoutProvider>
 	</extension>
+	
+	<!-- Bug 211856 : Restore related links -->
+	<extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+		<contributionItemProvider checkPluginLoaded="false" class="org.eclipse.emf.ecoretools.diagram.providers.EcoreDiagramContributionItemProvider">
+			<Priority name="Low"/>
+			<popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+				<popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart"/>
+				<popupAction id="restoreRelatedLinksAction" path="/additions"/>
+			</popupContribution>
+		</contributionItemProvider>
+	</extension>
 	 
 </plugin>

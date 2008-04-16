@@ -31,7 +31,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * 
- * Remove package associated diagrams <br>
+ * Removes package associated diagrams <br>
  * creation : 01 sept. 2007
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
@@ -47,7 +47,7 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 	public RemoveDiagramCommand(MultiDiagramLinkStyle linkStyle) {
 		// editing domain is taken for original diagram, if we open diagram from
 		// another file, we should use another editing domain
-		super(TransactionUtil.getEditingDomain(linkStyle), "RemoveDiagram", null);
+		super(TransactionUtil.getEditingDomain(linkStyle), "Remove Diagram", null);
 		diagramFacet = linkStyle;
 	}
 
