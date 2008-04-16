@@ -44,7 +44,7 @@ public class HideReferenceTypeAction extends Action {
 
 	public HideReferenceTypeAction() {
 		setId(ID);
-		setText("Hide Reference Relations");
+		setText("Hide Reference Links");
 		setToolTipText("Hide reference relations in the current diagram");
 		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hidereferencetype_exec.gif"));
 	}

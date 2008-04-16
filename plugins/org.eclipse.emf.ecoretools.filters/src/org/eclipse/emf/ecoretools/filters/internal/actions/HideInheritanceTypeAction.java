@@ -44,7 +44,7 @@ public class HideInheritanceTypeAction extends Action {
 
 	public HideInheritanceTypeAction() {
 		setId(ID);
-		setText("Hide Inheritance Relations");
+		setText("Hide Inheritance Links");
 		setToolTipText("Hide inheritance relations in the current diagram");
 		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hideinheritancetype_exec.gif"));
 	}
