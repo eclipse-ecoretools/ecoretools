@@ -40,6 +40,7 @@ import org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorItem;
 import org.eclipse.emf.ecoretools.diagram.outline.EcoreDiagramOutlinePage;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.EMFCommandOperation;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.MouseWheelHandler;
@@ -394,6 +395,11 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	 */
 	@Override
 	protected boolean shouldAddUndoContext(IUndoableOperation operation) {
+		// Add command from the property sheets
+		if (operation instanceof EMFCommandOperation)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -428,4 +434,5 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	protected int getInitialDockLocation() {
 		return PositionConstants.WEST;
 	}
+	
 }
