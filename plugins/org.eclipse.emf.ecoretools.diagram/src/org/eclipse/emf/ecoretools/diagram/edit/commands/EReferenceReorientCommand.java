@@ -96,16 +96,20 @@ public class EReferenceReorientCommand extends EditElementCommand {
 	}
 
 	/**
-	 * @generated
+	 * Set Eopposite to null before reorienting
+	 * 
+	 * @generated NOT
 	 */
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in reorient link command"); //$NON-NLS-1$
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
+			getLink().setEOpposite(null);
 			return reorientSource();
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET) {
+			getLink().setEOpposite(null);
 			return reorientTarget();
 		}
 		throw new IllegalStateException();
