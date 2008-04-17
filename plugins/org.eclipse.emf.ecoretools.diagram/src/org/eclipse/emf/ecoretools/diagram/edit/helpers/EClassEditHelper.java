@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
-import org.eclipse.gmf.runtime.emf.type.core.requests.IEditCommandRequest;
 
 /**
  * @generated
@@ -44,14 +43,5 @@ public class EClassEditHelper extends EcoreBaseEditHelper {
 			}
 			count++;
 		}
-	}
-	
-	/* (non-Javadoc)
-	 * @see org.eclipse.emf.ecoretools.diagram.edit.helpers.EcoreBaseEditHelper#getInsteadCommand(org.eclipse.gmf.runtime.emf.type.core.requests.IEditCommandRequest)
-	 */
-	@Override
-	protected ICommand getInsteadCommand(IEditCommandRequest req) {
-		// TODO Auto-generated method stub
-		return super.getInsteadCommand(req);
 	}
 }
