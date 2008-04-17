@@ -396,8 +396,10 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	@Override
 	protected boolean shouldAddUndoContext(IUndoableOperation operation) {
 		// Add command from the property sheets
-		if (operation instanceof EMFCommandOperation)
-		{
+		if (operation instanceof EMFCommandOperation) {
+			return true;
+		}
+		if (operation.getLabel() != null && (operation.getLabel().equals("Copy") || operation.getLabel().equals("Cut") || operation.getLabel().equals("Paste"))) {
 			return true;
 		}
 		return false;
@@ -434,5 +436,5 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	protected int getInitialDockLocation() {
 		return PositionConstants.WEST;
 	}
-	
+
 }
