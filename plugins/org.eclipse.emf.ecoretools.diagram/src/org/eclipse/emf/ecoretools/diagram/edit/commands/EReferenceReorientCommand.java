@@ -105,10 +105,16 @@ public class EReferenceReorientCommand extends EditElementCommand {
 			throw new ExecutionException("Invalid arguments in reorient link command"); //$NON-NLS-1$
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
+			if (getLink().getEOpposite() != null) {
+				getLink().getEOpposite().setEOpposite(null);
+			}
 			getLink().setEOpposite(null);
 			return reorientSource();
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_TARGET) {
+			if (getLink().getEOpposite() != null) {
+				getLink().getEOpposite().setEOpposite(null);
+			}
 			getLink().setEOpposite(null);
 			return reorientTarget();
 		}
