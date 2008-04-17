@@ -24,6 +24,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
+import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -45,6 +46,58 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy {
 
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy#getDropCommand(org.eclipse.gef.requests.ChangeBoundsRequest)
+	 */
+	@Override
+	protected Command getDropCommand(ChangeBoundsRequest dropRequest) {
+		List shortcutViewDescriptors = new ArrayList();
+		List normalViewDescriptors = new ArrayList();
+		for (Iterator it = dropRequest.getEditParts().iterator(); it.hasNext();) {
+			Object nextPart = it.next();		
+			if (false == nextPart instanceof IGraphicalEditPart) {
+				continue;
+			}
+			EObject nextObject = ((IGraphicalEditPart)nextPart).resolveSemanticElement();
+			if (nextObject == null){
+				continue;
+			}
+				
+			// Continue if element is the diagram canvas
+			if (getView().getElement().equals(nextObject)) {
+				continue;
+			}
+
+			// Continue if element already in diagram
+			if (false == isElementInView(nextObject, dropRequest) && getView().getElement() == ((EObject) nextObject).eContainer()) {
+				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+			} else {
+				shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+			}
+		}
+
+		Command shortcutCommand = null;
+		if (false == shortcutViewDescriptors.isEmpty()) {
+			shortcutCommand = createShortcutsCommand(dropRequest, shortcutViewDescriptors);
+		}
+		Command normalCommand = null;
+		if (false == normalViewDescriptors.isEmpty()) {
+			normalCommand = createNormalViewCommand(dropRequest, normalViewDescriptors);
+		}
+		if (shortcutCommand != null) {
+			Command createBoth = shortcutCommand.chain(normalCommand);
+			return createBoth.chain(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
+		}
+		if (normalCommand != null) {
+			return normalCommand.chain(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
+		}
+		return UnexecutableCommand.INSTANCE;
+	}
+		
+	/**
+	 * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy#getDropObjectsCommand(org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest)
+	 */
+	@Override
 	public Command getDropObjectsCommand(DropObjectsRequest dropRequest) {
 		List shortcutViewDescriptors = new ArrayList();
 		List normalViewDescriptors = new ArrayList();
@@ -108,12 +161,32 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		}
 		return null;
 	}
+	
+	private Command createShortcutsCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+		Command command = createViews(dropRequest, viewDescriptors);
+		if (command != null) {
+			return command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
+		}
+		return null;
+	}
 
 	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
 		return createViews(dropRequest, viewDescriptors);
 	}
+	
+	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+		return createViews(dropRequest, viewDescriptors);
+	}
 
 	protected Command createViews(DropObjectsRequest dropRequest, List viewDescriptors) {
+		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
+		createViewRequest.setLocation(dropRequest.getLocation());
+		Command createCommand = getHost().getCommand(createViewRequest);
+
+		return createCommand;
+	}
+	
+	protected Command createViews(ChangeBoundsRequest dropRequest, List viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);

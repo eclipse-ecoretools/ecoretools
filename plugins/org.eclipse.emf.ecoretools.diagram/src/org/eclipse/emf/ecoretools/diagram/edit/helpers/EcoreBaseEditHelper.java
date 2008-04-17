@@ -12,6 +12,7 @@
 
 package org.eclipse.emf.ecoretools.diagram.edit.helpers;
 
+import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelper;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
@@ -31,7 +32,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	public static final String EDIT_POLICY_COMMAND = "edit policy command"; //$NON-NLS-1$
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
 	protected ICommand getInsteadCommand(IEditCommandRequest req) {
 		ICommand epCommand = (ICommand) req.getParameter(EDIT_POLICY_COMMAND);
@@ -40,14 +41,13 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 		if (epCommand == null) {
 			return ehCommand;
 		}
-		// if (ehCommand == null) {
-		// return epCommand;
-		// }
-		// CompositeCommand command = new CompositeCommand(null);
-		// command.add(epCommand);
-		// command.add(ehCommand);
-		// return command;
-		return null;
+		 if (ehCommand == null) {
+			return epCommand;
+		}
+		CompositeCommand command = new CompositeCommand(null);
+		command.add(epCommand);
+		command.add(ehCommand);
+		return command;
 	}
 
 	/**

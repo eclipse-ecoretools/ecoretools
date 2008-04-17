@@ -956,6 +956,8 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 
 	public static String editingDomainBaseID = "org.eclipse.emf.ecoretools.diagram.EditingDomain";
 
+	public static String id_separator = "@";
+	
 	private IEditorInput currentEditorInput;
 
 	protected SynchronizerManager synchronizerManager;
@@ -973,7 +975,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		IEditorInput element = getCurrentEditorInput();
 		if (element.getAdapter(IResource.class) instanceof IResource) {
 			IResource iResource = (IResource) element.getAdapter(IResource.class);
-			result = editingDomainBaseID + iResource.getLocation();
+			result = editingDomainBaseID + id_separator + iResource.getLocation();
 		}
 
 		return result;

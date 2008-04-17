@@ -513,13 +513,16 @@
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
       <clientContext id="EcoreToolsClientContext">
-         <enablement>
+         <matcher
+               class="org.eclipse.emf.ecoretools.diagram.part.CustomElementMatcher">
+         </matcher>
+         <!-- <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="org.eclipse.emf.ecoretools.diagram.EditingDomain"/>
-         </enablement>
+         </enablement> -->
       </clientContext> 
       <binding context="EcoreToolsClientContext">
          <elementType ref="org.eclipse.emf.ecoretools.diagram.EPackage_79"/>
