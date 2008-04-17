@@ -784,7 +784,7 @@
 			<Priority name="Low"/>
 			<popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
 				<popupStructuredContributionCriteria objectClass="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart"/>
-				<popupAction id="restoreRelatedLinksAction" path="/additions"/>
+				<popupAction id="restoreRelatedLinksAction" path="/navigateMenu/additions"/>
 			</popupContribution>
 		</contributionItemProvider>
 	</extension>
