@@ -187,7 +187,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		}
 
 		// Set all existing related link visible
-		setConnectionsVisible(existingLinks);
+		setViewVisible(existingLinks);
 
 		// Remove already existing links
 		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
@@ -215,18 +215,18 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	}
 
 	/**
-	 * Set links visible
+	 * Set view visible
 	 * 
 	 * @param part
-	 * @param existingLinks
+	 * @param views
 	 */
-	protected void setConnectionsVisible(Collection existingLinks) {
-		for (Iterator it = existingLinks.iterator(); it.hasNext();) {
-			Edge edge = (Edge) it.next();
-			if (edge.isVisible()) {
+	protected void setViewVisible(Collection views) {
+		for (Iterator it = views.iterator(); it.hasNext();) {
+			View view = (View) it.next();
+			if (view.isVisible()) {
 				continue;
 			}
-			SetPropertyCommand cmd = new SetPropertyCommand(host.getEditingDomain(), "Hide Link", new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
+			SetPropertyCommand cmd = new SetPropertyCommand(host.getEditingDomain(), "Show View", new EObjectAdapter(view), Properties.ID_ISVISIBLE, Boolean.TRUE);
 			if (cmd != null && cmd.canExecute()) {
 				EReferenceUtils.executeCommand(new ICommandProxy(cmd), host);
 			}

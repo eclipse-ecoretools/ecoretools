@@ -120,8 +120,10 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
 			View sourceView = (View) domain2NotationMap.get(nextLinkDescriptor.getSource());
 			View targetView = (View) domain2NotationMap.get(nextLinkDescriptor.getDestination());
-			if (sourceView != null && false == relatedNodes.contains(sourceView) && targetView != null && false == relatedNodes.contains(targetView)) {
+			if (sourceView != null && false == relatedNodes.contains(sourceView)) {
 				relatedNodes.add(sourceView);
+			}
+			if (targetView != null && false == relatedNodes.contains(targetView)) {
 				relatedNodes.add(targetView);
 			}
 		}

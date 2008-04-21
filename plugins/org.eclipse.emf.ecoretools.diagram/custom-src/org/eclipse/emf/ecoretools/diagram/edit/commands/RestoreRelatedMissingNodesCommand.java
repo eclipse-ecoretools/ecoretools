@@ -13,6 +13,7 @@ package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -98,17 +99,29 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 
 		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
 			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
-			EditPart sourceEditPart = getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
-			EditPart targetEditPart = getEditPart(nextLinkDescriptor.getDestination(), domain2NotationMap);
+			// EditPart sourceEditPart =
+			// getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
+			// EditPart targetEditPart =
+			// getEditPart(nextLinkDescriptor.getDestination(),
+			// domain2NotationMap);
+			View sourceView = (View) domain2NotationMap.get(nextLinkDescriptor.getSource());
+			View targetView = (View) domain2NotationMap.get(nextLinkDescriptor.getDestination());
 
 			// Create missing parts
 			List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
-			if (sourceEditPart == null) {
+
+			if (sourceView == null) {
 				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
+			} else {
+				setViewVisible(Collections.singletonList(sourceView));
 			}
-			if (targetEditPart == null) {
+
+			if (targetView == null) {
 				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
+			} else {
+				setViewVisible(Collections.singletonList(targetView));
 			}
+
 			if (false == normalViewDescriptors.isEmpty()) {
 
 				CreateViewRequest cvr = new CreateViewRequest(normalViewDescriptors);
