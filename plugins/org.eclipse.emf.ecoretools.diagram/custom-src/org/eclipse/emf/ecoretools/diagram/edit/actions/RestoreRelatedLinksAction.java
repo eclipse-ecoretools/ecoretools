@@ -16,15 +16,18 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.ArrangeRelatedNodesCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedMissingNodesCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
-import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramUpdater;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
+import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
@@ -108,9 +111,19 @@ public class RestoreRelatedLinksAction extends Action {
 			return;
 		}
 	
-		Command cmd = new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart)host, selection));
-	
+		
 		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
+		
+		// Add missing nodes
+		Command cmd = new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart)host, selection));
+		commandStack.execute(cmd, new NullProgressMonitor());
+		
+		// Restore links
+		cmd = new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart)host, selection));
+		commandStack.execute(cmd, new NullProgressMonitor());
+		
+		// Arrange
+		cmd = new ICommandProxy(new ArrangeRelatedNodesCommand((DiagramEditPart)host, selection));
 		commandStack.execute(cmd, new NullProgressMonitor());
 	}
 	

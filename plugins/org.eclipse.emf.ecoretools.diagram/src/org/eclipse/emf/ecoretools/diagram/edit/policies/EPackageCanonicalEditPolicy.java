@@ -156,6 +156,8 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		List createdConnectionViews = new LinkedList();
 		createdConnectionViews.addAll(refreshSemanticConnections());
 		createdConnectionViews.addAll(refreshConnections());
+		
+		makeViewsImmutable(createdConnectionViews);
 	}
 
 	/**

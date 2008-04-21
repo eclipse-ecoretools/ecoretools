@@ -51,8 +51,8 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	 */
 	@Override
 	protected Command getDropCommand(ChangeBoundsRequest dropRequest) {
-		List shortcutViewDescriptors = new ArrayList();
-		List normalViewDescriptors = new ArrayList();
+		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
+		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		for (Iterator it = dropRequest.getEditParts().iterator(); it.hasNext();) {
 			Object nextPart = it.next();		
 			if (false == nextPart instanceof IGraphicalEditPart) {
@@ -99,8 +99,8 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	 */
 	@Override
 	public Command getDropObjectsCommand(DropObjectsRequest dropRequest) {
-		List shortcutViewDescriptors = new ArrayList();
-		List normalViewDescriptors = new ArrayList();
+		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
+		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		for (Iterator it = dropRequest.getObjects().iterator(); it.hasNext();) {
 			Object nextObject = it.next();
 			if (false == nextObject instanceof EObject) {

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.internal.resources.LinkDescription;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -45,7 +46,6 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.properties.Properties;
-import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramUIMessages;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -56,7 +56,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
- * Restores the outgoing or ingoing links for the selected parts <br>
+ * Restores the outgoing or incoming links for the selected parts <br>
  * creation : 15 avr. 2008
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
@@ -64,11 +64,11 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 
-	private List<IGraphicalEditPart> parts;
+	protected List<IGraphicalEditPart> parts;
 
-	private Diagram diagram;
+	protected Diagram diagram;
 
-	private DiagramEditPart host;
+	protected DiagramEditPart host;
 
 	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List<IGraphicalEditPart> selection) {
 		super(diagramEditPart.getEditingDomain(), "Restore Related Links", null);
@@ -85,22 +85,32 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		for (IGraphicalEditPart part : parts) {
-			refreshConnections(part);
+			refreshRelatedLinks(part);
 		}
 		return CommandResult.newOKCommandResult();
 	}
 
-	private void createConnections(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
-		// map elements
+	/**
+	 * Create related links corresponding to linkDescriptions
+	 * 
+	 * @param part
+	 * @param linkDescriptors
+	 * @param domain2NotationMap
+	 */
+	protected void createRelatedLinks(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
+		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
 		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
 			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
 			EditPart sourceEditPart = getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
 			EditPart targetEditPart = getEditPart(nextLinkDescriptor.getDestination(), domain2NotationMap);
+
+			// If the parts are still null...
 			if (sourceEditPart == null || targetEditPart == null) {
 				continue;
 			}
+
 			CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(nextLinkDescriptor.getSemanticAdapter(), null, ViewUtil.APPEND,
 					false, part.getDiagramPreferencesHint());
 			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(descriptor);
@@ -117,9 +127,12 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	}
 
 	/**
-	 * Taken from the EPackageCanonicalEditPolicy class
+	 * Retrieves editpart corresponding to domainModelElement
+	 * 
+	 * @param domainModelElement
+	 * @param domain2NotationMap
 	 */
-	private EditPart getEditPart(EObject domainModelElement, Map domain2NotationMap) {
+	protected EditPart getEditPart(EObject domainModelElement, Map domain2NotationMap) {
 		View view = (View) domain2NotationMap.get(domainModelElement);
 		if (view != null) {
 			return (EditPart) host.getViewer().getEditPartRegistry().get(view);
@@ -127,9 +140,28 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		return null;
 	}
 
-	private void refreshConnections(IGraphicalEditPart graphicalEditPart) {
+	/**
+	 * Refresh related links for graphicalEditPart
+	 * 
+	 * @param graphicalEditPart
+	 */
+	protected void refreshRelatedLinks(IGraphicalEditPart graphicalEditPart) {
 		Map domain2NotationMap = new HashMap();
 
+		// Create related links
+		Collection linkDescriptors = getLinkDescriptorToProcess(graphicalEditPart, domain2NotationMap);
+		createRelatedLinks(graphicalEditPart, linkDescriptors, domain2NotationMap);
+	}
+
+	/**
+	 * Get linkdescriptors of the related links for graphicalEditPart
+	 * 
+	 * @param graphicalEditPart
+	 * @param domain2NotationMap
+	 * 
+	 * @return linkDescritors
+	 */
+	protected Collection getLinkDescriptorToProcess(IGraphicalEditPart graphicalEditPart, Map domain2NotationMap) {
 		View notationView = graphicalEditPart.getNotationView();
 
 		// Collect all related link from semantic model
@@ -138,12 +170,12 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		// Collect all related link from graphical model
 		Collection existingLinks = new LinkedList();
 		for (Object edge : notationView.getTargetEdges()) {
-			if (edge instanceof Edge) {
+			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
 				existingLinks.add(edge);
 			}
 		}
 		for (Object edge : notationView.getSourceEdges()) {
-			if (edge instanceof Edge) {
+			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
 				existingLinks.add(edge);
 			}
 		}
@@ -173,25 +205,37 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 				}
 			}
 		}
-
-		// Create connection for all semantic link not yet in graphical model
-		createConnections(graphicalEditPart, linkDescriptors, domain2NotationMap);
+		return linkDescriptors;
 	}
 
-	private void setConnectionsVisible(IGraphicalEditPart part, Collection existingLinks) {
+	/**
+	 * Set links visible
+	 * 
+	 * @param part
+	 * @param existingLinks
+	 */
+	protected void setConnectionsVisible(IGraphicalEditPart part, Collection existingLinks) {
 		for (Iterator it = existingLinks.iterator(); it.hasNext();) {
 			Edge edge = (Edge) it.next();
 			if (edge.isVisible()) {
 				continue;
 			}
-			SetPropertyCommand cmd = new SetPropertyCommand(part.getEditingDomain(), DiagramUIMessages.Command_hideLabel_Label, new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
+			SetPropertyCommand cmd = new SetPropertyCommand(part.getEditingDomain(), "Hide Link", new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
 			if (cmd != null && cmd.canExecute()) {
 				EReferenceUtils.executeCommand(new ICommandProxy(cmd), part);
 			}
 		}
 	}
 
-	private Collection collectPartRelatedLinks(View view, Map domain2NotationMap) {
+	/**
+	 * Collects all related links for view
+	 * 
+	 * @param view
+	 * @param domain2NotationMap
+	 * 
+	 * @return linkdescriptors
+	 */
+	protected Collection collectPartRelatedLinks(View view, Map domain2NotationMap) {
 		Collection result = new LinkedList();
 
 		switch (EcoreVisualIDRegistry.getVisualID(view)) {
@@ -207,8 +251,12 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		case EReferenceEditPart.VISUAL_ID: {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				// result.addAll(EcoreDiagramUpdater.getContainedLinks(view));
-				result.addAll(EcoreDiagramUpdater.getOutgoingLinks(view));
-				result.addAll(EcoreDiagramUpdater.getIncomingLinks(view));
+				// We must prevent duplicate descriptors
+				List outgoingDescriptors = EcoreDiagramUpdater.getOutgoingLinks(view);
+				cleanAdd(result, outgoingDescriptors);
+
+				List incomingDescriptors = EcoreDiagramUpdater.getIncomingLinks(view);
+				cleanAdd(result, incomingDescriptors);
 			}
 			if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
 				domain2NotationMap.put(view.getElement(), view);
@@ -220,7 +268,41 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		return result;
 	}
 
-	private void mapModel(View view, Map domain2NotationMap) {
+	private void cleanAdd(Collection result, List descriptors) {
+		for (Object object : descriptors) {
+			if (false == object instanceof EcoreLinkDescriptor) {
+				continue;
+			}
+			EcoreLinkDescriptor descriptor = (EcoreLinkDescriptor) object;
+			if (cleanContains(result, descriptor)) {
+				continue;
+			}
+			result.add(descriptor);
+		}
+	}
+
+	private boolean cleanContains(Collection result, EcoreLinkDescriptor eCoreLinkDescriptor) {
+		for (Object object : result) {
+			if (false == object instanceof EcoreLinkDescriptor) {
+				continue;
+			}
+			EcoreLinkDescriptor descriptor = (EcoreLinkDescriptor) object;
+			if (descriptor.getModelElement() == eCoreLinkDescriptor.getModelElement() && descriptor.getSource() == eCoreLinkDescriptor.getSource()
+					&& descriptor.getDestination() == eCoreLinkDescriptor.getDestination() && descriptor.getVisualID() == eCoreLinkDescriptor.getVisualID()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Maps view
+	 * 
+	 * @param view
+	 * @param domain2NotationMap
+	 */
+	protected void mapModel(View view, Map domain2NotationMap) {
 		if (!EPackageEditPart.MODEL_ID.equals(EcoreVisualIDRegistry.getModelID(view))) {
 			return;
 		}
@@ -250,4 +332,5 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			mapModel((View) edges.next(), domain2NotationMap);
 		}
 	}
+
 }
