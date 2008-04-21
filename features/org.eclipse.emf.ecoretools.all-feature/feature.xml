@@ -37,19 +37,11 @@ http://www.eclipse.org/legal/epl-v10.html
    </url>
 
    <includes
-         id="org.eclipse.emf.ecoretools"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.ecoretools.doc"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.emf.ecoretools.source"
+         id="org.eclipse.emf.ecoretools.sdk"
          version="0.0.0"/>
 
    <includes
          id="org.eclipse.emf.ecoretools.examples"
          version="0.0.0"/>
-         
+
 </feature>
