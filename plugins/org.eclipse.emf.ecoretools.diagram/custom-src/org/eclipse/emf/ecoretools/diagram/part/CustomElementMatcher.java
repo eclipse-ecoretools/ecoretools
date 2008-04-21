@@ -8,10 +8,9 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementMatcher;
 
 public class CustomElementMatcher implements IElementMatcher {
 
-	/* (non-Javadoc)
+	/**
 	 * @see org.eclipse.gmf.runtime.emf.type.core.IElementMatcher#matches(org.eclipse.emf.ecore.EObject)
 	 */
-	@Override
 	public boolean matches(EObject object) {
 		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
 		if (domain == null)
