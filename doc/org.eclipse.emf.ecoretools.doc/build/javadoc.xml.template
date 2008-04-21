@@ -56,7 +56,7 @@
 			splitindex="true" 
 			use="true" 
 			version="true"> 
-				<arg value="-J-Xmx180m"/>
+				<arg value="-J-Xmx256m"/>
 				
 				<link offline="true" href="http://java.sun.com/j2se/1.4/docs/api/" packagelistLoc="${javaHome}/docs/api/"/>
 				<!-- TODO Enable link to platform documentation -->
