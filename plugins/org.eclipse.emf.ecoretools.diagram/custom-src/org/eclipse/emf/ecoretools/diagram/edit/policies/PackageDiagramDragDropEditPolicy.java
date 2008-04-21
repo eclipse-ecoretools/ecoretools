@@ -15,10 +15,14 @@ package org.eclipse.emf.ecoretools.diagram.edit.policies;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateEditPartCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.Request;
@@ -27,13 +31,17 @@ import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PlatformUI;
 
 /**
  * 
@@ -54,15 +62,15 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		for (Iterator it = dropRequest.getEditParts().iterator(); it.hasNext();) {
-			Object nextPart = it.next();		
+			Object nextPart = it.next();
 			if (false == nextPart instanceof IGraphicalEditPart) {
 				continue;
 			}
-			EObject nextObject = ((IGraphicalEditPart)nextPart).resolveSemanticElement();
-			if (nextObject == null){
+			EObject nextObject = ((IGraphicalEditPart) nextPart).resolveSemanticElement();
+			if (nextObject == null) {
 				continue;
 			}
-				
+
 			// Continue if element is the diagram canvas
 			if (getView().getElement().equals(nextObject)) {
 				continue;
@@ -86,14 +94,12 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		}
 		if (shortcutCommand != null) {
 			Command createBoth = shortcutCommand.chain(normalCommand);
-			return createBoth.chain(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
+			return createBoth;
 		}
-		if (normalCommand != null) {
-			return normalCommand.chain(new ICommandProxy(new UpdateEditPartCommand(getEditingDomain(), getHost())));
-		}
-		return UnexecutableCommand.INSTANCE;
+
+		return normalCommand;
 	}
-		
+
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy#getDropObjectsCommand(org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest)
 	 */
@@ -161,7 +167,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		}
 		return null;
 	}
-	
+
 	private Command createShortcutsCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
 		Command command = createViews(dropRequest, viewDescriptors);
 		if (command != null) {
@@ -173,7 +179,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
 		return createViews(dropRequest, viewDescriptors);
 	}
-	
+
 	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
 		return createViews(dropRequest, viewDescriptors);
 	}
@@ -182,14 +188,34 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
+		// Chain restore related links
+		restoreRelatedLinks(createViewRequest, createCommand);
 
 		return createCommand;
 	}
-	
+
+	private void restoreRelatedLinks(CreateViewRequest createViewRequest, Command createCommand) {
+		List viewAdapters = (List) createViewRequest.getNewObject();
+		createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), viewAdapters)));
+	}
+
+	private DiagramEditPart getDiagramEditPart() {
+		if (getHost() instanceof DiagramEditPart) {
+			return (DiagramEditPart) getHost();
+		}
+		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if (false == editorPart instanceof DiagramEditor) {
+			return null;
+		}
+		return ((DiagramEditor) editorPart).getDiagramEditPart();
+	}
+
 	protected Command createViews(ChangeBoundsRequest dropRequest, List viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
+		// Chain restore related links
+		restoreRelatedLinks(createViewRequest, createCommand);
 
 		return createCommand;
 	}

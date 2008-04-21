@@ -28,10 +28,7 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
-import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
@@ -48,7 +45,7 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksCommand {
 
-	public RestoreRelatedMissingNodesCommand(DiagramEditPart diagramEditPart, List<IGraphicalEditPart> selection) {
+	public RestoreRelatedMissingNodesCommand(DiagramEditPart diagramEditPart, List selection) {
 		super(diagramEditPart, selection);
 	}
 
@@ -58,9 +55,20 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (IGraphicalEditPart part : parts) {
-			refreshMissingNodes(part);
+		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
+			Object object = iter.next();
+			if (object instanceof IAdaptable) {
+				IAdaptable ad = (IAdaptable) object;
+				View view = (View) ad.getAdapter(View.class);
+				if (view != null) {
+					refreshMissingNodes(view);
+				}
+			} else if (object instanceof View) {
+				refreshMissingNodes((View) object);
+			}
+
 		}
+
 		return CommandResult.newOKCommandResult();
 	}
 
@@ -69,12 +77,12 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 * 
 	 * @param graphicalEditPart
 	 */
-	protected void refreshMissingNodes(IGraphicalEditPart graphicalEditPart) {
+	protected void refreshMissingNodes(View notationView) {
 		Map domain2NotationMap = new HashMap();
 
 		// Create related missing nodes for all semantic link
-		Collection linkDescriptors = getLinkDescriptorToProcess(graphicalEditPart, domain2NotationMap);
-		createRelatedMissingNodes(graphicalEditPart, linkDescriptors, domain2NotationMap);
+		Collection linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
+		createRelatedMissingNodes(linkDescriptors, domain2NotationMap);
 	}
 
 	/**
@@ -84,7 +92,7 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 * @param linkDescriptors
 	 * @param domain2NotationMap
 	 */
-	protected void createRelatedMissingNodes(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
+	protected void createRelatedMissingNodes(Collection linkDescriptors, Map domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
@@ -108,10 +116,10 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 				Command cmd = host.getCommand(cvr);
 
 				if (cmd != null && cmd.canExecute()) {
-					EReferenceUtils.executeCommand(cmd, part);
+					EReferenceUtils.executeCommand(cmd, host);
 				}
 			}
 		}
 	}
-	
+
 }

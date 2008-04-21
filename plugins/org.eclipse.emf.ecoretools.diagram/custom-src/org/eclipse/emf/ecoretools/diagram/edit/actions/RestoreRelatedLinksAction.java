@@ -21,13 +21,12 @@ import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksComma
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedMissingNodesCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
-import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
@@ -38,7 +37,8 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * 
- * Triggers restoration of the outgoing or ingoing links for the selected parts <br>
+ * Triggers restoration of the outgoing or ingoing links for the selected parts
+ * <br>
  * creation : 15 avr. 2008
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
@@ -73,8 +73,8 @@ public class RestoreRelatedLinksAction extends Action {
 		return diagram;
 	}
 
-	private List<IGraphicalEditPart> getSelection() {
-		List<IGraphicalEditPart> partSelected = new ArrayList<IGraphicalEditPart>();
+	private List<View> getSelection() {
+		List<View> viewSelected = new ArrayList<View>();
 		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
 		if (false == selection instanceof IStructuredSelection) {
 			return Collections.emptyList();
@@ -90,9 +90,9 @@ public class RestoreRelatedLinksAction extends Action {
 			if (view.getEAnnotation("Shortcut") != null) {
 				continue;
 			}
-			partSelected.add((IGraphicalEditPart) object);
+			viewSelected.add(view);
 		}
-		return partSelected;
+		return viewSelected;
 	}
 
 	/**
@@ -100,33 +100,26 @@ public class RestoreRelatedLinksAction extends Action {
 	 */
 	@Override
 	public void run() {
-		List<IGraphicalEditPart> selection = getSelection();
-	
+		List<View> selection = getSelection();
+
 		if (selection.isEmpty()) {
 			return;
 		}
-	
-		if (false == host instanceof DiagramEditPart)
-		{
+
+		if (false == host instanceof DiagramEditPart) {
 			return;
 		}
-	
+
+		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();	
+		CompoundCommand cmd = new CompoundCommand("Restore Related Links");
 		
-		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
+		cmd.add(new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart) host, selection)));
+		cmd.add(new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart) host, selection)));
+		cmd.add(new ICommandProxy(new ArrangeRelatedNodesCommand((DiagramEditPart) host, selection)));
 		
-		// Add missing nodes
-		Command cmd = new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart)host, selection));
-		commandStack.execute(cmd, new NullProgressMonitor());
-		
-		// Restore links
-		cmd = new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart)host, selection));
-		commandStack.execute(cmd, new NullProgressMonitor());
-		
-		// Arrange
-		cmd = new ICommandProxy(new ArrangeRelatedNodesCommand((DiagramEditPart)host, selection));
 		commandStack.execute(cmd, new NullProgressMonitor());
 	}
-	
+
 	/**
 	 * @see org.eclipse.jface.action.Action#isEnabled()
 	 */

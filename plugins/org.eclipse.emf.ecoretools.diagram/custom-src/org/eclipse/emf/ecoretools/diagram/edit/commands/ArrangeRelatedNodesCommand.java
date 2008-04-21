@@ -27,7 +27,6 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredLayoutCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.View;
 
@@ -42,20 +41,32 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 
-	public ArrangeRelatedNodesCommand(DiagramEditPart diagramEditPart, List<IGraphicalEditPart> selection) {
+	public ArrangeRelatedNodesCommand(DiagramEditPart diagramEditPart, List selection) {
 		super(diagramEditPart, selection);
 	}
-	
+
 	/**
 	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
 	 *      org.eclipse.core.runtime.IAdaptable)
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (IGraphicalEditPart part : parts) {
-			arrangeRelatedNodes(part);
-		}
+		List<View> views = new ArrayList<View>();
+		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
+			Object object = iter.next();
+			if (object instanceof IAdaptable) {
+				IAdaptable ad = (IAdaptable) object;
+				View view = (View) ad.getAdapter(View.class);
+				if (view != null) {
+					views.add(view);
+				}
+			} else if (object instanceof View) {
+				views.add((View) object);
+			}
 
+		}
+		arrangeRelatedNodes(views);
+		
 		return CommandResult.newOKCommandResult();
 	}
 
@@ -64,27 +75,28 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 	 * 
 	 * @param graphicalEditPart
 	 */
-	protected void arrangeRelatedNodes(IGraphicalEditPart graphicalEditPart) {
+	protected void arrangeRelatedNodes(List<View> notationViews) {
 		Map domain2NotationMap = new HashMap();
 
-		// Gets related missing nodes for all semantic link
-		View notationView = graphicalEditPart.getNotationView();
-
 		// Collect all related link from semantic model
-		Collection linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
-		List<View> relatedNodes = getRelatedMissingNodes(graphicalEditPart, linkDescriptors, domain2NotationMap);
-
-		List<EObjectAdapter> adapters = new ArrayList<EObjectAdapter>();
-		for (View view : relatedNodes)
-		{
-			adapters.add(new EObjectAdapter(view));
+		List<View> relatedNodes = new ArrayList<View>();
+		relatedNodes.addAll(notationViews);
+		
+		for (View notationView : notationViews) {
+			Collection linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
+			relatedNodes.addAll(getRelatedMissingNodes(linkDescriptors, domain2NotationMap));
 		}
 		
+		List<EObjectAdapter> adapters = new ArrayList<EObjectAdapter>();
+		for (View view : relatedNodes) {
+			adapters.add(new EObjectAdapter(view));
+		}
+
 		if (adapters.size() > 1) {
 			// perform a layout of the container
 			DeferredLayoutCommand cmd = new DeferredLayoutCommand(host.getEditingDomain(), adapters, host);
 			if (cmd != null && cmd.canExecute()) {
-				EReferenceUtils.executeCommand(new ICommandProxy(cmd), graphicalEditPart);
+				EReferenceUtils.executeCommand(new ICommandProxy(cmd), host);
 			}
 		}
 	}
@@ -98,7 +110,7 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 	 * 
 	 * @return views
 	 */
-	protected List<View> getRelatedMissingNodes(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
+	protected List<View> getRelatedMissingNodes(Collection linkDescriptors, Map domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
@@ -108,10 +120,8 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
 			View sourceView = (View) domain2NotationMap.get(nextLinkDescriptor.getSource());
 			View targetView = (View) domain2NotationMap.get(nextLinkDescriptor.getDestination());
-			if (sourceView != null && false == relatedNodes.contains(sourceView)) {
+			if (sourceView != null && false == relatedNodes.contains(sourceView) && targetView != null && false == relatedNodes.contains(targetView)) {
 				relatedNodes.add(sourceView);
-			}
-			if (targetView != null && false == relatedNodes.contains(targetView)) {
 				relatedNodes.add(targetView);
 			}
 		}

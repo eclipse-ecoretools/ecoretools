@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.internal.resources.LinkDescription;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -44,7 +43,6 @@ import org.eclipse.gmf.runtime.diagram.core.commands.SetPropertyCommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.internal.properties.Properties;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
@@ -64,17 +62,17 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 
-	protected List<IGraphicalEditPart> parts;
+	protected List adapters;
 
 	protected Diagram diagram;
 
 	protected DiagramEditPart host;
 
-	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List<IGraphicalEditPart> selection) {
+	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List selection) {
 		super(diagramEditPart.getEditingDomain(), "Restore Related Links", null);
 		this.host = diagramEditPart;
 		this.diagram = host.getDiagramView();
-		this.parts = selection;
+		this.adapters = selection;
 	}
 
 	/**
@@ -84,20 +82,30 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (IGraphicalEditPart part : parts) {
-			refreshRelatedLinks(part);
+		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
+			Object object = iter.next();
+			if (object instanceof IAdaptable) {
+				IAdaptable ad = (IAdaptable) object;
+				View view = (View) ad.getAdapter(View.class);
+				if (view != null) {
+					refreshRelatedLinks(view);
+				}
+			} else if (object instanceof View) {
+				refreshRelatedLinks((View) object);
+			}
+
 		}
+
 		return CommandResult.newOKCommandResult();
 	}
 
 	/**
 	 * Create related links corresponding to linkDescriptions
 	 * 
-	 * @param part
 	 * @param linkDescriptors
 	 * @param domain2NotationMap
 	 */
-	protected void createRelatedLinks(IGraphicalEditPart part, Collection linkDescriptors, Map domain2NotationMap) {
+	protected void createRelatedLinks(Collection linkDescriptors, Map domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
@@ -112,7 +120,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			}
 
 			CreateConnectionViewRequest.ConnectionViewDescriptor descriptor = new CreateConnectionViewRequest.ConnectionViewDescriptor(nextLinkDescriptor.getSemanticAdapter(), null, ViewUtil.APPEND,
-					false, part.getDiagramPreferencesHint());
+					false, host.getDiagramPreferencesHint());
 			CreateConnectionViewRequest ccr = new CreateConnectionViewRequest(descriptor);
 			ccr.setType(RequestConstants.REQ_CONNECTION_START);
 			ccr.setSourceEditPart(sourceEditPart);
@@ -121,7 +129,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			ccr.setType(RequestConstants.REQ_CONNECTION_END);
 			Command cmd = targetEditPart.getCommand(ccr);
 			if (cmd != null && cmd.canExecute()) {
-				EReferenceUtils.executeCommand(cmd, part);
+				EReferenceUtils.executeCommand(cmd, host);
 			}
 		}
 	}
@@ -145,12 +153,12 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * 
 	 * @param graphicalEditPart
 	 */
-	protected void refreshRelatedLinks(IGraphicalEditPart graphicalEditPart) {
+	protected void refreshRelatedLinks(View notationView) {
 		Map domain2NotationMap = new HashMap();
 
 		// Create related links
-		Collection linkDescriptors = getLinkDescriptorToProcess(graphicalEditPart, domain2NotationMap);
-		createRelatedLinks(graphicalEditPart, linkDescriptors, domain2NotationMap);
+		Collection linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
+		createRelatedLinks(linkDescriptors, domain2NotationMap);
 	}
 
 	/**
@@ -161,9 +169,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * 
 	 * @return linkDescritors
 	 */
-	protected Collection getLinkDescriptorToProcess(IGraphicalEditPart graphicalEditPart, Map domain2NotationMap) {
-		View notationView = graphicalEditPart.getNotationView();
-
+	protected Collection getLinkDescriptorToProcess(View notationView, Map domain2NotationMap) {
 		// Collect all related link from semantic model
 		Collection linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
 
@@ -181,7 +187,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		}
 
 		// Set all existing related link visible
-		setConnectionsVisible(graphicalEditPart, existingLinks);
+		setConnectionsVisible(existingLinks);
 
 		// Remove already existing links
 		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
@@ -214,15 +220,15 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param part
 	 * @param existingLinks
 	 */
-	protected void setConnectionsVisible(IGraphicalEditPart part, Collection existingLinks) {
+	protected void setConnectionsVisible(Collection existingLinks) {
 		for (Iterator it = existingLinks.iterator(); it.hasNext();) {
 			Edge edge = (Edge) it.next();
 			if (edge.isVisible()) {
 				continue;
 			}
-			SetPropertyCommand cmd = new SetPropertyCommand(part.getEditingDomain(), "Hide Link", new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
+			SetPropertyCommand cmd = new SetPropertyCommand(host.getEditingDomain(), "Hide Link", new EObjectAdapter((View) edge), Properties.ID_ISVISIBLE, Boolean.TRUE);
 			if (cmd != null && cmd.canExecute()) {
-				EReferenceUtils.executeCommand(new ICommandProxy(cmd), part);
+				EReferenceUtils.executeCommand(new ICommandProxy(cmd), host);
 			}
 		}
 	}

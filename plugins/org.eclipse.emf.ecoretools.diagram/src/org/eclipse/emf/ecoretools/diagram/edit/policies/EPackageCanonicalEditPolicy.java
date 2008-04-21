@@ -192,7 +192,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	private Collection refreshConnections() {
 		Map domain2NotationMap = new HashMap();
@@ -220,7 +220,9 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			}
 		}
 		deleteViews(existingLinks.iterator());
-		return createConnections(linkDescriptors, domain2NotationMap);
+		// return createConnections(linkDescriptors, domain2NotationMap);
+		
+		return Collections.emptyList();
 	}
 
 	/**
