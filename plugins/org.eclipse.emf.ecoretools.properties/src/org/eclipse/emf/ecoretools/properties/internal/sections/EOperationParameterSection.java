@@ -137,6 +137,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 		widgetFactory.createLabel(composite, "Type : ");
 		typeChooser = new CSingleObjectChooser(composite, getWidgetFactory(), SWT.NONE);
 		typeChooser.setLabelProvider((ILabelProvider) getLabelProvider());
+		typeChooser.setSection(this);
 		typeChooser.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 
