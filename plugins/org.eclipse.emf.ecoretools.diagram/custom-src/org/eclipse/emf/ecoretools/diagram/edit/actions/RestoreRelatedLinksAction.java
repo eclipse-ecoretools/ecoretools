@@ -51,8 +51,8 @@ public class RestoreRelatedLinksAction extends Action {
 
 	public RestoreRelatedLinksAction() {
 		setId(ID);
-		setText("Restore Related Links");
-		setToolTipText("Restore all links related to the selected element");
+		setText("Restore Related Elements");
+		setToolTipText("Restore all elements related to the selected element");
 		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/etool16/restorerelatedlinks_exec.gif"));
 	}
 

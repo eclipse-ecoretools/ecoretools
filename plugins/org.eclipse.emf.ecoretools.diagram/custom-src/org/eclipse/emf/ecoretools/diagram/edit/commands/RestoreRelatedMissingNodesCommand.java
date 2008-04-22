@@ -99,6 +99,7 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
+		List<EObject> objectViews = new ArrayList<EObject>();
 		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
 			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
 			// EditPart sourceEditPart =
@@ -113,21 +114,18 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 			List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 			List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 			if (sourceView == null) {
-				if (nextLinkDescriptor.getSource() != null && nextLinkDescriptor.getSource().eContainer() == diagram.getElement()) {
-					normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
-				} else {
-					shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
+				if (nextLinkDescriptor.getSource() != null && !objectViews.contains(nextLinkDescriptor.getSource())) {
+					updateDescriptors(nextLinkDescriptor.getSource(), normalViewDescriptors, shortcutViewDescriptors);
+					objectViews.add(nextLinkDescriptor.getSource());
 				}
-
 			} else {
 				setViewVisible(Collections.singletonList(sourceView));
 			}
 
 			if (targetView == null) {
-				if (nextLinkDescriptor.getDestination() != null && nextLinkDescriptor.getDestination().eContainer() == diagram.getElement()) {
-					normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
-				} else {
-					shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
+				if (nextLinkDescriptor.getDestination() != null && !objectViews.contains(nextLinkDescriptor.getDestination())) {
+					updateDescriptors(nextLinkDescriptor.getDestination(), normalViewDescriptors, shortcutViewDescriptors);
+					objectViews.add(nextLinkDescriptor.getDestination());
 				}
 			} else {
 				setViewVisible(Collections.singletonList(targetView));
@@ -150,10 +148,21 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 
 				compoundCmd.add(cmd);
 			}
-			
+
 			if (compoundCmd != null && compoundCmd.canExecute()) {
 				EReferenceUtils.executeCommand(compoundCmd, host);
 			}
+		}
+		objectViews.clear();
+
+	}
+
+	private void updateDescriptors(final EObject object, List<CreateViewRequest.ViewDescriptor> normalViewDescriptors,
+			List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors) {
+		if (object.eContainer() == diagram.getElement()) {
+			normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(object), Node.class, null, host.getDiagramPreferencesHint()));
+		} else {
+			shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(object), Node.class, null, host.getDiagramPreferencesHint()));
 		}
 	}
 
