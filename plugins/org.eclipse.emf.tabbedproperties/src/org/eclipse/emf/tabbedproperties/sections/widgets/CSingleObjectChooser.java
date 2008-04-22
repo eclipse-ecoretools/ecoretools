@@ -15,6 +15,7 @@ package org.eclipse.emf.tabbedproperties.sections.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
@@ -51,6 +52,8 @@ public class CSingleObjectChooser extends Composite {
 	private ILabelProvider labelProvider;
 
 	private Object selectedObject;
+
+	private AbstractTabbedPropertySection section;
 
 	/**
 	 * Constructor
@@ -185,6 +188,7 @@ public class CSingleObjectChooser extends Composite {
 	 * Open the dialog to choose in the searchable list
 	 */
 	private void handleChoose() {
+		section.refresh();
 		ChooseDialog dialog = new ChooseDialog(getShell(), objects);
 		dialog.setLabelProvider(labelProvider);
 		List<Object> selectedObjects = new ArrayList<Object>();
@@ -313,5 +317,9 @@ public class CSingleObjectChooser extends Composite {
 		super.setEnabled(enabled);
 		field.setEnabled(enabled);
 		chooseBt.setEnabled(enabled);
+	}
+
+	public void setSection(AbstractTabbedPropertySection abstractTabbedPropertySection) {
+		this.section = abstractTabbedPropertySection;
 	}
 }

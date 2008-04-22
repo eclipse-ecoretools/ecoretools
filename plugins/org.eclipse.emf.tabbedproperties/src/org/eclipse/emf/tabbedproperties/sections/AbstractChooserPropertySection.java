@@ -99,6 +99,7 @@ public abstract class AbstractChooserPropertySection extends AbstractTabbedPrope
 
 		cSingleObjectChooser = new CSingleObjectChooser(composite, getWidgetFactory(), SWT.NONE);
 		cSingleObjectChooser.setLabelProvider(getLabelProvider());
+		cSingleObjectChooser.setSection(this);
 
 		if (getFeature() != null) {
 			cSingleObjectChooser.setChangeable(getFeature().isChangeable());
