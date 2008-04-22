@@ -30,14 +30,16 @@ public class CustomElementMatcher implements IElementMatcher {
 	 */
 	public boolean matches(EObject object) {
 		TransactionalEditingDomain domain = TransactionUtil.getEditingDomain(object);
-		if (domain == null)
-		{
+		if (domain == null) {
 			return false;
 		}
 		String id = domain.getID();
+		if ((id == null) || (id != null && id.length() < 2)) {
+			return false;
+		}
 		int endString = id.indexOf(EcoreDocumentProvider.id_separator);
-		String domainBaseID = id.substring(0, endString);
-		if (EcoreDocumentProvider.editingDomainBaseID.equals(domainBaseID)){
+		String domainBaseID = id.substring(0, (endString > 0) ? endString : 1);
+		if (EcoreDocumentProvider.editingDomainBaseID.equals(domainBaseID)) {
 			return true;
 		}
 		return false;
