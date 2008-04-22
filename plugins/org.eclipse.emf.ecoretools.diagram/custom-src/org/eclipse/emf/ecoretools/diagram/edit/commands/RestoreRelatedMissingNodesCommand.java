@@ -28,7 +28,9 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
@@ -109,28 +111,48 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 
 			// Create missing parts
 			List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
-
+			List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 			if (sourceView == null) {
-				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
+				if (nextLinkDescriptor.getSource() != null && nextLinkDescriptor.getSource().eContainer() == diagram.getElement()) {
+					normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
+				} else {
+					shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getSource()), Node.class, null, host.getDiagramPreferencesHint()));
+				}
+
 			} else {
 				setViewVisible(Collections.singletonList(sourceView));
 			}
 
 			if (targetView == null) {
-				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
+				if (nextLinkDescriptor.getDestination() != null && nextLinkDescriptor.getDestination().eContainer() == diagram.getElement()) {
+					normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
+				} else {
+					shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextLinkDescriptor.getDestination()), Node.class, null, host.getDiagramPreferencesHint()));
+				}
 			} else {
 				setViewVisible(Collections.singletonList(targetView));
 			}
 
-			if (false == normalViewDescriptors.isEmpty()) {
+			CompoundCommand compoundCmd = new CompoundCommand("Create Missing Nodes");
 
+			if (false == normalViewDescriptors.isEmpty()) {
 				CreateViewRequest cvr = new CreateViewRequest(normalViewDescriptors);
 				cvr.setLocation(new Point(-1, -1));
 				Command cmd = host.getCommand(cvr);
 
-				if (cmd != null && cmd.canExecute()) {
-					EReferenceUtils.executeCommand(cmd, host);
-				}
+				compoundCmd.add(cmd);
+			}
+			if (false == shortcutViewDescriptors.isEmpty()) {
+				CreateViewRequest cvr = new CreateViewRequest(shortcutViewDescriptors);
+				cvr.setLocation(new Point(-1, -1));
+				Command cmd = host.getCommand(cvr);
+				cmd.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), diagram, shortcutViewDescriptors)));
+
+				compoundCmd.add(cmd);
+			}
+			
+			if (compoundCmd != null && compoundCmd.canExecute()) {
+				EReferenceUtils.executeCommand(compoundCmd, host);
 			}
 		}
 	}

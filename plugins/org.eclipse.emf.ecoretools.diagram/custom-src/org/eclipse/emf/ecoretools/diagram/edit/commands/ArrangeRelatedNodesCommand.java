@@ -89,6 +89,10 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 		
 		List<EObjectAdapter> adapters = new ArrayList<EObjectAdapter>();
 		for (View view : relatedNodes) {
+			if (view.eContainer() != diagram)
+			{
+				continue;
+			}
 			adapters.add(new EObjectAdapter(view));
 		}
 
