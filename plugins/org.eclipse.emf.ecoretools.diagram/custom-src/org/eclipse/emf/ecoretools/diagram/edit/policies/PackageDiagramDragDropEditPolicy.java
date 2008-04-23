@@ -15,14 +15,11 @@ package org.eclipse.emf.ecoretools.diagram.edit.policies;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateEditPartCommand;
-import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.Request;
