@@ -35,7 +35,18 @@ http://www.eclipse.org/legal/epl-v10.html
       <update label="%updateSiteName" url="http://www.eclipse.org/modeling/emft/updates/"/>
       <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/emft/updates/"/>
    </url>
-   
+
+   <requires>
+      <import feature="org.eclipse.emf" version="2.4.0"/>
+      <import feature="org.eclipse.emf.ocl" version="1.1.100"/>
+      <import feature="org.eclipse.emf.query" version="1.2.0"/>
+      <import feature="org.eclipse.emf.transaction" version="1.2.0"/>
+      <import feature="org.eclipse.emf.validation" version="1.2.0"/>
+      <import feature="org.eclipse.gef" version="3.4.0"/>
+      <import feature="org.eclipse.gmf" version="1.1.0"/>
+      <import feature="org.eclipse.platform" version="3.4.0"/>
+   </requires>
+
    <plugin
          id="org.eclipse.emf.ecoretools"
          download-size="0"
