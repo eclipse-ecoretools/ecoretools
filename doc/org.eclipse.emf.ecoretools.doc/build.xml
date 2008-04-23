@@ -4,32 +4,34 @@
 	<property file="${buildDirectory}/finalPluginsVersions.properties"/>
 	<!-- Plug-in version.  This is a HACK.  Do not forget to update. -->
 	<property name="pluginVersion" value="${org.eclipse.emf.ecoretools.doc}"/>
-
-	<property name="plugin" value="org.eclipse.emf.ecoretools"/>
 	<property name="docPlugin" value="org.eclipse.emf.ecoretools.doc"/>
+		
+	<property name="projectName" value="emf.ecoretools"/>
+	
+	<property name="plugin" value="org.eclipse.emf.ecoretools"/>
 	<property name="filesToInclude" value="META-INF/**,notices.html,about.*,modeling*.png,plugin.*,toc*.xml,topics_*.xml,doc.zip,index/**"/>
+	
+	<property name="basews" value="${ws}"/>
+	<property name="baseos" value="${os}"/>
+	<property name="basearch" value="${arch}"/>
+	<property name="basenl" value="${nl}"/>
 
-	<!-- Compiler settings. -->
+	<!-- Compiler settings -->
 	<property name="javacFailOnError" value="false"/>
 	<property name="javacDebugInfo" value="on"/>
 	<property name="javacVerbose" value="true"/>
+	<property name="compilerArg" value=""/>
 	<property name="javacSource" value="1.5"/>
 	<property name="javacTarget" value="1.5"/>
-	<property name="compilerArg" value=""/>
 	<path id="path_bootclasspath">
 		<fileset dir="${java.home}/lib">
 			<include name="*.jar"/>
 		</fileset>
 	</path>
 	<property name="bootclasspath" refid="path_bootclasspath"/>
-
 	<property name="bundleJavacSource" value="${javacSource}"/>
 	<property name="bundleJavacTarget" value="${javacTarget}"/>
 	<property name="bundleBootClasspath" value="${bootclasspath}"/>
-	<property name="basews" value="${ws}"/>
-	<property name="baseos" value="${os}"/>
-	<property name="basearch" value="${arch}"/>
-	<property name="basenl" value="${nl}"/>
 
 	<target name="init" depends="properties">
 		<condition property="pluginTemp" value="${buildTempFolder}/plugins">
@@ -46,7 +48,6 @@
 
 	<target name="properties" if="eclipse.running">
 		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-
 	</target>
 
 	<target name="build.update.jar" depends="init" description="Build the plug-in: ${docPlugin} for an update site.">
@@ -58,6 +59,14 @@
 		</antcall>
 		<zip destfile="${plugin.destination}/${docPlugin}_${pluginVersion}.${forceContextQualifier}.jar" basedir="${temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="${temp.folder}"/>
+	</target>
+
+	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
+		<mkdir dir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}"/>
+		<copy todir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" failonerror="true" overwrite="false">
+			<fileset dir="${basedir}" includes="${filesToInclude}"/>
+		</copy>
+		<eclipse.versionReplacer path="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" version="${pluginVersion}.${forceContextQualifier}"/>
 	</target>
 
 	<target name="build.jars" depends="init" description="Build all the jars for the plug-in: ${docPlugin}.">
@@ -76,7 +85,6 @@
 			<zipfileset dir="references" prefix="references"/>
 			<!--zipfileset dir="tutorials" prefix="tutorials"/-->
 		</zip>
-		
 	</target>
 
 	<target name="build.index" depends="init" description="Builds search index for the plug-in" if="eclipse.running">
@@ -84,16 +92,6 @@
 	</target>
 
 	<target name="build.sources" depends="init">
-	</target>
-
-	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
-		<mkdir dir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}"/>
-		<copy todir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" failonerror="true" overwrite="false">
-			<fileset dir="${basedir}" includes="${filesToInclude}"/>
-		</copy>
-		<eclipse.versionReplacer 
-			path="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" 
-			version="${pluginVersion}.${forceContextQualifier}"/>
 	</target>
 
 	<target name="build.zips" depends="init">
