@@ -7,7 +7,7 @@
 
 	<property name="plugin" value="org.eclipse.emf.ecoretools"/>
 	<property name="docPlugin" value="org.eclipse.emf.ecoretools.doc"/>
-	<property name="filesToInclude" value="META-INF/**,images/**,tasks/**,gettingStarted/**,references/**,tutorials/**,notices.html,about.*,eclipse*.gif,ModelingFeature*.png,eclipse_lg.gif,plugin.*,book.css,toc*.xml,topics_*.xml,index/**"/>
+	<property name="filesToInclude" value="META-INF/**,notices.html,about.*,modeling*.png,plugin.*,toc*.xml,topics_*.xml,doc.zip,index/**"/>
 
 	<!-- Compiler settings. -->
 	<property name="javacFailOnError" value="false"/>
@@ -49,7 +49,7 @@
 
 	</target>
 
-	<target name="build.update.jar" depends="init" description="Build the plug-in: ${plugin} for an update site.">
+	<target name="build.update.jar" depends="init" description="Build the plug-in: ${docPlugin} for an update site.">
 		<delete dir="${temp.folder}"/>
 		<mkdir dir="${temp.folder}"/>
 		<antcall target="build.jars"/>
@@ -69,6 +69,14 @@
 
 		<antcall target="build.index"/>
 
+		<!-- Zip up all of the documentation artifacts - references(including javadoc), images, tutorials, etc. -->
+		<zip destfile="${build.result.folder}/doc.zip" compress="true">
+			<!--zipfileset dir="css" prefix="css"/>
+			<zipfileset dir="images" prefix="images"/-->
+			<zipfileset dir="references" prefix="references"/>
+			<!--zipfileset dir="tutorials" prefix="tutorials"/-->
+		</zip>
+		
 	</target>
 
 	<target name="build.index" depends="init" description="Builds search index for the plug-in" if="eclipse.running">
