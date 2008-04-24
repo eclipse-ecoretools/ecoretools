@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="org.eclipse.emf.ecoretools.doc" default="build.jars" basedir=".">
-
-	<property file="${buildDirectory}/finalPluginsVersions.properties"/>
-	<!-- Plug-in version.  This is a HACK.  Do not forget to update. -->
-	<property name="pluginVersion" value="${org.eclipse.emf.ecoretools.doc}"/>
+	
+	<!-- Plug-in information.  This is a HACK.  Do not forget to update version numbers, etc.. -->
+	<property name="pluginVersion" value="0.8.0"/>
 	<property name="docPlugin" value="org.eclipse.emf.ecoretools.doc"/>
 		
 	<property name="projectName" value="emf.ecoretools"/>
-	
-	<property name="plugin" value="org.eclipse.emf.ecoretools"/>
-	<property name="filesToInclude" value="META-INF/**,notices.html,about.*,modeling*.png,plugin.*,toc*.xml,topics_*.xml,doc.zip,index/**"/>
 	
 	<property name="basews" value="${ws}"/>
 	<property name="baseos" value="${os}"/>
@@ -64,17 +60,19 @@
 	<target name="gather.bin.parts" depends="init" if="destination.temp.folder">
 		<mkdir dir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}"/>
 		<copy todir="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" failonerror="true" overwrite="false">
-			<fileset dir="${basedir}" includes="${filesToInclude}"/>
+			<fileset dir="${build.result.folder}" 
+			includes="about.*,modeling*.png,plugin.*,toc*.xml,topics_*.xml,doc.zip,index/**,META-INF/**"/>
 		</copy>
 		<eclipse.versionReplacer path="${destination.temp.folder}/${docPlugin}_${pluginVersion}.${forceContextQualifier}" version="${pluginVersion}.${forceContextQualifier}"/>
 	</target>
 
 	<target name="build.jars" depends="init" description="Build all the jars for the plug-in: ${docPlugin}.">
-		<!-- Execute a shell script that will create an ant javadoc script and then run it for us -->
-		<exec executable="sh">
-			<arg value="build/antJavadoc.sh"/>
-			<arg value="${eclipse.home}/../eclipse"/>
-		</exec>
+		<property name="eclipseDir" location="../.."/>
+
+		<chmod perm="754" file="build/antJavadoc.sh"/>
+        <exec executable="bash" dir="build">
+                <arg line="./antJavadoc.sh ${eclipseDir}"/>
+        </exec>
 
 		<antcall target="build.index"/>
 
