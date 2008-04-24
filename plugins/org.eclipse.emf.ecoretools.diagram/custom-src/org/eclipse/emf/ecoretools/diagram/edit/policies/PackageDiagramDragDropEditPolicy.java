@@ -174,14 +174,22 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	}
 
 	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
-		return createViews(dropRequest, viewDescriptors);
+		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
 	}
 
 	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
-		return createViews(dropRequest, viewDescriptors);
+		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
 	}
 
 	protected Command createViews(DropObjectsRequest dropRequest, List viewDescriptors) {
+		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
+		createViewRequest.setLocation(dropRequest.getLocation());
+		Command createCommand = getHost().getCommand(createViewRequest);
+
+		return createCommand;
+	}
+	
+	protected Command createViewsAndRestoreRelatedLinks(DropObjectsRequest dropRequest, List viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
@@ -208,6 +216,14 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	}
 
 	protected Command createViews(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
+		createViewRequest.setLocation(dropRequest.getLocation());
+		Command createCommand = getHost().getCommand(createViewRequest);
+
+		return createCommand;
+	}
+	
+	protected Command createViewsAndRestoreRelatedLinks(ChangeBoundsRequest dropRequest, List viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
