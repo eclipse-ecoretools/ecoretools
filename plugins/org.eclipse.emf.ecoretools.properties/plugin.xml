@@ -17,27 +17,36 @@
             id="org.eclipse.emf.ecoretools.diagram.modelTab"
             label="Model"/>
          <propertyTab
-               category="extra"
-               id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
-               label="Extended Metadata"/>
-         <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.modelTab"
                category="domain"
                id="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
                indented="true"
                label="Parameter"/>
          <propertyTab
-               category="documentation"
-               id="org.eclipse.emf.ecoretools.diagram.genModel"
-               label="GenModel">
+               afterTab="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
+               category="domain"
+               id="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
+               image="icons/view16/eannotation_tab.gif"
+               label="Annotation">
          </propertyTab>
          <propertyTab
-               afterTab="org.eclipse.emf.ecoretools.diagram.genModel"
-               category="documentation"
+               afterTab="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
+               category="domain"
+               id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
+               indented="true"
+               label="Extended Metadata"/>
+         <propertyTab
+               afterTab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
+               category="domain"
                id="org.eclipse.emf.ecoretools.diagram.genModelDoc"
                image="icons/view16/doc_tab.gif"
                indented="true"
                label="GenModel Doc">
+         </propertyTab>
+         <propertyTab
+               category="documentation"
+               id="org.eclipse.emf.ecoretools.diagram.genModel"
+               label="GenModel">
          </propertyTab>
       </propertyTabs>
    </extension>
@@ -299,6 +308,14 @@
             class="org.eclipse.emf.ecoretools.properties.internal.sections.GenModelDocumentationPropertySection"
             id="org.eclipse.emf.ecoretools.diagram.genModelDoc"
             tab="org.eclipse.emf.ecoretools.diagram.genModelDoc">
+         <input
+               type="org.eclipse.emf.ecore.EModelElement">
+         </input>
+      </propertySection>
+      <propertySection
+            class="org.eclipse.emf.ecoretools.properties.internal.sections.EAnnotationPropertySection"
+            id="org.eclipse.emf.ecoretools.diagram.eAnnotationSection"
+            tab="org.eclipse.emf.ecoretools.diagram.eAnnotationTab">
          <input
                type="org.eclipse.emf.ecore.EModelElement">
          </input>
