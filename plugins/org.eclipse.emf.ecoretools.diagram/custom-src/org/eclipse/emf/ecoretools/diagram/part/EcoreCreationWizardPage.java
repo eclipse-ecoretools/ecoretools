@@ -559,11 +559,15 @@ public class EcoreCreationWizardPage extends WizardPage {
 	 * file. If no object is selected, returns the rootEObject of the domain
 	 * model
 	 * 
-	 * @return the EObject
+	 * @return the selected EObject or null if the viewer input is not already set
 	 */
 	public EObject getDiagramEObject() {
 		if (((IStructuredSelection) viewer.getSelection()).getFirstElement() == null) {
-			return ((EList<EObject>) viewer.getInput()).get(0);
+			if (viewer.getInput() != null) {
+				return ((EList<EObject>) viewer.getInput()).get(0);
+			} else {
+				return null;
+			}
 		} else {
 			return (EObject) AdapterFactoryEditingDomain.unwrap(((IStructuredSelection) viewer.getSelection()).getFirstElement());
 		}
