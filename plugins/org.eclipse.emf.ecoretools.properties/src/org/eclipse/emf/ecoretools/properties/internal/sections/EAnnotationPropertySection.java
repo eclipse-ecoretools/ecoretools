@@ -336,6 +336,50 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			}
 
 		});
+		columnKey.setEditingSupport(new EditingSupport(eAnnotationViewer) {
+
+			protected boolean canEdit(Object element) {
+				if (false == element instanceof Entry) {
+					return false;
+				}
+				return true;
+			}
+
+			protected CellEditor getCellEditor(Object element) {
+				return textCellEditor;
+			}
+
+			@Override
+			protected Object getValue(Object element) {
+				if (false == element instanceof Entry) {
+					return "";
+				}
+				return ((((Entry) element).getKey() == null) ? "" : ((Entry) element).getKey());
+			}
+
+			@Override
+			protected void setValue(Object element, Object value) {
+				if (false == element instanceof Entry) {
+					return;
+				}
+				final String text = value.toString();
+				if (currentEAnnotation != null && currentEAnnotation.getDetails().get(text) != null)
+				{
+					return;
+				}
+				final Entry entry = (Entry) element;
+				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
+
+					protected void doExecute() {
+						currentEAnnotation.getDetails().put(text, entry.getValue().toString());
+						currentEAnnotation.getDetails().remove(entry);
+					}
+				});
+
+				mapEntryViewer.refresh();
+			}
+
+		});
 
 		TreeViewerColumn columnValue = new TreeViewerColumn(mapEntryViewer, SWT.NONE);
 		columnValue.getColumn().setResizable(true);
