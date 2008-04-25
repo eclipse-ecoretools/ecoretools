@@ -83,11 +83,11 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 	private static class MultiLineInputDialog extends InputDialog {
 
-		public MultiLineInputDialog(Shell parentShell, String title, String message, String initialValue, IInputValidator validator) {
+		public MultiLineInputDialog(Shell parentShell, String title, String message, String initialValue, IInputValidator validator ) {
 			super(parentShell, title, message, initialValue, validator);
-			 setShellStyle(getShellStyle() | SWT.RESIZE);
+			setShellStyle(getShellStyle() | SWT.RESIZE);
 		}
-		
+
 		/**
 		 * @see org.eclipse.jface.dialogs.Dialog#createButtonBar(org.eclipse.swt.widgets.Composite)
 		 */
@@ -104,11 +104,10 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			layout.horizontalSpacing = convertHorizontalDLUsToPixels(IDialogConstants.HORIZONTAL_SPACING);
 			layout.verticalSpacing = convertVerticalDLUsToPixels(IDialogConstants.VERTICAL_SPACING);
 			composite.setLayout(layout);
-			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_END
-					| GridData.VERTICAL_ALIGN_CENTER);
+			GridData data = new GridData(GridData.HORIZONTAL_ALIGN_END | GridData.VERTICAL_ALIGN_CENTER);
 			composite.setLayoutData(data);
 			composite.setFont(parent.getFont());
-			
+
 			// Add the buttons to the button bar.
 			createButtonsForButtonBar(composite);
 			return composite;
@@ -357,10 +356,17 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		final DialogCellEditor dialogCellEditor = new ExtendedDialogCellEditor(mapEntryViewer.getTree(), getLabelProvider()) {
 
 			protected Object openDialogBox(Control cellEditorWindow) {
-				MultiLineInputDialog dialog = new MultiLineInputDialog(cellEditorWindow.getShell(), "Entry Value", null, "", null);
+				MultiLineInputDialog dialog = new MultiLineInputDialog(cellEditorWindow.getShell(), "Entry Value", null, getCurrentEntryValue(), null);
 				dialog.open();
 
 				return dialog.getValue();
+			}
+
+			private String getCurrentEntryValue() {
+				if (currentEntry == null) {
+					return "";
+				}
+				return currentEntry.getValue().toString();
 			}
 		};
 		columnValue.setEditingSupport(new EditingSupport(eAnnotationViewer) {
@@ -525,14 +531,13 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 					return "";
 				}
 				String content = "";
-				for (EObject eObject : ((EAnnotation) element).getReferences())
-				{
+				for (EObject eObject : ((EAnnotation) element).getReferences()) {
 					content = labelProvider.getText(eObject) + ", " + content;
 				}
-				
+
 				return content;
 			}
-	
+
 			/**
 			 * @see org.eclipse.jface.viewers.BaseLabelProvider#dispose()
 			 */
@@ -569,7 +574,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnEReference.setEditingSupport(new EditingSupport(eAnnotationViewer) {
 
 			private ILabelProvider labelProvider = getLabelProvider();
-			
+
 			protected boolean canEdit(Object element) {
 				if (false == element instanceof EAnnotation) {
 					return false;
@@ -587,11 +592,10 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 					return "";
 				}
 				String content = "";
-				for (EObject eObject : ((EAnnotation) element).getReferences())
-				{
+				for (EObject eObject : ((EAnnotation) element).getReferences()) {
 					content = labelProvider.getText(eObject) + ", " + content;
 				}
-				
+
 				return content;
 			}
 
