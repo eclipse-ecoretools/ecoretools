@@ -39,8 +39,8 @@ public class EClassESuperTypesViewFactory extends ConnectionViewFactory {
 		super.initializeFromPreferences(view);
 		ConnectorStyle connectorStyle = (ConnectorStyle) view.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
 		connectorStyle.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
-		// Use RECTILINEAR style
-		connectorStyle.setRouting(Routing.RECTILINEAR_LITERAL);
+		// Use TREE style
+		connectorStyle.setRouting(Routing.TREE_LITERAL);
 	}
 
 	/**
