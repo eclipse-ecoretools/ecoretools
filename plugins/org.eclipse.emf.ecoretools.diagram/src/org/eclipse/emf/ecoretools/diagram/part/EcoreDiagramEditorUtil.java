@@ -164,7 +164,8 @@ public class EcoreDiagramEditorUtil {
 		progressMonitor.beginTask(Messages.EcoreDiagramEditorUtil_CreateDiagramProgressTask, 3);
 		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
 		final Resource modelResource = editingDomain.getResourceSet().createResource(modelURI);
-		final String diagramName = diagramURI.lastSegment();
+		// Retrieve the file name (removing extension)
+		final String diagramName = diagramURI.lastSegment().substring(0, diagramURI.lastSegment().length() - (diagramURI.fileExtension() == null ? 0 : diagramURI.fileExtension().length() + 1));
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
 
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
