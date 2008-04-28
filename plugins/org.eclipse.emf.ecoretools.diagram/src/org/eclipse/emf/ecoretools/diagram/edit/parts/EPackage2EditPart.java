@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2EditPart.java,v 1.6 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EPackage2EditPart.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -359,13 +359,13 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			packageLabelRectangle0.setLayoutManager(layoutPackageLabelRectangle0);
 
 			fFigurePackageNameLabel = new WrappingLabel();
-			fFigurePackageNameLabel.setText("<..>");
+			fFigurePackageNameLabel.setText("<..>"); //$NON-NLS-1$
 
 			packageLabelRectangle0.add(fFigurePackageNameLabel);
 
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
-			fFigureFromLabel.setText("<..>");
+			fFigureFromLabel.setText("<..>"); //$NON-NLS-1$
 
 			RectangleFigure fillerFigure0 = new RectangleFigure();
 

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: OpenDiagramEditPolicy.java,v 1.10 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: OpenDiagramEditPolicy.java,v 1.11 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.dialogs.ManageDiagramsDialog;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageNameEditPart;
@@ -50,6 +51,7 @@ import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.window.Window;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -106,7 +108,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		 * @param diagResource
 		 */
 		public OpenDiagramCommand(EObject domainElt, Resource diagResource) {
-			super(TransactionUtil.getEditingDomain(domainElt), "Open Diagram", null);
+			super(TransactionUtil.getEditingDomain(domainElt), Messages.OpenDiagramEditPolicy_OpenDiagram, null);
 			this.domainElement = domainElt;
 			this.diagramResource = diagResource;
 
@@ -174,7 +176,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			}
 				// Things gone bad ...
 			default: {
-				return CommandResult.newErrorCommandResult("Diagram operation failed !");
+				return CommandResult.newErrorCommandResult(Messages.OpenDiagramEditPolicy_OperationFailed);
 			}
 			}
 			return CommandResult.newOKCommandResult();
@@ -199,7 +201,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 				try {
 					page.openEditor(getEditorInput(diagram), getEditorID());
 				} catch (PartInitException e) {
-					EcoreDiagramEditorPlugin.getInstance().logError("Can't open Ecore Diagram Editor !");
+					EcoreDiagramEditorPlugin.getInstance().logError(Messages.OpenDiagramEditPolicy_CanNotOpen);
 				}
 			}
 		}
@@ -214,7 +216,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 				openEditor(diagram);
 				return diagram;
 			} catch (ExecutionException e) {
-				EcoreDiagramEditorPlugin.getInstance().logError("Can't open Ecore Diagram Editor !");
+				EcoreDiagramEditorPlugin.getInstance().logError(Messages.OpenDiagramEditPolicy_CanNotOpen);
 			}
 			return null;
 		}
@@ -245,7 +247,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		protected Diagram intializeNewDiagram(boolean initializeContent) throws ExecutionException {
 			Diagram diagram = ViewService.createDiagram(getDiagramDomainElement(), getDiagramKind(), getPreferencesHint());
 			if (diagram == null) {
-				throw new ExecutionException("Can't create diagram of '" + getDiagramKind() + "' kind");
+				throw new ExecutionException(NLS.bind(Messages.OpenDiagramEditPolicy_CanNotCreateDiagram, getDiagramKind()));
 			}
 			setDefaultNameForDiagram(diagram);
 
@@ -291,7 +293,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 
 		private void setDefaultNameForDiagram(Diagram elementToConfigure) {
 			EPackage pseudoContainer = (EPackage) elementToConfigure.getElement();
-			String baseString = pseudoContainer.getName() + "_Diagram";
+			String baseString = pseudoContainer.getName() + "_Diagram"; //$NON-NLS-1$
 			int count = 0;
 			for (Diagram diagram : allDiagrams) {
 				if (diagram.getName().equals(baseString + count)) {

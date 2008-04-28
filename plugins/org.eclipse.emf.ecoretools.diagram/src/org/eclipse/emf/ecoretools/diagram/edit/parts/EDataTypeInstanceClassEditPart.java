@@ -232,9 +232,9 @@ public class EDataTypeInstanceClassEditPart extends CompartmentEditPart implemen
 			instanceClassName = ((EDataType) ((View) getModel()).getElement()).getInstanceClassName();
 		}
 		if ((instanceClassName == null) || (instanceClassName.length() == 0)) {
-			return "null";
+			return "null"; //$NON-NLS-1$
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**

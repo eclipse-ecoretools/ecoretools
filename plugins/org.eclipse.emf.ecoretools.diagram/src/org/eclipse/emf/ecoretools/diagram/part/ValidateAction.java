@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ValidateAction.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: ValidateAction.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -69,10 +69,10 @@ public class ValidateAction extends Action {
 	 */
 	public ValidateAction(IWorkbenchPartDescriptor workbenchPartDescriptor) {
 		setId(VALIDATE_ACTION_KEY);
-		setText(Messages.ValidateActionMessage);
-		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif"));
-		setDisabledImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/dlcl16/validate.gif"));
-		setHoverImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif"));
+		setText(org.eclipse.emf.ecoretools.diagram.part.Messages.ValidateActionMessage);
+		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif")); //$NON-NLS-1$
+		setDisabledImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/dlcl16/validate.gif")); //$NON-NLS-1$
+		setHoverImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif")); //$NON-NLS-1$
 		this.workbenchPartDescriptor = workbenchPartDescriptor;
 	}
 

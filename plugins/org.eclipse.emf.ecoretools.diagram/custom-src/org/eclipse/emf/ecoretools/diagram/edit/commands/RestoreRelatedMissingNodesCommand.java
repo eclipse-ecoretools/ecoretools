@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RestoreRelatedMissingNodesCommand.java,v 1.6 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: RestoreRelatedMissingNodesCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
 import org.eclipse.gef.commands.Command;
@@ -129,7 +130,7 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 				setViewVisible(Collections.singletonList(targetView));
 			}
 
-			CompoundCommand compoundCmd = new CompoundCommand("Create Missing Nodes");
+			CompoundCommand compoundCmd = new CompoundCommand(Messages.RestoreRelatedMissingNodesCommand_CreateMissingNodes);
 
 			if (false == normalViewDescriptors.isEmpty()) {
 				CreateViewRequest cvr = new CreateViewRequest(normalViewDescriptors);

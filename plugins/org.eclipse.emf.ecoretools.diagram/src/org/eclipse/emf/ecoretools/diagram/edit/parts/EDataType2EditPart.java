@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataType2EditPart.java,v 1.8 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EDataType2EditPart.java,v 1.9 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -304,25 +304,25 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 
 			dataTypeFixedNameLabel0 = new WrappingLabel();
 			dataTypeFixedNameLabel0.setAlignment(PositionConstants.TOP);
-			dataTypeFixedNameLabel0.setText("<<datatype>>");
+			dataTypeFixedNameLabel0.setText("<<datatype>>"); //$NON-NLS-1$
 
 			this.add(dataTypeFixedNameLabel0);
 
 			fFigureDataTypeNameLabel = new WrappingLabel();
 			fFigureDataTypeNameLabel.setAlignment(PositionConstants.TOP);
-			fFigureDataTypeNameLabel.setText("<..>");
+			fFigureDataTypeNameLabel.setText("<..>"); //$NON-NLS-1$
 
 			this.add(fFigureDataTypeNameLabel);
 
 			fFigureDataTypeJavaLabel = new WrappingLabel();
 			fFigureDataTypeJavaLabel.setAlignment(PositionConstants.TOP);
-			fFigureDataTypeJavaLabel.setText("");
+			fFigureDataTypeJavaLabel.setText(""); //$NON-NLS-1$
 
 			this.add(fFigureDataTypeJavaLabel);
 
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
-			fFigureFromLabel.setText("<..>");
+			fFigureFromLabel.setText("<..>"); //$NON-NLS-1$
 		}
 
 		/**

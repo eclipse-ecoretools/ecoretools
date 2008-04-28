@@ -10,7 +10,7 @@
  *    Anyware Technologies - initial API and implementation
  *    Lucas Bigeardel - fix EPL header
  *
- * $Id: DestroyElementUtils.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: DestroyElementUtils.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
@@ -49,7 +49,7 @@ public class DestroyElementUtils {
 				continue;
 			}
 			View potentialView = (View) eObject;
-			if (potentialView.getEAnnotation("Shortcut") == null) {
+			if (potentialView.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
 				continue;
 			}
 			if (potentialView.getElement() != semanticElement) {

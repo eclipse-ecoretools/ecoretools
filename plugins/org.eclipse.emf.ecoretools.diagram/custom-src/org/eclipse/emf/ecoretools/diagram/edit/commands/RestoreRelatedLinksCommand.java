@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RestoreRelatedLinksCommand.java,v 1.6 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: RestoreRelatedLinksCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
@@ -72,7 +73,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	protected DiagramEditPart host;
 
 	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List<?> selection) {
-		super(diagramEditPart.getEditingDomain(), "Restore Related Links", null);
+		super(diagramEditPart.getEditingDomain(), Messages.RestoreRelatedLinksCommand_RestoreRelatedLinks, null);
 		this.host = diagramEditPart;
 		this.diagram = host.getDiagramView();
 		this.adapters = selection;
@@ -226,7 +227,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			if (view.isVisible()) {
 				continue;
 			}
-			SetPropertyCommand cmd = new SetPropertyCommand(host.getEditingDomain(), "Show View", new EObjectAdapter(view), Properties.ID_ISVISIBLE, Boolean.TRUE);
+			SetPropertyCommand cmd = new SetPropertyCommand(host.getEditingDomain(), Messages.RestoreRelatedLinksCommand_ShowView, new EObjectAdapter(view), Properties.ID_ISVISIBLE, Boolean.TRUE);
 			if (cmd != null && cmd.canExecute()) {
 				EReferenceUtils.executeCommand(new ICommandProxy(cmd), host);
 			}

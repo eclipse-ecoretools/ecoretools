@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreAbstractExpression.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreAbstractExpression.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.expressions;
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 
 /**
@@ -40,7 +41,7 @@ public abstract class EcoreAbstractExpression {
 	 * @generated
 	 */
 	private static final boolean DISABLED_NO_IMPL_EXCEPTION_LOG = Boolean.valueOf(
-			Platform.getDebugOption(EcoreDiagramEditorPlugin.getInstance().getBundle().getSymbolicName() + "/debug/disableNoExprImplExceptionLog")).booleanValue();
+			Platform.getDebugOption(EcoreDiagramEditorPlugin.getInstance().getBundle().getSymbolicName() + "/debug/disableNoExprImplExceptionLog")).booleanValue(); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -106,7 +107,7 @@ public abstract class EcoreAbstractExpression {
 				if (DISABLED_NO_IMPL_EXCEPTION_LOG && e instanceof NoImplException) {
 					return null;
 				}
-				EcoreDiagramEditorPlugin.getInstance().logError("Expression evaluation failure: " + body, e);
+				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreAbstractExpression_ExpressionEvaluationFailure + body, e);
 			}
 		}
 		return null;

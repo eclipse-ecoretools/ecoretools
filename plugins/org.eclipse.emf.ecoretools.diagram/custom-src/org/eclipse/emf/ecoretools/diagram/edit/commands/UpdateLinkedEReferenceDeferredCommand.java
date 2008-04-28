@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpdateLinkedEReferenceDeferredCommand.java,v 1.4 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: UpdateLinkedEReferenceDeferredCommand.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -59,7 +60,7 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 	 * each other. Graphical representation should overlay each other.
 	 */
 	public UpdateLinkedEReferenceDeferredCommand(TransactionalEditingDomain domain, EReferenceEditPart part1, EReferenceEditPart part2) {
-		super(domain, "LinkEReferenceDeferredCommand", null);
+		super(domain, "LinkEReferenceDeferredCommand", null); //$NON-NLS-1$
 		this.part1 = part1;
 		this.part2 = part2;
 	}
@@ -70,7 +71,7 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (part1 == null || part2 == null) {
-			return CommandResult.newWarningCommandResult("Unable to proceed with null parts", null);
+			return CommandResult.newWarningCommandResult(Messages.UpdateLinkedEReferenceDeferredCommand_UnableToProceed, null);
 		}
 		RunnableWithResult<Object> refreshRunnable = new RunnableWithResult<Object>() {
 
@@ -105,12 +106,12 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 				// Refresh anchors
 				if (edge1.getSourceAnchor() == null) {
 					IdentityAnchor sourceAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
-					sourceAnchor.setId("(0.5,0.5)");
+					sourceAnchor.setId("(0.5,0.5)"); //$NON-NLS-1$
 					edge1.setSourceAnchor(sourceAnchor);
 				}
 				if (edge1.getTargetAnchor() == null) {
 					IdentityAnchor targetAnchor = NotationFactory.eINSTANCE.createIdentityAnchor();
-					targetAnchor.setId("(0.5,0.5)");
+					targetAnchor.setId("(0.5,0.5)"); //$NON-NLS-1$
 					edge1.setTargetAnchor(targetAnchor);
 				}
 

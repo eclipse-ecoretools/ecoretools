@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceEditHelper.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EReferenceEditHelper.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.helpers;
@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
  */
 public class EReferenceEditHelper extends EcoreBaseEditHelper {
 
-	private final static String baseString = "EReference";
+	private final static String baseString = "EReference"; //$NON-NLS-1$
 
 	@Override
 	protected ICommand getConfigureCommand(ConfigureRequest req) {

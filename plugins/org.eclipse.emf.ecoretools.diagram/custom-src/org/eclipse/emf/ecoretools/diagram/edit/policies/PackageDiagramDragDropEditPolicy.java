@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: PackageDiagramDragDropEditPolicy.java,v 1.12 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: PackageDiagramDragDropEditPolicy.java,v 1.13 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -146,7 +146,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		@SuppressWarnings("unchecked")
 		EList<View> views = getView().getChildren();
 		for (View nextView : views) {
-			if (nextView.getEAnnotation("Shortcut") != null) {
+			if (nextView.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 				continue;
 			}
 			if (nextView.getElement() == null) {

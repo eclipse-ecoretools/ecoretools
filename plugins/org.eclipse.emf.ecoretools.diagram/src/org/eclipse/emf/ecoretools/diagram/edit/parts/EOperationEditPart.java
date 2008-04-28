@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationEditPart.java,v 1.5 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EOperationEditPart.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -238,14 +238,14 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	}
 
 	private String getSuffixText() {
-		String text = "";
+		String text = ""; //$NON-NLS-1$
 		EObject semanticElement = resolveSemanticElement();
 		if (semanticElement != null && semanticElement instanceof EOperation) {
-			text += "(";
+			text += "("; //$NON-NLS-1$
 			text += getParametersText();
-			text += ")";
+			text += ")"; //$NON-NLS-1$
 			if (((EOperation) semanticElement).getEType() != null) {
-				text += " : " + ((EOperation) semanticElement).getEType().getName();
+				text += " : " + ((EOperation) semanticElement).getEType().getName(); //$NON-NLS-1$
 			}
 			text += getExceptionsText();
 		}
@@ -261,12 +261,12 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 				if (first) {
 					first = false;
 				} else {
-					text.append(",");
+					text.append(","); //$NON-NLS-1$
 				}
 
 				EClassifier eType = param.getEType();
 				if (eType == null) {
-					text.append("null");
+					text.append("null"); //$NON-NLS-1$
 				} else {
 					text.append(param.getEType().getName());
 				}
@@ -283,10 +283,10 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 		if (model != null && model instanceof EOperation) {
 			for (EClassifier ex : ((EOperation) model).getEExceptions()) {
 				if (first) {
-					text.append(" throws ");
+					text.append(" throws "); //$NON-NLS-1$
 					first = false;
 				} else {
-					text.append(", ");
+					text.append(", "); //$NON-NLS-1$
 				}
 
 				text.append(ex.getName());

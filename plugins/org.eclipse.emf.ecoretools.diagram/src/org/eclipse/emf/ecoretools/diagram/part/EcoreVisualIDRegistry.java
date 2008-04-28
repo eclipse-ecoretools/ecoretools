@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreVisualIDRegistry.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreVisualIDRegistry.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationDetailsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationSourceEditPart;
@@ -75,12 +76,12 @@ public class EcoreVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static final EcoreAbstractExpression EDataType_1004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType());
+	private static final EcoreAbstractExpression EDataType_1004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	private static final EcoreAbstractExpression EDataType_2004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType());
+	private static final EcoreAbstractExpression EDataType_2004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -119,7 +120,7 @@ public class EcoreVisualIDRegistry {
 			return Integer.parseInt(type);
 		} catch (NumberFormatException e) {
 			if (Boolean.TRUE.toString().equalsIgnoreCase(Platform.getDebugOption(DEBUG_KEY))) {
-				EcoreDiagramEditorPlugin.getInstance().logError("Unable to parse view type as a visualID number: " + type);
+				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreVisualIDRegistry_UnableToParseView + type);
 			}
 		}
 		return -1;

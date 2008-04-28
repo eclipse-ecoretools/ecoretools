@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.12 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.13 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -96,7 +96,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 			title = getDiagram().getName();
 		}
 
-		if ((title != null) && (!title.equals(""))) {
+		if ((title != null) && (!title.equals(""))) { //$NON-NLS-1$
 			super.setPartName(title);
 		} else {
 			super.setPartName(partName);
@@ -417,7 +417,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		if (operation instanceof EMFCommandOperation) {
 			return true;
 		}
-		if (operation.getLabel() != null && (operation.getLabel().equals("Copy") || operation.getLabel().equals("Cut") || operation.getLabel().equals("Paste"))) {
+		if (operation.getLabel() != null && (operation.getLabel().equals("Copy") || operation.getLabel().equals("Cut") || operation.getLabel().equals("Paste"))) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			return true;
 		}
 		return false;

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassName2EditPart.java,v 1.4 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EClassName2EditPart.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -215,7 +215,7 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	protected Image getLabelIcon() {
 		EObject semanticElement = resolveSemanticElement();
 		if (semanticElement instanceof EClass && ((EClass) semanticElement).isInterface()) {
-			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif");
+			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/Interface.gif"); //$NON-NLS-1$
 		} else {
 			EObject parserElement = getParserElement();
 			if (parserElement == null) {

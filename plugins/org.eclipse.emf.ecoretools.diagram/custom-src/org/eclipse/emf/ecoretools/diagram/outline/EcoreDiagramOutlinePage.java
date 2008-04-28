@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramOutlinePage.java,v 1.3 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreDiagramOutlinePage.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.outline;
@@ -63,6 +63,6 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	 */
 	@Override
 	protected String getEditorID() {
-		return "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID";
+		return "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID"; //$NON-NLS-1$
 	}
 }

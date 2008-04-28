@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassEditPart.java,v 1.6 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EClassEditPart.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -317,13 +317,13 @@ public class EClassEditPart extends ShapeNodeEditPart {
 
 			fFigureClassNameLabel = new WrappingLabel();
 			fFigureClassNameLabel.setAlignment(PositionConstants.TOP);
-			fFigureClassNameLabel.setText("<..>");
+			fFigureClassNameLabel.setText("<..>"); //$NON-NLS-1$
 
 			this.add(fFigureClassNameLabel);
 
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
-			fFigureFromLabel.setText("<..>");
+			fFigureFromLabel.setText("<..>"); //$NON-NLS-1$
 		}
 
 		/**

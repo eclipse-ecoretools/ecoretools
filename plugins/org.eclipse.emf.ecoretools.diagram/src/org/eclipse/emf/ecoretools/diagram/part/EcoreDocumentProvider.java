@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDocumentProvider.java,v 1.11 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDocumentProvider.java,v 1.12 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -976,9 +976,9 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 **************************************************************************/
 	/** **************************************************************************************** */
 
-	public static String editingDomainBaseID = "org.eclipse.emf.ecoretools.diagram.EditingDomain";
+	public static String editingDomainBaseID = "org.eclipse.emf.ecoretools.diagram.EditingDomain"; //$NON-NLS-1$
 
-	public static String id_separator = "@";
+	public static String id_separator = "@"; //$NON-NLS-1$
 	
 	private IEditorInput currentEditorInput;
 

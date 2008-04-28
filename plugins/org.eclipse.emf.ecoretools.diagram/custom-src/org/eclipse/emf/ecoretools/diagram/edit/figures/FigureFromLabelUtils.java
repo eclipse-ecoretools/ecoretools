@@ -9,13 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: FigureFromLabelUtils.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: FigureFromLabelUtils.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.figures;
 
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
@@ -29,12 +30,12 @@ import org.eclipse.gmf.runtime.notation.View;
 public class FigureFromLabelUtils {
 
 	public static String getQualifiedName(EObject semanticElement) {
-		return "(from " + getParentName(semanticElement) + ")";
+		return "(from " + getParentName(semanticElement) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	private static String getParentName(EObject semanticElement) {
 		if (semanticElement == null) {
-			return "Unresolved Element";
+			return Messages.FigureFromLabelUtils_UnresolvedElement;
 		}
 		if (semanticElement.eContainer() instanceof ENamedElement) {
 			return ((ENamedElement) semanticElement.eContainer()).getName();
@@ -42,7 +43,7 @@ public class FigureFromLabelUtils {
 		if (semanticElement.eResource() != null) {
 			return semanticElement.eResource().getURI().lastSegment();
 		}
-		return "Unknown Element";
+		return Messages.FigureFromLabelUtils_UnknownElement;
 	}
 
 	private static View getVisualContainer(View notationView) {

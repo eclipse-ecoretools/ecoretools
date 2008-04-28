@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreCreationWizard.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreCreationWizard.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -103,7 +103,7 @@ public class EcoreCreationWizard extends Wizard implements INewWizard {
 			if (e.getTargetException() instanceof CoreException) {
 				ErrorDialog.openError(getContainer().getShell(), Messages.EcoreCreationWizardCreationError, null, ((CoreException) e.getTargetException()).getStatus());
 			} else {
-				EcoreDiagramEditorPlugin.getInstance().logError("Error creating diagram", e.getTargetException());
+				EcoreDiagramEditorPlugin.getInstance().logError(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizard_ErrorOnCreation, e.getTargetException());
 			}
 			return false;
 		}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.4 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EAttributeEditPart.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -213,7 +213,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		String imageName = "EOccurrence";
+		String imageName = "EOccurrence"; //$NON-NLS-1$
 		EObject semanticElement = resolveSemanticElement();
 		if (semanticElement != null && semanticElement instanceof EAttribute) {
 			int minOccurs = ((EAttribute) semanticElement).getLowerBound();
@@ -221,37 +221,37 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 			if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == -1)) {
 				switch (minOccurs) {
 				case 0:
-					imageName += "Zero";
+					imageName += "Zero"; //$NON-NLS-1$
 					break;
 				case 1:
-					imageName += "One";
+					imageName += "One"; //$NON-NLS-1$
 					break;
 				default:
-					imageName += "N";
+					imageName += "N"; //$NON-NLS-1$
 					break;
 				}
 
 				if (minOccurs != maxOccurs) {
 					switch (maxOccurs) {
 					case -1:
-						imageName += "ToUnbounded";
+						imageName += "ToUnbounded"; //$NON-NLS-1$
 						break;
 					case 0:
 						return null;
 					case 1:
-						imageName += "ToOne";
+						imageName += "ToOne"; //$NON-NLS-1$
 						break;
 					default:
-						imageName += minOccurs <= 1 ? "ToN" : "ToM";
+						imageName += minOccurs <= 1 ? "ToN" : "ToM"; //$NON-NLS-1$ //$NON-NLS-2$
 						break;
 					}
 				}
 			} else {
-				imageName += "NToM";
+				imageName += "NToM"; //$NON-NLS-1$
 			}
 		}
 
-		return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/multiplicity/" + imageName + ".gif");
+		return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/multiplicity/" + imageName + ".gif"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -275,9 +275,9 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 			eType = ((EAttribute) ((View) getModel()).getElement()).getEType();
 		}
 		if (eType != null) {
-			return " : " + eType.getName();
+			return " : " + eType.getName(); //$NON-NLS-1$
 		}
-		return " : null";
+		return " : null"; //$NON-NLS-1$
 	}
 
 	/**

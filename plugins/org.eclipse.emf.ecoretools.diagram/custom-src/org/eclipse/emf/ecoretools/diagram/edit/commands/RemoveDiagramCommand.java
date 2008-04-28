@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RemoveDiagramCommand.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: RemoveDiagramCommand.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -48,7 +49,7 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 	public RemoveDiagramCommand(MultiDiagramLinkStyle linkStyle) {
 		// editing domain is taken for original diagram, if we open diagram from
 		// another file, we should use another editing domain
-		super(TransactionUtil.getEditingDomain(linkStyle), "Remove Diagram", null);
+		super(TransactionUtil.getEditingDomain(linkStyle), Messages.RemoveDiagramCommand_RemoveDiagram, null);
 		diagramFacet = linkStyle;
 	}
 
@@ -80,7 +81,7 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 			diagramLinks.clear();
 			return CommandResult.newOKCommandResult();
 		} catch (Exception ex) {
-			throw new ExecutionException("Can't remove diagram", ex);
+			throw new ExecutionException(Messages.RemoveDiagramCommand_CanNotRemove, ex);
 		}
 	}
 }

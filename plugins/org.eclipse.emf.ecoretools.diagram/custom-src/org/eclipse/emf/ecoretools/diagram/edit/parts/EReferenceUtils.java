@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceUtils.java,v 1.9 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EReferenceUtils.java,v 1.10 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.UpdateLinkedEReferenceDeferredCommand;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.transaction.Transaction;
@@ -128,7 +129,7 @@ public class EReferenceUtils {
 		try {
 			operation.execute(new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
-			EcoreDiagramEditorPlugin.getInstance().logError("Can't execute command!", e);
+			EcoreDiagramEditorPlugin.getInstance().logError(Messages.EReferenceUtils_CanNotExecute, e);
 		}
 	}
 	

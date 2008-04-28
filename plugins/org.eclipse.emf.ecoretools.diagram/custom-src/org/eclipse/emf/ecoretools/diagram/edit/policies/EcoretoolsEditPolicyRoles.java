@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoretoolsEditPolicyRoles.java,v 1.4 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoretoolsEditPolicyRoles.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
@@ -27,6 +27,6 @@ public class EcoretoolsEditPolicyRoles {
 	 * Synchronization on removal Modifyin the semantic model will trigger a
 	 * refresh that will only remove orphaned views.
 	 */
-	public static final String PSEUDO_CANONICAL_ROLE = "PseudoCanonical";
+	public static final String PSEUDO_CANONICAL_ROLE = "PseudoCanonical"; //$NON-NLS-1$
 
 }

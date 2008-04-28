@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreParserProvider.java,v 1.3 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EcoreParserProvider.java,v 1.4 2008/04/28 15:23:58 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -167,9 +167,9 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 	protected IParser createEDataTypeInstanceClassName_4009Parser() {
 		EAttribute[] features = new EAttribute[] { EcorePackage.eINSTANCE.getEClassifier_InstanceClassName(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
-		parser.setViewPattern("<<javaclass>> {0}");
-		parser.setEditorPattern("<<javaclass>> {0}");
-		parser.setEditPattern("<<javaclass>> {0}");
+		parser.setViewPattern("<<javaclass>> {0}"); //$NON-NLS-1$
+		parser.setEditorPattern("<<javaclass>> {0}"); //$NON-NLS-1$
+		parser.setEditPattern("<<javaclass>> {0}"); //$NON-NLS-1$
 		return parser;
 	}
 
@@ -314,9 +314,9 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 	protected IParser createEDataTypeInstanceClassName_4004Parser() {
 		EAttribute[] features = new EAttribute[] { EcorePackage.eINSTANCE.getEClassifier_InstanceClassName(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
-		parser.setViewPattern("<<javaclass>> {0}");
-		parser.setEditorPattern("<<javaclass>> {0}");
-		parser.setEditPattern("<<javaclass>> {0}");
+		parser.setViewPattern("<<javaclass>> {0}"); //$NON-NLS-1$
+		parser.setEditorPattern("<<javaclass>> {0}"); //$NON-NLS-1$
+		parser.setEditPattern("<<javaclass>> {0}"); //$NON-NLS-1$
 		return parser;
 	}
 
@@ -437,9 +437,9 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 	protected IParser createEReferenceLowerBoundUpperBound_4012Parser() {
 		EAttribute[] features = new EAttribute[] { EcorePackage.eINSTANCE.getETypedElement_LowerBound(), EcorePackage.eINSTANCE.getETypedElement_UpperBound(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
-		parser.setViewPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}");
-		parser.setEditorPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}");
-		parser.setEditPattern("{0}..{1}");
+		parser.setViewPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}"); //$NON-NLS-1$
+		parser.setEditorPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}"); //$NON-NLS-1$
+		parser.setEditPattern("{0}..{1}"); //$NON-NLS-1$
 		return parser;
 	}
 

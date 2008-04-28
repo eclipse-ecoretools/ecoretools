@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpdateEditPartCommand.java,v 1.6 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: UpdateEditPartCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -17,7 +17,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoretoolsEditPolicyRoles;
-import org.eclipse.emf.ecoretools.diagram.part.Messages;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
@@ -45,7 +45,7 @@ public class UpdateEditPartCommand extends AbstractTransactionalCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (part == null) {
-			return CommandResult.newWarningCommandResult("Unable to proceed with null part", null);
+			return CommandResult.newWarningCommandResult(Messages.UpdateEditPartCommand_UnableToProceed, null);
 		}
 		EditPolicy editPolicy = part.getEditPolicy(EcoretoolsEditPolicyRoles.PSEUDO_CANONICAL_ROLE);
 		if (editPolicy instanceof CanonicalEditPolicy) {

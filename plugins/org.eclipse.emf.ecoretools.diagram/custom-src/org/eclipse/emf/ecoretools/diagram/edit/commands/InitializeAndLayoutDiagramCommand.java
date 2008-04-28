@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: InitializeAndLayoutDiagramCommand.java,v 1.7 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: InitializeAndLayoutDiagramCommand.java,v 1.8 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -19,8 +19,8 @@ import java.util.List;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramContentInitializer;
-import org.eclipse.emf.ecoretools.diagram.part.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutService;
@@ -52,7 +52,7 @@ public class InitializeAndLayoutDiagramCommand extends AbstractTransactionalComm
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (diagram == null) {
-			return CommandResult.newWarningCommandResult("Unable to proceed with null diagam", null);
+			return CommandResult.newWarningCommandResult(Messages.InitializeAndLayoutDiagramCommand_UnableToProceed, null);
 		}
 		// Initialize diagram content
 		EcoreDiagramContentInitializer initializer = new EcoreDiagramContentInitializer();

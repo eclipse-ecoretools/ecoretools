@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataTypeInstanceClass2EditPart.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EDataTypeInstanceClass2EditPart.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -234,9 +234,9 @@ public class EDataTypeInstanceClass2EditPart extends CompartmentEditPart impleme
 			instanceClassName = ((EDataType) ((View) getModel()).getElement()).getInstanceClassName();
 		}
 		if ((instanceClassName == null) || (instanceClassName.length() == 0)) {
-			return "null";
+			return "null"; //$NON-NLS-1$
 		}
-		return "";
+		return ""; //$NON-NLS-1$
 	}
 
 	/**

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditorUtil.java,v 1.8 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDiagramEditorUtil.java,v 1.9 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -163,12 +163,12 @@ public class EcoreDiagramEditorUtil {
 	 */
 	public static Resource createDiagram(URI diagramURI, URI modelURI, IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
-		progressMonitor.beginTask(Messages.EcoreDiagramEditorUtil_CreateDiagramProgressTask, 3);
+		progressMonitor.beginTask("", 3); //$NON-NLS-1$
 		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
 		final Resource modelResource = editingDomain.getResourceSet().createResource(modelURI);
 		// Retrieve the file name (removing extension)
 		final String diagramName = diagramURI.lastSegment().substring(0, diagramURI.lastSegment().length() - (diagramURI.fileExtension() == null ? 0 : diagramURI.fileExtension().length() + 1));
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, "", Collections.EMPTY_LIST) { //$NON-NLS-1$
 
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
@@ -177,7 +177,7 @@ public class EcoreDiagramEditorUtil {
 				// Bug #224334 : Initialize root EPackage properties
 				model.setName(diagramName.toLowerCase());
 				model.setNsPrefix(diagramName.toLowerCase());
-				model.setNsURI("http://".concat(diagramName.toLowerCase()).concat("/1.0"));
+				model.setNsURI("http://".concat(diagramName.toLowerCase()).concat("/1.0")); //$NON-NLS-1$ //$NON-NLS-2$
 				
 				attachModelToResource(model, modelResource);
 
@@ -230,11 +230,11 @@ public class EcoreDiagramEditorUtil {
 	 */
 	public static Resource createDiagramOnly(URI diagramURI, URI modelURI, EObject domainElement, final boolean initializeDiagram, IProgressMonitor progressMonitor) {
 		final TransactionalEditingDomain editingDomain = WorkspaceEditingDomainFactory.INSTANCE.createEditingDomain();
-		progressMonitor.beginTask(Messages.EcoreDiagramEditorUtil_CreateDiagramProgressTask, 3);
+		progressMonitor.beginTask("", 3); //$NON-NLS-1$
 		final Resource diagramResource = editingDomain.getResourceSet().createResource(diagramURI);
 		final EObject model = domainElement;
 		final String diagramName = diagramURI.lastSegment();
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, "", Collections.EMPTY_LIST) { //$NON-NLS-1$
 
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {

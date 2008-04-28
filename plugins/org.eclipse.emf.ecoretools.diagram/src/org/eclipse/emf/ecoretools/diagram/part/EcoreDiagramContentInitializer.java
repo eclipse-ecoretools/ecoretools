@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramContentInitializer.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDiagramContentInitializer.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -49,6 +49,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * @generated
@@ -72,11 +73,11 @@ public class EcoreDiagramContentInitializer {
 	 */
 	public void initDiagramContent(Diagram diagram) {
 		if (!EPackageEditPart.MODEL_ID.equals(diagram.getType())) {
-			EcoreDiagramEditorPlugin.getInstance().logError("Incorrect diagram passed as a parameter: " + diagram.getType());
+			EcoreDiagramEditorPlugin.getInstance().logError(org.eclipse.emf.ecoretools.diagram.Messages.EcoreDiagramContentInitializer_IncorrectDiagramAsParameter + diagram.getType());
 			return;
 		}
 		if (false == diagram.getElement() instanceof EPackage) {
-			EcoreDiagramEditorPlugin.getInstance().logError("Incorrect diagram element specified: " + diagram.getElement() + " instead of org.eclipse.emf.ecore.EPackage");
+			EcoreDiagramEditorPlugin.getInstance().logError(NLS.bind(org.eclipse.emf.ecoretools.diagram.Messages.EcoreDiagramContentInitializer_IncorrectElementSpecified, diagram.getElement()));
 			return;
 		}
 		createEPackage_79Children(diagram);

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.4 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: Messages.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -578,10 +578,6 @@ public class Messages extends NLS {
 	 * @generated
 	 */
 	public static String EcoreModelingAssistantProviderMessage;
-
-	public static String CommandName_UpdateEditPart;
-
-	public static String CommandName_InitializeAndLayoutDiagram;
 
 	// TODO: put accessor fields manually
 }

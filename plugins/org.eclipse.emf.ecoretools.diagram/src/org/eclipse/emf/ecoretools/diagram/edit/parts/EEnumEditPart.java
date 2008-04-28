@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumEditPart.java,v 1.5 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EEnumEditPart.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -313,19 +313,19 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 
 			WrappingLabel enumerationFixedNameLabel0 = new WrappingLabel();
 			enumerationFixedNameLabel0.setAlignment(PositionConstants.TOP);
-			enumerationFixedNameLabel0.setText("<<enumeration>>");
+			enumerationFixedNameLabel0.setText("<<enumeration>>"); //$NON-NLS-1$
 
 			this.add(enumerationFixedNameLabel0);
 
 			fFigureEnumerationNameLabel = new WrappingLabel();
 			fFigureEnumerationNameLabel.setAlignment(PositionConstants.TOP);
-			fFigureEnumerationNameLabel.setText("<..>");
+			fFigureEnumerationNameLabel.setText("<..>"); //$NON-NLS-1$
 
 			this.add(fFigureEnumerationNameLabel);
 
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
-			fFigureFromLabel.setText("<..>");
+			fFigureFromLabel.setText("<..>"); //$NON-NLS-1$
 		}
 
 		/**

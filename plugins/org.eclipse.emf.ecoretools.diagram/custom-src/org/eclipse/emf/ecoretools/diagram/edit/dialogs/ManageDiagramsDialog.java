@@ -9,13 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ManageDiagramsDialog.java,v 1.4 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: ManageDiagramsDialog.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.dialogs;
 
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -54,9 +55,9 @@ public class ManageDiagramsDialog extends Dialog {
 
 	private static final int CREATE_ID = IDialogConstants.CLIENT_ID + 1020;
 
-	private static final String DELETE_LABEL = "Delete";
+	private static final String DELETE_LABEL = Messages.ManageDiagramsDialog_Delete;
 
-	private static final String CREATE_LABEL = "Create";
+	private static final String CREATE_LABEL = Messages.ManageDiagramsDialog_Create;
 
 	private TreeViewer myTreeViewer;
 
@@ -95,7 +96,7 @@ public class ManageDiagramsDialog extends Dialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
-		getShell().setText("Manage diagrams");
+		getShell().setText(Messages.ManageDiagramsDialog_ManageDiagrams);
 		createDiagramTreeBrowser(composite);
 		return composite;
 	}
@@ -106,11 +107,11 @@ public class ManageDiagramsDialog extends Dialog {
 	@Override
 	protected Control createButtonBar(Composite parent) {
 		Control btnBar = super.createButtonBar(parent);
-		getButton(IDialogConstants.OK_ID).setText("Open");
-		getButton(IDialogConstants.OK_ID).setToolTipText("Open selected diagram");
-		getButton(CREATE_ID).setToolTipText("Create a new diagram an open it");
-		getButton(DELETE_ID).setToolTipText("Delete selected diagram");
-		getButton(IDialogConstants.CANCEL_ID).setToolTipText("Close the dialog");
+		getButton(IDialogConstants.OK_ID).setText(Messages.ManageDiagramsDialog_Open);
+		getButton(IDialogConstants.OK_ID).setToolTipText(Messages.ManageDiagramsDialog_OpenSelectedDiagram);
+		getButton(CREATE_ID).setToolTipText(Messages.ManageDiagramsDialog_CreateNewDiagram);
+		getButton(DELETE_ID).setToolTipText(Messages.ManageDiagramsDialog_DeleteSelectedDiagram);
+		getButton(IDialogConstants.CANCEL_ID).setToolTipText(Messages.ManageDiagramsDialog_CloseDialog);
 		validateDialog();
 		return btnBar;
 	}
@@ -147,7 +148,7 @@ public class ManageDiagramsDialog extends Dialog {
 		myTreeViewer.setInput(diagramList);
 		myTreeViewer.addSelectionChangedListener(new DiagramTreeSelectionChangedListener());
 		initializeContentButton = new Button(composite, SWT.CHECK);
-		initializeContentButton.setText("Initialize newly created diagram content");
+		initializeContentButton.setText(Messages.ManageDiagramsDialog_InitializeDiagramContents);
 		initializeContentButton.setSelection(true);
 	}
 
@@ -191,7 +192,7 @@ public class ManageDiagramsDialog extends Dialog {
 		private AdapterFactoryLabelProvider myAdapterFactoryLabelProvider = new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
 
 		public Image getImage(Object element) {
-			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/EPackage.gif");
+			return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/EPackage.gif"); //$NON-NLS-1$
 		}
 
 		public String getText(Object element) {

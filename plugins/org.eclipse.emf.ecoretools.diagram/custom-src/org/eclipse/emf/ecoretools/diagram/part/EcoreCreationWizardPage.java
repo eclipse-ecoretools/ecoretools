@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreCreationWizardPage.java,v 1.3 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreCreationWizardPage.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -455,14 +455,14 @@ public class EcoreCreationWizardPage extends WizardPage {
 	private boolean validateNewModelGroup() {
 		IContainer container = getSelectedIContainer();
 		if (container == null || container instanceof IWorkspaceRoot) {
-			setErrorMessage("The destination is not a valid container.");
+			setErrorMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_UnvalidDestinationContainer);
 			return false;
 		}
 
-		if (getFileName() == null || "".equals(getFileName())) {
-			setErrorMessage("Domain file name cannot be empty.");
+		if (getFileName() == null || "".equals(getFileName())) { //$NON-NLS-1$
+			setErrorMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_DomainFileNotEmpty);
 			return false;
-		} else if (!getFileName().endsWith("." + DOMAIN_EXT)) {
+		} else if (!getFileName().endsWith("." + DOMAIN_EXT)) { //$NON-NLS-1$
 			setErrorMessage(NLS.bind(Messages.EcoreCreationWizardPageExtensionError, DOMAIN_EXT));
 			return false;
 		} else {
@@ -478,12 +478,12 @@ public class EcoreCreationWizardPage extends WizardPage {
 	private void validateExistingFiles() {
 		if (modelFileExist()) {
 			if (diagramFileExist()) {
-				setMessage("The domain file and the diagram file already exist. They will be overwritten !", IMessageProvider.WARNING);
+				setMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_FilesAlreadyExist, IMessageProvider.WARNING);
 			} else {
-				setMessage("The domain file already exists. It will be overwritten !", IMessageProvider.WARNING);
+				setMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_DomainFileAlreadyExists, IMessageProvider.WARNING);
 			}
 		} else if (diagramFileExist()) {
-			setMessage("The diagram file already exists. It will be overwritten !", IMessageProvider.WARNING);
+			setMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_DiagramFileAlreadyExists, IMessageProvider.WARNING);
 		}
 	}
 
@@ -506,7 +506,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 	private boolean validateExistingModel() {
 		// the user has chosen an existing domain file
 		if (modelFd.getText() == null || "".equals(modelFd.getText())) { //$NON-NLS-1$
-			setErrorMessage("You have to choose an existing domain file.");
+			setErrorMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_ChooseExistingDomainFile);
 			return false;
 		}
 
@@ -516,12 +516,12 @@ public class EcoreCreationWizardPage extends WizardPage {
 		}
 
 		if (diagramFileExist()) {
-			setMessage("The diagrams file already exists. It will be overwritten !", IMessageProvider.WARNING);
+			setMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_DiagramFileAlreadyExists, IMessageProvider.WARNING);
 		}
 
 		// Check whether the selected domain element is an EPackage
 		if (!(getDiagramEObject() instanceof EPackage)) {
-			setErrorMessage("You have to choose an EPackage element to associate with the diagram.");
+			setErrorMessage(org.eclipse.emf.ecoretools.diagram.Messages.EcoreCreationWizardPage_ChooseAnEPackageElement);
 			return false;
 		}
 

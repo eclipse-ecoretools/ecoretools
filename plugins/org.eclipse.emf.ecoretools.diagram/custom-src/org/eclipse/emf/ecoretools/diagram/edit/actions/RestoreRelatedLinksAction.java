@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RestoreRelatedLinksAction.java,v 1.7 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: RestoreRelatedLinksAction.java,v 1.8 2008/04/28 15:23:59 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.ArrangeRelatedNodesCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedMissingNodesCommand;
@@ -49,13 +50,13 @@ public class RestoreRelatedLinksAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "restoreRelatedLinksAction";
+	public static String ID = "restoreRelatedLinksAction"; //$NON-NLS-1$
 
 	public RestoreRelatedLinksAction() {
 		setId(ID);
-		setText("Restore Related Elements");
-		setToolTipText("Restore all elements related to the selected element");
-		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/etool16/restorerelatedlinks_exec.gif"));
+		setText(Messages.RestoreRelatedLinksAction_RestoreRelatedElements);
+		setToolTipText(Messages.RestoreRelatedLinksAction_RestoreRelatedElements_tooltip);
+		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/etool16/restorerelatedlinks_exec.gif")); //$NON-NLS-1$
 	}
 
 	private Diagram getCurrentDiagram() {
@@ -85,7 +86,7 @@ public class RestoreRelatedLinksAction extends Action {
 				continue;
 			}
 			View view = ((IGraphicalEditPart) object).getNotationView();
-			if (view.getEAnnotation("Shortcut") != null) {
+			if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 				continue;
 			}
 			viewSelected.add(view);
@@ -109,7 +110,7 @@ public class RestoreRelatedLinksAction extends Action {
 		}
 
 		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();	
-		CompoundCommand cmd = new CompoundCommand("Restore Related Links");
+		CompoundCommand cmd = new CompoundCommand(Messages.RestoreRelatedLinksAction_RestoreRelatedLinks);
 		
 		cmd.add(new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart) host, selection)));
 		cmd.add(new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart) host, selection)));
@@ -123,7 +124,7 @@ public class RestoreRelatedLinksAction extends Action {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools"));
+		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools")); //$NON-NLS-1$
 	}
 
 }
