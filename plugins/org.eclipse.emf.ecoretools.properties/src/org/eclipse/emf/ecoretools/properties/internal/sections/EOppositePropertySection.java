@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOppositePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: EOppositePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -47,7 +48,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "EOpposite:";
+		return Messages.EOppositePropertySection_EOpposite;
 	}
 
 	/**
@@ -55,7 +56,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected Object[] getComboFeatureValues() {
-		return getPropertyDescriptor() != null ? getPropertyDescriptor().getChoiceOfValues(getEObject()).toArray() : new String[] { "" };
+		return getPropertyDescriptor() != null ? getPropertyDescriptor().getChoiceOfValues(getEObject()).toArray() : new String[] { "" }; //$NON-NLS-1$
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	private IItemPropertyDescriptor getPropertyDescriptor() {
 		for (Adapter adapter : getEObject().eAdapters()) {
 			if (adapter instanceof ItemProviderAdapter) {
-				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EOpposite");
+				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EOpposite"); //$NON-NLS-1$
 				if (descriptor != null) {
 					return descriptor;
 				}

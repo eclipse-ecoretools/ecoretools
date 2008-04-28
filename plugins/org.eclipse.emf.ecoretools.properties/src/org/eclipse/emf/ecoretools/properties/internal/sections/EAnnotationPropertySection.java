@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationPropertySection.java,v 1.4 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: EAnnotationPropertySection.java,v 1.5 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.ui.celleditor.FeatureEditorDialog;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
@@ -206,7 +207,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Annotations";
+		return Messages.EAnnotationPropertySection_Annotations;
 	}
 
 	/**
@@ -215,12 +216,12 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	@Override
 	protected void createWidgets(Composite composite) {
 		super.createWidgets(composite);
-		groupEAnnotations = getWidgetFactory().createGroup(composite, "Annotations");
+		groupEAnnotations = getWidgetFactory().createGroup(composite, Messages.EAnnotationPropertySection_AnnotationsGroup);
 		groupEAnnotations.setLayout(new GridLayout());
 
 		createGroupEAnnotationContents(groupEAnnotations);
 
-		groupMapEntries = getWidgetFactory().createGroup(composite, "Entries");
+		groupMapEntries = getWidgetFactory().createGroup(composite, Messages.EAnnotationPropertySection_EntriesGroup);
 		groupMapEntries.setLayout(new GridLayout());
 
 		createGroupMapEntryContents(groupMapEntries);
@@ -299,7 +300,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnKey.getColumn().setResizable(true);
 		columnKey.getColumn().setMoveable(true);
 		columnKey.getColumn().setWidth(200);
-		columnKey.getColumn().setText("Key");
+		columnKey.getColumn().setText(Messages.EAnnotationPropertySection_Key);
 		columnKey.setLabelProvider(new ColumnLabelProvider() {
 
 			private ILabelProvider labelProvider = getLabelProvider();
@@ -385,7 +386,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnValue.getColumn().setResizable(true);
 		columnValue.getColumn().setMoveable(true);
 		columnValue.getColumn().setWidth(200);
-		columnValue.getColumn().setText("Value");
+		columnValue.getColumn().setText(Messages.EAnnotationPropertySection_Value);
 		columnValue.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -402,7 +403,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 			@Override
 			protected Object openDialogBox(Control cellEditorWindow) {
-				MultiLineInputDialog dialog = new MultiLineInputDialog(cellEditorWindow.getShell(), "Entry Value", null, getCurrentEntryValue(), null);
+				MultiLineInputDialog dialog = new MultiLineInputDialog(cellEditorWindow.getShell(), Messages.EAnnotationPropertySection_EntryValue, null, getCurrentEntryValue(), null);
 				dialog.open();
 
 				return dialog.getValue();
@@ -410,7 +411,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 			private String getCurrentEntryValue() {
 				if (currentEntry == null) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
 				return currentEntry.getValue().toString();
 			}
@@ -486,7 +487,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnName.getColumn().setResizable(true);
 		columnName.getColumn().setMoveable(true);
 		columnName.getColumn().setWidth(200);
-		columnName.getColumn().setText("Source");
+		columnName.getColumn().setText(Messages.EAnnotationPropertySection_Source);
 		columnName.setLabelProvider(new ColumnLabelProvider() {
 
 			private ILabelProvider labelProvider = getLabelProvider();
@@ -570,7 +571,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnEReference.getColumn().setResizable(true);
 		columnEReference.getColumn().setMoveable(true);
 		columnEReference.getColumn().setWidth(200);
-		columnEReference.getColumn().setText("References");
+		columnEReference.getColumn().setText(Messages.EAnnotationPropertySection_References);
 		columnEReference.setLabelProvider(new ColumnLabelProvider() {
 
 			private ILabelProvider labelProvider = getLabelProvider();
@@ -607,7 +608,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			protected Object openDialogBox(Control cellEditorWindow) {
 				FeatureEditorDialog dialog = new FeatureEditorDialog(cellEditorWindow.getShell(), labelProvider, currentEAnnotation, EcorePackage.eINSTANCE.getEAnnotation_References(),
-						"Choose references", getPotentialReferences());
+						Messages.EAnnotationPropertySection_ChooseReferences, getPotentialReferences());
 				dialog.open();
 
 				return dialog.getResult();
@@ -740,11 +741,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		Composite comp = widgetFactory.createComposite(parent);
 		comp.setLayout(new GridLayout());
 
-		Button add = widgetFactory.createButton(comp, "Add", SWT.NONE);
+		Button add = widgetFactory.createButton(comp, Messages.EAnnotationPropertySection_Add, SWT.NONE);
 		add.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		add.addSelectionListener(new SelectionListener() {
-
-			private final static String baseString = "EAnnotation";
 
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// Nothing to do
@@ -771,8 +770,8 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				Boolean foundName = false;
 				int count = 0;
 				while (!foundName && count < 10000) {
-					if (container.getEAnnotation(baseString + count) == null) {
-						elementToConfigure.setSource(baseString + count);
+					if (container.getEAnnotation(Messages.EAnnotationPropertySection_EAnnotation + count) == null) {
+						elementToConfigure.setSource(Messages.EAnnotationPropertySection_EAnnotation + count);
 						foundName = true;
 					}
 					count++;
@@ -781,7 +780,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 		});
 
-		Button remove = widgetFactory.createButton(comp, "Remove", SWT.NONE);
+		Button remove = widgetFactory.createButton(comp, Messages.EAnnotationPropertySection_Remove, SWT.NONE);
 		remove.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		remove.addSelectionListener(new SelectionListener() {
 
@@ -812,11 +811,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		Composite comp = widgetFactory.createComposite(parent);
 		comp.setLayout(new GridLayout());
 
-		Button add = widgetFactory.createButton(comp, "Add", SWT.NONE);
+		Button add = widgetFactory.createButton(comp, Messages.EAnnotationPropertySection_Add, SWT.NONE);
 		add.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		add.addSelectionListener(new SelectionListener() {
-
-			private final static String baseString = "EStringToStringMapEntry";
 
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// Nothing to do
@@ -841,17 +838,17 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				int count = 0;
 				for (Map.Entry<String, String> eDetail : container.getDetails()) {
 					if (eDetail.getKey() != null) {
-						if (eDetail.getKey().equals(baseString + count)) {
+						if (eDetail.getKey().equals(Messages.EAnnotationPropertySection_EStringToStringMapEntry + count)) {
 							count++;
 						}
 					}
 				}
-				return baseString + count;
+				return Messages.EAnnotationPropertySection_EStringToStringMapEntry + count;
 			}
 
 		});
 
-		Button remove = widgetFactory.createButton(comp, "Remove", SWT.NONE);
+		Button remove = widgetFactory.createButton(comp, Messages.EAnnotationPropertySection_Remove, SWT.NONE);
 		remove.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		remove.addSelectionListener(new SelectionListener() {
 

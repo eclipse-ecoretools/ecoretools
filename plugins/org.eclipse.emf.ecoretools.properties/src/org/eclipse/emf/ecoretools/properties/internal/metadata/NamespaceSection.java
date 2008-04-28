@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: NamespaceSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: NamespaceSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -20,6 +20,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
@@ -98,7 +99,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
-		namespaceTxt = getWidgetFactory().createText(composite, "");
+		namespaceTxt = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -184,7 +185,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 
 		String txt = ExtendedMetaData.INSTANCE.getNamespace((EStructuralFeature) getEObject());
 		if (txt == null) {
-			txt = "";
+			txt = ""; //$NON-NLS-1$
 		}
 
 		namespaceTxt.setText(txt);
@@ -205,7 +206,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Namespace";
+		return Messages.NamespaceSection_Namespace;
 	}
 
 }

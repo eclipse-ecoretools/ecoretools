@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpperBoundPropertySection.java,v 1.3 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: UpperBoundPropertySection.java,v 1.4 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection;
 
 /**
@@ -60,7 +61,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Upper Bound:";
+		return Messages.UpperBoundPropertySection_UpperBound;
 	}
 
 	/**
@@ -77,10 +78,10 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	@Override
 	protected Object getNewFeatureValue(String newText) {
 		String text = newText;
-		if ("*".equals(newText)) {
-			text = "-1";
-		} else if ("?".equals(newText)) {
-			text = "-2";
+		if ("*".equals(newText)) { //$NON-NLS-1$
+			text = "-1"; //$NON-NLS-1$
+		} else if ("?".equals(newText)) { //$NON-NLS-1$
+			text = "-2"; //$NON-NLS-1$
 		}
 		return new Integer(Integer.parseInt(text));
 	}
@@ -92,9 +93,9 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	protected String getFeatureAsString() {
 		Integer upper = getFeatureInteger();
 		if (upper.intValue() == -1) {
-			return "*";
+			return "*"; //$NON-NLS-1$
 		} else if (upper.intValue() == -2) {
-			return "?";
+			return "?"; //$NON-NLS-1$
 		} else {
 			return getFeatureInteger().toString();
 		}

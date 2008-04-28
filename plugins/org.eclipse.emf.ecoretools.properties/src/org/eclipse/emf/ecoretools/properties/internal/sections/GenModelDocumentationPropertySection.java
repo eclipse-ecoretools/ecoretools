@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: GenModelDocumentationPropertySection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: GenModelDocumentationPropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
@@ -41,9 +42,9 @@ import org.eclipse.ui.views.properties.tabbed.ITabbedPropertyConstants;
  */
 public class GenModelDocumentationPropertySection extends AbstractTabbedPropertySection {
 
-	private static final String GENMODEL_SOURCE = "http://www.eclipse.org/emf/2002/GenModel";
+	private static final String GENMODEL_SOURCE = "http://www.eclipse.org/emf/2002/GenModel"; //$NON-NLS-1$
 
-	private static final String GENMODEL_DOC_KEY = "documentation";
+	private static final String GENMODEL_DOC_KEY = "documentation"; //$NON-NLS-1$
 
 	private Text commentsText;
 
@@ -54,7 +55,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	 */
 	@Override
 	protected String getLabelText() {
-		return "GenModel Documentation:";
+		return Messages.GenModelDocumentationPropertySection_GenModelDocumentation;
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	 */
 	@Override
 	public void refresh() {
-		commentsText.setText("");
+		commentsText.setText(""); //$NON-NLS-1$
 		commentsText.setEnabled(getEObject() != null);
 		if (getEObject() != null) {
 			EAnnotation annotation = ((EModelElement) getEObject()).getEAnnotation(GENMODEL_SOURCE);
@@ -148,7 +149,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 		private String oldComments;
 
 		public ChangeComments(EModelElement element, String comments) {
-			super("Change comments of EModelElement");
+			super(Messages.GenModelDocumentationPropertySection_ChangeComments);
 
 			this.element = element;
 			this.newComments = comments;
@@ -194,7 +195,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 		 */
 		protected void changeDocumentation(EModelElement elt, String newDoc) {
 			EAnnotation annotation = elt.getEAnnotation(GENMODEL_SOURCE);
-			if (newDoc != null && !"".equals(newDoc)) {
+			if (newDoc != null && !"".equals(newDoc)) { //$NON-NLS-1$
 				// creates EAnnotation if needed
 				if (annotation == null) {
 					annotation = EcoreFactory.eINSTANCE.createEAnnotation();

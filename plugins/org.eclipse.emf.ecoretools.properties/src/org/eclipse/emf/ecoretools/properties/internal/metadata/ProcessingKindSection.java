@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ProcessingKindSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: ProcessingKindSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -20,6 +20,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
@@ -182,7 +183,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Processing Kind";
+		return Messages.ProcessingKindSection_ProcessingKind;
 	}
 
 }

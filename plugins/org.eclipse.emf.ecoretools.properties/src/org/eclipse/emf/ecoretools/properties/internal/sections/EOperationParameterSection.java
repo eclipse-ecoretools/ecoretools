@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationParameterSection.java,v 1.3 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: EOperationParameterSection.java,v 1.4 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -103,7 +104,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	@Override
 	protected void createWidgets(Composite composite) {
 		super.createWidgets(composite);
-		groupDetails = getWidgetFactory().createGroup(composite, "Parameter Details");
+		groupDetails = getWidgetFactory().createGroup(composite, Messages.EOperationParameterSection_ParameterDetails);
 		groupDetails.setLayout(new GridLayout());
 
 		createGroupContents(groupDetails);
@@ -134,11 +135,11 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		widgetFactory.createLabel(composite, "Name : ");
-		parameterNameTxt = widgetFactory.createText(composite, "", SWT.BORDER);
+		widgetFactory.createLabel(composite, Messages.EOperationParameterSection_Name);
+		parameterNameTxt = widgetFactory.createText(composite, "", SWT.BORDER); //$NON-NLS-1$
 		parameterNameTxt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		widgetFactory.createLabel(composite, "Type : ");
+		widgetFactory.createLabel(composite, Messages.EOperationParameterSection_Type);
 		typeChooser = new CSingleObjectChooser(composite, getWidgetFactory(), SWT.NONE);
 		typeChooser.setLabelProvider((ILabelProvider) getLabelProvider());
 		typeChooser.setSection(this);
@@ -231,7 +232,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Parameters";
+		return Messages.EOperationParameterSection_Parameters;
 	}
 
 	/**
@@ -271,7 +272,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	 * @return the parameters name
 	 */
 	private String getEParameterName(EParameter parameter) {
-		return parameter == null ? "" : parameter.getName() != null ? parameter.getName() : "";
+		return parameter == null ? "" : parameter.getName() != null ? parameter.getName() : ""; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	/**
@@ -285,13 +286,13 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 		while (iter.hasNext()) {
 			Adapter adapter = iter.next();
 			if (adapter instanceof ItemProviderAdapter) {
-				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EType");
+				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), Messages.EOperationParameterSection_EType);
 				if (descriptor != null) {
 					return descriptor.getChoiceOfValues(getEObject()).toArray();
 				}
 			}
 		}
-		return new String[] { "" };
+		return new String[] { "" }; //$NON-NLS-1$
 	}
 
 	/**

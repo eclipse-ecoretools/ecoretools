@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: LengthSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: LengthSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
@@ -99,7 +100,7 @@ public class LengthSection extends AbstractTabbedPropertySection {
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
-		lengthTxt = getWidgetFactory().createText(composite, "");
+		lengthTxt = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -143,7 +144,7 @@ public class LengthSection extends AbstractTabbedPropertySection {
 		if (!isRefreshing) {
 			try {
 				if (lengthTxt.getText() == null || lengthTxt.getText().length() == 0) {
-					lengthTxt.setText("-1");
+					lengthTxt.setText("-1"); //$NON-NLS-1$
 				}
 				final int newLength = Integer.parseInt(lengthTxt.getText());
 
@@ -191,7 +192,7 @@ public class LengthSection extends AbstractTabbedPropertySection {
 	public void refresh() {
 		isRefreshing = true;
 
-		lengthTxt.setText("" + ExtendedMetaData.INSTANCE.getLengthFacet((EDataType) getEObject()));
+		lengthTxt.setText("" + ExtendedMetaData.INSTANCE.getLengthFacet((EDataType) getEObject())); //$NON-NLS-1$
 
 		isRefreshing = false;
 	}
@@ -209,7 +210,7 @@ public class LengthSection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Length";
+		return Messages.LengthSection_Length;
 	}
 
 }

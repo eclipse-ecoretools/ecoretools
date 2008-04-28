@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: AffiliationSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: AffiliationSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
@@ -48,7 +49,7 @@ public class AffiliationSection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Affiliation";
+		return Messages.AffiliationSection_Affiliation;
 	}
 
 	/**

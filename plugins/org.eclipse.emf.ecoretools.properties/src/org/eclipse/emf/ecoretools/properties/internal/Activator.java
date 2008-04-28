@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Activator.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: Activator.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal;
@@ -23,7 +23,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	/** The plug-in ID */
-	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.properties";
+	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.properties"; //$NON-NLS-1$
 
 	/** The shared instance */
 	private static Activator plugin;

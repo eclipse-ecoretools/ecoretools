@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ETypePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: ETypePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -47,7 +48,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "EType:";
+		return Messages.ETypePropertySection_EType;
 	}
 
 	/**
@@ -57,13 +58,13 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	protected Object[] getComboFeatureValues() {
 		for (Adapter adapter : getEObject().eAdapters()) {
 			if (adapter instanceof ItemProviderAdapter) {
-				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EType");
+				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EType"); //$NON-NLS-1$
 				if (descriptor != null) {
 					return descriptor.getChoiceOfValues(getEObject()).toArray();
 				}
 			}
 		}
-		return new String[] { "" };
+		return new String[] { "" }; //$NON-NLS-1$
 	}
 
 	/**

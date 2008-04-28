@@ -9,13 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: NamePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
+ * $Id: NamePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.sections.AbstractStringPropertySection;
 
 /**
@@ -32,7 +33,7 @@ public class NamePropertySection extends AbstractStringPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Name:";
+		return Messages.NamePropertySection_Name;
 	}
 
 	/**

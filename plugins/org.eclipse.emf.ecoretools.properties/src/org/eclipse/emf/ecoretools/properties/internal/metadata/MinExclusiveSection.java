@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: MinExclusiveSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: MinExclusiveSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
@@ -99,7 +100,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
-		constraintTxt = getWidgetFactory().createText(composite, "");
+		constraintTxt = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -177,7 +178,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	}
 
 	private String getText() {
-		if (constraintTxt.getText() != null && !"".equals(constraintTxt.getText())) {
+		if (constraintTxt.getText() != null && !"".equals(constraintTxt.getText())) { //$NON-NLS-1$
 			return constraintTxt.getText();
 		}
 
@@ -193,7 +194,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 
 		String text = ExtendedMetaData.INSTANCE.getMinExclusiveFacet((EDataType) getEObject());
 		if (text == null) {
-			text = "";
+			text = ""; //$NON-NLS-1$
 		}
 		constraintTxt.setText(text);
 
@@ -213,7 +214,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Minimum(exclusive) constraint";
+		return Messages.MinExclusiveSection_MinimumConstraint;
 	}
 
 }

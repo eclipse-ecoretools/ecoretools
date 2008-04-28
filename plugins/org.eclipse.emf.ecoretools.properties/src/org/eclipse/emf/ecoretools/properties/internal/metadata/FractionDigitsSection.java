@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: FractionDigitsSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: FractionDigitsSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
 import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
@@ -100,7 +101,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
-		fractionTxt = getWidgetFactory().createText(composite, "");
+		fractionTxt = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 	}
 
 	/**
@@ -144,7 +145,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 		if (!isRefreshing) {
 			try {
 				if (fractionTxt.getText() == null || fractionTxt.getText().length() == 0) {
-					fractionTxt.setText("-1");
+					fractionTxt.setText("-1"); //$NON-NLS-1$
 				}
 				final int newFraction = Integer.parseInt(fractionTxt.getText());
 
@@ -192,7 +193,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	public void refresh() {
 		isRefreshing = true;
 
-		fractionTxt.setText("" + ExtendedMetaData.INSTANCE.getFractionDigitsFacet((EDataType) getEObject()));
+		fractionTxt.setText("" + ExtendedMetaData.INSTANCE.getFractionDigitsFacet((EDataType) getEObject())); //$NON-NLS-1$
 
 		isRefreshing = false;
 	}
@@ -210,7 +211,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Fraction Digits";
+		return Messages.FractionDigitsSection_FractionDigits;
 	}
 
 }

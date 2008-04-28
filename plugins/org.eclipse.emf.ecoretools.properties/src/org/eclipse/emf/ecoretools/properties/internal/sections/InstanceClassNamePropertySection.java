@@ -9,13 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: InstanceClassNamePropertySection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
+ * $Id: InstanceClassNamePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.sections.AbstractStringPropertySection;
 
 /**
@@ -32,7 +33,7 @@ public class InstanceClassNamePropertySection extends AbstractStringPropertySect
 	 */
 	@Override
 	protected String getLabelText() {
-		return "Instance Class Name:";
+		return Messages.InstanceClassNamePropertySection_InstanceClassName;
 	}
 
 	/**
