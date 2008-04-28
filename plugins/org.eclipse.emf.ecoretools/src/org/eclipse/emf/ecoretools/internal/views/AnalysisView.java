@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: AnalysisView.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -61,6 +63,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	/**
 	 * @see org.eclipse.ui.part.WorkbenchPart#dispose()
 	 */
+	@Override
 	public void dispose() {
 		ISelectionService selService = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 		selService.removeSelectionListener(this);
@@ -177,6 +180,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	/**
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	public void createPartControl(Composite parent) {
 		fillActionBars();
 	}
@@ -184,6 +188,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	/**
 	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
 	 */
+	@Override
 	public void setFocus() {
 		// Do nothing
 	}

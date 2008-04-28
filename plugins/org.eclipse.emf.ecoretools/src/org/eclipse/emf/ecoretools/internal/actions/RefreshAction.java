@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: RefreshAction.java,v 1.3 2008/04/28 08:41:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.actions;
@@ -45,6 +47,7 @@ public class RefreshAction extends Action {
 	/**
 	 * Runs the action.
 	 */
+	@Override
 	public void run() {
 		analysisView.refresh();
 	}

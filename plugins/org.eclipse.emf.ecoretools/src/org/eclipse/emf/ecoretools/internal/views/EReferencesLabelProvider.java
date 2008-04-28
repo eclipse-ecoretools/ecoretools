@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferencesLabelProvider.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -38,6 +40,7 @@ public class EReferencesLabelProvider extends LabelProvider {
 	/**
 	 * @see org.eclipse.jface.viewers.LabelProvider#getImage(java.lang.Object)
 	 */
+	@Override
 	public Image getImage(Object element) {
 		if (element instanceof WrappedEClass) {
 			return delegateProvider.getImage(((WrappedEClass) element).getWrappedEClass());
@@ -48,6 +51,7 @@ public class EReferencesLabelProvider extends LabelProvider {
 	/**
 	 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
 	 */
+	@Override
 	public String getText(Object element) {
 		if (element instanceof WrappedEClass) {
 			return delegateProvider.getText(((WrappedEClass) element).getWrappedEClass());

@@ -8,6 +8,8 @@
     
   Contributors: 
   	   Anyware Technologies - Initial API and implementation
+
+  $Id: plugin.xml,v 1.4 2008/04/28 08:41:20 jlescot Exp $
 -->
 <plugin>
 
@@ -15,12 +17,12 @@
 		<view
 			id="org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView"
 			class="org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView"
-			name="EClass Hierarchy"
+			name="%ecore.class.hierarchy.view.title"
 			icon="icons/eview16/eclass_hi_nav.gif"/>
 		<view
 			id="org.eclipse.emf.ecoretools.internal.views.EReferencesView"
 			class="org.eclipse.emf.ecoretools.internal.views.EReferencesView"
-			name="EClass References"
+			name="%ecore.class.reference.view.title"
 			icon="icons/eview16/eref_nav.gif"/>
 	</extension>
 
@@ -34,13 +36,13 @@
 				class="org.eclipse.emf.ecoretools.internal.actions.ShowReferencesAction"
 				enablesFor="1"
 				icon="icons/eview16/eref_nav.gif"
-				label="Show References"/>
+				label="%menu.show.references"/>
 			<action
 				id="org.eclipse.emf.ecoretools.internal.actions.ShowHierarchyAction"
 				class="org.eclipse.emf.ecoretools.internal.actions.ShowHierarchyAction"
 				enablesFor="1"
 				icon="icons/eview16/eclass_hi_nav.gif"
-				label="Show Hierarchy"/>
+				label="%menu.show.hierarchy"/>
 		</objectContribution>
 	</extension>
 
@@ -48,12 +50,12 @@
 		<perspective
 			id="org.eclipse.emf.ecoretools.perspective"
 			class="org.eclipse.emf.ecoretools.internal.ui.EcoreToolsPerspective"
-			name="Ecore Tools Perspective"
+			name="%ecore.perspective.name"
 			icon="icons/eview16/etools_persp.gif"/>
 	</extension>
 
 	<!-- Add the Ecore Nature -->
-	<extension id="ecorenature" name="Ecore Nature" point="org.eclipse.core.resources.natures">
+	<extension id="ecorenature" name="%ecore.nature.name" point="org.eclipse.core.resources.natures">
 		<runtime>
 			<run class="org.eclipse.emf.ecoretools.core.nature.EcoreNature"/>
 		</runtime>
@@ -71,18 +73,18 @@
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard
 			id="org.eclipse.emf.ecoretools.ui.wizards.EcoreProjectWizardID"
-			name="Ecore Project"
+			name="%ecore.project.name"
 			class="org.eclipse.emf.ecoretools.ui.wizards.NewEcoreProjectWizard"
 			category="org.eclipse.emf.ecoretools.diagram"
 			finalPerspective="org.eclipse.emf.ecoretools.perspective"
 			icon="icons/etool16/ecoreprj_wiz.gif"
 			preferredPerspectives="org.eclipse.emf.ecoretools.perspective"
 			project="true">
-			<description>Create Ecore Project</description>
+			<description>%ecore.project.description</description>
 		</wizard>
 		<category
 			id="org.eclipse.emf.ecoretools.diagram"
-			name="Ecore Tools"/>
+			name="%ecore.tools.category"/>
 	</extension>
 
 </plugin>

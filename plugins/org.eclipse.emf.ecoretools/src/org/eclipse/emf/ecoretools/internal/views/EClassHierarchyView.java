@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EClassHierarchyView.java,v 1.4 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -60,6 +62,7 @@ public class EClassHierarchyView extends AnalysisView {
 	/**
 	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 		hierarchyTree = new TreeViewer(parent, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL);
@@ -106,6 +109,7 @@ public class EClassHierarchyView extends AnalysisView {
 	/**
 	 * @see org.eclipse.emf.ecoretools.internal.views.AnalysisView#refresh(org.eclipse.emf.ecore.EObject)
 	 */
+	@Override
 	protected void refresh(EObject object) {
 		// cancel currently running job first, to prevent unnecessary redraw
 		if (refreshJob != null) {
@@ -129,6 +133,7 @@ public class EClassHierarchyView extends AnalysisView {
 			/**
 			 * @see org.eclipse.ui.progress.UIJob#runInUIThread(org.eclipse.core.runtime.IProgressMonitor)
 			 */
+			@Override
 			public IStatus runInUIThread(IProgressMonitor monitor) {
 				if (hierarchyTree.getControl().isDisposed()) {
 					return Status.CANCEL_STATUS;
@@ -164,9 +169,11 @@ public class EClassHierarchyView extends AnalysisView {
 	/**
 	 * @see org.eclipse.emf.ecoretools.internal.views.AnalysisView#fillToolBar(org.eclipse.jface.action.IToolBarManager)
 	 */
+	@Override
 	protected void fillToolBar(IToolBarManager toolBar) {
 		IAction ascendantAction = new Action("Ascendant", IAction.AS_RADIO_BUTTON) {
 
+			@Override
 			public void run() {
 				EClassHierarchyView.this.setKind(ASCENDANT);
 			}
@@ -176,6 +183,7 @@ public class EClassHierarchyView extends AnalysisView {
 
 		IAction descendantAction = new Action("Descendant", IAction.AS_RADIO_BUTTON) {
 
+			@Override
 			public void run() {
 				EClassHierarchyView.this.setKind(DESCENDANT);
 			}

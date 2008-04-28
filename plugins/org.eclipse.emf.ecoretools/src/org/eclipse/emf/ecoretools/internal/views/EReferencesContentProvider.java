@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferencesContentProvider.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;

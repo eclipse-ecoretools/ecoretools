@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreToolsPerspective.java,v 1.4 2008/04/28 08:41:20 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.internal.ui;
 

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: NewEcoreProjectWizard.java,v 1.2 2008/04/28 08:41:20 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.ui.wizards;
 
@@ -79,6 +81,7 @@ public class NewEcoreProjectWizard extends Wizard implements INewWizard {
 	/**
 	 * @see org.eclipse.jface.wizard.Wizard#addPages()
 	 */
+	@Override
 	public void addPages() {
 		super.addPages();
 
@@ -92,6 +95,7 @@ public class NewEcoreProjectWizard extends Wizard implements INewWizard {
 	/**
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
+	@Override
 	public boolean performFinish() {
 		createNewProject();
 
@@ -143,6 +147,7 @@ public class NewEcoreProjectWizard extends Wizard implements INewWizard {
 		// create the new project operation
 		WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
 
+			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException {
 				createProject(description, newProjectHandle, monitor);
 			}
