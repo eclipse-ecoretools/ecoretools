@@ -12,7 +12,7 @@ Export-Package: org.eclipse.emf.ecoretools.diagram.edit.commands;x-internal:=tru
  org.eclipse.emf.ecoretools.diagram.edit.figures;x-internal:=true,
  org.eclipse.emf.ecoretools.diagram.edit.helpers;x-internal:=true,
  org.eclipse.emf.ecoretools.diagram.edit.parts,
- org.eclipse.emf.ecoretools.diagram.edit.policies;x-internal:=true,
+ org.eclipse.emf.ecoretools.diagram.edit.policies;x-friends:="org.eclipse.emf.ecoretools.tests",
  org.eclipse.emf.ecoretools.diagram.expressions;x-internal:=true,
  org.eclipse.emf.ecoretools.diagram.navigator;x-internal:=true,
  org.eclipse.emf.ecoretools.diagram.outline;x-internal:=true,
