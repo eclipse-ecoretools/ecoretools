@@ -8,8 +8,9 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: EcoreDiagramExampleWizard.java,v 1.2 2008/04/28 10:59:51 jlescot Exp $
  **********************************************************************/
-
 package org.eclipse.emf.ecoretools.examples.internal.wizard;
 
 import java.io.IOException;
@@ -89,12 +90,12 @@ public class EcoreDiagramExampleWizard extends Wizard implements INewWizard {
 
 	private IFile createDomainFile() {
 		IContainer container = (IContainer) ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(directorySelectionPage.getContainerName()));
-		URL pluginFileURL = EcoreToolsExamplesPlugin.getDefault().getBundle().getEntry("/models/Ecore.ecore");
+		URL pluginFileURL = EcoreToolsExamplesPlugin.getDefault().getBundle().getEntry("/models/Ecore.ecore"); //$NON-NLS-1$
 		if (pluginFileURL != null) {
 			try {
 				InputStream inStream = pluginFileURL.openStream();
 				// create the IFile for the project file
-				container.getFile(new Path("Ecore.ecore")).create(inStream, true, null);
+				container.getFile(new Path("Ecore.ecore")).create(inStream, true, null); //$NON-NLS-1$
 				inStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -104,17 +105,17 @@ public class EcoreDiagramExampleWizard extends Wizard implements INewWizard {
 				e.printStackTrace();
 			}
 		}
-		return container.getFile(new Path("Ecore.ecore"));
+		return container.getFile(new Path("Ecore.ecore")); //$NON-NLS-1$
 	}
 
 	private IFile createDiagramFile() {
 		IContainer container = (IContainer) ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(directorySelectionPage.getContainerName()));
-		URL pluginFileURL = EcoreToolsExamplesPlugin.getDefault().getBundle().getEntry("/models/Ecore.ecorediag");
+		URL pluginFileURL = EcoreToolsExamplesPlugin.getDefault().getBundle().getEntry("/models/Ecore.ecorediag"); //$NON-NLS-1$
 		if (pluginFileURL != null) {
 			try {
 				InputStream inStream = pluginFileURL.openStream();
 				// create the IFile for the project file
-				container.getFile(new Path("Ecore.ecorediag")).create(inStream, true, null);
+				container.getFile(new Path("Ecore.ecorediag")).create(inStream, true, null); //$NON-NLS-1$
 				inStream.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -124,7 +125,7 @@ public class EcoreDiagramExampleWizard extends Wizard implements INewWizard {
 				e.printStackTrace();
 			}
 		}
-		return container.getFile(new Path("Ecore.ecorediag"));
+		return container.getFile(new Path("Ecore.ecorediag")); //$NON-NLS-1$
 	}
 
 }

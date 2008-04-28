@@ -8,6 +8,8 @@
     
   Contributors: 
   	   Anyware Technologies - Initial API and implementation
+  
+  $Id: plugin.xml,v 1.3 2008/04/28 10:59:51 jlescot Exp $
 -->
 <plugin>
 

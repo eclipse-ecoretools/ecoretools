@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: EcoreDiagramExampleWizardPage.java,v 1.2 2008/04/28 10:59:51 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.examples.internal.wizard;
 
@@ -15,6 +17,7 @@ import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecoretools.examples.Messages;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -52,9 +55,9 @@ public class EcoreDiagramExampleWizardPage extends WizardPage {
 	 * @param selection
 	 */
 	public EcoreDiagramExampleWizardPage(ISelection selection) {
-		super("wizardPage");
-		setTitle("Ecore Tools Example");
-		setDescription("Select the output container resource where the Diagram and Domain files should be created.");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.EcoreDiagramExampleWizardPage_Wizard_title);
+		setDescription(Messages.EcoreDiagramExampleWizardPage_Wizard_description);
 		this.selection = selection;
 	}
 
@@ -68,7 +71,7 @@ public class EcoreDiagramExampleWizardPage extends WizardPage {
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
 		Label label = new Label(container, SWT.NULL);
-		label.setText("&Container:");
+		label.setText(Messages.EcoreDiagramExampleWizardPage_Container);
 
 		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
@@ -81,7 +84,7 @@ public class EcoreDiagramExampleWizardPage extends WizardPage {
 		});
 
 		Button button = new Button(container, SWT.PUSH);
-		button.setText("Browse...");
+		button.setText(Messages.EcoreDiagramExampleWizardPage_Browse);
 		button.addSelectionListener(new SelectionAdapter() {
 
 			public void widgetSelected(SelectionEvent e) {
@@ -121,7 +124,7 @@ public class EcoreDiagramExampleWizardPage extends WizardPage {
 	 * the container field.
 	 */
 	private void handleBrowse() {
-		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, "Select new file container");
+		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), false, Messages.EcoreDiagramExampleWizardPage_SelectNewFileContainer);
 		if (dialog.open() == Window.OK) {
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
@@ -137,15 +140,15 @@ public class EcoreDiagramExampleWizardPage extends WizardPage {
 		IResource container = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(getContainerName()));
 
 		if (getContainerName().length() == 0) {
-			updateStatus("File container must be specified");
+			updateStatus(Messages.EcoreDiagramExampleWizardPage_SpecifyFileContainer);
 			return;
 		}
 		if (container == null || (container.getType() & (IResource.PROJECT | IResource.FOLDER)) == 0) {
-			updateStatus("File container must exist");
+			updateStatus(Messages.EcoreDiagramExampleWizardPage_FileContainerExist);
 			return;
 		}
 		if (!container.isAccessible()) {
-			updateStatus("Project must be writable");
+			updateStatus(Messages.EcoreDiagramExampleWizardPage_ProjectWritable);
 			return;
 		}
 		updateStatus(null);

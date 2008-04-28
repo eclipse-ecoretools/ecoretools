@@ -8,8 +8,9 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: EcoreToolsExamplesPlugin.java,v 1.2 2008/04/28 10:59:51 jlescot Exp $
  **********************************************************************/
-
 package org.eclipse.emf.ecoretools.examples.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
