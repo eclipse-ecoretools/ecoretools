@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: NamespaceSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -92,6 +94,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -101,6 +104,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -118,9 +122,11 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		TextChangeListener listener = new TextChangeListener() {
 
+			@Override
 			public void textChanged(Control control) {
 				handleTextModified();
 			}
@@ -141,6 +147,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 				if (oldNamespace == null || !oldNamespace.equals(newNamespace)) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setNamespace((EStructuralFeature) getEObject(), newNamespace);
 						}
@@ -156,6 +163,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 					if (oldNamespace != null && !oldNamespace.equals(newNamespace)) {
 						editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setNamespace((EStructuralFeature) nextObject, newNamespace);
 							}
@@ -170,6 +178,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -186,6 +195,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -193,6 +203,7 @@ public class NamespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Namespace";
 	}

@@ -8,6 +8,8 @@
     
   Contributors: 
   	   Anyware Technologies - Initial API and implementation
+
+  $Id: plugin.xml,v 1.5 2008/04/28 08:41:45 jlescot Exp $
 -->
 <plugin>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">

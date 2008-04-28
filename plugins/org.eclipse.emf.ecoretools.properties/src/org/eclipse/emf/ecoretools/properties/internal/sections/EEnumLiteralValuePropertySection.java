@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EEnumLiteralValuePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -29,6 +31,7 @@ public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySec
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEEnumLiteral_Value();
 	}
@@ -36,6 +39,7 @@ public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySec
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection#getFeatureInteger()
 	 */
+	@Override
 	protected Integer getFeatureInteger() {
 		return new Integer(((EEnumLiteral) getEObject()).getValue());
 	}
@@ -43,6 +47,7 @@ public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySec
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Value:";
 	}

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: DetailEntryKeyPropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -28,6 +30,7 @@ public class DetailEntryKeyPropertySection extends AbstractStringPropertySection
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Key:";
 	}
@@ -35,6 +38,7 @@ public class DetailEntryKeyPropertySection extends AbstractStringPropertySection
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEStringToStringMapEntry_Key();
 	}

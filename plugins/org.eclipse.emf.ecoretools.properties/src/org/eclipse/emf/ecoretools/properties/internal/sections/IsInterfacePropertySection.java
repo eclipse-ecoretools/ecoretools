@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: IsInterfacePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -26,6 +28,7 @@ public class IsInterfacePropertySection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEClass_Interface();
 	}
@@ -33,6 +36,7 @@ public class IsInterfacePropertySection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Is Interface";
 	}

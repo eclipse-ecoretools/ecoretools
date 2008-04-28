@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EAnnotationPropertySection.java,v 1.4 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -21,7 +23,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.ui.celleditor.ExtendedDialogCellEditor;
-import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
@@ -172,17 +173,13 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		}
 
 		public void dispose() {
+			// Ignore
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			// Ignore
 		}
 	}
-
-	/**
-	 * A boolean that store if refreshing is happening and no model
-	 * modifications should be performed
-	 */
-	private boolean isRefreshing = false;
 
 	private Group groupEAnnotations;
 
@@ -194,7 +191,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 	private EAnnotation currentEAnnotation;
 
-	private Entry currentEntry;
+	private Entry<?, ?> currentEntry;
 
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
@@ -313,7 +310,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof Entry) {
-					return (((Entry) element).getKey() != null) ? ((Entry) element).getKey().toString() : "null";
+					return (((Entry<?, ?>) element).getKey() != null) ? ((Entry<?, ?>) element).getKey().toString() : "null";
 				}
 				return "Unknown";
 			}
@@ -338,6 +335,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		});
 		columnKey.setEditingSupport(new EditingSupport(eAnnotationViewer) {
 
+			@Override
 			protected boolean canEdit(Object element) {
 				if (false == element instanceof Entry) {
 					return false;
@@ -345,6 +343,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				return true;
 			}
 
+			@Override
 			protected CellEditor getCellEditor(Object element) {
 				return textCellEditor;
 			}
@@ -354,7 +353,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				if (false == element instanceof Entry) {
 					return "";
 				}
-				return ((((Entry) element).getKey() == null) ? "" : ((Entry) element).getKey());
+				return ((((Entry<?, ?>) element).getKey() == null) ? "" : ((Entry<?, ?>) element).getKey());
 			}
 
 			@Override
@@ -367,9 +366,10 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				{
 					return;
 				}
-				final Entry entry = (Entry) element;
+				final Entry<?, ?> entry = (Entry<?, ?>) element;
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						currentEAnnotation.getDetails().put(text, entry.getValue().toString());
 						currentEAnnotation.getDetails().remove(entry);
@@ -388,17 +388,19 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		columnValue.getColumn().setText("Value");
 		columnValue.setLabelProvider(new ColumnLabelProvider() {
 
+			@Override
 			public String getText(Object element) {
 				if (false == element instanceof Entry) {
 					return "";
 				}
-				return ((((Entry) element).getValue() == null) ? "" : ((Entry) element).getValue().toString());
+				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue().toString());
 			}
 
 		});
 
 		final DialogCellEditor dialogCellEditor = new ExtendedDialogCellEditor(mapEntryViewer.getTree(), getLabelProvider()) {
 
+			@Override
 			protected Object openDialogBox(Control cellEditorWindow) {
 				MultiLineInputDialog dialog = new MultiLineInputDialog(cellEditorWindow.getShell(), "Entry Value", null, getCurrentEntryValue(), null);
 				dialog.open();
@@ -415,6 +417,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		};
 		columnValue.setEditingSupport(new EditingSupport(eAnnotationViewer) {
 
+			@Override
 			protected boolean canEdit(Object element) {
 				if (false == element instanceof Entry) {
 					return false;
@@ -422,6 +425,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				return true;
 			}
 
+			@Override
 			protected CellEditor getCellEditor(Object element) {
 				return dialogCellEditor;
 			}
@@ -431,7 +435,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				if (false == element instanceof Entry) {
 					return "";
 				}
-				return ((((Entry) element).getValue() == null) ? "" : ((Entry) element).getValue());
+				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue());
 			}
 
 			@Override
@@ -440,9 +444,11 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 					return;
 				}
 				final String text = value.toString();
-				final Entry entry = (Entry) element;
+				@SuppressWarnings("unchecked")
+				final Entry<?, String> entry = (Entry<?, String>) element;
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						entry.setValue(text);
 					}
@@ -466,7 +472,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 					currentEntry = null;
 					return;
 				}
-				currentEntry = (Entry) selection;
+				currentEntry = (Entry<?, ?>) selection;
 			}
 
 		});
@@ -516,6 +522,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		});
 		columnName.setEditingSupport(new EditingSupport(eAnnotationViewer) {
 
+			@Override
 			protected boolean canEdit(Object element) {
 				if (false == element instanceof EAnnotation) {
 					return false;
@@ -523,6 +530,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				return true;
 			}
 
+			@Override
 			protected CellEditor getCellEditor(Object element) {
 				return textCellEditor;
 			}
@@ -547,6 +555,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				final EAnnotation eAnnotation = (EAnnotation) element;
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						eAnnotation.setSource(text);
 					}
@@ -595,6 +604,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 		final DialogCellEditor dialogCellEditor = new ExtendedDialogCellEditor(eAnnotationViewer.getTree(), getLabelProvider()) {
 
+			@Override
 			protected Object openDialogBox(Control cellEditorWindow) {
 				FeatureEditorDialog dialog = new FeatureEditorDialog(cellEditorWindow.getShell(), labelProvider, currentEAnnotation, EcorePackage.eINSTANCE.getEAnnotation_References(),
 						"Choose references", getPotentialReferences());
@@ -619,6 +629,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 			private ILabelProvider labelProvider = getLabelProvider();
 
+			@Override
 			protected boolean canEdit(Object element) {
 				if (false == element instanceof EAnnotation) {
 					return false;
@@ -626,6 +637,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				return true;
 			}
 
+			@Override
 			protected CellEditor getCellEditor(Object element) {
 				return dialogCellEditor;
 			}
@@ -651,10 +663,13 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				final EAnnotation eAnnotation = (EAnnotation) element;
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						if (value instanceof List) {
 							eAnnotation.getReferences().clear();
-							eAnnotation.getReferences().addAll((List) value);
+							@SuppressWarnings("unchecked")
+							List<EObject> eObjectValues = (List<EObject>) value;
+							eAnnotation.getReferences().addAll(eObjectValues);
 						}
 					}
 				});
@@ -684,14 +699,14 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		});
 	}
 
-	private Collection getEAnnotations() {
+	private Collection<? extends EAnnotation> getEAnnotations() {
 		if (getEObject() instanceof EModelElement) {
 			return ((EModelElement) getEObject()).getEAnnotations();
 		}
 		return Collections.emptyList();
 	}
 
-	private Collection getMapEntries() {
+	private Collection<Map.Entry<String, String>> getMapEntries() {
 		if (currentEAnnotation != null) {
 			return currentEAnnotation.getDetails();
 		}
@@ -707,6 +722,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		TreeViewerFocusCellManager focusCellManager = new TreeViewerFocusCellManager(treeViewer, new FocusCellOwnerDrawHighlighter(treeViewer));
 		ColumnViewerEditorActivationStrategy actSupport = new ColumnViewerEditorActivationStrategy(treeViewer) {
 
+			@Override
 			protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
 				return event.eventType == ColumnViewerEditorActivationEvent.TRAVERSAL || event.eventType == ColumnViewerEditorActivationEvent.MOUSE_CLICK_SELECTION
 						|| (event.eventType == ColumnViewerEditorActivationEvent.KEY_PRESSED && event.keyCode == SWT.CR) || event.eventType == ColumnViewerEditorActivationEvent.PROGRAMMATIC;
@@ -742,6 +758,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				setDefaultNameForElement((EModelElement) getEObject(), newEAnnotation);
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						((EModelElement) getEObject()).getEAnnotations().add(newEAnnotation);
 					}
@@ -778,6 +795,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				}
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						((EModelElement) getEObject()).getEAnnotations().remove(currentEAnnotation);
 					}
@@ -810,6 +828,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				}
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						currentEAnnotation.getDetails().put(getKeyString(currentEAnnotation), "");
 					}
@@ -820,8 +839,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 			private String getKeyString(EAnnotation container) {
 				int count = 0;
-				for (Iterator it = container.getDetails().iterator(); it.hasNext();) {
-					BasicEMap.Entry eDetail = (BasicEMap.Entry) it.next();
+				for (Map.Entry<String, String> eDetail : container.getDetails()) {
 					if (eDetail.getKey() != null) {
 						if (eDetail.getKey().equals(baseString + count)) {
 							count++;
@@ -847,6 +865,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				}
 				getEditingDomain().getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+					@Override
 					protected void doExecute() {
 						currentEAnnotation.getDetails().remove(currentEntry);
 					}
@@ -862,12 +881,11 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 		return new TabbedPropertiesLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
 
+	@Override
 	public void refresh() {
-		isRefreshing = true;
 		super.refresh();
 		eAnnotationViewer.setInput(getEAnnotations());
 		mapEntryViewer.setInput(getMapEntries());
-		isRefreshing = false;
 	}
 
 }

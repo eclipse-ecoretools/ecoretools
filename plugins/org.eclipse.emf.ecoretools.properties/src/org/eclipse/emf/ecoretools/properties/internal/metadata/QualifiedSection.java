@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: QualifiedSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -32,6 +34,7 @@ public class QualifiedSection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -39,6 +42,7 @@ public class QualifiedSection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection#getFeatureValue()
 	 */
+	@Override
 	protected boolean getFeatureValue() {
 		return ExtendedMetaData.INSTANCE.isQualified((EPackage) getEObject());
 	}
@@ -46,6 +50,7 @@ public class QualifiedSection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Qualified";
 	}
@@ -53,12 +58,14 @@ public class QualifiedSection extends AbstractBooleanPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection#handleCheckButtonModified()
 	 */
+	@Override
 	protected void handleCheckButtonModified() {
 		EditingDomain editingDomain = (EditingDomain) getPart().getAdapter(EditingDomain.class);
 		final boolean newValue = getCheckButton().getSelection();
 		if (getEObjectList().size() == 1) {
 			editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+				@Override
 				protected void doExecute() {
 					ExtendedMetaData.INSTANCE.setQualified((EPackage) getEObject(), newValue);
 				}
@@ -69,6 +76,7 @@ public class QualifiedSection extends AbstractBooleanPropertySection {
 			for (final EObject nextObject : getEObjectList()) {
 				editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+					@Override
 					protected void doExecute() {
 						ExtendedMetaData.INSTANCE.setQualified((EPackage) nextObject, newValue);
 					}

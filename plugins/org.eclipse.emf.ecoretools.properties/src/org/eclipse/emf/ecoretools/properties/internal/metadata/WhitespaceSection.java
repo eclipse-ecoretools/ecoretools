@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: WhitespaceSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -95,6 +97,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -104,6 +107,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -121,6 +125,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		whitespaceCb.addModifyListener(new ModifyListener() {
 
@@ -142,6 +147,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 				if (oldWhitespace != newWhitespace) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setWhiteSpaceFacet((EDataType) getEObject(), newWhitespace);
 						}
@@ -157,6 +163,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 					if (oldWhitespace != newWhitespace) {
 						compoundCommand.append(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setWhiteSpaceFacet((EDataType) nextObject, newWhitespace);
 							}
@@ -171,6 +178,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -184,6 +192,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -191,6 +200,7 @@ public class WhitespaceSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Whitespace";
 	}

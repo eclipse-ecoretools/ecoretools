@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ProcessingKindSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -58,6 +60,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -67,6 +70,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -84,6 +88,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		processingKindCb.addModifyListener(new ModifyListener() {
 
@@ -105,6 +110,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 				if (oldProcessingKind != newProcessingKind) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setProcessingKind((EStructuralFeature) getEObject(), newProcessingKind);
 						}
@@ -120,6 +126,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 					if (oldProcessingKind != newProcessingKind) {
 						compoundCommand.append(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setProcessingKind((EStructuralFeature) nextObject, newProcessingKind);
 							}
@@ -134,6 +141,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -164,6 +172,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -171,6 +180,7 @@ public class ProcessingKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Processing Kind";
 	}

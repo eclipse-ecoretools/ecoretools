@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ContentKindSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -93,6 +95,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -102,6 +105,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -119,6 +123,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		contentKindCb.addModifyListener(new ModifyListener() {
 
@@ -140,6 +145,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 				if (oldContentKind != newContentKind) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setContentKind((EClass) getEObject(), newContentKind);
 						}
@@ -155,6 +161,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 					if (oldContentKind != newContentKind) {
 						compoundCommand.append(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setContentKind((EClass) nextObject, newContentKind);
 							}
@@ -169,6 +176,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -180,7 +188,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * Gets the respectif index of the key inside this array. It returns -1 when
+	 * Gets the respect if index of the key inside this array. It returns -1 when
 	 * the key is not find inside the array
 	 * 
 	 * @param key
@@ -199,6 +207,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -206,6 +215,7 @@ public class ContentKindSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Content Kind";
 	}

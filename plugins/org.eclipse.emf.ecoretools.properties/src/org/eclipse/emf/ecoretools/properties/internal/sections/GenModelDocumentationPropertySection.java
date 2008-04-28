@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: GenModelDocumentationPropertySection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -50,6 +52,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "GenModel Documentation:";
 	}
@@ -57,6 +60,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEAnnotation_Source();
 	}
@@ -64,6 +68,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		commentsText = new Text(composite, SWT.BORDER | SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 
@@ -71,10 +76,12 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 
 			private String previousComment;
 
+			@Override
 			public void focusGained(FocusEvent e) {
 				previousComment = commentsText.getText();
 			}
 
+			@Override
 			public void focusLost(FocusEvent e) {
 				if (!commentsText.getText().equals(previousComment)) {
 					handleDocChanged();
@@ -88,6 +95,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -100,6 +108,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#shouldUseExtraSpace()
 	 */
+	@Override
 	public boolean shouldUseExtraSpace() {
 		return true;
 	}
@@ -107,6 +116,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		commentsText.setText("");
 		commentsText.setEnabled(getEObject() != null);
@@ -147,6 +157,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 		/**
 		 * @see org.eclipse.emf.common.command.AbstractCommand#canExecute()
 		 */
+		@Override
 		public boolean canExecute() {
 			return true;
 		}
@@ -154,6 +165,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 		/**
 		 * @see org.eclipse.emf.common.command.AbstractCommand#canUndo()
 		 */
+		@Override
 		public boolean canUndo() {
 			return true;
 		}
@@ -214,6 +226,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 		/**
 		 * @see org.eclipse.emf.common.command.AbstractCommand#undo()
 		 */
+		@Override
 		public void undo() {
 			changeDocumentation(element, oldComments);
 		}

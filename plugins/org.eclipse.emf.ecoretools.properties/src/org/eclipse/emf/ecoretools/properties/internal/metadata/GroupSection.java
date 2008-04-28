@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: GroupSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -35,6 +37,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -42,6 +45,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Group";
 	}
@@ -49,6 +53,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
 	 */
+	@Override
 	protected Object[] getComboFeatureValues() {
 		return getChoices(getEObject(), EcorePackage.eINSTANCE.getEStructuralFeature());
 	}
@@ -56,6 +61,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
 	 */
+	@Override
 	protected ILabelProvider getLabelProvider() {
 		return new AdapterFactoryLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
@@ -63,6 +69,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
 	 */
+	@Override
 	protected Object getFeatureValue() {
 		return ExtendedMetaData.INSTANCE.getGroup((EStructuralFeature) getEObject());
 	}
@@ -70,6 +77,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 	/**
 	 * Handle the combo modified event.
 	 */
+	@Override
 	protected void handleComboModified() {
 		if (!isRefreshing()) {
 			final Object newGroup = getCSingleObjectChooser().getSelection();
@@ -79,6 +87,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 				if (oldGroup != newGroup) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setGroup((EStructuralFeature) getEObject(), (EStructuralFeature) newGroup);
 						}
@@ -92,6 +101,7 @@ public class GroupSection extends AbstractChooserPropertySection {
 					if (oldGroup != newGroup) {
 						editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setGroup((EStructuralFeature) nextObject, (EStructuralFeature) newGroup);
 							}

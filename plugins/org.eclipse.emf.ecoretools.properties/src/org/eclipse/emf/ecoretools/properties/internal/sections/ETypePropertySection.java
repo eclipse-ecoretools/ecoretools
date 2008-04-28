@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ETypePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -35,6 +37,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getETypedElement_EType();
 	}
@@ -42,6 +45,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "EType:";
 	}
@@ -49,6 +53,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
 	 */
+	@Override
 	protected Object[] getComboFeatureValues() {
 		for (Adapter adapter : getEObject().eAdapters()) {
 			if (adapter instanceof ItemProviderAdapter) {
@@ -64,6 +69,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
 	 */
+	@Override
 	protected ILabelProvider getLabelProvider() {
 		return new AdapterFactoryLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
@@ -71,6 +77,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
 	 */
+	@Override
 	protected Object getFeatureValue() {
 		return ((ETypedElement) getEObject()).getEType();
 	}

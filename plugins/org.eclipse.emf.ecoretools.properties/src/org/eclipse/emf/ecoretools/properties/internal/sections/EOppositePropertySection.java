@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EOppositePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -35,6 +37,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEReference_EOpposite();
 	}
@@ -42,6 +45,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "EOpposite:";
 	}
@@ -49,6 +53,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
 	 */
+	@Override
 	protected Object[] getComboFeatureValues() {
 		return getPropertyDescriptor() != null ? getPropertyDescriptor().getChoiceOfValues(getEObject()).toArray() : new String[] { "" };
 	}
@@ -60,6 +65,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	 * 
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#handleComboModified()
 	 */
+	@Override
 	protected void handleComboModified() {
 		if (!isRefreshing() && getFeatureValue() != getCSingleObjectChooser().getSelection() && getEObjectList().size() == 1) {
 			if (getPropertyDescriptor() != null) {
@@ -85,6 +91,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
 	 */
+	@Override
 	protected ILabelProvider getLabelProvider() {
 		return new AdapterFactoryLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
@@ -92,6 +99,7 @@ public class EOppositePropertySection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
 	 */
+	@Override
 	protected Object getFeatureValue() {
 		return ((EReference) getEObject()).getEOpposite();
 	}

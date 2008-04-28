@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ItemTypeSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -36,6 +38,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -43,6 +46,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Item Type";
 	}
@@ -50,6 +54,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
 	 */
+	@Override
 	protected Object[] getComboFeatureValues() {
 		return getChoices(getEObject(), EcorePackage.eINSTANCE.getEDataType());
 	}
@@ -57,6 +62,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
 	 */
+	@Override
 	protected ILabelProvider getLabelProvider() {
 		return new AdapterFactoryLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
@@ -64,6 +70,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
 	 */
+	@Override
 	protected Object getFeatureValue() {
 		return ExtendedMetaData.INSTANCE.getItemType((EDataType) getEObject());
 	}
@@ -71,6 +78,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	/**
 	 * Handle the combo modified event.
 	 */
+	@Override
 	protected void handleComboModified() {
 		if (!isRefreshing()) {
 			final Object newItemType = getCSingleObjectChooser().getSelection();
@@ -80,6 +88,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 				if (oldItemType != newItemType) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setItemType((EDataType) getEObject(), (EDataType) newItemType);
 						}
@@ -93,6 +102,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 					if (oldItemType != newItemType) {
 						editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setItemType((EDataType) nextObject, (EDataType) newItemType);
 							}

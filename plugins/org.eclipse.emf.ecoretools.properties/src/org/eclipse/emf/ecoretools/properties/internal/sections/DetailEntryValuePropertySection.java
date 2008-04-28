@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: DetailEntryValuePropertySection.java,v 1.2 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -29,6 +31,7 @@ public class DetailEntryValuePropertySection extends AbstractStringPropertySecti
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Value:";
 	}
@@ -36,6 +39,7 @@ public class DetailEntryValuePropertySection extends AbstractStringPropertySecti
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEStringToStringMapEntry_Value();
 	}
@@ -43,6 +47,7 @@ public class DetailEntryValuePropertySection extends AbstractStringPropertySecti
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getStyle()
 	 */
+	@Override
 	protected int getStyle() {
 		return SWT.MULTI | SWT.WRAP;
 	}
@@ -50,6 +55,7 @@ public class DetailEntryValuePropertySection extends AbstractStringPropertySecti
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#shouldUseExtraSpace()
 	 */
+	@Override
 	public boolean shouldUseExtraSpace() {
 		return true;
 	}

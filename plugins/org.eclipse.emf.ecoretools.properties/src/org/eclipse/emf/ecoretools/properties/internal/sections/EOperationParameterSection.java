@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EOperationParameterSection.java,v 1.3 2008/04/28 08:41:45 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -98,6 +100,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		super.createWidgets(composite);
 		groupDetails = getWidgetFactory().createGroup(composite, "Parameter Details");
@@ -109,6 +112,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		super.setSectionData(composite);
 		FormData data = new FormData();
@@ -144,10 +148,12 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#hookListeners()
 	 */
+	@Override
 	protected void hookListeners() {
 		// Add the Listener for the eparameter name
 		TextChangeListener parameterNameListener = new TextChangeListener() {
 
+			@Override
 			public void textChanged(Control control) {
 				String newText = parameterNameTxt.getText();
 				EParameter parameter = (EParameter) getTable().getSelectionItem();
@@ -166,6 +172,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 			/**
 			 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
 			 */
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleComboModified();
 			}
@@ -198,6 +205,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#getLabelProvider()
 	 */
+	@Override
 	protected IBaseLabelProvider getLabelProvider() {
 		return new TabbedPropertiesLabelProvider(new EcoreItemProviderAdapterFactory());
 	}
@@ -205,6 +213,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#getListValues()
 	 */
+	@Override
 	protected Object getListValues() {
 		return ((EOperation) getEObject()).getEParameters();
 	}
@@ -212,6 +221,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getEOperation_EParameters();
 	}
@@ -219,6 +229,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Parameters";
 	}
@@ -226,6 +237,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 		super.refresh();
@@ -241,6 +253,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#updateSelection(java.lang.Object)
 	 */
+	@Override
 	public void updateSelection(Object data) {
 		if (data instanceof EParameter) {
 			EParameter parameter = (EParameter) data;

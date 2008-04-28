@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: MinExclusiveSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -93,6 +95,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -102,6 +105,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -119,9 +123,11 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		TextChangeListener listener = new TextChangeListener() {
 
+			@Override
 			public void textChanged(Control control) {
 				handleTextModified();
 			}
@@ -142,6 +148,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 				if ((oldConstraint != null && !oldConstraint.equals(newConstraint)) || (oldConstraint == null && newConstraint != null)) {
 					editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+						@Override
 						protected void doExecute() {
 							ExtendedMetaData.INSTANCE.setMinExclusiveFacet((EDataType) getEObject(), newConstraint);
 						}
@@ -157,6 +164,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 					if ((oldConstraint != null && !oldConstraint.equals(newConstraint)) || (oldConstraint == null && newConstraint != null)) {
 						editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setMinExclusiveFacet((EDataType) nextObject, newConstraint);
 							}
@@ -179,6 +187,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -194,6 +203,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -201,6 +211,7 @@ public class MinExclusiveSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Minimum(exclusive) constraint";
 	}

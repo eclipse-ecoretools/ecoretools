@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: FractionDigitsSection.java,v 1.2 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -94,6 +96,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void createWidgets(Composite composite) {
 		labelTxt = getWidgetFactory().createCLabel(composite, getLabelText());
 
@@ -103,6 +106,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	protected void setSectionData(Composite composite) {
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, 0);
@@ -120,9 +124,11 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * Adds the listeners on the widgets
 	 */
+	@Override
 	protected void hookListeners() {
 		TextChangeListener listener = new TextChangeListener() {
 
+			@Override
 			public void textChanged(Control control) {
 				handleTextModified();
 			}
@@ -148,6 +154,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 					if (oldFraction != newFraction) {
 						editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(getEObject().eResource()) {
 
+							@Override
 							protected void doExecute() {
 								ExtendedMetaData.INSTANCE.setFractionDigitsFacet((EDataType) getEObject(), newFraction);
 							}
@@ -163,6 +170,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 						if (oldFraction != newFraction) {
 							editingDomain.getCommandStack().execute(new EMFRecordingChangeCommand(nextObject.eResource()) {
 
+								@Override
 								protected void doExecute() {
 									ExtendedMetaData.INSTANCE.setFractionDigitsFacet((EDataType) nextObject, newFraction);
 								}
@@ -180,6 +188,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
+	@Override
 	public void refresh() {
 		isRefreshing = true;
 
@@ -191,6 +200,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return null;
 	}
@@ -198,6 +208,7 @@ public class FractionDigitsSection extends AbstractTabbedPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Fraction Digits";
 	}

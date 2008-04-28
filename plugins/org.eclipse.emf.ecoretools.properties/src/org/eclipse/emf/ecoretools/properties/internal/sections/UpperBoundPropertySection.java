@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: UpperBoundPropertySection.java,v 1.3 2008/04/28 08:41:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -40,6 +42,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
+	@Override
 	protected EStructuralFeature getFeature() {
 		return EcorePackage.eINSTANCE.getETypedElement_UpperBound();
 	}
@@ -47,6 +50,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection#getFeatureInteger()
 	 */
+	@Override
 	protected Integer getFeatureInteger() {
 		return new Integer(((ETypedElement) getEObject()).getUpperBound());
 	}
@@ -54,6 +58,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
+	@Override
 	protected String getLabelText() {
 		return "Upper Bound:";
 	}
@@ -61,6 +66,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#isTextValid()
 	 */
+	@Override
 	protected boolean isTextValid() {
 		return UPPER_PATTERN.matcher(getText().getText()).matches();
 	}
@@ -68,6 +74,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getNewFeatureValue(java.lang.String)
 	 */
+	@Override
 	protected Object getNewFeatureValue(String newText) {
 		String text = newText;
 		if ("*".equals(newText)) {
@@ -81,6 +88,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	/**
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeatureAsString()
 	 */
+	@Override
 	protected String getFeatureAsString() {
 		Integer upper = getFeatureInteger();
 		if (upper.intValue() == -1) {
