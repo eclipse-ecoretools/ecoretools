@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: EMFRecordingChangeCommand.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties;
@@ -39,7 +41,7 @@ public abstract class EMFRecordingChangeCommand extends AbstractCommand {
 	 * @param resource
 	 */
 	public EMFRecordingChangeCommand(Resource resource) {
-		super("Recording Change Command");
+		super(Messages.EMFRecordingChangeCommand_RecordingChangeCommand);
 		recorder = new ChangeRecorder();
 		notifiers = Collections.singleton(resource);
 	}

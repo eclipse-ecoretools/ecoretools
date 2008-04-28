@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractTabbedPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -405,7 +407,7 @@ public abstract class AbstractTabbedPropertySection extends AbstractPropertySect
 	 * 
 	 */
 	protected void setDecorator(Control control, String message, int type) {
-		messageManager.addMessage("", message, null, type, control);
+		messageManager.addMessage("", message, null, type, control); //$NON-NLS-1$
 	}
 
 	/**

@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: TableObjectManager.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.internal.sections;
@@ -37,6 +39,7 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.ui.celleditor.FeatureEditorDialog;
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.emf.tabbedproperties.sections.widgets.ChooseDialog;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.window.Window;
@@ -291,13 +294,13 @@ public class TableObjectManager {
 			newElement = new Integer(0);
 			break;
 		case B_INT:
-			newElement = new BigInteger("0");
+			newElement = new BigInteger("0"); //$NON-NLS-1$
 			break;
 		case DBL:
 			newElement = new Double(0);
 			break;
 		case STR:
-			newElement = "New String";
+			newElement = Messages.TableObjectManager_NewString;
 			break;
 		case REF:
 			if (((EClass) type).isAbstract()) {
@@ -359,7 +362,7 @@ public class TableObjectManager {
 	public List<?> chooseObjectsFromDialog() {
 		Collection<EObject> choiceOfValues = ItemPropertyDescriptor.getReachableObjectsOfType(inputEObject, feature.getEType());
 		Shell shell = Display.getDefault().getActiveShell();
-		String displayName = "Choose the objects to add";
+		String displayName = Messages.TableObjectManager_ChooseObjectsToAdd;
 		List<?> choices = new ArrayList<EObject>(choiceOfValues);
 		FeatureEditorDialog dialog = new FeatureEditorDialog(shell, labelProvider, inputEObject, feature, displayName, choices);
 		dialog.open();

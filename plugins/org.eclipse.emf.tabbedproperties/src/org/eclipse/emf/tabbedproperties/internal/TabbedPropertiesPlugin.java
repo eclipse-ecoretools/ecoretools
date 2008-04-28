@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: TabbedPropertiesPlugin.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.internal;
@@ -22,7 +24,7 @@ import org.osgi.framework.BundleContext;
 public class TabbedPropertiesPlugin extends AbstractUIPlugin {
 
 	/** The plug-in ID */
-	public static final String PLUGIN_ID = "org.eclipse.emf.tabbedproperties";
+	public static final String PLUGIN_ID = "org.eclipse.emf.tabbedproperties"; //$NON-NLS-1$
 
 	/** The shared instance */
 	private static TabbedPropertiesPlugin plugin;

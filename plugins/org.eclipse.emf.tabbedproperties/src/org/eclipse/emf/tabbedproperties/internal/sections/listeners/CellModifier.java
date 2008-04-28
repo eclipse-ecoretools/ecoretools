@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: CellModifier.java,v 1.2 2008/04/28 12:19:09 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.internal.sections.listeners;
@@ -89,7 +91,7 @@ public class CellModifier implements ICellModifier {
 		} else if (oldValue instanceof Integer) {
 			int i = Integer.parseInt((String) value);
 			newValue = new Integer(i);
-			item.setText(i + "");
+			item.setText(i + ""); //$NON-NLS-1$
 			item.setData(newValue);
 		} else if (oldValue instanceof BigInteger) {
 			newValue = new BigInteger((String) value);

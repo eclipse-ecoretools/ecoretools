@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractChooserPropertySection.java,v 1.3 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -196,7 +198,7 @@ public abstract class AbstractChooserPropertySection extends AbstractTabbedPrope
 	 */
 	protected Object[] getChoices(EObject object, EClassifier type) {
 		List<Object> choices = new ArrayList<Object>();
-		choices.add("");
+		choices.add(""); //$NON-NLS-1$
 		choices.addAll(ItemPropertyDescriptor.getReachableObjectsOfType(getEObject(), type));
 
 		return choices.toArray();

@@ -5,15 +5,18 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractIntegerPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.emf.tabbedproperties.internal.utils.ColorRegistry;
 import org.eclipse.swt.widgets.Event;
 
@@ -39,12 +42,12 @@ public abstract class AbstractIntegerPropertySection extends AbstractTextPropert
 	 */
 	protected void verifyField(Event e) {
 		String value = getText().getText();
-		if (value == null || value.equals("") || isTextValid()) {
+		if (value == null || value.equals("") || isTextValid()) { //$NON-NLS-1$
 			setErrorMessage(null);
 			getText().setBackground(null);
 			e.doit = true;
 		} else {
-			setErrorMessage("The character is not valid!!!");
+			setErrorMessage(Messages.AbstractIntegerPropertySection_UnvalidCharacter);
 			getText().setBackground(ColorRegistry.COLOR_ERROR);
 			e.doit = false;
 		}

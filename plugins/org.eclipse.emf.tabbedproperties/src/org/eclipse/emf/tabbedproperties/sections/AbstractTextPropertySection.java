@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractTextPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -64,7 +66,7 @@ public abstract class AbstractTextPropertySection extends AbstractTabbedProperty
 	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
 	protected void createWidgets(Composite composite) {
-		text = getWidgetFactory().createText(composite, "", getStyle());
+		text = getWidgetFactory().createText(composite, "", getStyle()); //$NON-NLS-1$
 
 		if (getFeature() != null) {
 			boolean isChangeable = getFeature().isChangeable();

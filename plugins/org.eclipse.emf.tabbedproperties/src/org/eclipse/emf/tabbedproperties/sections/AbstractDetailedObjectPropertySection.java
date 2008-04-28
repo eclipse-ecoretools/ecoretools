@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractDetailedObjectPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -19,6 +21,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.command.CommandParameter;
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
 import org.eclipse.emf.tabbedproperties.sections.widgets.ChooseDialog;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -171,11 +174,11 @@ public abstract class AbstractDetailedObjectPropertySection extends AbstractTabb
 	protected void createWidgets(Composite composite) {
 		// The Widget used to select/create the corresponding Constraint
 		nameLabel = getWidgetFactory().createCLabel(composite, getLabelText());
-		text = getWidgetFactory().createText(composite, "", SWT.READ_ONLY);
-		createButton = getWidgetFactory().createButton(composite, "Create ...", SWT.NONE);
+		text = getWidgetFactory().createText(composite, "", SWT.READ_ONLY); //$NON-NLS-1$
+		createButton = getWidgetFactory().createButton(composite, Messages.AbstractDetailedObjectPropertySection_Create, SWT.NONE);
 
 		// The group that is used to edit the Details of the selected Constraint
-		groupDetails = getWidgetFactory().createGroup(composite, "Details");
+		groupDetails = getWidgetFactory().createGroup(composite, Messages.AbstractDetailedObjectPropertySection_Details);
 		groupDetails.setLayout(new GridLayout());
 
 	}
@@ -220,11 +223,11 @@ public abstract class AbstractDetailedObjectPropertySection extends AbstractTabb
 	}
 
 	private String updateConstraintText() {
-		String name = "";
+		String name = ""; //$NON-NLS-1$
 		if (getRelatedEObject() != null) {
 			name = getLabelProvider().getText(getRelatedEObject());
 			if (name == null) {
-				name = "";
+				name = ""; //$NON-NLS-1$
 			}
 		}
 		return name;

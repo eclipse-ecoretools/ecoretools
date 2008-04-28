@@ -5,13 +5,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: GoToReferenceComposite.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
 
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -48,7 +51,7 @@ public class GoToReferenceComposite extends CSingleObjectChooser {
 	protected void createContents(Composite parent) {
 		super.createContents(parent);
 
-		goToBt = getWidgetFactory().createButton(parent, "GoTo->", SWT.PUSH);
+		goToBt = getWidgetFactory().createButton(parent, Messages.GoToReferenceComposite_GoTo, SWT.PUSH);
 	}
 
 	/**

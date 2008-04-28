@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractFileChooserPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -21,6 +23,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.emf.tabbedproperties.internal.TabbedPropertiesPlugin;
 import org.eclipse.emf.tabbedproperties.sections.widgets.FileChooser;
 import org.eclipse.swt.SWT;
@@ -171,16 +174,16 @@ public abstract class AbstractFileChooserPropertySection extends AbstractTabbedP
 		List<IStatus> statusList = new ArrayList<IStatus>();
 		if (isCheckFileExistence()) {
 			String selection = fileChooser.getSelection();
-			if (selection != null && !"".equals(selection)) {
+			if (selection != null && !"".equals(selection)) { //$NON-NLS-1$
 				File file = new File(selection);
 				if (!file.exists()) {
-					statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + " does not exist!"));
+					statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + Messages.AbstractFileChooserPropertySection_NotExist));
 				}
 				if (!file.isFile()) {
-					statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + " cannot be a directory!"));
+					statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + Messages.AbstractFileChooserPropertySection_NotADirectory));
 				}
 			} else if (cannotBeBlank()) {
-				statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + " cannot be blank!"));
+				statusList.add(new Status(IStatus.ERROR, TabbedPropertiesPlugin.PLUGIN_ID, getLabelText() + Messages.AbstractFileChooserPropertySection_NotBlank));
 			}
 		}
 		List<IStatus> emptyList = Collections.emptyList();

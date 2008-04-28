@@ -5,13 +5,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: SearchableTree.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
 
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -64,7 +67,7 @@ public class SearchableTree extends Composite {
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			String searchedText = SearchableTree.this.searchField.getText();
 			boolean isCaseSensitive = SearchableTree.this.sensitiveBt.getSelection();
-			if (searchedText != null & !"".equals(searchedText)) {
+			if (searchedText != null & !"".equals(searchedText)) { //$NON-NLS-1$
 				IBaseLabelProvider provider = treeViewer.getLabelProvider();
 				if (provider instanceof ILabelProvider) {
 					String text = ((ILabelProvider) provider).getText(element);
@@ -136,14 +139,14 @@ public class SearchableTree extends Composite {
 
 		// Create search zone
 		Label searchLbl = new Label(main, SWT.NONE);
-		searchLbl.setText("Search : ");
+		searchLbl.setText(Messages.SearchableTree_Search);
 
 		this.searchField = new Text(main, SWT.BORDER);
 		this.searchField.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// Create case sensitive checkbox
 		this.sensitiveBt = new Button(main, SWT.CHECK);
-		this.sensitiveBt.setText("Case sensitive");
+		this.sensitiveBt.setText(Messages.SearchableTree_CaseSensitive);
 		this.sensitiveBt.setSelection(caseSensitive);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 2;

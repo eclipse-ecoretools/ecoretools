@@ -5,13 +5,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: ReferenceViewerComposite.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
 
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -51,7 +54,7 @@ public class ReferenceViewerComposite extends TableViewerComposite {
 		final Composite comp = getWidgetFactory().createComposite(parent);
 		comp.setLayout(new GridLayout());
 
-		selectButton = getWidgetFactory().createButton(comp, "Select...", SWT.NONE);
+		selectButton = getWidgetFactory().createButton(comp, Messages.ReferenceViewerComposite_Select, SWT.NONE);
 		selectButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		hookButtonListeners();
 	}

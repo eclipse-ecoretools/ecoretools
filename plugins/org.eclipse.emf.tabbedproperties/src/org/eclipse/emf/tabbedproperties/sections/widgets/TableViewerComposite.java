@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: TableViewerComposite.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
@@ -23,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.tabbedproperties.AbstractTabbedPropertySheetPage;
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.emf.tabbedproperties.internal.sections.TableObjectManager;
 import org.eclipse.emf.tabbedproperties.internal.sections.listeners.CellModifier;
 import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
@@ -270,7 +273,7 @@ public class TableViewerComposite extends Composite {
 				text.addVerifyListener(new VerifyListener() {
 
 					public void verifyText(VerifyEvent e) {
-						e.doit = "0123456789".indexOf(e.text) >= 0;
+						e.doit = "0123456789".indexOf(e.text) >= 0; //$NON-NLS-1$
 					}
 				});
 				editors[i] = cellEditor;
@@ -310,7 +313,7 @@ public class TableViewerComposite extends Composite {
 	 *            the parent Composite
 	 */
 	protected void createAddButton(Composite comp) {
-		addButton = widgetFactory.createButton(comp, "Add", SWT.NONE);
+		addButton = widgetFactory.createButton(comp, Messages.TableViewerComposite_Add, SWT.NONE);
 		addButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 
@@ -321,7 +324,7 @@ public class TableViewerComposite extends Composite {
 	 *            the parent Composite
 	 */
 	protected void createRemoveButton(Composite comp) {
-		removeButton = widgetFactory.createButton(comp, "Remove", SWT.NONE);
+		removeButton = widgetFactory.createButton(comp, Messages.TableViewerComposite_Remove, SWT.NONE);
 		removeButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 	}
 

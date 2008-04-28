@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: FileChooser.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
@@ -70,7 +72,7 @@ public class FileChooser extends Composite {
 
 		this.widgetFactory = factory;
 		// default no filter
-		setFilterExtensions(new String[] { "*.*" });
+		setFilterExtensions(new String[] { "*.*" }); //$NON-NLS-1$
 		createContents(this);
 		widgetFactory.adapt(this);
 		hookListeners();
@@ -86,10 +88,10 @@ public class FileChooser extends Composite {
 	protected void createContents(Composite parent) {
 		setLayout(parent);
 
-		field = widgetFactory.createText(parent, "", SWT.FLAT | SWT.BORDER | SWT.READ_ONLY);
+		field = widgetFactory.createText(parent, "", SWT.FLAT | SWT.BORDER | SWT.READ_ONLY); //$NON-NLS-1$
 		field.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		chooseBt = widgetFactory.createButton(parent, "...", SWT.PUSH);
+		chooseBt = widgetFactory.createButton(parent, "...", SWT.PUSH); //$NON-NLS-1$
 	}
 
 	/**
@@ -233,7 +235,7 @@ public class FileChooser extends Composite {
 	 *            boolean update text field if true
 	 */
 	public void setSelection(String selection, boolean updateField) {
-		String name = "";
+		String name = ""; //$NON-NLS-1$
 		if (selection != null) {
 			name = selection;
 		}
@@ -329,9 +331,9 @@ public class FileChooser extends Composite {
 	public void setStatus(List<IStatus> statusList) {
 		if (statusList != null && !statusList.isEmpty()) {
 			int severity = -1;
-			String toolTip = "";
+			String toolTip = ""; //$NON-NLS-1$
 			for (IStatus status : statusList) {
-				toolTip = "* " + status.getMessage() + "\n";
+				toolTip = "* " + status.getMessage() + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
 				if (severity != IStatus.ERROR) {
 					severity = status.getSeverity();
 				}
@@ -343,7 +345,7 @@ public class FileChooser extends Composite {
 				field.setBackground(ColorRegistry.COLOR_WARNING);
 			}
 		} else {
-			field.setToolTipText("");
+			field.setToolTipText(""); //$NON-NLS-1$
 			field.setBackground(ColorRegistry.COLOR_WHITE);
 		}
 	}

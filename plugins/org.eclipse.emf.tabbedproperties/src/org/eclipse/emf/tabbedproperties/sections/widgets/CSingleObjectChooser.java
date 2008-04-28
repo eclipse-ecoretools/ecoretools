@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: CSingleObjectChooser.java,v 1.3 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
@@ -83,10 +85,10 @@ public class CSingleObjectChooser extends Composite {
 	protected void createContents(Composite parent) {
 		setLayout(parent);
 
-		field = widgetFactory.createText(parent, "", SWT.FLAT | SWT.BORDER | SWT.READ_ONLY);
+		field = widgetFactory.createText(parent, "", SWT.FLAT | SWT.BORDER | SWT.READ_ONLY); //$NON-NLS-1$
 		field.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		chooseBt = widgetFactory.createButton(parent, "...", SWT.PUSH);
+		chooseBt = widgetFactory.createButton(parent, "...", SWT.PUSH); //$NON-NLS-1$
 	}
 
 	/**
@@ -240,11 +242,11 @@ public class CSingleObjectChooser extends Composite {
 			selectedObject = selection;
 		}
 
-		String name = "";
+		String name = ""; //$NON-NLS-1$
 		if (selectedObject != null) {
 			name = labelProvider.getText(selectedObject);
 			if (name == null) {
-				name = "";
+				name = ""; //$NON-NLS-1$
 			}
 		}
 		field.setText(name);
@@ -288,7 +290,7 @@ public class CSingleObjectChooser extends Composite {
 		 * @see java.lang.Object#toString()
 		 */
 		public String toString() {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 
 		/**

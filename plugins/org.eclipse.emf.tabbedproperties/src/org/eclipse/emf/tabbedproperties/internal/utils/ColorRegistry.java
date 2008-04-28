@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: ColorRegistry.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.internal.utils;
@@ -36,47 +38,47 @@ public final class ColorRegistry {
 	/**
 	 * Constant for error color.
 	 */
-	public static Color COLOR_ERROR = getInstance().get("255,128,128");
+	public static Color COLOR_ERROR = getInstance().get("255,128,128"); //$NON-NLS-1$
 
 	/**
 	 * Constant for warning color.
 	 */
-	public static Color COLOR_WARNING = getInstance().get("249,240,163");
+	public static Color COLOR_WARNING = getInstance().get("249,240,163"); //$NON-NLS-1$
 
 	/**
 	 * Constant for info color.
 	 */
-	public static Color COLOR_INFO = getInstance().get("128,128,255");
+	public static Color COLOR_INFO = getInstance().get("128,128,255"); //$NON-NLS-1$
 
 	/**
 	 * Constant for black color.
 	 */
-	public static Color COLOR_BLACK = getInstance().get("0,0,0");
+	public static Color COLOR_BLACK = getInstance().get("0,0,0"); //$NON-NLS-1$
 
 	/**
 	 * Constant for white color.
 	 */
-	public static Color COLOR_WHITE = getInstance().get("255,255,255");
+	public static Color COLOR_WHITE = getInstance().get("255,255,255"); //$NON-NLS-1$
 
 	/**
 	 * Constant for red color.
 	 */
-	public static Color COLOR_RED = getInstance().get("255,0,0");
+	public static Color COLOR_RED = getInstance().get("255,0,0"); //$NON-NLS-1$
 
 	/**
 	 * Constant for green color.
 	 */
-	public static Color COLOR_GREEN = getInstance().get("0,255,0");
+	public static Color COLOR_GREEN = getInstance().get("0,255,0"); //$NON-NLS-1$
 
 	/**
 	 * Constant for blue color.
 	 */
-	public static Color COLOR_BLUE = getInstance().get("0,0,255");
+	public static Color COLOR_BLUE = getInstance().get("0,0,255"); //$NON-NLS-1$
 
 	/**
 	 * Constant for a soft grey color.
 	 */
-	public static Color COLOR_SOFT_GREY = getInstance().get("219,211,203");
+	public static Color COLOR_SOFT_GREY = getInstance().get("219,211,203"); //$NON-NLS-1$
 
 	private static ColorRegistry _instance;
 

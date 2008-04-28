@@ -5,13 +5,16 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractFontPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
 
+import org.eclipse.emf.tabbedproperties.Messages;
 import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
@@ -52,10 +55,10 @@ public abstract class AbstractFontPropertySection extends AbstractTabbedProperty
 	protected void createWidgets(Composite composite) {
 		fontLabel = getWidgetFactory().createCLabel(composite, getLabelText());
 
-		fontText = getWidgetFactory().createText(composite, "");
+		fontText = getWidgetFactory().createText(composite, ""); //$NON-NLS-1$
 		fontText.setEditable(false);
 
-		fontButton = getWidgetFactory().createButton(composite, "Change...", SWT.PUSH);
+		fontButton = getWidgetFactory().createButton(composite, Messages.AbstractFontPropertySection_Change, SWT.PUSH);
 	}
 
 	/**

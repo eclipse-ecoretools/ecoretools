@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractStringPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -38,7 +40,7 @@ public abstract class AbstractStringPropertySection extends AbstractTextProperty
 	protected String getFeatureAsString() {
 		String string = getEObject() == null ? null : (String) getEObject().eGet(getFeature());
 		if (string == null) {
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 		return string;
 	}
