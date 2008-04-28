@@ -1,4 +1,16 @@
-/*$Id: RegisteredPackageView.java,v 1.1 2008/03/10 09:40:01 jlescot Exp $ */
+/***********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    INRIA - initial API and implementation
+ *
+ * $Id: RegisteredPackageView.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
+ **********************************************************************/
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -17,6 +29,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
+import org.eclipse.emf.ecoretools.registration.Messages;
 import org.eclipse.emf.ecoretools.registration.internal.NsURIComparator;
 import org.eclipse.emf.ecoretools.registration.internal.RegisteredPackageComparator;
 import org.eclipse.emf.ecoretools.registration.popup.actions.CopyNSURIAction;
@@ -63,14 +76,14 @@ public class RegisteredPackageView extends ViewPart {
 	/**
 	 * View ID
 	 */
-	public static final String ID = "org.eclipse.emf.ecoretools.registration.viewregisteredpackages";
+	public static final String ID = "org.eclipse.emf.ecoretools.registration.viewregisteredpackages"; //$NON-NLS-1$
 
 	/**
 	 * constructor
 	 */
 	public RegisteredPackageView() {
 		super();
-		setContentDescription("Registered packages:");
+		setContentDescription(Messages.RegisteredPackageView_RegisteredPackages);
 	}
 
 	/**
@@ -90,7 +103,7 @@ public class RegisteredPackageView extends ViewPart {
 		createContextMenu();
 
 		createColumns(viewer);
-		viewer.setColumnProperties(new String[] { "Registered URI", "Package name", "Origin" });
+		viewer.setColumnProperties(new String[] { Messages.RegisteredPackageView_RegisteredURI, Messages.RegisteredPackageView_PackageName, Messages.RegisteredPackageView_Origin });
 
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(false);
@@ -111,19 +124,19 @@ public class RegisteredPackageView extends ViewPart {
 	 */
 	private void createColumns(TreeViewer treeViewer) {
 		TreeColumn column1 = new TreeColumn(treeViewer.getTree(), SWT.LEFT);
-		column1.setText("Registered URI");
+		column1.setText(Messages.RegisteredPackageView_RegisteredURI);
 		column1.setWidth(300);
 		column1.setResizable(true);
 		column1.addSelectionListener(new PackageNsURIColumnSelectionListener(treeViewer));
 
 		TreeColumn column2 = new TreeColumn(treeViewer.getTree(), SWT.LEFT);
-		column2.setText("Package name");
+		column2.setText(Messages.RegisteredPackageView_PackageName);
 		column2.setWidth(120);
 		column2.setResizable(true);
 		column2.addSelectionListener(new PackageNameColumnSelectionListener(treeViewer));
 
 		TreeColumn column3 = new TreeColumn(treeViewer.getTree(), SWT.LEFT);
-		column3.setText("Origin");
+		column3.setText(Messages.RegisteredPackageView_Origin);
 		column3.setWidth(350);
 		column3.setResizable(true);
 	}
@@ -135,13 +148,13 @@ public class RegisteredPackageView extends ViewPart {
 	private void createActions() {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		ISharedImages platformImages = workbench.getSharedImages();
-		unregisterPackageAction = new EcoreUnregisterPackageAction(this, "Unregister");
+		unregisterPackageAction = new EcoreUnregisterPackageAction(this, Messages.RegisteredPackageView_Unregister);
 		unregisterPackageAction.setImageDescriptor(platformImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
 		unregisterPackageAction.setDisabledImageDescriptor(platformImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE_DISABLED));
-		unregisterPackageAction.setToolTipText("unregister the selected packages");
-		copyNSURIAction = new CopyNSURIAction(this, clipboard, "Copy NsURI");
+		unregisterPackageAction.setToolTipText(Messages.RegisteredPackageView_UnregisterSelectedPackages);
+		copyNSURIAction = new CopyNSURIAction(this, clipboard, Messages.RegisteredPackageView_CopyNsURI);
 		copyNSURIAction.setImageDescriptor(platformImages.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
-		copyNSURIAction.setToolTipText("Copy NsURI");
+		copyNSURIAction.setToolTipText(Messages.RegisteredPackageView_CopyNsURI_tooltip);
 	}
 
 	/**
@@ -149,7 +162,7 @@ public class RegisteredPackageView extends ViewPart {
 	 * 
 	 */
 	private void createContextMenu() {
-		MenuManager menuMgr = new MenuManager("#PopupMenu");
+		MenuManager menuMgr = new MenuManager("#PopupMenu"); //$NON-NLS-1$
 		menuMgr.setRemoveAllWhenShown(true);
 		menuMgr.addMenuListener(new IMenuListener() {
 

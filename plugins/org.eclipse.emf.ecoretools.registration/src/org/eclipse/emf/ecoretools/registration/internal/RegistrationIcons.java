@@ -1,4 +1,16 @@
-/* $Id: RegistrationIcons.java,v 1.1 2008/03/10 09:40:02 jlescot Exp $ */
+/***********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    INRIA - initial API and implementation
+ *
+ * $Id: RegistrationIcons.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
+ **********************************************************************/
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -37,7 +49,7 @@ public class RegistrationIcons {
 	 * We need to access to images in the plugin hierarchy. This URL will help
 	 * us.
 	 */
-	static final private URL pluginURL = RegistrationPlugin.getDefault().getBundle().getEntry("/");
+	static final private URL pluginURL = RegistrationPlugin.getDefault().getBundle().getEntry("/"); //$NON-NLS-1$
 
 	/**
 	 * This is the icons registry : a name corresponds to an image.
@@ -58,10 +70,10 @@ public class RegistrationIcons {
 	 */
 	private void initialize() {
 		try {
-			Image icon_folder = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/folder.gif")).createImage();
-			Image icon_project = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/project.gif")).createImage();
-			Image icon_ecoreModelFile = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/EcoreModelFile.gif")).createImage();
-			Image icon_generatedPackage = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/generated_package.gif")).createImage();
+			Image icon_folder = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/folder.gif")).createImage(); //$NON-NLS-1$
+			Image icon_project = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/project.gif")).createImage(); //$NON-NLS-1$
+			Image icon_ecoreModelFile = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/EcoreModelFile.gif")).createImage(); //$NON-NLS-1$
+			Image icon_generatedPackage = ImageDescriptor.createFromURL(new URL(pluginURL, "/icons/obj16/generated_package.gif")).createImage(); //$NON-NLS-1$
 			icons.put(RegistrationConstants.FOLDER, icon_folder); // instance
 			icons.put(RegistrationConstants.PROJECT, icon_project);
 			icons.put(RegistrationConstants.IMG_ECORE_FILE, icon_ecoreModelFile);

@@ -1,4 +1,16 @@
-/*$Id: EMFRegisterAction.java,v 1.1 2008/03/10 09:40:02 jlescot Exp $ */
+/***********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    INRIA - initial API and implementation
+ *
+ * $Id: EMFRegisterAction.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
+ **********************************************************************/
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -18,6 +30,7 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecoretools.registration.Messages;
 import org.eclipse.emf.ecoretools.registration.RegistrationPlugin;
 import org.eclipse.emf.ecoretools.registration.view.RegisteredPackageView;
 import org.eclipse.jface.action.IAction;
@@ -92,7 +105,7 @@ public class EMFRegisterAction implements IObjectActionDelegate {
 			view.refresh();
 		} catch (PartInitException e) {
 			RegistrationPlugin.getDefault().getLog().log(
-					new Status(IStatus.WARNING, "org.eclipse.emf.ecoretools.registration", IStatus.OK, "not able to open Registered Package View : \"" + RegisteredPackageView.ID + "\"", e));
+					new Status(IStatus.WARNING, "org.eclipse.emf.ecoretools.registration", IStatus.OK, Messages.EMFRegisterAction_UnableToOpenView + RegisteredPackageView.ID + "\"", e)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 	}
 }

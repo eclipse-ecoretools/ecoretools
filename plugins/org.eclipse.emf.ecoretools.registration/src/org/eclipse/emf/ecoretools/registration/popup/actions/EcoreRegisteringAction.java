@@ -1,4 +1,16 @@
-/* $Id: EcoreRegisteringAction.java,v 1.1 2008/03/10 09:40:02 jlescot Exp $ */
+/***********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    INRIA - initial API and implementation
+ *
+ * $Id: EcoreRegisteringAction.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
+ **********************************************************************/
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -20,8 +32,10 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecoretools.registration.Messages;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Shell;
 
 /**
@@ -47,7 +61,7 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 
 		ResourceSet rs = new ResourceSetImpl();
 		for (IFile ecoreFile : ecoreFiles) {
-			strURI = "platform:/resource" + ecoreFile.getFullPath().toString();
+			strURI = "platform:/resource" + ecoreFile.getFullPath().toString(); //$NON-NLS-1$
 			mmURI = URI.createURI(strURI);
 			res = rs.getResource(mmURI, true);
 
@@ -67,7 +81,7 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 	 * @param pack
 	 */
 	private void registerPackages(EPackage pack) {
-		if (pack.getNsURI() != null && !pack.getNsURI().equals("")) {
+		if (pack.getNsURI() != null && !pack.getNsURI().equals("")) { //$NON-NLS-1$
 			Registry.INSTANCE.put(pack.getNsURI(), pack);
 
 			for (EPackage subPack : pack.getESubpackages()) {
@@ -76,8 +90,7 @@ public class EcoreRegisteringAction extends EMFRegisterAction {
 
 		} else {
 			Shell shell = new Shell();
-			MessageDialog.openWarning(shell, "EPackage registration", "The EPackage: " + pack.getName()
-					+ " cannot be registered, because its nsUri is not defined, all its subpackages have not been registered.");
+			MessageDialog.openWarning(shell, Messages.EcoreRegisteringAction_EPackageRegistration, NLS.bind(Messages.EcoreRegisteringAction_CanNotBeRegistered, pack.getName()));
 		}
 	}
 

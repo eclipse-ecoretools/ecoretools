@@ -1,4 +1,16 @@
-/*$Id: RegisteredPackagesLabelProvider.java,v 1.1 2008/03/10 09:40:01 jlescot Exp $ */
+/***********************************************************************
+ * Copyright (c) 2007, 2008 INRIA and others
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *    INRIA - initial API and implementation
+ *
+ * $Id: RegisteredPackagesLabelProvider.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
+ **********************************************************************/
 /* **********************************************************************
  * Copyright (c) 2007, 2008 INRIA and others
  *
@@ -16,6 +28,7 @@ package org.eclipse.emf.ecoretools.registration.view;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecoretools.registration.EMFRegistryHelper;
+import org.eclipse.emf.ecoretools.registration.Messages;
 import org.eclipse.emf.ecoretools.registration.internal.RegistrationConstants;
 import org.eclipse.emf.ecoretools.registration.internal.RegistrationIcons;
 import org.eclipse.jface.viewers.ITableLabelProvider;
@@ -44,13 +57,13 @@ public class RegisteredPackagesLabelProvider extends LabelProvider implements IT
 				if (EMFRegistryHelper.isDynamicallyRegistered(p.getNsURI()))
 					// if this is exactly an EPackage then this comes from a
 					// files, otherwise it comes from generated java
-					return "" + getText(p.eResource().getURI());
+					return "" + getText(p.eResource().getURI()); //$NON-NLS-1$
 				else
-					return "generated java in plugin";
+					return Messages.RegisteredPackagesLabelProvider_GeneratedJava;
 			}
-			return "";
+			return ""; //$NON-NLS-1$
 		default:
-			return "";
+			return ""; //$NON-NLS-1$
 		}
 	}
 
