@@ -12,6 +12,8 @@
  * Contributors:
  *    Harman/Becker - initial API and implementation
  *    Lucas Bigeardel - IP integration
+ * 
+ * $Id: EmfBuilderPrefsInitializer.java,v 1.2 2008/04/28 12:23:25 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.codegen.builder;

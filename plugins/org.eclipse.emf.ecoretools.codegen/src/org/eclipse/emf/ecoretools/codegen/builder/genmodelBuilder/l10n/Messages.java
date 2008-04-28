@@ -9,6 +9,8 @@
  * Contributors: 
  * 		Lucas Bigeardel - initial API and implementation
  * 
+ * 
+ * $Id: Messages.java,v 1.2 2008/04/28 12:23:25 jlescot Exp $
  ******************************************************************************/
 
 package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder.l10n;

@@ -12,6 +12,8 @@
  * Contributors:
  *    Daniel Weber - initial API and implementation
  *    Lucas Bigeardel - IP integration
+ * 
+ * $Id: GenModelBuilder.java,v 1.3 2008/04/28 12:23:25 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder;
