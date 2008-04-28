@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreNature.java,v 1.3 2008/04/28 08:41:20 jlescot Exp $
+ * $Id: EcoreNature.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.core.nature;
 
@@ -25,43 +25,39 @@ import org.eclipse.emf.ecoretools.internal.Activator;
  */
 public class EcoreNature implements IProjectNature {
 
-    /** The Ecore Nature ID */
-    public static final String ECORE_NATURE_ID = Activator.PLUGIN_ID + ".ecorenature";
+	/** The Ecore Nature ID */
+	public static final String ECORE_NATURE_ID = Activator.PLUGIN_ID + ".ecorenature"; //$NON-NLS-1$
 
-    private IProject project; 
+	private IProject project;
 
-    /**
-     * @see org.eclipse.core.resources.IProjectNature#configure()
-     */
-    public void configure() throws CoreException
-    {
-        // Add nature-specific information
-        // for the project, such as adding a builder
-        // to a project's build spec.
-    }
+	/**
+	 * @see org.eclipse.core.resources.IProjectNature#configure()
+	 */
+	public void configure() throws CoreException {
+		// Add nature-specific information
+		// for the project, such as adding a builder
+		// to a project's build spec.
+	}
 
-    /**
-     * @see org.eclipse.core.resources.IProjectNature#deconfigure()
-     */
-    public void deconfigure() throws CoreException
-    {
-        // Remove the nature-specific information here.
-    }
+	/**
+	 * @see org.eclipse.core.resources.IProjectNature#deconfigure()
+	 */
+	public void deconfigure() throws CoreException {
+		// Remove the nature-specific information here.
+	}
 
-    /**
-     * @see org.eclipse.core.resources.IProjectNature#getProject()
-     */
-    public IProject getProject()
-    {
-        return project;
-    }
+	/**
+	 * @see org.eclipse.core.resources.IProjectNature#getProject()
+	 */
+	public IProject getProject() {
+		return project;
+	}
 
-    /**
-     * @see org.eclipse.core.resources.IProjectNature#setProject(org.eclipse.core.resources.IProject)
-     */
-    public void setProject(IProject value)
-    {
-        project = value;
-    }
-    
+	/**
+	 * @see org.eclipse.core.resources.IProjectNature#setProject(org.eclipse.core.resources.IProject)
+	 */
+	public void setProject(IProject value) {
+		project = value;
+	}
+
 }

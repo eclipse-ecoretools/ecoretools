@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassHierarchyView.java,v 1.4 2008/04/28 08:41:19 jlescot Exp $
+ * $Id: EClassHierarchyView.java,v 1.5 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
@@ -44,7 +45,7 @@ public class EClassHierarchyView extends AnalysisView {
 	/**
 	 * The ID of the view
 	 */
-	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView";
+	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView"; //$NON-NLS-1$
 
 	private static final int ASCENDANT = 0;
 
@@ -122,13 +123,13 @@ public class EClassHierarchyView extends AnalysisView {
 				refreshJob = createRefreshJob(selectedEClass);
 				refreshJob.schedule(200);
 			} else {
-				getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Invalid selection");
+				getViewSite().getActionBars().getStatusLineManager().setErrorMessage(Messages.EClassHierarchyView_InvalidSelection);
 			}
 		}
 	}
 
 	private Job createRefreshJob(final EClass selection) {
-		Job job = new WorkbenchJob("Refresh hierarchy") {
+		Job job = new WorkbenchJob(Messages.EClassHierarchyView_RefreshHierarchy) {
 
 			/**
 			 * @see org.eclipse.ui.progress.UIJob#runInUIThread(org.eclipse.core.runtime.IProgressMonitor)
@@ -171,24 +172,24 @@ public class EClassHierarchyView extends AnalysisView {
 	 */
 	@Override
 	protected void fillToolBar(IToolBarManager toolBar) {
-		IAction ascendantAction = new Action("Ascendant", IAction.AS_RADIO_BUTTON) {
+		IAction ascendantAction = new Action(Messages.EClassHierarchyView_Ascendant, IAction.AS_RADIO_BUTTON) {
 
 			@Override
 			public void run() {
 				EClassHierarchyView.this.setKind(ASCENDANT);
 			}
 		};
-		ascendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/super_co.gif"));
+		ascendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/super_co.gif")); //$NON-NLS-1$
 		ascendantAction.setChecked(true);
 
-		IAction descendantAction = new Action("Descendant", IAction.AS_RADIO_BUTTON) {
+		IAction descendantAction = new Action(Messages.EClassHierarchyView_Descendant, IAction.AS_RADIO_BUTTON) {
 
 			@Override
 			public void run() {
 				EClassHierarchyView.this.setKind(DESCENDANT);
 			}
 		};
-		descendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/sub_co.gif"));
+		descendantAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/sub_co.gif")); //$NON-NLS-1$
 
 		toolBar.add(ascendantAction);
 		toolBar.add(descendantAction);

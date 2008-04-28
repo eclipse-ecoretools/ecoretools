@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferencesView.java,v 1.4 2008/04/28 08:41:19 jlescot Exp $
+ * $Id: EReferencesView.java,v 1.5 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -20,6 +20,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
@@ -37,7 +38,7 @@ public class EReferencesView extends AnalysisView {
 	/**
 	 * The ID of the view
 	 */
-	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EReferencesView";
+	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EReferencesView"; //$NON-NLS-1$
 
 	private TreeViewer referencesTree;
 
@@ -86,16 +87,17 @@ public class EReferencesView extends AnalysisView {
 				refreshJob = createRefreshJob(selectedEClass);
 				refreshJob.schedule(200);
 			} else {
-				getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Invalid selection");
+				getViewSite().getActionBars().getStatusLineManager().setErrorMessage(Messages.EReferencesView_InvalidSelection);
 			}
-//		// TODO see whether we want to refresh the view even if the selected element is not an EClass
-//		} else {
-//			referencesTree.setInput(object);
+			// // TODO see whether we want to refresh the view even if the
+			// selected element is not an EClass
+			// } else {
+			// referencesTree.setInput(object);
 		}
 	}
 
 	private Job createRefreshJob(final EClass selection) {
-		Job job = new WorkbenchJob("Refresh references") {
+		Job job = new WorkbenchJob(Messages.EReferencesView_RefreshReferences) {
 
 			/**
 			 * @see org.eclipse.ui.progress.UIJob#runInUIThread(org.eclipse.core.runtime.IProgressMonitor)
@@ -108,7 +110,9 @@ public class EReferencesView extends AnalysisView {
 				try {
 					referencesTree.getControl().setRedraw(false);
 
-					// TODO Calling setInput() and then refresh() causes a refreshment of the view twice : setInput() should be performed elsewhere.
+					// TODO Calling setInput() and then refresh() causes a
+					// refreshment of the view twice : setInput() should be
+					// performed elsewhere.
 					referencesTree.setInput(selection);
 					referencesTree.refresh();
 					referencesTree.expandAll();

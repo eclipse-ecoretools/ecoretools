@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreToolsPerspective.java,v 1.4 2008/04/28 08:41:20 jlescot Exp $
+ * $Id: EcoreToolsPerspective.java,v 1.5 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.internal.ui;
 
@@ -61,7 +61,7 @@ public class EcoreToolsPerspective implements IPerspectiveFactory {
 		properties.setCloseable(false);
 
 		// Bottom Right
-		IFolderLayout right = layout.createFolder("bottomRight", IPageLayout.RIGHT, (float) 0.60, "bottom"); //$NON-NLS-1$ $NON-NLS-2$
+		IFolderLayout right = layout.createFolder("bottomRight", IPageLayout.RIGHT, (float) 0.60, "bottom"); //$NON-NLS-1$ //$NON-NLS-2$
 		right.addView(EClassHierarchyView.VIEW_ID);
 		right.addView(EReferencesView.VIEW_ID);
 	}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: AnalysisView.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
+ * $Id: AnalysisView.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
 import org.eclipse.emf.ecoretools.internal.actions.RefreshAction;
 import org.eclipse.emf.ecoretools.internal.actions.ToggleSynchronizeAction;
@@ -91,7 +92,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 			analyzedObject = obj;
 			refresh(analyzedObject);
 		} else {
-			getViewSite().getActionBars().getStatusLineManager().setErrorMessage("Invalid selection");
+			getViewSite().getActionBars().getStatusLineManager().setErrorMessage(Messages.AnalysisView_InvalidSelection);
 		}
 	}
 

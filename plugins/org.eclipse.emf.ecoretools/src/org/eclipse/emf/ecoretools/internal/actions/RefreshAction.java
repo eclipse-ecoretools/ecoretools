@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RefreshAction.java,v 1.3 2008/04/28 08:41:20 jlescot Exp $
+ * $Id: RefreshAction.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.actions;
 
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
 import org.eclipse.emf.ecoretools.internal.views.AnalysisView;
 import org.eclipse.jface.action.Action;
@@ -35,11 +36,11 @@ public class RefreshAction extends Action {
 	 *            the analysis view that must be refresh
 	 */
 	public RefreshAction(AnalysisView view) {
-		super("Refresh");
-		setDescription("Refresh the view for the current object");
-		setToolTipText("Refresh the view");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/refresh.gif"));
-		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/refresh.gif"));
+		super(Messages.RefreshAction_Refresh);
+		setDescription(Messages.RefreshAction_Refresh_description);
+		setToolTipText(Messages.RefreshAction_Refresh_tooltip);
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/refresh.gif")); //$NON-NLS-1$
+		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/refresh.gif")); //$NON-NLS-1$
 
 		analysisView = view;
 	}

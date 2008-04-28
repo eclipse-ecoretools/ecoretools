@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ToggleSynchronizeAction.java,v 1.3 2008/04/28 08:41:20 jlescot Exp $
+ * $Id: ToggleSynchronizeAction.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.actions;
 
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
 import org.eclipse.emf.ecoretools.internal.views.AnalysisView;
 import org.eclipse.jface.action.Action;
@@ -35,11 +36,11 @@ public class ToggleSynchronizeAction extends Action {
 	 *            the AnalysisView
 	 */
 	public ToggleSynchronizeAction(AnalysisView view) {
-		super("Synchronize");
-		setDescription("Synchronize the view with the workbench selection");
-		setToolTipText("Synchronize with workbench");
-		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif"));
-		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/synced.gif"));
+		super(Messages.ToggleSynchronizeAction_Synchronize);
+		setDescription(Messages.ToggleSynchronizeAction_Synchronize_description);
+		setToolTipText(Messages.ToggleSynchronizeAction_Synchronize_tooltip);
+		setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif")); //$NON-NLS-1$
+		setDisabledImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/dlcl16/synced.gif")); //$NON-NLS-1$
 		setChecked(view.isSynchronized());
 
 		analysisView = view;

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: NewEcoreProjectWizard.java,v 1.2 2008/04/28 08:41:20 jlescot Exp $
+ * $Id: NewEcoreProjectWizard.java,v 1.3 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.ui.wizards;
 
@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.core.nature.EcoreNature;
 import org.eclipse.emf.ecoretools.internal.Activator;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -85,10 +86,10 @@ public class NewEcoreProjectWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		super.addPages();
 
-		mainPage = new WizardNewProjectCreationPage("New Ecore Project");
-		mainPage.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/wizban/newprj_wiz.png"));
-		mainPage.setTitle("Ecore Project");
-		mainPage.setDescription("Create a new Ecore Project");
+		mainPage = new WizardNewProjectCreationPage(Messages.NewEcoreProjectWizard_NewEcoreProject);
+		mainPage.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/wizban/newprj_wiz.png")); //$NON-NLS-1$
+		mainPage.setTitle(Messages.NewEcoreProjectWizard_EcoreProject_title);
+		mainPage.setDescription(Messages.NewEcoreProjectWizard_EcoreProject_description);
 		this.addPage(mainPage);
 	}
 
@@ -163,16 +164,17 @@ public class NewEcoreProjectWizard extends Wizard implements INewWizard {
 			Throwable t = e.getTargetException();
 			if (t instanceof CoreException) {
 				if (((CoreException) t).getStatus().getCode() == IResourceStatus.CASE_VARIANT_EXISTS) {
-					MessageDialog.openError(getShell(), "Creation Problems", NLS.bind("The underlying file system is case insensitive. There is an existing project which conflicts with ''{0}''.",
+					MessageDialog.openError(getShell(), Messages.NewEcoreProjectWizard_CreationProblems, NLS.bind(
+							Messages.NewEcoreProjectWizard_CaseSensitive_warning,
 							newProjectHandle.getName()));
 				} else {
-					ErrorDialog.openError(getShell(), "Creation Problems", null, ((CoreException) t).getStatus());
+					ErrorDialog.openError(getShell(), Messages.NewEcoreProjectWizard_CreationProblems, null, ((CoreException) t).getStatus());
 				}
 			} else {
 				// CoreExceptions are handled above, but unexpected runtime
 				// exceptions and errors may still occur.
 				Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, 0, t.toString(), t));
-				MessageDialog.openError(getShell(), "Creation Problems", NLS.bind("Internal error: {0}", t.getMessage()));
+				MessageDialog.openError(getShell(), Messages.NewEcoreProjectWizard_CreationProblems, NLS.bind(Messages.NewEcoreProjectWizard_InternalError, t.getMessage()));
 			}
 			return null;
 		}

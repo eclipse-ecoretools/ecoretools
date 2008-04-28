@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Activator.java,v 1.2 2008/04/28 08:41:19 jlescot Exp $
+ * $Id: Activator.java,v 1.3 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal;
@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -28,7 +29,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	/** The plug-in ID */
-	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools";
+	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -104,7 +105,7 @@ public class Activator extends AbstractUIPlugin {
 		if (e instanceof CoreException)
 			status = ((CoreException) e).getStatus();
 		else
-			status = new Status(IStatus.ERROR, PLUGIN_ID, IStatus.OK, "Error", e);
+			status = new Status(IStatus.ERROR, PLUGIN_ID, IStatus.OK, Messages.Activator_Error, e);
 
 		log(status);
 	}
