@@ -9,16 +9,23 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: ComplexEcoreDiagramTextFixture.java,v 1.2 2008/04/28 12:38:09 jlescot Exp $
+ * $Id: Messages.java,v 1.1 2008/04/28 12:38:09 jlescot Exp $
  **********************************************************************/
+package org.eclipse.emf.ecoretools.tests;
 
-package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
+import org.eclipse.osgi.util.NLS;
 
-/**
- * A fixture for test on an complex Ecore diagram
- * 
- * @author Simon Bernard
- */
-public class ComplexEcoreDiagramTextFixture {
-	// TODO Implement this
+public class Messages extends NLS {
+
+	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.tests.messages"; //$NON-NLS-1$
+
+	public static String ExistingEcoreDiagramTestFixture_ErrorDuringConversion;
+
+	static {
+		// initialize resource bundle
+		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+	}
+
+	private Messages() {
+	}
 }

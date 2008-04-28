@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: ExistingEcoreDiagramTestFixture.java,v 1.2 2008/04/28 12:38:09 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -18,6 +20,7 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecoretools.tests.Messages;
 import org.eclipse.emf.ecoretools.tests.internal.Activator;
 import org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture;
 
@@ -58,7 +61,7 @@ public abstract class ExistingEcoreDiagramTestFixture extends AbstractExistingDi
 		try {
 			return FileLocator.toFileURL(url);
 		} catch (IOException e) {
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "error during convertion url to file url", e));
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, Messages.ExistingEcoreDiagramTestFixture_ErrorDuringConversion, e));
 		}
 		return null;
 	}
@@ -67,7 +70,7 @@ public abstract class ExistingEcoreDiagramTestFixture extends AbstractExistingDi
 	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getProjectName()
 	 */
 	public String getProjectName() {
-		return "ecoreProj";
+		return "ecoreProj"; //$NON-NLS-1$
 	}
 
 	/**

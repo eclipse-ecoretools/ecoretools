@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: EmptyEcoreDiagramTestFixture.java,v 1.2 2008/04/28 12:38:09 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -57,7 +59,7 @@ public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixtur
 	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getProjectName()
 	 */
 	public String getProjectName() {
-		return "EcoreToolProj";
+		return "EcoreToolProj"; //$NON-NLS-1$
 	}
 
 	/**

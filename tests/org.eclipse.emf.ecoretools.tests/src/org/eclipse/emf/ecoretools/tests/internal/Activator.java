@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: Activator.java,v 1.3 2008/04/28 12:38:10 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.internal;
@@ -23,7 +25,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends Plugin {
 
 	/** The plug-in ID */
-	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.tests";
+	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.tests"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

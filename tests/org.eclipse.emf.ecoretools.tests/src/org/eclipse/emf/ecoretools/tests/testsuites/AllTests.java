@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AllTests.java,v 1.3 2008/04/28 12:38:10 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testsuites;
@@ -35,7 +37,7 @@ public class AllTests {
 	 * @return Test
 	 */
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.emf.ecoretools.tests.testcases");
+		TestSuite suite = new TestSuite("Test for org.eclipse.emf.ecoretools.tests.testcases"); //$NON-NLS-1$
 		// $JUnit-BEGIN$
 		suite.addTestSuite(DefaultNameTest.class);
 

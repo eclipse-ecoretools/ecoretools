@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: DropInEPackageTest.java,v 1.2 2008/04/28 12:38:10 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.dragndrop;
@@ -67,7 +69,7 @@ public class DropInEPackageTest extends AbstractTestBase {
 
 		// drop an external epackage
 		EPackage extEPackage1 = EcoreFactory.eINSTANCE.createEPackage();
-		extEPackage1.setName("pack1");
+		extEPackage1.setName("pack1"); //$NON-NLS-1$
 		getFixture().dropObject(diagramEP, new Point(10, 10), extEPackage1);
 
 		assertEquals(diagramEP.getChildren().size(), 1);
@@ -113,7 +115,7 @@ public class DropInEPackageTest extends AbstractTestBase {
 
 		// drop an external eClass in this package
 		EClass extEClass = EcoreFactory.eINSTANCE.createEClass();
-		extEClass.setName("class1");
+		extEClass.setName("class1"); //$NON-NLS-1$
 		getFixture().dropObject(epackage2EDPartContent, new Point(30, 70), extEClass);
 
 		assertEquals(epackage2EDPartContent.getChildren().size(), 1);

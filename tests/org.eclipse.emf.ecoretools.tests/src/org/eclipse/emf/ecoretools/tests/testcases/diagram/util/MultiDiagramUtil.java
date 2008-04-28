@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: MultiDiagramUtil.java,v 1.3 2008/04/28 12:38:09 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.util;
@@ -48,7 +50,7 @@ public class MultiDiagramUtil {
 		 *            the MultiDiagramLinkStyle
 		 */
 		public OpenDiagramTestCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
-			super(multiDiagramLinkStyle);
+			super(((View) multiDiagramLinkStyle.eContainer()).getElement(), multiDiagramLinkStyle.eResource());
 		}
 
 		/**
