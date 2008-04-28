@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: FilteredDiagramTypeExtensionManager.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.extension;
 
@@ -25,9 +27,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecoretools.filters.diagramfilters.IDiagramFilter;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
 
+public class FilteredDiagramTypeExtensionManager implements IRegistryChangeListener {
 
-public class FilteredDiagramTypeExtensionManager implements
-		IRegistryChangeListener {
 	private static FilteredDiagramTypeExtensionManager instance;
 
 	private static final String ATT_MODEL_ID = "modelId"; //$NON-NLS-1$
@@ -66,22 +67,17 @@ public class FilteredDiagramTypeExtensionManager implements
 
 				// The autosarDiagramTypeInitializer is not yet defined.
 				if (!filteredDiagramType.containsKey(modelId)) {
-					FilteredDiagramTypeExtension filteredDiagramTypeExtension = new FilteredDiagramTypeExtension(
-							modelId);
+					FilteredDiagramTypeExtension filteredDiagramTypeExtension = new FilteredDiagramTypeExtension(modelId);
 
 					try {
 						if (extElement.getAttribute(ATT_DIAGRAM_FILTER) != null) {
-							IDiagramFilter diagramFilter = (IDiagramFilter) FilterPlugin
-									.createExtension(extElement,
-											ATT_DIAGRAM_FILTER);
+							IDiagramFilter diagramFilter = (IDiagramFilter) FilterPlugin.createExtension(extElement, ATT_DIAGRAM_FILTER);
 
-							filteredDiagramTypeExtension
-									.setDiagramFilter(diagramFilter);
+							filteredDiagramTypeExtension.setDiagramFilter(diagramFilter);
 						}
 
 						// Store it in the cache
-						filteredDiagramType.put(modelId,
-								filteredDiagramTypeExtension);
+						filteredDiagramType.put(modelId, filteredDiagramTypeExtension);
 					} catch (CoreException ce) {
 						FilterPlugin.log(ce);
 					}
@@ -98,11 +94,10 @@ public class FilteredDiagramTypeExtensionManager implements
 	 * 
 	 * @return <code>true</code> if the Tags exist
 	 */
-	private boolean checkRequiredTags(
-			IConfigurationElement extendedClassLoaderElement) {
+	private boolean checkRequiredTags(IConfigurationElement extendedClassLoaderElement) {
 		String modelId = extendedClassLoaderElement.getAttribute(ATT_MODEL_ID);
 
-		return (!"".equals(modelId));
+		return (!"".equals(modelId)); //$NON-NLS-1$
 	}
 
 	public Map<String, FilteredDiagramTypeExtension> getFilteredDiagramType() {
@@ -111,10 +106,8 @@ public class FilteredDiagramTypeExtensionManager implements
 		return filteredDiagramType;
 	}
 
-	public FilteredDiagramTypeExtension getFilteredDiagramTypeExtension(
-			String modelId) {
-		FilteredDiagramTypeExtension filteredDiagramTypeExtension = filteredDiagramType
-				.get(modelId);
+	public FilteredDiagramTypeExtension getFilteredDiagramTypeExtension(String modelId) {
+		FilteredDiagramTypeExtension filteredDiagramTypeExtension = filteredDiagramType.get(modelId);
 
 		return filteredDiagramTypeExtension;
 	}
@@ -138,9 +131,7 @@ public class FilteredDiagramTypeExtensionManager implements
 	private void retrieveTypeProviders() {
 		// Iterate on extension points.
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		IExtensionPoint point = registry.getExtensionPoint(
-				FilterPlugin.PLUGIN_ID,
-				FilterPlugin.FILTERED_DIAGRAM_TYPE_EXTENSION_ID);
+		IExtensionPoint point = registry.getExtensionPoint(FilterPlugin.PLUGIN_ID, FilterPlugin.FILTERED_DIAGRAM_TYPE_EXTENSION_ID);
 
 		IExtension[] extensions = point.getExtensions();
 		for (int i = 0; i < extensions.length; i++) {

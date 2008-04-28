@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractDiagramFilter.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.diagramfilters;
 
@@ -37,7 +39,7 @@ public abstract class AbstractDiagramFilter implements IDiagramFilter {
 	/**
 	 * 
 	 */
-	private static String DIAGRAM_FILTER_PREFERENCE_STORE_KEY = "DiagramFilterPreferenceStoreKey";
+	private static String DIAGRAM_FILTER_PREFERENCE_STORE_KEY = "DiagramFilterPreferenceStoreKey"; //$NON-NLS-1$
 
 	private Map<String, String> filteredType = new TreeMap<String, String>();
 
@@ -88,7 +90,7 @@ public abstract class AbstractDiagramFilter implements IDiagramFilter {
 			if (elementTypeHint == null || elementTypeHint.length() < 1) {
 				continue;
 			}
-			String nameValue = elementType.getDisplayName() + " - " + elementTypeHint;
+			String nameValue = elementType.getDisplayName() + " - " + elementTypeHint; //$NON-NLS-1$
 
 			filteredType.put(elementTypeHint, nameValue);
 		}
@@ -125,7 +127,7 @@ public abstract class AbstractDiagramFilter implements IDiagramFilter {
 	 * @param store
 	 */
 	protected void writeFilteredTypes(List<String> filteredTypes, IPreferenceStore store) {
-		String storedValue = "";
+		String storedValue = ""; //$NON-NLS-1$
 		for (String currentType : filteredTypes) {
 			storedValue = storedValue + DiagramFilterUtil.DIAGRAM_FILTER_STRING_DELIMITER + currentType;
 		}

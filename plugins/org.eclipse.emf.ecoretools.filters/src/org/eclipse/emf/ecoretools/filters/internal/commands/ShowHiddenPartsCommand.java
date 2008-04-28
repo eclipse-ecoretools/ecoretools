@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,13 +8,16 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: ShowHiddenPartsCommand.java,v 1.4 2008/04/28 09:55:14 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.commands;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
@@ -34,7 +37,7 @@ public class ShowHiddenPartsCommand extends AbstractTransactionalCommand {
 	private Diagram diagramToFilter;
 
 	public ShowHiddenPartsCommand(TransactionalEditingDomain domain, Diagram diagramToFilter) {
-		super(domain, "Show Hidden Parts", null);
+		super(domain, Messages.ShowHiddenPartsCommand_ShowHiddenParts, null);
 		this.diagramToFilter = diagramToFilter;
 	}
 

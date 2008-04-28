@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: ConfigureFilterDiagramAction.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.dialogs.FilterDiagramSelectionDialog;
 import org.eclipse.emf.ecoretools.filters.internal.utils.DiagramFilterUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -27,7 +30,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-
 /**
  * 
  * TODO Describe the class here <br>
@@ -39,23 +41,20 @@ import org.eclipse.ui.PlatformUI;
 public class ConfigureFilterDiagramAction extends Action {
 
 	protected IGraphicalEditPart host;
-	
-	public static String ID = "configureFilterDiagramAction";
+
+	public static String ID = "configureFilterDiagramAction"; //$NON-NLS-1$
 
 	public ConfigureFilterDiagramAction() {
 		setId(ID);
-		setImageDescriptor(FilterPlugin
-				.getImageDescriptor("icons/etool16/configurefilter_exec.gif"));
-		setText("Configure...");
-		setToolTipText("Configure Element(s)");
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/configurefilter_exec.gif")); //$NON-NLS-1$
+		setText(Messages.ConfigureFilterDiagramAction_Configure);
+		setToolTipText(Messages.ConfigureFilterDiagramAction_Configure_tooltip);
 	}
 
 	private List<String> buildSelection(Diagram diagram) {
 		List<String> intinialSelection = new ArrayList<String>();
-		List<String> savedConfiguration = DiagramFilterUtil
-				.getCurrentFilteredTypeConfiguration(diagram);
-		for (String key : DiagramFilterUtil.getDiagramFilteredTypeDescription(
-				diagram).keySet()) {
+		List<String> savedConfiguration = DiagramFilterUtil.getCurrentFilteredTypeConfiguration(diagram);
+		for (String key : DiagramFilterUtil.getDiagramFilteredTypeDescription(diagram).keySet()) {
 			if (DiagramFilterUtil.isInKey(key, savedConfiguration)) {
 				intinialSelection.add(key);
 			}
@@ -71,14 +70,12 @@ public class ConfigureFilterDiagramAction extends Action {
 				filteredTypes.add((String) object);
 			}
 		}
-		DiagramFilterUtil.setCurrentFilteredTypeConfiguration(diagram,
-				filteredTypes);
+		DiagramFilterUtil.setCurrentFilteredTypeConfiguration(diagram, filteredTypes);
 	}
 
 	@Override
 	public void run() {
-		IEditorPart editorPart = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (false == editorPart instanceof DiagramEditor) {
 			return;
 		}
@@ -94,13 +91,9 @@ public class ConfigureFilterDiagramAction extends Action {
 			return;
 		}
 
-		final Shell shell = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActivePart()
-				.getSite().getShell();
-		FilterDiagramSelectionDialog dialog = new FilterDiagramSelectionDialog(
-				shell, view.getDiagram());
-		dialog.setInput(DiagramFilterUtil
-				.getDiagramFilteredTypeDescription(view.getDiagram()));
+		final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActivePart().getSite().getShell();
+		FilterDiagramSelectionDialog dialog = new FilterDiagramSelectionDialog(shell, view.getDiagram());
+		dialog.setInput(DiagramFilterUtil.getDiagramFilteredTypeDescription(view.getDiagram()));
 
 		List<String> selection = buildSelection(view.getDiagram());
 		dialog.setInitialElementSelections(selection);

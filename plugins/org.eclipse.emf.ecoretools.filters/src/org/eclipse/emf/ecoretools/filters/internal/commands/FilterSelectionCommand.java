@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,13 +8,16 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: FilterSelectionCommand.java,v 1.4 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.commands;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -36,7 +39,7 @@ public class FilterSelectionCommand extends AbstractTransactionalCommand {
 	private boolean show;
 
 	public FilterSelectionCommand(TransactionalEditingDomain domain, List<IGraphicalEditPart> selection, boolean show) {
-		super(domain, "Filter Selection", null);
+		super(domain, Messages.FilterSelectionCommand_FilterSelection, null);
 		this.selection = selection;
 		this.show = show;
 	}
@@ -48,7 +51,7 @@ public class FilterSelectionCommand extends AbstractTransactionalCommand {
 			if (view == null) {
 				continue;
 			}
-			((View) view).setVisible(show);
+			view.setVisible(show);
 		}
 		return CommandResult.newOKCommandResult();
 	}

@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,13 +8,16 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: ShowHiddenPartAction.java,v 1.4 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.ShowHiddenPartsCommand;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -39,13 +42,13 @@ public class ShowHiddenPartAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "showHiddenPartAction";
+	public static String ID = "showHiddenPartAction"; //$NON-NLS-1$
 
 	public ShowHiddenPartAction() {
 		setId(ID);
-		setText("Show All Hidden Parts");
-		setToolTipText("Show all hiddent parts of the current diagram");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/showhiddentpart_exec.gif"));
+		setText(Messages.ShowHiddenPartAction_ShowAllHiddenParts);
+		setToolTipText(Messages.ShowHiddenPartAction_ShowAllHiddenParts_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/showhiddentpart_exec.gif")); //$NON-NLS-1$
 	}
 
 	private Diagram getCurrentDiagram() {

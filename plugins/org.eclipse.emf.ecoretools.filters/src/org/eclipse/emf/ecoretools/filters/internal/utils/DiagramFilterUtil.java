@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: DiagramFilterUtil.java,v 1.3 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.utils;
 
@@ -40,7 +42,7 @@ public class DiagramFilterUtil {
 	/**
 	 * 
 	 */
-	public static String DIAGRAM_FILTER_STRING_DELIMITER = ";";
+	public static String DIAGRAM_FILTER_STRING_DELIMITER = ";"; //$NON-NLS-1$
 
 	/**
 	 * 
@@ -100,7 +102,7 @@ public class DiagramFilterUtil {
 	 */
 	public static Image getDiagramElementImage(Diagram diagram, String element) {
 
-		return FilterPlugin.getInstance().getImage("obj16/diagramelement_obj.gif");
+		return FilterPlugin.getInstance().getImage("obj16/diagramelement_obj.gif"); //$NON-NLS-1$
 	}
 
 	/**
@@ -113,7 +115,7 @@ public class DiagramFilterUtil {
 		if (false == getDiagramFilteredTypeDescription(diagram).isEmpty()) {
 			return getDiagramFilteredTypeDescription(diagram).get(element);
 		}
-		return "???";
+		return "???"; //$NON-NLS-1$
 	}
 
 	/**

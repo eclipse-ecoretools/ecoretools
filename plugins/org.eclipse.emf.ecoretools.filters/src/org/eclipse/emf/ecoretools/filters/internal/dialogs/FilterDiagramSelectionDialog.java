@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: FilterDiagramSelectionDialog.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.dialogs;
 
@@ -17,7 +19,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.CheckedTreeSelectionDialog;
-
 
 /**
  * 
@@ -30,8 +31,7 @@ import org.eclipse.ui.dialogs.CheckedTreeSelectionDialog;
 public class FilterDiagramSelectionDialog extends CheckedTreeSelectionDialog {
 
 	public FilterDiagramSelectionDialog(Shell parent, Diagram diagram) {
-		super(parent, new FilterDiagramViewerLabelProvider(diagram),
-				new FilterDiagramViewerContentProvider());
+		super(parent, new FilterDiagramViewerLabelProvider(diagram), new FilterDiagramViewerContentProvider());
 		setTitle(Messages.ConfigureFilter_Dialog_title);
 		setMessage(Messages.ConfigureFilter_Dialog_message);
 	}

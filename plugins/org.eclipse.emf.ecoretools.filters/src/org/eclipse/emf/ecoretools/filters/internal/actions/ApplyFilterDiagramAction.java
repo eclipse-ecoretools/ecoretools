@@ -8,11 +8,14 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: ApplyFilterDiagramAction.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.FilterDiagramCommand;
 import org.eclipse.emf.ecoretools.filters.internal.utils.DiagramFilterUtil;
 import org.eclipse.gef.commands.Command;
@@ -26,7 +29,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-
 /**
  * 
  * TODO Describe the class here <br>
@@ -38,21 +40,19 @@ import org.eclipse.ui.PlatformUI;
 public class ApplyFilterDiagramAction extends Action {
 
 	protected IGraphicalEditPart host;
-	
-	public static String ID = "applyFilterDiagramAction";
+
+	public static String ID = "applyFilterDiagramAction"; //$NON-NLS-1$
 
 	public ApplyFilterDiagramAction() {
 		setId(ID);
-		setText("Apply Filter");
-		setToolTipText("Filter Configured Element(s)");
-		setImageDescriptor(FilterPlugin
-				.getImageDescriptor("icons/etool16/applyfilter_exec.gif"));
+		setText(Messages.ApplyFilterDiagramAction_ApplyFilter);
+		setToolTipText(Messages.ApplyFilterDiagramAction_ApplyFilter_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/applyfilter_exec.gif")); //$NON-NLS-1$
 		updateImageDescriptor(getCurrentDiagram());
 	}
 
 	private Diagram getCurrentDiagram() {
-		IEditorPart editorPart = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (false == editorPart instanceof DiagramEditor) {
 			return null;
 		}
@@ -75,12 +75,9 @@ public class ApplyFilterDiagramAction extends Action {
 			return;
 		}
 
-		Command cmd = new ICommandProxy(new FilterDiagramCommand(host
-				.getEditingDomain(), diagram, DiagramFilterUtil
-				.getCurrentFilteredTypeConfiguration(diagram), false));
+		Command cmd = new ICommandProxy(new FilterDiagramCommand(host.getEditingDomain(), diagram, DiagramFilterUtil.getCurrentFilteredTypeConfiguration(diagram), false));
 
-		final DiagramCommandStack commandStack = (host).getDiagramEditDomain()
-				.getDiagramCommandStack();
+		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
 		commandStack.execute(cmd, new NullProgressMonitor());
 
 		updateImageDescriptor(diagram);

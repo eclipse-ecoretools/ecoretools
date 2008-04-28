@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +8,9 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: HideSelectionAction.java,v 1.3 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.FilterSelectionCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.commands.Command;
@@ -42,13 +45,13 @@ public class HideSelectionAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "hideSelectionAction";
+	public static String ID = "hideSelectionAction"; //$NON-NLS-1$
 
 	public HideSelectionAction() {
 		setId(ID);
-		setText("Hide Selection");
-		setToolTipText("Hide the current selection");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hideselection_exec.gif"));
+		setText(Messages.HideSelectionAction_HideSelection);
+		setToolTipText(Messages.HideSelectionAction_HideSelection_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hideselection_exec.gif")); //$NON-NLS-1$
 	}
 
 	private List<IGraphicalEditPart> getSelection() {

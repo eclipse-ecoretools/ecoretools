@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: FilterDiagramViewerLabelProvider.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.dialogs;
 
@@ -15,7 +17,6 @@ import org.eclipse.emf.ecoretools.filters.internal.utils.DiagramFilterUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
-
 
 /**
  * 
@@ -36,8 +37,7 @@ public class FilterDiagramViewerLabelProvider extends LabelProvider {
 	@Override
 	public Image getImage(Object element) {
 		if (element instanceof String) {
-			return DiagramFilterUtil.getDiagramElementImage(diagram,
-					(String) element);
+			return DiagramFilterUtil.getDiagramElementImage(diagram, (String) element);
 		}
 		return null;
 	}
@@ -45,8 +45,7 @@ public class FilterDiagramViewerLabelProvider extends LabelProvider {
 	@Override
 	public String getText(Object element) {
 		if (element instanceof String) {
-			return DiagramFilterUtil.getDiagramElementName(diagram,
-					(String) element);
+			return DiagramFilterUtil.getDiagramElementName(diagram, (String) element);
 		}
 		return null;
 	}

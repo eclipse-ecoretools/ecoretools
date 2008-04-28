@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +8,9 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: HideInheritanceTypeAction.java,v 1.4 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import java.util.Collections;
@@ -16,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.FilterTypeSelectionCommand;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -40,13 +43,13 @@ public class HideInheritanceTypeAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "hideInheritanceTypeAction";
+	public static String ID = "hideInheritanceTypeAction"; //$NON-NLS-1$
 
 	public HideInheritanceTypeAction() {
 		setId(ID);
-		setText("Hide Inheritance Links");
-		setToolTipText("Hide inheritance relations in the current diagram");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hideinheritancetype_exec.gif"));
+		setText(Messages.HideInheritanceTypeAction_HideInheritanceLinks);
+		setToolTipText(Messages.HideInheritanceTypeAction_HideInheritanceLinks_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hideinheritancetype_exec.gif")); //$NON-NLS-1$
 	}
 
 	private Diagram getCurrentDiagram() {
@@ -66,7 +69,7 @@ public class HideInheritanceTypeAction extends Action {
 	}
 
 	private List<String> getSelection() {
-		return Collections.singletonList("3003");
+		return Collections.singletonList("3003"); //$NON-NLS-1$
 	}
 
 	/**
@@ -97,6 +100,6 @@ public class HideInheritanceTypeAction extends Action {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools"));
+		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools")); //$NON-NLS-1$
 	}
 }

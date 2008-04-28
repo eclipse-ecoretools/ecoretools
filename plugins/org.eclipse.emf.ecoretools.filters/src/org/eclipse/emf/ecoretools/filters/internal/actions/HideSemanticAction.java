@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +8,9 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: HideSemanticAction.java,v 1.3 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.FilterSemanticSelectionCommand;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -45,13 +48,13 @@ public class HideSemanticAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "hideSemanticAction";
+	public static String ID = "hideSemanticAction"; //$NON-NLS-1$
 
 	public HideSemanticAction() {
 		setId(ID);
-		setText("Hide SemanticModel");
-		setToolTipText("Hide parts  in the current diagram related to the semantic model of the current selection");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hidesemantic_exec.gif"));
+		setText(Messages.HideSemanticAction_HideSemanticModel);
+		setToolTipText(Messages.HideSemanticAction_HideSemanticModel_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hidesemantic_exec.gif")); //$NON-NLS-1$
 	}
 
 	private Diagram getCurrentDiagram() {

@@ -8,10 +8,13 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: DiagramFilterActionMenu.java,v 1.4 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.extension.FilteredDiagramTypeExtensionManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -101,18 +104,18 @@ public class DiagramFilterActionMenu extends Action implements ISelectionChanged
 		}
 	}
 
-	public static String ID = "diagramFilterActionMenu";
+	public static String ID = "diagramFilterActionMenu"; //$NON-NLS-1$
 
 	private Menu menu;
 
 	protected IGraphicalEditPart host;
 
 	public DiagramFilterActionMenu() {
-		super("", AS_DROP_DOWN_MENU);
+		super("", AS_DROP_DOWN_MENU); //$NON-NLS-1$
 		setId(ID);
-		setText("Filter Elements");
-		setToolTipText("Filter Elements");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/filter_edit.gif"));
+		setText(Messages.DiagramFilterActionMenu_FilterElements);
+		setToolTipText(Messages.DiagramFilterActionMenu_FilterElements_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/filter_edit.gif")); //$NON-NLS-1$
 		setMenuCreator(new MenuCreator()); // set menu creator for sub menus
 	}
 

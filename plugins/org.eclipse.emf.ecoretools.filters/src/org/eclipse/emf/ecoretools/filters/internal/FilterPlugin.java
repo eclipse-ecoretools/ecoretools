@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,16 +8,10 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: FilterPlugin.java,v 1.2 2008/04/28 09:55:15 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.text.MessageFormat;
-import java.util.MissingResourceException;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -43,9 +37,9 @@ import org.osgi.framework.BundleContext;
 public class FilterPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.filters";
+	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.filters"; //$NON-NLS-1$
 
-	public static final String FILTERED_DIAGRAM_TYPE_EXTENSION_ID = "filteredDiagramType";
+	public static final String FILTERED_DIAGRAM_TYPE_EXTENSION_ID = "filteredDiagramType"; //$NON-NLS-1$
 
 	// The shared instance
 	private static FilterPlugin plugin;
@@ -88,7 +82,7 @@ public class FilterPlugin extends AbstractUIPlugin {
 		} catch (CoreException core) {
 			throw core;
 		} catch (Exception e) {
-			throw new CoreException(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, "Unable to create extension.", e));
+			throw new CoreException(new Status(IStatus.ERROR, PLUGIN_ID, IStatus.ERROR, Messages.FilterPlugin_UnableCreateExtension, e));
 		}
 	}
 
@@ -118,7 +112,7 @@ public class FilterPlugin extends AbstractUIPlugin {
 	}
 
 	public static void log(final Throwable thr) {
-		String defaultMsg = "No details available."; //$NON-NLS-1$
+		String defaultMsg = Messages.FilterPlugin_NoDetailsAvailable;
 		String msg = thr.getMessage() == null ? defaultMsg : thr.getMessage();
 		IStatus status = new Status(IStatus.ERROR, PLUGIN_ID, 0, msg, thr);
 		getInstance().getLog().log(status);
@@ -136,15 +130,11 @@ public class FilterPlugin extends AbstractUIPlugin {
 	}
 
 	public static void logWarning(final Throwable thr) {
-		String defaultMsg = "No details available."; //$NON-NLS-1$
+		String defaultMsg = Messages.FilterPlugin_NoDetailsAvailable;
 		String msg = thr.getMessage() == null ? defaultMsg : thr.getMessage();
 		IStatus status = new Status(IStatus.WARNING, PLUGIN_ID, 0, msg, thr);
 		getInstance().getLog().log(status);
 	}
-
-	private ResourceBundle resourceBundle;
-
-	private ResourceBundle untranslatedResourceBundle;
 
 	/**
 	 * The constructor
@@ -166,53 +156,10 @@ public class FilterPlugin extends AbstractUIPlugin {
 		ImageRegistry reg = getImageRegistry();
 		Image result = reg.get(key);
 		if (result == null) {
-			reg.put(key, getImageDescriptor("icons/" + key));
+			reg.put(key, getImageDescriptor("icons/" + key)); //$NON-NLS-1$
 			result = reg.get(key);
 		}
 		return result;
-	}
-
-	public String getString(String key) {
-		return getString(key, true);
-	}
-
-	public String getString(String key, boolean translate) {
-		ResourceBundle bundle = translate ? resourceBundle : untranslatedResourceBundle;
-		if (bundle == null) {
-			if (translate) {
-				bundle = resourceBundle = Platform.getResourceBundle(getBundle());
-			} else {
-				String resourceName = getBundle().getEntry("/").toString() + "plugin.properties";
-				try {
-					InputStream inputStream = new URL(resourceName).openStream();
-					bundle = untranslatedResourceBundle = new PropertyResourceBundle(inputStream);
-					inputStream.close();
-				} catch (IOException ioException) {
-					throw new MissingResourceException("Missing properties: " + resourceName, getClass().getName(), "plugin.properties");
-				}
-			}
-		}
-		return bundle.getString(key);
-	}
-
-	public String getString(String key, Object param) {
-		return getString(key, new Object[] { param }, true);
-	}
-
-	public String getString(String key, Object param1, Object param2) {
-		return getString(key, new Object[] { param1, param2 }, true);
-	}
-
-	public String getString(String key, Object param1, Object param2, Object param3) {
-		return getString(key, new Object[] { param1, param2, param3 }, true);
-	}
-
-	public String getString(String key, Object[] substitutions) {
-		return getString(key, substitutions, true);
-	}
-
-	public String getString(String key, Object[] substitutions, boolean translate) {
-		return MessageFormat.format(getString(key, translate), substitutions);
 	}
 
 	/*

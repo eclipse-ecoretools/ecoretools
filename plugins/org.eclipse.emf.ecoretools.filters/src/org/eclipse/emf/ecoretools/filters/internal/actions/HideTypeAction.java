@@ -1,4 +1,4 @@
-/**
+/***********************************************************************
  * Copyright (c) 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
@@ -8,7 +8,9 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- */
+ * 
+ * $Id: HideTypeAction.java,v 1.3 2008/04/28 09:55:15 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal.actions;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecoretools.filters.internal.FilterPlugin;
+import org.eclipse.emf.ecoretools.filters.internal.Messages;
 import org.eclipse.emf.ecoretools.filters.internal.commands.FilterTypeSelectionCommand;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -44,13 +47,13 @@ public class HideTypeAction extends Action {
 
 	protected IGraphicalEditPart host;
 
-	public static String ID = "hideTypeAction";
+	public static String ID = "hideTypeAction"; //$NON-NLS-1$
 
 	public HideTypeAction() {
 		setId(ID);
-		setText("Hide VisualType");
-		setToolTipText("Hide all parts in the current diagram related to the visual type of the current selection");
-		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hidetype_exec.gif"));
+		setText(Messages.HideTypeAction_HideVisualType);
+		setToolTipText(Messages.HideTypeAction_HideVisualType_tooltip);
+		setImageDescriptor(FilterPlugin.getImageDescriptor("icons/etool16/hidetype_exec.gif")); //$NON-NLS-1$
 	}
 
 	private Diagram getCurrentDiagram() {
