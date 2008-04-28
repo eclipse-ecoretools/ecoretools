@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: AbstractParser.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.parsers;
@@ -393,6 +395,7 @@ public abstract class AbstractParser implements IParser {
 		/**
 		 * @generated
 		 */
+		@Override
 		public String toString() {
 			return description;
 		}

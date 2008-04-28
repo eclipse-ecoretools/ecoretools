@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: PackageComponentEditPolicy.java,v 1.3 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -52,7 +54,7 @@ public class PackageComponentEditPolicy extends ComponentEditPolicy {
 		if (editingDomain == null) {
 			return null;
 		}
-		List toDel = deleteRequest.getEditParts();
+		List<?> toDel = deleteRequest.getEditParts();
 		if (toDel == null || toDel.isEmpty()) {
 			deleteLinkedDiagram(cc, getHost());
 			cc.compose(new DeleteCommand(editingDomain, (View) getHost().getModel()));

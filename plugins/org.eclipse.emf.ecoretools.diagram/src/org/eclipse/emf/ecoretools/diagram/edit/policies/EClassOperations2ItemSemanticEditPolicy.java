@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EClassOperations2ItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -26,6 +28,7 @@ public class EClassOperations2ItemSemanticEditPolicy extends EcoreBaseItemSemant
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EOperation_2002 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {

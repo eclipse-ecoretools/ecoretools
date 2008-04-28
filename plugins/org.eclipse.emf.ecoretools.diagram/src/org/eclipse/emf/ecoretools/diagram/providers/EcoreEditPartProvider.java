@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreEditPartProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -115,6 +117,7 @@ public class EcoreEditPartProvider extends AbstractEditPartProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public synchronized IGraphicalEditPart createGraphicEditPart(View view) {
 		if (isAllowCaching()) {
 			IGraphicalEditPart part = getCachedPart(view);
@@ -130,6 +133,7 @@ public class EcoreEditPartProvider extends AbstractEditPartProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public synchronized boolean provides(IOperation operation) {
 		if (operation instanceof CreateGraphicEditPartOperation) {
 			View view = ((IEditPartOperation) operation).getView();

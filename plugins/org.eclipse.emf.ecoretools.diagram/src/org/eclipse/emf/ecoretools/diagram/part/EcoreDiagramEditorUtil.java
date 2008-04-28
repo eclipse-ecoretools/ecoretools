@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreDiagramEditorUtil.java,v 1.8 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -168,6 +170,7 @@ public class EcoreDiagramEditorUtil {
 		final String diagramName = diagramURI.lastSegment().substring(0, diagramURI.lastSegment().length() - (diagramURI.fileExtension() == null ? 0 : diagramURI.fileExtension().length() + 1));
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
 
+			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				EPackage model = createInitialModel();
 				
@@ -233,6 +236,7 @@ public class EcoreDiagramEditorUtil {
 		final String diagramName = diagramURI.lastSegment();
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain, Messages.EcoreDiagramEditorUtil_CreateDiagramCommandLabel, Collections.EMPTY_LIST) {
 
+			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				Diagram diagram = ViewService.createDiagram(model, EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (diagram != null) {

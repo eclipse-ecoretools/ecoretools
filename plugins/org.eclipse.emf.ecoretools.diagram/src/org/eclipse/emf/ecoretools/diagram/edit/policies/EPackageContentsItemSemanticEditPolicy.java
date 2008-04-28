@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EPackageContentsItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -28,6 +30,7 @@ public class EPackageContentsItemSemanticEditPolicy extends EcoreBaseItemSemanti
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EClass_2003 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {

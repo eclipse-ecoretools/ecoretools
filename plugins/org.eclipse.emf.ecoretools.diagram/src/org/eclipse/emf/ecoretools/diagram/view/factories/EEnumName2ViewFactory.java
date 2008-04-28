@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EEnumName2ViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -26,6 +28,7 @@ public class EEnumName2ViewFactory extends BasicNodeViewFactory {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;

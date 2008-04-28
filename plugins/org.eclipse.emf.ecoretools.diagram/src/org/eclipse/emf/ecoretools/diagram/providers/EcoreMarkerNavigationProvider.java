@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreMarkerNavigationProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -40,6 +42,7 @@ public class EcoreMarkerNavigationProvider extends AbstractModelMarkerNavigation
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void doGotoMarker(IMarker marker) {
 		String elementId = marker.getAttribute(org.eclipse.gmf.runtime.common.core.resources.IMarker.ELEMENT_ID, null);
 		if (elementId == null || !(getEditor() instanceof DiagramEditor)) {

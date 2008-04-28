@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreOCLFactory.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.expressions;
@@ -109,6 +111,7 @@ public class EcoreOCLFactory {
 		/**
 		 * @generated
 		 */
+		@Override
 		protected Object doEvaluate(Object context, Map env) {
 			Query oclQuery = getQuery();
 			if (oclQuery == null) {
@@ -133,6 +136,7 @@ public class EcoreOCLFactory {
 		/**
 		 * @generated
 		 */
+		@Override
 		protected Object performCast(Object value, ETypedElement targetType) {
 			if (targetType.getEType() instanceof EEnum) {
 				if (value instanceof EEnumLiteral) {
@@ -158,6 +162,7 @@ public class EcoreOCLFactory {
 
 					private boolean usesAllInstances = false;
 
+					@Override
 					public Object visitOperationCallExp(OperationCallExp oc) {
 						if (!usesAllInstances) {
 							usesAllInstances = PredefinedType.ALL_INSTANCES == oc.getOperationCode();

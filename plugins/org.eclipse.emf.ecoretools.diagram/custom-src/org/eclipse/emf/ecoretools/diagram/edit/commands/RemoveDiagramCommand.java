@@ -8,16 +8,17 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: RemoveDiagramCommand.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
-
-import java.util.Iterator;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -55,10 +56,12 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
 	 *      org.eclipse.core.runtime.IAdaptable)
 	 */
+	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		try {
-			for (Iterator it = diagramFacet.getDiagramLinks().iterator(); it.hasNext();) {
-				Diagram diagram = (Diagram) it.next();
+			@SuppressWarnings("unchecked")
+			EList<Diagram> diagramLinks = diagramFacet.getDiagramLinks();
+			for (Diagram diagram : diagramLinks) {
 				if (diagram != null) {
 					// Close associated diagram
 					URI uri = diagram.eResource().getURI();
@@ -74,7 +77,7 @@ public class RemoveDiagramCommand extends AbstractTransactionalCommand {
 					diagramFacet.eResource().getContents().remove(diagram);
 				}
 			}
-			diagramFacet.getDiagramLinks().clear();
+			diagramLinks.clear();
 			return CommandResult.newOKCommandResult();
 		} catch (Exception ex) {
 			throw new ExecutionException("Can't remove diagram", ex);

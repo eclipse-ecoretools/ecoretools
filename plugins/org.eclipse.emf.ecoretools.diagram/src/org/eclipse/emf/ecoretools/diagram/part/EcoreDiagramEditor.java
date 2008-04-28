@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreDiagramEditor.java,v 1.12 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -121,6 +123,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected String getContextID() {
 		return CONTEXT_ID;
 	}
@@ -128,6 +131,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected PaletteRoot createPaletteRoot(PaletteRoot existingPaletteRoot) {
 		PaletteRoot root = super.createPaletteRoot(existingPaletteRoot);
 		new EcorePaletteFactory().fillPalette(root);
@@ -137,6 +141,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected PreferencesHint getPreferencesHint() {
 		return EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT;
 	}
@@ -144,6 +149,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getContributorId() {
 		return EcoreDiagramEditorPlugin.ID;
 	}
@@ -153,6 +159,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	public Object getAdapter(Class type) {
 		if (type == IShowInTargetList.class) {
 			return new IShowInTargetList() {
@@ -171,6 +178,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IDocumentProvider getDocumentProvider(IEditorInput input) {
 		if (input instanceof IFileEditorInput || input instanceof URIEditorInput) {
 			return EcoreDiagramEditorPlugin.getInstance().getDocumentProvider();
@@ -181,6 +189,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	public TransactionalEditingDomain getEditingDomain() {
 		IDocument document = getEditorInput() != null ? getDocumentProvider().getDocument(getEditorInput()) : null;
 		if (document instanceof IDiagramDocument) {
@@ -192,6 +201,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void setDocumentProvider(IEditorInput input) {
 		if (input instanceof IFileEditorInput || input instanceof URIEditorInput) {
 			setDocumentProvider(EcoreDiagramEditorPlugin.getInstance().getDocumentProvider());
@@ -210,6 +220,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean isSaveAsAllowed() {
 		return true;
 	}
@@ -217,6 +228,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	public void doSaveAs() {
 		performSaveAs(new NullProgressMonitor());
 	}
@@ -224,6 +236,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void performSaveAs(IProgressMonitor progressMonitor) {
 		Shell shell = getSite().getShell();
 		IEditorInput input = getEditorInput();
@@ -292,6 +305,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	public ShowInContext getShowInContext() {
 		return new ShowInContext(getEditorInput(), getNavigatorSelection());
 	}
@@ -316,10 +330,12 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void initializeGraphicalViewer() {
 		super.initializeGraphicalViewer();
 		getDiagramGraphicalViewer().addDropTargetListener(new DropTargetListener(getDiagramGraphicalViewer(), LocalSelectionTransfer.getTransfer()) {
 
+			@Override
 			protected Object getJavaObject(TransferData data) {
 				return LocalSelectionTransfer.getTransfer().nativeToJava(data);
 			}
@@ -327,6 +343,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		});
 		getDiagramGraphicalViewer().addDropTargetListener(new DropTargetListener(getDiagramGraphicalViewer(), LocalTransfer.getInstance()) {
 
+			@Override
 			protected Object getJavaObject(TransferData data) {
 				return LocalTransfer.getInstance().nativeToJava(data);
 			}
@@ -349,6 +366,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		/**
 		 * @generated
 		 */
+		@Override
 		protected List getObjectsBeingDropped() {
 			TransferData data = getCurrentEvent().currentDataType;
 			Collection uris = new HashSet();

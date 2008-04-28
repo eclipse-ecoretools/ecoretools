@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EAttributeEditPart.java,v 1.4 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -107,6 +109,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	public DragTracker getDragTracker(Request request) {
 		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3) {
 			return null;
@@ -117,6 +120,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EAttributeItemSemanticEditPolicy());
@@ -183,6 +187,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -190,6 +195,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -407,6 +413,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -434,6 +441,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -478,6 +486,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -489,6 +498,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -496,6 +506,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -511,6 +522,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -524,10 +536,12 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
+				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -546,6 +560,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -554,6 +569,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
@@ -562,6 +578,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -609,6 +626,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IFigure createFigure() {
 		IFigure label = createFigurePrim();
 		defaultText = getLabelTextHelper(label);

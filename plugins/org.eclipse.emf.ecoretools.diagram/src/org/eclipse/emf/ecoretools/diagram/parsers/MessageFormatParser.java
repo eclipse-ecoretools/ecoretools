@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: MessageFormatParser.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.parsers;
@@ -80,6 +82,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getViewPattern() {
 		String pattern = super.getViewPattern();
 		return pattern != null ? pattern : getDefaultPattern();
@@ -88,6 +91,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void setViewPattern(String viewPattern) {
 		super.setViewPattern(viewPattern);
 		viewProcessor = null;
@@ -113,6 +117,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getEditorPattern() {
 		String pattern = super.getEditorPattern();
 		return pattern != null ? pattern : getDefaultPattern();
@@ -121,6 +126,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void setEditorPattern(String editorPattern) {
 		super.setEditorPattern(editorPattern);
 		editorProcessor = null;
@@ -146,6 +152,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getEditPattern() {
 		String pattern = super.getEditPattern();
 		return pattern != null ? pattern : getDefaultPattern();
@@ -154,6 +161,7 @@ public class MessageFormatParser extends AbstractParser {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void setEditPattern(String editPattern) {
 		super.setEditPattern(editPattern);
 		editProcessor = null;

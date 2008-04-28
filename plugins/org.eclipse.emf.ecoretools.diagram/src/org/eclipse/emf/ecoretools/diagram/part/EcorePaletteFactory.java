@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcorePaletteFactory.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -241,6 +243,7 @@ public class EcorePaletteFactory {
 		/**
 		 * @generated
 		 */
+		@Override
 		public Tool createTool() {
 			Tool tool = new UnspecifiedTypeCreationTool(elementTypes);
 			tool.setProperties(getToolProperties());
@@ -269,6 +272,7 @@ public class EcorePaletteFactory {
 		/**
 		 * @generated
 		 */
+		@Override
 		public Tool createTool() {
 			Tool tool = new UnspecifiedTypeConnectionTool(relationshipTypes);
 			tool.setProperties(getToolProperties());

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreParserProvider.java,v 1.3 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -533,6 +535,7 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 		/**
 		 * @generated
 		 */
+		@Override
 		public Object getAdapter(Class adapter) {
 			if (IElementType.class.equals(adapter)) {
 				return elementType;

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EEnumLiteralsItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -26,6 +28,7 @@ public class EEnumLiteralsItemSemanticEditPolicy extends EcoreBaseItemSemanticEd
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EEnumLiteral_2006 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {

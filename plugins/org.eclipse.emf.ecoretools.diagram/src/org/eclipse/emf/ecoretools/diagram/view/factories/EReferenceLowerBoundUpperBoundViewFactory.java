@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferenceLowerBoundUpperBoundViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -32,6 +34,7 @@ public class EReferenceLowerBoundUpperBoundViewFactory extends AbstractLabelView
 	/**
 	 * @generated
 	 */
+	@Override
 	public View createView(IAdaptable semanticAdapter, View containerView, String semanticHint, int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node view = (Node) super.createView(semanticAdapter, containerView, semanticHint, index, persisted, preferencesHint);
 		Location location = (Location) view.getLayoutConstraint();
@@ -44,6 +47,7 @@ public class EReferenceLowerBoundUpperBoundViewFactory extends AbstractLabelView
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;

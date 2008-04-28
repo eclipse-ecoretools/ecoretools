@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EPackageCanonicalEditPolicy.java,v 1.7 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -65,6 +67,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
@@ -77,6 +80,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected boolean shouldDeleteView(View view) {
 		return true;
 	}
@@ -84,6 +88,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
 			return EcoreDiagramUpdater.isShortcutOrphaned(view);
@@ -103,6 +108,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected String getDefaultFactoryHint() {
 		return null;
 	}
@@ -110,6 +116,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
@@ -123,6 +130,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List getSemanticConnectionsList() {
 		return Collections.EMPTY_LIST;
 	}
@@ -130,6 +138,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected EObject getSourceElement(EObject relationship) {
 		return null;
 	}
@@ -137,6 +146,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected EObject getTargetElement(EObject relationship) {
 		return null;
 	}
@@ -144,6 +154,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected boolean shouldIncludeConnection(Edge connector, Collection children) {
 		return false;
 	}
@@ -151,6 +162,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected void refreshSemantic() {
 		deleteOrphanedViews();
 		List createdConnectionViews = new LinkedList();

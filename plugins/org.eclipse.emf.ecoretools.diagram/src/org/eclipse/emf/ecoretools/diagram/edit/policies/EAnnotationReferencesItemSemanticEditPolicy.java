@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EAnnotationReferencesItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -24,6 +26,7 @@ public class EAnnotationReferencesItemSemanticEditPolicy extends EcoreBaseItemSe
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getDestroyReferenceCommand(DestroyReferenceRequest req) {
 		return getGEFWrapper(new DestroyReferenceCommand(req));
 	}

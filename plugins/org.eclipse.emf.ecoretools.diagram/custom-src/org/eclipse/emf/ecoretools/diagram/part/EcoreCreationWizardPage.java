@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreCreationWizardPage.java,v 1.3 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -73,7 +75,7 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
  */
 public class EcoreCreationWizardPage extends WizardPage {
 
-	private static final String BROWSE_TEXT = "Browse...";
+	private static final String BROWSE_TEXT = EcoreDiagramEditorPlugin.getString("label.browse"); //$NON-NLS-1$
 
 	private static final String DOMAIN_EXT = "ecore"; //$NON-NLS-1$
 
@@ -182,7 +184,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 	protected void createDestinationGroup(Composite parent) {
 		// Group activated when the user choose to create a new domain file
 		newModelBt = new Button(parent, SWT.RADIO);
-		newModelBt.setText("Create a new Model");
+		newModelBt.setText(EcoreDiagramEditorPlugin.getString("label.create.new.model"));  //$NON-NLS-1$
 		newModelBt.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		createNewModelGroup(parent);
@@ -190,7 +192,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 		// Group activated when the user choose to create from an existing
 		// domain file
 		existingModelBt = new Button(parent, SWT.RADIO);
-		existingModelBt.setText("Create from an existing Model");
+		existingModelBt.setText(EcoreDiagramEditorPlugin.getString("label.create.from.existing.model")); //$NON-NLS-1$
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.verticalIndent = 20;
 		existingModelBt.setLayoutData(gd);
@@ -205,7 +207,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		// The destination directory
 		Label directoryLbl = new Label(newModelGrp, SWT.NONE);
-		directoryLbl.setText("Directory : ");
+		directoryLbl.setText(EcoreDiagramEditorPlugin.getString("label.directory")); //$NON-NLS-1$
 
 		directoryFd = new Text(newModelGrp, SWT.BORDER);
 		directoryFd.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -216,7 +218,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		// The new name of the domain file to create
 		Label nameLbl = new Label(newModelGrp, SWT.NONE);
-		nameLbl.setText("Domain file name : ");
+		nameLbl.setText(EcoreDiagramEditorPlugin.getString("label.domain.file.name")); //$NON-NLS-1$
 
 		nameFd = new Text(newModelGrp, SWT.BORDER);
 		GridData layoutNameFd = new GridData(GridData.FILL_HORIZONTAL);
@@ -231,7 +233,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		// Selection of the existing domain file
 		Label modelLbl = new Label(existingModelGrp, SWT.NONE);
-		modelLbl.setText("Domain model : ");
+		modelLbl.setText(EcoreDiagramEditorPlugin.getString("label.domain.model")); //$NON-NLS-1$
 
 		modelFd = new Text(existingModelGrp, SWT.BORDER);
 		modelFd.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -242,7 +244,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		// The TreeViewer in charge of rendering the domain model
 		Label viewerLbl = new Label(existingModelGrp, SWT.NONE);
-		viewerLbl.setText("Select : ");
+		viewerLbl.setText(EcoreDiagramEditorPlugin.getString("label.select")); //$NON-NLS-1$
 
 		viewer = new TreeViewer(existingModelGrp, SWT.SINGLE | SWT.BORDER);
 		GridData gdViewer = new GridData(GridData.FILL_BOTH);
@@ -251,7 +253,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 		viewer.getTree().setLayoutData(gdViewer);
 
 		initializeBt = new Button(existingModelGrp, SWT.CHECK);
-		initializeBt.setText("Initialize the diagram with existing domain model objects");
+		initializeBt.setText(EcoreDiagramEditorPlugin.getString("label.initialize.with.existing.model")); //$NON-NLS-1$
 		GridData gdInit = new GridData(GridData.FILL_HORIZONTAL);
 		gdInit.horizontalSpan = 3;
 		initializeBt.setLayoutData(gdInit);
@@ -295,6 +297,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 		// Button listeners
 		directoryBt.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleDirectoryChoose();
 			}
@@ -302,6 +305,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		modelBt.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				handleModelChoose();
 			}
@@ -309,6 +313,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		existingModelBt.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (existingModelBt.getSelection()) {
 					newModelGrp.setEnabled(false);
@@ -320,6 +325,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 
 		newModelBt.addSelectionListener(new SelectionAdapter() {
 
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (newModelBt.getSelection()) {
 					newModelGrp.setEnabled(true);
@@ -342,7 +348,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 	 */
 	protected void handleDirectoryChoose() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), (IContainer) ResourcesPlugin.getWorkspace().getRoot().findMember(directoryFd.getText()), false,
-				"Choose the destination directory :");
+			EcoreDiagramEditorPlugin.getString("description.select.destintation.directory")); //$NON-NLS-1$
 		if (dialog.open() == Window.OK) {
 			Object[] results = dialog.getResult();
 			if (results.length == 1 && results[0] instanceof IPath) {
@@ -359,7 +365,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 		// The initial directory is always the Workspace
 		String initialDirectory = ResourcesPlugin.getWorkspace().getRoot().getFullPath().toString();
 
-		ResourceSelectionDialog dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot().findMember(initialDirectory), "Choose an existing domain file :");
+		ResourceSelectionDialog dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot().findMember(initialDirectory), EcoreDiagramEditorPlugin.getString("label.select.existing.domain.file")); //$NON-NLS-1$
 		if (dialog.open() == Window.OK) {
 			Object[] results = dialog.getResult();
 			if (results.length == 1 && results[0] instanceof IFile) {
@@ -564,7 +570,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 	public EObject getDiagramEObject() {
 		if (((IStructuredSelection) viewer.getSelection()).getFirstElement() == null) {
 			if (viewer.getInput() != null) {
-				return ((EList<EObject>) viewer.getInput()).get(0);
+				return (EObject)((EList<?>) viewer.getInput()).get(0);
 			} else {
 				return null;
 			}
@@ -656,7 +662,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 		public Object[] getChildren(Object parentElement) {
 			// Return the edited domain model as root element
 			if (parentElement instanceof List) {
-				return new Object[] { ((List<Object>) parentElement).get(0) };
+				return new Object[] { ((List<?>) parentElement).get(0) };
 			}
 
 			// For the domain model objects, retrieves model children and merges

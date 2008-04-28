@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreAbstractExpression.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.expressions;
@@ -199,6 +201,7 @@ public abstract class EcoreAbstractExpression {
 	public static final EcoreAbstractExpression createNullExpression(EClassifier context) {
 		return new EcoreAbstractExpression(context) {
 
+			@Override
 			protected Object doEvaluate(Object context, Map env) {
 				// TODO - log entry about not provider available for this
 				// expression
@@ -211,6 +214,11 @@ public abstract class EcoreAbstractExpression {
 	 * @generated
 	 */
 	public static class NoImplException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 
 		/**
 		 * @generated

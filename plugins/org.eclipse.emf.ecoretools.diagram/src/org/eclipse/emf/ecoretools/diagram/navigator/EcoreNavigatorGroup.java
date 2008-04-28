@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreNavigatorGroup.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
@@ -89,6 +91,7 @@ public class EcoreNavigatorGroup extends EcoreAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorGroup) {
 			org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorGroup anotherGroup = (org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorGroup) obj;
@@ -102,6 +105,7 @@ public class EcoreNavigatorGroup extends EcoreAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
+	@Override
 	public int hashCode() {
 		return getGroupName().hashCode();
 	}

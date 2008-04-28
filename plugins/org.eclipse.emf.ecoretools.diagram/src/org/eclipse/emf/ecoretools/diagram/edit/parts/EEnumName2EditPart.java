@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EEnumName2EditPart.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -101,21 +103,25 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicy() {
 
+			@Override
 			protected List createSelectionHandles() {
 				List handles = new ArrayList();
 				NonResizableHandleKit.addMoveHandle((GraphicalEditPart) getHost(), handles);
 				return handles;
 			}
 
+			@Override
 			public Command getCommand(Request request) {
 				return null;
 			}
 
+			@Override
 			public boolean understandsRequest(Request request) {
 				return false;
 			}
@@ -180,6 +186,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -187,6 +194,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -357,6 +365,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -384,6 +393,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -428,6 +438,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -439,6 +450,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -446,6 +458,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -461,6 +474,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -474,10 +488,12 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
+				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -496,6 +512,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -504,6 +521,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
@@ -512,6 +530,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -545,6 +564,7 @@ public class EEnumName2EditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IFigure createFigure() {
 		// Parent should assign one using setLabel() method
 		return null;

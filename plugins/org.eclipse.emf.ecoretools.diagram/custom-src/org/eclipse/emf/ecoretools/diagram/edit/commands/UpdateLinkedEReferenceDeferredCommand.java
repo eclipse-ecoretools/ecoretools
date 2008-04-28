@@ -8,6 +8,8 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: UpdateLinkedEReferenceDeferredCommand.java,v 1.4 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -70,7 +72,7 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 		if (part1 == null || part2 == null) {
 			return CommandResult.newWarningCommandResult("Unable to proceed with null parts", null);
 		}
-		RunnableWithResult refreshRunnable = new RunnableWithResult() {
+		RunnableWithResult<Object> refreshRunnable = new RunnableWithResult<Object>() {
 
 			private IStatus status;
 
@@ -137,7 +139,9 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 				}
 
 				RelativeBendpoints edge2Benpoints = (RelativeBendpoints) edge2.getBendpoints();
-				if (false == isBendpointEqual(edge2Benpoints.getPoints(), relativePoints)) {
+				@SuppressWarnings("unchecked")
+				List<RelativeBendpoint> points = edge2Benpoints.getPoints();
+				if (false == isBendpointEqual(points, relativePoints)) {
 					edge2Benpoints.setPoints(relativePoints);
 				}
 

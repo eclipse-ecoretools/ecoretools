@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreDomainNavigatorContentProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
@@ -76,6 +78,12 @@ public class EcoreDomainNavigatorContentProvider implements ICommonContentProvid
 		myEditingDomain = (AdapterFactoryEditingDomain) editingDomain;
 		myEditingDomain.setResourceToReadOnlyMap(new HashMap() {
 
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
 			public Object get(Object key) {
 				if (!containsKey(key)) {
 					put(key, Boolean.TRUE);

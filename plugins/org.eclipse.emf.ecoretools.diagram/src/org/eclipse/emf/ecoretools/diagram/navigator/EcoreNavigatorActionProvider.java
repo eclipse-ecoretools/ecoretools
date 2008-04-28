@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreNavigatorActionProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
@@ -58,6 +60,7 @@ public class EcoreNavigatorActionProvider extends CommonActionProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void init(ICommonActionExtensionSite aSite) {
 		super.init(aSite);
 		if (aSite.getViewSite() instanceof ICommonViewerWorkbenchSite) {
@@ -78,6 +81,7 @@ public class EcoreNavigatorActionProvider extends CommonActionProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void fillActionBars(IActionBars actionBars) {
 		if (!myContribute) {
 			return;
@@ -92,6 +96,7 @@ public class EcoreNavigatorActionProvider extends CommonActionProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void fillContextMenu(IMenuManager menu) {
 	}
 
@@ -143,6 +148,7 @@ public class EcoreNavigatorActionProvider extends CommonActionProvider {
 		/**
 		 * @generated
 		 */
+		@Override
 		public void run() {
 			if (myDiagram == null || myDiagram.eResource() == null) {
 				return;

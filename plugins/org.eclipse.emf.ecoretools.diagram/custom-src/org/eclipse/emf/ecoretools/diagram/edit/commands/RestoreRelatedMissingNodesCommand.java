@@ -8,6 +8,8 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: RestoreRelatedMissingNodesCommand.java,v 1.6 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -15,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,7 +27,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -48,7 +48,7 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksCommand {
 
-	public RestoreRelatedMissingNodesCommand(DiagramEditPart diagramEditPart, List selection) {
+	public RestoreRelatedMissingNodesCommand(DiagramEditPart diagramEditPart, List<?> selection) {
 		super(diagramEditPart, selection);
 	}
 
@@ -58,8 +58,7 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
-			Object object = iter.next();
+		for (Object object : adapters) {
 			if (object instanceof IAdaptable) {
 				IAdaptable ad = (IAdaptable) object;
 				View view = (View) ad.getAdapter(View.class);
@@ -81,10 +80,10 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 * @param graphicalEditPart
 	 */
 	protected void refreshMissingNodes(View notationView) {
-		Map domain2NotationMap = new HashMap();
+		Map<EObject, View> domain2NotationMap = new HashMap<EObject, View>();
 
 		// Create related missing nodes for all semantic link
-		Collection linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
+		Collection<? extends EcoreLinkDescriptor> linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
 		createRelatedMissingNodes(linkDescriptors, domain2NotationMap);
 	}
 
@@ -95,20 +94,19 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 	 * @param linkDescriptors
 	 * @param domain2NotationMap
 	 */
-	protected void createRelatedMissingNodes(Collection linkDescriptors, Map domain2NotationMap) {
+	protected void createRelatedMissingNodes(Collection<? extends EcoreLinkDescriptor> linkDescriptors, Map<EObject, View> domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
 		List<EObject> objectViews = new ArrayList<EObject>();
-		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
-			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
+		for (EcoreLinkDescriptor nextLinkDescriptor : linkDescriptors) {
 			// EditPart sourceEditPart =
 			// getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
 			// EditPart targetEditPart =
 			// getEditPart(nextLinkDescriptor.getDestination(),
 			// domain2NotationMap);
-			View sourceView = (View) domain2NotationMap.get(nextLinkDescriptor.getSource());
-			View targetView = (View) domain2NotationMap.get(nextLinkDescriptor.getDestination());
+			View sourceView = domain2NotationMap.get(nextLinkDescriptor.getSource());
+			View targetView = domain2NotationMap.get(nextLinkDescriptor.getDestination());
 
 			// Create missing parts
 			List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();

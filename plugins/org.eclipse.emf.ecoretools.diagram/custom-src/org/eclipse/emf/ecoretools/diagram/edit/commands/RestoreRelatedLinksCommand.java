@@ -8,6 +8,8 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: RestoreRelatedLinksCommand.java,v 1.6 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -21,6 +23,7 @@ import java.util.Map;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
@@ -62,13 +65,13 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 
-	protected List adapters;
+	protected List<?> adapters;
 
 	protected Diagram diagram;
 
 	protected DiagramEditPart host;
 
-	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List selection) {
+	public RestoreRelatedLinksCommand(DiagramEditPart diagramEditPart, List<?> selection) {
 		super(diagramEditPart.getEditingDomain(), "Restore Related Links", null);
 		this.host = diagramEditPart;
 		this.diagram = host.getDiagramView();
@@ -82,8 +85,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
-			Object object = iter.next();
+		for (Object object : adapters) {
 			if (object instanceof IAdaptable) {
 				IAdaptable ad = (IAdaptable) object;
 				View view = (View) ad.getAdapter(View.class);
@@ -105,12 +107,11 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param linkDescriptors
 	 * @param domain2NotationMap
 	 */
-	protected void createRelatedLinks(Collection linkDescriptors, Map domain2NotationMap) {
+	protected void createRelatedLinks(Collection<? extends EcoreLinkDescriptor> linkDescriptors, Map<EObject, View> domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
-		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
-			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
+		for (EcoreLinkDescriptor nextLinkDescriptor : linkDescriptors ) {
 			EditPart sourceEditPart = getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
 			EditPart targetEditPart = getEditPart(nextLinkDescriptor.getDestination(), domain2NotationMap);
 
@@ -140,8 +141,8 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param domainModelElement
 	 * @param domain2NotationMap
 	 */
-	protected EditPart getEditPart(EObject domainModelElement, Map domain2NotationMap) {
-		View view = (View) domain2NotationMap.get(domainModelElement);
+	protected EditPart getEditPart(EObject domainModelElement, Map<? extends EObject, ? extends View> domain2NotationMap) {
+		View view = domain2NotationMap.get(domainModelElement);
 		if (view != null) {
 			return (EditPart) host.getViewer().getEditPartRegistry().get(view);
 		}
@@ -154,10 +155,10 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param graphicalEditPart
 	 */
 	protected void refreshRelatedLinks(View notationView) {
-		Map domain2NotationMap = new HashMap();
+		Map<EObject, View> domain2NotationMap = new HashMap<EObject, View>();
 
 		// Create related links
-		Collection linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
+		Collection<? extends EcoreLinkDescriptor> linkDescriptors = getLinkDescriptorToProcess(notationView, domain2NotationMap);
 		createRelatedLinks(linkDescriptors, domain2NotationMap);
 	}
 
@@ -169,20 +170,20 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * 
 	 * @return linkDescritors
 	 */
-	protected Collection getLinkDescriptorToProcess(View notationView, Map domain2NotationMap) {
+	protected Collection<? extends EcoreLinkDescriptor> getLinkDescriptorToProcess(View notationView, Map<EObject, View> domain2NotationMap) {
 		// Collect all related link from semantic model
-		Collection linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
+		Collection<? extends EcoreLinkDescriptor> linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
 
 		// Collect all related link from graphical model
-		Collection existingLinks = new LinkedList();
+		Collection<Edge> existingLinks = new LinkedList<Edge>();
 		for (Object edge : notationView.getTargetEdges()) {
 			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
-				existingLinks.add(edge);
+				existingLinks.add((Edge)edge);
 			}
 		}
 		for (Object edge : notationView.getSourceEdges()) {
 			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
-				existingLinks.add(edge);
+				existingLinks.add((Edge)edge);
 			}
 		}
 
@@ -190,8 +191,8 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		setViewVisible(existingLinks);
 
 		// Remove already existing links
-		for (Iterator linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
-			Edge nextDiagramLink = (Edge) linksIterator.next();
+		for (Iterator<Edge> linksIterator = existingLinks.iterator(); linksIterator.hasNext();) {
+			Edge nextDiagramLink = linksIterator.next();
 			int diagramLinkVisualID = EcoreVisualIDRegistry.getVisualID(nextDiagramLink);
 			if (diagramLinkVisualID == -1) {
 				if (nextDiagramLink.getSource() != null && nextDiagramLink.getTarget() != null) {
@@ -202,8 +203,8 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			EObject diagramLinkObject = nextDiagramLink.getElement();
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
-			for (Iterator LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator.hasNext();) {
-				EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) LinkDescriptorsIterator.next();
+			for (Iterator<? extends EcoreLinkDescriptor> LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator.hasNext();) {
+				EcoreLinkDescriptor nextLinkDescriptor =  LinkDescriptorsIterator.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement() && diagramLinkSrc == nextLinkDescriptor.getSource() && diagramLinkDst == nextLinkDescriptor.getDestination()
 						&& diagramLinkVisualID == nextLinkDescriptor.getVisualID()) {
 					linksIterator.remove();
@@ -220,9 +221,8 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param part
 	 * @param views
 	 */
-	protected void setViewVisible(Collection views) {
-		for (Iterator it = views.iterator(); it.hasNext();) {
-			View view = (View) it.next();
+	protected void setViewVisible(Collection<? extends View> views) {
+		for (View view  : views) {
 			if (view.isVisible()) {
 				continue;
 			}
@@ -241,8 +241,8 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * 
 	 * @return linkdescriptors
 	 */
-	protected Collection collectPartRelatedLinks(View view, Map domain2NotationMap) {
-		Collection result = new LinkedList();
+	protected Collection<? extends EcoreLinkDescriptor> collectPartRelatedLinks(View view, Map<EObject, View> domain2NotationMap) {
+		Collection<EcoreLinkDescriptor> result = new LinkedList<EcoreLinkDescriptor>();
 
 		switch (EcoreVisualIDRegistry.getVisualID(view)) {
 		case EPackageEditPart.VISUAL_ID:
@@ -258,10 +258,10 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			if (!domain2NotationMap.containsKey(view.getElement())) {
 				// result.addAll(EcoreDiagramUpdater.getContainedLinks(view));
 				// We must prevent duplicate descriptors
-				List outgoingDescriptors = EcoreDiagramUpdater.getOutgoingLinks(view);
+				List<?> outgoingDescriptors = EcoreDiagramUpdater.getOutgoingLinks(view);
 				cleanAdd(result, outgoingDescriptors);
 
-				List incomingDescriptors = EcoreDiagramUpdater.getIncomingLinks(view);
+				List<?> incomingDescriptors = EcoreDiagramUpdater.getIncomingLinks(view);
 				cleanAdd(result, incomingDescriptors);
 			}
 			if (!domain2NotationMap.containsKey(view.getElement()) || view.getEAnnotation("Shortcut") == null) { //$NON-NLS-1$
@@ -274,7 +274,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		return result;
 	}
 
-	private void cleanAdd(Collection result, List descriptors) {
+	private void cleanAdd(Collection<EcoreLinkDescriptor> result, List<?> descriptors) {
 		for (Object object : descriptors) {
 			if (false == object instanceof EcoreLinkDescriptor) {
 				continue;
@@ -287,7 +287,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		}
 	}
 
-	private boolean cleanContains(Collection result, EcoreLinkDescriptor eCoreLinkDescriptor) {
+	private boolean cleanContains(Collection<? extends EcoreLinkDescriptor> result, EcoreLinkDescriptor eCoreLinkDescriptor) {
 		for (Object object : result) {
 			if (false == object instanceof EcoreLinkDescriptor) {
 				continue;
@@ -308,7 +308,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param view
 	 * @param domain2NotationMap
 	 */
-	protected void mapModel(View view, Map domain2NotationMap) {
+	protected void mapModel(View view, Map<EObject, View> domain2NotationMap) {
 		if (!EPackageEditPart.MODEL_ID.equals(EcoreVisualIDRegistry.getModelID(view))) {
 			return;
 		}
@@ -331,11 +331,15 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		}
 		}
 
-		for (Iterator children = view.getChildren().iterator(); children.hasNext();) {
-			mapModel((View) children.next(), domain2NotationMap);
+		@SuppressWarnings("unchecked")
+		EList<View> children = view.getChildren();
+		for (View child : children) {
+			mapModel(child, domain2NotationMap);
 		}
-		for (Iterator edges = view.getSourceEdges().iterator(); edges.hasNext();) {
-			mapModel((View) edges.next(), domain2NotationMap);
+		@SuppressWarnings("unchecked")
+		EList<View> sourceEdges = view.getSourceEdges();
+		for (View edge : sourceEdges) {
+			mapModel(edge, domain2NotationMap);
 		}
 	}
 

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferenceItemSemanticEditPolicy.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -34,6 +36,7 @@ public class EReferenceItemSemanticEditPolicy extends EcoreBaseItemSemanticEditP
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		// Destroy representations from all over the notation model file
 		CompoundCommand cc = getDestroyEdgesCommand();
@@ -48,6 +51,7 @@ public class EReferenceItemSemanticEditPolicy extends EcoreBaseItemSemanticEditP
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		Command command = req.getTarget() == null ? getStartCreateRelationshipCommand(req) : getCompleteCreateRelationshipCommand(req);
 		return command != null ? command : super.getCreateRelationshipCommand(req);
@@ -79,6 +83,7 @@ public class EReferenceItemSemanticEditPolicy extends EcoreBaseItemSemanticEditP
 	 * 
 	 * @generated
 	 */
+	@Override
 	protected Command getReorientReferenceRelationshipCommand(ReorientReferenceRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case EAnnotationReferencesEditPart.VISUAL_ID:

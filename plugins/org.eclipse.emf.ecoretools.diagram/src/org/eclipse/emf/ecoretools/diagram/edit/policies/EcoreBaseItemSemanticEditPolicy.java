@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreBaseItemSemanticEditPolicy.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -83,6 +85,7 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * 
 	 * @generated
 	 */
+	@Override
 	public Command getCommand(Request request) {
 		if (request instanceof ReconnectRequest) {
 			Object view = ((ReconnectRequest) request).getConnectionEditPart().getModel();
@@ -107,6 +110,7 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getSemanticCommand(IEditCommandRequest request) {
 		IEditCommandRequest completedRequest = completeRequest(request);
 		Object editHelperContext = completedRequest.getEditHelperContext();
@@ -269,6 +273,7 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @deprecated use getGEFWrapper() instead
 	 * @generated
 	 */
+	@Deprecated
 	protected final Command getMSLWrapper(ICommand cmd) {
 		// XXX deprecated: use getGEFWrapper() instead
 		return getGEFWrapper(cmd);

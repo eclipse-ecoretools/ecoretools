@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ValidateAction.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -77,6 +79,7 @@ public class ValidateAction extends Action {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void run() {
 		IWorkbenchPart workbenchPart = workbenchPartDescriptor.getPartPage().getActivePart();
 		if (workbenchPart instanceof IDiagramWorkbenchPart) {
@@ -141,6 +144,7 @@ public class ValidateAction extends Action {
 		if (target.isSetElement() && target.getElement() != null) {
 			return new Diagnostician() {
 
+				@Override
 				public String getObjectLabel(EObject eObject) {
 					return EMFCoreUtil.getQualifiedName(eObject, true);
 				}

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: InitializeAndLayoutDiagramCommand.java,v 1.7 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 

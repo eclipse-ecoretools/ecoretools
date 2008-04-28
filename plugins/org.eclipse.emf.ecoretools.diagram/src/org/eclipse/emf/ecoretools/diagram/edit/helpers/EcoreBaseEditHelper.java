@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreBaseEditHelper.java,v 1.5 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.helpers;
@@ -34,6 +36,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ICommand getInsteadCommand(IEditCommandRequest req) {
 		ICommand epCommand = (ICommand) req.getParameter(EDIT_POLICY_COMMAND);
 		req.setParameter(EDIT_POLICY_COMMAND, null);
@@ -53,6 +56,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ICommand getCreateCommand(CreateElementRequest req) {
 		return null;
 	}
@@ -60,6 +64,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ICommand getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		return null;
 	}
@@ -67,6 +72,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ICommand getDestroyElementCommand(DestroyElementRequest req) {
 		return null;
 	}
@@ -74,6 +80,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ICommand getDestroyReferenceCommand(DestroyReferenceRequest req) {
 		return null;
 	}

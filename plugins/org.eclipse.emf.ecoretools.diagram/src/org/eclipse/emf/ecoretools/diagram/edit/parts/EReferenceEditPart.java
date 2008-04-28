@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferenceEditPart.java,v 1.8 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -100,6 +102,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EReferenceItemSemanticEditPolicy());
@@ -115,6 +118,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (addFixedChild(childEditPart)) {
 			return;
@@ -130,6 +134,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	 * 
 	 * @generated
 	 */
+	@Override
 	protected Connection createConnectionFigure() {
 		return new SolidLineWDstArrow();
 	}
@@ -242,6 +247,7 @@ public class EReferenceEditPart extends ConnectionNodeEditPart {
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionEditPart#refreshVisuals()
 	 */
+	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshSourceDecoration();

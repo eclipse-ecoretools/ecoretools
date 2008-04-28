@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreTextNonResizableEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -46,6 +48,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void showPrimarySelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(true);
@@ -59,6 +62,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void showSelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(true);
@@ -74,6 +78,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void hideSelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(false);
@@ -90,6 +95,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void showFocus() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setFocus(true);
@@ -103,6 +109,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void hideFocus() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setFocus(false);
@@ -153,6 +160,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	protected IFigure createFocusFeedbackFigure() {
 		return new Figure() {
 
+			@Override
 			protected void paintFigure(Graphics graphics) {
 				graphics.drawFocus(getBounds().getResized(-1, -1));
 			}
@@ -203,6 +211,7 @@ public class EcoreTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List createSelectionHandles() {
 		MoveHandle moveHandle = new MoveHandle((GraphicalEditPart) getHost());
 		moveHandle.setBorder(null);

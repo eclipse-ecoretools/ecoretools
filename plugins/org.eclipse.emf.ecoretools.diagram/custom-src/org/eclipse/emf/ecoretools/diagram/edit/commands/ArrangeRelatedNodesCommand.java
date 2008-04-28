@@ -8,19 +8,21 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: ArrangeRelatedNodesCommand.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceUtils;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreLinkDescriptor;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -41,7 +43,7 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 
-	public ArrangeRelatedNodesCommand(DiagramEditPart diagramEditPart, List selection) {
+	public ArrangeRelatedNodesCommand(DiagramEditPart diagramEditPart, List<?> selection) {
 		super(diagramEditPart, selection);
 	}
 
@@ -52,8 +54,7 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		List<View> views = new ArrayList<View>();
-		for (Iterator iter = adapters.iterator(); iter.hasNext();) {
-			Object object = iter.next();
+		for (Object object : adapters) {
 			if (object instanceof IAdaptable) {
 				IAdaptable ad = (IAdaptable) object;
 				View view = (View) ad.getAdapter(View.class);
@@ -76,14 +77,14 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 	 * @param graphicalEditPart
 	 */
 	protected void arrangeRelatedNodes(List<View> notationViews) {
-		Map domain2NotationMap = new HashMap();
+		Map<EObject, View> domain2NotationMap = new HashMap<EObject, View>();
 
 		// Collect all related link from semantic model
 		List<View> relatedNodes = new ArrayList<View>();
 		relatedNodes.addAll(notationViews);
 		
 		for (View notationView : notationViews) {
-			Collection linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
+			Collection<? extends EcoreLinkDescriptor> linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
 			relatedNodes.addAll(getRelatedMissingNodes(linkDescriptors, domain2NotationMap));
 		}
 		
@@ -114,16 +115,15 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 	 * 
 	 * @return views
 	 */
-	protected List<View> getRelatedMissingNodes(Collection linkDescriptors, Map domain2NotationMap) {
+	protected List<View> getRelatedMissingNodes(Collection<? extends EcoreLinkDescriptor> linkDescriptors, Map<EObject, View> domain2NotationMap) {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
 		List<View> relatedNodes = new ArrayList<View>();
 
-		for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
-			final EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
-			View sourceView = (View) domain2NotationMap.get(nextLinkDescriptor.getSource());
-			View targetView = (View) domain2NotationMap.get(nextLinkDescriptor.getDestination());
+		for (EcoreLinkDescriptor nextLinkDescriptor : linkDescriptors) {
+			View sourceView = domain2NotationMap.get(nextLinkDescriptor.getSource());
+			View targetView = domain2NotationMap.get(nextLinkDescriptor.getDestination());
 			if (sourceView != null && false == relatedNodes.contains(sourceView)) {
 				relatedNodes.add(sourceView);
 			}

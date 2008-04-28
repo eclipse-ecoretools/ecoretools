@@ -8,14 +8,16 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: PackageDiagramDragDropEditPolicy.java,v 1.12 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
@@ -34,6 +36,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
@@ -58,8 +61,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	protected Command getDropCommand(ChangeBoundsRequest dropRequest) {
 		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
-		for (Iterator it = dropRequest.getEditParts().iterator(); it.hasNext();) {
-			Object nextPart = it.next();
+		for (Object nextPart : dropRequest.getEditParts()) {
 			if (false == nextPart instanceof IGraphicalEditPart) {
 				continue;
 			}
@@ -74,10 +76,10 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 			}
 
 			// Continue if element already in diagram
-			if (false == isElementInView(nextObject, dropRequest) && getView().getElement() == ((EObject) nextObject).eContainer()) {
-				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+			if (false == isElementInView(nextObject, dropRequest) && getView().getElement() == nextObject.eContainer()) {
+				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
 			} else {
-				shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+				shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
 			}
 		}
 
@@ -104,8 +106,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	public Command getDropObjectsCommand(DropObjectsRequest dropRequest) {
 		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
-		for (Iterator it = dropRequest.getObjects().iterator(); it.hasNext();) {
-			Object nextObject = it.next();
+		for (Object nextObject : dropRequest.getObjects()) {
 			if (false == nextObject instanceof EObject) {
 				continue;
 			}
@@ -142,8 +143,9 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	}
 
 	protected boolean isElementInView(Object nextObject, Request request) {
-		for (Iterator it = getView().getChildren().iterator(); it.hasNext();) {
-			View nextView = (View) it.next();
+		@SuppressWarnings("unchecked")
+		EList<View> views = getView().getChildren();
+		for (View nextView : views) {
 			if (nextView.getEAnnotation("Shortcut") != null) {
 				continue;
 			}
@@ -157,7 +159,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return false;
 	}
 
-	private Command createShortcutsCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
+	private Command createShortcutsCommand(DropObjectsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		Command command = createViews(dropRequest, viewDescriptors);
 		if (command != null) {
 			return command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
@@ -165,7 +167,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return null;
 	}
 
-	private Command createShortcutsCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+	private Command createShortcutsCommand(ChangeBoundsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		Command command = createViews(dropRequest, viewDescriptors);
 		if (command != null) {
 			return command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
@@ -173,15 +175,15 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return null;
 	}
 
-	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List viewDescriptors) {
+	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
 	}
 
-	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
 	}
 
-	protected Command createViews(DropObjectsRequest dropRequest, List viewDescriptors) {
+	protected Command createViews(DropObjectsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
@@ -189,7 +191,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return createCommand;
 	}
 	
-	protected Command createViewsAndRestoreRelatedLinks(DropObjectsRequest dropRequest, List viewDescriptors) {
+	protected Command createViewsAndRestoreRelatedLinks(DropObjectsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
@@ -200,7 +202,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 	}
 
 	private void restoreRelatedLinks(CreateViewRequest createViewRequest, Command createCommand) {
-		List viewAdapters = (List) createViewRequest.getNewObject();
+		List<?> viewAdapters = (List<?>) createViewRequest.getNewObject();
 		createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), viewAdapters)));
 	}
 
@@ -215,7 +217,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return ((DiagramEditor) editorPart).getDiagramEditPart();
 	}
 
-	protected Command createViews(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+	protected Command createViews(ChangeBoundsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
@@ -223,7 +225,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return createCommand;
 	}
 	
-	protected Command createViewsAndRestoreRelatedLinks(ChangeBoundsRequest dropRequest, List viewDescriptors) {
+	protected Command createViewsAndRestoreRelatedLinks(ChangeBoundsRequest dropRequest, List<? extends ViewDescriptor> viewDescriptors) {
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
 		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);

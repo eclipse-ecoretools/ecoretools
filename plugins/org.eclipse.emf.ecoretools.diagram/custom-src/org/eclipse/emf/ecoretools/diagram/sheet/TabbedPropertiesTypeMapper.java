@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: TabbedPropertiesTypeMapper.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.sheet;
@@ -31,6 +33,7 @@ public class TabbedPropertiesTypeMapper extends AbstractTypeMapper {
 	/**
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractTypeMapper#mapType(java.lang.Object)
 	 */
+	@Override
 	public Class<?> mapType(Object object) {
 
 		EObject eObject = ObjectAdapter.adaptObject(object);

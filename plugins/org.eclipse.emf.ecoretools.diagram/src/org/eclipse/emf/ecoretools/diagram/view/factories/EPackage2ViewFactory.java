@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EPackage2ViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -59,6 +61,7 @@ public class EPackage2ViewFactory extends AbstractShapeViewFactory {
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		styles.add(NotationFactory.eINSTANCE.createShapeStyle());
@@ -72,6 +75,7 @@ public class EPackage2ViewFactory extends AbstractShapeViewFactory {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void decorateView(View containerView, View view, IAdaptable semanticAdapter, String semanticHint, int index, boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = EcoreVisualIDRegistry.getType(EPackage2EditPart.VISUAL_ID);

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EPackageItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -34,6 +36,7 @@ public class EPackageItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPol
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EClass_1001 == req.getElementType()) {
 			if (req.getContainmentFeature() == null) {
@@ -71,6 +74,7 @@ public class EPackageItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPol
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Command getDuplicateCommand(DuplicateElementsRequest req) {
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
 		return getGEFWrapper(new DuplicateAnythingCommand(editingDomain, req));

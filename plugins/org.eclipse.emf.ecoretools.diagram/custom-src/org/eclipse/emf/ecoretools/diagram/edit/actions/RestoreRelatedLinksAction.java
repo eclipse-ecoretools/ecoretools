@@ -8,6 +8,8 @@
  *
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: RestoreRelatedLinksAction.java,v 1.7 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -62,9 +64,6 @@ public class RestoreRelatedLinksAction extends Action {
 			return null;
 		}
 		host = ((DiagramEditor) editorPart).getDiagramEditPart();
-		if (false == host instanceof IGraphicalEditPart) {
-			return null;
-		}
 		View view = (View) host.getModel();
 
 		Diagram diagram = view.getDiagram();

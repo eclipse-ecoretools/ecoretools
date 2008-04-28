@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EStringToStringMapEntryViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -29,6 +31,7 @@ public class EStringToStringMapEntryViewFactory extends AbstractLabelViewFactory
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;
@@ -37,6 +40,7 @@ public class EStringToStringMapEntryViewFactory extends AbstractLabelViewFactory
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void decorateView(View containerView, View view, IAdaptable semanticAdapter, String semanticHint, int index, boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = EcoreVisualIDRegistry.getType(EStringToStringMapEntryEditPart.VISUAL_ID);

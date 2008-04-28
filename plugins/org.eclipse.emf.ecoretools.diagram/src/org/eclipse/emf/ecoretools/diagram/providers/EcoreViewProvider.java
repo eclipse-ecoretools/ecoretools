@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreViewProvider.java,v 1.3 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -100,6 +102,7 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Class getDiagramViewClass(IAdaptable semanticAdapter, String diagramKind) {
 		EObject semanticElement = getSemanticElement(semanticAdapter);
 		if (EPackageEditPart.MODEL_ID.equals(diagramKind) && EcoreVisualIDRegistry.getDiagramVisualID(semanticElement) != -1) {
@@ -111,6 +114,7 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Class getNodeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
 		if (containerView == null) {
 			return null;
@@ -320,6 +324,7 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Class getEdgeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
 		IElementType elementType = getSemanticElementType(semanticAdapter);
 		if (!EcoreElementTypes.isKnownElementType(elementType) || (!(elementType instanceof IHintedType))) {

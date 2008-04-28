@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: OpenDiagramEditPolicy.java,v 1.10 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -121,6 +123,7 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		 * @param multiDiagramLinkStyle
 		 * @deprecated use the other constructor
 		 */
+		@Deprecated
 		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
 			this(((View) multiDiagramLinkStyle.eContainer()).getElement(), multiDiagramLinkStyle.eResource());
 			// super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle),

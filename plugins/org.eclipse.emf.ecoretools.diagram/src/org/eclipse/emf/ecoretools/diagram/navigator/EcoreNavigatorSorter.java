@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreNavigatorSorter.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
@@ -33,6 +35,7 @@ public class EcoreNavigatorSorter extends ViewerSorter {
 	/**
 	 * @generated
 	 */
+	@Override
 	public int category(Object element) {
 		if (element instanceof EcoreNavigatorItem) {
 			EcoreNavigatorItem item = (EcoreNavigatorItem) element;

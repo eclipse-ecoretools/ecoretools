@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferenceCreateCommand.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -59,6 +61,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean canExecute() {
 		if (source == null && target == null) {
 			return false;
@@ -80,6 +83,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected EObject doDefaultElementCreation() {
 		// org.eclipse.emf.ecore.EReference newElement =
 		// (org.eclipse.emf.ecore.EReference) super.doDefaultElementCreation();
@@ -92,6 +96,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected EClass getEClassToEdit() {
 		return EcorePackage.eINSTANCE.getEClass();
 	}
@@ -99,6 +104,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
@@ -109,6 +115,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ConfigureRequest createConfigureRequest() {
 		ConfigureRequest request = super.createConfigureRequest();
 		request.setParameter(CreateRelationshipRequest.SOURCE, getSource());
@@ -119,6 +126,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void setElementToEdit(EObject element) {
 		throw new UnsupportedOperationException();
 	}

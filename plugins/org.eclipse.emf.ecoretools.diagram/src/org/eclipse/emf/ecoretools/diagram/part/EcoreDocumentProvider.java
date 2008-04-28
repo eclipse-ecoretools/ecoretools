@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreDocumentProvider.java,v 1.11 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -76,6 +78,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 * 
 	 * @generated NOT
 	 */
+	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
 			throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, 0, NLS.bind(Messages.EcoreDocumentProvider_IncorrectInputError, new Object[] { element,
@@ -100,6 +103,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
 			throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, 0, NLS.bind(Messages.EcoreDocumentProvider_IncorrectInputError, new Object[] { element,
@@ -153,6 +157,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IDocument createEmptyDocument() {
 		DiagramDocument document = new DiagramDocument();
 		document.setEditingDomain(createEditingDomain());
@@ -270,6 +275,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	public long getModificationStamp(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -281,6 +287,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean isDeleted(Object element) {
 		IDiagramDocument document = getDiagramDocument(element);
 		if (document != null) {
@@ -303,6 +310,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		if (info instanceof ResourceSetInfo) {
 			ResourceSetInfo resourceSetInfo = (ResourceSetInfo) info;
@@ -314,6 +322,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void doValidateState(Object element, Object computationContext) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -334,6 +343,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean isReadOnly(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -354,6 +364,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean isModifiable(Object element) {
 		if (!isStateValidated(element)) {
 			if (element instanceof FileEditorInput || element instanceof URIEditorInput) {
@@ -400,6 +411,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void doUpdateStateCache(Object element) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -411,6 +423,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean isSynchronized(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -422,6 +435,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ISchedulingRule getResetRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -441,6 +455,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ISchedulingRule getSaveRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -460,6 +475,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ISchedulingRule getSynchronizeRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -479,6 +495,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected ISchedulingRule getValidateStateRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -520,6 +537,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void doSynchronize(Object element, IProgressMonitor monitor) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -535,6 +553,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -611,6 +630,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			try {
 				new AbstractTransactionalCommand(diagramDocument.getEditingDomain(), NLS.bind(Messages.EcoreDocumentProvider_SaveAsOperation, diagramCopy.getName()), affectedFiles) {
 
+					@Override
 					protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 						newResource.getContents().add(diagramCopy);
 						return CommandResult.newOKCommandResult();
@@ -681,6 +701,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IRunnableContext getOperationRunner(IProgressMonitor monitor) {
 		return null;
 	}
@@ -908,6 +929,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		/**
 		 * @generated
 		 */
+		@Override
 		public void notifyChanged(Notification notification) {
 			if (notification.getNotifier() instanceof ResourceSet) {
 				super.notifyChanged(notification);
@@ -981,6 +1003,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		return result;
 	}
 
+	@Override
 	protected void disconnected() {
 		synchronizerManager.disconnect();
 	};

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreSheetLabelProvider.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.sheet;
@@ -37,6 +39,7 @@ public class EcoreSheetLabelProvider extends DecoratingLabelProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public String getText(Object element) {
 		Object selected = unwrap(element);
 		if (selected instanceof EcoreNavigatorGroup) {
@@ -48,6 +51,7 @@ public class EcoreSheetLabelProvider extends DecoratingLabelProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public Image getImage(Object element) {
 		return super.getImage(unwrap(element));
 	}

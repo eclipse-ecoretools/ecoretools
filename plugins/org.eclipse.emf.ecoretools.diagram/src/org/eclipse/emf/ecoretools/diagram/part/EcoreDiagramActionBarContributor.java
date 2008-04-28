@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreDiagramActionBarContributor.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -22,6 +24,7 @@ public class EcoreDiagramActionBarContributor extends DiagramActionBarContributo
 	/**
 	 * @generated
 	 */
+	@Override
 	protected Class getEditorClass() {
 		return EcoreDiagramEditor.class;
 	}
@@ -29,6 +32,7 @@ public class EcoreDiagramActionBarContributor extends DiagramActionBarContributo
 	/**
 	 * @generated
 	 */
+	@Override
 	protected String getEditorId() {
 		return EcoreDiagramEditor.ID;
 	}

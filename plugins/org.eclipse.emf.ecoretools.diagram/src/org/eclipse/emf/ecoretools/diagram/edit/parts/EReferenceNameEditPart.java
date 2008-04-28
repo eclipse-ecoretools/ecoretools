@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EReferenceNameEditPart.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -105,6 +107,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
@@ -113,6 +116,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	public int getKeyPoint() {
 		return ConnectionLocator.SOURCE;
 	}
@@ -175,6 +179,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -182,6 +187,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -348,6 +354,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -375,6 +382,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -419,6 +427,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -430,6 +439,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -437,6 +447,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -452,6 +463,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -465,10 +477,12 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
+				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -487,6 +501,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -520,6 +535,7 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IFigure createFigure() {
 		IFigure label = createFigurePrim();
 		defaultText = getLabelTextHelper(label);

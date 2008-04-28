@@ -9,6 +9,8 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *    Lucas Bigeardel - fix EPL header
+ *
+ * $Id: DestroyElementUtils.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
@@ -53,7 +55,7 @@ public class DestroyElementUtils {
 			if (potentialView.getElement() != semanticElement) {
 				continue;
 			}
-			if ((potentialView.eContainer() instanceof View) && (semanticElement.eContainer() instanceof EObject) && (semanticElement.eContainer() == ((View) potentialView.eContainer()).getElement())) {
+			if ((potentialView.eContainer() instanceof View) && (semanticElement.eContainer() == ((View) potentialView.eContainer()).getElement())) {
 				continue;
 			}
 			views.add(potentialView);
@@ -81,7 +83,7 @@ public class DestroyElementUtils {
 			if (potentialView.getElement() != semanticElement) {
 				continue;
 			}
-			if ((potentialView.eContainer() instanceof View) && (semanticElement.eContainer() instanceof EObject) && (semanticElement.eContainer() == ((View) potentialView.eContainer()).getElement())) {
+			if ((potentialView.eContainer() instanceof View) && (semanticElement.eContainer() == ((View) potentialView.eContainer()).getElement())) {
 				continue;
 			}
 			views.add(potentialView);

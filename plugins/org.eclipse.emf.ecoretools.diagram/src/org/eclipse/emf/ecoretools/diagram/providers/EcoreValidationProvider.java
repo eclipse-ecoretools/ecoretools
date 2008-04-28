@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreValidationProvider.java,v 1.3 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -52,6 +54,7 @@ public class EcoreValidationProvider extends AbstractContributionItemProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IAction createAction(String actionId, IWorkbenchPartDescriptor partDescriptor) {
 		if (ValidateAction.VALIDATE_ACTION_KEY.equals(actionId)) {
 			return new ValidateAction(partDescriptor);

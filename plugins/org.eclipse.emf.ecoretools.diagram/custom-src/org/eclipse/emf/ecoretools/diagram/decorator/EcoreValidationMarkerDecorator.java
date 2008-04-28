@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreValidationMarkerDecorator.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.decorator;
 
@@ -23,6 +25,7 @@ public class EcoreValidationMarkerDecorator extends AbstractValidationMarkerDeco
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.decorator.AbstractValidationMarkerDecorator#createMarkerReader()
 	 */
+	@Override
 	protected IMarkerReader createMarkerReader() {
 		return new EcoreValidationMarkerReader();
 	}

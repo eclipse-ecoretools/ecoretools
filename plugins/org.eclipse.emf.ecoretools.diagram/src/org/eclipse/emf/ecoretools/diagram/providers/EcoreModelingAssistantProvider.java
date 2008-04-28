@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreModelingAssistantProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -50,6 +52,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getTypesForPopupBar(IAdaptable host) {
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host.getAdapter(IGraphicalEditPart.class);
 		if (editPart instanceof EClassEditPart) {
@@ -101,6 +104,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getRelTypesOnSource(IAdaptable source) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof EClassEditPart) {
@@ -126,6 +130,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getRelTypesOnTarget(IAdaptable target) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof EClassEditPart) {
@@ -144,6 +149,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getRelTypesOnSourceAndTarget(IAdaptable source, IAdaptable target) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
@@ -177,6 +183,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getTypesForSource(IAdaptable target, IElementType relationshipType) {
 		IGraphicalEditPart targetEditPart = (IGraphicalEditPart) target.getAdapter(IGraphicalEditPart.class);
 		if (targetEditPart instanceof EClassEditPart) {
@@ -205,6 +212,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public List getTypesForTarget(IAdaptable source, IElementType relationshipType) {
 		IGraphicalEditPart sourceEditPart = (IGraphicalEditPart) source.getAdapter(IGraphicalEditPart.class);
 		if (sourceEditPart instanceof EClassEditPart) {
@@ -237,6 +245,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public EObject selectExistingElementForSource(IAdaptable target, IElementType relationshipType) {
 		return selectExistingElement(target, getTypesForSource(target, relationshipType));
 	}
@@ -244,6 +253,7 @@ public class EcoreModelingAssistantProvider extends ModelingAssistantProvider {
 	/**
 	 * @generated
 	 */
+	@Override
 	public EObject selectExistingElementForTarget(IAdaptable source, IElementType relationshipType) {
 		return selectExistingElement(source, getTypesForTarget(source, relationshipType));
 	}

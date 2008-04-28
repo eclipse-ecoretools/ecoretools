@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreCreationWizard.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -68,9 +70,11 @@ public class EcoreCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 */
+	@Override
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 
+			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
 				if (diagPage.isNewModel()) {
 					// case of creating an empty domain/diagram Resources
@@ -109,6 +113,7 @@ public class EcoreCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
+	@Override
 	public void addPages() {
 		// Add the single wizard page used to configure the diagram resource
 		// creation
@@ -121,6 +126,7 @@ public class EcoreCreationWizard extends Wizard implements INewWizard {
 	/**
 	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
 	 */
+	@Override
 	public boolean canFinish() {
 		return diagPage.isPageComplete();
 	}

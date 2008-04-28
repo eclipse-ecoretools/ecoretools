@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcorePropertySection.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.sheet;
@@ -59,6 +61,7 @@ public class EcorePropertySection extends AdvancedPropertySection implements IPr
 	/**
 	 * @generated
 	 */
+	@Override
 	protected IPropertySourceProvider getPropertySourceProvider() {
 		return this;
 	}
@@ -89,6 +92,7 @@ public class EcorePropertySection extends AdvancedPropertySection implements IPr
 	/**
 	 * @generated
 	 */
+	@Override
 	public void setInput(IWorkbenchPart part, ISelection selection) {
 		if (selection.isEmpty() || false == selection instanceof StructuredSelection) {
 			super.setInput(part, selection);

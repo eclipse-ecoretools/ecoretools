@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EClassESuperTypesViewFactory.java,v 1.5 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -46,6 +48,7 @@ public class EClassESuperTypesViewFactory extends ConnectionViewFactory {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		styles.add(NotationFactory.eINSTANCE.createConnectorStyle());
@@ -56,6 +59,7 @@ public class EClassESuperTypesViewFactory extends ConnectionViewFactory {
 	/**
 	 * @generated
 	 */
+	@Override
 	protected void decorateView(View containerView, View view, IAdaptable semanticAdapter, String semanticHint, int index, boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = EcoreVisualIDRegistry.getType(EClassESuperTypesEditPart.VISUAL_ID);

@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreNavigatorItem.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
@@ -79,6 +81,7 @@ public class EcoreNavigatorItem extends EcoreAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorItem) {
 			return EcoreUtil.getURI(getView()).equals(EcoreUtil.getURI(((org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorItem) obj).getView()));
@@ -89,6 +92,7 @@ public class EcoreNavigatorItem extends EcoreAbstractNavigatorItem {
 	/**
 	 * @generated
 	 */
+	@Override
 	public int hashCode() {
 		return EcoreUtil.getURI(getView()).hashCode();
 	}

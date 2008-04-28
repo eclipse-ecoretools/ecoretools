@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreNewDiagramFileWizard.java,v 1.5 2008/04/28 08:41:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -98,6 +100,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated
 	 */
+	@Override
 	public void addPages() {
 		addPage(myFileCreationPage);
 		addPage(diagramRootElementSelectionPage);
@@ -106,6 +109,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 	/**
 	 * @generated NOT
 	 */
+	@Override
 	public boolean performFinish() {
 		List affectedFiles = new LinkedList();
 		IFile diagramFile = myFileCreationPage.createNewFile();
@@ -116,6 +120,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 		final Resource diagramResource = resourceSet.createResource(diagramModelURI);
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(myEditingDomain, Messages.EcoreNewDiagramFileWizard_InitDiagramCommand, affectedFiles) {
 
+			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				int diagramVID = EcoreVisualIDRegistry.getDiagramVisualID(diagramRootElementSelectionPage.getModelElement());
 				if (diagramVID != EPackageEditPart.VISUAL_ID) {
@@ -166,6 +171,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 		/**
 		 * @generated
 		 */
+		@Override
 		protected String getSelectionTitle() {
 			return Messages.EcoreNewDiagramFileWizard_RootSelectionPageSelectionTitle;
 		}
@@ -173,6 +179,7 @@ public class EcoreNewDiagramFileWizard extends Wizard {
 		/**
 		 * @generated
 		 */
+		@Override
 		protected boolean validatePage() {
 			if (selectedModelElement == null) {
 				setErrorMessage(Messages.EcoreNewDiagramFileWizard_RootSelectionPageNoSelectionMessage);

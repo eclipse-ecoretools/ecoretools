@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ *
+ * $Id: EcoreModelNavigator.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.outline;
@@ -20,9 +22,7 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator;
 import org.eclipse.gmf.runtime.diagram.ui.outline.IOutlineMenuConstants;
 import org.eclipse.gmf.runtime.diagram.ui.outline.actions.CreateDiagramAction;
-import org.eclipse.gmf.runtime.diagram.ui.outline.actions.DeleteDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.IPageSite;
