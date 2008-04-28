@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: CreateDiagramAction.java,v 1.2 2008/04/28 13:34:37 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.actions;
@@ -19,6 +21,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
+import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
@@ -60,8 +63,8 @@ public class CreateDiagramAction extends Action {
 		this.diagType = diagramType;
 		this.prefHint = preferencesHint;
 
-		setText("Create new diagram");
-		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/add.gif"));
+		setText(Messages.CreateDiagramAction_CreateNewDiagram);
+		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/add.gif")); //$NON-NLS-1$
 	}
 
 	/**
@@ -78,10 +81,10 @@ public class CreateDiagramAction extends Action {
 	 * @see org.eclipse.jface.action.Action#run()
 	 */
 	public void run() {
-		InputDialog dialog = new InputDialog(Activator.getDefault().getWorkbench().getDisplay().getActiveShell(), "Create new Diagram", "Diagram name : ", "diagram", null);
+		InputDialog dialog = new InputDialog(Activator.getDefault().getWorkbench().getDisplay().getActiveShell(), Messages.CreateDiagramAction_DialogCreateNewDiagram, Messages.CreateDiagramAction_DialogDiagramName, Messages.CreateDiagramAction_DialogDefaultDiagramName, null);
 		if (dialog.open() == Window.OK) {
 			String name = dialog.getValue();
-			if (name != null && !name.equals("")) {
+			if (name != null && !name.equals("")) { //$NON-NLS-1$
 				Diagram d = ViewService.createDiagram(selectedElt, diagType, prefHint);
 				d.setName(name);
 				// TODO if we want to initialize diagram contents, the action

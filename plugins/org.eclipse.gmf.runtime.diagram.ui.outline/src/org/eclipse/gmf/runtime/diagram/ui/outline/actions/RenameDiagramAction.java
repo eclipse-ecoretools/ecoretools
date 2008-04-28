@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: RenameDiagramAction.java,v 1.2 2008/04/28 13:34:37 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.actions;
@@ -16,6 +18,7 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -43,8 +46,8 @@ public class RenameDiagramAction extends Action {
 	public RenameDiagramAction(Diagram diagramToRename) {
 		this.diagram = diagramToRename;
 
-		setText("Rename diagram");
-		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/rename.gif"));
+		setText(Messages.RenameDiagramAction_RenameDiagram);
+		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/rename.gif")); //$NON-NLS-1$
 	}
 
 	/**
@@ -56,10 +59,10 @@ public class RenameDiagramAction extends Action {
 		if (editingDomain != null) {
 
 			// Input name
-			InputDialog dialog = new InputDialog(Activator.getDefault().getWorkbench().getDisplay().getActiveShell(), "Rename an existing diagram", "New diagram name : ", diagram.getName(), null);
+			InputDialog dialog = new InputDialog(Activator.getDefault().getWorkbench().getDisplay().getActiveShell(), Messages.RenameDiagramAction_RenameExistingDiagram, Messages.RenameDiagramAction_NewName, diagram.getName(), null);
 			if (dialog.open() == Window.OK) {
 				String name = dialog.getValue();
-				if (name != null && !name.equals("")) {
+				if (name != null && !name.equals("")) { //$NON-NLS-1$
 					Command command = new SetCommand(editingDomain, diagram, NotationPackage.eINSTANCE.getDiagram_Name(), dialog.getValue());
 					editingDomain.getCommandStack().execute(command);
 				}

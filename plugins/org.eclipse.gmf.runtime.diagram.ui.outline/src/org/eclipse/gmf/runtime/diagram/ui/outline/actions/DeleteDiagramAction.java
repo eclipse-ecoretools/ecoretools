@@ -8,6 +8,8 @@
  * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: DeleteDiagramAction.java,v 1.2 2008/04/28 13:34:37 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.actions;
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
+import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
@@ -42,8 +45,8 @@ public class DeleteDiagramAction extends Action {
 	public DeleteDiagramAction(Diagram diagramToDelete) {
 		this.diagram = diagramToDelete;
 
-		setText("Delete diagram");
-		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/delete.gif"));
+		setText(Messages.DeleteDiagramAction_DeleteDiagram);
+		setImageDescriptor(Activator.getImageDescriptor("icons/etool16/delete.gif")); //$NON-NLS-1$
 	}
 
 	/**

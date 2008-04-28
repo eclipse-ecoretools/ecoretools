@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractValidationMarkerReader.java,v 1.3 2008/04/28 13:34:36 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.decorator;
@@ -28,6 +30,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 
@@ -41,7 +44,7 @@ public abstract class AbstractValidationMarkerReader implements IMarkerReader {
 	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.decorator.IMarkerReader#getStatus(org.eclipse.emf.ecore.EObject)
 	 */
 	public IStatus getStatus(EObject object) {
-		MultiStatus status = new MultiStatus("Plugin ID", IStatus.OK, "Validation Problems", null);
+		MultiStatus status = new MultiStatus(Activator.PLUGIN_ID, IStatus.OK, Messages.AbstractValidationMarkerReader_ValidationProblems, null);
 
 		IMarker[] markers = getMarkers(object);
 		for (int i = 0; i < markers.length; i++) {
@@ -118,7 +121,7 @@ public abstract class AbstractValidationMarkerReader implements IMarkerReader {
 				}
 			}
 		} catch (CoreException ce) {
-			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "The Marker does not exist", ce));
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, Messages.AbstractValidationMarkerReader_MarkerNotExist, ce));
 		}
 
 		return result;
@@ -136,7 +139,7 @@ public abstract class AbstractValidationMarkerReader implements IMarkerReader {
 		URI uri = resource.getURI();
 		uri = resource.getResourceSet().getURIConverter().normalize(uri);
 		String scheme = uri.scheme();
-		if ("platform".equals(scheme) && uri.segmentCount() > 1 && "resource".equals(uri.segment(0))) {
+		if ("platform".equals(scheme) && uri.segmentCount() > 1 && "resource".equals(uri.segment(0))) { //$NON-NLS-1$ //$NON-NLS-2$
 			StringBuffer platformResourcePath = new StringBuffer();
 			for (int j = 1; j < uri.segmentCount(); ++j) {
 				platformResourcePath.append('/');

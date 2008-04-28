@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: NavigatorLabelProvider.java,v 1.3 2008/04/28 13:34:37 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline;
@@ -65,7 +67,7 @@ public class NavigatorLabelProvider extends LabelProvider implements IFontProvid
 	 */
 	public String getText(Object element) {
 		if (element instanceof AdditionalResources) {
-			return "Additional Resources";
+			return Messages.NavigatorLabelProvider_AdditionalResources;
 		}
 		if (element instanceof Diagram) {
 			Diagram diag = (Diagram) element;
@@ -86,8 +88,8 @@ public class NavigatorLabelProvider extends LabelProvider implements IFontProvid
 	private String getDiagramText(Diagram d) {
 		String name = d.getName();
 		String id = d.getType();
-		String diagramTypeName = "Diagram";
-		if (id != null && !"".equals(id)) {
+		String diagramTypeName = Messages.NavigatorLabelProvider_DiagramDefaultName;
+		if (id != null && !"".equals(id)) { //$NON-NLS-1$
 			// TODO Change This !
 			// DiagramDescriptor diagDesc =
 			// DiagramsManager.getInstance().find(id);
@@ -97,7 +99,7 @@ public class NavigatorLabelProvider extends LabelProvider implements IFontProvid
 			// }
 		}
 
-		return name == null || name.length() == 0 ? diagramTypeName : diagramTypeName + " " + name;
+		return name == null || name.length() == 0 ? diagramTypeName : diagramTypeName + " " + name; //$NON-NLS-1$
 	}
 
 	/**
@@ -109,7 +111,7 @@ public class NavigatorLabelProvider extends LabelProvider implements IFontProvid
 	 */
 	private Image getDiagramIcon(Diagram d) {
 		String id = d.getType();
-		if (id != null && !"".equals(id)) {
+		if (id != null && !"".equals(id)) { //$NON-NLS-1$
 			// TODO Change This !
 			// DiagramDescriptor diagDesc =
 			// DiagramsManager.getInstance().find(id);

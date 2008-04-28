@@ -5,9 +5,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
+ * 
+ * $Id: AbstractDiagramsOutlinePage.java,v 1.7 2008/04/28 13:34:37 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline;
@@ -192,7 +194,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 					// content
 					page.openEditor(getEditorInput((Diagram) selectedObject), getEditorID());
 				} catch (PartInitException e) {
-					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Can't open Ecore Diagram Editor !"));
+					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, Messages.AbstractDiagramsOutlinePage_CanNotOpenEditor));
 				}
 				// editor.setActiveDiagram((Diagram) selectedObject);
 			}
@@ -307,17 +309,17 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	 */
 	private void createShowOutlineActions(IToolBarManager tbm) {
 		final IPreferenceStore ps = getPreferenceStore();
-		linkWithEditorAction = new Action("Link with Editor", IAction.AS_CHECK_BOX) {
+		linkWithEditorAction = new Action(Messages.AbstractDiagramsOutlinePage_LinkWithEditor, IAction.AS_CHECK_BOX) {
 
 			public void run() {
 				// Do nothing
 			}
 		};
 		linkWithEditorAction.setToolTipText(linkWithEditorAction.getText());
-		linkWithEditorAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif"));
+		linkWithEditorAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/synced.gif")); //$NON-NLS-1$
 		tbm.add(linkWithEditorAction);
 
-		showTreeAction = new Action("Show Navigator", IAction.AS_RADIO_BUTTON) {
+		showTreeAction = new Action(Messages.AbstractDiagramsOutlinePage_ShowNavigator, IAction.AS_RADIO_BUTTON) {
 
 			public void run() {
 				if (navigator != null && !navigator.isDisposed()) {
@@ -326,10 +328,10 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showTreeAction.setToolTipText(showTreeAction.getText());
-		showTreeAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/tree_co.gif"));
+		showTreeAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/tree_co.gif")); //$NON-NLS-1$
 		tbm.add(showTreeAction);
 
-		showOverviewAction = new Action("Show Overview", IAction.AS_RADIO_BUTTON) {
+		showOverviewAction = new Action(Messages.AbstractDiagramsOutlinePage_ShowOverview, IAction.AS_RADIO_BUTTON) {
 
 			public void run() {
 				if (overview != null && !overview.isDisposed()) {
@@ -338,10 +340,10 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showOverviewAction.setToolTipText(showOverviewAction.getText());
-		showOverviewAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/overview_co.gif"));
+		showOverviewAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/overview_co.gif")); //$NON-NLS-1$
 		tbm.add(showOverviewAction);
 
-		showAllAction = new Action("Show both", IAction.AS_RADIO_BUTTON) {
+		showAllAction = new Action(Messages.AbstractDiagramsOutlinePage_ShowBoth, IAction.AS_RADIO_BUTTON) {
 
 			public void run() {
 				if (sashComp != null && !sashComp.isDisposed()) {
@@ -350,7 +352,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		};
 		showAllAction.setToolTipText(showAllAction.getText());
-		showAllAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/all_co.gif"));
+		showAllAction.setImageDescriptor(AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, "icons/elcl16/all_co.gif")); //$NON-NLS-1$
 		tbm.add(showAllAction);
 
 		if (ps != null) {
@@ -558,7 +560,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 
 		List<Object> newSelection = new ArrayList<Object>();
 		if (selection instanceof IStructuredSelection) {
-			Iterator it = ((IStructuredSelection) selection).iterator();
+			Iterator<?> it = ((IStructuredSelection) selection).iterator();
 			while (it.hasNext()) {
 				Object selectedObject = it.next();
 				if (selectedObject instanceof GraphicalEditPart) {

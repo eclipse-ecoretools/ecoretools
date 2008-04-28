@@ -5,10 +5,12 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *    Anyware Technologies - initial API and implementation
- *******************************************************************************/
+ * 
+ * $Id: AbstractValidationMarkerDecorator.java,v 1.2 2008/04/28 13:34:36 jlescot Exp $
+ **********************************************************************/
 package org.eclipse.gmf.runtime.diagram.ui.outline.decorator;
 
 import org.eclipse.core.resources.IMarkerDelta;
