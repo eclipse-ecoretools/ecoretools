@@ -791,5 +791,23 @@
 			</popupContribution>
 		</contributionItemProvider>
 	</extension>
-	 
+
+	<!-- Provide shortcut access to wizards when the Ecore Tools perspective is activated -->
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="org.eclipse.emf.ecoretools.perspective">
+			<newWizardShortcut id="org.eclipse.emf.ecoretools.diagram.part.EcoreCreationWizardID"/>
+			<newWizardShortcut id="org.eclipse.emf.ecoretools.ui.wizards.EcoreProjectWizardID"/>
+		</perspectiveExtension>
+	</extension>
+
+	<!-- Provide shortcut access to wizards in the Project Explorer view -->
+	<extension point="org.eclipse.ui.navigator.navigatorContent">
+		<commonWizard type="new" wizardId="org.eclipse.emf.ecoretools.ui.wizards.EcoreProjectWizardID">
+     		<enablement/>
+		</commonWizard>
+		<commonWizard wizardId="org.eclipse.emf.ecoretools.diagram.part.EcoreCreationWizardID" type="new">
+     		<enablement/>
+		</commonWizard>
+	</extension>
+
 </plugin>
