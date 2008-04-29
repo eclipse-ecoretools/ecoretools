@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.3 2008/04/28 10:24:44 jlescot Exp $
+ * $Id: Messages.java,v 1.4 2008/04/29 07:28:53 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.filters.internal;
 
@@ -32,8 +32,6 @@ public class Messages extends NLS {
 	public static String ConfigureFilter_Dialog_title;
 
 	public static String FilterDiagramCommand_FilterDiagram;
-
-	public static String FilterPlugin_MissingProperties;
 
 	public static String FilterPlugin_NoDetailsAvailable;
 
