@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.1 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: Messages.java,v 1.2 2008/04/29 07:55:24 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram;
 
@@ -27,19 +27,41 @@ public class Messages extends NLS {
 
 	public static String EcoreCreationWizard_ErrorOnCreation;
 
+	public static String EcoreCreationWizardPage_Browse;
+
 	public static String EcoreCreationWizardPage_ChooseAnEPackageElement;
+
+	public static String EcoreCreationWizardPage_ChooseAnExistingDomainFile;
+
+	public static String EcoreCreationWizardPage_ChooseDestinationDirectory;
 
 	public static String EcoreCreationWizardPage_ChooseExistingDomainFile;
 
+	public static String EcoreCreationWizardPage_CreateFromExistingModel;
+
+	public static String EcoreCreationWizardPage_CreateNewModel;
+
 	public static String EcoreCreationWizardPage_DiagramFileAlreadyExists;
+
+	public static String EcoreCreationWizardPage_Directory;
 
 	public static String EcoreCreationWizardPage_DomainFileAlreadyExists;
 
+	public static String EcoreCreationWizardPage_DomainFileName;
+
 	public static String EcoreCreationWizardPage_DomainFileNotEmpty;
+
+	public static String EcoreCreationWizardPage_DomainModel;
 
 	public static String EcoreCreationWizardPage_FilesAlreadyExist;
 
+	public static String EcoreCreationWizardPage_InitializeWithExistingElements;
+
+	public static String EcoreCreationWizardPage_Select;
+
 	public static String EcoreCreationWizardPage_UnvalidDestinationContainer;
+
+	public static String EcoreCreationWizardPageExtensionError;
 
 	public static String EcoreDiagramContentInitializer_IncorrectDiagramAsParameter;
 
