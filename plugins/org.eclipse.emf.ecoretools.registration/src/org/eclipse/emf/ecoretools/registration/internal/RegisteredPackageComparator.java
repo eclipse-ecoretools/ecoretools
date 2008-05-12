@@ -9,19 +9,7 @@
  * Contributors:
  *    INRIA - initial API and implementation
  *
- * $Id: RegisteredPackageComparator.java,v 1.2 2008/04/28 15:47:42 jlescot Exp $
- **********************************************************************/
-
-/* **********************************************************************
- * Copyright (c) 2007, 2008 INRIA and others
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *    INRIA - initial API and implementation
+ * $Id: RegisteredPackageComparator.java,v 1.3 2008/05/12 21:49:28 lbigearde Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.registration.internal;
