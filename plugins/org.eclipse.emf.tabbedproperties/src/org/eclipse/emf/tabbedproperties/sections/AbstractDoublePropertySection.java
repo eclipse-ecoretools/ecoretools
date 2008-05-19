@@ -9,14 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractDoublePropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: AbstractDoublePropertySection.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.internal.utils.ColorRegistry;
 import org.eclipse.swt.widgets.Event;
 

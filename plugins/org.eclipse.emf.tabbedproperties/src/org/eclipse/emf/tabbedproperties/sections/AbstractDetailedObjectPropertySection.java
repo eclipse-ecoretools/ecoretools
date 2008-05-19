@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractDetailedObjectPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: AbstractDetailedObjectPropertySection.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -21,7 +21,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.edit.command.CommandParameter;
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
 import org.eclipse.emf.tabbedproperties.sections.widgets.ChooseDialog;
 import org.eclipse.jface.viewers.ILabelProvider;

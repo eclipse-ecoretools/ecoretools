@@ -9,15 +9,15 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.1 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: Messages.java,v 1.1 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
-package org.eclipse.emf.tabbedproperties;
+package org.eclipse.emf.tabbedproperties.internal;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.emf.tabbedproperties.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.emf.tabbedproperties.internal.messages"; //$NON-NLS-1$
 
 	public static String AbstractDetailedObjectPropertySection_Create;
 

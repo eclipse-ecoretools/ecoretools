@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: TableObjectManager.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: TableObjectManager.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.internal.sections;
@@ -39,7 +39,7 @@ import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.ui.celleditor.FeatureEditorDialog;
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.sections.widgets.ChooseDialog;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.window.Window;

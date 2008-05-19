@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractFileChooserPropertySection.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: AbstractFileChooserPropertySection.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections;
@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.internal.TabbedPropertiesPlugin;
 import org.eclipse.emf.tabbedproperties.sections.widgets.FileChooser;
 import org.eclipse.swt.SWT;

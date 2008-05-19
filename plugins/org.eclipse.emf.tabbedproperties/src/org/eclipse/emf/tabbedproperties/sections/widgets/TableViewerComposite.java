@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: TableViewerComposite.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: TableViewerComposite.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.tabbedproperties.AbstractTabbedPropertySheetPage;
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.emf.tabbedproperties.internal.sections.TableObjectManager;
 import org.eclipse.emf.tabbedproperties.internal.sections.listeners.CellModifier;
 import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;

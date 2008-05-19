@@ -9,12 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: GoToReferenceComposite.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: GoToReferenceComposite.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties.sections.widgets;
 
-import org.eclipse.emf.tabbedproperties.Messages;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;

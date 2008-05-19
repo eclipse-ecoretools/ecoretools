@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: EMFRecordingChangeCommand.java,v 1.2 2008/04/28 12:19:08 jlescot Exp $
+ * $Id: EMFRecordingChangeCommand.java,v 1.3 2008/05/19 09:25:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.tabbedproperties;
@@ -21,6 +21,7 @@ import org.eclipse.emf.common.command.AbstractCommand;
 import org.eclipse.emf.ecore.change.ChangeDescription;
 import org.eclipse.emf.ecore.change.util.ChangeRecorder;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.tabbedproperties.internal.Messages;
 
 /**
  * An automatic command
