@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Activator.java,v 1.3 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: Activator.java,v 1.4 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal;
@@ -19,7 +19,6 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 

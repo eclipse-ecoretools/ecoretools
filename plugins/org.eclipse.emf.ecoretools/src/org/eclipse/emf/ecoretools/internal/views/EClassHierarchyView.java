@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassHierarchyView.java,v 1.5 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: EClassHierarchyView.java,v 1.6 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -21,8 +21,8 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
-import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
+import org.eclipse.emf.ecoretools.internal.Messages;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;

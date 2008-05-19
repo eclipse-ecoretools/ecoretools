@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: AnalysisView.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: AnalysisView.java,v 1.5 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.views;
@@ -18,8 +18,8 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
+import org.eclipse.emf.ecoretools.internal.Messages;
 import org.eclipse.emf.ecoretools.internal.actions.RefreshAction;
 import org.eclipse.emf.ecoretools.internal.actions.ToggleSynchronizeAction;
 import org.eclipse.jface.action.IMenuManager;

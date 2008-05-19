@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: NewEcoreProjectWizard.java,v 1.3 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: NewEcoreProjectWizard.java,v 1.4 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.ui.wizards;
 
@@ -31,9 +31,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.core.nature.EcoreNature;
 import org.eclipse.emf.ecoretools.internal.Activator;
+import org.eclipse.emf.ecoretools.internal.Messages;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;

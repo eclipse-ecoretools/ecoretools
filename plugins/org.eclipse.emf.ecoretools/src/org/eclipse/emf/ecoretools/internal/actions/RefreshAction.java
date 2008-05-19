@@ -9,13 +9,13 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RefreshAction.java,v 1.4 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: RefreshAction.java,v 1.5 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.internal.actions;
 
-import org.eclipse.emf.ecoretools.Messages;
 import org.eclipse.emf.ecoretools.internal.Activator;
+import org.eclipse.emf.ecoretools.internal.Messages;
 import org.eclipse.emf.ecoretools.internal.views.AnalysisView;
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

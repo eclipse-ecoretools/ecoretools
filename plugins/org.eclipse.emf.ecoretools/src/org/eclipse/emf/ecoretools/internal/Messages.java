@@ -9,15 +9,15 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.1 2008/04/28 15:49:07 jlescot Exp $
+ * $Id: Messages.java,v 1.1 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
-package org.eclipse.emf.ecoretools;
+package org.eclipse.emf.ecoretools.internal;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.internal.messages"; //$NON-NLS-1$
 
 	public static String Activator_Error;
 
