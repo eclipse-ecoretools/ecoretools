@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: RenameDiagramAction.java,v 1.2 2008/04/28 13:34:37 jlescot Exp $
+ * $Id: RenameDiagramAction.java,v 1.3 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.actions;
@@ -18,8 +18,8 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
+import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Messages;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.jface.action.Action;

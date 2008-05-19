@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractDiagramsOutlinePage.java,v 1.7 2008/04/28 13:34:37 jlescot Exp $
+ * $Id: AbstractDiagramsOutlinePage.java,v 1.8 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline;
@@ -34,6 +34,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
+import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.OverviewComposite;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractValidationMarkerReader.java,v 1.3 2008/04/28 13:34:36 jlescot Exp $
+ * $Id: AbstractValidationMarkerReader.java,v 1.4 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.decorator;
@@ -30,8 +30,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
+import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Messages;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
 
 /**

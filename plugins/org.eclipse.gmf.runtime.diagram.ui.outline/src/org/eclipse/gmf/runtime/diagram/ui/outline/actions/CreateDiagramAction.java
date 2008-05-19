@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: CreateDiagramAction.java,v 1.2 2008/04/28 13:34:37 jlescot Exp $
+ * $Id: CreateDiagramAction.java,v 1.3 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline.actions;
@@ -21,8 +21,8 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
-import org.eclipse.gmf.runtime.diagram.ui.outline.Messages;
 import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Activator;
+import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Messages;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.InputDialog;

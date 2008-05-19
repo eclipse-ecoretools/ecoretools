@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: NavigatorLabelProvider.java,v 1.3 2008/04/28 13:34:37 jlescot Exp $
+ * $Id: NavigatorLabelProvider.java,v 1.4 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.gmf.runtime.diagram.ui.outline;
 
+import org.eclipse.gmf.runtime.diagram.ui.outline.internal.Messages;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.viewers.IFontProvider;
 import org.eclipse.jface.viewers.ILabelProvider;

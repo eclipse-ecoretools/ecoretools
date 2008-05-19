@@ -9,15 +9,15 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.1 2008/04/28 13:34:37 jlescot Exp $
+ * $Id: Messages.java,v 1.1 2008/05/19 09:25:39 jlescot Exp $
  **********************************************************************/
-package org.eclipse.gmf.runtime.diagram.ui.outline;
+package org.eclipse.gmf.runtime.diagram.ui.outline.internal;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.gmf.runtime.diagram.ui.outline.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.gmf.runtime.diagram.ui.outline.internal.messages"; //$NON-NLS-1$
 
 	public static String AbstractDiagramsOutlinePage_CanNotOpenEditor;
 
