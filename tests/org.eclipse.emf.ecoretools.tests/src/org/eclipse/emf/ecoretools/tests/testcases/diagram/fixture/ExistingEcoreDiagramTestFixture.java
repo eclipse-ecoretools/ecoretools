@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: ExistingEcoreDiagramTestFixture.java,v 1.2 2008/04/28 12:38:09 jlescot Exp $
+ * $Id: ExistingEcoreDiagramTestFixture.java,v 1.3 2008/05/19 09:25:18 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -20,8 +20,8 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecoretools.tests.Messages;
 import org.eclipse.emf.ecoretools.tests.internal.Activator;
+import org.eclipse.emf.ecoretools.tests.internal.Messages;
 import org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture;
 
 /**

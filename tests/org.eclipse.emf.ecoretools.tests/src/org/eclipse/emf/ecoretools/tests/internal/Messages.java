@@ -9,15 +9,15 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.1 2008/04/28 12:38:09 jlescot Exp $
+ * $Id: Messages.java,v 1.1 2008/05/19 09:25:17 jlescot Exp $
  **********************************************************************/
-package org.eclipse.emf.ecoretools.tests;
+package org.eclipse.emf.ecoretools.tests.internal;
 
 import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.tests.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.tests.internal.messages"; //$NON-NLS-1$
 
 	public static String ExistingEcoreDiagramTestFixture_ErrorDuringConversion;
 
