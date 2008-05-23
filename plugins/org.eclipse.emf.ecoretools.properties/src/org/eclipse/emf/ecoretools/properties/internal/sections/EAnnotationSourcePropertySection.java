@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationSourcePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: EAnnotationSourcePropertySection.java,v 1.4 2008/05/23 15:15:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -41,6 +41,6 @@ public class EAnnotationSourcePropertySection extends AbstractStringPropertySect
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getEAnnotation_Source();
+		return EcorePackage.Literals.EANNOTATION__SOURCE;
 	}
 }

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ItemTypeSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: ItemTypeSection.java,v 1.4 2008/05/23 15:15:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -57,7 +57,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected Object[] getComboFeatureValues() {
-		return getChoices(getEObject(), EcorePackage.eINSTANCE.getEDataType());
+		return getChoices(getEObject(), EcorePackage.Literals.EDATA_TYPE);
 	}
 
 	/**

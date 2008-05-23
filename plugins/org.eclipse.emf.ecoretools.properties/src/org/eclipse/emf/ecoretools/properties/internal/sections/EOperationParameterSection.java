@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationParameterSection.java,v 1.5 2008/05/23 14:56:54 jlescot Exp $
+ * $Id: EOperationParameterSection.java,v 1.6 2008/05/23 15:15:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -159,7 +159,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 				String newText = parameterNameTxt.getText();
 				EParameter parameter = (EParameter) getTable().getSelectionItem();
 				if (parameter != null && !newText.equals(parameter.getName())) {
-					getEditingDomain().getCommandStack().execute(SetCommand.create(getEditingDomain(), parameter, EcorePackage.eINSTANCE.getENamedElement_Name(), newText));
+					getEditingDomain().getCommandStack().execute(SetCommand.create(getEditingDomain(), parameter, EcorePackage.Literals.ENAMED_ELEMENT__NAME, newText));
 				}
 				refresh();
 			}
@@ -189,13 +189,13 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 			EParameter parameter = (EParameter) getTable().getSelectionItem();
 			if (getEObjectList().size() == 1) {
 				/* apply the property change to single selected object */
-				editingDomain.getCommandStack().execute(SetCommand.create(editingDomain, parameter, EcorePackage.eINSTANCE.getETypedElement_EType(), typeChooser.getSelection()));
+				editingDomain.getCommandStack().execute(SetCommand.create(editingDomain, parameter, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE, typeChooser.getSelection()));
 			} else {
 				CompoundCommand compoundCommand = new CompoundCommand();
 				/* apply the property change to all selected elements */
 				for (Iterator<EObject> i = getEObjectList().iterator(); i.hasNext();) {
 					EObject nextObject = i.next();
-					compoundCommand.append(SetCommand.create(editingDomain, nextObject, EcorePackage.eINSTANCE.getETypedElement_EType(), typeChooser.getSelection()));
+					compoundCommand.append(SetCommand.create(editingDomain, nextObject, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE, typeChooser.getSelection()));
 				}
 				editingDomain.getCommandStack().execute(compoundCommand);
 			}

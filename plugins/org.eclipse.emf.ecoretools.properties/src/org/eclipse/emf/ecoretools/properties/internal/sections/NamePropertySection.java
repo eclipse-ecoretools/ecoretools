@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: NamePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: NamePropertySection.java,v 1.4 2008/05/23 15:15:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -41,6 +41,6 @@ public class NamePropertySection extends AbstractStringPropertySection {
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getENamedElement_Name();
+		return EcorePackage.Literals.ENAMED_ELEMENT__NAME;
 	}
 }

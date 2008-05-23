@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: IsSerializablePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: IsSerializablePropertySection.java,v 1.4 2008/05/23 15:15:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -31,7 +31,7 @@ public class IsSerializablePropertySection extends AbstractBooleanPropertySectio
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getEDataType_Serializable();
+		return EcorePackage.Literals.EDATA_TYPE__SERIALIZABLE;
 	}
 
 	/**

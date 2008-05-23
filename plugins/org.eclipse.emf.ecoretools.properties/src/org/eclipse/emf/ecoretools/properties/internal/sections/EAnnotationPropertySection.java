@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationPropertySection.java,v 1.5 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: EAnnotationPropertySection.java,v 1.6 2008/05/23 15:15:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -199,7 +199,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getEModelElement_EAnnotations();
+		return EcorePackage.Literals.EMODEL_ELEMENT__EANNOTATIONS;
 	}
 
 	/**
@@ -607,7 +607,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 			@Override
 			protected Object openDialogBox(Control cellEditorWindow) {
-				FeatureEditorDialog dialog = new FeatureEditorDialog(cellEditorWindow.getShell(), labelProvider, currentEAnnotation, EcorePackage.eINSTANCE.getEAnnotation_References(),
+				FeatureEditorDialog dialog = new FeatureEditorDialog(cellEditorWindow.getShell(), labelProvider, currentEAnnotation, EcorePackage.Literals.EANNOTATION__REFERENCES,
 						Messages.EAnnotationPropertySection_ChooseReferences, getPotentialReferences());
 				dialog.open();
 

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpperBoundPropertySection.java,v 1.4 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: UpperBoundPropertySection.java,v 1.5 2008/05/23 15:15:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -45,7 +45,7 @@ public class UpperBoundPropertySection extends AbstractIntegerPropertySection {
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getETypedElement_UpperBound();
+		return EcorePackage.Literals.ETYPED_ELEMENT__UPPER_BOUND;
 	}
 
 	/**
