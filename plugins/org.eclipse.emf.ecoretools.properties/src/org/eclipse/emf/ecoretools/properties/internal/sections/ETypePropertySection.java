@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ETypePropertySection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: ETypePropertySection.java,v 1.4 2008/05/23 14:56:54 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -40,7 +40,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getETypedElement_EType();
+		return EcorePackage.Literals.ETYPED_ELEMENT__ETYPE;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ETypePropertySection extends AbstractChooserPropertySection {
 	protected Object[] getComboFeatureValues() {
 		for (Adapter adapter : getEObject().eAdapters()) {
 			if (adapter instanceof ItemProviderAdapter) {
-				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), "EType"); //$NON-NLS-1$
+				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), getFeature().getName());
 				if (descriptor != null) {
 					return descriptor.getChoiceOfValues(getEObject()).toArray();
 				}

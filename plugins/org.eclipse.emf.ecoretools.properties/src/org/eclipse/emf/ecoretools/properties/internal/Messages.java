@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.1 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: Messages.java,v 1.2 2008/05/23 14:56:54 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.properties.internal;
 
@@ -60,8 +60,6 @@ public class Messages extends NLS {
 	public static String EEnumLiteralLiteralPropertySection_Literal;
 
 	public static String EEnumLiteralValuePropertySection_Value;
-
-	public static String EOperationParameterSection_EType;
 
 	public static String EOperationParameterSection_Name;
 

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationParameterSection.java,v 1.4 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: EOperationParameterSection.java,v 1.5 2008/05/23 14:56:54 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -224,7 +224,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
-		return EcorePackage.eINSTANCE.getEOperation_EParameters();
+		return EcorePackage.Literals.EOPERATION__EPARAMETERS;
 	}
 
 	/**
@@ -286,7 +286,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 		while (iter.hasNext()) {
 			Adapter adapter = iter.next();
 			if (adapter instanceof ItemProviderAdapter) {
-				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), Messages.EOperationParameterSection_EType);
+				IItemPropertyDescriptor descriptor = ((ItemProviderAdapter) adapter).getPropertyDescriptor(getEObject(), getFeature().getName());
 				if (descriptor != null) {
 					return descriptor.getChoiceOfValues(getEObject()).toArray();
 				}
