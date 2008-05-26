@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EAttributeEditPart.java,v 1.6 2008/05/26 10:18:26 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -25,13 +25,18 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.provider.EAttributeItemProvider;
+import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EAttributeItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextNonResizableEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
@@ -213,71 +218,22 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		String imageName = "EOccurrence"; //$NON-NLS-1$
-		EObject semanticElement = resolveSemanticElement();
-		if (semanticElement != null && semanticElement instanceof EAttribute) {
-			int minOccurs = ((EAttribute) semanticElement).getLowerBound();
-			int maxOccurs = ((EAttribute) semanticElement).getUpperBound();
-			if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == -1)) {
-				switch (minOccurs) {
-				case 0:
-					imageName += "Zero"; //$NON-NLS-1$
-					break;
-				case 1:
-					imageName += "One"; //$NON-NLS-1$
-					break;
-				default:
-					imageName += "N"; //$NON-NLS-1$
-					break;
-				}
-
-				if (minOccurs != maxOccurs) {
-					switch (maxOccurs) {
-					case -1:
-						imageName += "ToUnbounded"; //$NON-NLS-1$
-						break;
-					case 0:
-						return null;
-					case 1:
-						imageName += "ToOne"; //$NON-NLS-1$
-						break;
-					default:
-						imageName += minOccurs <= 1 ? "ToN" : "ToM"; //$NON-NLS-1$ //$NON-NLS-2$
-						break;
-					}
-				}
-			} else {
-				imageName += "NToM"; //$NON-NLS-1$
-			}
+		IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
+		if (labelProvider != null) {
+			return (Image) labelProvider.getImage(resolveSemanticElement());
 		}
-
-		return EcoreDiagramEditorPlugin.getInstance().getBundledImage("icons/multiplicity/" + imageName + ".gif"); //$NON-NLS-1$ //$NON-NLS-2$
+		return null;
 	}
 
 	/**
 	 * @generated NOT
 	 */
 	protected String getLabelText() {
-		String text = null;
-		EObject parserElement = getParserElement();
-		if (parserElement != null && getParser() != null) {
-			text = getParser().getPrintString(new EObjectAdapter(parserElement), getParserOptions().intValue()) + getETypeString();
+		IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
+		if (labelProvider != null) {
+			return labelProvider.getText(resolveSemanticElement());
 		}
-		if (text == null || text.length() == 0) {
-			text = defaultText;
-		}
-		return text;
-	}
-
-	private String getETypeString() {
-		EClassifier eType = null;
-		if (((View) getModel()).getElement() instanceof EAttribute) {
-			eType = ((EAttribute) ((View) getModel()).getElement()).getEType();
-		}
-		if (eType != null) {
-			return " : " + eType.getName(); //$NON-NLS-1$
-		}
-		return " : null"; //$NON-NLS-1$
+		return defaultText;
 	}
 
 	/**
