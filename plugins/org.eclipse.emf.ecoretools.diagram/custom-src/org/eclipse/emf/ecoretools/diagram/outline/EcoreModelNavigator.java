@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreModelNavigator.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreModelNavigator.java,v 1.6 2008/05/26 12:28:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.outline;
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
-import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator;
-import org.eclipse.gmf.runtime.diagram.ui.outline.IOutlineMenuConstants;
-import org.eclipse.gmf.runtime.diagram.ui.outline.actions.CreateDiagramAction;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractModelNavigator;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.IOutlineMenuConstants;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.actions.CreateDiagramAction;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.swt.widgets.Composite;
@@ -50,7 +50,7 @@ public class EcoreModelNavigator extends AbstractModelNavigator {
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator#getAdapterFactory()
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractModelNavigator#getAdapterFactory()
 	 */
 	@Override
 	protected AdapterFactory getAdapterFactory() {
@@ -58,7 +58,7 @@ public class EcoreModelNavigator extends AbstractModelNavigator {
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator#createDiagramsMenu(org.eclipse.jface.action.IMenuManager,
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractModelNavigator#createDiagramsMenu(org.eclipse.jface.action.IMenuManager,
 	 *      org.eclipse.emf.ecore.EObject)
 	 */
 	@Override

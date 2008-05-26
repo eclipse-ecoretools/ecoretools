@@ -48,7 +48,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.draw2d.ui;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
  org.eclipse.ui.navigator.resources,
- org.eclipse.gmf.runtime.diagram.ui.outline,
+ org.eclipse.emf.ecoretools.diagram.ui.outline,
  org.eclipse.gmf.runtime.diagram.ui.printing,
  org.eclipse.gmf.runtime.diagram.ui.printing.render,
  org.eclipse.emf.validation;visibility:=reexport

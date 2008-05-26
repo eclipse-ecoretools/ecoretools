@@ -9,14 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramOutlinePage.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreDiagramOutlinePage.java,v 1.5 2008/05/26 12:28:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.outline;
 
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
-import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage;
-import org.eclipse.gmf.runtime.diagram.ui.outline.AbstractModelNavigator;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractDiagramsOutlinePage;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractModelNavigator;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
@@ -42,7 +42,7 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage#createNavigator(org.eclipse.swt.widgets.Composite,
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractDiagramsOutlinePage#createNavigator(org.eclipse.swt.widgets.Composite,
 	 *      org.eclipse.ui.part.IPageSite)
 	 */
 	@Override
@@ -51,7 +51,7 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage#getPreferenceStore()
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractDiagramsOutlinePage#getPreferenceStore()
 	 */
 	@Override
 	protected IPreferenceStore getPreferenceStore() {
@@ -59,7 +59,7 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.AbstractDiagramsOutlinePage#getEditorID()
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractDiagramsOutlinePage#getEditorID()
 	 */
 	@Override
 	protected String getEditorID() {

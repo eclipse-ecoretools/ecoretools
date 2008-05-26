@@ -9,12 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreValidationMarkerDecorator.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreValidationMarkerDecorator.java,v 1.3 2008/05/26 12:28:51 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.decorator;
 
-import org.eclipse.gmf.runtime.diagram.ui.outline.decorator.AbstractValidationMarkerDecorator;
-import org.eclipse.gmf.runtime.diagram.ui.outline.decorator.IMarkerReader;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.decorator.AbstractValidationMarkerDecorator;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.decorator.IMarkerReader;
 
 /**
  * An implementation of the AbstractValidationMarkerDecorator applied to the
@@ -23,7 +23,7 @@ import org.eclipse.gmf.runtime.diagram.ui.outline.decorator.IMarkerReader;
 public class EcoreValidationMarkerDecorator extends AbstractValidationMarkerDecorator {
 
 	/**
-	 * @see org.eclipse.gmf.runtime.diagram.ui.outline.decorator.AbstractValidationMarkerDecorator#createMarkerReader()
+	 * @see org.eclipse.emf.ecoretools.diagram.ui.outline.decorator.AbstractValidationMarkerDecorator#createMarkerReader()
 	 */
 	@Override
 	protected IMarkerReader createMarkerReader() {
