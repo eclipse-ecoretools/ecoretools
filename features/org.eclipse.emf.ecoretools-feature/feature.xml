@@ -69,14 +69,14 @@ http://www.eclipse.org/legal/epl-v10.html
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.emf.tabbedproperties"
+         id="org.eclipse.emf.ecoretools.tabbedproperties"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.gmf.runtime.diagram.ui.outline"
+         id="org.eclipse.emf.ecoretools.diagram.ui.outline"
          download-size="0"
          install-size="0"
          version="0.0.0"
