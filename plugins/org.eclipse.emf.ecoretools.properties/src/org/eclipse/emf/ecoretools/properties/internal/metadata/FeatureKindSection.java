@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: FeatureKindSection.java,v 1.3 2008/04/28 10:24:47 jlescot Exp $
+ * $Id: FeatureKindSection.java,v 1.4 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
+import org.eclipse.emf.ecoretools.tabbedproperties.EMFRecordingChangeCommand;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
-import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.CLabel;
@@ -94,7 +94,7 @@ public class FeatureKindSection extends AbstractTabbedPropertySection {
 	// }
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void createWidgets(Composite composite) {
@@ -104,7 +104,7 @@ public class FeatureKindSection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void setSectionData(Composite composite) {
@@ -206,7 +206,7 @@ public class FeatureKindSection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -214,7 +214,7 @@ public class FeatureKindSection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ItemTypeSection.java,v 1.4 2008/05/23 15:15:21 jlescot Exp $
+ * $Id: ItemTypeSection.java,v 1.5 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
+import org.eclipse.emf.ecoretools.tabbedproperties.EMFRecordingChangeCommand;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractChooserPropertySection;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
-import org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection;
 import org.eclipse.jface.viewers.ILabelProvider;
 
 /**
@@ -37,7 +37,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 public class ItemTypeSection extends AbstractChooserPropertySection {
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -45,7 +45,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
@@ -53,7 +53,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractChooserPropertySection#getComboFeatureValues()
 	 */
 	@Override
 	protected Object[] getComboFeatureValues() {
@@ -61,7 +61,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractChooserPropertySection#getLabelProvider()
 	 */
 	@Override
 	protected ILabelProvider getLabelProvider() {
@@ -69,7 +69,7 @@ public class ItemTypeSection extends AbstractChooserPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractChooserPropertySection#getFeatureValue()
 	 */
 	@Override
 	protected Object getFeatureValue() {

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: GenModelDocumentationPropertySection.java,v 1.4 2008/05/23 15:15:20 jlescot Exp $
+ * $Id: GenModelDocumentationPropertySection.java,v 1.5 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
-import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
@@ -51,7 +51,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	private FocusAdapter focusListener;
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
@@ -59,7 +59,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -67,7 +67,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void createWidgets(Composite composite) {
@@ -94,7 +94,7 @@ public class GenModelDocumentationPropertySection extends AbstractTabbedProperty
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void setSectionData(Composite composite) {

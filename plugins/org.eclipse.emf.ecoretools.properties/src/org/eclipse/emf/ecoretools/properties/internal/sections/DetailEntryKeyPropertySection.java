@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DetailEntryKeyPropertySection.java,v 1.4 2008/05/23 15:15:20 jlescot Exp $
+ * $Id: DetailEntryKeyPropertySection.java,v 1.5 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -17,7 +17,7 @@ package org.eclipse.emf.ecoretools.properties.internal.sections;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
-import org.eclipse.emf.tabbedproperties.sections.AbstractStringPropertySection;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractStringPropertySection;
 
 /**
  * The section for the key property of an EStringToStringMapEntry Object.
@@ -29,7 +29,7 @@ import org.eclipse.emf.tabbedproperties.sections.AbstractStringPropertySection;
 public class DetailEntryKeyPropertySection extends AbstractStringPropertySection {
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
@@ -37,7 +37,7 @@ public class DetailEntryKeyPropertySection extends AbstractStringPropertySection
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {

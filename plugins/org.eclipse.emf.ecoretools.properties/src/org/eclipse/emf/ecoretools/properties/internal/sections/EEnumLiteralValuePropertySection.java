@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiteralValuePropertySection.java,v 1.4 2008/05/23 15:15:20 jlescot Exp $
+ * $Id: EEnumLiteralValuePropertySection.java,v 1.5 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
-import org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractIntegerPropertySection;
 
 /**
  * A section for the value property of an EEnumLiteral Object.
@@ -30,7 +30,7 @@ import org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection;
 public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySection {
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTextPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -38,7 +38,7 @@ public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySec
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractIntegerPropertySection#getFeatureInteger()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractIntegerPropertySection#getFeatureInteger()
 	 */
 	@Override
 	protected Integer getFeatureInteger() {
@@ -46,7 +46,7 @@ public class EEnumLiteralValuePropertySection extends AbstractIntegerPropertySec
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTextPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {

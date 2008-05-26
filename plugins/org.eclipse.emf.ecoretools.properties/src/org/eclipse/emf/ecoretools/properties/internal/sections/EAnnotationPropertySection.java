@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationPropertySection.java,v 1.6 2008/05/23 15:15:20 jlescot Exp $
+ * $Id: EAnnotationPropertySection.java,v 1.7 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
+import org.eclipse.emf.ecoretools.tabbedproperties.EMFRecordingChangeCommand;
+import org.eclipse.emf.ecoretools.tabbedproperties.providers.TabbedPropertiesLabelProvider;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.emf.edit.ui.celleditor.FeatureEditorDialog;
-import org.eclipse.emf.tabbedproperties.EMFRecordingChangeCommand;
-import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
-import org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -195,7 +195,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	private Entry<?, ?> currentEntry;
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -203,7 +203,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
@@ -211,7 +211,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void createWidgets(Composite composite) {
@@ -228,7 +228,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void setSectionData(Composite composite) {

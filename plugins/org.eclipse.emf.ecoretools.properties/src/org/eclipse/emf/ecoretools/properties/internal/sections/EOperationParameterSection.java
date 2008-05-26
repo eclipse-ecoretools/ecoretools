@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationParameterSection.java,v 1.7 2008/05/23 15:39:07 jlescot Exp $
+ * $Id: EOperationParameterSection.java,v 1.8 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -25,14 +25,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
+import org.eclipse.emf.ecoretools.tabbedproperties.providers.TabbedPropertiesLabelProvider;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.widgets.CSingleObjectChooser;
+import org.eclipse.emf.ecoretools.tabbedproperties.utils.TextChangeListener;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.tabbedproperties.providers.TabbedPropertiesLabelProvider;
-import org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection;
-import org.eclipse.emf.tabbedproperties.sections.widgets.CSingleObjectChooser;
-import org.eclipse.emf.tabbedproperties.utils.TextChangeListener;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
@@ -72,7 +72,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 
 	// /**
 	// * @see
-	// org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#createControls(org.eclipse.swt.widgets.Composite,
+	// org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#createControls(org.eclipse.swt.widgets.Composite,
 	// org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage)
 	// */
 	// public void createControls(Composite parent, TabbedPropertySheetPage
@@ -99,7 +99,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	// }
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#createWidgets(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void createWidgets(Composite composite) {
@@ -111,7 +111,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#setSectionData(org.eclipse.swt.widgets.Composite)
 	 */
 	@Override
 	protected void setSectionData(Composite composite) {
@@ -147,7 +147,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#hookListeners()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#hookListeners()
 	 */
 	@Override
 	protected void hookListeners() {
@@ -204,7 +204,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#getLabelProvider()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#getLabelProvider()
 	 */
 	@Override
 	protected IBaseLabelProvider getLabelProvider() {
@@ -212,7 +212,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#getListValues()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#getListValues()
 	 */
 	@Override
 	protected Object getListValues() {
@@ -220,7 +220,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -228,7 +228,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
@@ -252,7 +252,7 @@ public class EOperationParameterSection extends AbstractListPropertySection {
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractListPropertySection#updateSelection(java.lang.Object)
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractListPropertySection#updateSelection(java.lang.Object)
 	 */
 	@Override
 	public void updateSelection(Object data) {

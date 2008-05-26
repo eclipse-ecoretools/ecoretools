@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: IsContainmentPropertySection.java,v 1.4 2008/05/23 15:15:21 jlescot Exp $
+ * $Id: IsContainmentPropertySection.java,v 1.5 2008/05/26 12:28:57 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -17,7 +17,7 @@ package org.eclipse.emf.ecoretools.properties.internal.sections;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.properties.internal.Messages;
-import org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection;
+import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractBooleanPropertySection;
 
 /**
  * A section for the containment property of an EReference Object.
@@ -27,7 +27,7 @@ import org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection;
 public class IsContainmentPropertySection extends AbstractBooleanPropertySection {
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractBooleanPropertySection#getFeature()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractBooleanPropertySection#getFeature()
 	 */
 	@Override
 	protected EStructuralFeature getFeature() {
@@ -35,7 +35,7 @@ public class IsContainmentPropertySection extends AbstractBooleanPropertySection
 	}
 
 	/**
-	 * @see org.eclipse.emf.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
+	 * @see org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractTabbedPropertySection#getLabelText()
 	 */
 	@Override
 	protected String getLabelText() {
