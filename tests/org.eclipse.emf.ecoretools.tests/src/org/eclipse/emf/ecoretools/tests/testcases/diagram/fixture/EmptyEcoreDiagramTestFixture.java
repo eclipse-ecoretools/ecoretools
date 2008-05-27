@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: EmptyEcoreDiagramTestFixture.java,v 1.2 2008/04/28 12:38:09 jlescot Exp $
+ * $Id: EmptyEcoreDiagramTestFixture.java,v 1.3 2008/05/27 09:54:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
+import org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture;
 import org.eclipse.emf.ecoretools.tests.internal.Activator;
 import org.eclipse.emf.ecoretools.tests.testcases.diagram.util.MultiDiagramUtil;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
@@ -32,7 +33,6 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.util.DiagramFileCreator;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture;
 
 /**
  * A fixture to make test on a new empty Ecore diagram
@@ -42,35 +42,35 @@ import org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagra
 public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixture {
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#createRootModel()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#createRootModel()
 	 */
 	public EObject createRootModel() {
 		return EcoreFactory.eINSTANCE.createEPackage();
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getDiagramFileCreator()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getDiagramFileCreator()
 	 */
 	public DiagramFileCreator getDiagramFileCreator() {
 		return new EcoreDiagramFileCreator();
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getProjectName()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getProjectName()
 	 */
 	public String getProjectName() {
 		return "EcoreToolProj"; //$NON-NLS-1$
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getSemanticResourcePath()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getSemanticResourcePath()
 	 */
 	public String getSemanticResourcePath() {
 		return "EcoreTools";
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractPresentationTestFixture#createShapesAndConnectors()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractPresentationTestFixture#createShapesAndConnectors()
 	 */
 	protected void createShapesAndConnectors() throws Exception {
 		// Do nothing
@@ -86,7 +86,7 @@ public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixtur
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getPreferencesHint()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getPreferencesHint()
 	 */
 	public PreferencesHint getPreferencesHint() {
 		return new PreferencesHint(EcoreDiagramEditorPlugin.ID);

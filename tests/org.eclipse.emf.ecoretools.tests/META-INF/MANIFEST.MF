@@ -22,7 +22,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.diagram.ui.actions,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide,
- org.eclipse.gmf.tests.runtime.diagram.ui.core,
+ org.eclipse.emf.ecoretools.tests.diagram.ui.core,
  org.eclipse.emf.common.ui,
  org.eclipse.ui.ide
 Bundle-Activator: org.eclipse.emf.ecoretools.tests.internal.Activator

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: EClassCreationTest.java,v 1.2 2008/04/28 12:38:10 jlescot Exp $
+ * $Id: EClassCreationTest.java,v 1.3 2008/05/27 09:54:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.shape;
@@ -25,10 +25,10 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
+import org.eclipse.emf.ecoretools.tests.diagram.ui.core.test.AbstractTestBase;
 import org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture.EmptyEcoreDiagramTestFixture;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.tests.runtime.diagram.ui.core.test.AbstractTestBase;
 
 /**
  * @author Simon Bernard

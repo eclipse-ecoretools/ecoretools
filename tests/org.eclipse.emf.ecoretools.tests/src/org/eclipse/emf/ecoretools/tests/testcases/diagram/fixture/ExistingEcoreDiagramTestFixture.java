@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: ExistingEcoreDiagramTestFixture.java,v 1.3 2008/05/19 09:25:18 jlescot Exp $
+ * $Id: ExistingEcoreDiagramTestFixture.java,v 1.4 2008/05/27 09:54:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -20,9 +20,9 @@ import java.net.URL;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture;
 import org.eclipse.emf.ecoretools.tests.internal.Activator;
 import org.eclipse.emf.ecoretools.tests.internal.Messages;
-import org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture;
 
 /**
  * a fixture to make test on an existing ecore diagram
@@ -36,7 +36,7 @@ public abstract class ExistingEcoreDiagramTestFixture extends AbstractExistingDi
 	private URL sourceModelURL;
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getSourceDiagramURL()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getSourceDiagramURL()
 	 */
 	public URL getSourceDiagramURL() {
 		if (sourceDiagramURL == null) {
@@ -46,7 +46,7 @@ public abstract class ExistingEcoreDiagramTestFixture extends AbstractExistingDi
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getSourceModelURL()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getSourceModelURL()
 	 */
 	public URL getSourceModelURL() {
 		if (sourceModelURL == null) {
@@ -67,7 +67,7 @@ public abstract class ExistingEcoreDiagramTestFixture extends AbstractExistingDi
 	}
 
 	/**
-	 * @see org.eclipse.gmf.tests.runtime.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getProjectName()
+	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractExistingDiagramTestFixture#getProjectName()
 	 */
 	public String getProjectName() {
 		return "ecoreProj"; //$NON-NLS-1$

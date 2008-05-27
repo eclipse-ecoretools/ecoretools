@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: OpenSimpleDiagramTest.java,v 1.2 2008/04/28 12:38:10 jlescot Exp $
+ * $Id: OpenSimpleDiagramTest.java,v 1.3 2008/05/27 09:54:59 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.openclose;
@@ -18,11 +18,11 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import org.eclipse.emf.ecoretools.tests.diagram.ui.core.test.AbstractTestBase;
 import org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture.SimpleEcoreDiagramTestFixture;
 import org.eclipse.emf.ecoretools.tests.testcases.diagram.helpers.DefaultNameTest;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.tests.runtime.diagram.ui.core.test.AbstractTestBase;
 
 public class OpenSimpleDiagramTest extends AbstractTestBase {
 
