@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.6 2008/05/26 10:18:26 jlescot Exp $
+ * $Id: EAttributeEditPart.java,v 1.7 2008/05/27 09:07:50 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -37,6 +37,7 @@ import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.DragTracker;
@@ -220,7 +221,7 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	protected Image getLabelIcon() {
 		IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
 		if (labelProvider != null) {
-			return (Image) labelProvider.getImage(resolveSemanticElement());
+			return ExtendedImageRegistry.getInstance().getImage(labelProvider.getImage(resolveSemanticElement()));
 		}
 		return null;
 	}
