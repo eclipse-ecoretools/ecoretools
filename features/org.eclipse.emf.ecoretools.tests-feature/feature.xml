@@ -92,7 +92,7 @@ http://www.eclipse.org/legal/epl-v10.html
          fragment="true"/>
 
    <plugin
-         id="org.eclipse.gmf.tests.runtime.diagram.ui.core"
+         id="org.eclipse.emf.ecoretools.tests.diagram.ui.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
