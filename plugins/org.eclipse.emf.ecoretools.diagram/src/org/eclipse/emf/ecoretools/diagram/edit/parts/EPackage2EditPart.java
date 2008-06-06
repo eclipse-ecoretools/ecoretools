@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2EditPart.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EPackage2EditPart.java,v 1.8 2008/06/06 12:04:28 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -23,6 +23,8 @@ import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -147,7 +149,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof EPackageContentsEditPart) {
 			IFigure pane = getPrimaryShape().getFigurePackageBodyRectangle();
 			setupContentPane(pane); // FIXME each comparment should handle his
-									// content pane in his own way
+			// content pane in his own way
 			pane.add(((EPackageContentsEditPart) childEditPart).getFigure());
 			return true;
 		}
@@ -162,7 +164,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof EPackageContentsEditPart) {
 			IFigure pane = getPrimaryShape().getFigurePackageBodyRectangle();
 			setupContentPane(pane); // FIXME each comparment should handle his
-									// content pane in his own way
+			// content pane in his own way
 			pane.remove(((EPackageContentsEditPart) childEditPart).getFigure());
 			return true;
 		}
@@ -204,10 +206,26 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40));
+		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40)) {
+
+			@Override
+			public PointList getPolygonPoints() {
+				PointList points = new PointList(7);
+				Rectangle nameRectangle = getPrimaryShape().getFigurePackageNameRectangle().getBounds();
+				Rectangle bodyRectangle = getPrimaryShape().getFigurePackageBodyRectangle().getBounds();
+				points.addPoint(nameRectangle.x, nameRectangle.y);
+				points.addPoint(nameRectangle.x + nameRectangle.width, nameRectangle.y);
+				points.addPoint(nameRectangle.x + nameRectangle.width, nameRectangle.y + nameRectangle.height);
+				points.addPoint(bodyRectangle.x + bodyRectangle.width, bodyRectangle.y);
+				points.addPoint(bodyRectangle.x + bodyRectangle.width, bodyRectangle.y + bodyRectangle.height);
+				points.addPoint(bodyRectangle.x, bodyRectangle.y + bodyRectangle.height);
+				points.addPoint(nameRectangle.x, nameRectangle.y);
+				return points;
+			}
+		};
 		return result;
 	}
 
@@ -234,7 +252,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	 * layout one may have set for generated figure.
 	 * 
 	 * @param nodeShape
-	 *            instance of generated figure class
+	 * 		instance of generated figure class
 	 * @generated
 	 */
 	protected IFigure setupContentPane(IFigure nodeShape) {
@@ -430,6 +448,13 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		 */
 		public WrappingLabel getFigurePackageNameLabel() {
 			return fFigurePackageNameLabel;
+		}
+
+		/**
+		 * @generated
+		 */
+		public RectangleFigure getFigurePackageNameRectangle() {
+			return packageLabelRectangle0;
 		}
 
 		// @Override

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationEditPart.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EAnnotationEditPart.java,v 1.7 2008/06/06 12:04:28 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -198,10 +198,16 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected NodeFigure createNodePlate() {
-		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40));
+		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40)) {
+
+			@Override
+			public PointList getPolygonPoints() {
+				return getPrimaryShape().getPointsList();
+			}
+		};
 		return result;
 	}
 
@@ -228,7 +234,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 	 * layout one may have set for generated figure.
 	 * 
 	 * @param nodeShape
-	 *            instance of generated figure class
+	 * 		instance of generated figure class
 	 * @generated
 	 */
 	protected IFigure setupContentPane(IFigure nodeShape) {
@@ -293,9 +299,31 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 		 */
 		private WrappingLabel fFigureAnnotationNameLabel;
 
-		private final int BENT_CORNER_WIDTH = 12;
+		protected static final int BENT_CORNER_WIDTH = 12;
 
-		private final int BENT_CORNER_HEIGHT = 12;
+		protected static final int BENT_CORNER_HEIGHT = 12;
+
+		public PointList getPointsList() {
+			Rectangle r = getBounds();
+			int x = r.x;
+			int y = r.y;
+			int h = r.height;
+			int w = r.width;
+
+			Point point1 = new Point(x, y);
+			Point point2 = new Point(x + w - BENT_CORNER_WIDTH, y);
+			Point point3 = new Point(x + w, y + BENT_CORNER_HEIGHT);
+			Point point4 = new Point(x + w, y + h);
+			Point point5 = new Point(x, y + h);
+
+			PointList desiredBounds = new PointList();
+			desiredBounds.addPoint(point1);
+			desiredBounds.addPoint(point2);
+			desiredBounds.addPoint(point3);
+			desiredBounds.addPoint(point4);
+			desiredBounds.addPoint(point5);
+			return desiredBounds;
+		}
 
 		@Override
 		protected void fillShape(Graphics graphics) {

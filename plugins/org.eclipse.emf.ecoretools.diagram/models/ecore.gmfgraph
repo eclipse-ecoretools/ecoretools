@@ -77,6 +77,8 @@
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.2"/>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EnumerationFigure">
