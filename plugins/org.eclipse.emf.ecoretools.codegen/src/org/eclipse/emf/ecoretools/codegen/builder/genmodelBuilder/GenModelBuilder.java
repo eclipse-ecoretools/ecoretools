@@ -13,7 +13,7 @@
  *    Daniel Weber - initial API and implementation
  *    Lucas Bigeardel - IP integration
  * 
- * $Id: GenModelBuilder.java,v 1.3 2008/04/28 12:23:25 jlescot Exp $
+ * $Id: GenModelBuilder.java,v 1.4 2008/07/15 15:14:45 lbigearde Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.codegen.builder.genmodelBuilder;
@@ -124,9 +124,7 @@ public class GenModelBuilder extends IncrementalProjectBuilder
    private final GenModelDeltaVisitor  deltaVisitor;
    private AdapterFactoryEditingDomain editingDomain;
    private Generator                   generator;
-
    private IProgressMonitor            monitor;
-
    private GenModelResourceVisitor     resourceVisitor;
 
    /**
