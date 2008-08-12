@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataTypeEditPart.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EDataTypeEditPart.java,v 1.8 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -17,7 +17,6 @@ package org.eclipse.emf.ecoretools.diagram.edit.parts;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
-import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -26,10 +25,14 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.AlphaDropShadowBorder;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.GradientRectangleFigure;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.AlphaResizableShapeEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EDataTypeItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
+import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
@@ -106,10 +109,11 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IFigure createNodeShape() {
 		DataTypeFigure figure = new DataTypeFigure();
+		figure.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)); 
 		return primaryShape = figure;
 	}
 
@@ -175,10 +179,13 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected NodeFigure createNodePlate() {
 		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40));
+		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
+		shadowBorder.setShouldDrawDropShadow((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		result.setBorder(shadowBorder);
 		return result;
 	}
 
@@ -260,10 +267,15 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 		super.refreshVisuals();
 	}
 
+	@Override
+	public EditPolicy getPrimaryDragEditPolicy() {
+		return new AlphaResizableShapeEditPolicy();
+	}
+
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
-	public class DataTypeFigure extends RectangleFigure {
+	public class DataTypeFigure extends GradientRectangleFigure {
 
 		/**
 		 * @generated

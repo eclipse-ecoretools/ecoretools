@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.13 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.14 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -40,13 +40,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorItem;
 import org.eclipse.emf.ecoretools.diagram.outline.EcoreDiagramOutlinePage;
+import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
 import org.eclipse.emf.edit.ui.dnd.LocalTransfer;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.EMFCommandOperation;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
-import org.eclipse.gef.MouseWheelHandler;
-import org.eclipse.gef.MouseWheelZoomHandler;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
@@ -66,7 +65,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.util.NLS;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.dnd.TransferData;
 import org.eclipse.swt.widgets.Shell;
@@ -439,15 +437,16 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	}
 
 	/**
-	 * Remove this method when the feature 210642 will be implemented
+	 * Store Sexy UI preferences at the Viewer level so that it can be reached later by controllers.
 	 * 
 	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#initializeGraphicalViewerContents()
 	 */
 	@Override
 	protected void initializeGraphicalViewerContents() {
+		// Sexy UI preferences
+		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT));
+		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
 		super.initializeGraphicalViewerContents();
-		// Scroll-wheel Zoom
-		getGraphicalViewer().setProperty(MouseWheelHandler.KeyGenerator.getKey(SWT.CTRL), MouseWheelZoomHandler.SINGLETON);
 	}
 
 	@Override

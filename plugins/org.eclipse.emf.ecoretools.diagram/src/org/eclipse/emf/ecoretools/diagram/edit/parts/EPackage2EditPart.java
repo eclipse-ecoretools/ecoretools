@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2EditPart.java,v 1.8 2008/06/06 12:04:28 dsciamma Exp $
+ * $Id: EPackage2EditPart.java,v 1.9 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -28,11 +28,15 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.AlphaDropShadowBorder;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.GradientRectangleFigure;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.PackageLabelRectangle;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.AlphaResizableShapeEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackage2ItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.OpenDiagramEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
+import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -124,10 +128,11 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IFigure createNodeShape() {
 		PackageFigure figure = new PackageFigure();
+		figure.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)); 
 		return primaryShape = figure;
 	}
 
@@ -226,7 +231,10 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 				return points;
 			}
 		};
-		return result;
+		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
+		shadowBorder.setShouldDrawDropShadow((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		result.setBorder(shadowBorder);
+        return result;
 	}
 
 	/**
@@ -307,15 +315,20 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		super.refreshVisuals();
 	}
 
+	@Override
+	public EditPolicy getPrimaryDragEditPolicy() {
+		return new AlphaResizableShapeEditPolicy();
+	}
+
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
-	public class PackageFigure extends RectangleFigure {
+	public class PackageFigure extends GradientRectangleFigure {
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
-		private RectangleFigure fFigurePackageBodyRectangle;
+		private GradientRectangleFigure fFigurePackageBodyRectangle;
 
 		/**
 		 * @generated
@@ -353,7 +366,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		private void createContents() {
 
 			packageLabelRectangle0 = new PackageLabelRectangle();
-			packageLabelRectangle0.setLineWidth(2);
+			packageLabelRectangle0.setLineWidth(1);
 
 			packageLabelRectangle0.setBorder(new MarginBorder(getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5)));
 
@@ -397,8 +410,9 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			constraintFillerFigure0.grabExcessVerticalSpace = false;
 			this.add(fillerFigure0, constraintFillerFigure0);
 
-			fFigurePackageBodyRectangle = new RectangleFigure();
-			fFigurePackageBodyRectangle.setLineWidth(2);
+			fFigurePackageBodyRectangle = new GradientRectangleFigure();
+			fFigurePackageBodyRectangle.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT));
+			fFigurePackageBodyRectangle.setLineWidth(1);
 
 			GridData constraintFFigurePackageBodyRectangle = new GridData();
 			constraintFFigurePackageBodyRectangle.verticalAlignment = GridData.FILL;

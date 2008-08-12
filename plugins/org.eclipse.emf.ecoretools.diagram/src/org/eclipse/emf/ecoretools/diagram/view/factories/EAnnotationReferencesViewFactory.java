@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationReferencesViewFactory.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EAnnotationReferencesViewFactory.java,v 1.4 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.ConnectionViewFactory;
@@ -33,7 +34,7 @@ import org.eclipse.swt.graphics.Color;
  */
 public class EAnnotationReferencesViewFactory extends ConnectionViewFactory {
 
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	static final Color THIS_FORE = ColorConstants.darkGray;
 
 	@Override
 	protected void initializeFromPreferences(View view) {

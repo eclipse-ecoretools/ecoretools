@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DiagramPreferenceInitializer.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: DiagramPreferenceInitializer.java,v 1.3 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.preferences;
@@ -24,7 +24,9 @@ import org.eclipse.jface.preference.IPreferenceStore;
 public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer {
 
 	/**
-	 * @generated
+	 * Initialize new preferences added to support Sexy UI feature
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public void initializeDefaultPreferences() {
@@ -34,6 +36,9 @@ public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer 
 		DiagramAppearancePreferencePage.initDefaults(store);
 		DiagramConnectionsPreferencePage.initDefaults(store);
 		DiagramRulersAndGridPreferencePage.initDefaults(store);
+		
+		store.setDefault(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, true);
+		store.setDefault(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, true);
 	}
 
 	/**

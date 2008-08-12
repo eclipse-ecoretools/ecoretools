@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2ViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EPackage2ViewFactory.java,v 1.3 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -42,9 +43,9 @@ import org.eclipse.swt.graphics.Color;
  */
 public class EPackage2ViewFactory extends AbstractShapeViewFactory {
 
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	static final Color THIS_FORE = ColorConstants.darkGray;
 
-	static final Color THIS_BACK = new Color(null, 190, 166, 206);
+	static final Color THIS_BACK = new Color(null, 183, 167, 200);
 
 	static final int fontHeight = 10;
 

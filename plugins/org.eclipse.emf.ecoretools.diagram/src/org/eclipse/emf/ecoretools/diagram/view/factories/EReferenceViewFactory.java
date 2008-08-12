@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceViewFactory.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EReferenceViewFactory.java,v 1.4 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceLowerBoundUpperBoundEditPart;
@@ -39,7 +40,7 @@ import org.eclipse.swt.graphics.Color;
  */
 public class EReferenceViewFactory extends ConnectionViewFactory {
 
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	static final Color THIS_FORE = ColorConstants.darkGray;
 
 	static final int fontHeight = 10;
 

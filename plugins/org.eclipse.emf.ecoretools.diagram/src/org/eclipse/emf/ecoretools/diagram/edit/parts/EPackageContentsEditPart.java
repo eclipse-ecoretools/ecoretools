@@ -9,12 +9,13 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageContentsEditPart.java,v 1.11 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EPackageContentsEditPart.java,v 1.12 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.AlphaXYLayoutEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackageContentsCanonicalEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackageContentsItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoretoolsEditPolicyRoles;
@@ -75,6 +76,8 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new PackageDiagramDragDropEditPolicy());
 		installEditPolicy(EcoretoolsEditPolicyRoles.PSEUDO_CANONICAL_ROLE, new EPackageContentsCanonicalEditPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AlphaXYLayoutEditPolicy());
+		// EPackageCompartment can not be connected !
 	}
 
 	/**

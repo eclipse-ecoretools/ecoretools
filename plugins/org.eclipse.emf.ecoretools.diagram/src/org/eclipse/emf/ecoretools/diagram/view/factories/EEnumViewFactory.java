@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EEnumViewFactory.java,v 1.3 2008/08/12 13:24:50 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -41,7 +42,9 @@ import org.eclipse.swt.graphics.Color;
  */
 public class EEnumViewFactory extends AbstractShapeViewFactory {
 
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	static final Color THIS_FONT = ColorConstants.darkGray;
+
+	static final Color THIS_FORE = ColorConstants.gray;
 
 	static final Color THIS_BACK = new Color(null, 248, 249, 209);
 
@@ -53,7 +56,7 @@ public class EEnumViewFactory extends AbstractShapeViewFactory {
 		ShapeStyle style = (ShapeStyle) view.getStyle(NotationPackage.Literals.SHAPE_STYLE);
 		style.setFillColor(FigureUtilities.colorToInteger(THIS_BACK));
 		style.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
-		style.setFontColor(FigureUtilities.colorToInteger(THIS_FORE));
+		style.setFontColor(FigureUtilities.colorToInteger(THIS_FONT));
 		style.setFontHeight(fontHeight);
 	}
 
