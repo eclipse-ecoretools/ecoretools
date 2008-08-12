@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.7 2008/05/27 09:07:50 dsciamma Exp $
+ * $Id: EAttributeEditPart.java,v 1.8 2008/08/12 15:38:42 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -219,9 +219,11 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 * @generated NOT
 	 */
 	protected Image getLabelIcon() {
-		IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
-		if (labelProvider != null) {
-			return ExtendedImageRegistry.getInstance().getImage(labelProvider.getImage(resolveSemanticElement()));
+		if (resolveSemanticElement() != null) {
+			IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
+			if (labelProvider != null) {
+				return ExtendedImageRegistry.getInstance().getImage(labelProvider.getImage(resolveSemanticElement()));
+			}
 		}
 		return null;
 	}
@@ -230,9 +232,11 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 * @generated NOT
 	 */
 	protected String getLabelText() {
-		IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
-		if (labelProvider != null) {
-			return labelProvider.getText(resolveSemanticElement());
+		if (resolveSemanticElement() != null) {
+			IItemLabelProvider labelProvider = (IItemLabelProvider) EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory().adapt(resolveSemanticElement(), IItemLabelProvider.class);
+			if (labelProvider != null) {
+				return labelProvider.getText(resolveSemanticElement());
+			}
 		}
 		return defaultText;
 	}
