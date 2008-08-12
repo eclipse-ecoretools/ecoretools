@@ -9,10 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractModelNavigator.java,v 1.1 2008/05/26 12:26:56 jlescot Exp $
+ * $Id: AbstractModelNavigator.java,v 1.2 2008/08/12 16:54:51 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.ui.outline;
+
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -32,13 +34,26 @@ import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.IViewerNotification;
 import org.eclipse.emf.edit.provider.IWrapperItemProvider;
+import org.eclipse.emf.edit.ui.action.ControlAction;
+import org.eclipse.emf.edit.ui.action.CopyAction;
+import org.eclipse.emf.edit.ui.action.CreateChildAction;
+import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
+import org.eclipse.emf.edit.ui.action.CutAction;
+import org.eclipse.emf.edit.ui.action.DeleteAction;
 import org.eclipse.emf.edit.ui.action.LoadResourceAction;
+import org.eclipse.emf.edit.ui.action.PasteAction;
+import org.eclipse.emf.edit.ui.action.RedoAction;
+import org.eclipse.emf.edit.ui.action.UndoAction;
+import org.eclipse.emf.edit.ui.action.ValidateAction;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramGraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -46,6 +61,7 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.viewers.DecoratingLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -57,7 +73,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.IPageSite;
 
 /**
@@ -467,8 +485,8 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	}
 
 	/**
-	 * Subclasses should override this method to add their own actions related
-	 * to EMF stuff
+	 * Subclasses should override this method to add/remove actions related to
+	 * EMF stuff
 	 * 
 	 * @param manager
 	 *            the IMenuManager
@@ -480,39 +498,74 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		if (!isEMFMenuEnabledFor(selectedObject)) {
 			return;
 		}
+		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 
-		// TODO Restore this
-		// MixedEditDomain domain = (MixedEditDomain)
-		// modeler.getAdapter(MixedEditDomain.class);
-		//
-		// if (domain != null)
-		// {
-		// IPreferenceStore ps = modeler.getPreferenceStore();
-		// if (ps != null)
-		// {
-		// String id =
-		// ps.getString(ModelerPreferenceConstants.CREATE_CHILD_MENU_PREF);
-		// CreateChildMenuConfiguration config =
-		// OutlineManager.getInstance().getCreateChildMenuConfiguration(id);
-		// ICreateChildMenu createChildMenu = null;
-		// if (config != null)
-		// {
-		// createChildMenu = config.getMenu();
-		// }
-		// if (createChildMenu == null)
-		// {
-		// createChildMenu = new DefaultCreateChildMenu();
-		// }
-		//
-		// createChildMenu.removeAll();
-		// createChildMenu.setMixedEditDomain(domain);
-		// createChildMenu.setSelectedEObject(selectedObject);
-		// createChildMenu.createMenuContents();
-		//
-		// manager.appendToGroup(IOutlineMenuConstants.NEW_GROUP,
-		// createChildMenu);
-		// }
-		// }
+		final TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(getDiagramResource());
+		final IStructuredSelection structuredSelection = new StructuredSelection(selectedObject);
+
+		Collection<?> newChildDescriptors = editingDomain.getNewChildDescriptors(selectedObject, null);
+		Collection<?> newSiblingDescriptors = editingDomain.getNewChildDescriptors(null, selectedObject);
+
+		if (newChildDescriptors.size() > 0) {
+			MenuManager menuManager = new MenuManager("New Child");
+			for (Object descriptor : newChildDescriptors) {
+				menuManager.add(new CreateChildAction(getEditor(), structuredSelection, descriptor));
+			}
+			manager.add(menuManager);
+		}
+		if (newSiblingDescriptors.size() > 0) {
+			MenuManager menuManager = new MenuManager("New Sibling");
+			for (Object descriptor : newSiblingDescriptors) {
+				menuManager.add(new CreateSiblingAction(getEditor(), structuredSelection, descriptor));
+			}
+			manager.add(menuManager);
+		}
+		manager.add(new Separator());
+
+		UndoAction undoAction = new UndoAction(editingDomain);
+		undoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_UNDO));
+		manager.add(new ActionContributionItem(undoAction));
+
+		RedoAction redoAction = new RedoAction(editingDomain);
+		redoAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_REDO));
+		manager.add(new ActionContributionItem(redoAction));
+
+		manager.add(new Separator());
+
+		CopyAction copyAction = new CopyAction(editingDomain);
+		copyAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_COPY));
+		manager.add(new ActionContributionItem(copyAction));
+
+		CutAction cutAction = new CutAction(editingDomain);
+		cutAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_CUT));
+		manager.add(new ActionContributionItem(cutAction));
+
+		PasteAction pasteAction = new PasteAction(editingDomain);
+		pasteAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_PASTE));
+		manager.add(new ActionContributionItem(pasteAction));
+
+		manager.add(new Separator());
+
+		DeleteAction deleteAction = new DeleteAction(editingDomain, true);
+		deleteAction.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_DELETE));
+		manager.add(new ActionContributionItem(deleteAction));
+
+		manager.add(new Separator());
+
+		ValidateAction validateAction = new ValidateAction();
+		manager.add(new ActionContributionItem(validateAction));
+
+		ControlAction controlAction = new ControlAction(editingDomain);
+		manager.add(new ActionContributionItem(controlAction));
+
+		manager.add(new Separator());
+
+		copyAction.updateSelection(structuredSelection);
+		cutAction.updateSelection(structuredSelection);
+		pasteAction.updateSelection(structuredSelection);
+		deleteAction.updateSelection(structuredSelection);
+		validateAction.updateSelection(structuredSelection);
+		controlAction.updateSelection(structuredSelection);
 	}
 
 	/**
