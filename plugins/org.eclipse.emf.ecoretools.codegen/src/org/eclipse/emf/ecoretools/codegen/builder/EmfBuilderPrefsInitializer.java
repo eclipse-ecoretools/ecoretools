@@ -13,7 +13,7 @@
  *    Harman/Becker - initial API and implementation
  *    Lucas Bigeardel - IP integration
  * 
- * $Id: EmfBuilderPrefsInitializer.java,v 1.2 2008/04/28 12:23:25 jlescot Exp $
+ * $Id: EmfBuilderPrefsInitializer.java,v 1.3 2008/09/06 17:05:00 lbigearde Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.codegen.builder;
@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
  */
 public class EmfBuilderPrefsInitializer extends AbstractPreferenceInitializer
 {
-
    public static final String PREFERENCE_NODE_NAME      = "org.eclipse.emf.ecoretools.codegen.builder"; //$NON-NLS-1$
    public static final String PREF_GENERATE_MODEL_CODE  = "generate.modelCode"; //$NON-NLS-1$
    public static final String PREF_GENERATE_EDIT_CODE   = "generate.editCode"; //$NON-NLS-1$
