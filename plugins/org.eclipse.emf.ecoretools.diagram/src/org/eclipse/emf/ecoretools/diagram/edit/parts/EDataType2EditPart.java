@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataType2EditPart.java,v 1.10 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EDataType2EditPart.java,v 1.11 2008/10/31 15:27:22 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -113,7 +113,7 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		DataTypeFigure figure = new DataTypeFigure();
-		figure.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
 		return primaryShape = figure;
 	}
 
@@ -184,7 +184,7 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	protected NodeFigure createNodePlate() {
 		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40));
 		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
-		shadowBorder.setShouldDrawDropShadow((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		shadowBorder.setShouldDrawDropShadow(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER)));
 		result.setBorder(shadowBorder);
 		return result;
 	}

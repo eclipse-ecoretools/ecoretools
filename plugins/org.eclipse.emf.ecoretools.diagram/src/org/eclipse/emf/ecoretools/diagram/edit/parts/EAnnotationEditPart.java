@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationEditPart.java,v 1.8 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EAnnotationEditPart.java,v 1.9 2008/10/31 15:27:22 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -142,7 +142,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		AnnotationFigure figure = new AnnotationFigure();
-		figure.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
 		return primaryShape = figure;
 	}
 
@@ -215,7 +215,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 			}
 		};
 		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
-		shadowBorder.setShouldDrawDropShadow((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		shadowBorder.setShouldDrawDropShadow(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER)));
 		result.setBorder(shadowBorder);
 		return result;
 	}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumEditPart.java,v 1.7 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EEnumEditPart.java,v 1.8 2008/10/31 15:27:22 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -135,7 +135,7 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		EnumerationFigure figure = new EnumerationFigure();
-		figure.setShouldUseGradient((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
 		return primaryShape = figure;
 	}
 
@@ -202,7 +202,7 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	protected NodeFigure createNodePlate() {
 		DefaultSizeNodeFigure result = new DefaultSizeNodeFigure(getMapMode().DPtoLP(40), getMapMode().DPtoLP(40));
 		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
-		shadowBorder.setShouldDrawDropShadow((Boolean) getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		shadowBorder.setShouldDrawDropShadow(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER)));
 		result.setBorder(shadowBorder);
 		return result;
 	}
