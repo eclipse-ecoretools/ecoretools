@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractEnumerationPropertySection.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: AbstractEnumerationPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -144,6 +144,7 @@ public abstract class AbstractEnumerationPropertySection extends AbstractTabbedP
 	 * @see org.eclipse.ui.views.properties.tabbed.ISection#refresh()
 	 */
 	public void refresh() {
+		combo.setEnabled(!isReadOnly());
 		combo.setItems(getEnumerationFeatureValues());
 		combo.setText(getFeatureAsText());
 	}

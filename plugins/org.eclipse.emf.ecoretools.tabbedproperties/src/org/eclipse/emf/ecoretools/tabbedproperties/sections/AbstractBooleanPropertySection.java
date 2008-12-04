@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractBooleanPropertySection.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: AbstractBooleanPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -114,6 +114,7 @@ public abstract class AbstractBooleanPropertySection extends AbstractTabbedPrope
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
 	 */
 	public void refresh() {
+		checkButton.setEnabled(!isReadOnly());
 		checkButton.setSelection(getFeatureValue());
 	}
 

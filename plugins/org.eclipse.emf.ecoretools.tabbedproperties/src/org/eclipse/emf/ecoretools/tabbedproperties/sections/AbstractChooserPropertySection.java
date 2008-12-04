@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractChooserPropertySection.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: AbstractChooserPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -167,6 +167,7 @@ public abstract class AbstractChooserPropertySection extends AbstractTabbedPrope
 	 */
 	public void refresh() {
 		isRefreshing = true;
+		cSingleObjectChooser.setChangeable(!isReadOnly());
 		cSingleObjectChooser.setChoices(getComboFeatureValues());
 		cSingleObjectChooser.setSelection(getFeatureValue());
 		isRefreshing = false;

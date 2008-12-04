@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractColorPropertySection.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: AbstractColorPropertySection.java,v 1.2 2008/12/04 14:58:20 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -93,6 +93,7 @@ public abstract class AbstractColorPropertySection extends AbstractTabbedPropert
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
 	 */
 	public void refresh() {
+		colorSelector.setEnabled(!isReadOnly());
 		colorSelector.setColorValue(getRGBValue());
 	}
 

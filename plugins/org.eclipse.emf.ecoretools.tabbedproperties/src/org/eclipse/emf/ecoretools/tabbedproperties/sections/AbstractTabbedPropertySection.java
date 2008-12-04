@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractTabbedPropertySection.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: AbstractTabbedPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -134,15 +134,25 @@ public abstract class AbstractTabbedPropertySection extends AbstractPropertySect
 		}
 		Object ssel = ((IStructuredSelection) selection).getFirstElement();
 		removeListener();
-		eObject = ObjectAdapter.adaptObject(ssel);
+		eObject = adaptToEObject(ssel);
 		eObjectList = new ArrayList<EObject>();
 		for (Iterator<?> iter = ((IStructuredSelection) selection).iterator(); iter.hasNext();) {
-			EObject element = ObjectAdapter.adaptObject(iter.next());
+			EObject element = adaptToEObject(iter.next());
 			if (element != null) {
 				eObjectList.add(element);
 			}
 		}
 		addListener();
+	}
+	
+	/**
+	 * Adapt the given object into an EObject
+	 * @param object the object to adapt
+	 * @return the adapted object
+	 */
+	protected EObject adaptToEObject(Object object)
+	{
+		return ObjectAdapter.adaptObject(object);
 	}
 
 	/**

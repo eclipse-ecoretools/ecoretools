@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractTextPropertySection.java,v 1.1 2008/05/26 12:25:14 jlescot Exp $
+ * $Id: AbstractTextPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -134,6 +134,7 @@ public abstract class AbstractTextPropertySection extends AbstractTabbedProperty
 	 * @see org.eclipse.ui.views.properties.tabbed.AbstractPropertySection#refresh()
 	 */
 	public void refresh() {
+		getText().setEnabled(!isReadOnly());
 		getText().setText(getFeatureAsString());
 	}
 

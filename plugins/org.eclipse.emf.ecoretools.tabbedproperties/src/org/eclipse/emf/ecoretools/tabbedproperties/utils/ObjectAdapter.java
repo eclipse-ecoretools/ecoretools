@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: ObjectAdapter.java,v 1.1 2008/05/26 12:25:13 jlescot Exp $
+ * $Id: ObjectAdapter.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.utils;
@@ -43,22 +43,26 @@ public final class ObjectAdapter {
 	 *         if this object does not have any.
 	 */
 	public static EObject adaptObject(Object object) {
+		return (EObject) adaptObject(object, EObject.class);
+	}
+	
+	public static Object adaptObject(Object object, Class<?> adaptedClass) {
 		if (object == null) {
 			return null;
-		} else if (object instanceof EObject) {
-			return (EObject) object;
+		} else if (adaptedClass.isInstance(object)) {
+			return object;
 		} else if (object instanceof IAdaptable) {
 			// Try IAdaptable
 			IAdaptable adapted = (IAdaptable) object;
-			Object eObject = adapted.getAdapter(EObject.class);
-			if (eObject != null) {
-				return (EObject) eObject;
+			Object adaptedObject = adapted.getAdapter(adaptedClass);
+			if (adaptedObject != null) {
+				return adaptedObject;
 			}
 		} else {
 			// Try registered adapter
-			Object adapted = Platform.getAdapterManager().getAdapter(object, EObject.class);
+			Object adapted = Platform.getAdapterManager().getAdapter(object, adaptedClass);
 			if (adapted != null) {
-				return (EObject) adapted;
+				return adapted;
 			}
 		}
 		return null;

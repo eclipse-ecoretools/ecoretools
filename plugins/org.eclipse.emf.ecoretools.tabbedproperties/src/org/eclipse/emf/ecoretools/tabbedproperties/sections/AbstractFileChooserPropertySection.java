@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractFileChooserPropertySection.java,v 1.1 2008/05/26 12:25:14 jlescot Exp $
+ * $Id: AbstractFileChooserPropertySection.java,v 1.2 2008/12/04 14:58:21 dsciamma Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -145,6 +145,7 @@ public abstract class AbstractFileChooserPropertySection extends AbstractTabbedP
 	 */
 	public void refresh() {
 		isRefreshing = true;
+		fileChooser.setChangeable(!isReadOnly());
 		fileChooser.setSelection(getFeatureValue());
 		isRefreshing = false;
 	}
