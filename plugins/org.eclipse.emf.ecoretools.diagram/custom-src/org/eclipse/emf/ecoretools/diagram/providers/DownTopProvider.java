@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DownTopProvider.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: DownTopProvider.java,v 1.3 2008/12/24 13:58:21 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.providers;
 
@@ -29,7 +29,7 @@ public class DownTopProvider extends TopDownProvider {
 	 * class="org.eclipse.emf.ecoretools.diagram.providers.DownTopProvider">
 	 * <Priority name="Medium"/> </layoutProvider> </extension>
 	 * 
-	 * @see org.eclipse.gmf.runtime.diagram.ui.providers.TopDownProvider#layoutTopDown(org.eclipse.gef.ConnectionEditPart)
+	 * @see org.eclipse.gmf.runtime.diagram.ui.providers.DefaultProvider#layoutTopDown(org.eclipse.gef.ConnectionEditPart)
 	 */
 	@Override
 	protected boolean layoutTopDown(ConnectionEditPart poly) {
