@@ -10,7 +10,7 @@
  *    Gilles Cannenterre (Anyware Technologies) - initial API and implementation
  *    Jacques LESCOT (Anyware Technologies) - Bug #238052 : Restore related elements actions should be also available for shortcut elements
  *
- * $Id: RestoreRelatedLinksAction.java,v 1.9 2008/12/24 14:08:04 jlescot Exp $
+ * $Id: RestoreRelatedLinksAction.java,v 1.10 2008/12/24 15:52:05 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -63,7 +63,8 @@ public class RestoreRelatedLinksAction extends Action {
 	private Diagram getCurrentDiagram() {
 		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editorPart instanceof DiagramEditor) {
-			return ((View) (((DiagramEditor) editorPart).getDiagramEditPart()).getModel()).getDiagram();
+			host = ((DiagramEditor) editorPart).getDiagramEditPart();
+			return ((View) host.getModel()).getDiagram();
 		}
 		return null;
 	}
@@ -90,7 +91,7 @@ public class RestoreRelatedLinksAction extends Action {
 		List<View> selection = getSelection();
 
 		if (!selection.isEmpty() && host instanceof DiagramEditPart) {
-			final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
+			final DiagramCommandStack commandStack = host.getDiagramEditDomain().getDiagramCommandStack();
 			CompoundCommand cmd = new CompoundCommand(Messages.RestoreRelatedLinksAction_RestoreRelatedLinks);
 
 			cmd.add(new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart) host, selection)));
