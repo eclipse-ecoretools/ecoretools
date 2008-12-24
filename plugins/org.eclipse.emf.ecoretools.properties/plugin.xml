@@ -9,7 +9,7 @@
   Contributors: 
   	   Anyware Technologies - Initial API and implementation
 
-  $Id: plugin.xml,v 1.5 2008/04/28 08:41:45 jlescot Exp $
+  $Id: plugin.xml,v 1.6 2008/12/24 12:02:53 jlescot Exp $
 -->
 <plugin>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
@@ -193,9 +193,24 @@
 	        tab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata">
 	        <input type="org.eclipse.emf.ecore.EStructuralFeature"/>
 	     </propertySection>
-	     <!-- TODO add Wildcards Section : String List -->
-	     <!-- TODO add Pattern Facet Section : String List -->
-	     <!-- TODO add Enumeration Facet Section : String List -->
+	     <propertySection
+	        class="org.eclipse.emf.ecoretools.properties.internal.metadata.WildcardsSection"
+	        id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata.Wildcards"
+	        tab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata">
+	        <input type="org.eclipse.emf.ecore.EStructuralFeature"/>
+	     </propertySection>
+	     <propertySection
+	        class="org.eclipse.emf.ecoretools.properties.internal.metadata.PatternFacetSection"
+	        id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata.PatternFacet"
+	        tab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata">
+	        <input type="org.eclipse.emf.ecore.EDataType"/>
+	     </propertySection>
+	     <propertySection
+	        class="org.eclipse.emf.ecoretools.properties.internal.metadata.EnumerationFacetSection"
+	        id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata.EnumerationFacet"
+	        tab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata">
+	        <input type="org.eclipse.emf.ecore.EDataType"/>
+	     </propertySection>
 	     <!-- TODO add Member Types Section : EDatatype List -->
 	     <propertySection
 	        class="org.eclipse.emf.ecoretools.properties.internal.metadata.TotalDigitsSection"
