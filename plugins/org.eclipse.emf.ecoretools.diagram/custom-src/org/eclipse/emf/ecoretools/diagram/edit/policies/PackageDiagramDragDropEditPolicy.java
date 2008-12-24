@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2008 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: PackageDiagramDragDropEditPolicy.java,v 1.14 2008/12/23 11:12:38 jlescot Exp $
+ * $Id: PackageDiagramDragDropEditPolicy.java,v 1.15 2008/12/24 16:04:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -17,6 +17,7 @@ package org.eclipse.emf.ecoretools.diagram.edit.policies;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
@@ -45,7 +46,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * 
- * Custom drag and drop edit policy that creates shorcuts only for elements
+ * Custom drag and drop edit policy that creates shortcuts only for elements
  * already present in target diagram <br>
  * creation : 01 sept. 2007
  * 
@@ -62,34 +63,28 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		for (Object nextPart : dropRequest.getEditParts()) {
-			if (false == nextPart instanceof IGraphicalEditPart) {
-				continue;
-			}
-			EObject nextObject = ((IGraphicalEditPart) nextPart).resolveSemanticElement();
-			if (nextObject == null) {
-				continue;
-			}
-
-			// Continue if element is the diagram canvas
-			if (getView().getElement().equals(nextObject)) {
-				continue;
-			}
-
-			// Continue if element already in diagram
-			if (false == isElementInView(nextObject, dropRequest) && getView().getElement() == nextObject.eContainer()) {
-				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
-			} else {
-				shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
+			if (nextPart instanceof IGraphicalEditPart) {
+				EObject nextObject = ((IGraphicalEditPart) nextPart).resolveSemanticElement();
+				// Continue if element is the diagram canvas
+				if (nextObject != null && !getHostView().getElement().equals(nextObject)) {
+					// Create a shortcut depending on whether a view already
+					// exists
+					if (!isElementInView(nextObject, dropRequest) && getHostView().getElement() == nextObject.eContainer()) {
+						normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
+					} else {
+						shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(nextObject), Node.class, null, getDiagramPreferencesHint()));
+					}
+				}
 			}
 		}
 
 		Command shortcutCommand = null;
-		if (false == shortcutViewDescriptors.isEmpty()) {
-			shortcutCommand = createShortcutsCommand(dropRequest, shortcutViewDescriptors);
+		if (!shortcutViewDescriptors.isEmpty()) {
+			shortcutCommand = createShortcutsCommand(dropRequest.getLocation(), shortcutViewDescriptors);
 		}
 		Command normalCommand = null;
-		if (false == normalViewDescriptors.isEmpty()) {
-			normalCommand = createNormalViewCommand(dropRequest, normalViewDescriptors);
+		if (!normalViewDescriptors.isEmpty()) {
+			normalCommand = createViewsAndRestoreRelatedLinks(dropRequest.getLocation(), normalViewDescriptors);
 		}
 		if (shortcutCommand != null) {
 			Command createBoth = shortcutCommand.chain(normalCommand);
@@ -107,30 +102,24 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		List<CreateViewRequest.ViewDescriptor> normalViewDescriptors = new ArrayList<CreateViewRequest.ViewDescriptor>();
 		for (Object nextObject : dropRequest.getObjects()) {
-			if (false == nextObject instanceof EObject) {
-				continue;
-			}
-
 			// Continue if element is the diagram canvas
-			if (getView().getElement().equals(nextObject)) {
-				continue;
-			}
-
-			// Continue if element already in diagram
-			if (false == isElementInView(nextObject, dropRequest) && getView().getElement() == ((EObject) nextObject).eContainer()) {
-				normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
-			} else {
-				shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+			if (nextObject instanceof EObject && !getHostView().getElement().equals(nextObject)) {
+				// Create a shortcut depending on whether a view already exists
+				if (!isElementInView(nextObject, dropRequest) && getHostView().getElement() == ((EObject) nextObject).eContainer()) {
+					normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+				} else {
+					shortcutViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter((EObject) nextObject), Node.class, null, getDiagramPreferencesHint()));
+				}
 			}
 		}
 
 		Command shortcutCommand = null;
-		if (false == shortcutViewDescriptors.isEmpty()) {
-			shortcutCommand = createShortcutsCommand(dropRequest, shortcutViewDescriptors);
+		if (!shortcutViewDescriptors.isEmpty()) {
+			shortcutCommand = createShortcutsCommand(dropRequest.getLocation(), shortcutViewDescriptors);
 		}
 		Command normalCommand = null;
-		if (false == normalViewDescriptors.isEmpty()) {
-			normalCommand = createNormalViewCommand(dropRequest, normalViewDescriptors);
+		if (!normalViewDescriptors.isEmpty()) {
+			normalCommand = createViewsAndRestoreRelatedLinks(dropRequest.getLocation(), normalViewDescriptors);
 		}
 		if (shortcutCommand != null) {
 			Command createBoth = shortcutCommand.chain(normalCommand);
@@ -144,7 +133,7 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 
 	protected boolean isElementInView(Object nextObject, Request request) {
 		@SuppressWarnings("unchecked")
-		EList<View> views = getView().getChildren();
+		EList<View> views = getHostView().getChildren();
 		for (View nextView : views) {
 			if (nextView.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 				continue;
@@ -159,51 +148,22 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return false;
 	}
 
-	private Command createShortcutsCommand(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		Command command = createViews(dropRequest, viewDescriptors);
-		if (command != null) {
-			return command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
+	protected Command createShortcutsCommand(Point dropLocation, List<ViewDescriptor> viewDescriptors) {
+		Command createCommand = createViewsAndRestoreRelatedLinks(dropLocation, viewDescriptors);
+		if (createCommand != null) {
+			// Chain a "Create Shortcut" command
+			createCommand.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getHostView(), viewDescriptors)));
 		}
-		return null;
-	}
-
-	private Command createShortcutsCommand(ChangeBoundsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		Command command = createViews(dropRequest, viewDescriptors);
-		if (command != null) {
-			return command.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getView(), viewDescriptors)));
-		}
-		return null;
-	}
-
-	private Command createNormalViewCommand(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
-	}
-
-	private Command createNormalViewCommand(ChangeBoundsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		return createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
-	}
-
-	protected Command createViews(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
-		createViewRequest.setLocation(dropRequest.getLocation());
-		Command createCommand = getHost().getCommand(createViewRequest);
-
-		return createCommand;
-	}
-	
-	protected Command createViewsAndRestoreRelatedLinks(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
-		createViewRequest.setLocation(dropRequest.getLocation());
-		Command createCommand = getHost().getCommand(createViewRequest);
-		// Chain restore related links
-		restoreRelatedLinks(createViewRequest, createCommand);
-
 		return createCommand;
 	}
 
-	private void restoreRelatedLinks(CreateViewRequest createViewRequest, Command createCommand) {
-		List<?> viewAdapters = (List<?>) createViewRequest.getNewObject();
-		createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), viewAdapters)));
+	protected Command createViewsAndRestoreRelatedLinks(Point dropLocation, List<ViewDescriptor> viewDescriptors) {
+		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
+		createViewRequest.setLocation(dropLocation);
+		Command createCommand = getHost().getCommand(createViewRequest);
+		// Chain a "Restore Related Links" command
+		createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), (List<?>) createViewRequest.getNewObject())));
+		return createCommand;
 	}
 
 	private DiagramEditPart getDiagramEditPart() {
@@ -217,24 +177,6 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return ((DiagramEditor) editorPart).getDiagramEditPart();
 	}
 
-	protected Command createViews(ChangeBoundsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
-		createViewRequest.setLocation(dropRequest.getLocation());
-		Command createCommand = getHost().getCommand(createViewRequest);
-
-		return createCommand;
-	}
-	
-	protected Command createViewsAndRestoreRelatedLinks(ChangeBoundsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
-		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
-		createViewRequest.setLocation(dropRequest.getLocation());
-		Command createCommand = getHost().getCommand(createViewRequest);
-		// Chain restore related links
-		restoreRelatedLinks(createViewRequest, createCommand);
-
-		return createCommand;
-	}
-
 	private TransactionalEditingDomain getEditingDomain() {
 		if (getHost() instanceof IGraphicalEditPart) {
 			return ((IGraphicalEditPart) getHost()).getEditingDomain();
@@ -242,11 +184,11 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return null;
 	}
 
-	protected View getView() {
+	private View getHostView() {
 		return (View) getHost().getModel();
 	}
 
-	protected PreferencesHint getDiagramPreferencesHint() {
+	private PreferencesHint getDiagramPreferencesHint() {
 		return EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT;
 	}
 }
