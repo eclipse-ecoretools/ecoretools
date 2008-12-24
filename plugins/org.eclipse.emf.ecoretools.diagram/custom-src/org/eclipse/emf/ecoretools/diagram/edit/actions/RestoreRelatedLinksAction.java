@@ -7,9 +7,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *    Anyware Technologies - initial API and implementation
+ *    Gilles Cannenterre (Anyware Technologies) - initial API and implementation
+ *    Jacques LESCOT (Anyware Technologies) - Bug #238052 : Restore related elements actions should be also available for shortcut elements
  *
- * $Id: RestoreRelatedLinksAction.java,v 1.8 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: RestoreRelatedLinksAction.java,v 1.9 2008/12/24 14:08:04 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.ArrangeRelatedNodesCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedLinksCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.RestoreRelatedMissingNodesCommand;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -39,8 +41,7 @@ import org.eclipse.ui.PlatformUI;
 
 /**
  * 
- * Triggers restoration of the outgoing or ingoing links for the selected parts
- * <br>
+ * Triggers restoration of the outgoing or ingoing links for the selected parts <br>
  * creation : 15 avr. 2008
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
@@ -61,35 +62,22 @@ public class RestoreRelatedLinksAction extends Action {
 
 	private Diagram getCurrentDiagram() {
 		IEditorPart editorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (false == editorPart instanceof DiagramEditor) {
-			return null;
+		if (editorPart instanceof DiagramEditor) {
+			return ((View) (((DiagramEditor) editorPart).getDiagramEditPart()).getModel()).getDiagram();
 		}
-		host = ((DiagramEditor) editorPart).getDiagramEditPart();
-		View view = (View) host.getModel();
-
-		Diagram diagram = view.getDiagram();
-
-		return diagram;
+		return null;
 	}
 
 	private List<View> getSelection() {
 		List<View> viewSelected = new ArrayList<View>();
 		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
-		if (false == selection instanceof IStructuredSelection) {
+		if (!(selection instanceof IStructuredSelection)) {
 			return Collections.emptyList();
 		}
 		for (Object object : ((IStructuredSelection) selection).toList()) {
-			if (false == object instanceof IGraphicalEditPart) {
-				continue;
+			if (object instanceof IGraphicalEditPart && !(object instanceof DiagramEditPart)) {
+				viewSelected.add(((IGraphicalEditPart) object).getNotationView());
 			}
-			if (object instanceof DiagramEditPart) {
-				continue;
-			}
-			View view = ((IGraphicalEditPart) object).getNotationView();
-			if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
-				continue;
-			}
-			viewSelected.add(view);
 		}
 		return viewSelected;
 	}
@@ -101,22 +89,16 @@ public class RestoreRelatedLinksAction extends Action {
 	public void run() {
 		List<View> selection = getSelection();
 
-		if (selection.isEmpty()) {
-			return;
-		}
+		if (!selection.isEmpty() && host instanceof DiagramEditPart) {
+			final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();
+			CompoundCommand cmd = new CompoundCommand(Messages.RestoreRelatedLinksAction_RestoreRelatedLinks);
 
-		if (false == host instanceof DiagramEditPart) {
-			return;
-		}
+			cmd.add(new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart) host, selection)));
+			cmd.add(new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart) host, selection)));
+			cmd.add(new ICommandProxy(new ArrangeRelatedNodesCommand((DiagramEditPart) host, selection)));
 
-		final DiagramCommandStack commandStack = (host).getDiagramEditDomain().getDiagramCommandStack();	
-		CompoundCommand cmd = new CompoundCommand(Messages.RestoreRelatedLinksAction_RestoreRelatedLinks);
-		
-		cmd.add(new ICommandProxy(new RestoreRelatedMissingNodesCommand((DiagramEditPart) host, selection)));
-		cmd.add(new ICommandProxy(new RestoreRelatedLinksCommand((DiagramEditPart) host, selection)));
-		cmd.add(new ICommandProxy(new ArrangeRelatedNodesCommand((DiagramEditPart) host, selection)));
-		
-		commandStack.execute(cmd, new NullProgressMonitor());
+			commandStack.execute(cmd, new NullProgressMonitor());
+		}
 	}
 
 	/**
@@ -124,7 +106,7 @@ public class RestoreRelatedLinksAction extends Action {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return (false == getSelection().isEmpty() && getCurrentDiagram().getType().equals("EcoreTools")); //$NON-NLS-1$
+		return !getSelection().isEmpty() && EPackageEditPart.MODEL_ID.equals(getCurrentDiagram().getType());
 	}
 
 }
