@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataTypeEditPart.java,v 1.9 2008/10/31 15:27:22 jlescot Exp $
+ * $Id: EDataTypeEditPart.java,v 1.10 2008/12/24 14:18:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -375,11 +375,13 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 
 		@Override
 		protected void outlineShape(Graphics graphics) {
-			Rectangle r = getBounds();
-			int x = r.x + lineWidth / 2;
-			int y = r.y + lineWidth / 2;
-			int w = r.width - Math.max(1, lineWidth);
-			int h = r.height - Math.max(1, lineWidth);
+			int lineInset = (int)Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
+			Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
+			r.shrink(lineInset, lineInset);
+			int x = r.x;
+			int y = r.y;
+			int h = r.height;
+			int w = r.width;
 			int labelHeight = getFigureDataTypeJavaLabel().getBounds().y - dataTypeFixedNameLabel0.getBounds().y;
 			Point point1 = new Point(x, y + labelHeight);
 			Point point2 = new Point(x + w, y + labelHeight);
