@@ -9,15 +9,15 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpdateEditPartCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: UpdateEditPartCommand.java,v 1.8 2009/01/29 09:57:44 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoretoolsEditPolicyRoles;
 import org.eclipse.emf.ecoretools.diagram.Messages;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoretoolsEditPolicyRoles;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;

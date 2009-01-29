@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DiagramAppearancePreferencePage.java,v 1.3 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: DiagramAppearancePreferencePage.java,v 1.4 2009/01/29 09:57:44 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.preferences;
@@ -18,12 +18,10 @@ import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.AppearancePreferencePage;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 
 /**
  * @generated
