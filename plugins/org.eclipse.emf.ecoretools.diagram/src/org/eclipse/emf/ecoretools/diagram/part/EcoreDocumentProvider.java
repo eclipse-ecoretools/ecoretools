@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDocumentProvider.java,v 1.12 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreDocumentProvider.java,v 1.13 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -709,7 +709,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated NOT
 	 * 
-	 * Remove inside the workspace synchronizer
+	 *            Remove inside the workspace synchronizer
 	 */
 	protected class ResourceSetInfo extends ElementInfo {
 
@@ -974,12 +974,15 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 * synchronizer per editing domain
 	 * 
 	 **************************************************************************/
-	/** **************************************************************************************** */
+	/**
+	 * *************************************************************************
+	 * ***************
+	 */
 
 	public static String editingDomainBaseID = "org.eclipse.emf.ecoretools.diagram.EditingDomain"; //$NON-NLS-1$
 
 	public static String id_separator = "@"; //$NON-NLS-1$
-	
+
 	private IEditorInput currentEditorInput;
 
 	protected SynchronizerManager synchronizerManager;
@@ -1164,6 +1167,9 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		}
 	}
 
-	/** **************************************************************************************** */
+	/**
+	 * *************************************************************************
+	 * ***************
+	 */
 
 }

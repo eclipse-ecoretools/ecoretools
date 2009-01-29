@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceCreateCommand.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EReferenceCreateCommand.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -74,7 +74,7 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 		}
 		if (getSource() == null) {
 			return true; // link creation is in progress; source is not
-							// defined yet
+			// defined yet
 		}
 		// target may be null here but it's possible to check constraint
 		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEReference_3002(getSource(), getTarget());

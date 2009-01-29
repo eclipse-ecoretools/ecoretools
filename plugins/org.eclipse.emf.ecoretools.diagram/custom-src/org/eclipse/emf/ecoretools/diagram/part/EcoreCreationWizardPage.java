@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreCreationWizardPage.java,v 1.5 2008/04/29 07:55:24 jlescot Exp $
+ * $Id: EcoreCreationWizardPage.java,v 1.6 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -349,7 +349,7 @@ public class EcoreCreationWizardPage extends WizardPage {
 	 */
 	protected void handleDirectoryChoose() {
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), (IContainer) ResourcesPlugin.getWorkspace().getRoot().findMember(directoryFd.getText()), false,
-		Messages.EcoreCreationWizardPage_ChooseDestinationDirectory);
+				Messages.EcoreCreationWizardPage_ChooseDestinationDirectory);
 		if (dialog.open() == Window.OK) {
 			Object[] results = dialog.getResult();
 			if (results.length == 1 && results[0] instanceof IPath) {
@@ -366,7 +366,8 @@ public class EcoreCreationWizardPage extends WizardPage {
 		// The initial directory is always the Workspace
 		String initialDirectory = ResourcesPlugin.getWorkspace().getRoot().getFullPath().toString();
 
-		ResourceSelectionDialog dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot().findMember(initialDirectory), Messages.EcoreCreationWizardPage_ChooseAnExistingDomainFile);
+		ResourceSelectionDialog dialog = new ResourceSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot().findMember(initialDirectory),
+				Messages.EcoreCreationWizardPage_ChooseAnExistingDomainFile);
 		if (dialog.open() == Window.OK) {
 			Object[] results = dialog.getResult();
 			if (results.length == 1 && results[0] instanceof IFile) {
@@ -566,12 +567,13 @@ public class EcoreCreationWizardPage extends WizardPage {
 	 * file. If no object is selected, returns the rootEObject of the domain
 	 * model
 	 * 
-	 * @return the selected EObject or null if the viewer input is not already set
+	 * @return the selected EObject or null if the viewer input is not already
+	 *         set
 	 */
 	public EObject getDiagramEObject() {
 		if (((IStructuredSelection) viewer.getSelection()).getFirstElement() == null) {
 			if (viewer.getInput() != null) {
-				return (EObject)((EList<?>) viewer.getInput()).get(0);
+				return (EObject) ((EList<?>) viewer.getInput()).get(0);
 			} else {
 				return null;
 			}
@@ -639,7 +641,8 @@ public class EcoreCreationWizardPage extends WizardPage {
 	 * 
 	 * Creation : 26 Nov. 2007
 	 * 
-	 * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques LESCOT</a>
+	 * @author <a href="mailto:jacques.lescot@anyware-tech.com">Jacques
+	 *         LESCOT</a>
 	 */
 	public static class WizardContentProvider implements ITreeContentProvider {
 

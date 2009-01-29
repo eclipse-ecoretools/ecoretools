@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: UpdateLinkedEReferenceDeferredCommand.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: UpdateLinkedEReferenceDeferredCommand.java,v 1.6 2009/01/29 10:02:08 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -66,7 +66,8 @@ public class UpdateLinkedEReferenceDeferredCommand extends AbstractTransactional
 	}
 
 	/**
-	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor, org.eclipse.core.runtime.IAdaptable)
+	 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
+	 *      org.eclipse.core.runtime.IAdaptable)
 	 */
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {

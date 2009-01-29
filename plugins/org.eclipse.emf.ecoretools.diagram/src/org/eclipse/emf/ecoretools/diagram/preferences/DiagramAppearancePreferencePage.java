@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DiagramAppearancePreferencePage.java,v 1.4 2009/01/29 09:57:44 jlescot Exp $
+ * $Id: DiagramAppearancePreferencePage.java,v 1.5 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.preferences;
@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Group;
 public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 
 	private BooleanFieldEditor fillFigureUsingGradient = null;
+
 	private BooleanFieldEditor useShadowOnBorder = null;
 
 	/**
@@ -41,7 +42,8 @@ public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.gmf.runtime.common.ui.preferences.AbstractPreferencePage#
+	 * @see
+	 * org.eclipse.gmf.runtime.common.ui.preferences.AbstractPreferencePage#
 	 * addFields(org.eclipse.swt.widgets.Composite)
 	 */
 	protected void addFields(Composite parent) {
@@ -70,14 +72,12 @@ public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 		composite.setLayoutData(gridData);
 		group.setText("Sexy UI - Figures rendering");
 
-		fillFigureUsingGradient = new BooleanFieldEditor(
-				IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, "Use gradient to fill figures", composite);
+		fillFigureUsingGradient = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, "Use gradient to fill figures", composite);
 		addField(fillFigureUsingGradient);
 
-		useShadowOnBorder = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER,
-				"Show shadow on border", composite);
+		useShadowOnBorder = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, "Show shadow on border", composite);
 		addField(useShadowOnBorder);
-		
+
 		createNoteComposite(parent.getFont(), group, "Note:", "those preferences will take effect only on new diagrams.");
 
 		GridLayout layout = new GridLayout();

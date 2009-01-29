@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: PackageComponentEditPolicy.java,v 1.3 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: PackageComponentEditPolicy.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -38,8 +38,7 @@ import org.eclipse.gmf.runtime.notation.View;
  * 
  * @author <a href="mailto:gilles.cannenterre@anyware-tech.com">Gilles
  *         Cannenterre</a>
- * @author <a href="mailto:david.sciamma@anyware-tech.com">David
- *         Sciamma</a>
+ * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma</a>
  */
 public class PackageComponentEditPolicy extends ComponentEditPolicy {
 

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.14 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.15 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -437,15 +437,18 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	}
 
 	/**
-	 * Store Sexy UI preferences at the Viewer level so that it can be reached later by controllers.
+	 * Store Sexy UI preferences at the Viewer level so that it can be reached
+	 * later by controllers.
 	 * 
 	 * @see org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor#initializeGraphicalViewerContents()
 	 */
 	@Override
 	protected void initializeGraphicalViewerContents() {
 		// Sexy UI preferences
-		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT));
-		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
+		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT,
+				EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT));
+		getGraphicalViewer().setProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER,
+				EcoreDiagramEditorPlugin.getInstance().getPreferenceStore().getBoolean(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER));
 		super.initializeGraphicalViewerContents();
 	}
 

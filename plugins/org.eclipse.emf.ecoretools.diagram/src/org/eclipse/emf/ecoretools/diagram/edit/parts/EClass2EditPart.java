@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClass2EditPart.java,v 1.8 2008/10/31 15:27:22 jlescot Exp $
+ * $Id: EClass2EditPart.java,v 1.9 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -139,7 +139,7 @@ public class EClass2EditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		ClassFigure figure = new ClassFigure();
-		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)));
 		return primaryShape = figure;
 	}
 

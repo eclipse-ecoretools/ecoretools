@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataTypeEditPart.java,v 1.10 2008/12/24 14:18:05 jlescot Exp $
+ * $Id: EDataTypeEditPart.java,v 1.11 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -113,7 +113,7 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		DataTypeFigure figure = new DataTypeFigure();
-		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)));
 		return primaryShape = figure;
 	}
 
@@ -375,7 +375,7 @@ public class EDataTypeEditPart extends ShapeNodeEditPart {
 
 		@Override
 		protected void outlineShape(Graphics graphics) {
-			int lineInset = (int)Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
+			int lineInset = (int) Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
 			Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
 			r.shrink(lineInset, lineInset);
 			int x = r.x;

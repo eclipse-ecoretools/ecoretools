@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ArrangeRelatedNodesCommand.java,v 1.5 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: ArrangeRelatedNodesCommand.java,v 1.6 2009/01/29 10:02:08 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -67,7 +67,7 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 
 		}
 		arrangeRelatedNodes(views);
-		
+
 		return CommandResult.newOKCommandResult();
 	}
 
@@ -82,16 +82,15 @@ public class ArrangeRelatedNodesCommand extends RestoreRelatedLinksCommand {
 		// Collect all related link from semantic model
 		List<View> relatedNodes = new ArrayList<View>();
 		relatedNodes.addAll(notationViews);
-		
+
 		for (View notationView : notationViews) {
 			Collection<? extends EcoreLinkDescriptor> linkDescriptors = collectPartRelatedLinks(notationView, domain2NotationMap);
 			relatedNodes.addAll(getRelatedMissingNodes(linkDescriptors, domain2NotationMap));
 		}
-		
+
 		List<EObjectAdapter> adapters = new ArrayList<EObjectAdapter>();
 		for (View view : relatedNodes) {
-			if (view.eContainer() != diagram)
-			{
+			if (view.eContainer() != diagram) {
 				continue;
 			}
 			adapters.add(new EObjectAdapter(view));

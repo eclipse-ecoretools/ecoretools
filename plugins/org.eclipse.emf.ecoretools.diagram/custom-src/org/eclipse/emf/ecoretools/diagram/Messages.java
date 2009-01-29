@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.2 2008/04/29 07:55:24 jlescot Exp $
+ * $Id: Messages.java,v 1.3 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram;
 
@@ -20,7 +20,7 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.diagram.messages"; //$NON-NLS-1$
 
 	public static String CommandName_InitializeAndLayoutDiagram;
-	
+
 	public static String CommandName_UpdateEditPart;
 
 	public static String EcoreAbstractExpression_ExpressionEvaluationFailure;

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageCanonicalEditPolicy.java,v 1.7 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EPackageCanonicalEditPolicy.java,v 1.8 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -168,7 +168,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		List createdConnectionViews = new LinkedList();
 		createdConnectionViews.addAll(refreshSemanticConnections());
 		createdConnectionViews.addAll(refreshConnections());
-		
+
 		makeViewsImmutable(createdConnectionViews);
 	}
 
@@ -233,7 +233,7 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		}
 		deleteViews(existingLinks.iterator());
 		// return createConnections(linkDescriptors, domain2NotationMap);
-		
+
 		return Collections.emptyList();
 	}
 

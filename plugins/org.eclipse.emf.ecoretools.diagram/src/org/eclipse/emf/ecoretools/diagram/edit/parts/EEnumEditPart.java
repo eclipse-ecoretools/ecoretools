@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumEditPart.java,v 1.8 2008/10/31 15:27:22 jlescot Exp $
+ * $Id: EEnumEditPart.java,v 1.9 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -135,7 +135,7 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		EnumerationFigure figure = new EnumerationFigure();
-		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)));
 		return primaryShape = figure;
 	}
 

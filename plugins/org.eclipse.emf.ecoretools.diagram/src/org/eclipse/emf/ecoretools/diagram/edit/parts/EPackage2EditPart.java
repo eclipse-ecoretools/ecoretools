@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2EditPart.java,v 1.10 2008/10/31 15:27:22 jlescot Exp $
+ * $Id: EPackage2EditPart.java,v 1.11 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -132,7 +132,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		PackageFigure figure = new PackageFigure();
-		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)));
 		return primaryShape = figure;
 	}
 
@@ -234,7 +234,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		AlphaDropShadowBorder shadowBorder = new AlphaDropShadowBorder();
 		shadowBorder.setShouldDrawDropShadow(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER)));
 		result.setBorder(shadowBorder);
-        return result;
+		return result;
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	 * layout one may have set for generated figure.
 	 * 
 	 * @param nodeShape
-	 * 		instance of generated figure class
+	 *            instance of generated figure class
 	 * @generated
 	 */
 	protected IFigure setupContentPane(IFigure nodeShape) {

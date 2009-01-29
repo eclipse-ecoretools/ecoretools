@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditorUtil.java,v 1.9 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreDiagramEditorUtil.java,v 1.10 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -173,12 +173,12 @@ public class EcoreDiagramEditorUtil {
 			@Override
 			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 				EPackage model = createInitialModel();
-				
+
 				// Bug #224334 : Initialize root EPackage properties
 				model.setName(diagramName.toLowerCase());
 				model.setNsPrefix(diagramName.toLowerCase());
 				model.setNsURI("http://".concat(diagramName.toLowerCase()).concat("/1.0")); //$NON-NLS-1$ //$NON-NLS-2$
-				
+
 				attachModelToResource(model, modelResource);
 
 				Diagram diagram = ViewService.createDiagram(model, EPackageEditPart.MODEL_ID, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);

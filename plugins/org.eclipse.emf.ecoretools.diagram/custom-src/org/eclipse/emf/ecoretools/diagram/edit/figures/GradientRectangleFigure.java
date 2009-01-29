@@ -9,7 +9,7 @@
  * Contributors:
  *    Simon Bernard (Anyware Technologies) - initial API and implementation
  *
- * $Id: GradientRectangleFigure.java,v 1.1 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: GradientRectangleFigure.java,v 1.2 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.figures;
 
@@ -26,23 +26,23 @@ import org.eclipse.gmf.runtime.diagram.ui.figures.DiagramColorConstants;
 public class GradientRectangleFigure extends RectangleFigure {
 
 	private boolean useGradient = true;
-	
+
 	/**
 	 * Sets whether the gradient should be used when rendering the figure
 	 * 
-	 * @param drawDropShadow 
+	 * @param drawDropShadow
 	 */
 	public void setShouldUseGradient(boolean shouldUseGradient) {
 		this.useGradient = shouldUseGradient;
 	}
-	
+
 	/**
 	 * @return true if gradient should be used when rendering the figure
 	 */
 	public boolean shouldUseGradient() {
 		return useGradient;
 	}
-	
+
 	@Override
 	protected void fillShape(Graphics graphics) {
 		if (shouldUseGradient()) {

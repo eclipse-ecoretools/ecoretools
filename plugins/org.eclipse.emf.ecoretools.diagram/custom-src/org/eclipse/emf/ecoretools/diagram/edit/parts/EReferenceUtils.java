@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceUtils.java,v 1.10 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EReferenceUtils.java,v 1.11 2009/01/29 10:02:08 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
@@ -77,8 +77,7 @@ public class EReferenceUtils {
 		// Hide line of the non selected reference
 		EReferenceEditPart masterPart;
 		EReferenceEditPart slavePart;
-		if (oppositeEditPart.getSelected() != EditPart.SELECTED_NONE)
-		{
+		if (oppositeEditPart.getSelected() != EditPart.SELECTED_NONE) {
 			referenceEditPart.getPrimaryShape().setHideLine(true);
 			oppositeEditPart.getPrimaryShape().setHideLine(false);
 			masterPart = oppositeEditPart;
@@ -87,7 +86,7 @@ public class EReferenceUtils {
 			oppositeEditPart.getPrimaryShape().setHideLine(true);
 			referenceEditPart.getPrimaryShape().setHideLine(false);
 			masterPart = referenceEditPart;
-			slavePart = oppositeEditPart;			
+			slavePart = oppositeEditPart;
 		}
 
 		TransactionalEditingDomain editingDomain = masterPart.getEditingDomain();
@@ -99,7 +98,8 @@ public class EReferenceUtils {
 	 * Executes the supplied command inside an <code>unchecked action</code>
 	 * Taken from the CanonicalEditPolicy class
 	 * 
-	 * @param cmd command that can be executed (i.e., cmd.canExecute() == true)
+	 * @param cmd
+	 *            command that can be executed (i.e., cmd.canExecute() == true)
 	 * @param part
 	 */
 	public static void executeCommand(final Command cmd, IGraphicalEditPart part) {
@@ -132,5 +132,5 @@ public class EReferenceUtils {
 			EcoreDiagramEditorPlugin.getInstance().logError(Messages.EReferenceUtils_CanNotExecute, e);
 		}
 	}
-	
+
 }

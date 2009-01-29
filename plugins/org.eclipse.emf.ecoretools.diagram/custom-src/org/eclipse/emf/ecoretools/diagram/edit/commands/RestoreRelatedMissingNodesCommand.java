@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RestoreRelatedMissingNodesCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: RestoreRelatedMissingNodesCommand.java,v 1.8 2009/01/29 10:02:08 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -156,8 +156,7 @@ public class RestoreRelatedMissingNodesCommand extends RestoreRelatedLinksComman
 
 	}
 
-	private void updateDescriptors(final EObject object, List<CreateViewRequest.ViewDescriptor> normalViewDescriptors,
-			List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors) {
+	private void updateDescriptors(final EObject object, List<CreateViewRequest.ViewDescriptor> normalViewDescriptors, List<CreateViewRequest.ViewDescriptor> shortcutViewDescriptors) {
 		if (object.eContainer() == diagram.getElement()) {
 			normalViewDescriptors.add(new CreateViewRequest.ViewDescriptor(new EObjectAdapter(object), Node.class, null, host.getDiagramPreferencesHint()));
 		} else {

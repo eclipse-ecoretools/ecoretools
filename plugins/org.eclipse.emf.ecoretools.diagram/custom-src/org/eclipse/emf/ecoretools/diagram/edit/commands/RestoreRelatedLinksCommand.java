@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: RestoreRelatedLinksCommand.java,v 1.7 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: RestoreRelatedLinksCommand.java,v 1.8 2009/01/29 10:02:08 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
 
@@ -112,7 +112,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		// map diagram
 		mapModel(diagram, domain2NotationMap);
 
-		for (EcoreLinkDescriptor nextLinkDescriptor : linkDescriptors ) {
+		for (EcoreLinkDescriptor nextLinkDescriptor : linkDescriptors) {
 			EditPart sourceEditPart = getEditPart(nextLinkDescriptor.getSource(), domain2NotationMap);
 			EditPart targetEditPart = getEditPart(nextLinkDescriptor.getDestination(), domain2NotationMap);
 
@@ -179,12 +179,12 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 		Collection<Edge> existingLinks = new LinkedList<Edge>();
 		for (Object edge : notationView.getTargetEdges()) {
 			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
-				existingLinks.add((Edge)edge);
+				existingLinks.add((Edge) edge);
 			}
 		}
 		for (Object edge : notationView.getSourceEdges()) {
 			if (edge instanceof Edge && false == existingLinks.contains(edge)) {
-				existingLinks.add((Edge)edge);
+				existingLinks.add((Edge) edge);
 			}
 		}
 
@@ -205,7 +205,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
 			for (Iterator<? extends EcoreLinkDescriptor> LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator.hasNext();) {
-				EcoreLinkDescriptor nextLinkDescriptor =  LinkDescriptorsIterator.next();
+				EcoreLinkDescriptor nextLinkDescriptor = LinkDescriptorsIterator.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement() && diagramLinkSrc == nextLinkDescriptor.getSource() && diagramLinkDst == nextLinkDescriptor.getDestination()
 						&& diagramLinkVisualID == nextLinkDescriptor.getVisualID()) {
 					linksIterator.remove();
@@ -223,7 +223,7 @@ public class RestoreRelatedLinksCommand extends AbstractTransactionalCommand {
 	 * @param views
 	 */
 	protected void setViewVisible(Collection<? extends View> views) {
-		for (View view  : views) {
+		for (View view : views) {
 			if (view.isVisible()) {
 				continue;
 			}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationReferencesCreateCommand.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EAnnotationReferencesCreateCommand.java,v 1.3 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -64,7 +64,7 @@ public class EAnnotationReferencesCreateCommand extends EditElementCommand {
 		}
 		if (getSource() == null) {
 			return true; // link creation is in progress; source is not
-							// defined yet
+			// defined yet
 		}
 		// target may be null here but it's possible to check constraint
 		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEAnnotationReferences_3001(getSource(), getTarget());

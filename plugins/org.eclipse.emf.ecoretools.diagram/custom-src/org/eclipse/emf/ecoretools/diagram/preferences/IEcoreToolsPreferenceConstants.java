@@ -9,14 +9,15 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: IEcoreToolsPreferenceConstants.java,v 1.1 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: IEcoreToolsPreferenceConstants.java,v 1.2 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.preferences;
 
 /**
  * Defines custom preference constants for the Ecore Tools graphical editor
  * <p>
- * This interface defines constants only, it is <EM>not</EM> intended to be implemented by clients.
+ * This interface defines constants only, it is <EM>not</EM> intended to be
+ * implemented by clients.
  * </p>
  * 
  * @author Jacques Lescot

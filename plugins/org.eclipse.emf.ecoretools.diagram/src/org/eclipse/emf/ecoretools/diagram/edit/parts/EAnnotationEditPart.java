@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationEditPart.java,v 1.10 2008/12/24 14:18:05 jlescot Exp $
+ * $Id: EAnnotationEditPart.java,v 1.11 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -142,7 +142,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 	 */
 	protected IFigure createNodeShape() {
 		AnnotationFigure figure = new AnnotationFigure();
-		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT))); 
+		figure.setShouldUseGradient(Boolean.TRUE.equals(getViewer().getProperty(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT)));
 		return primaryShape = figure;
 	}
 
@@ -243,7 +243,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 	 * layout one may have set for generated figure.
 	 * 
 	 * @param nodeShape
-	 * 		instance of generated figure class
+	 *            instance of generated figure class
 	 * @generated
 	 */
 	protected IFigure setupContentPane(IFigure nodeShape) {
@@ -318,7 +318,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 		protected static final int BENT_CORNER_HEIGHT = 12;
 
 		public PointList getPointsList() {
-			int lineInset = (int)Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
+			int lineInset = (int) Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
 			Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
 			r.shrink(lineInset, lineInset);
 			int x = r.x;
@@ -380,7 +380,7 @@ public class EAnnotationEditPart extends ShapeNodeEditPart {
 
 		@Override
 		protected void outlineShape(Graphics graphics) {
-			int lineInset = (int)Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
+			int lineInset = (int) Math.ceil(Math.max(1.0, getLineWidthFloat() / 2.0));
 			Rectangle r = Rectangle.SINGLETON.setBounds(getBounds());
 			r.shrink(lineInset, lineInset);
 			int x = r.x;

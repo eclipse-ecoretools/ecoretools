@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreBaseEditHelper.java,v 1.5 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EcoreBaseEditHelper.java,v 1.6 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.helpers;
@@ -44,7 +44,7 @@ public class EcoreBaseEditHelper extends AbstractEditHelper {
 		if (epCommand == null) {
 			return ehCommand;
 		}
-		 if (ehCommand == null) {
+		if (ehCommand == null) {
 			return epCommand;
 		}
 		CompositeCommand command = new CompositeCommand(null);

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreViewProvider.java,v 1.3 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EcoreViewProvider.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -147,11 +147,11 @@ public class EcoreViewProvider extends AbstractViewProvider {
 				String elementTypeHint = ((IHintedType) elementType).getSemanticHint();
 				if (!semanticHint.equals(elementTypeHint)) {
 					return null; // if semantic hint is specified it should
-									// be the same as in element type
+					// be the same as in element type
 				}
 				if (domainElement != null && visualID != EcoreVisualIDRegistry.getNodeVisualID(containerView, domainElement)) {
 					return null; // visual id for node EClass should match
-									// visual id from element type
+					// visual id from element type
 				}
 			} else {
 				// Element type is not specified. Domain element should be
@@ -178,7 +178,7 @@ public class EcoreViewProvider extends AbstractViewProvider {
 				case EClass2EditPart.VISUAL_ID:
 					if (domainElement == null || visualID != EcoreVisualIDRegistry.getNodeVisualID(containerView, domainElement)) {
 						return null; // visual id in semantic hint should
-										// match visual id for domain element
+						// match visual id for domain element
 					}
 					break;
 				case EClassNameEditPart.VISUAL_ID:
@@ -336,13 +336,13 @@ public class EcoreViewProvider extends AbstractViewProvider {
 		}
 		if (semanticHint != null && !semanticHint.equals(elementTypeHint)) {
 			return null; // if semantic hint is specified it should be the
-							// same as in element type
+			// same as in element type
 		}
 		int visualID = EcoreVisualIDRegistry.getVisualID(elementTypeHint);
 		EObject domainElement = getSemanticElement(semanticAdapter);
 		if (domainElement != null && visualID != EcoreVisualIDRegistry.getLinkWithClassVisualID(domainElement)) {
 			return null; // visual id for link EClass should match visual id
-							// from element type
+			// from element type
 		}
 		return getEdgeViewClass(visualID);
 	}
