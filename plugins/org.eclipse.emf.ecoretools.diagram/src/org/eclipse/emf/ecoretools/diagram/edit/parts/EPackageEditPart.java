@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageEditPart.java,v 1.7 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EPackageEditPart.java,v 1.8 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -49,7 +49,6 @@ public class EPackageEditPart extends DiagramEditPart {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EPackageItemSemanticEditPolicy());

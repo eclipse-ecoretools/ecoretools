@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreEditPartFactory.java,v 1.4 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreEditPartFactory.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -149,6 +149,7 @@ public class EcoreEditPartFactory implements EditPartFactory {
 
 			case EClassESuperTypesEditPart.VISUAL_ID:
 				return new EClassESuperTypesEditPart(view);
+
 			}
 		}
 		return createUnrecognizedEditPart(context, model);

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationReferencesCreateCommand.java,v 1.3 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EAnnotationReferencesCreateCommand.java,v 1.4 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -51,20 +51,19 @@ public class EAnnotationReferencesCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean canExecute() {
 		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null && !(source instanceof EAnnotation)) {
+		if (source != null && false == source instanceof EAnnotation) {
 			return false;
 		}
-		if (target != null && !(target instanceof EObject)) {
+		if (target != null && false == target instanceof EObject) {
 			return false;
 		}
 		if (getSource() == null) {
-			return true; // link creation is in progress; source is not
-			// defined yet
+			return true; // link creation is in progress; source is not defined
+			// yet
 		}
 		// target may be null here but it's possible to check constraint
 		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEAnnotationReferences_3001(getSource(), getTarget());
@@ -73,15 +72,23 @@ public class EAnnotationReferencesCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
+
 		if (getSource() != null && getTarget() != null) {
 			getSource().getReferences().add(getTarget());
 		}
 		return CommandResult.newOKCommandResult();
+
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setElementToEdit(EObject element) {
+		throw new UnsupportedOperationException();
 	}
 
 	/**

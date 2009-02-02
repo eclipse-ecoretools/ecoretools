@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreCreateShortcutDecorationsCommand.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EcoreCreateShortcutDecorationsCommand.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -58,7 +58,6 @@ public class EcoreCreateShortcutDecorationsCommand extends AbstractTransactional
 	/**
 	 * @generated
 	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		for (Iterator it = myDescriptors.iterator(); it.hasNext();) {
 			CreateViewRequest.ViewDescriptor nextDescriptor = (CreateViewRequest.ViewDescriptor) it.next();

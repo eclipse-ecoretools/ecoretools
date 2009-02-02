@@ -9,12 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiterals2ItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EEnumLiterals2ItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EEnumLiteralCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
@@ -28,12 +27,15 @@ public class EEnumLiterals2ItemSemanticEditPolicy extends EcoreBaseItemSemanticE
 	/**
 	 * @generated
 	 */
-	@Override
+	public EEnumLiterals2ItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EEnum_1005);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EEnumLiteral_2006 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEEnum_ELiterals());
-			}
 			return getGEFWrapper(new EEnumLiteralCreateCommand(req));
 		}
 		return super.getCreateCommand(req);

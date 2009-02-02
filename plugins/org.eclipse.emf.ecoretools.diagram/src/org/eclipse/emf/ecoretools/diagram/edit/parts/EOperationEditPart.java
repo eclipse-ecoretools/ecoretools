@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationEditPart.java,v 1.6 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EOperationEditPart.java,v 1.7 2009/02/02 08:39:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -17,7 +17,6 @@ package org.eclipse.emf.ecoretools.diagram.edit.parts;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
@@ -30,6 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EOperationItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextNonResizableEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
+import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
@@ -44,7 +44,6 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.common.ui.services.parser.ParserService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
@@ -110,7 +109,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	public DragTracker getDragTracker(Request request) {
 		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3) {
 			return null;
@@ -121,7 +119,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EOperationItemSemanticEditPolicy());
@@ -188,7 +185,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -196,7 +192,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -304,6 +299,10 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
 		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
+		}
 	}
 
 	/**
@@ -374,9 +373,8 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	public IParser getParser() {
 		if (parser == null) {
-			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new EcoreParserProvider.HintAdapter(EcoreElementTypes.EOperation_2002, getParserElement(), parserHint);
-			parser = ParserService.getInstance().getParser(hintAdapter);
+			parser = EcoreParserProvider.getParser(EcoreElementTypes.EOperation_2002, getParserElement(), EcoreVisualIDRegistry
+					.getType(org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart.VISUAL_ID));
 		}
 		return parser;
 	}
@@ -428,7 +426,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -456,7 +453,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -475,6 +471,10 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -501,7 +501,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -513,7 +512,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -521,7 +519,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -537,7 +534,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -551,12 +547,10 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
-				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -575,7 +569,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -584,7 +577,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
@@ -593,7 +585,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -793,7 +784,6 @@ public class EOperationEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure createFigure() {
 		IFigure label = createFigurePrim();
 		defaultText = getLabelTextHelper(label);

@@ -9,13 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreBaseItemSemanticEditPolicy.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EcoreBaseItemSemanticEditPolicy.java,v 1.4 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ import org.eclipse.emf.ecoretools.diagram.expressions.EcoreAbstractExpression;
 import org.eclipse.emf.ecoretools.diagram.expressions.EcoreOCLFactory;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
@@ -45,8 +45,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.SemanticEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.requests.EditCommandRequestWrapper;
 import org.eclipse.gmf.runtime.emf.commands.core.command.CompositeTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
-import org.eclipse.gmf.runtime.emf.type.core.IEditHelperContext;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
@@ -77,6 +75,18 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	public static final String VISUAL_ID_KEY = "visual_id"; //$NON-NLS-1$
 
 	/**
+	 * @generated
+	 */
+	private final IElementType myElementType;
+
+	/**
+	 * @generated
+	 */
+	protected EcoreBaseItemSemanticEditPolicy(IElementType elementType) {
+		myElementType = elementType;
+	}
+
+	/**
 	 * Extended request data key to hold editpart visual id. Add visual id of
 	 * edited editpart to extended data of the request so command switch can
 	 * decide what kind of diagram element is being edited. It is done in those
@@ -85,7 +95,6 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * 
 	 * @generated
 	 */
-	@Override
 	public Command getCommand(Request request) {
 		if (request instanceof ReconnectRequest) {
 			Object view = ((ReconnectRequest) request).getConnectionEditPart().getModel();
@@ -110,49 +119,55 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Command getSemanticCommand(IEditCommandRequest request) {
 		IEditCommandRequest completedRequest = completeRequest(request);
-		Object editHelperContext = completedRequest.getEditHelperContext();
-		if (editHelperContext instanceof View || (editHelperContext instanceof IEditHelperContext && ((IEditHelperContext) editHelperContext).getEObject() instanceof View)) {
-			// no semantic commands are provided for pure design elements
-			return null;
-		}
-		if (editHelperContext == null) {
-			editHelperContext = ViewUtil.resolveSemanticElement((View) getHost().getModel());
-		}
-		IElementType elementType = ElementTypeRegistry.getInstance().getElementType(editHelperContext);
-		if (elementType == ElementTypeRegistry.getInstance().getType("org.eclipse.gmf.runtime.emf.type.core.default")) { //$NON-NLS-1$ 
-			elementType = null;
-		}
 		Command semanticCommand = getSemanticCommandSwitch(completedRequest);
-		if (semanticCommand != null) {
-			ICommand command = semanticCommand instanceof ICommandProxy ? ((ICommandProxy) semanticCommand).getICommand() : new CommandProxy(semanticCommand);
-			completedRequest.setParameter(EcoreBaseEditHelper.EDIT_POLICY_COMMAND, command);
-		}
-		if (elementType != null) {
-			ICommand command = elementType.getEditCommand(completedRequest);
-			if (command != null) {
-				if (!(command instanceof CompositeTransactionalCommand)) {
-					TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
-					command = new CompositeTransactionalCommand(editingDomain, command.getLabel()).compose(command);
-				}
-				semanticCommand = new ICommandProxy(command);
-			}
-		}
-		boolean shouldProceed = true;
+		semanticCommand = getEditHelperCommand(completedRequest, semanticCommand);
 		if (completedRequest instanceof DestroyRequest) {
-			shouldProceed = shouldProceed((DestroyRequest) completedRequest);
+			DestroyRequest destroyRequest = (DestroyRequest) completedRequest;
+			return shouldProceed(destroyRequest) ? addDeleteViewCommand(semanticCommand, destroyRequest) : null;
 		}
-		if (shouldProceed) {
-			if (completedRequest instanceof DestroyRequest) {
+		return semanticCommand;
+	}
+
+	/**
+	 * @generated
+	 */
+	protected Command addDeleteViewCommand(Command mainCommand, DestroyRequest completedRequest) {
+		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
+		Command deleteViewCommand = getGEFWrapper(new DeleteCommand(editingDomain, (View) getHost().getModel()));
+		return mainCommand == null ? deleteViewCommand : mainCommand.chain(deleteViewCommand);
+	}
+
+	/**
+	 * @generated
+	 */
+	private Command getEditHelperCommand(IEditCommandRequest request, Command editPolicyCommand) {
+		if (editPolicyCommand != null) {
+			ICommand command = editPolicyCommand instanceof ICommandProxy ? ((ICommandProxy) editPolicyCommand).getICommand() : new CommandProxy(editPolicyCommand);
+			request.setParameter(EcoreBaseEditHelper.EDIT_POLICY_COMMAND, command);
+		}
+		IElementType requestContextElementType = getContextElementType(request);
+		request.setParameter(EcoreBaseEditHelper.CONTEXT_ELEMENT_TYPE, requestContextElementType);
+		ICommand command = requestContextElementType.getEditCommand(request);
+		request.setParameter(EcoreBaseEditHelper.EDIT_POLICY_COMMAND, null);
+		request.setParameter(EcoreBaseEditHelper.CONTEXT_ELEMENT_TYPE, null);
+		if (command != null) {
+			if (!(command instanceof CompositeTransactionalCommand)) {
 				TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
-				Command deleteViewCommand = new ICommandProxy(new DeleteCommand(editingDomain, (View) getHost().getModel()));
-				semanticCommand = semanticCommand == null ? deleteViewCommand : semanticCommand.chain(deleteViewCommand);
+				command = new CompositeTransactionalCommand(editingDomain, command.getLabel()).compose(command);
 			}
-			return semanticCommand;
+			return new ICommandProxy(command);
 		}
-		return null;
+		return editPolicyCommand;
+	}
+
+	/**
+	 * @generated
+	 */
+	private IElementType getContextElementType(IEditCommandRequest request) {
+		IElementType requestContextElementType = EcoreElementTypes.getElementType(getVisualID(request));
+		return requestContextElementType != null ? requestContextElementType : myElementType;
 	}
 
 	/**
@@ -273,7 +288,6 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @deprecated use getGEFWrapper() instead
 	 * @generated
 	 */
-	@Deprecated
 	protected final Command getMSLWrapper(ICommand cmd) {
 		// XXX deprecated: use getGEFWrapper() instead
 		return getGEFWrapper(cmd);
@@ -353,31 +367,12 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		/**
 		 * @generated
 		 */
-		private static final EcoreAbstractExpression EReference_3002_TargetExpression;
+		private static EcoreAbstractExpression EReference_3002_TargetExpression;
 
 		/**
 		 * @generated
 		 */
-		static {
-			Map env = new HashMap(3);
-			env.put(OPPOSITE_END_VAR, EcorePackage.eINSTANCE.getEClass());
-			EReference_3002_TargetExpression = EcoreOCLFactory.getExpression("self.oclIsKindOf(ecore::EClass)", EcorePackage.eINSTANCE.getEClassifier(), env); //$NON-NLS-1$
-		}
-
-		/**
-		 * @generated
-		 */
-		private static final EcoreAbstractExpression EClassESuperTypes_3003_TargetExpression;
-
-		/**
-		 * @generated
-		 */
-		static {
-			Map env = new HashMap(3);
-			env.put(OPPOSITE_END_VAR, EcorePackage.eINSTANCE.getEClass());
-			EClassESuperTypes_3003_TargetExpression = EcoreOCLFactory.getExpression(
-					"self <> oppositeEnd and not oppositeEnd.eSuperTypes->includes(self) and not self.eAllSuperTypes->includes(oppositeEnd)", EcorePackage.eINSTANCE.getEClass(), env); //$NON-NLS-1$
-		}
+		private static EcoreAbstractExpression EClassESuperTypes_3003_TargetExpression;
 
 		/**
 		 * @generated
@@ -388,6 +383,7 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 					return false;
 				}
 			}
+
 			return canExistEAnnotationReferences_3001(source, target);
 		}
 
@@ -407,6 +403,7 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 					return false;
 				}
 			}
+
 			return canExistEClassESuperTypes_3003(source, target);
 		}
 
@@ -421,33 +418,43 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 		 * @generated
 		 */
 		public static boolean canExistEReference_3002(EClass source, EClassifier target) {
-			if (!evaluate(EReference_3002_TargetExpression, target, source, true)) {
+			try {
+				if (target == null) {
+					return true;
+				}
+				if (EReference_3002_TargetExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR, EcorePackage.eINSTANCE.getEClass());
+					EReference_3002_TargetExpression = EcoreOCLFactory.getExpression("self.oclIsKindOf(ecore::EClass)", EcorePackage.eINSTANCE.getEClassifier(), env); //$NON-NLS-1$
+				}
+				Object targetVal = EReference_3002_TargetExpression.evaluate(target, Collections.singletonMap(OPPOSITE_END_VAR, source));
+				if (false == targetVal instanceof Boolean || !((Boolean) targetVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				return true;
+			} catch (Exception e) {
+				EcoreDiagramEditorPlugin.getInstance().logError("Link constraint evaluation error", e); //$NON-NLS-1$
 				return false;
 			}
-			return true;
 		}
 
 		/**
 		 * @generated
 		 */
 		public static boolean canExistEClassESuperTypes_3003(EClass source, EClass target) {
-			if (!evaluate(EClassESuperTypes_3003_TargetExpression, target, source, true)) {
-				return false;
-			}
-			return true;
-		}
-
-		/**
-		 * @generated
-		 */
-		private static boolean evaluate(EcoreAbstractExpression constraint, Object sourceEnd, Object oppositeEnd, boolean clearEnv) {
-			if (sourceEnd == null) {
-				return true;
-			}
-			Map evalEnv = Collections.singletonMap(OPPOSITE_END_VAR, oppositeEnd);
 			try {
-				Object val = constraint.evaluate(sourceEnd, evalEnv);
-				return (val instanceof Boolean) ? ((Boolean) val).booleanValue() : false;
+				if (target == null) {
+					return true;
+				}
+				if (EClassESuperTypes_3003_TargetExpression == null) {
+					Map env = Collections.singletonMap(OPPOSITE_END_VAR, EcorePackage.eINSTANCE.getEClass());
+					EClassESuperTypes_3003_TargetExpression = EcoreOCLFactory.getExpression(
+							"self <> oppositeEnd and not oppositeEnd.eSuperTypes->includes(self) and not self.eAllSuperTypes->includes(oppositeEnd)", EcorePackage.eINSTANCE.getEClass(), env); //$NON-NLS-1$
+				}
+				Object targetVal = EClassESuperTypes_3003_TargetExpression.evaluate(target, Collections.singletonMap(OPPOSITE_END_VAR, source));
+				if (false == targetVal instanceof Boolean || !((Boolean) targetVal).booleanValue()) {
+					return false;
+				} // else fall-through
+				return true;
 			} catch (Exception e) {
 				EcoreDiagramEditorPlugin.getInstance().logError("Link constraint evaluation error", e); //$NON-NLS-1$
 				return false;

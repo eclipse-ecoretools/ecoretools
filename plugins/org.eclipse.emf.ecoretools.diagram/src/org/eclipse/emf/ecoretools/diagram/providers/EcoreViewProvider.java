@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreViewProvider.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EcoreViewProvider.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -102,7 +102,6 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Class getDiagramViewClass(IAdaptable semanticAdapter, String diagramKind) {
 		EObject semanticElement = getSemanticElement(semanticAdapter);
 		if (EPackageEditPart.MODEL_ID.equals(diagramKind) && EcoreVisualIDRegistry.getDiagramVisualID(semanticElement) != -1) {
@@ -114,7 +113,6 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Class getNodeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
 		if (containerView == null) {
 			return null;
@@ -146,8 +144,8 @@ public class EcoreViewProvider extends AbstractViewProvider {
 				}
 				String elementTypeHint = ((IHintedType) elementType).getSemanticHint();
 				if (!semanticHint.equals(elementTypeHint)) {
-					return null; // if semantic hint is specified it should
-					// be the same as in element type
+					return null; // if semantic hint is specified it should be
+					// the same as in element type
 				}
 				if (domainElement != null && visualID != EcoreVisualIDRegistry.getNodeVisualID(containerView, domainElement)) {
 					return null; // visual id for node EClass should match
@@ -177,8 +175,8 @@ public class EcoreViewProvider extends AbstractViewProvider {
 				case EEnumEditPart.VISUAL_ID:
 				case EClass2EditPart.VISUAL_ID:
 					if (domainElement == null || visualID != EcoreVisualIDRegistry.getNodeVisualID(containerView, domainElement)) {
-						return null; // visual id in semantic hint should
-						// match visual id for domain element
+						return null; // visual id in semantic hint should match
+						// visual id for domain element
 					}
 					break;
 				case EClassNameEditPart.VISUAL_ID:
@@ -324,7 +322,6 @@ public class EcoreViewProvider extends AbstractViewProvider {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Class getEdgeViewClass(IAdaptable semanticAdapter, View containerView, String semanticHint) {
 		IElementType elementType = getSemanticElementType(semanticAdapter);
 		if (!EcoreElementTypes.isKnownElementType(elementType) || (!(elementType instanceof IHintedType))) {
@@ -335,8 +332,8 @@ public class EcoreViewProvider extends AbstractViewProvider {
 			return null; // our hint is visual id and must be specified
 		}
 		if (semanticHint != null && !semanticHint.equals(elementTypeHint)) {
-			return null; // if semantic hint is specified it should be the
-			// same as in element type
+			return null; // if semantic hint is specified it should be the same
+			// as in element type
 		}
 		int visualID = EcoreVisualIDRegistry.getVisualID(elementTypeHint);
 		EObject domainElement = getSemanticElement(semanticAdapter);

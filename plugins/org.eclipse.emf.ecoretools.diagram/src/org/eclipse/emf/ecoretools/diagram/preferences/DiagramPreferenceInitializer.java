@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DiagramPreferenceInitializer.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: DiagramPreferenceInitializer.java,v 1.5 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.preferences;
@@ -28,7 +28,6 @@ public class DiagramPreferenceInitializer extends AbstractPreferenceInitializer 
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = getPreferenceStore();
 		DiagramPrintingPreferencePage.initDefaults(store);

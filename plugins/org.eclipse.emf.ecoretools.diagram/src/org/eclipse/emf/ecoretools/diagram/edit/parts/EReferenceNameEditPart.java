@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceNameEditPart.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EReferenceNameEditPart.java,v 1.3 2009/02/02 08:39:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -17,7 +17,6 @@ package org.eclipse.emf.ecoretools.diagram.edit.parts;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.ConnectionLocator;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -31,18 +30,20 @@ import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
 import org.eclipse.gef.AccessibleEditPart;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.handles.MoveHandle;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.common.ui.services.parser.ParserService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableLabelEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.l10n.DiagramColorRegistry;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
@@ -107,16 +108,23 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new EcoreTextSelectionEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableLabelEditPolicy() {
+
+			protected List createSelectionHandles() {
+				MoveHandle mh = new MoveHandle((GraphicalEditPart) getHost());
+				mh.setBorder(null);
+				return Collections.singletonList(mh);
+			}
+		});
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	public int getKeyPoint() {
 		return ConnectionLocator.SOURCE;
 	}
@@ -179,7 +187,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -187,7 +194,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -229,6 +235,10 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -300,9 +310,8 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	 */
 	public IParser getParser() {
 		if (parser == null) {
-			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new EcoreParserProvider.HintAdapter(EcoreElementTypes.EReference_3002, getParserElement(), parserHint);
-			parser = ParserService.getInstance().getParser(hintAdapter);
+			parser = EcoreParserProvider.getParser(EcoreElementTypes.EReference_3002, getParserElement(), EcoreVisualIDRegistry
+					.getType(org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceNameEditPart.VISUAL_ID));
 		}
 		return parser;
 	}
@@ -354,7 +363,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -382,7 +390,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -401,6 +408,10 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -427,7 +438,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -439,7 +449,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -447,7 +456,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -463,7 +471,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -477,12 +484,10 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
-				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -501,7 +506,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -535,7 +539,6 @@ public class EReferenceNameEditPart extends LabelEditPart implements ITextAwareE
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure createFigure() {
 		IFigure label = createFigurePrim();
 		defaultText = getLabelTextHelper(label);

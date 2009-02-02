@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationReferencesEditPart.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EAnnotationReferencesEditPart.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -42,7 +42,6 @@ public class EAnnotationReferencesEditPart extends ConnectionNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EAnnotationReferencesItemSemanticEditPolicy());
@@ -56,7 +55,6 @@ public class EAnnotationReferencesEditPart extends ConnectionNodeEditPart {
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Connection createConnectionFigure() {
 		return new DashedLineConnection();
 	}

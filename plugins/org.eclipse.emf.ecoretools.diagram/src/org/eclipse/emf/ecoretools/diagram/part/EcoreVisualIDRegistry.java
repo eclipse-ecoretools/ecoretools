@@ -9,17 +9,17 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreVisualIDRegistry.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreVisualIDRegistry.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationDetailsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationSourceEditPart;
@@ -71,17 +71,17 @@ public class EcoreVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static final String DEBUG_KEY = EcoreDiagramEditorPlugin.getInstance().getBundle().getSymbolicName() + "/debug/visualID"; //$NON-NLS-1$
+	private static final String DEBUG_KEY = "org.eclipse.emf.ecoretools.diagram/debug/visualID"; //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	private static final EcoreAbstractExpression EDataType_1004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
+	private static EcoreAbstractExpression EDataType_1004_Constraint; //$NON-NLS-1$
 
 	/**
 	 * @generated
 	 */
-	private static final EcoreAbstractExpression EDataType_2004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
+	private static EcoreAbstractExpression EDataType_2004_Constraint; //$NON-NLS-1$
 
 	/**
 	 * @generated
@@ -120,7 +120,7 @@ public class EcoreVisualIDRegistry {
 			return Integer.parseInt(type);
 		} catch (NumberFormatException e) {
 			if (Boolean.TRUE.toString().equalsIgnoreCase(Platform.getDebugOption(DEBUG_KEY))) {
-				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreVisualIDRegistry_UnableToParseView + type);
+				EcoreDiagramEditorPlugin.getInstance().logError("Unable to parse view type as a visualID number: " + type);
 			}
 		}
 		return -1;
@@ -182,7 +182,7 @@ public class EcoreVisualIDRegistry {
 			if (EcorePackage.eINSTANCE.getEClass().isSuperTypeOf(domainElement.eClass())) {
 				return EClass2EditPart.VISUAL_ID;
 			}
-			if (EcorePackage.eINSTANCE.getEDataType().isSuperTypeOf(domainElement.eClass()) && evaluate(EDataType_2004_Constraint, domainElement)) {
+			if (EcorePackage.eINSTANCE.getEDataType().isSuperTypeOf(domainElement.eClass()) && isEDataType_2004((EDataType) domainElement)) {
 				return EDataType2EditPart.VISUAL_ID;
 			}
 			if (EcorePackage.eINSTANCE.getEEnum().isSuperTypeOf(domainElement.eClass())) {
@@ -224,7 +224,7 @@ public class EcoreVisualIDRegistry {
 			if (EcorePackage.eINSTANCE.getEAnnotation().isSuperTypeOf(domainElement.eClass())) {
 				return EAnnotationEditPart.VISUAL_ID;
 			}
-			if (EcorePackage.eINSTANCE.getEDataType().isSuperTypeOf(domainElement.eClass()) && evaluate(EDataType_1004_Constraint, domainElement)) {
+			if (EcorePackage.eINSTANCE.getEDataType().isSuperTypeOf(domainElement.eClass()) && isEDataType_1004((EDataType) domainElement)) {
 				return EDataTypeEditPart.VISUAL_ID;
 			}
 			if (EcorePackage.eINSTANCE.getEEnum().isSuperTypeOf(domainElement.eClass())) {
@@ -425,8 +425,22 @@ public class EcoreVisualIDRegistry {
 	/**
 	 * @generated
 	 */
-	private static boolean evaluate(EcoreAbstractExpression expression, Object element) {
-		Object result = expression.evaluate(element);
+	private static boolean isEDataType_1004(EDataType domainElement) {
+		if (EDataType_1004_Constraint == null) { // lazy initialization
+			EDataType_1004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
+		}
+		Object result = EDataType_1004_Constraint.evaluate(domainElement);
+		return result instanceof Boolean && ((Boolean) result).booleanValue();
+	}
+
+	/**
+	 * @generated
+	 */
+	private static boolean isEDataType_2004(EDataType domainElement) {
+		if (EDataType_2004_Constraint == null) { // lazy initialization
+			EDataType_2004_Constraint = EcoreOCLFactory.getExpression("not oclIsKindOf(ecore::EEnum)", EcorePackage.eINSTANCE.getEDataType()); //$NON-NLS-1$
+		}
+		Object result = EDataType_2004_Constraint.evaluate(domainElement);
 		return result instanceof Boolean && ((Boolean) result).booleanValue();
 	}
 

@@ -9,10 +9,13 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackage2EditPart.java,v 1.11 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EPackage2EditPart.java,v 1.12 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
@@ -20,6 +23,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -37,6 +41,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.policies.EPackage2ItemSemanticEdi
 import org.eclipse.emf.ecoretools.diagram.edit.policies.OpenDiagramEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -49,9 +54,11 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 
 /**
  * @generated
@@ -83,7 +90,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 
 		super.createDefaultEditPolicies();
@@ -105,7 +111,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	protected LayoutEditPolicy createLayoutEditPolicy() {
 		LayoutEditPolicy lep = new LayoutEditPolicy() {
 
-			@Override
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				EditPolicy result = child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 				if (result == null) {
@@ -114,12 +119,10 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 				return result;
 			}
 
-			@Override
 			protected Command getMoveChildrenCommand(Request request) {
 				return null;
 			}
 
-			@Override
 			protected Command getCreateCommand(CreateRequest request) {
 				return null;
 			}
@@ -165,7 +168,9 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-
+		if (childEditPart instanceof EPackageNameEditPart) {
+			return true;
+		}
 		if (childEditPart instanceof EPackageContentsEditPart) {
 			IFigure pane = getPrimaryShape().getFigurePackageBodyRectangle();
 			setupContentPane(pane); // FIXME each comparment should handle his
@@ -179,7 +184,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (addFixedChild(childEditPart)) {
 			return;
@@ -190,7 +194,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (removeFixedChild(childEditPart)) {
 			return;
@@ -201,13 +204,11 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-
 		if (editPart instanceof EPackageContentsEditPart) {
 			return getPrimaryShape().getFigurePackageBodyRectangle();
 		}
-		return super.getContentPaneFor(editPart);
+		return getContentPane();
 	}
 
 	/**
@@ -219,7 +220,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			@Override
 			public PointList getPolygonPoints() {
 				PointList points = new PointList(7);
-				Rectangle nameRectangle = getPrimaryShape().getFigurePackageNameRectangle().getBounds();
+				Rectangle nameRectangle = getPrimaryShape().getFigurePackageLabelRectangle().getBounds();
 				Rectangle bodyRectangle = getPrimaryShape().getFigurePackageBodyRectangle().getBounds();
 				points.addPoint(nameRectangle.x, nameRectangle.y);
 				points.addPoint(nameRectangle.x + nameRectangle.width, nameRectangle.y);
@@ -245,7 +246,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
@@ -275,7 +275,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public IFigure getContentPane() {
 		if (contentPane != null) {
 			return contentPane;
@@ -286,9 +285,64 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
+	protected void setForegroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setForegroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setBackgroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setBackgroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineWidth(int width) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineWidth(getMapMode().DPtoLP(width));
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineType(int style) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineStyle(style);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(EcoreVisualIDRegistry.getType(EPackageNameEditPart.VISUAL_ID));
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMARelTypesOnTarget() {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		types.add(EcoreElementTypes.EAnnotationReferences_3001);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMATypesForSource(IElementType relationshipType) {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		if (relationshipType == EcoreElementTypes.EAnnotationReferences_3001) {
+			types.add(EcoreElementTypes.EAnnotation_1003);
+		}
+		return types;
 	}
 
 	/**
@@ -335,9 +389,10 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		 */
 		private WrappingLabel fFigurePackageNameLabel;
 
-		private RectangleFigure packageLabelRectangle0;
-
-		// private PackageLabelRectangle packageLabelRectangle0;
+		/**
+		 * @generated
+		 */
+		private RectangleFigure fFigurePackageLabelRectangle;
 
 		/**
 		 * @generated
@@ -365,10 +420,10 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		 */
 		private void createContents() {
 
-			packageLabelRectangle0 = new PackageLabelRectangle();
-			packageLabelRectangle0.setLineWidth(1);
+			fFigurePackageLabelRectangle = new PackageLabelRectangle();
+			fFigurePackageLabelRectangle.setLineWidth(1);
 
-			packageLabelRectangle0.setBorder(new MarginBorder(getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5)));
+			fFigurePackageLabelRectangle.setBorder(new MarginBorder(getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5), getMapMode().DPtoLP(5)));
 
 			GridData constraintPackageLabelRectangle0 = new GridData();
 			constraintPackageLabelRectangle0.verticalAlignment = GridData.BEGINNING;
@@ -378,7 +433,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			constraintPackageLabelRectangle0.verticalSpan = 1;
 			constraintPackageLabelRectangle0.grabExcessHorizontalSpace = false;
 			constraintPackageLabelRectangle0.grabExcessVerticalSpace = false;
-			this.add(packageLabelRectangle0, constraintPackageLabelRectangle0);
+			this.add(fFigurePackageLabelRectangle, constraintPackageLabelRectangle0);
 
 			ToolbarLayout layoutPackageLabelRectangle0 = new ToolbarLayout();
 			layoutPackageLabelRectangle0.setStretchMinorAxis(false);
@@ -387,12 +442,12 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 			layoutPackageLabelRectangle0.setSpacing(5);
 			layoutPackageLabelRectangle0.setVertical(true);
 
-			packageLabelRectangle0.setLayoutManager(layoutPackageLabelRectangle0);
+			fFigurePackageLabelRectangle.setLayoutManager(layoutPackageLabelRectangle0);
 
 			fFigurePackageNameLabel = new WrappingLabel();
 			fFigurePackageNameLabel.setText("<..>"); //$NON-NLS-1$
 
-			packageLabelRectangle0.add(fFigurePackageNameLabel);
+			fFigurePackageLabelRectangle.add(fFigurePackageNameLabel);
 
 			fFigureFromLabel = new WrappingLabel();
 			fFigureFromLabel.setAlignment(PositionConstants.TOP);
@@ -438,7 +493,6 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		@Override
 		protected boolean useLocalCoordinates() {
 			return myUseLocalCoordinates;
 		}
@@ -467,8 +521,8 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		public RectangleFigure getFigurePackageNameRectangle() {
-			return packageLabelRectangle0;
+		public RectangleFigure getFigurePackageLabelRectangle() {
+			return fFigurePackageLabelRectangle;
 		}
 
 		// @Override
@@ -484,7 +538,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 		// }
 
 		public void addFromLabel() {
-			packageLabelRectangle0.add(getFigureFromLabel(), 1);
+			fFigurePackageLabelRectangle.add(getFigureFromLabel(), 1);
 			canRemovedFromLabel = true;
 		}
 
@@ -494,7 +548,7 @@ public class EPackage2EditPart extends ShapeNodeEditPart {
 
 		public void removeFromLabel() {
 			if (canRemovedFromLabel) {
-				packageLabelRectangle0.remove(getFigureFromLabel());
+				fFigurePackageLabelRectangle.remove(getFigureFromLabel());
 				canRemovedFromLabel = false;
 			}
 		}

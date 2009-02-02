@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ValidateAction.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: ValidateAction.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -29,14 +29,14 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreMarkerNavigationProvider;
-import org.eclipse.emf.ecoretools.diagram.providers.EcoreValidationProvider;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IConstraintStatus;
 import org.eclipse.emf.validation.service.IBatchValidator;
 import org.eclipse.emf.validation.service.ModelValidationService;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
-import org.eclipse.gmf.runtime.common.ui.util.IWorkbenchPartDescriptor;
 import org.eclipse.gmf.runtime.diagram.ui.OffscreenEditPartFactory;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramWorkbenchPart;
@@ -45,6 +45,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
@@ -54,34 +55,29 @@ import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
  */
 public class ValidateAction extends Action {
 
-	/**
-	 * @generated
-	 */
-	public static final String VALIDATE_ACTION_KEY = "validateAction"; //$NON-NLS-1$
+	public static final String ID = "validateAction";
 
 	/**
 	 * @generated
 	 */
-	private IWorkbenchPartDescriptor workbenchPartDescriptor;
+	private IWorkbenchPage page;
 
 	/**
 	 * @generated NOT
 	 */
-	public ValidateAction(IWorkbenchPartDescriptor workbenchPartDescriptor) {
-		setId(VALIDATE_ACTION_KEY);
-		setText(org.eclipse.emf.ecoretools.diagram.part.Messages.ValidateActionMessage);
+	public ValidateAction(IWorkbenchPage page) {
+		setText(Messages.ValidateActionMessage);
 		setImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif")); //$NON-NLS-1$
 		setDisabledImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/dlcl16/validate.gif")); //$NON-NLS-1$
 		setHoverImageDescriptor(EcoreDiagramEditorPlugin.getBundledImageDescriptor("icons/elcl16/validate.gif")); //$NON-NLS-1$
-		this.workbenchPartDescriptor = workbenchPartDescriptor;
+		this.page = page;
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	public void run() {
-		IWorkbenchPart workbenchPart = workbenchPartDescriptor.getPartPage().getActivePart();
+		IWorkbenchPart workbenchPart = page.getActivePart();
 		if (workbenchPart instanceof IDiagramWorkbenchPart) {
 			final IDiagramWorkbenchPart part = (IDiagramWorkbenchPart) workbenchPart;
 			try {
@@ -129,12 +125,8 @@ public class ValidateAction extends Action {
 	public static void runValidation(DiagramEditPart diagramEditPart, View view) {
 		final DiagramEditPart fpart = diagramEditPart;
 		final View fview = view;
-		EcoreValidationProvider.runWithConstraints(view, new Runnable() {
-
-			public void run() {
-				validate(fpart, fview);
-			}
-		});
+		TransactionalEditingDomain txDomain = TransactionUtil.getEditingDomain(view);
+		validate(fpart, fview);
 	}
 
 	/**
@@ -144,7 +136,6 @@ public class ValidateAction extends Action {
 		if (target.isSetElement() && target.getElement() != null) {
 			return new Diagnostician() {
 
-				@Override
 				public String getObjectLabel(EObject eObject) {
 					return EMFCoreUtil.getQualifiedName(eObject, true);
 				}

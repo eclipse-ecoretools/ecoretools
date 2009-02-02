@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassName2ViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EClassName2ViewFactory.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -28,7 +28,6 @@ public class EClassName2ViewFactory extends BasicNodeViewFactory {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;

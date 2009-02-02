@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassESuperTypesEditPart.java,v 1.4 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EClassESuperTypesEditPart.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -46,7 +46,6 @@ public class EClassESuperTypesEditPart extends ConnectionNodeEditPart implements
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EClassESuperTypesItemSemanticEditPolicy());
@@ -60,7 +59,6 @@ public class EClassESuperTypesEditPart extends ConnectionNodeEditPart implements
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Connection createConnectionFigure() {
 		return new SolidLineWDstClosedArrow();
 	}
@@ -90,6 +88,7 @@ public class EClassESuperTypesEditPart extends ConnectionNodeEditPart implements
 		 */
 		private RotatableDecoration createTargetDecoration() {
 			PolygonDecoration df = new PolygonDecoration();
+			df.setFill(true);
 			df.setBackgroundColor(ColorConstants.white);
 			PointList pl = new PointList();
 			pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));

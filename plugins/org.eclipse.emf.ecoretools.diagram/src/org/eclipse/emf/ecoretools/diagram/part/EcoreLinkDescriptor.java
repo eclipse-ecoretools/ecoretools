@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreLinkDescriptor.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreLinkDescriptor.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -73,7 +73,6 @@ public class EcoreLinkDescriptor extends EcoreNodeDescriptor {
 		final IElementType elementTypeCopy = elementType;
 		mySemanticAdapter = new EObjectAdapter(linkElement) {
 
-			@Override
 			public Object getAdapter(Class adapter) {
 				if (IElementType.class.equals(adapter)) {
 					return elementTypeCopy;

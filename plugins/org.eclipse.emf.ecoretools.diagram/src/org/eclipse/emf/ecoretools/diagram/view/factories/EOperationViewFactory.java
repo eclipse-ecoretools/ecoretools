@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EOperationViewFactory.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EOperationViewFactory.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -31,7 +31,6 @@ public class EOperationViewFactory extends AbstractLabelViewFactory {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;
@@ -40,7 +39,6 @@ public class EOperationViewFactory extends AbstractLabelViewFactory {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void decorateView(View containerView, View view, IAdaptable semanticAdapter, String semanticHint, int index, boolean persisted) {
 		if (semanticHint == null) {
 			semanticHint = EcoreVisualIDRegistry.getType(EOperationEditPart.VISUAL_ID);

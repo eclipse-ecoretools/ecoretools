@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreSheetLabelProvider.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreSheetLabelProvider.java,v 1.3 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.sheet;
@@ -17,43 +17,47 @@ package org.eclipse.emf.ecoretools.diagram.sheet;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorGroup;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
+import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.gef.EditPart;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.viewers.DecoratingLabelProvider;
+import org.eclipse.jface.viewers.BaseLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.graphics.Image;
 
 /**
  * @generated
  */
-public class EcoreSheetLabelProvider extends DecoratingLabelProvider {
+public class EcoreSheetLabelProvider extends BaseLabelProvider implements ILabelProvider {
+
+	// Provide a LabelProvider that could be used when selection is made from
+	// outline view
+	private static final ILabelProvider labelProvider = new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory());
 
 	/**
 	 * @generated
 	 */
-	public EcoreSheetLabelProvider() {
-		super(new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory()), null);
-	}
-
-	/**
-	 * @generated
-	 */
-	@Override
 	public String getText(Object element) {
-		Object selected = unwrap(element);
-		if (selected instanceof EcoreNavigatorGroup) {
-			return ((EcoreNavigatorGroup) selected).getGroupName();
+		element = unwrap(element);
+		if (element instanceof EcoreNavigatorGroup) {
+			return ((EcoreNavigatorGroup) element).getGroupName();
 		}
-		return super.getText(selected);
+		IElementType etype = getElementType(getView(element));
+		// Instead of returning null, use the LabelProvider to retrieve the
+		// associated text
+		return etype == null ? labelProvider.getText(element) : etype.getDisplayName();
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	public Image getImage(Object element) {
-		return super.getImage(unwrap(element));
+		IElementType etype = getElementType(getView(unwrap(element)));
+		// Instead of returning null, use the LabelProvider to retrieve the
+		// associated image
+		return etype == null ? labelProvider.getImage(unwrap(element)) : EcoreElementTypes.getImage(etype);
 	}
 
 	/**
@@ -61,16 +65,7 @@ public class EcoreSheetLabelProvider extends DecoratingLabelProvider {
 	 */
 	private Object unwrap(Object element) {
 		if (element instanceof IStructuredSelection) {
-			return unwrap(((IStructuredSelection) element).getFirstElement());
-		}
-		if (element instanceof EditPart) {
-			return unwrapEditPart((EditPart) element);
-		}
-		if (element instanceof IAdaptable) {
-			View view = (View) ((IAdaptable) element).getAdapter(View.class);
-			if (view != null) {
-				return unwrapView(view);
-			}
+			return ((IStructuredSelection) element).getFirstElement();
 		}
 		return element;
 	}
@@ -78,18 +73,30 @@ public class EcoreSheetLabelProvider extends DecoratingLabelProvider {
 	/**
 	 * @generated
 	 */
-	private Object unwrapEditPart(EditPart p) {
-		if (p.getModel() instanceof View) {
-			return unwrapView((View) p.getModel());
+	private View getView(Object element) {
+		if (element instanceof View) {
+			return (View) element;
 		}
-		return p.getModel();
+		if (element instanceof IAdaptable) {
+			return (View) ((IAdaptable) element).getAdapter(View.class);
+		}
+		return null;
 	}
 
 	/**
 	 * @generated
 	 */
-	private Object unwrapView(View view) {
-		return view.getElement() == null ? view : view.getElement();
+	private IElementType getElementType(View view) {
+		// For intermediate views climb up the containment hierarchy to find the
+		// one associated with an element type.
+		while (view != null) {
+			int vid = EcoreVisualIDRegistry.getVisualID(view);
+			IElementType etype = EcoreElementTypes.getElementType(vid);
+			if (etype != null) {
+				return etype;
+			}
+			view = view.eContainer() instanceof View ? (View) view.eContainer() : null;
+		}
+		return null;
 	}
-
 }

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageCanonicalEditPolicy.java,v 1.8 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EPackageCanonicalEditPolicy.java,v 1.9 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -67,7 +67,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
@@ -80,7 +79,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected boolean shouldDeleteView(View view) {
 		return true;
 	}
@@ -88,9 +86,8 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
-		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
+		if (view.getEAnnotation("Shortcut") != null) { //$NON-NLS-1$
 			return EcoreDiagramUpdater.isShortcutOrphaned(view);
 		}
 		int visualID = EcoreVisualIDRegistry.getVisualID(view);
@@ -100,7 +97,9 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		case EAnnotationEditPart.VISUAL_ID:
 		case EDataTypeEditPart.VISUAL_ID:
 		case EEnumEditPart.VISUAL_ID:
-			return !semanticChildren.contains(view.getElement()) || visualID != EcoreVisualIDRegistry.getNodeVisualID((View) getHost().getModel(), view.getElement());
+			if (!semanticChildren.contains(view.getElement())) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -108,7 +107,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected String getDefaultFactoryHint() {
 		return null;
 	}
@@ -116,7 +114,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();
@@ -130,7 +127,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getSemanticConnectionsList() {
 		return Collections.EMPTY_LIST;
 	}
@@ -138,7 +134,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected EObject getSourceElement(EObject relationship) {
 		return null;
 	}
@@ -146,7 +141,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected EObject getTargetElement(EObject relationship) {
 		return null;
 	}
@@ -154,7 +148,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected boolean shouldIncludeConnection(Edge connector, Collection children) {
 		return false;
 	}
@@ -162,7 +155,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void refreshSemantic() {
 		deleteOrphanedViews();
 		List createdConnectionViews = new LinkedList();
@@ -222,12 +214,12 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 			EObject diagramLinkObject = nextDiagramLink.getElement();
 			EObject diagramLinkSrc = nextDiagramLink.getSource().getElement();
 			EObject diagramLinkDst = nextDiagramLink.getTarget().getElement();
-			for (Iterator LinkDescriptorsIterator = linkDescriptors.iterator(); LinkDescriptorsIterator.hasNext();) {
-				EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) LinkDescriptorsIterator.next();
+			for (Iterator linkDescriptorsIterator = linkDescriptors.iterator(); linkDescriptorsIterator.hasNext();) {
+				EcoreLinkDescriptor nextLinkDescriptor = (EcoreLinkDescriptor) linkDescriptorsIterator.next();
 				if (diagramLinkObject == nextLinkDescriptor.getModelElement() && diagramLinkSrc == nextLinkDescriptor.getSource() && diagramLinkDst == nextLinkDescriptor.getDestination()
 						&& diagramLinkVisualID == nextLinkDescriptor.getVisualID()) {
 					linksIterator.remove();
-					LinkDescriptorsIterator.remove();
+					linkDescriptorsIterator.remove();
 				}
 			}
 		}
@@ -389,9 +381,6 @@ public class EPackageCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 		return null;
 	}
 
-	/**
-	 * @generated NOT
-	 */
 	@Override
 	public boolean understandsRequest(Request req) {
 		return RequestConstants.REQ_CREATE.equals(req.getType());

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassName2EditPart.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EClassName2EditPart.java,v 1.6 2009/02/02 08:39:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
@@ -28,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
+import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
 import org.eclipse.emf.transaction.RunnableWithResult;
@@ -37,6 +37,7 @@ import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
+import org.eclipse.gef.handles.MoveHandle;
 import org.eclipse.gef.handles.NonResizableHandleKit;
 import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gef.tools.DirectEditManager;
@@ -44,7 +45,6 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.common.ui.services.parser.ParserService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
@@ -106,25 +106,23 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new EcoreTextSelectionEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new LabelDirectEditPolicy());
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicy() {
 
-			@Override
 			protected List createSelectionHandles() {
 				List handles = new ArrayList();
 				NonResizableHandleKit.addMoveHandle((GraphicalEditPart) getHost(), handles);
+				((MoveHandle) handles.get(0)).setBorder(null);
 				return handles;
 			}
 
-			@Override
 			public Command getCommand(Request request) {
 				return null;
 			}
 
-			@Override
 			public boolean understandsRequest(Request request) {
 				return false;
 			}
@@ -189,7 +187,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -197,7 +194,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -248,6 +244,10 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -319,9 +319,8 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	 */
 	public IParser getParser() {
 		if (parser == null) {
-			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new EcoreParserProvider.HintAdapter(EcoreElementTypes.EClass_2003, getParserElement(), parserHint);
-			parser = ParserService.getInstance().getParser(hintAdapter);
+			parser = EcoreParserProvider.getParser(EcoreElementTypes.EClass_2003, getParserElement(), EcoreVisualIDRegistry
+					.getType(org.eclipse.emf.ecoretools.diagram.edit.parts.EClassName2EditPart.VISUAL_ID));
 		}
 		return parser;
 	}
@@ -373,7 +372,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -401,7 +399,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -420,6 +417,10 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -446,7 +447,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -458,7 +458,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -466,7 +465,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -482,7 +480,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -496,12 +493,10 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
-				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -520,7 +515,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -529,7 +523,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
@@ -538,7 +531,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -572,7 +564,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure createFigure() {
 		// Parent should assign one using setLabel() method
 		return null;
@@ -581,7 +572,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart#notifyChanged(org.eclipse.emf.common.notify.Notification)
 	 */
-	@Override
 	public void notifyChanged(Notification notification) {
 
 		if (notification.getNotifier() instanceof EClass)
@@ -599,7 +589,6 @@ public class EClassName2EditPart extends CompartmentEditPart implements ITextAwa
 	/**
 	 * @see org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart#setFont(org.eclipse.swt.graphics.FontData)
 	 */
-	@Override
 	protected void setFont(FontData fontData) {
 		// Enforce the Font Style as italic when the EClass is abstract
 		EObject semanticElement = resolveSemanticElement();

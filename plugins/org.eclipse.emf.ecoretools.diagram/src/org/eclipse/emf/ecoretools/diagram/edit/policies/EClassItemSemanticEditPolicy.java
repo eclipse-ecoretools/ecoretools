@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassItemSemanticEditPolicy.java,v 1.4 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EClassItemSemanticEditPolicy.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -49,9 +49,15 @@ import org.eclipse.gmf.runtime.notation.View;
 public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolicy {
 
 	/**
+	 * @generated
+	 */
+	public EClassItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EClass_1001);
+	}
+
+	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		CompoundCommand cc = getDestroyEdgesCommand();
 		addDestroyChildNodesCommand(cc);
@@ -110,7 +116,6 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Command getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		Command command = req.getTarget() == null ? getStartCreateRelationshipCommand(req) : getCompleteCreateRelationshipCommand(req);
 		return command != null ? command : super.getCreateRelationshipCommand(req);
@@ -154,7 +159,6 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Command getReorientRelationshipCommand(ReorientRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case EReferenceEditPart.VISUAL_ID:
@@ -169,7 +173,6 @@ public class EClassItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolic
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Command getReorientReferenceRelationshipCommand(ReorientReferenceRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case EAnnotationReferencesEditPart.VISUAL_ID:

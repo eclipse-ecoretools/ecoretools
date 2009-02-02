@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditorPlugin.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDiagramEditorPlugin.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -74,7 +74,6 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		instance = this;
@@ -85,7 +84,6 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 	/**
 	 * @generated
 	 */
-	@Override
 	public void stop(BundleContext context) throws Exception {
 		adapterFactory.dispose();
 		adapterFactory = null;
@@ -170,15 +168,6 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns string from plug-in's resource bundle
-	 * 
-	 * @generated
-	 */
-	public static String getString(String key) {
-		return Platform.getResourceString(getInstance().getBundle(), "%" + key); //$NON-NLS-1$
-	}
-
-	/**
 	 * Returns an image for the image file at the given plug-in relative path.
 	 * Client do not need to dispose this image. Images will be disposed
 	 * automatically.
@@ -195,6 +184,15 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 			image = getImageRegistry().get(path);
 		}
 		return image;
+	}
+
+	/**
+	 * Returns string from plug-in's resource bundle
+	 * 
+	 * @generated
+	 */
+	public static String getString(String key) {
+		return Platform.getResourceString(getInstance().getBundle(), "%" + key); //$NON-NLS-1$
 	}
 
 	/**
@@ -215,8 +213,6 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * @param throwable
-	 *            actual error or null could be passed
 	 * @generated
 	 */
 	public void logError(String error, Throwable throwable) {
@@ -235,8 +231,6 @@ public class EcoreDiagramEditorPlugin extends AbstractUIPlugin {
 	}
 
 	/**
-	 * @param throwable
-	 *            actual error or null could be passed
 	 * @generated
 	 */
 	public void logInfo(String message, Throwable throwable) {

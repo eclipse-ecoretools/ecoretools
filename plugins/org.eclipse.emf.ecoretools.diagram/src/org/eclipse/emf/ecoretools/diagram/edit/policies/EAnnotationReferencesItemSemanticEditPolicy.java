@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationReferencesItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EAnnotationReferencesItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyReferenceCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyReferenceRequest;
@@ -26,7 +27,13 @@ public class EAnnotationReferencesItemSemanticEditPolicy extends EcoreBaseItemSe
 	/**
 	 * @generated
 	 */
-	@Override
+	public EAnnotationReferencesItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EAnnotationReferences_3001);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getDestroyReferenceCommand(DestroyReferenceRequest req) {
 		return getGEFWrapper(new DestroyReferenceCommand(req));
 	}

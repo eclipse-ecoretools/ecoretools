@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiterals2EditPart.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EEnumLiterals2EditPart.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -48,7 +48,6 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected boolean hasModelChildrenChanged(Notification evt) {
 		return false;
 	}
@@ -56,7 +55,6 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public String getCompartmentName() {
 		return Messages.EEnumLiterals2EditPart_title;
 	}
@@ -64,7 +62,6 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public IFigure createFigure() {
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super.createFigure();
 		result.setTitleVisibility(false);
@@ -74,7 +71,6 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableCompartmentEditPolicy());
@@ -87,7 +83,6 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setRatio(Double ratio) {
 		// nothing to do -- parent layout does not accept Double constraints as
 		// ratio

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreReorientConnectionViewCommand.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EcoreReorientConnectionViewCommand.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -44,7 +44,6 @@ public class EcoreReorientConnectionViewCommand extends AbstractTransactionalCom
 	/**
 	 * @generated
 	 */
-	@Override
 	public List getAffectedFiles() {
 		View view = (View) edgeAdaptor.getAdapter(View.class);
 		if (view != null) {
@@ -70,7 +69,6 @@ public class EcoreReorientConnectionViewCommand extends AbstractTransactionalCom
 	/**
 	 * @generated
 	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) {
 		assert null != edgeAdaptor : "Null child in EcoreReorientConnectionViewCommand"; //$NON-NLS-1$
 		Edge edge = (Edge) getEdgeAdaptor().getAdapter(Edge.class);

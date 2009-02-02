@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramUpdater.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreDiagramUpdater.java,v 1.4 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -624,22 +624,14 @@ public class EcoreDiagramUpdater {
 	 * @generated
 	 */
 	public static List getEAttribute_2001IncomingLinks(View view) {
-		EAttribute modelElement = (EAttribute) view.getElement();
-		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource().getResourceSet().getResources());
-		List result = new LinkedList();
-		result.addAll(getIncomingFeatureModelFacetLinks_EAnnotation_References_3001(modelElement, crossReferences));
-		return result;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
 	 * @generated
 	 */
 	public static List getEOperation_2002IncomingLinks(View view) {
-		EOperation modelElement = (EOperation) view.getElement();
-		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource().getResourceSet().getResources());
-		List result = new LinkedList();
-		result.addAll(getIncomingFeatureModelFacetLinks_EAnnotation_References_3001(modelElement, crossReferences));
-		return result;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -683,11 +675,7 @@ public class EcoreDiagramUpdater {
 	 * @generated
 	 */
 	public static List getEEnumLiteral_2006IncomingLinks(View view) {
-		EEnumLiteral modelElement = (EEnumLiteral) view.getElement();
-		Map crossReferences = EcoreUtil.CrossReferencer.find(view.eResource().getResourceSet().getResources());
-		List result = new LinkedList();
-		result.addAll(getIncomingFeatureModelFacetLinks_EAnnotation_References_3001(modelElement, crossReferences));
-		return result;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -816,7 +804,7 @@ public class EcoreDiagramUpdater {
 	private static Collection getContainedTypeModelFacetLinks_EReference_3002(EClass container) {
 		Collection result = new LinkedList();
 		for (Iterator links = container.getEStructuralFeatures().iterator(); links.hasNext();) {
-			Object linkObject = links.next();
+			EObject linkObject = (EObject) links.next();
 			if (false == linkObject instanceof EReference) {
 				continue;
 			}

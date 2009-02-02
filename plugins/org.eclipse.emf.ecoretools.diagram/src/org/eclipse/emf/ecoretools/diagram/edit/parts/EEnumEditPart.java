@@ -9,13 +9,17 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumEditPart.java,v 1.9 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EEnumEditPart.java,v 1.10 2009/02/02 08:39:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -50,6 +54,7 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 
 /**
  * @generated
@@ -81,7 +86,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy() {
 
@@ -117,7 +121,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 
 		ConstrainedToolbarLayoutEditPolicy lep = new ConstrainedToolbarLayoutEditPolicy() {
 
-			@Override
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				if (child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE) == null) {
 					if (child instanceof ITextAwareEditPart) {
@@ -161,14 +164,15 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-
+		if (childEditPart instanceof EEnumNameEditPart) {
+			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (addFixedChild(childEditPart)) {
 			return;
@@ -179,7 +183,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (removeFixedChild(childEditPart)) {
 			return;
@@ -190,10 +193,8 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-
-		return super.getContentPaneFor(editPart);
+		return getContentPane();
 	}
 
 	/**
@@ -215,7 +216,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
@@ -245,7 +245,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public IFigure getContentPane() {
 		if (contentPane != null) {
 			return contentPane;
@@ -256,7 +255,42 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
+	protected void setForegroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setForegroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setBackgroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setBackgroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineWidth(int width) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineWidth(getMapMode().DPtoLP(width));
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineType(int style) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineStyle(style);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(EcoreVisualIDRegistry.getType(EEnumNameEditPart.VISUAL_ID));
 	}
@@ -264,7 +298,47 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMARelTypesOnTarget() {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		types.add(EcoreElementTypes.EAnnotationReferences_3001);
+		types.add(EcoreElementTypes.EReference_3002);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMATypesForSource(IElementType relationshipType) {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		if (relationshipType == EcoreElementTypes.EAnnotationReferences_3001) {
+			types.add(EcoreElementTypes.EAnnotation_1003);
+		}
+		if (relationshipType == EcoreElementTypes.EReference_3002) {
+			types.add(EcoreElementTypes.EClass_1001);
+		}
+		if (relationshipType == EcoreElementTypes.EReference_3002) {
+			types.add(EcoreElementTypes.EClass_2003);
+		}
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public EditPart getTargetEditPart(Request request) {
+		if (request instanceof CreateViewAndElementRequest) {
+			CreateElementRequestAdapter adapter = ((CreateViewAndElementRequest) request).getViewAndElementDescriptor().getCreateElementRequestAdapter();
+			IElementType type = (IElementType) adapter.getAdapter(IElementType.class);
+			if (type == EcoreElementTypes.EEnumLiteral_2006) {
+				return getChildBySemanticHint(EcoreVisualIDRegistry.getType(EEnumLiterals2EditPart.VISUAL_ID));
+			}
+		}
+		return super.getTargetEditPart(request);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected void handleNotificationEvent(Notification event) {
 		if (event.getNotifier() == getModel() && EcorePackage.eINSTANCE.getEModelElement_EAnnotations().equals(event.getFeature())) {
 			handleMajorSemanticChange();
@@ -352,7 +426,6 @@ public class EEnumEditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		@Override
 		protected boolean useLocalCoordinates() {
 			return myUseLocalCoordinates;
 		}

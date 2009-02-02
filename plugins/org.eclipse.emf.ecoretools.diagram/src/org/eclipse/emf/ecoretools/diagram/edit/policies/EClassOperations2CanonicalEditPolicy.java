@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassOperations2CanonicalEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EClassOperations2CanonicalEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -42,7 +42,6 @@ public class EClassOperations2CanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
@@ -55,12 +54,13 @@ public class EClassOperations2CanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		int visualID = EcoreVisualIDRegistry.getVisualID(view);
 		switch (visualID) {
 		case EOperationEditPart.VISUAL_ID:
-			return !semanticChildren.contains(view.getElement()) || visualID != EcoreVisualIDRegistry.getNodeVisualID((View) getHost().getModel(), view.getElement());
+			if (!semanticChildren.contains(view.getElement())) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -68,7 +68,6 @@ public class EClassOperations2CanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected String getDefaultFactoryHint() {
 		return null;
 	}
@@ -76,7 +75,6 @@ public class EClassOperations2CanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();

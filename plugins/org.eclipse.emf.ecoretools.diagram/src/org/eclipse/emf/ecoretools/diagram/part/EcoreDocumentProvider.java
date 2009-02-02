@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDocumentProvider.java,v 1.13 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EcoreDocumentProvider.java,v 1.14 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -78,7 +78,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	 * 
 	 * @generated NOT
 	 */
-	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
 			throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, 0, NLS.bind(Messages.EcoreDocumentProvider_IncorrectInputError, new Object[] { element,
@@ -103,7 +102,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		if (false == element instanceof FileEditorInput && false == element instanceof URIEditorInput) {
 			throw new CoreException(new Status(IStatus.ERROR, EcoreDiagramEditorPlugin.ID, 0, NLS.bind(Messages.EcoreDocumentProvider_IncorrectInputError, new Object[] { element,
@@ -157,7 +155,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IDocument createEmptyDocument() {
 		DiagramDocument document = new DiagramDocument();
 		document.setEditingDomain(createEditingDomain());
@@ -275,7 +272,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	public long getModificationStamp(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -287,7 +283,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean isDeleted(Object element) {
 		IDiagramDocument document = getDiagramDocument(element);
 		if (document != null) {
@@ -310,7 +305,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void disposeElementInfo(Object element, ElementInfo info) {
 		if (info instanceof ResourceSetInfo) {
 			ResourceSetInfo resourceSetInfo = (ResourceSetInfo) info;
@@ -322,12 +316,11 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void doValidateState(Object element, Object computationContext) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
 			Collection files2Validate = new ArrayList();
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				IFile file = WorkspaceSynchronizer.getFile(nextResource);
 				if (file != null && file.isReadOnly()) {
@@ -343,7 +336,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean isReadOnly(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -364,7 +356,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean isModifiable(Object element) {
 		if (!isStateValidated(element)) {
 			if (element instanceof FileEditorInput || element instanceof URIEditorInput) {
@@ -393,7 +384,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	protected void updateCache(Object element) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				IFile file = WorkspaceSynchronizer.getFile(nextResource);
 				if (file != null && file.isReadOnly()) {
@@ -411,7 +402,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void doUpdateStateCache(Object element) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -423,7 +413,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean isSynchronized(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -435,12 +424,11 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected ISchedulingRule getResetRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
 			Collection rules = new ArrayList();
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				IFile file = WorkspaceSynchronizer.getFile(nextResource);
 				if (file != null) {
@@ -455,7 +443,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected ISchedulingRule getSaveRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -475,12 +462,11 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected ISchedulingRule getSynchronizeRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
 			Collection rules = new ArrayList();
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				IFile file = WorkspaceSynchronizer.getFile(nextResource);
 				if (file != null) {
@@ -495,12 +481,11 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected ISchedulingRule getValidateStateRule(Object element) {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
 			Collection files = new ArrayList();
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				IFile file = WorkspaceSynchronizer.getFile(nextResource);
 				if (file != null) {
@@ -537,11 +522,10 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void doSynchronize(Object element, IProgressMonitor monitor) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
-			for (Iterator it = info.getResourceSet().getResources().iterator(); it.hasNext();) {
+			for (Iterator it = info.getLoadedResourcesIterator(); it.hasNext();) {
 				Resource nextResource = (Resource) it.next();
 				handleElementChanged(info, nextResource, monitor);
 			}
@@ -553,7 +537,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
 		ResourceSetInfo info = getResourceSetInfo(element);
 		if (info != null) {
@@ -630,7 +613,6 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 			try {
 				new AbstractTransactionalCommand(diagramDocument.getEditingDomain(), NLS.bind(Messages.EcoreDocumentProvider_SaveAsOperation, diagramCopy.getName()), affectedFiles) {
 
-					@Override
 					protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 						newResource.getContents().add(diagramCopy);
 						return CommandResult.newOKCommandResult();
@@ -701,15 +683,14 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IRunnableContext getOperationRunner(IProgressMonitor monitor) {
 		return null;
 	}
 
 	/**
-	 * @generated NOT
+	 * Remove inside the workspace synchronizer
 	 * 
-	 *            Remove inside the workspace synchronizer
+	 * @generated NOT
 	 */
 	protected class ResourceSetInfo extends ElementInfo {
 
@@ -790,6 +771,13 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 		 */
 		public ResourceSet getResourceSet() {
 			return getEditingDomain().getResourceSet();
+		}
+
+		/**
+		 * @generated
+		 */
+		public Iterator<org.eclipse.emf.ecore.resource.Resource> getLoadedResourcesIterator() {
+			return new ArrayList<org.eclipse.emf.ecore.resource.Resource>(getResourceSet().getResources()).iterator();
 		}
 
 		/**

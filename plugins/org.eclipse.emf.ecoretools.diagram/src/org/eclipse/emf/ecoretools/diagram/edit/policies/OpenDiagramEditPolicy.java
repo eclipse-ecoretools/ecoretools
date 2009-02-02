@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: OpenDiagramEditPolicy.java,v 1.11 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: OpenDiagramEditPolicy.java,v 1.12 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -275,19 +275,32 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 			return diagram;
 		}
 
-		private EObject getDiagramDomainElement() {
+		/**
+		 * @generated
+		 */
+		protected EObject getDiagramDomainElement() {
 			return domainElement;
 		}
 
-		private PreferencesHint getPreferencesHint() {
+		/**
+		 * @generated
+		 */
+		protected PreferencesHint getPreferencesHint() {
+			// XXX prefhint from target diagram's editor?
 			return EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT;
 		}
 
-		private String getDiagramKind() {
+		/**
+		 * @generated
+		 */
+		protected String getDiagramKind() {
 			return EPackageEditPart.MODEL_ID;
 		}
 
-		private String getEditorID() {
+		/**
+		 * @generated
+		 */
+		protected String getEditorID() {
 			return EcoreDiagramEditor.ID;
 		}
 

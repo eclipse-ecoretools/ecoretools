@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.5 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: Messages.java,v 1.6 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -142,22 +142,22 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String EcoreInitDiagramFileAction_InitDiagramFileResourceErrorDialogTitle;
+	public static String InitDiagramFile_ResourceErrorDialogTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String EcoreInitDiagramFileAction_InitDiagramFileResourceErrorDialogMessage;
+	public static String InitDiagramFile_ResourceErrorDialogMessage;
 
 	/**
 	 * @generated
 	 */
-	public static String EcoreInitDiagramFileAction_InitDiagramFileWizardTitle;
+	public static String InitDiagramFile_WizardTitle;
 
 	/**
 	 * @generated
 	 */
-	public static String EcoreInitDiagramFileAction_OpenModelFileDialogTitle;
+	public static String InitDiagramFile_OpenModelFileDialogTitle;
 
 	/**
 	 * @generated
@@ -552,17 +552,17 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_UnexpectedValueTypeMessage;
+	public static String AbstractParser_UnexpectedValueType;
 
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_WrongStringConversionMessage;
+	public static String AbstractParser_WrongStringConversion;
 
 	/**
 	 * @generated
 	 */
-	public static String AbstractParser_UnknownLiteralMessage;
+	public static String AbstractParser_UnknownLiteral;
 
 	/**
 	 * @generated

@@ -9,12 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageContentsItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EPackageContentsItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EClass2CreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EDataType2CreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EEnum2CreateCommand;
@@ -30,24 +29,21 @@ public class EPackageContentsItemSemanticEditPolicy extends EcoreBaseItemSemanti
 	/**
 	 * @generated
 	 */
-	@Override
+	public EPackageContentsItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EPackage_1002);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EClass_2003 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EClass2CreateCommand(req));
 		}
 		if (EcoreElementTypes.EDataType_2004 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EDataType2CreateCommand(req));
 		}
 		if (EcoreElementTypes.EEnum_2005 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EEnum2CreateCommand(req));
 		}
 		return super.getCreateCommand(req);

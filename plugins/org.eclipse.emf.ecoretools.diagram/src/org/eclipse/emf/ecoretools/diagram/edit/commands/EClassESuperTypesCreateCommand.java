@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassESuperTypesCreateCommand.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EClassESuperTypesCreateCommand.java,v 1.4 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -51,20 +51,19 @@ public class EClassESuperTypesCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean canExecute() {
 		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null && !(source instanceof EClass)) {
+		if (source != null && false == source instanceof EClass) {
 			return false;
 		}
-		if (target != null && !(target instanceof EClass)) {
+		if (target != null && false == target instanceof EClass) {
 			return false;
 		}
 		if (getSource() == null) {
-			return true; // link creation is in progress; source is not
-			// defined yet
+			return true; // link creation is in progress; source is not defined
+			// yet
 		}
 		// target may be null here but it's possible to check constraint
 		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEClassESuperTypes_3003(getSource(), getTarget());
@@ -73,15 +72,23 @@ public class EClassESuperTypesCreateCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
+
 		if (getSource() != null && getTarget() != null) {
 			getSource().getESuperTypes().add(getTarget());
 		}
 		return CommandResult.newOKCommandResult();
+
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setElementToEdit(EObject element) {
+		throw new UnsupportedOperationException();
 	}
 
 	/**

@@ -9,12 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassOperations2ItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EClassOperations2ItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EOperationCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
@@ -28,12 +27,15 @@ public class EClassOperations2ItemSemanticEditPolicy extends EcoreBaseItemSemant
 	/**
 	 * @generated
 	 */
-	@Override
+	public EClassOperations2ItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EClass_2003);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EOperation_2002 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEClass_EOperations());
-			}
 			return getGEFWrapper(new EOperationCreateCommand(req));
 		}
 		return super.getCreateCommand(req);

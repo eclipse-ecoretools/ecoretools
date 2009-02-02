@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassESuperTypesReorientCommand.java,v 1.3 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EClassESuperTypesReorientCommand.java,v 1.4 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -64,9 +64,8 @@ public class EClassESuperTypesReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean canExecute() {
-		if (!(referenceOwner instanceof EClass)) {
+		if (false == referenceOwner instanceof EClass) {
 			return false;
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {
@@ -101,7 +100,6 @@ public class EClassESuperTypesReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in reorient link command"); //$NON-NLS-1$

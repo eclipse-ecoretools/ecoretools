@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageContentsCanonicalEditPolicy.java,v 1.4 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EPackageContentsCanonicalEditPolicy.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -45,7 +45,6 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getSemanticChildrenList() {
 		View viewObject = (View) getHost().getModel();
 		List result = new LinkedList();
@@ -58,7 +57,6 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected boolean isOrphaned(Collection semanticChildren, final View view) {
 		if (view.getEAnnotation("Shortcut") != null) {//$NON-NLS-1$
 			return EcoreDiagramUpdater.isShortcutOrphaned(view);
@@ -76,7 +74,6 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected String getDefaultFactoryHint() {
 		return null;
 	}
@@ -84,7 +81,6 @@ public class EPackageContentsCanonicalEditPolicy extends CanonicalEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Set getFeaturesToSynchronize() {
 		if (myFeaturesToSynchronize == null) {
 			myFeaturesToSynchronize = new HashSet();

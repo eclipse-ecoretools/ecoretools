@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataTypeItemSemanticEditPolicy.java,v 1.3 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EDataTypeItemSemanticEditPolicy.java,v 1.4 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -38,9 +38,15 @@ import org.eclipse.gmf.runtime.notation.View;
 public class EDataTypeItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPolicy {
 
 	/**
+	 * @generated
+	 */
+	public EDataTypeItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EDataType_1004);
+	}
+
+	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		CompoundCommand cc = getDestroyEdgesCommand();
 		addDestroyShortcutsCommand(cc);
@@ -54,7 +60,6 @@ public class EDataTypeItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPo
 				cc.add(getGEFWrapper(new DestroyElementCommand(new DestroyElementRequest(getEditingDomain(), shortcutViewToDelete, false))));
 			}
 		}
-
 		cc.add(getGEFWrapper(new DestroyElementCommand(req)));
 		return cc.unwrap();
 	}
@@ -62,7 +67,6 @@ public class EDataTypeItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPo
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Command getCreateRelationshipCommand(CreateRelationshipRequest req) {
 		Command command = req.getTarget() == null ? getStartCreateRelationshipCommand(req) : getCompleteCreateRelationshipCommand(req);
 		return command != null ? command : super.getCreateRelationshipCommand(req);
@@ -100,7 +104,6 @@ public class EDataTypeItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPo
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Command getReorientRelationshipCommand(ReorientRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case EReferenceEditPart.VISUAL_ID:
@@ -115,7 +118,6 @@ public class EDataTypeItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPo
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected Command getReorientReferenceRelationshipCommand(ReorientReferenceRelationshipRequest req) {
 		switch (getVisualID(req)) {
 		case EAnnotationReferencesEditPart.VISUAL_ID:

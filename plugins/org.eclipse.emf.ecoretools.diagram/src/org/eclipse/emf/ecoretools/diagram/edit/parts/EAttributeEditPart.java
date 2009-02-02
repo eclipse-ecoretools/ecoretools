@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.9 2009/01/29 09:57:44 jlescot Exp $
+ * $Id: EAttributeEditPart.java,v 1.10 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -17,7 +17,6 @@ package org.eclipse.emf.ecoretools.diagram.edit.parts;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
@@ -29,6 +28,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.policies.EAttributeItemSemanticEd
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextNonResizableEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
+import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreParserProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -45,7 +45,6 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserEditStatus;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
-import org.eclipse.gmf.runtime.common.ui.services.parser.ParserService;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
@@ -110,7 +109,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	public DragTracker getDragTracker(Request request) {
 		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3) {
 			return null;
@@ -121,7 +119,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EAttributeItemSemanticEditPolicy());
@@ -188,7 +185,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected List getModelChildren() {
 		return Collections.EMPTY_LIST;
 	}
@@ -196,7 +192,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	public IGraphicalEditPart getChildBySemanticHint(String semanticHint) {
 		return null;
 	}
@@ -244,6 +239,10 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -315,9 +314,8 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	public IParser getParser() {
 		if (parser == null) {
-			String parserHint = ((View) getModel()).getType();
-			IAdaptable hintAdapter = new EcoreParserProvider.HintAdapter(EcoreElementTypes.EAttribute_2001, getParserElement(), parserHint);
-			parser = ParserService.getInstance().getParser(hintAdapter);
+			parser = EcoreParserProvider.getParser(EcoreElementTypes.EAttribute_2001, getParserElement(), EcoreVisualIDRegistry
+					.getType(org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart.VISUAL_ID));
 		}
 		return parser;
 	}
@@ -369,7 +367,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void performDirectEditRequest(Request request) {
 		final Request theRequest = request;
 		try {
@@ -397,7 +394,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 		refreshLabel();
@@ -416,6 +412,10 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 		Object pdEditPolicy = getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 		if (pdEditPolicy instanceof EcoreTextSelectionEditPolicy) {
 			((EcoreTextSelectionEditPolicy) pdEditPolicy).refreshFeedback();
+		}
+		Object sfEditPolicy = getEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE);
+		if (sfEditPolicy instanceof EcoreTextSelectionEditPolicy) {
+			((EcoreTextSelectionEditPolicy) sfEditPolicy).refreshFeedback();
 		}
 	}
 
@@ -442,7 +442,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void refreshFont() {
 		FontStyle style = (FontStyle) getFontStyleOwnerView().getStyle(NotationPackage.eINSTANCE.getFontStyle());
 		if (style != null) {
@@ -454,7 +453,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setFontColor(Color color) {
 		getFigure().setForegroundColor(color);
 	}
@@ -462,7 +460,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addSemanticListeners() {
 		if (getParser() instanceof ISemanticParser) {
 			EObject element = resolveSemanticElement();
@@ -476,9 +473,8 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	}
 
 	/**
-	 * @generated NOT
+	 * @generated
 	 */
-	@Override
 	protected void removeSemanticListeners() {
 		if (parserElements != null) {
 			for (int i = 0; i < parserElements.size(); i++) {
@@ -492,12 +488,10 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected AccessibleEditPart getAccessibleEditPart() {
 		if (accessibleEP == null) {
 			accessibleEP = new AccessibleGraphicalEditPart() {
 
-				@Override
 				public void getName(AccessibleEvent e) {
 					e.result = getLabelTextHelper(getFigure());
 				}
@@ -516,7 +510,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
 		addListenerFilter("PrimaryView", this, getPrimaryView()); //$NON-NLS-1$
@@ -525,7 +518,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("PrimaryView"); //$NON-NLS-1$
@@ -534,7 +526,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void handleNotificationEvent(Notification event) {
 		Object feature = event.getFeature();
 		if (NotationPackage.eINSTANCE.getFontStyle_FontColor().equals(feature)) {
@@ -563,9 +554,8 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 			}
 		}
 
-		Object notifier = event.getNotifier();
-
 		// To handle refresh on EType or Bounds of EAttribute
+		Object notifier = event.getNotifier();
 		if (notifier == resolveSemanticElement()) {
 			switch (event.getFeatureID(EAttribute.class)) {
 			case EcorePackage.EATTRIBUTE__LOWER_BOUND:
@@ -582,7 +572,6 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure createFigure() {
 		IFigure label = createFigurePrim();
 		defaultText = getLabelTextHelper(label);

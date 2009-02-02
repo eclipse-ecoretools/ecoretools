@@ -9,12 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EPackageItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EAnnotationCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EClassCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EDataTypeCreateCommand;
@@ -36,36 +35,27 @@ public class EPackageItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPol
 	/**
 	 * @generated
 	 */
-	@Override
+	public EPackageItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EPackage_79);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EClass_1001 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EClassCreateCommand(req));
 		}
 		if (EcoreElementTypes.EPackage_1002 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_ESubpackages());
-			}
 			return getGEFWrapper(new EPackageCreateCommand(req));
 		}
 		if (EcoreElementTypes.EAnnotation_1003 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEModelElement_EAnnotations());
-			}
 			return getGEFWrapper(new EAnnotationCreateCommand(req));
 		}
 		if (EcoreElementTypes.EDataType_1004 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EDataTypeCreateCommand(req));
 		}
 		if (EcoreElementTypes.EEnum_1005 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEPackage_EClassifiers());
-			}
 			return getGEFWrapper(new EEnumCreateCommand(req));
 		}
 		return super.getCreateCommand(req);
@@ -74,7 +64,6 @@ public class EPackageItemSemanticEditPolicy extends EcoreBaseItemSemanticEditPol
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Command getDuplicateCommand(DuplicateElementsRequest req) {
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
 		return getGEFWrapper(new DuplicateAnythingCommand(editingDomain, req));

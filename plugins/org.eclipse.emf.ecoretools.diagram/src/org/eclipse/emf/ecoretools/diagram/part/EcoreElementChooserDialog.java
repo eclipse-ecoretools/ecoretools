@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreElementChooserDialog.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreElementChooserDialog.java,v 1.3 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -96,7 +96,6 @@ public class EcoreElementChooserDialog extends Dialog {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		getShell().setText(Messages.EcoreElementChooserDialog_SelectModelElementTitle);
@@ -107,7 +106,6 @@ public class EcoreElementChooserDialog extends Dialog {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected Control createButtonBar(Composite parent) {
 		Control buttonBar = super.createButtonBar(parent);
 		setOkButtonEnabled(false);
@@ -155,7 +153,6 @@ public class EcoreElementChooserDialog extends Dialog {
 	/**
 	 * @generated
 	 */
-	@Override
 	public int open() {
 		int result = super.open();
 		for (Iterator it = myEditingDomain.getResourceSet().getResources().iterator(); it.hasNext();) {
@@ -331,7 +328,6 @@ public class EcoreElementChooserDialog extends Dialog {
 		/**
 		 * @generated
 		 */
-		@Override
 		public boolean select(Viewer viewer, Object parentElement, Object element) {
 			if (element instanceof IContainer) {
 				return true;

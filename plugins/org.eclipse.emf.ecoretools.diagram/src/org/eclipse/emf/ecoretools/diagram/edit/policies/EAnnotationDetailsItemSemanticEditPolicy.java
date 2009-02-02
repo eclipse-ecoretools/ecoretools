@@ -9,12 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationDetailsItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EAnnotationDetailsItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EStringToStringMapEntryCreateCommand;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
@@ -28,12 +27,15 @@ public class EAnnotationDetailsItemSemanticEditPolicy extends EcoreBaseItemSeman
 	/**
 	 * @generated
 	 */
-	@Override
+	public EAnnotationDetailsItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EAnnotation_1003);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getCreateCommand(CreateElementRequest req) {
 		if (EcoreElementTypes.EStringToStringMapEntry_2007 == req.getElementType()) {
-			if (req.getContainmentFeature() == null) {
-				req.setContainmentFeature(EcorePackage.eINSTANCE.getEAnnotation_Details());
-			}
 			return getGEFWrapper(new EStringToStringMapEntryCreateCommand(req));
 		}
 		return super.getCreateCommand(req);

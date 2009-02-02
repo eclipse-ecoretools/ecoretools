@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreOCLFactory.java,v 1.2 2008/04/28 08:41:33 jlescot Exp $
+ * $Id: EcoreOCLFactory.java,v 1.3 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.expressions;
@@ -21,9 +21,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.ParserException;
@@ -111,7 +108,6 @@ public class EcoreOCLFactory {
 		/**
 		 * @generated
 		 */
-		@Override
 		protected Object doEvaluate(Object context, Map env) {
 			Query oclQuery = getQuery();
 			if (oclQuery == null) {
@@ -136,20 +132,6 @@ public class EcoreOCLFactory {
 		/**
 		 * @generated
 		 */
-		@Override
-		protected Object performCast(Object value, ETypedElement targetType) {
-			if (targetType.getEType() instanceof EEnum) {
-				if (value instanceof EEnumLiteral) {
-					EEnumLiteral literal = (EEnumLiteral) value;
-					return (literal.getInstance() != null) ? literal.getInstance() : literal;
-				}
-			}
-			return super.performCast(value, targetType);
-		}
-
-		/**
-		 * @generated
-		 */
 		private void initExtentMap(Object context) {
 			if (!getStatus().isOK() || context == null) {
 				return;
@@ -162,7 +144,6 @@ public class EcoreOCLFactory {
 
 					private boolean usesAllInstances = false;
 
-					@Override
 					public Object visitOperationCallExp(OperationCallExp oc) {
 						if (!usesAllInstances) {
 							usesAllInstances = PredefinedType.ALL_INSTANCES == oc.getOperationCode();

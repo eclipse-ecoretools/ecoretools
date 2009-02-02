@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageContentsEditPart.java,v 1.12 2008/08/12 13:24:50 jlescot Exp $
+ * $Id: EPackageContentsEditPart.java,v 1.13 2009/02/02 08:39:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -50,7 +50,6 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public String getCompartmentName() {
 		return Messages.EPackageContentsEditPart_title;
 	}
@@ -58,7 +57,6 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public IFigure createFigure() {
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super.createFigure();
 		result.setTitleVisibility(false);
@@ -68,7 +66,6 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableCompartmentEditPolicy());
@@ -83,7 +80,6 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setRatio(Double ratio) {
 		if (getFigure().getParent().getLayoutManager() instanceof ConstrainedToolbarLayout) {
 			super.setRatio(ratio);

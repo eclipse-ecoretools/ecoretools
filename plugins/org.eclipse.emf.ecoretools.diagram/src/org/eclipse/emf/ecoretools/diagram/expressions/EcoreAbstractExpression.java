@@ -9,27 +9,23 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreAbstractExpression.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreAbstractExpression.java,v 1.4 2009/02/02 08:39:08 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.expressions;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 
 /**
@@ -40,38 +36,7 @@ public abstract class EcoreAbstractExpression {
 	/**
 	 * @generated
 	 */
-	private static final boolean DISABLED_NO_IMPL_EXCEPTION_LOG = Boolean.valueOf(
-			Platform.getDebugOption(EcoreDiagramEditorPlugin.getInstance().getBundle().getSymbolicName() + "/debug/disableNoExprImplExceptionLog")).booleanValue(); //$NON-NLS-1$
-
-	/**
-	 * @generated
-	 */
-	private final String body;
-
-	/**
-	 * @generated
-	 */
-	private final EClassifier context;
-
-	/**
-	 * @generated
-	 */
 	private IStatus status = Status.OK_STATUS;
-
-	/**
-	 * @generated
-	 */
-	protected EcoreAbstractExpression(EClassifier context) {
-		this(null, context);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected EcoreAbstractExpression(String body, EClassifier context) {
-		this.body = body;
-		this.context = context;
-	}
 
 	/**
 	 * @generated
@@ -80,8 +45,47 @@ public abstract class EcoreAbstractExpression {
 		String pluginID = EcoreDiagramEditorPlugin.ID;
 		this.status = new Status(severity, pluginID, -1, (message != null) ? message : "", throwable); //$NON-NLS-1$
 		if (!this.status.isOK()) {
-			EcoreDiagramEditorPlugin.getInstance().logError("Expression problem: " + message + " body: " + body, throwable); //$NON-NLS-1$ //$NON-NLS-2$
+			EcoreDiagramEditorPlugin.getInstance().logError("Expression problem:" + message + "body:" + body(), throwable); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+	}
+
+	/**
+	 * @generated
+	 */
+	public IStatus getStatus() {
+		return status;
+	}
+
+	/**
+	 * @generated
+	 */
+	private final String myBody;
+
+	/**
+	 * @generated
+	 */
+	public String body() {
+		return myBody;
+	}
+
+	/**
+	 * @generated
+	 */
+	private final EClassifier myContext;
+
+	/**
+	 * @generated
+	 */
+	public EClassifier context() {
+		return myContext;
+	}
+
+	/**
+	 * @generated
+	 */
+	protected EcoreAbstractExpression(String body, EClassifier context) {
+		myBody = body;
+		myContext = context;
 	}
 
 	/**
@@ -104,128 +108,58 @@ public abstract class EcoreAbstractExpression {
 			try {
 				return doEvaluate(context, env);
 			} catch (Exception e) {
-				if (DISABLED_NO_IMPL_EXCEPTION_LOG && e instanceof NoImplException) {
-					return null;
-				}
-				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreAbstractExpression_ExpressionEvaluationFailure + body, e);
+				EcoreDiagramEditorPlugin.getInstance().logError("Expression evaluation failure: " + body(), e); //$NON-NLS-1$
 			}
 		}
 		return null;
 	}
 
 	/**
+	 * Expression may return number value which is not directly compatible with
+	 * feature type (e.g. Double when Integer is expected), or EEnumLiteral
+	 * meta-object when literal instance is expected
+	 * 
 	 * @generated
 	 */
-	public IStatus getStatus() {
-		return status;
-	}
-
-	/**
-	 * @generated
-	 */
-	public String body() {
-		return body;
-	}
-
-	/**
-	 * @generated
-	 */
-	public EClassifier context() {
-		return context;
-	}
-
-	/**
-	 * @generated
-	 */
-	public void assignTo(EStructuralFeature feature, EObject target) {
-		Object value = evaluate(target);
-		value = (value != null) ? performCast(value, feature) : null;
-		if (feature.isMany()) {
-			Collection destCollection = (Collection) target.eGet(feature);
-			destCollection.clear();
-			if (value instanceof Collection) {
-				Collection valueCollection = (Collection) value;
-				for (Iterator it = valueCollection.iterator(); it.hasNext();) {
-					destCollection.add(performCast(it.next(), feature));
-				}
-			} else {
-				destCollection.add(value);
+	public static Object performCast(Object value, EDataType targetType) {
+		if (targetType instanceof EEnum) {
+			if (value instanceof EEnumLiteral) {
+				EEnumLiteral literal = (EEnumLiteral) value;
+				return (literal.getInstance() != null) ? literal.getInstance() : literal;
 			}
-			return;
 		}
-		target.eSet(feature, value);
-	}
-
-	/**
-	 * @generated
-	 */
-	protected Object performCast(Object value, ETypedElement targetType) {
-		if (targetType.getEType() == null || targetType.getEType().getInstanceClass() == null) {
+		if (false == value instanceof Number || targetType == null || targetType.getInstanceClass() == null) {
 			return value;
 		}
-		Class targetClass = targetType.getEType().getInstanceClass();
-		if (value != null && value instanceof Number) {
-			Number num = (Number) value;
-			Class valClass = value.getClass();
-			Class targetWrapperClass = targetClass;
-			if (targetClass.isPrimitive()) {
-				targetWrapperClass = EcoreUtil.wrapperClassFor(targetClass);
-			}
-			if (valClass.equals(targetWrapperClass)) {
-				return value;
-			}
-			if (Number.class.isAssignableFrom(targetWrapperClass)) {
-				if (targetWrapperClass.equals(Byte.class))
-					return new Byte(num.byteValue());
-				if (targetWrapperClass.equals(Integer.class))
-					return new Integer(num.intValue());
-				if (targetWrapperClass.equals(Short.class))
-					return new Short(num.shortValue());
-				if (targetWrapperClass.equals(Long.class))
-					return new Long(num.longValue());
-				if (targetWrapperClass.equals(BigInteger.class))
-					return BigInteger.valueOf(num.longValue());
-				if (targetWrapperClass.equals(Float.class))
-					return new Float(num.floatValue());
-				if (targetWrapperClass.equals(Double.class))
-					return new Double(num.doubleValue());
-				if (targetWrapperClass.equals(BigDecimal.class))
-					return new BigDecimal(num.doubleValue());
-			}
+		Class targetClass = targetType.getInstanceClass();
+		Number num = (Number) value;
+		Class valClass = value.getClass();
+		Class targetWrapperClass = targetClass;
+		if (targetClass.isPrimitive()) {
+			targetWrapperClass = EcoreUtil.wrapperClassFor(targetClass);
+		}
+		if (valClass.equals(targetWrapperClass)) {
+			return value;
+		}
+		if (Number.class.isAssignableFrom(targetWrapperClass)) {
+			if (targetWrapperClass.equals(Byte.class))
+				return new Byte(num.byteValue());
+			if (targetWrapperClass.equals(Integer.class))
+				return new Integer(num.intValue());
+			if (targetWrapperClass.equals(Short.class))
+				return new Short(num.shortValue());
+			if (targetWrapperClass.equals(Long.class))
+				return new Long(num.longValue());
+			if (targetWrapperClass.equals(BigInteger.class))
+				return BigInteger.valueOf(num.longValue());
+			if (targetWrapperClass.equals(Float.class))
+				return new Float(num.floatValue());
+			if (targetWrapperClass.equals(Double.class))
+				return new Double(num.doubleValue());
+			if (targetWrapperClass.equals(BigDecimal.class))
+				return new BigDecimal(num.doubleValue());
 		}
 		return value;
 	}
 
-	/**
-	 * @generated
-	 */
-	public static final EcoreAbstractExpression createNullExpression(EClassifier context) {
-		return new EcoreAbstractExpression(context) {
-
-			@Override
-			protected Object doEvaluate(Object context, Map env) {
-				// TODO - log entry about not provider available for this
-				// expression
-				return null;
-			}
-		};
-	}
-
-	/**
-	 * @generated
-	 */
-	public static class NoImplException extends RuntimeException {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
-		/**
-		 * @generated
-		 */
-		public NoImplException(String message) {
-			super(message);
-		}
-	}
 }

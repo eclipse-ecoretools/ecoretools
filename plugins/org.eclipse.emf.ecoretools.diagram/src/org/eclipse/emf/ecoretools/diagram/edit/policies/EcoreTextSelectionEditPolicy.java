@@ -9,13 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreTextSelectionEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EcoreTextSelectionEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.FigureListener;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
@@ -42,7 +43,11 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
+	private FigureListener hostPositionListener;
+
+	/**
+	 * @generated
+	 */
 	protected void showPrimarySelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(true);
@@ -56,7 +61,6 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void showSelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(true);
@@ -64,6 +68,7 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 		} else {
 			hideSelection();
 			addFeedback(selectionFeedbackFigure = createSelectionFeedbackFigure());
+			getHostFigure().addFigureListener(getHostPositionListener());
 			refreshSelectionFeedback();
 			hideFocus();
 		}
@@ -72,7 +77,6 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void hideSelection() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setSelected(false);
@@ -80,6 +84,7 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 		} else {
 			if (selectionFeedbackFigure != null) {
 				removeFeedback(selectionFeedbackFigure);
+				getHostFigure().removeFigureListener(getHostPositionListener());
 				selectionFeedbackFigure = null;
 			}
 			hideFocus();
@@ -89,7 +94,6 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void showFocus() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setFocus(true);
@@ -103,7 +107,6 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void hideFocus() {
 		if (getHostFigure() instanceof WrappingLabel) {
 			((WrappingLabel) getHostFigure()).setFocus(false);
@@ -154,7 +157,6 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	protected IFigure createFocusFeedbackFigure() {
 		return new Figure() {
 
-			@Override
 			protected void paintFigure(Graphics graphics) {
 				graphics.drawFocus(getBounds().getResized(-1, -1));
 			}
@@ -200,5 +202,20 @@ public class EcoreTextSelectionEditPolicy extends SelectionEditPolicy {
 	public void refreshFeedback() {
 		refreshSelectionFeedback();
 		refreshFocusFeedback();
+	}
+
+	/**
+	 * @generated
+	 */
+	private FigureListener getHostPositionListener() {
+		if (hostPositionListener == null) {
+			hostPositionListener = new FigureListener() {
+
+				public void figureMoved(IFigure source) {
+					refreshFeedback();
+				}
+			};
+		}
+		return hostPositionListener;
 	}
 }

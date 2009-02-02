@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreElementTypes.java,v 1.4 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EcoreElementTypes.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -25,6 +25,22 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EAttributeEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClass2EditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassESuperTypesEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EClassEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EDataType2EditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EDataTypeEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EEnum2EditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EEnumEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EEnumLiteralEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EOperationEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackage2EditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceEditPart;
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EStringToStringMapEntryEditPart;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gmf.runtime.emf.type.core.ElementTypeRegistry;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
@@ -310,6 +326,47 @@ public class EcoreElementTypes extends ElementInitializers {
 			KNOWN_ELEMENT_TYPES.add(EClassESuperTypes_3003);
 		}
 		return KNOWN_ELEMENT_TYPES.contains(elementType);
+	}
+
+	/**
+	 * @generated
+	 */
+	public static IElementType getElementType(int visualID) {
+		switch (visualID) {
+		case EPackageEditPart.VISUAL_ID:
+			return EPackage_79;
+		case EClassEditPart.VISUAL_ID:
+			return EClass_1001;
+		case EPackage2EditPart.VISUAL_ID:
+			return EPackage_1002;
+		case EAnnotationEditPart.VISUAL_ID:
+			return EAnnotation_1003;
+		case EDataTypeEditPart.VISUAL_ID:
+			return EDataType_1004;
+		case EEnumEditPart.VISUAL_ID:
+			return EEnum_1005;
+		case EAttributeEditPart.VISUAL_ID:
+			return EAttribute_2001;
+		case EOperationEditPart.VISUAL_ID:
+			return EOperation_2002;
+		case EClass2EditPart.VISUAL_ID:
+			return EClass_2003;
+		case EDataType2EditPart.VISUAL_ID:
+			return EDataType_2004;
+		case EEnum2EditPart.VISUAL_ID:
+			return EEnum_2005;
+		case EEnumLiteralEditPart.VISUAL_ID:
+			return EEnumLiteral_2006;
+		case EStringToStringMapEntryEditPart.VISUAL_ID:
+			return EStringToStringMapEntry_2007;
+		case EAnnotationReferencesEditPart.VISUAL_ID:
+			return EAnnotationReferences_3001;
+		case EReferenceEditPart.VISUAL_ID:
+			return EReference_3002;
+		case EClassESuperTypesEditPart.VISUAL_ID:
+			return EClassESuperTypes_3003;
+		}
+		return null;
 	}
 
 }

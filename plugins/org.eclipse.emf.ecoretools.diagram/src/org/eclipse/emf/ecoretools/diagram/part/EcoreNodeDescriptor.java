@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreNodeDescriptor.java,v 1.2 2008/04/28 08:41:31 jlescot Exp $
+ * $Id: EcoreNodeDescriptor.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -24,17 +24,12 @@ public class EcoreNodeDescriptor {
 	/**
 	 * @generated
 	 */
-	private EObject myModelElement;
+	private final EObject myModelElement;
 
 	/**
 	 * @generated
 	 */
-	private int myVisualID;
-
-	/**
-	 * @generated
-	 */
-	private String myType;
+	private final int myVisualID;
 
 	/**
 	 * @generated
@@ -56,16 +51,6 @@ public class EcoreNodeDescriptor {
 	 */
 	public int getVisualID() {
 		return myVisualID;
-	}
-
-	/**
-	 * @generated
-	 */
-	public String getType() {
-		if (myType == null) {
-			myType = EcoreVisualIDRegistry.getType(getVisualID());
-		}
-		return myType;
 	}
 
 }

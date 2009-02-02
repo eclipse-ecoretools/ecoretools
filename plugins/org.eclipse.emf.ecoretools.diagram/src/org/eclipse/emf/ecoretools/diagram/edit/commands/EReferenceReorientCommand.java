@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceReorientCommand.java,v 1.4 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EReferenceReorientCommand.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -59,9 +59,8 @@ public class EReferenceReorientCommand extends EditElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean canExecute() {
-		if (!(getElementToEdit() instanceof EReference)) {
+		if (false == getElementToEdit() instanceof EReference) {
 			return false;
 		}
 		if (reorientDirection == ReorientRelationshipRequest.REORIENT_SOURCE) {

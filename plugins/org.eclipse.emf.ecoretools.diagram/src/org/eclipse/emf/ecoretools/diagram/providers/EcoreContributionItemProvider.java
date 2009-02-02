@@ -9,10 +9,11 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreContributionItemProvider.java,v 1.2 2008/04/28 08:41:30 jlescot Exp $
+ * $Id: EcoreContributionItemProvider.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.providers;
 
+import org.eclipse.emf.ecoretools.diagram.part.ValidateAction;
 import org.eclipse.gmf.runtime.common.ui.services.action.contributionitem.AbstractContributionItemProvider;
 import org.eclipse.gmf.runtime.common.ui.util.IWorkbenchPartDescriptor;
 import org.eclipse.gmf.runtime.diagram.ui.printing.actions.PrintPreviewAction;
@@ -32,6 +33,9 @@ public class EcoreContributionItemProvider extends AbstractContributionItemProvi
 	protected IAction createAction(String actionId, IWorkbenchPartDescriptor partDescriptor) {
 		if (actionId.equals(PrintPreviewAction.ID)) {
 			return new RenderedPrintPreviewAction(new EnhancedPrintActionHelper());
+		}
+		if (actionId.equals(ValidateAction.ID)) {
+			return new ValidateAction(partDescriptor.getPartPage());
 		}
 		return super.createAction(actionId, partDescriptor);
 	}

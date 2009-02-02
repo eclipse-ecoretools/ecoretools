@@ -9,14 +9,18 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EDataType2EditPart.java,v 1.12 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EDataType2EditPart.java,v 1.13 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
@@ -33,6 +37,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.policies.EDataType2ItemSemanticEd
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editpolicies.LayoutEditPolicy;
@@ -43,9 +48,11 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConstrainedToolbarLayoutE
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Color;
 
 /**
  * @generated
@@ -77,7 +84,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated NOT
 	 */
-	@Override
 	protected void createDefaultEditPolicies() {
 
 		super.createDefaultEditPolicies();
@@ -95,7 +101,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 
 		ConstrainedToolbarLayoutEditPolicy lep = new ConstrainedToolbarLayoutEditPolicy() {
 
-			@Override
 			protected EditPolicy createChildEditPolicy(EditPart child) {
 				if (child.getEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE) == null) {
 					if (child instanceof ITextAwareEditPart) {
@@ -143,14 +148,18 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	 * @generated
 	 */
 	protected boolean removeFixedChild(EditPart childEditPart) {
-
+		if (childEditPart instanceof EDataTypeName2EditPart) {
+			return true;
+		}
+		if (childEditPart instanceof EDataTypeInstanceClass2EditPart) {
+			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void addChildVisual(EditPart childEditPart, int index) {
 		if (addFixedChild(childEditPart)) {
 			return;
@@ -161,7 +170,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (removeFixedChild(childEditPart)) {
 			return;
@@ -172,10 +180,8 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	protected IFigure getContentPaneFor(IGraphicalEditPart editPart) {
-
-		return super.getContentPaneFor(editPart);
+		return getContentPane();
 	}
 
 	/**
@@ -197,7 +203,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	 * 
 	 * @generated
 	 */
-	@Override
 	protected NodeFigure createNodeFigure() {
 		NodeFigure figure = createNodePlate();
 		figure.setLayoutManager(new StackLayout());
@@ -227,7 +232,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
 	public IFigure getContentPane() {
 		if (contentPane != null) {
 			return contentPane;
@@ -238,9 +242,71 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	@Override
+	protected void setForegroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setForegroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setBackgroundColor(Color color) {
+		if (primaryShape != null) {
+			primaryShape.setBackgroundColor(color);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineWidth(int width) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineWidth(getMapMode().DPtoLP(width));
+		}
+	}
+
+	/**
+	 * @generated
+	 */
+	protected void setLineType(int style) {
+		if (primaryShape instanceof Shape) {
+			((Shape) primaryShape).setLineStyle(style);
+		}
+	}
+
+	/**
+	 * @generated
+	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(EcoreVisualIDRegistry.getType(EDataTypeName2EditPart.VISUAL_ID));
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMARelTypesOnTarget() {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		types.add(EcoreElementTypes.EAnnotationReferences_3001);
+		types.add(EcoreElementTypes.EReference_3002);
+		return types;
+	}
+
+	/**
+	 * @generated
+	 */
+	public List<org.eclipse.gmf.runtime.emf.type.core.IElementType> getMATypesForSource(IElementType relationshipType) {
+		List<org.eclipse.gmf.runtime.emf.type.core.IElementType> types = new ArrayList<org.eclipse.gmf.runtime.emf.type.core.IElementType>();
+		if (relationshipType == EcoreElementTypes.EAnnotationReferences_3001) {
+			types.add(EcoreElementTypes.EAnnotation_1003);
+		}
+		if (relationshipType == EcoreElementTypes.EReference_3002) {
+			types.add(EcoreElementTypes.EClass_1001);
+		}
+		if (relationshipType == EcoreElementTypes.EReference_3002) {
+			types.add(EcoreElementTypes.EClass_2003);
+		}
+		return types;
 	}
 
 	@Override
@@ -349,7 +415,6 @@ public class EDataType2EditPart extends ShapeNodeEditPart {
 		/**
 		 * @generated
 		 */
-		@Override
 		protected boolean useLocalCoordinates() {
 			return myUseLocalCoordinates;
 		}

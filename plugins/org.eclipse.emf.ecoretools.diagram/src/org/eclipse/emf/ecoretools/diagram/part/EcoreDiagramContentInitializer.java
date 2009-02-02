@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramContentInitializer.java,v 1.4 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EcoreDiagramContentInitializer.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -294,7 +294,8 @@ public class EcoreDiagramContentInitializer {
 	 * @generated NOT
 	 */
 	private void createNode(View parentView, EcoreNodeDescriptor nodeDescriptor) {
-		Node node = ViewService.createNode(parentView, nodeDescriptor.getModelElement(), nodeDescriptor.getType(), EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+		Node node = ViewService
+				.createNode(parentView, nodeDescriptor.getModelElement(), EcoreVisualIDRegistry.getType(nodeDescriptor.getVisualID()), EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 		switch (nodeDescriptor.getVisualID()) {
 		case EClassEditPart.VISUAL_ID:
 			createEClass_1001Children(node);
@@ -349,8 +350,8 @@ public class EcoreDiagramContentInitializer {
 				if (!myDomain2NotationMap.containsKey(nextLinkDescriptor.getSource()) || !myDomain2NotationMap.containsKey(nextLinkDescriptor.getDestination())) {
 					continue;
 				}
-				Edge edge = (Edge) ViewService.getInstance().createEdge(nextLinkDescriptor.getSemanticAdapter(), diagram, nextLinkDescriptor.getType(), ViewUtil.APPEND,
-						EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				Edge edge = (Edge) ViewService.getInstance().createEdge(nextLinkDescriptor.getSemanticAdapter(), diagram, EcoreVisualIDRegistry.getType(nextLinkDescriptor.getVisualID()),
+						ViewUtil.APPEND, EcoreDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				if (edge != null) {
 					edge.setSource((View) myDomain2NotationMap.get(nextLinkDescriptor.getSource()));
 					edge.setTarget((View) myDomain2NotationMap.get(nextLinkDescriptor.getDestination()));

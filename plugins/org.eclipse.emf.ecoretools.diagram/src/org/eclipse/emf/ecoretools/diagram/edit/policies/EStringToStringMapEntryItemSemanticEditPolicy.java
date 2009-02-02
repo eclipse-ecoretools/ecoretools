@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EStringToStringMapEntryItemSemanticEditPolicy.java,v 1.2 2008/04/28 08:41:32 jlescot Exp $
+ * $Id: EStringToStringMapEntryItemSemanticEditPolicy.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
 
+import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
@@ -27,7 +28,13 @@ public class EStringToStringMapEntryItemSemanticEditPolicy extends EcoreBaseItem
 	/**
 	 * @generated
 	 */
-	@Override
+	public EStringToStringMapEntryItemSemanticEditPolicy() {
+		super(EcoreElementTypes.EStringToStringMapEntry_2007);
+	}
+
+	/**
+	 * @generated
+	 */
 	protected Command getDestroyElementCommand(DestroyElementRequest req) {
 		CompoundCommand cc = getDestroyEdgesCommand();
 		addDestroyShortcutsCommand(cc);

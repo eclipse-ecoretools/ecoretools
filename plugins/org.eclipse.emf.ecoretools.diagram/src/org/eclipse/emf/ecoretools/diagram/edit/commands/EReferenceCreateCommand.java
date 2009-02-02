@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceCreateCommand.java,v 1.4 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EReferenceCreateCommand.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.commands;
@@ -22,17 +22,19 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreBaseItemSemanticEditPolicy;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
+import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.gmf.runtime.emf.type.core.commands.EditElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
+import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 
 /**
  * @generated
  */
-public class EReferenceCreateCommand extends CreateElementCommand {
+public class EReferenceCreateCommand extends EditElementCommand {
 
 	/**
 	 * @generated
@@ -48,33 +50,27 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	 * @generated
 	 */
 	public EReferenceCreateCommand(CreateRelationshipRequest request, EObject source, EObject target) {
-		super(request);
+		super(request.getLabel(), null, request);
 		this.source = source;
 		this.target = target;
-		if (request.getContainmentFeature() == null) {
-			setContainmentFeature(EcorePackage.eINSTANCE.getEClass_EStructuralFeatures());
-		}
-
-		super.setElementToEdit(source);
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	public boolean canExecute() {
 		if (source == null && target == null) {
 			return false;
 		}
-		if (source != null && !(source instanceof EClass)) {
+		if (source != null && false == source instanceof EClass) {
 			return false;
 		}
-		if (target != null && !(target instanceof EClassifier)) {
+		if (target != null && false == target instanceof EClassifier) {
 			return false;
 		}
 		if (getSource() == null) {
-			return true; // link creation is in progress; source is not
-			// defined yet
+			return true; // link creation is in progress; source is not defined
+			// yet
 		}
 		// target may be null here but it's possible to check constraint
 		return EcoreBaseItemSemanticEditPolicy.LinkConstraints.canCreateEReference_3002(getSource(), getTarget());
@@ -83,50 +79,39 @@ public class EReferenceCreateCommand extends CreateElementCommand {
 	/**
 	 * @generated
 	 */
-	@Override
-	protected EObject doDefaultElementCreation() {
-		// org.eclipse.emf.ecore.EReference newElement =
-		// (org.eclipse.emf.ecore.EReference) super.doDefaultElementCreation();
-		EReference newElement = EcoreFactory.eINSTANCE.createEReference();
-		getSource().getEStructuralFeatures().add(newElement);
-		newElement.setEType(getTarget());
-		return newElement;
-	}
-
-	/**
-	 * @generated
-	 */
-	@Override
-	protected EClass getEClassToEdit() {
-		return EcorePackage.eINSTANCE.getEClass();
-	}
-
-	/**
-	 * @generated
-	 */
-	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 		if (!canExecute()) {
 			throw new ExecutionException("Invalid arguments in create link command"); //$NON-NLS-1$
 		}
-		return super.doExecuteWithResult(monitor, info);
+
+		EReference newElement = EcoreFactory.eINSTANCE.createEReference();
+		getSource().getEStructuralFeatures().add(newElement);
+		newElement.setEType(getTarget());
+		doConfigure(newElement, monitor, info);
+		((CreateElementRequest) getRequest()).setNewElement(newElement);
+		return CommandResult.newOKCommandResult(newElement);
+
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
-	protected ConfigureRequest createConfigureRequest() {
-		ConfigureRequest request = super.createConfigureRequest();
-		request.setParameter(CreateRelationshipRequest.SOURCE, getSource());
-		request.setParameter(CreateRelationshipRequest.TARGET, getTarget());
-		return request;
+	protected void doConfigure(EReference newElement, IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+		IElementType elementType = ((CreateElementRequest) getRequest()).getElementType();
+		ConfigureRequest configureRequest = new ConfigureRequest(getEditingDomain(), newElement, elementType);
+		configureRequest.setClientContext(((CreateElementRequest) getRequest()).getClientContext());
+		configureRequest.addParameters(getRequest().getParameters());
+		configureRequest.setParameter(CreateRelationshipRequest.SOURCE, getSource());
+		configureRequest.setParameter(CreateRelationshipRequest.TARGET, getTarget());
+		ICommand configureCommand = elementType.getEditCommand(configureRequest);
+		if (configureCommand != null && configureCommand.canExecute()) {
+			configureCommand.execute(monitor, info);
+		}
 	}
 
 	/**
 	 * @generated
 	 */
-	@Override
 	protected void setElementToEdit(EObject element) {
 		throw new UnsupportedOperationException();
 	}
