@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractDiagramsOutlinePage.java,v 1.1 2008/05/26 12:26:56 jlescot Exp $
+ * $Id: AbstractDiagramsOutlinePage.java,v 1.2 2009/02/02 16:18:18 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.ui.outline;
@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.actions.CollapseAllAction;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Activator;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Messages;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.OverviewComposite;
@@ -47,6 +48,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
@@ -63,6 +65,8 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.CollapseAllHandler;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -72,8 +76,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  * <b>Outline of the modeler editor</b> <br>
  * The outline displays the model tree and the diagrams associated with the
  * model objects. <br>
- * Double-clicking on a diagram change the active diagram edited by the modeler.
- * <br>
+ * Double-clicking on a diagram change the active diagram edited by the modeler. <br>
  * 
  * @author <a href="mailto:david.sciamma@anyware-tech.com">David Sciamma </a>
  */
@@ -98,6 +101,10 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	private IAction showAllAction;
 
 	private IAction linkWithEditorAction;
+
+	private CollapseAllAction collapseAllAction;
+
+	private CollapseAllHandler collapseAllHandler;
 
 	private DiagramEditor editor;
 
@@ -239,7 +246,8 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 			}
 		}
 
-		// Bug #226235 : manage the case when there is no element to select in the diagram
+		// Bug #226235 : manage the case when there is no element to select in
+		// the diagram
 		if (editPartsToSelect.size() > 0) {
 			editor.getDiagramGraphicalViewer().setSelection(new StructuredSelection(editPartsToSelect));
 			viewer.reveal(editPartsToSelect.get(editPartsToSelect.size() - 1));
@@ -310,10 +318,28 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	 */
 	private void createShowOutlineActions(IToolBarManager tbm) {
 		final IPreferenceStore ps = getPreferenceStore();
+
+		// Add CollapseAll action
+		collapseAllAction = new CollapseAllAction(navigator.getTreeViewer());
+		ImageDescriptor collapseAllIcon = Activator.getImageDescriptor("icons/elcl16/collapseall.gif"); //$NON-NLS-1$
+		collapseAllAction.setImageDescriptor(collapseAllIcon);
+		collapseAllAction.setHoverImageDescriptor(collapseAllIcon);
+		tbm.add(collapseAllAction);
+		// Add the corresponding handler to the treeViewer
+		collapseAllHandler = new CollapseAllHandler(navigator.getTreeViewer());
+		IHandlerService service = (IHandlerService) getSite().getService(IHandlerService.class);
+		service.activateHandler(CollapseAllHandler.COMMAND_ID, collapseAllHandler);
+
 		linkWithEditorAction = new Action(Messages.AbstractDiagramsOutlinePage_LinkWithEditor, IAction.AS_CHECK_BOX) {
 
 			public void run() {
-				// Do nothing
+				if (linkWithEditorAction.isChecked()) {
+					if (isDispatching) {
+						return;
+					}
+					// Try to select the element in the current active diagram
+					selectAssociatedPartsInEditor();
+				}
 			}
 		};
 		linkWithEditorAction.setToolTipText(linkWithEditorAction.getText());
@@ -584,6 +610,7 @@ public abstract class AbstractDiagramsOutlinePage extends Page implements IConte
 	 * @see org.eclipse.ui.part.IPage#dispose()
 	 */
 	public void dispose() {
+		collapseAllHandler.dispose();
 		unhookListeners();
 		overview.dispose();
 		navigator.dispose();
