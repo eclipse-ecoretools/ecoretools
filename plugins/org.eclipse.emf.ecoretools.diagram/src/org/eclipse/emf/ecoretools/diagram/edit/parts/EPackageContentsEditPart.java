@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EPackageContentsEditPart.java,v 1.13 2009/02/02 08:39:05 jlescot Exp $
+ * $Id: EPackageContentsEditPart.java,v 1.14 2009/02/02 09:28:07 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -74,7 +74,6 @@ public class EPackageContentsEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new PackageDiagramDragDropEditPolicy());
 		installEditPolicy(EcoretoolsEditPolicyRoles.PSEUDO_CANONICAL_ROLE, new EPackageContentsCanonicalEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new AlphaXYLayoutEditPolicy());
-		// EPackageCompartment can not be connected !
 	}
 
 	/**
