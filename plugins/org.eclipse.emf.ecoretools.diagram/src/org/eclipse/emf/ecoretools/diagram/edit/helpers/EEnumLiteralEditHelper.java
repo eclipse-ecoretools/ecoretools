@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiteralEditHelper.java,v 1.3 2008/04/28 15:23:59 jlescot Exp $
+ * $Id: EEnumLiteralEditHelper.java,v 1.4 2009/02/02 10:18:01 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.helpers;
@@ -37,19 +37,15 @@ public class EEnumLiteralEditHelper extends EcoreBaseEditHelper {
 
 	private void setDefaultNameForElement(EEnumLiteral elementToConfigure) {
 		EEnum container = elementToConfigure.getEEnum();
-		elementToConfigure.setName(baseString + (container.getELiterals().size() - 1));
-		// TODO : Wait for this issue to be fixed :
-		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=201446
-		// EEnum container = elementToConfigure.getEEnum();
-		// Boolean foundName = false;
-		// int count = 0;
-		// while (!foundName && count < 10000) {
-		// if (container.getEEnumLiteral(baseString + count) == null) {
-		// elementToConfigure.setName(baseString + count);
-		// foundName = true;
-		// }
-		// count++;
-		// }
+		Boolean foundName = false;
+		int count = 0;
+		while (!foundName && count < 10000) {
+			if (container.getEEnumLiteral(baseString + count) == null) {
+				elementToConfigure.setName(baseString + count);
+				foundName = true;
+			}
+			count++;
+		}
 	}
 
 	private void setDefaultValueForElement(EEnumLiteral elementToConfigure) {
