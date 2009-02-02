@@ -5,12 +5,7 @@ Bundle-SymbolicName: org.eclipse.emf.ecoretools.diagram.ui.outline;singleton:=tr
 Bundle-Version: 0.8.0.qualifier
 Bundle-Activator: org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Activator
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.gmf.runtime.notation,
- org.eclipse.emf.ecore,
- org.eclipse.gef,
- org.eclipse.gmf.runtime.diagram.ui,
+Require-Bundle: org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.emf.edit.ui
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.diagram.ui.outline,
