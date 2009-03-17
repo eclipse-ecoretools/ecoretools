@@ -593,17 +593,6 @@
        </propertyTester>
    </extension>
 
-   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isDomainModelElement">
-      <?gmfgen generated="true"?>
-       <propertyTester
-           id="org.eclipse.emf.ecoretools.diagram.DomainModelElementPropertyTester"
-           type="org.eclipse.emf.ecore.EObject"
-           namespace="org.eclipse.emf.ecoretools.diagram"
-           properties="isDomainModelElement"
-           class="org.eclipse.emf.ecoretools.diagram.part.EcoreDomainModelElementTester">
-       </propertyTester>
-   </extension>
-   
    <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
       <?gmfgen generated="true"?>
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
@@ -678,17 +667,11 @@
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
         	      <test property="org.eclipse.core.resources.extension" value="ecore"/>
                </and>
-               <and>
-                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
-                  <test property="org.eclipse.emf.ecoretools.diagram.isDomainModelElement"/>
-               </and>
+               <instanceof value="org.eclipse.emf.ecoretools.diagram.navigator.EcoreDomainNavigatorItem"/>
             </or>
          </triggerPoints>
          <possibleChildren>
-            <and>
-       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
-       	       <test property="org.eclipse.emf.ecoretools.diagram.isDomainModelElement"/>
-       	    </and>
+         	<instanceof value="org.eclipse.emf.ecoretools.diagram.navigator.EcoreDomainNavigatorItem"/>
          </possibleChildren>
       </navigatorContent>
       <actionProvider
