@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreBaseItemSemanticEditPolicy.java,v 1.4 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EcoreBaseItemSemanticEditPolicy.java,v 1.5 2009/03/17 14:29:56 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -312,12 +312,15 @@ public class EcoreBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	/**
 	 * Creates command to destroy the link.
 	 * 
-	 * @generated
+	 * Modified : check whether the EditPart associated with the view exists. If
+	 * the view is not visible, none EditPart match.
+	 * 
+	 * @generated NOT
 	 */
 	protected Command getDestroyElementCommand(View view) {
 		EditPart editPart = (EditPart) getHost().getViewer().getEditPartRegistry().get(view);
 		DestroyElementRequest request = new DestroyElementRequest(getEditingDomain(), false);
-		return editPart.getCommand(new EditCommandRequestWrapper(request, Collections.EMPTY_MAP));
+		return editPart != null ? editPart.getCommand(new EditCommandRequestWrapper(request, Collections.EMPTY_MAP)) : null;
 	}
 
 	/**
