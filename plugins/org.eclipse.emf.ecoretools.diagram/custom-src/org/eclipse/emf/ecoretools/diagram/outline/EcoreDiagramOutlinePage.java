@@ -9,16 +9,19 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramOutlinePage.java,v 1.5 2008/05/26 12:28:51 jlescot Exp $
+ * $Id: EcoreDiagramOutlinePage.java,v 1.6 2009/03/19 14:37:39 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.outline;
 
+import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractDiagramsOutlinePage;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.AbstractModelNavigator;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.IPageSite;
 
@@ -64,5 +67,18 @@ public class EcoreDiagramOutlinePage extends AbstractDiagramsOutlinePage {
 	@Override
 	protected String getEditorID() {
 		return "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID"; //$NON-NLS-1$
+	}
+
+	/**
+	 * Open the new diagram in the same editor
+	 */
+	@Override
+	protected void handleDoubleClickEvent() {
+		IStructuredSelection selection = (IStructuredSelection) getSelection();
+		Object selectedObject = selection.getFirstElement();
+		if (selectedObject != null && selectedObject instanceof Diagram && getEditor().getDiagram() != selectedObject
+				&& getEditor().getDiagram().eResource().equals(((Diagram) selectedObject).eResource())) {
+			((EcoreDiagramEditor) getEditor()).setDiagram((Diagram) selectedObject);
+		}
 	}
 }
