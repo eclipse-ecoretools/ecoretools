@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.16 2009/02/02 08:39:08 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.17 2009/03/19 14:35:15 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.ObjectUndoContext;
@@ -38,6 +39,9 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecoretools.diagram.edit.actions.NextDiagramAction;
+import org.eclipse.emf.ecoretools.diagram.edit.actions.PreviousDiagramAction;
+import org.eclipse.emf.ecoretools.diagram.edit.actions.UpDiagramAction;
 import org.eclipse.emf.ecoretools.diagram.navigator.EcoreNavigatorItem;
 import org.eclipse.emf.ecoretools.diagram.outline.EcoreDiagramOutlinePage;
 import org.eclipse.emf.ecoretools.diagram.preferences.IEcoreToolsPreferenceConstants;
@@ -47,16 +51,20 @@ import org.eclipse.emf.workspace.EMFCommandOperation;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.palette.PaletteRoot;
+import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramDropTargetListener;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -68,6 +76,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.dnd.TransferData;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorMatchingStrategy;
@@ -86,6 +95,9 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
  * @generated
  */
 public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMarker {
+
+	/** The class that manage the navigation through the different diagrams */
+	private NavigationManager navigation;
 
 	@Override
 	protected void setPartName(String partName) {
@@ -117,6 +129,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 	 */
 	public EcoreDiagramEditor() {
 		super(true);
+		navigation = new NavigationManager(this);
 	}
 
 	/**
@@ -452,4 +465,73 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		return PositionConstants.WEST;
 	}
 
+	/**
+	 * Returns the diagram navigation manager
+	 * 
+	 * @return the navigation
+	 */
+	public NavigationManager getNavigationManager() {
+		return navigation;
+	}
+
+	/**
+	 * Set the given diagram as contents of this editor.
+	 * 
+	 * @param diagram
+	 *            The diagram to display
+	 */
+	public void setDiagram(final Diagram diagram) {
+
+		if (Display.getCurrent() != Display.getDefault()) {
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					navigation.set(diagram);
+				}
+			});
+		} else {
+			navigation.set(diagram);
+		}
+	}
+
+	/**
+	 * Do not use this method directly to change active diagram, use
+	 * {@link #setDiagram(Diagram)} instead.
+	 */
+	void changeActiveDiagram(Diagram diagram) {
+		IEditorInput oldInput = getEditorInput();
+
+		clearGraphicalViewerContents();
+		IDocumentProvider provider = getDocumentProvider();
+		if (provider == null || !(provider instanceof IDiagramDocumentProvider)) {
+			EcoreDiagramEditorPlugin.getInstance().logError("No document providers");
+		}
+
+		IDocument document = provider.getDocument(oldInput);
+
+		if (!(document instanceof DiagramDocument)) {
+			EcoreDiagramEditorPlugin.getInstance().logError("No diagram document");
+		}
+
+		((DiagramDocument) document).setContent(diagram);
+		initializeGraphicalViewerContents();
+	}
+
+	@Override
+	protected void createActions() {
+		super.createActions();
+
+		ActionRegistry registry = getActionRegistry();
+		IAction action;
+
+		// Previous, up and next diagram navigation Action
+		action = new PreviousDiagramAction(this);
+		registry.registerAction(action);
+
+		action = new UpDiagramAction(this);
+		registry.registerAction(action);
+
+		action = new NextDiagramAction(this);
+		registry.registerAction(action);
+
+	}
 }

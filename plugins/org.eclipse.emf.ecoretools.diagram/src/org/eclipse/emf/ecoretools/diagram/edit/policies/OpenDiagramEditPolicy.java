@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: OpenDiagramEditPolicy.java,v 1.12 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: OpenDiagramEditPolicy.java,v 1.13 2009/03/19 14:35:15 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -47,9 +47,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutService;
 import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.MultiDiagramLinkStyle;
 import org.eclipse.gmf.runtime.notation.Node;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.window.Window;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Shell;
@@ -122,29 +120,6 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		}
 
 		/**
-		 * @param multiDiagramLinkStyle
-		 * @deprecated use the other constructor
-		 */
-		@Deprecated
-		public OpenDiagramCommand(MultiDiagramLinkStyle multiDiagramLinkStyle) {
-			this(((View) multiDiagramLinkStyle.eContainer()).getElement(), multiDiagramLinkStyle.eResource());
-			// super(TransactionUtil.getEditingDomain(multiDiagramLinkStyle),
-			// "Open Diagram", null);
-			// this.domainElement = ((View)
-			// multiDiagramLinkStyle.eContainer()).getElement();
-			// this.diagramResource = multiDiagramLinkStyle.eResource();
-			//
-			// if (domainElement instanceof EPackage) {
-			// for (EObject currentDiag : diagramResource.getContents()) {
-			// if (currentDiag instanceof Diagram &&
-			// domainElement.equals(((Diagram) currentDiag).getElement())) {
-			// allDiagrams.add((Diagram) currentDiag);
-			// }
-			// }
-			// }
-		}
-
-		/**
 		 * @see org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand#doExecuteWithResult(org.eclipse.core.runtime.IProgressMonitor,
 		 *      org.eclipse.core.runtime.IAdaptable)
 		 */
@@ -197,9 +172,14 @@ public class OpenDiagramEditPolicy extends OpenEditPolicy {
 		 */
 		protected void openEditor(Diagram diagram) {
 			if (diagram != null) {
-				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IEditorPart editorPart = activePage.getActiveEditor();
 				try {
-					page.openEditor(getEditorInput(diagram), getEditorID());
+					if (editorPart instanceof EcoreDiagramEditor) {
+						((EcoreDiagramEditor) editorPart).setDiagram(diagram);
+					} else {
+						activePage.openEditor(getEditorInput(diagram), getEditorID());
+					}
 				} catch (PartInitException e) {
 					EcoreDiagramEditorPlugin.getInstance().logError(Messages.OpenDiagramEditPolicy_CanNotOpen);
 				}

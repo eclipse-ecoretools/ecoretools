@@ -9,20 +9,24 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramActionBarContributor.java,v 1.3 2009/02/02 08:39:07 jlescot Exp $
+ * $Id: EcoreDiagramActionBarContributor.java,v 1.4 2009/03/19 14:35:15 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
 
+import org.eclipse.emf.ecoretools.diagram.edit.actions.EcoreActionConstants;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 import org.eclipse.gmf.runtime.diagram.ui.printing.render.actions.EnhancedPrintActionHelper;
 import org.eclipse.gmf.runtime.diagram.ui.printing.render.actions.RenderedPrintPreviewAction;
 import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.actions.RetargetAction;
 
 /**
  * @generated
@@ -60,5 +64,40 @@ public class EcoreDiagramActionBarContributor extends DiagramActionBarContributo
 		}
 		IAction validateAction = new ValidateAction(page);
 		editMenu.appendToGroup("validationGroup", validateAction); //$NON-NLS-1$
+	}
+	
+	@Override
+	protected void buildActions() {
+		super.buildActions();
+		
+		RetargetAction action = null;
+		
+		// Previous Diagram
+        action = new RetargetAction(EcoreActionConstants.PREVIOUS_DIAGRAM, "Previous Diagram");
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-previous.png"));
+        action.setToolTipText("Go to the previous diagram");
+        addRetargetAction(action);
+        // Open Parent Diagram
+        action = new RetargetAction(EcoreActionConstants.OPEN_PARENT_DIAGRAM, "Open Parent Diagram");
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-up.png"));
+        action.setToolTipText("Open the Parent Diagram");
+        addRetargetAction(action);
+        // Next Diagram
+        action = new RetargetAction(EcoreActionConstants.NEXT_DIAGRAM, "Next Diagram");
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-next.png"));
+        action.setToolTipText("Go to the next diagram");
+        addRetargetAction(action);
+	}
+	
+	@Override
+	public void contributeToToolBar(IToolBarManager toolBarManager) {
+		// TODO Auto-generated method stub
+		super.contributeToToolBar(toolBarManager);
+		
+		// Navigate actions
+        toolBarManager.add(new Separator());
+        toolBarManager.add(getAction(EcoreActionConstants.PREVIOUS_DIAGRAM));
+        toolBarManager.add(getAction(EcoreActionConstants.OPEN_PARENT_DIAGRAM));
+        toolBarManager.add(getAction(EcoreActionConstants.NEXT_DIAGRAM));
 	}
 }
