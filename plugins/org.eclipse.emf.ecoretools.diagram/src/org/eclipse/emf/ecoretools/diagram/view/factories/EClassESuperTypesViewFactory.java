@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassESuperTypesViewFactory.java,v 1.7 2009/02/02 08:39:07 jlescot Exp $
+ * $Id: EClassESuperTypesViewFactory.java,v 1.8 2009/03/19 15:04:28 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.view.factories;
@@ -42,8 +42,7 @@ public class EClassESuperTypesViewFactory extends ConnectionViewFactory {
 		super.initializeFromPreferences(view);
 		ConnectorStyle connectorStyle = (ConnectorStyle) view.getStyle(NotationPackage.Literals.CONNECTOR_STYLE);
 		connectorStyle.setLineColor(FigureUtilities.colorToInteger(THIS_FORE));
-		// Use TREE style
-		connectorStyle.setRouting(Routing.TREE_LITERAL);
+		connectorStyle.setRouting(Routing.RECTILINEAR_LITERAL);
 	}
 
 	/**
