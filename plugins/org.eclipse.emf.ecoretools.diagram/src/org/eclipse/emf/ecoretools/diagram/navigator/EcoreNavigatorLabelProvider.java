@@ -9,12 +9,14 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreNavigatorLabelProvider.java,v 1.4 2009/02/02 08:39:07 jlescot Exp $
+ * $Id: EcoreNavigatorLabelProvider.java,v 1.5 2009/03/19 16:47:11 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.navigator;
 
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationReferencesEditPart;
@@ -49,6 +51,7 @@ import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
@@ -446,10 +449,20 @@ public class EcoreNavigatorLabelProvider extends LabelProvider implements ICommo
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	private String getEClassESuperTypes_3003Text(View view) {
-		return ""; //$NON-NLS-1$
+		String textValue = ""; //$NON-NLS-1$
+		EObject sourceElt = ((Edge) view).getSource().getElement();
+		EObject targetElt = ((Edge) view).getTarget().getElement();
+		if (sourceElt != null && sourceElt instanceof EClass) {
+			textValue = textValue.concat(((EClass) sourceElt).getName());
+		}
+		textValue = textValue.concat(" > "); //$NON-NLS-1$
+		if (targetElt != null && targetElt instanceof EClass) {
+			textValue = textValue.concat(((EClass) targetElt).getName());
+		}
+		return textValue;
 	}
 
 	/**
