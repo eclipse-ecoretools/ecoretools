@@ -9,7 +9,7 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: UpDiagramAction.java,v 1.1 2009/03/19 14:35:47 jlescot Exp $
+ * $Id: UpDiagramAction.java,v 1.2 2009/03/19 14:38:18 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -93,8 +93,6 @@ public class UpDiagramAction extends WorkbenchPartAction implements INavigationL
 		if (!possibleDiagrams.isEmpty()) {
 			Diagram selectedDiagram = (Diagram) chooseDiagram(possibleDiagrams.toArray(new Diagram[possibleDiagrams.size()]));
 			if (selectedDiagram != null) {
-//				IAction action = new ChangeActiveDiagramAction(editor, selectedDiagram);
-//				action.run();
 				editor.setDiagram(selectedDiagram);
 			}
 		}
