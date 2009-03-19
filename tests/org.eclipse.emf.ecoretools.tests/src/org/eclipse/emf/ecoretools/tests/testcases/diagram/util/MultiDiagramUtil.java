@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: MultiDiagramUtil.java,v 1.3 2008/04/28 12:38:09 jlescot Exp $
+ * $Id: MultiDiagramUtil.java,v 1.4 2009/03/19 16:17:54 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.util;
@@ -114,20 +114,6 @@ public class MultiDiagramUtil {
 		final OpenDiagramTestCommand command = new OpenDiagramTestCommand(getMultiDiagramLinkStyleFromEditPart(targetEditPart));
 
 		return command.createPressed(initializedContent);
-	}
-
-	/**
-	 * Close the editor part associated with the current diagram
-	 * 
-	 * @param diagram
-	 *            the Diagram to close
-	 */
-	public static void closeDiagram(Diagram diagram) {
-		if (diagram != null) {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-
-			page.closeEditor(getEditorPart(diagram), false);
-		}
 	}
 
 	/**
