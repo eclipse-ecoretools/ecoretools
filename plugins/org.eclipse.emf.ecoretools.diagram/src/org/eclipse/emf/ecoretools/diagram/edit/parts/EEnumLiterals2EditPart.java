@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiterals2EditPart.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EEnumLiterals2EditPart.java,v 1.4 2009/03/25 11:40:19 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -87,6 +87,12 @@ public class EEnumLiterals2EditPart extends ListCompartmentEditPart {
 		// nothing to do -- parent layout does not accept Double constraints as
 		// ratio
 		// super.setRatio(ratio);
+	}
+
+	@Override
+	public boolean isSelectable() {
+		// Bug 238814 : Compartment must not be selectable
+		return false;
 	}
 
 }

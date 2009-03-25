@@ -566,4 +566,10 @@ public class EDataTypeInstanceClassEditPart extends CompartmentEditPart implemen
 		// Parent should assign one using setLabel() method
 		return null;
 	}
+
+	@Override
+	public boolean isSelectable() {
+		// Bug 238814 : Compartment must not be selectable
+		return false;
+	}
 }
