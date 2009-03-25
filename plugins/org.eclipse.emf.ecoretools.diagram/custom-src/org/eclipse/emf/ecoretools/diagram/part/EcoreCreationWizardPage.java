@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreCreationWizardPage.java,v 1.6 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: EcoreCreationWizardPage.java,v 1.7 2009/03/25 13:43:35 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -266,24 +266,37 @@ public class EcoreCreationWizardPage extends WizardPage {
 	private void loadData() {
 		if (selectedResource instanceof IFile) {
 			existingModelBt.setSelection(true);
-			newModelGrp.setEnabled(false);
 
+			directoryFd.setText(selectedResource.getParent().getFullPath().toString());
+			nameFd.setText(EcoreDiagramEditorUtil.getUniqueFileName(selectedResource.getParent().getFullPath(), "DefaultName", DOMAIN_EXT)); //$NON-NLS-1$
 			modelFd.setText(selectedResource.getFullPath().toString());
-
 			if (loadModelFile()) {
 				existingModelBt.setFocus();
 			}
+
+			setNewModelGroupEnabled(false);
 		} else {
 			newModelBt.setSelection(true);
-			existingModelGrp.setEnabled(false);
 
 			directoryFd.setText(selectedResource.getFullPath().toString());
-
 			nameFd.setText(EcoreDiagramEditorUtil.getUniqueFileName(selectedResource.getFullPath(), "DefaultName", DOMAIN_EXT)); //$NON-NLS-1$
 			nameFd.setFocus();
+
+			setExistingModelGroupEnabled(false);
 		}
 
 		initializeBt.setSelection(true);
+	}
+	
+	private void setNewModelGroupEnabled(boolean enabled) {
+		directoryBt.setEnabled(enabled);
+		nameFd.setEnabled(enabled);
+	}
+	
+	private void setExistingModelGroupEnabled(boolean enabled) {
+		modelBt.setEnabled(enabled);
+		viewer.getControl().setEnabled(enabled);
+		initializeBt.setEnabled(enabled);
 	}
 
 	/**
@@ -317,8 +330,8 @@ public class EcoreCreationWizardPage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (existingModelBt.getSelection()) {
-					newModelGrp.setEnabled(false);
-					existingModelGrp.setEnabled(true);
+					setNewModelGroupEnabled(false);
+					setExistingModelGroupEnabled(true);
 				}
 				setPageComplete(validatePage());
 			}
@@ -329,8 +342,8 @@ public class EcoreCreationWizardPage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (newModelBt.getSelection()) {
-					newModelGrp.setEnabled(true);
-					existingModelGrp.setEnabled(false);
+					setNewModelGroupEnabled(true);
+					setExistingModelGroupEnabled(false);
 				}
 				setPageComplete(validatePage());
 			}
