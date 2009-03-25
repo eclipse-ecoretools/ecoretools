@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAttributeEditPart.java,v 1.10 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EAttributeEditPart.java,v 1.11 2009/03/25 11:22:17 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -583,5 +583,12 @@ public class EAttributeEditPart extends CompartmentEditPart implements ITextAwar
 	 */
 	protected IFigure createFigurePrim() {
 		return new WrappingLabel();
+	}
+
+	// Bug 219984 : enable selection of the label figure without having to
+	// select first its container figure
+	@Override
+	public boolean isSelectable() {
+		return getFigure().isShowing();
 	}
 }
