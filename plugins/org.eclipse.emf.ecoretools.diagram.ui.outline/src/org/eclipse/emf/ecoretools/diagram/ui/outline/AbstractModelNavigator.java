@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007, 2008 Anyware Technologies
+ * Copyright (c) 2007, 2009 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractModelNavigator.java,v 1.2 2008/08/12 16:54:51 jlescot Exp $
+ * $Id: AbstractModelNavigator.java,v 1.3 2009/04/20 13:53:23 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.ui.outline;
@@ -76,6 +76,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.FilteredTree;
+import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.part.IPageSite;
 
 /**
@@ -187,7 +189,13 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	 *            the current widget
 	 */
 	protected void createContents(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI);
+		// Bug 272891 : [Outline] Provide a way to quickly filter elements in
+		// the tree
+		FilteredTree tree = new FilteredTree(parent, SWT.MULTI, new PatternFilter(), true);
+		tree.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		viewer = tree.getViewer();
 		viewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		initDragAndDrop();
@@ -295,7 +303,8 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 	}
 
 	/**
-	 * Add listeners : <br> - on the model<br>
+	 * Add listeners : <br>
+	 * - on the model<br>
 	 */
 	protected void hookListeners() {
 		if (getModelResource() != null && getModelResource().getResourceSet() != null) {
