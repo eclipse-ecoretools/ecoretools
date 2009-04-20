@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2009 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassOperations2EditPart.java,v 1.4 2009/03/25 11:40:19 jlescot Exp $
+ * $Id: EClassOperations2EditPart.java,v 1.5 2009/04/20 14:35:13 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -18,10 +18,10 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClassOperations2CanonicalEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClassOperations2ItemSemanticEditPolicy;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreCreationEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.Messages;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ListCompartmentEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableCompartmentEditPolicy;
@@ -75,7 +75,7 @@ public class EClassOperations2EditPart extends ListCompartmentEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableCompartmentEditPolicy());
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EClassOperations2ItemSemanticEditPolicy());
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new EcoreCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new EClassOperations2CanonicalEditPolicy());
 	}
