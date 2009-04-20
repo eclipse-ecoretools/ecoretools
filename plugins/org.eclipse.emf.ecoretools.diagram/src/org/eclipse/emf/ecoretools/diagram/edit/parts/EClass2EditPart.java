@@ -1,5 +1,5 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
+ * Copyright (c) 2007, 2009 Anyware Technologies
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClass2EditPart.java,v 1.10 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EClass2EditPart.java,v 1.11 2009/04/20 15:08:17 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.AlphaDropShadowBorder;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.FigureFromLabelUtils;
 import org.eclipse.emf.ecoretools.diagram.edit.figures.GradientRectangleFigure;
+import org.eclipse.emf.ecoretools.diagram.edit.figures.ToolbarLayoutExt;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.AlphaResizableShapeEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClass2ItemSemanticEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
@@ -466,14 +467,14 @@ public class EClass2EditPart extends ShapeNodeEditPart {
 		private WrappingLabel fFigureClassNameLabel;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public ClassFigure() {
 
-			ToolbarLayout layoutThis = new ToolbarLayout();
+			ToolbarLayoutExt layoutThis = new ToolbarLayoutExt();
 			layoutThis.setStretchMinorAxis(true);
 			layoutThis.setMinorAlignment(ToolbarLayout.ALIGN_CENTER);
-
+			layoutThis.setExpandLastItemMajorAxis(true);
 			layoutThis.setSpacing(0);
 			layoutThis.setVertical(true);
 
