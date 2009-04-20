@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceLowerBoundUpperBoundEditPart.java,v 1.3 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EReferenceLowerBoundUpperBoundEditPart.java,v 1.4 2009/04/20 13:37:40 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -23,6 +23,8 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreTextSelectionEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
 import org.eclipse.emf.ecoretools.diagram.providers.EcoreElementTypes;
@@ -141,14 +143,31 @@ public class EReferenceLowerBoundUpperBoundEditPart extends LabelEditPart implem
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void setLabelTextHelper(IFigure figure, String text) {
+		String cardinality = getCardinalityString((EReference) resolveSemanticElement());
 		if (figure instanceof WrappingLabel) {
-			((WrappingLabel) figure).setText(text);
+			((WrappingLabel) figure).setText(cardinality != null ? cardinality : text);
 		} else {
-			((Label) figure).setText(text);
+			((Label) figure).setText(cardinality != null ? cardinality : text);
 		}
+	}
+
+	// Bug 216102 : Cardinality edition could be more intuitive
+	private String getCardinalityString(ETypedElement eTypedElement) {
+		if (eTypedElement != null) {
+			int minOccurs = eTypedElement.getLowerBound();
+			int maxOccurs = eTypedElement.getUpperBound();
+
+			if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == ETypedElement.UNBOUNDED_MULTIPLICITY || maxOccurs == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
+				if (minOccurs == maxOccurs) {
+					return "" + minOccurs;
+				}
+				return minOccurs + ".." + (maxOccurs == ETypedElement.UNBOUNDED_MULTIPLICITY ? "*" : maxOccurs == ETypedElement.UNSPECIFIED_MULTIPLICITY ? "?" : maxOccurs);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -260,20 +279,26 @@ public class EReferenceLowerBoundUpperBoundEditPart extends LabelEditPart implem
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public ICellEditorValidator getEditTextValidator() {
 		return new ICellEditorValidator() {
 
 			public String isValid(final Object value) {
 				if (value instanceof String) {
+					// Bug 216102 : Cardinality edition could be more intuitive
+					String parsableString = ((String) value).replace("*", "-1").replace("?", "-2");
+					if (parsableString.indexOf("..") == -1) {
+						parsableString = parsableString.concat("..").concat(parsableString);
+					}
+					final String parsableValue = parsableString;
 					final EObject element = getParserElement();
 					final IParser parser = getParser();
 					try {
 						IParserEditStatus valid = (IParserEditStatus) getEditingDomain().runExclusive(new RunnableWithResult.Impl() {
 
 							public void run() {
-								setResult(parser.isValidEditString(new EObjectAdapter(element), (String) value));
+								setResult(parser.isValidEditString(new EObjectAdapter(element), parsableValue));
 							}
 						});
 						return valid.getCode() == ParserEditStatus.EDITABLE ? null : valid.getMessage();

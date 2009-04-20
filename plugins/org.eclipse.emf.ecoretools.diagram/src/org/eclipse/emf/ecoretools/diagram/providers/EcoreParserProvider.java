@@ -9,10 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreParserProvider.java,v 1.5 2009/02/02 08:39:06 jlescot Exp $
+ * $Id: EcoreParserProvider.java,v 1.6 2009/04/20 13:37:40 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
+
+import java.text.ParsePosition;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EAttribute;
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecoretools.diagram.edit.parts.EReferenceNameEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EStringToStringMapEntryEditPart;
 import org.eclipse.emf.ecoretools.diagram.parsers.MessageFormatParser;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreVisualIDRegistry;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.common.core.service.AbstractProvider;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.common.ui.services.parser.GetParserOperation;
@@ -318,12 +321,25 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 	private IParser eReferenceLowerBoundUpperBound_4012Parser;
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	private IParser getEReferenceLowerBoundUpperBound_4012Parser() {
 		if (eReferenceLowerBoundUpperBound_4012Parser == null) {
 			EAttribute[] features = new EAttribute[] { EcorePackage.eINSTANCE.getETypedElement_LowerBound(), EcorePackage.eINSTANCE.getETypedElement_UpperBound() };
-			MessageFormatParser parser = new MessageFormatParser(features);
+			MessageFormatParser parser = new MessageFormatParser(features) {
+
+				// Bug 216102 : Cardinality edition could be more intuitive
+				@Override
+				public ICommand getParseCommand(IAdaptable adapter, String newString, int flags) {
+					String parsableString = ((String) newString).replace("*", "-1").replace("?", "-2");
+					if (parsableString.indexOf("..") == -1) {
+						parsableString = parsableString.concat("..").concat(parsableString);
+					}
+
+					Object[] values = getEditProcessor().parse(parsableString, new ParsePosition(0));
+					return getParseCommand(adapter, values, flags);
+				}
+			};
 			parser.setViewPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}"); //$NON-NLS-1$
 			parser.setEditorPattern("{0}..{1,choice,-2#?|-1#*|-1<{1}}"); //$NON-NLS-1$
 			parser.setEditPattern("{0}..{1}"); //$NON-NLS-1$
