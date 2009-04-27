@@ -9,16 +9,19 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EClassOperationsEditPart.java,v 1.5 2009/04/20 14:35:13 jlescot Exp $
+ * $Id: EClassOperationsEditPart.java,v 1.6 2009/04/27 10:04:00 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
 
+import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.CompartmentChildCreationEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClassOperationsCanonicalEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.edit.policies.EClassOperationsItemSemanticEditPolicy;
-import org.eclipse.emf.ecoretools.diagram.edit.policies.EcoreCreationEditPolicy;
+import org.eclipse.emf.ecoretools.diagram.edit.policies.ReorderingCompartmentEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.Messages;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ListCompartmentEditPart;
@@ -60,24 +63,36 @@ public class EClassOperationsEditPart extends ListCompartmentEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public IFigure createFigure() {
 		ResizableCompartmentFigure result = (ResizableCompartmentFigure) super.createFigure();
+		FlowLayout layout = new FlowLayout();
+		layout.setMajorSpacing(getMapMode().DPtoLP(0));
+		layout.setMinorSpacing(getMapMode().DPtoLP(0));
+		layout.setHorizontal(false);
+		result.getContentPane().setLayoutManager(layout);
 		result.setTitleVisibility(false);
 		return result;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableCompartmentEditPolicy());
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EClassOperationsItemSemanticEditPolicy());
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new EcoreCreationEditPolicy());
+
+		// Use a custom Policy to create child elements and initialize their
+		// initial position
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentChildCreationEditPolicy());
+
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new EClassOperationsCanonicalEditPolicy());
+
+		// Add a policy used to reorder children
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new ReorderingCompartmentEditPolicy(EcorePackage.Literals.ECLASS__EOPERATIONS));
 	}
 
 	/**
