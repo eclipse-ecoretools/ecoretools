@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: PackageDiagramDragDropEditPolicy.java,v 1.15 2008/12/24 16:04:07 jlescot Exp $
+ * $Id: PackageDiagramDragDropEditPolicy.java,v 1.16 2009/04/27 13:28:05 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.policies;
@@ -17,7 +17,6 @@ package org.eclipse.emf.ecoretools.diagram.edit.policies;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.diagram.edit.commands.EcoreCreateShortcutDecorationsCommand;
@@ -35,8 +34,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.diagram.ui.requests.ArrangeRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.DropObjectsRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
@@ -80,11 +81,11 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 
 		Command shortcutCommand = null;
 		if (!shortcutViewDescriptors.isEmpty()) {
-			shortcutCommand = createShortcutsCommand(dropRequest.getLocation(), shortcutViewDescriptors);
+			shortcutCommand = createShortcutsCommand(castToDropObjectsRequest(dropRequest), shortcutViewDescriptors);
 		}
 		Command normalCommand = null;
 		if (!normalViewDescriptors.isEmpty()) {
-			normalCommand = createViewsAndRestoreRelatedLinks(dropRequest.getLocation(), normalViewDescriptors);
+			normalCommand = createViewsAndRestoreRelatedLinks(castToDropObjectsRequest(dropRequest), normalViewDescriptors);
 		}
 		if (shortcutCommand != null) {
 			Command createBoth = shortcutCommand.chain(normalCommand);
@@ -115,11 +116,11 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 
 		Command shortcutCommand = null;
 		if (!shortcutViewDescriptors.isEmpty()) {
-			shortcutCommand = createShortcutsCommand(dropRequest.getLocation(), shortcutViewDescriptors);
+			shortcutCommand = createShortcutsCommand(dropRequest, shortcutViewDescriptors);
 		}
 		Command normalCommand = null;
 		if (!normalViewDescriptors.isEmpty()) {
-			normalCommand = createViewsAndRestoreRelatedLinks(dropRequest.getLocation(), normalViewDescriptors);
+			normalCommand = createViewsAndRestoreRelatedLinks(dropRequest, normalViewDescriptors);
 		}
 		if (shortcutCommand != null) {
 			Command createBoth = shortcutCommand.chain(normalCommand);
@@ -148,8 +149,8 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return false;
 	}
 
-	protected Command createShortcutsCommand(Point dropLocation, List<ViewDescriptor> viewDescriptors) {
-		Command createCommand = createViewsAndRestoreRelatedLinks(dropLocation, viewDescriptors);
+	protected Command createShortcutsCommand(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
+		Command createCommand = createViewsAndRestoreRelatedLinks(dropRequest, viewDescriptors);
 		if (createCommand != null) {
 			// Chain a "Create Shortcut" command
 			createCommand.chain(new ICommandProxy(new EcoreCreateShortcutDecorationsCommand(getEditingDomain(), getHostView(), viewDescriptors)));
@@ -157,12 +158,25 @@ public class PackageDiagramDragDropEditPolicy extends DiagramDragDropEditPolicy 
 		return createCommand;
 	}
 
-	protected Command createViewsAndRestoreRelatedLinks(Point dropLocation, List<ViewDescriptor> viewDescriptors) {
+	protected Command createViewsAndRestoreRelatedLinks(DropObjectsRequest dropRequest, List<ViewDescriptor> viewDescriptors) {
+
 		CreateViewRequest createViewRequest = new CreateViewRequest(viewDescriptors);
-		createViewRequest.setLocation(dropLocation);
+		createViewRequest.setLocation(dropRequest.getLocation());
 		Command createCommand = getHost().getCommand(createViewRequest);
-		// Chain a "Restore Related Links" command
-		createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), (List<?>) createViewRequest.getNewObject())));
+
+		if (createCommand != null) {
+			List result = (List) createViewRequest.getNewObject();
+			dropRequest.setResult(result);
+
+			// Chain a "Restore Related Links" command
+			createCommand.chain(new ICommandProxy(new RestoreRelatedLinksCommand(getDiagramEditPart(), (List<?>) createViewRequest.getNewObject())));
+
+			// Chain an "Arrange Selection" command
+			ArrangeRequest arrangeRequest = new ArrangeRequest(RequestConstants.REQ_ARRANGE_DEFERRED);
+			arrangeRequest.setViewAdaptersToArrange(result);
+			createCommand.chain(getHost().getCommand(arrangeRequest));
+		}
+
 		return createCommand;
 	}
 
