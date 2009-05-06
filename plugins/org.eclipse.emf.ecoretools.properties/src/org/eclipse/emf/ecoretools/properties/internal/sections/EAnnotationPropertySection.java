@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EAnnotationPropertySection.java,v 1.7 2008/05/26 12:28:57 jlescot Exp $
+ * $Id: EAnnotationPropertySection.java,v 1.8 2009/05/06 13:54:14 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.sections;
@@ -311,9 +311,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			public String getText(Object element) {
 				if (element instanceof Entry) {
-					return (((Entry<?, ?>) element).getKey() != null) ? ((Entry<?, ?>) element).getKey().toString() : "null";
+					return (((Entry<?, ?>) element).getKey() != null) ? ((Entry<?, ?>) element).getKey().toString() : Messages.EAnnotationPropertySection_Null;
 				}
-				return "Unknown";
+				return Messages.EAnnotationPropertySection_Unknown;
 			}
 
 			/**
@@ -352,9 +352,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			protected Object getValue(Object element) {
 				if (false == element instanceof Entry) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				return ((((Entry<?, ?>) element).getKey() == null) ? "" : ((Entry<?, ?>) element).getKey());
+				return ((((Entry<?, ?>) element).getKey() == null) ? "" : ((Entry<?, ?>) element).getKey()); //$NON-NLS-1$
 			}
 
 			@Override
@@ -392,9 +392,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			public String getText(Object element) {
 				if (false == element instanceof Entry) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue().toString());
+				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue().toString()); //$NON-NLS-1$
 			}
 
 		});
@@ -434,9 +434,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			protected Object getValue(Object element) {
 				if (false == element instanceof Entry) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue());
+				return ((((Entry<?, ?>) element).getValue() == null) ? "" : ((Entry<?, ?>) element).getValue()); //$NON-NLS-1$
 			}
 
 			@Override
@@ -500,7 +500,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 				if (element instanceof EAnnotation) {
 					return ((EAnnotation) element).getSource();
 				}
-				return "Unknown";
+				return Messages.EAnnotationPropertySection_Unknown;
 			}
 
 			/**
@@ -539,9 +539,9 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			protected Object getValue(Object element) {
 				if (false == element instanceof EAnnotation) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				return ((((EAnnotation) element).getSource() == null) ? "" : ((EAnnotation) element).getSource());
+				return ((((EAnnotation) element).getSource() == null) ? "" : ((EAnnotation) element).getSource()); //$NON-NLS-1$
 			}
 
 			@Override
@@ -582,11 +582,11 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			public String getText(Object element) {
 				if (false == element instanceof EAnnotation) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				String content = "";
+				String content = ""; //$NON-NLS-1$
 				for (EObject eObject : ((EAnnotation) element).getReferences()) {
-					content = labelProvider.getText(eObject) + ", " + content;
+					content = labelProvider.getText(eObject) + ", " + content; //$NON-NLS-1$
 				}
 
 				return content;
@@ -646,11 +646,11 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 			@Override
 			protected Object getValue(Object element) {
 				if (false == element instanceof EAnnotation) {
-					return "";
+					return ""; //$NON-NLS-1$
 				}
-				String content = "";
+				String content = ""; //$NON-NLS-1$
 				for (EObject eObject : ((EAnnotation) element).getReferences()) {
-					content = labelProvider.getText(eObject) + ", " + content;
+					content = labelProvider.getText(eObject) + ", " + content; //$NON-NLS-1$
 				}
 
 				return content;
@@ -827,7 +827,7 @@ public class EAnnotationPropertySection extends AbstractTabbedPropertySection {
 
 					@Override
 					protected void doExecute() {
-						currentEAnnotation.getDetails().put(getKeyString(currentEAnnotation), "");
+						currentEAnnotation.getDetails().put(getKeyString(currentEAnnotation), ""); //$NON-NLS-1$
 					}
 				});
 

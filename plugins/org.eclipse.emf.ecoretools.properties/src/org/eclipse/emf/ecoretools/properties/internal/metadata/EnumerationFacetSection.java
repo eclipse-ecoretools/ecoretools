@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EnumerationFacetSection.java,v 1.1 2008/12/24 12:02:53 jlescot Exp $
+ * $Id: EnumerationFacetSection.java,v 1.2 2009/05/06 13:54:14 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.properties.internal.metadata;
@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
+import org.eclipse.emf.ecoretools.properties.internal.Messages;
 import org.eclipse.emf.ecoretools.tabbedproperties.sections.AbstractStringListPropertySection;
 
 /**
@@ -31,7 +32,7 @@ public class EnumerationFacetSection extends AbstractStringListPropertySection {
 
 	@Override
 	protected String getLabelText() {
-		return "Enumeration Facet";
+		return Messages.EnumerationFacetSection_EnumerationFacet;
 	}
 
 	@Override

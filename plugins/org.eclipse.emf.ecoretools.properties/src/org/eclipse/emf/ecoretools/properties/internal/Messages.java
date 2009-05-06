@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.2 2008/05/23 14:56:54 jlescot Exp $
+ * $Id: Messages.java,v 1.3 2009/05/06 13:54:14 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.properties.internal;
 
@@ -47,11 +47,15 @@ public class Messages extends NLS {
 
 	public static String EAnnotationPropertySection_Key;
 
+	public static String EAnnotationPropertySection_Null;
+
 	public static String EAnnotationPropertySection_References;
 
 	public static String EAnnotationPropertySection_Remove;
 
 	public static String EAnnotationPropertySection_Source;
+
+	public static String EAnnotationPropertySection_Unknown;
 
 	public static String EAnnotationPropertySection_Value;
 
@@ -60,6 +64,8 @@ public class Messages extends NLS {
 	public static String EEnumLiteralLiteralPropertySection_Literal;
 
 	public static String EEnumLiteralValuePropertySection_Value;
+
+	public static String EnumerationFacetSection_EnumerationFacet;
 
 	public static String EOperationParameterSection_Name;
 
@@ -121,6 +127,8 @@ public class Messages extends NLS {
 
 	public static String NsURIPropertySection_NsURI;
 
+	public static String PatternFacetSection_PatternFacet;
+
 	public static String ProcessingKindSection_ProcessingKind;
 
 	public static String QualifiedSection_Qualified;
@@ -130,6 +138,8 @@ public class Messages extends NLS {
 	public static String UpperBoundPropertySection_UpperBound;
 
 	public static String WhitespaceSection_Whitespace;
+
+	public static String WildcardsSection_Wildcards;
 	
 	static {
 		// initialize resource bundle
