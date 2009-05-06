@@ -307,7 +307,7 @@ public abstract class AbstractDiagramTestFixture extends AbstractPresentationTes
 	 */
 	public boolean isShortcut(EditPart editpart) {
 		View view = (View) editpart.getModel();
-		return view.getEAnnotation("Shortcut") != null;
+		return view.getEAnnotation("Shortcut") != null; //$NON-NLS-1$
 	}
 
 }

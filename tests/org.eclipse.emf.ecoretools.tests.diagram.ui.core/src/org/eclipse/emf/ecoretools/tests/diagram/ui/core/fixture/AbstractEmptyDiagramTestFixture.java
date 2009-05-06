@@ -95,7 +95,7 @@ public abstract class AbstractEmptyDiagramTestFixture extends AbstractDiagramTes
 	public abstract String getProjectName();
 
 	public String getFileName() {
-		return getSemanticResourcePath() + "Test";
+		return getSemanticResourcePath() + "Test"; //$NON-NLS-1$
 	}
 
 	public abstract String getSemanticResourcePath();

@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecoretools.tests.diagram.ui.core.Messages;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
@@ -86,7 +87,7 @@ public class TestDiagramEditorUtil extends IDEEditorUtil {
 		TransactionalEditingDomain domain = GMFEditingDomainFactory.getInstance().createEditingDomain();
 		final ResourceSet resourceSet = domain.getResourceSet();
 
-		AbstractEMFOperation op = new AbstractEMFOperation(domain, "File creation") {
+		AbstractEMFOperation op = new AbstractEMFOperation(domain, Messages.TestDiagramEditorUtil_FileCreation) {
 
 			protected IStatus doExecute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
