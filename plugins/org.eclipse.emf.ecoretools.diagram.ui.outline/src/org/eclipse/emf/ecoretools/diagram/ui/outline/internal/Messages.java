@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.1 2008/05/26 12:26:56 jlescot Exp $
+ * $Id: Messages.java,v 1.2 2009/05/06 13:54:18 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.ui.outline.internal;
 
@@ -29,9 +29,15 @@ public class Messages extends NLS {
 
 	public static String AbstractDiagramsOutlinePage_ShowOverview;
 
+	public static String AbstractModelNavigator_NewChild;
+
+	public static String AbstractModelNavigator_NewSibling;
+
 	public static String AbstractValidationMarkerReader_MarkerNotExist;
 
 	public static String AbstractValidationMarkerReader_ValidationProblems;
+
+	public static String CollapseAllAction_CollapseAll;
 
 	public static String CreateDiagramAction_CreateNewDiagram;
 

@@ -1,5 +1,6 @@
 package org.eclipse.emf.ecoretools.diagram.ui.outline.actions;
 
+import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Messages;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.handlers.CollapseAllHandler;
@@ -19,8 +20,8 @@ public class CollapseAllAction extends Action {
 	 *            The viewer to be collapsed.
 	 */
 	public CollapseAllAction(TreeViewer aViewer) {
-		super("Collapse All");
-		setToolTipText("Collapse All");
+		super(Messages.CollapseAllAction_CollapseAll);
+		setToolTipText(Messages.CollapseAllAction_CollapseAll);
 		setActionDefinitionId(CollapseAllHandler.COMMAND_ID);
 		treeViewer = aViewer;
 	}

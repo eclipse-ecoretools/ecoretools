@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: AbstractModelNavigator.java,v 1.3 2009/04/20 13:53:23 jlescot Exp $
+ * $Id: AbstractModelNavigator.java,v 1.4 2009/05/06 13:54:18 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.ui.outline;
@@ -28,6 +28,7 @@ import org.eclipse.emf.ecoretools.diagram.ui.outline.actions.DeleteDiagramAction
 import org.eclipse.emf.ecoretools.diagram.ui.outline.actions.DuplicateDiagramAction;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.actions.RenameDiagramAction;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Activator;
+import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Messages;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.ModelElementComparer;
 import org.eclipse.emf.ecoretools.diagram.ui.outline.internal.OutlineDragAdapter;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -516,14 +517,14 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 		Collection<?> newSiblingDescriptors = editingDomain.getNewChildDescriptors(null, selectedObject);
 
 		if (newChildDescriptors.size() > 0) {
-			MenuManager menuManager = new MenuManager("New Child");
+			MenuManager menuManager = new MenuManager(Messages.AbstractModelNavigator_NewChild);
 			for (Object descriptor : newChildDescriptors) {
 				menuManager.add(new CreateChildAction(getEditor(), structuredSelection, descriptor));
 			}
 			manager.add(menuManager);
 		}
 		if (newSiblingDescriptors.size() > 0) {
-			MenuManager menuManager = new MenuManager("New Sibling");
+			MenuManager menuManager = new MenuManager(Messages.AbstractModelNavigator_NewSibling);
 			for (Object descriptor : newSiblingDescriptors) {
 				menuManager.add(new CreateSiblingAction(getEditor(), structuredSelection, descriptor));
 			}
