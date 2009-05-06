@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreElementTypes.java,v 1.6 2009/03/19 16:47:11 jlescot Exp $
+ * $Id: EcoreElementTypes.java,v 1.7 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -163,7 +163,7 @@ public class EcoreElementTypes extends ElementInitializers {
 			
 			// Bug 216111 : Automatically register the icon we want to use with SuperType elements in the Project Explorer.
 			// There is maybe a less "hacking" way, but the code of the getProvidedImageDescriptor() method could not be easily changed.
-			imageRegistry.put("eSuperTypes", EcoreDiagramEditorPlugin.imageDescriptorFromPlugin("org.eclipse.emf.ecore.edit", "icons/full/obj16/EGenericSuperType.gif"));
+			imageRegistry.put("eSuperTypes", EcoreDiagramEditorPlugin.imageDescriptorFromPlugin("org.eclipse.emf.ecore.edit", "icons/full/obj16/EGenericSuperType.gif")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}
 		return imageRegistry;
 	}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.4 2009/05/06 13:36:41 jlescot Exp $
+ * $Id: Messages.java,v 1.5 2009/05/06 14:19:20 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram;
 
@@ -22,6 +22,18 @@ public class Messages extends NLS {
 	public static String CommandName_InitializeAndLayoutDiagram;
 
 	public static String CommandName_UpdateEditPart;
+
+	public static String DiagramAppearancePreferencePage_Note;
+
+	public static String DiagramAppearancePreferencePage_NoteDescription;
+
+	public static String DiagramAppearancePreferencePage_SexyUI_FiguresRendering;
+
+	public static String DiagramAppearancePreferencePage_ShowShadow;
+
+	public static String DiagramAppearancePreferencePage_UseGradient;
+
+	public static String DiagramEditorContextMenuProvider_ErrorBuildingContextMenu;
 
 	public static String EcoreAbstractExpression_ExpressionEvaluationFailure;
 
@@ -63,9 +75,25 @@ public class Messages extends NLS {
 
 	public static String EcoreCreationWizardPageExtensionError;
 
+	public static String EcoreDiagramActionBarContributor_GoToNextDiagram;
+
+	public static String EcoreDiagramActionBarContributor_GoToPreviousDiagram;
+
+	public static String EcoreDiagramActionBarContributor_NextDiagram;
+
+	public static String EcoreDiagramActionBarContributor_OpenParentDiagram;
+
+	public static String EcoreDiagramActionBarContributor_OpenTheParentDiagram;
+
+	public static String EcoreDiagramActionBarContributor_PreviousDiagram;
+
 	public static String EcoreDiagramContentInitializer_IncorrectDiagramAsParameter;
 
 	public static String EcoreDiagramContentInitializer_IncorrectElementSpecified;
+
+	public static String EcoreDiagramEditor_NoDiagramDocument;
+
+	public static String EcoreDiagramEditor_NoDocumentProviders;
 
 	public static String EcoreVisualIDRegistry_UnableToParseView;
 

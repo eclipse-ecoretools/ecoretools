@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: ValidateAction.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
+ * $Id: ValidateAction.java,v 1.6 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -55,7 +55,7 @@ import org.eclipse.ui.actions.WorkspaceModifyDelegatingOperation;
  */
 public class ValidateAction extends Action {
 
-	public static final String ID = "validateAction";
+	public static final String ID = "validateAction"; //$NON-NLS-1$
 
 	/**
 	 * @generated

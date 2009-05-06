@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.18 2009/05/06 13:00:26 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.19 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -503,13 +503,13 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		clearGraphicalViewerContents();
 		IDocumentProvider provider = getDocumentProvider();
 		if (provider == null || !(provider instanceof IDiagramDocumentProvider)) {
-			EcoreDiagramEditorPlugin.getInstance().logError("No document providers");
+			EcoreDiagramEditorPlugin.getInstance().logError(org.eclipse.emf.ecoretools.diagram.Messages.EcoreDiagramEditor_NoDocumentProviders);
 		}
 
 		IDocument document = provider.getDocument(oldInput);
 
 		if (!(document instanceof DiagramDocument)) {
-			EcoreDiagramEditorPlugin.getInstance().logError("No diagram document");
+			EcoreDiagramEditorPlugin.getInstance().logError(org.eclipse.emf.ecoretools.diagram.Messages.EcoreDiagramEditor_NoDiagramDocument);
 		}
 
 		((DiagramDocument) document).setContent(diagram);

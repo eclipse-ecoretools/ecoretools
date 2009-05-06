@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: DiagramAppearancePreferencePage.java,v 1.5 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: DiagramAppearancePreferencePage.java,v 1.6 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.preferences;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.gmf.runtime.diagram.ui.preferences.AppearancePreferencePage;
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -70,15 +71,15 @@ public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalSpan = 3;
 		composite.setLayoutData(gridData);
-		group.setText("Sexy UI - Figures rendering");
+		group.setText(Messages.DiagramAppearancePreferencePage_SexyUI_FiguresRendering);
 
-		fillFigureUsingGradient = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, "Use gradient to fill figures", composite);
+		fillFigureUsingGradient = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_FILL_FIGURE_USING_GRADIENT, Messages.DiagramAppearancePreferencePage_UseGradient, composite);
 		addField(fillFigureUsingGradient);
 
-		useShadowOnBorder = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, "Show shadow on border", composite);
+		useShadowOnBorder = new BooleanFieldEditor(IEcoreToolsPreferenceConstants.PREF_USE_SHADOW_ON_BORDER, Messages.DiagramAppearancePreferencePage_ShowShadow, composite);
 		addField(useShadowOnBorder);
 
-		createNoteComposite(parent.getFont(), group, "Note:", "those preferences will take effect only on new diagrams.");
+		createNoteComposite(parent.getFont(), group, Messages.DiagramAppearancePreferencePage_Note, Messages.DiagramAppearancePreferencePage_NoteDescription);
 
 		GridLayout layout = new GridLayout();
 		layout.numColumns = 3;

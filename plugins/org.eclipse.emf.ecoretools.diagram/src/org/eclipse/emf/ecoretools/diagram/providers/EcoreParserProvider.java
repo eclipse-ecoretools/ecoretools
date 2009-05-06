@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreParserProvider.java,v 1.6 2009/04/20 13:37:40 jlescot Exp $
+ * $Id: EcoreParserProvider.java,v 1.7 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.providers;
@@ -331,9 +331,9 @@ public class EcoreParserProvider extends AbstractProvider implements IParserProv
 				// Bug 216102 : Cardinality edition could be more intuitive
 				@Override
 				public ICommand getParseCommand(IAdaptable adapter, String newString, int flags) {
-					String parsableString = ((String) newString).replace("*", "-1").replace("?", "-2");
-					if (parsableString.indexOf("..") == -1) {
-						parsableString = parsableString.concat("..").concat(parsableString);
+					String parsableString = ((String) newString).replace("*", "-1").replace("?", "-2"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					if (parsableString.indexOf("..") == -1) { //$NON-NLS-1$
+						parsableString = parsableString.concat("..").concat(parsableString); //$NON-NLS-1$
 					}
 
 					Object[] values = getEditProcessor().parse(parsableString, new ParsePosition(0));

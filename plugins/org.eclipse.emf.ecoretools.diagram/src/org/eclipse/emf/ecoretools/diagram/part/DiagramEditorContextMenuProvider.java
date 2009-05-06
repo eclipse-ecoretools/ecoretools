@@ -12,6 +12,7 @@
 package org.eclipse.emf.ecoretools.diagram.part;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gmf.runtime.common.ui.services.action.contributionitem.ContributionItemService;
@@ -71,7 +72,7 @@ public class DiagramEditorContextMenuProvider extends DiagramContextMenuProvider
 				}
 			});
 		} catch (Exception e) {
-			EcoreDiagramEditorPlugin.getInstance().logError("Error building context menu", e);
+			EcoreDiagramEditorPlugin.getInstance().logError(Messages.DiagramEditorContextMenuProvider_ErrorBuildingContextMenu, e);
 		}
 	}
 }

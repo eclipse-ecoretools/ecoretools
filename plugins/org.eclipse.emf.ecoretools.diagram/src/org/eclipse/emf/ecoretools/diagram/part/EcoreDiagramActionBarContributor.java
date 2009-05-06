@@ -9,11 +9,12 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramActionBarContributor.java,v 1.4 2009/03/19 14:35:15 jlescot Exp $
+ * $Id: EcoreDiagramActionBarContributor.java,v 1.5 2009/05/06 14:19:21 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.actions.EcoreActionConstants;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 import org.eclipse.gmf.runtime.diagram.ui.printing.render.actions.EnhancedPrintActionHelper;
@@ -73,19 +74,19 @@ public class EcoreDiagramActionBarContributor extends DiagramActionBarContributo
 		RetargetAction action = null;
 		
 		// Previous Diagram
-        action = new RetargetAction(EcoreActionConstants.PREVIOUS_DIAGRAM, "Previous Diagram");
-        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-previous.png"));
-        action.setToolTipText("Go to the previous diagram");
+        action = new RetargetAction(EcoreActionConstants.PREVIOUS_DIAGRAM, Messages.EcoreDiagramActionBarContributor_PreviousDiagram);
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-previous.png")); //$NON-NLS-1$
+        action.setToolTipText(Messages.EcoreDiagramActionBarContributor_GoToPreviousDiagram);
         addRetargetAction(action);
         // Open Parent Diagram
-        action = new RetargetAction(EcoreActionConstants.OPEN_PARENT_DIAGRAM, "Open Parent Diagram");
-        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-up.png"));
-        action.setToolTipText("Open the Parent Diagram");
+        action = new RetargetAction(EcoreActionConstants.OPEN_PARENT_DIAGRAM, Messages.EcoreDiagramActionBarContributor_OpenParentDiagram);
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-up.png")); //$NON-NLS-1$
+        action.setToolTipText(Messages.EcoreDiagramActionBarContributor_OpenTheParentDiagram);
         addRetargetAction(action);
         // Next Diagram
-        action = new RetargetAction(EcoreActionConstants.NEXT_DIAGRAM, "Next Diagram");
-        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-next.png"));
-        action.setToolTipText("Go to the next diagram");
+        action = new RetargetAction(EcoreActionConstants.NEXT_DIAGRAM, Messages.EcoreDiagramActionBarContributor_NextDiagram);
+        action.setImageDescriptor(EcoreDiagramEditorPlugin.findImageDescriptor("icons/elcl16/go-next.png")); //$NON-NLS-1$
+        action.setToolTipText(Messages.EcoreDiagramActionBarContributor_GoToNextDiagram);
         addRetargetAction(action);
 	}
 	

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreVisualIDRegistry.java,v 1.5 2009/02/02 08:39:07 jlescot Exp $
+ * $Id: EcoreVisualIDRegistry.java,v 1.6 2009/05/06 14:19:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationDetailsEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationEditPart;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EAnnotationSourceEditPart;
@@ -120,7 +121,7 @@ public class EcoreVisualIDRegistry {
 			return Integer.parseInt(type);
 		} catch (NumberFormatException e) {
 			if (Boolean.TRUE.toString().equalsIgnoreCase(Platform.getDebugOption(DEBUG_KEY))) {
-				EcoreDiagramEditorPlugin.getInstance().logError("Unable to parse view type as a visualID number: " + type);
+				EcoreDiagramEditorPlugin.getInstance().logError(Messages.EcoreVisualIDRegistry_UnableToParseView + type);
 			}
 		}
 		return -1;
