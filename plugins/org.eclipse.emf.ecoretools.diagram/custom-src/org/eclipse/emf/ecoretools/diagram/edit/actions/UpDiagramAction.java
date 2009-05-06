@@ -9,7 +9,7 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: UpDiagramAction.java,v 1.2 2009/03/19 14:38:18 jlescot Exp $
+ * $Id: UpDiagramAction.java,v 1.3 2009/05/06 13:00:26 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -23,8 +23,6 @@ import org.eclipse.emf.ecoretools.diagram.part.INavigationListener;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
@@ -138,7 +136,8 @@ public class UpDiagramAction extends WorkbenchPartAction implements INavigationL
 		if (elements.length == 1) {
 			selectedDiagram = elements[0];
 		} else {
-			ElementListSelectionDialog dialog = new ElementListSelectionDialog(getWorkbenchPart().getSite().getShell(), new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory()));
+			ElementListSelectionDialog dialog = new ElementListSelectionDialog(getWorkbenchPart().getSite().getShell(), new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance()
+					.getItemProvidersAdapterFactory()));
 			dialog.setMultipleSelection(false);
 			dialog.setTitle("Diagram Selection");
 			dialog.setMessage("Select a Diagram :");

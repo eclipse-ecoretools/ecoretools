@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EcoreDiagramEditor.java,v 1.17 2009/03/19 14:35:15 jlescot Exp $
+ * $Id: EcoreDiagramEditor.java,v 1.18 2009/05/06 13:00:26 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.part;
@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.ObjectUndoContext;
@@ -484,6 +483,7 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 
 		if (Display.getCurrent() != Display.getDefault()) {
 			Display.getDefault().asyncExec(new Runnable() {
+
 				public void run() {
 					navigation.set(diagram);
 				}

@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EEnumLiteralsEditPart.java,v 1.5 2009/04/27 10:04:00 jlescot Exp $
+ * $Id: EEnumLiteralsEditPart.java,v 1.6 2009/05/06 13:00:26 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecoretools.diagram.edit.policies.EEnumLiteralsItemSemanti
 import org.eclipse.emf.ecoretools.diagram.edit.policies.ReorderingCompartmentEditPolicy;
 import org.eclipse.emf.ecoretools.diagram.part.Messages;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ListCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -84,13 +83,14 @@ public class EEnumLiteralsEditPart extends ListCompartmentEditPart {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableCompartmentEditPolicy());
 		installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE, new EEnumLiteralsItemSemanticEditPolicy());
-		
-		// Use a custom Policy to create child elements and initialize their initial position
+
+		// Use a custom Policy to create child elements and initialize their
+		// initial position
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentChildCreationEditPolicy());
-		
+
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new EEnumLiteralsCanonicalEditPolicy());
-		
+
 		// Add a policy used to reorder children
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new ReorderingCompartmentEditPolicy(EcorePackage.Literals.EENUM__ELITERALS));
 	}
