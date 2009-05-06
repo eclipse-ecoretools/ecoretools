@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: Messages.java,v 1.1 2008/05/26 12:25:14 jlescot Exp $
+ * $Id: Messages.java,v 1.2 2009/05/06 13:54:20 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.tabbedproperties.internal;
 
@@ -18,6 +18,14 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.emf.ecoretools.tabbedproperties.internal.messages"; //$NON-NLS-1$
+
+	public static String AbstractCollectionPropertySection_Add;
+
+	public static String AbstractCollectionPropertySection_Down;
+
+	public static String AbstractCollectionPropertySection_Remove;
+
+	public static String AbstractCollectionPropertySection_Up;
 
 	public static String AbstractDetailedObjectPropertySection_Create;
 
@@ -34,6 +42,8 @@ public class Messages extends NLS {
 	public static String AbstractFontPropertySection_Change;
 
 	public static String AbstractIntegerPropertySection_UnvalidCharacter;
+
+	public static String AbstractStringListPropertySection_InvalidSequence;
 
 	public static String ChooseDialog_ChooseDialog_message;
 

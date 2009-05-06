@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: AbstractStringListPropertySection.java,v 1.1 2008/12/24 12:02:51 jlescot Exp $
+ * $Id: AbstractStringListPropertySection.java,v 1.2 2009/05/06 13:54:20 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tabbedproperties.sections;
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecoretools.tabbedproperties.EMFRecordingChangeCommand;
+import org.eclipse.emf.ecoretools.tabbedproperties.internal.Messages;
 import org.eclipse.emf.ecoretools.tabbedproperties.internal.utils.ColorRegistry;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.swt.widgets.Event;
@@ -36,7 +37,7 @@ import org.eclipse.swt.widgets.Event;
 public abstract class AbstractStringListPropertySection extends AbstractTextPropertySection {
 
 	/** The Pattern used to check an List of String */
-	public static final Pattern STRING_LIST_PATTERN = Pattern.compile("(\\w)*(,(\\w)+)*");
+	public static final Pattern STRING_LIST_PATTERN = Pattern.compile("(\\w)*(,(\\w)+)*"); //$NON-NLS-1$
 
 	@Override
 	protected String getFeatureAsString() {
@@ -46,7 +47,7 @@ public abstract class AbstractStringListPropertySection extends AbstractTextProp
 			String nextValue = itValue.next();
 			result.append(nextValue);
 			if (itValue.hasNext()) {
-				result.append(",");
+				result.append(","); //$NON-NLS-1$
 			}
 		}
 		return result.toString();
@@ -54,7 +55,7 @@ public abstract class AbstractStringListPropertySection extends AbstractTextProp
 
 	@Override
 	protected Object getNewFeatureValue(String newText) {
-		return Arrays.asList(newText.split(","));
+		return Arrays.asList(newText.split(",")); //$NON-NLS-1$
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public abstract class AbstractStringListPropertySection extends AbstractTextProp
 			getText().setBackground(null);
 			e.doit = true;
 		} else {
-			setErrorMessage("Invalid sequence : accept only sequence comma separated words. Ex : 'First,Second,Third'");
+			setErrorMessage(Messages.AbstractStringListPropertySection_InvalidSequence);
 			getText().setBackground(ColorRegistry.COLOR_ERROR);
 			e.doit = false;
 		}

@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
+import org.eclipse.emf.ecoretools.tabbedproperties.internal.Messages;
 import org.eclipse.emf.ecoretools.tabbedproperties.providers.TabbedPropertiesLabelProvider;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -106,11 +107,11 @@ public abstract class AbstractCollectionPropertySection extends AbstractTabbedPr
 		listMembers = new TableViewer(compositeListMembers);
 		listMembers.setLabelProvider(getLabelProvider());
 
-		buttonAdd = getWidgetFactory().createButton(compositeButtons, "  Add  ", SWT.PUSH);
-		buttonRemove = getWidgetFactory().createButton(compositeButtons, "  Remove  ", SWT.PUSH);
-		getWidgetFactory().createLabel(compositeButtons, " "); // A hidden Label
-		buttonUp = getWidgetFactory().createButton(compositeButtons, "  Up  ", SWT.PUSH);
-		buttonDown = getWidgetFactory().createButton(compositeButtons, "  Down  ", SWT.PUSH);
+		buttonAdd = getWidgetFactory().createButton(compositeButtons, Messages.AbstractCollectionPropertySection_Add, SWT.PUSH);
+		buttonRemove = getWidgetFactory().createButton(compositeButtons, Messages.AbstractCollectionPropertySection_Remove, SWT.PUSH);
+		getWidgetFactory().createLabel(compositeButtons, " "); // A hidden Label //$NON-NLS-1$
+		buttonUp = getWidgetFactory().createButton(compositeButtons, Messages.AbstractCollectionPropertySection_Up, SWT.PUSH);
+		buttonDown = getWidgetFactory().createButton(compositeButtons, Messages.AbstractCollectionPropertySection_Down, SWT.PUSH);
 	}
 
 	/**
