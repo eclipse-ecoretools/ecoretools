@@ -9,7 +9,7 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: UpDiagramAction.java,v 1.3 2009/05/06 13:00:26 jlescot Exp $
+ * $Id: UpDiagramAction.java,v 1.4 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.ecoretools.diagram.part.INavigationListener;
@@ -79,7 +80,7 @@ public class UpDiagramAction extends WorkbenchPartAction implements INavigationL
 	 */
 	protected void init() {
 		setId(EcoreActionConstants.OPEN_PARENT_DIAGRAM);
-		setText("Open a Parent Diagram");
+		setText(Messages.UpDiagramAction_OpenParentAction);
 	}
 
 	/**
@@ -139,8 +140,8 @@ public class UpDiagramAction extends WorkbenchPartAction implements INavigationL
 			ElementListSelectionDialog dialog = new ElementListSelectionDialog(getWorkbenchPart().getSite().getShell(), new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance()
 					.getItemProvidersAdapterFactory()));
 			dialog.setMultipleSelection(false);
-			dialog.setTitle("Diagram Selection");
-			dialog.setMessage("Select a Diagram :");
+			dialog.setTitle(Messages.UpDiagramAction_DiagramSelection);
+			dialog.setMessage(Messages.UpDiagramAction_SelectDiagram);
 			dialog.setElements(elements);
 
 			if (dialog.open() == Window.OK) {

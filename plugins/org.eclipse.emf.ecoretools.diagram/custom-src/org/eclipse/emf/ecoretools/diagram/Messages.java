@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: Messages.java,v 1.3 2009/01/29 10:02:08 jlescot Exp $
+ * $Id: Messages.java,v 1.4 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram;
 
@@ -95,6 +95,10 @@ public class Messages extends NLS {
 
 	public static String ManageDiagramsDialog_OpenSelectedDiagram;
 
+	public static String NavigationManager_CreateDiagram;
+
+	public static String NextDiagramAction_NextDiagram;
+
 	public static String OpenDiagramEditPolicy_CanNotCreateDiagram;
 
 	public static String OpenDiagramEditPolicy_CanNotOpen;
@@ -102,6 +106,8 @@ public class Messages extends NLS {
 	public static String OpenDiagramEditPolicy_OpenDiagram;
 
 	public static String OpenDiagramEditPolicy_OperationFailed;
+
+	public static String PreviousDiagramAction_PreviousDiagram;
 
 	public static String RemoveDiagramCommand_CanNotRemove;
 
@@ -122,6 +128,12 @@ public class Messages extends NLS {
 	public static String UpdateEditPartCommand_UnableToProceed;
 
 	public static String UpdateLinkedEReferenceDeferredCommand_UnableToProceed;
+
+	public static String UpDiagramAction_DiagramSelection;
+
+	public static String UpDiagramAction_OpenParentAction;
+
+	public static String UpDiagramAction_SelectDiagram;
 
 	static {
 		// initialize resource bundle

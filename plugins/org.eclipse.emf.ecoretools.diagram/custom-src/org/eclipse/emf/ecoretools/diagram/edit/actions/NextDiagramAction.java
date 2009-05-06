@@ -9,10 +9,11 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: NextDiagramAction.java,v 1.1 2009/03/19 14:35:47 jlescot Exp $
+ * $Id: NextDiagramAction.java,v 1.2 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.INavigationListener;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
@@ -64,7 +65,7 @@ public class NextDiagramAction extends WorkbenchPartAction implements INavigatio
 	 */
 	protected void init() {
 		setId(EcoreActionConstants.NEXT_DIAGRAM);
-		setText("Next Diagram");
+		setText(Messages.NextDiagramAction_NextDiagram);
 	}
 
 	/**

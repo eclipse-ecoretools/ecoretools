@@ -9,10 +9,11 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: PreviousDiagramAction.java,v 1.1 2009/03/19 14:35:47 jlescot Exp $
+ * $Id: PreviousDiagramAction.java,v 1.2 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.emf.ecoretools.diagram.part.INavigationListener;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
@@ -64,7 +65,7 @@ public class PreviousDiagramAction extends WorkbenchPartAction implements INavig
 	 */
 	protected void init() {
 		setId(EcoreActionConstants.PREVIOUS_DIAGRAM);
-		setText("Previous Diagram");
+		setText(Messages.PreviousDiagramAction_PreviousDiagram);
 	}
 
 	/**

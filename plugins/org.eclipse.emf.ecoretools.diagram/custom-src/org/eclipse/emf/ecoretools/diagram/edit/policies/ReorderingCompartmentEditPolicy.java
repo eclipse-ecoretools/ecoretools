@@ -109,7 +109,7 @@ public class ReorderingCompartmentEditPolicy extends org.eclipse.gef.editpolicie
 		}
 
 		TransactionalEditingDomain editingDomain = ((IGraphicalEditPart) getHost()).getEditingDomain();
-		CompartmentReorderEObjectCommand command = new CompartmentReorderEObjectCommand(editingDomain, "", (EList<EObject>) ((View) child.getParent().getModel()).getElement().eGet(feature), child,
+		CompartmentReorderEObjectCommand command = new CompartmentReorderEObjectCommand(editingDomain, "", (EList<EObject>) ((View) child.getParent().getModel()).getElement().eGet(feature), child, //$NON-NLS-1$
 				after);
 
 		return new ICommandProxy(command);

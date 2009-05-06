@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  *
- * $Id: EReferenceLowerBoundUpperBoundEditPart.java,v 1.4 2009/04/20 13:37:40 jlescot Exp $
+ * $Id: EReferenceLowerBoundUpperBoundEditPart.java,v 1.5 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.diagram.edit.parts;
@@ -162,9 +162,9 @@ public class EReferenceLowerBoundUpperBoundEditPart extends LabelEditPart implem
 
 			if (minOccurs >= 0 && (minOccurs <= maxOccurs || maxOccurs == ETypedElement.UNBOUNDED_MULTIPLICITY || maxOccurs == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
 				if (minOccurs == maxOccurs) {
-					return "" + minOccurs;
+					return "" + minOccurs; //$NON-NLS-1$
 				}
-				return minOccurs + ".." + (maxOccurs == ETypedElement.UNBOUNDED_MULTIPLICITY ? "*" : maxOccurs == ETypedElement.UNSPECIFIED_MULTIPLICITY ? "?" : maxOccurs);
+				return minOccurs + ".." + (maxOccurs == ETypedElement.UNBOUNDED_MULTIPLICITY ? "*" : maxOccurs == ETypedElement.UNSPECIFIED_MULTIPLICITY ? "?" : maxOccurs); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		}
 		return null;
@@ -287,9 +287,9 @@ public class EReferenceLowerBoundUpperBoundEditPart extends LabelEditPart implem
 			public String isValid(final Object value) {
 				if (value instanceof String) {
 					// Bug 216102 : Cardinality edition could be more intuitive
-					String parsableString = ((String) value).replace("*", "-1").replace("?", "-2");
-					if (parsableString.indexOf("..") == -1) {
-						parsableString = parsableString.concat("..").concat(parsableString);
+					String parsableString = ((String) value).replace("*", "-1").replace("?", "-2"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+					if (parsableString.indexOf("..") == -1) { //$NON-NLS-1$
+						parsableString = parsableString.concat("..").concat(parsableString); //$NON-NLS-1$
 					}
 					final String parsableValue = parsableString;
 					final EObject element = getParserElement();

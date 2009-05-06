@@ -67,7 +67,7 @@ public class DiagramEditorContextMenuProvider extends DiagramContextMenuProvider
 				public void run() {
 					ContributionItemService.getInstance().contributeToPopupMenu(DiagramEditorContextMenuProvider.this, part);
 					menu.remove(ActionIds.ACTION_DELETE_FROM_MODEL);
-					menu.appendToGroup("editGroup", deleteAction);
+					menu.appendToGroup("editGroup", deleteAction); //$NON-NLS-1$
 				}
 			});
 		} catch (Exception e) {

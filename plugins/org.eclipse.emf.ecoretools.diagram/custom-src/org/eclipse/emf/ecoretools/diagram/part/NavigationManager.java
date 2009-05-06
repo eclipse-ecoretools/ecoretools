@@ -9,7 +9,7 @@
  * Contributors:
  *    Jacques Lescot (Anyware Technologies) - initial API and implementation
  *
- * $Id: NavigationManager.java,v 1.1 2009/03/19 14:35:15 jlescot Exp $
+ * $Id: NavigationManager.java,v 1.2 2009/05/06 13:36:41 jlescot Exp $
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.part;
 
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import org.eclipse.emf.ecoretools.diagram.Messages;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditor;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CommandStack;
@@ -215,7 +216,7 @@ public class NavigationManager {
 		 *            the new active diagram
 		 */
 		public ChangeActiveDiagramCommand(EcoreDiagramEditor ed, Diagram newDiag) {
-			super("Create Diagram");
+			super(Messages.NavigationManager_CreateDiagram);
 			this.editor = ed;
 			this.newDiagram = newDiag;
 		}
