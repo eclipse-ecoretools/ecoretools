@@ -58,7 +58,7 @@
       </wizard>
       <category
            id="org.eclipse.emf.ecoretools.diagram"
-           name="Ecore Tools">
+           name="%category.ecoretools">
      </category>
    </extension>
 
@@ -272,7 +272,7 @@
           <propertyTab
              category="advanced"
              id="property.tab.AdvancedPropertySection"
-             label="Advanced"/>
+             label="%propertyTab.advanced"/>
       </propertyTabs>
    </extension>
    
@@ -799,13 +799,13 @@
       <decorator
             id="validationDecorator"
             class="org.eclipse.emf.ecoretools.diagram.decorator.EcoreValidationMarkerDecorator"
-            label="Validation Problems"
+            label="%decorator.validation.problems"
             adaptable="true"
             lightweight="true"
             location="BOTTOM_LEFT"
             state="true">
          <description>
-            Shows errors and warnings from a EcoreTools Validation
+            %decorator.show.errors.and.warnings
          </description>
          <enablement>
             <objectClass name="org.eclipse.emf.ecore.EObject"/>
