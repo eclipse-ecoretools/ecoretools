@@ -9,7 +9,7 @@
  * Contributors:
  *    Anyware Technologies - initial API and implementation
  * 
- * $Id: EmptyEcoreDiagramTestFixture.java,v 1.3 2008/05/27 09:54:59 jlescot Exp $
+ * $Id: EmptyEcoreDiagramTestFixture.java,v 1.4 2009/05/06 13:54:15 jlescot Exp $
  **********************************************************************/
 
 package org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture;
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorPlugin;
 import org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture;
 import org.eclipse.emf.ecoretools.tests.internal.Activator;
+import org.eclipse.emf.ecoretools.tests.internal.Messages;
 import org.eclipse.emf.ecoretools.tests.testcases.diagram.util.MultiDiagramUtil;
 import org.eclipse.emf.workspace.AbstractEMFOperation;
 import org.eclipse.gef.EditPart;
@@ -66,7 +67,7 @@ public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixtur
 	 * @see org.eclipse.emf.ecoretools.tests.diagram.ui.core.fixture.AbstractEmptyDiagramTestFixture#getSemanticResourcePath()
 	 */
 	public String getSemanticResourcePath() {
-		return "EcoreTools";
+		return "EcoreTools"; //$NON-NLS-1$
 	}
 
 	/**
@@ -130,7 +131,7 @@ public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixtur
 				try {
 					operation.execute(new NullProgressMonitor(), null);
 				} catch (ExecutionException e) {
-					Activator.logError("Creation diagram error", e);
+					Activator.logError(Messages.EmptyEcoreDiagramTestFixture_CreationDiagramError, e);
 				}
 
 			}
@@ -168,7 +169,7 @@ public class EmptyEcoreDiagramTestFixture extends AbstractEmptyDiagramTestFixtur
 				try {
 					operation.execute(new NullProgressMonitor(), null);
 				} catch (ExecutionException e) {
-					Activator.logError("Deletion diagram error", e);
+					Activator.logError(Messages.EmptyEcoreDiagramTestFixture_DeletionDiagramError, e);
 				}
 			}
 
