@@ -9,7 +9,7 @@
   Contributors: 
   	   Anyware Technologies - Initial API and implementation
 
-  $Id: plugin.xml,v 1.6 2008/12/24 12:02:53 jlescot Exp $
+  $Id: plugin.xml,v 1.7 2009/05/06 13:16:50 jlescot Exp $
 -->
 <plugin>
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
@@ -17,38 +17,38 @@
          <propertyTab
             category="domain"
             id="org.eclipse.emf.ecoretools.diagram.modelTab"
-            label="Model"/>
+            label="%propertyTab.model"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.modelTab"
                category="domain"
                id="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
                indented="true"
-               label="Parameter"/>
+               label="%propertyTab.parameter"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
                category="domain"
                id="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
                image="icons/view16/eannotation_tab.gif"
-               label="Annotation">
+               label="%propertyTab.annotation">
          </propertyTab>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
                category="domain"
                id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
                indented="true"
-               label="Extended Metadata"/>
+               label="%propertyTab.extended.metadata"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
                category="domain"
                id="org.eclipse.emf.ecoretools.diagram.genModelDoc"
                image="icons/view16/doc_tab.gif"
                indented="true"
-               label="GenModel Doc">
+               label="%propertyTab.genmodel.doc">
          </propertyTab>
          <propertyTab
                category="documentation"
                id="org.eclipse.emf.ecoretools.diagram.genModel"
-               label="GenModel">
+               label="%propertyTab.genmodel">
          </propertyTab>
       </propertyTabs>
    </extension>
