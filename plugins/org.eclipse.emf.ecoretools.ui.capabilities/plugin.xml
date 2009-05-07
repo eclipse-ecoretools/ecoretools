@@ -12,18 +12,15 @@ Contributors:
 -->
 <plugin>
 
-	<!-- Categories provided by org.eclipse.galileo -->
-	<!--
 	<extension point="org.eclipse.ui.activities">
-		<category
+
+		<!-- Categories provided by org.eclipse.galileo -->
+		<!--category
 			id="org.eclipse.galileo.modeling.Category"
             description="%activity.cat.modeling.desc"
             name="%activity.cat.modeling">
-		</category>
-	</extension>
-	-->
+		</category-->
 
-	<extension point="org.eclipse.ui.activities">
 		<activity
 			id="org.eclipse.emf.ecoretools.ui.capabilities"
 			description="%activity.ecoretools.diagram.desc"
@@ -31,19 +28,18 @@ Contributors:
 		</activity>
 		<activityPatternBinding
 			activityId="org.eclipse.emf.ecoretools.ui.capabilities"
-			pattern="org\.eclipse\.emf\.ecoretools/.*">
+			pattern="org\.eclipse\.emf\.ecoretools.*">
 		</activityPatternBinding>
-	</extension>
 
-	<!-- Category bindings and default enablement provided by org.eclipse.galileo -->
-	<!--
-	<categoryActivityBinding
-		activityId="org.eclipse.emf.ecoretools.ui.capabilities"
-		categoryId="org.eclipse.galileo.modeling.Category">
-	</categoryActivityBinding>
-	<defaultEnablement
-		id="org.eclipse.emf.ecoretools.ui.capabilities">
-	</defaultEnablement>
-	-->
+		<!-- Category bindings and default enablement provided by org.eclipse.galileo -->
+		<!--categoryActivityBinding
+			activityId="org.eclipse.emf.ecoretools.ui.capabilities"
+			categoryId="org.eclipse.galileo.modeling.Category">
+		</categoryActivityBinding>
+		<defaultEnablement
+			id="org.eclipse.emf.ecoretools.ui.capabilities">
+		</defaultEnablement-->
+
+	</extension>
 	
 </plugin>
