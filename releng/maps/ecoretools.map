@@ -1,0 +1,42 @@
+!***************  PROJECT CONTRIBUTION  ******************************************************** 
+
+!*** Special entries from eclipse
+
+plugin@org.eclipse.test=v20070226,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+fragment@org.eclipse.ant.optional.junit=v20050226,:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,
+
+!*** Project's plugins, features and fragments
+
+!*** Runtime, Utils & SDK Ecore Tools Feature ***
+feature@org.eclipse.emf.ecoretools.all=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.all-feature
+feature@org.eclipse.emf.ecoretools=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools-feature
+feature@org.eclipse.emf.ecoretools.utils=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.utils-feature
+feature@org.eclipse.emf.ecoretools.sdk=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.sdk-feature
+
+plugin@org.eclipse.emf.ecoretools=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools
+plugin@org.eclipse.emf.ecoretools.diagram=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.diagram
+plugin@org.eclipse.emf.ecoretools.properties=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.properties
+
+plugin@org.eclipse.emf.ecoretools.diagram.ui.outline=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.diagram.ui.outline
+plugin@org.eclipse.emf.ecoretools.filters=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.filters
+plugin@org.eclipse.emf.ecoretools.tabbedproperties=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.tabbedproperties
+
+
+!*** Documentation Ecore Tools Feature ***
+feature@org.eclipse.emf.ecoretools.doc=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/doc/org.eclipse.emf.ecoretools.doc-feature
+plugin@org.eclipse.emf.ecoretools.doc=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/doc/org.eclipse.emf.ecoretools.doc
+
+
+!*** Examples Ecore Tools Feature ***
+feature@org.eclipse.emf.ecoretools.examples=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.examples-feature
+plugin@org.eclipse.emf.ecoretools.examples=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/examples/org.eclipse.emf.ecoretools.examples
+
+!*** Capabilities Ecore Tools Feature ***
+feature@org.eclipse.emf.ecoretools.ui.capabilities=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.ui.capabilities-feature
+plugin@org.eclipse.emf.ecoretools.ui.capabilities=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/org.eclipse.emf.ecoretools.ui.capabilities
+
+
+!*** Tests Ecore Tools Feature ***
+feature@org.eclipse.emf.ecoretools.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/features/org.eclipse.emf.ecoretools.tests-feature
+plugin@org.eclipse.emf.ecoretools.tests=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/tests/org.eclipse.emf.ecoretools.tests
+plugin@org.eclipse.emf.ecoretools.tests.diagram.ui.core=HEAD,:pserver:anonymous@dev.eclipse.org:/cvsroot/modeling,,org.eclipse.emf/org.eclipse.emf.ecoretools/tests/org.eclipse.emf.ecoretools.tests.diagram.ui.core
