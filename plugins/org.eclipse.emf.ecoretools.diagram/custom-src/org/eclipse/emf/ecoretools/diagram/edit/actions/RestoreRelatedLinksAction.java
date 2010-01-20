@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2008 Anyware Technologies
+ * Copyright (c) 2008, 2009 Anyware Technologies and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,8 +9,9 @@
  * Contributors:
  *    Gilles Cannenterre (Anyware Technologies) - initial API and implementation
  *    Jacques LESCOT (Anyware Technologies) - Bug #238052 : Restore related elements actions should be also available for shortcut elements
+ *    Mariot Chauvin (Obeo)  - Bug #294090 : NPE could be thrown in RestoreRelatedLinksAction#isEnabled
  *
- * $Id: RestoreRelatedLinksAction.java,v 1.10 2008/12/24 15:52:05 jlescot Exp $
+ * $Id: RestoreRelatedLinksAction.java,v 1.11 2010/01/20 16:56:03 jlescot Exp $
  */
 package org.eclipse.emf.ecoretools.diagram.edit.actions;
 
@@ -107,7 +108,11 @@ public class RestoreRelatedLinksAction extends Action {
 	 */
 	@Override
 	public boolean isEnabled() {
-		return !getSelection().isEmpty() && EPackageEditPart.MODEL_ID.equals(getCurrentDiagram().getType());
+		if (!getSelection().isEmpty()) {
+			final Diagram diagram = getCurrentDiagram();
+			return diagram != null && EPackageEditPart.MODEL_ID.equals(getCurrentDiagram().getType());
+		}
+		return false;	
 	}
 
 }
