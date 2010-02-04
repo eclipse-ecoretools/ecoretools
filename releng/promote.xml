@@ -24,10 +24,10 @@
 		<dirname file="${relengBuilderDir}" property="workspaceDir" />
 
 		<!-- 
-			can build in /tmp, eg., in /tmp/build, or in workspace, eg.,
+			can build in ${java.io.tmpdir}/build, eg., in /tmp/build, or in workspace, eg.,
 			${relengBuilderDir}/build
 		-->
-		<property name="writableBuildRoot" value="/tmp/build" />
+		<property name="writableBuildRoot" value="${java.io.tmpdir}/build" />
 
 		<!-- 
 			can be simple path, eg., 
