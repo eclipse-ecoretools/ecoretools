@@ -27,7 +27,7 @@
 			can build in ${java.io.tmpdir}/build, eg., in /tmp/build, or in workspace, eg.,
 			${relengBuilderDir}/build
 		-->
-		<property name="writableBuildRoot" value="${java.io.tmpdir}/build" />
+		<property name="writableBuildRoot" value="${relengBuilderDir}/build" />
 
 		<!-- 
 			can be simple path, eg., 
