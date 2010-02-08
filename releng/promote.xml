@@ -1,6 +1,8 @@
 <project default="run" name="org.eclipse.emf.ecoretools.releng/promote.xml - Promote a build from build server to production server">
 	<target name="run">
 		<!--
+			TODO: Copy this script into your .releng project and rename it to promote.xml
+			
 			To use this script, you must have configured a promote.properties file.
 			
 			Then, run commandline:
@@ -35,7 +37,7 @@
 			${writableBuildRoot}/${topprojectName}/${projectName}/downloads/drops/${version}/${buildType}${buildTimestamp} or
 			${writableBuildRoot}/${topprojectName}/${projectName}/${subprojectName}/downloads/drops/${version}/${buildType}${buildTimestamp}
 		-->
-		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}" />
+		<property name="buildDir" value="${writableBuildRoot}/${buildType}${buildTimestamp}-ecoretools" />
 
 		<!-- invoke common promotion script -->
 		<property name="relengCommonBuilderDir" value="${workspaceDir}/org.eclipse.dash.common.releng" />
