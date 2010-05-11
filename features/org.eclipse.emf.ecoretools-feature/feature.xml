@@ -40,17 +40,6 @@ http://www.eclipse.org/legal/epl-v10.html
          id="org.eclipse.emf.ecoretools.utils"
          version="0.0.0"/>
 
-   <requires>
-      <import feature="org.eclipse.emf" version="2.4.0"/>
-      <import feature="org.eclipse.ocl" version="3.0.0"/>
-      <import feature="org.eclipse.emf.query" version="1.2.0"/>
-      <import feature="org.eclipse.emf.transaction" version="1.2.0"/>
-      <import feature="org.eclipse.emf.validation" version="1.2.0"/>
-      <import feature="org.eclipse.gef" version="3.4.0"/>
-      <import feature="org.eclipse.gmf" version="1.1.0"/>
-      <import feature="org.eclipse.platform" version="3.4.0"/>
-   </requires>
-
    <plugin
          id="org.eclipse.emf.ecoretools"
          download-size="0"
