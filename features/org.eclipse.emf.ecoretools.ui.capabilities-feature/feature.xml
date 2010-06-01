@@ -26,8 +26,8 @@ v1.0
    </license>
 
    <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
-      <discovery label="%updateSiteName" url="http://download.eclipse.org/modeling/emft/updates/"/>
+      <update label="%updateSiteName" url="http://www.eclipse.org/modeling/updates/"/>
+      <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates/"/>
    </url>
 
    <requires>
