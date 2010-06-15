@@ -8,8 +8,4 @@
 		<topic label="Ecore Tools FAQ" href="http://wiki.eclipse.org/EcoreTools_FAQ" />
 	</topic>
 
-	<topic label="Reference">
-		<link toc="topics_Reference.xml"/>
-	</topic>
-
 </toc>

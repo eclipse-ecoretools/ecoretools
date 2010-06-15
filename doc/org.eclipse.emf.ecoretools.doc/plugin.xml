@@ -9,28 +9,4 @@
 	<index path="index"/>
   </extension>
 
-  <!-- ====================================================================== -->
-  <!-- Define TOCs                                                            -->
-  <!-- ====================================================================== -->
-
-   <extension point="org.eclipse.help.toc">
-       <toc file="topics_Reference.xml" />
-   </extension>
-
-<!-- ============================================================================= -->
-<!-- Define Javadoc locations                                                      -->
-<!-- ============================================================================= -->
-   <extension point="org.eclipse.pde.core.javadoc">
-       <javadoc path="doc.zip!/references/javadoc" archive="true">
-          <!-- @pluginIDs@ -->
-          <!-- list plugin IDs here, eg. <plugin id="org.eclipse.foo.bar"/> <plugin id="org.eclipse.foo.baz"/> -->
-          <plugin id="org.eclipse.emf.ecoretools"/>
-          <plugin id="org.eclipse.emf.ecoretools.diagram"/>
-          <plugin id="org.eclipse.emf.ecoretools.diagram.ui.outline"/>
-          <plugin id="org.eclipse.emf.ecoretools.filters"/>
-          <plugin id="org.eclipse.emf.ecoretools.properties"/>
-          <plugin id="org.eclipse.emf.ecoretools.tabbedproperties"/>
-       </javadoc>
-   </extension>
-
 </plugin>
