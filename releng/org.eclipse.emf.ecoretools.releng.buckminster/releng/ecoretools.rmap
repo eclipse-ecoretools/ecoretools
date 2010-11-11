@@ -2,41 +2,53 @@
 <rmap xmlns="http://www.eclipse.org/buckminster/RMap-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0"
 >
-	<locator pattern="^org\.eclipse\.emf\.ecoretools\.(?:releng|build)(?:\..+)?$" searchPathRef="releng" />
+	<locator pattern="^org\.eclipse\.emf\.ecoretools\.(?:releng|build)(?:\..+)?$" searchPathRef="ecoretools.releng" />
 	<locator pattern="^org\.eclipse\.emf\.ecoretools(?:\..+)?$" searchPathRef="ecoretools" />
 
+	<locator pattern="^org\.eclipse\.emf\.(?:compare|transaction|validation|workspace)(?:\..+)?$" searchPathRef="modeling" />
+	<locator pattern="^org\.eclipse\.emf(?:\..+)?$" searchPathRef="emf" />
+	<locator pattern="^org\.eclipse\.gmf(?:\..+)?$" searchPathRef="gmf" />
+	<locator pattern="^org\.eclipse\.gef(?:\..+)?$" searchPathRef="gef" />
+	<locator pattern="^org\.eclipse\.ocl(?:\..+)?$" searchPathRef="ocl" />
+	<locator pattern="^org\.w3c(?:\..+)?$" searchPathRef="gmf" />
+	<locator pattern="^org\.apache\.batik(?:\..+)?$" searchPathRef="gmf" />
+	<locator pattern="^javax\.xml$" searchPathRef="gmf" />
+	<locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef" />
+	<locator pattern="^lpg\.runtime\.java$" searchPathRef="ocl" />
+	<locator searchPathRef="platform" />
+
 	<searchPath name="ecoretools">
-		<provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="osgi.bundle" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/plugins/{1}">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="eclipse.feature" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="eclipse.feature" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/features/{1}-feature">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="osgi.bundle" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/doc/{1}">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="eclipse.feature" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="eclipse.feature" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/doc/{1}-feature">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="osgi.bundle" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/examples/{1}">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="osgi.bundle" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="osgi.bundle" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/tests/{1}">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
@@ -44,14 +56,14 @@
 		</provider>
 	</searchPath>
 
-	<searchPath name="releng">
-		<provider componentTypes="buckminster" readerType="cvs" source="true" mutable="false">
+	<searchPath name="ecoretools.releng">
+		<provider componentTypes="buckminster" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/releng/{1}">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
 			</uri>
 		</provider>
-		<provider componentTypes="eclipse.feature" readerType="cvs" source="true" mutable="false">
+		<provider componentTypes="eclipse.feature" readerType="cvs" source="true">
 			<uri format="{0},org.eclipse.emf/org.eclipse.emf.ecoretools/releng/{1}-feature">
 				<bc:propertyRef key="source.repository.location" />
 				<bc:propertyRef key="buckminster.component" />
@@ -59,5 +71,69 @@
 		</provider>
 	</searchPath>
 
+	<searchPath name="emf">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/modeling/emf/emf/updates/2.7milestones">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="modeling">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/modeling/emf/updates">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="gef">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/tools/gef/updates/milestones">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="gmf">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/modeling/gmf/updates">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="ocl">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/modeling/mdt/ocl/updates">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
+	<searchPath name="platform">
+		<provider componentTypes="eclipse.feature,osgi.bundle" readerType="p2" source="false" mutable="false"
+			resolutionFilter="(resolve.target.platform=true)"
+		>
+			<uri format="{0}/eclipse/updates/3.7milestones">
+				<bc:propertyRef key="eclipse.download" />
+			</uri>
+		</provider>
+	</searchPath>
+
 	<property key="source.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling" />
+
+	<property key="eclipse.download" value="http://download.eclipse.org" />
+
+	<property key="resolve.target.platform" value="false" />
 </rmap>
