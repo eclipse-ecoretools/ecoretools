@@ -129,16 +129,6 @@
 				<bc:propertyRef key="eclipse.download" />
 			</uri>
 		</provider>
-	    <provider componentTypes="osgi.bundle" readerType="cvs" mutable="false">
-	      <uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}">
-	        <bc:propertyRef key="buckminster.component"/>
-	      </uri>
-	    </provider>
-	    <provider componentTypes="eclipse.feature" readerType="cvs" mutable="false">
-	      <uri format=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse,{0}-feature">
-	        <bc:propertyRef key="buckminster.component"/>
-	      </uri>
-	    </provider>
 	</searchPath>
 
 	<property key="source.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling" />
