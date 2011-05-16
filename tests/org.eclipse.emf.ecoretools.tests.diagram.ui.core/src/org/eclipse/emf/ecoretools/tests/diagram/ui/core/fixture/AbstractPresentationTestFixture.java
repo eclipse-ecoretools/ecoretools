@@ -44,6 +44,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.EditorPart;
+import org.eclipse.ui.part.FileEditorInput;
 
 /**
  * @author choang
@@ -194,6 +195,8 @@ public abstract class AbstractPresentationTestFixture extends Assert implements 
 	 * diagram for the tests.
 	 */
 	public void setup() throws Exception {
+		// first, ensure active perspective is correct
+		PlatformUI.getWorkbench().showPerspective("org.eclipse.emf.ecoretools.perspective", PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		createProject();
 		createDiagram();
 		createResource();
@@ -290,7 +293,8 @@ public abstract class AbstractPresentationTestFixture extends Assert implements 
 
 		IDEEditorUtil.openDiagram(getDiagramFile(), page.getWorkbenchWindow(), false, new NullProgressMonitor());
 
-		setDiagramWorkbenchPart((IDiagramWorkbenchPart) IDE.openEditor(page, getDiagramFile(), true));
+		IEditorPart editor = page.openEditor(new FileEditorInput(getDiagramFile()), "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID", true, IWorkbenchPage.MATCH_ID);
+		setDiagramWorkbenchPart((IDiagramWorkbenchPart) editor);
 		setDiagramEditPart(getDiagramWorkbenchPart().getDiagramEditPart());
 		setDiagram(getDiagramEditPart().getDiagramView());
 		setResource(getDiagram().eResource());
