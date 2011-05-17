@@ -290,13 +290,13 @@ public abstract class AbstractPresentationTestFixture extends Assert implements 
 		assertTrue("creation of diagram failed", getDiagramFile() != null); //$NON-NLS-1$
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
-		IDEEditorUtil.openDiagram(getDiagramFile(), page.getWorkbenchWindow(), false, new NullProgressMonitor());
-
 		IEditorPart editor = page.openEditor(new FileEditorInput(getDiagramFile()), "org.eclipse.emf.ecoretools.diagram.part.EcoreDiagramEditorID", true, IWorkbenchPage.MATCH_ID);
+
 		setDiagramWorkbenchPart((IDiagramWorkbenchPart) editor);
 		setDiagramEditPart(getDiagramWorkbenchPart().getDiagramEditPart());
 		setDiagram(getDiagramEditPart().getDiagramView());
 		setResource(getDiagram().eResource());
+		
 	}
 
 	public boolean closeDiagram() {
