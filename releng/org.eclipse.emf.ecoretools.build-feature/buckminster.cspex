@@ -2,7 +2,7 @@
 <cs:cspecExtension xmlns:com="http://www.eclipse.org/buckminster/Common-1.0" xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0">
 	<cs:dependencies>
 		<cs:dependency name="org.eclipse.emf.ecoretools.releng.buckminster" componentType="buckminster" />
-		<cs:dependency name="org.eclipse.emf.ecoretools.tests" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.emf.ecoretools.tests" componentType="eclipse.feature" />
 
 		<!-- Target Platform dependencies not detected by Buckminster -->
 		<cs:dependency name="org.eclipse.platform" componentType="eclipse.feature" />
