@@ -14,7 +14,7 @@
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="location" value="${workspace_loc}/../junit-workspace"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.eclipse.emf.ecoretools.tests/src/org/eclipse/emf/ecoretools/tests/testsuites/AllTests.java"/>
+<listEntry value="${workspace_loc}/plugins/org.eclipse.emf.ecoretools.tests/src/org/eclipse/emf/ecoretools/tests/testsuites/AllTests.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
