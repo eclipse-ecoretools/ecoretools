@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="ecoretools.rmap">
 	<cq:rootRequest name="org.eclipse.emf.ecoretools.build" componentType="eclipse.feature"/>
+	<cq:rootRequest name="org.eclipse.emf.ecoretools.tests" componentType="eclipse.feature"/>
+	<cq:rootRequest name="org.eclipse.emf.ecoretools.tests" componentType="eclipse.bundle"/>
 
 	<cq:advisorNode namePattern="^org\.eclipse\.emf\.ecoretools(?:\..*)?\.source$" skipComponent="true"/>
 	<cq:advisorNode filter="(resolve.target.platform=true)" useTargetPlatform="false"/>
