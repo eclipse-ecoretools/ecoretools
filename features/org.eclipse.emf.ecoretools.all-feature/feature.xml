@@ -11,7 +11,7 @@
 <feature
       id="org.eclipse.emf.ecoretools.all"
       label="%featureName"
-      version="0.10.1.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%providerName"
       image="modeling32.png">
 
