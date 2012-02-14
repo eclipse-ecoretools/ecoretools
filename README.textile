@@ -9,6 +9,10 @@ h2. Building
 
 To build the project you need to install Maven 3. Once you have maven go into the build project @org.eclipse.emf.ecoretools.build@ and type
 
-@mvn clean verify@
+@mvn clean package@
 
 The final result of the build is an update site in the @org.eclipse.emf.ecoretools.update@ project.
+
+To run the unit tests you'll need to type
+
+@mvn clean verify -Dmaven.test.failure.ignore=true  --fail-at-end@
