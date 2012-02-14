@@ -217,9 +217,6 @@
 	   <url>http://download.eclipse.org/releases/indigo</url>          
         </repository>        
       </repositories>
-      <modules>
-	  <module>plugins/org.eclipse.emf.compare.mpatch.binding</module>    
-      </modules>
     </profile>
     
     
