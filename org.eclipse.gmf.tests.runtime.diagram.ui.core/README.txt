@@ -1,1 +1,0 @@
-Contents of this project has moved into org.eclipse.emf.ecoretools.tests.diagram.ui.core
