@@ -1,0 +1,14 @@
+h1 EMF EcoreTools
+
+
+The Ecore Tools component provides a complete environment to create, edit and maintain Ecore models. This component eases handling of Ecore models with a Graphical Ecore Editor and bridges to other existing Ecore tools (Validation, Search, Compare, Emfatic, generators...). The Graphical Ecore Editor implements multi-diagram support, a custom tabbed properties view, validation feedbacks, refactoring capabilities... The long-term goal is to provide the same level of services as does JDT for Java.
+
+!http://wiki.eclipse.org/images/5/56/EcoreDiagramOverview_tmb.png!
+
+h2. Building
+
+To build the project you need to install Maven 3. Once you have maven go into the build project @org.eclipse.emf.ecoretools.build@ and type
+
+@mvn clean verify@
+
+The final result of the build is an update site in the @org.eclipse.emf.ecoretools.update@ project.
