@@ -16,3 +16,5 @@ The final result of the build is an update site in the @org.eclipse.emf.ecoretoo
 To run the unit tests you'll need to type
 
 @mvn clean verify -Dmaven.test.failure.ignore=true  --fail-at-end@
+
+@mvn clean verify  --projects org.eclipse.emf.ecoretools.update,org.eclipse.emf.ecoretools.tests -am -Dmaven.test.failure.ignore=true  --fail-at-end@

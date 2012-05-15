@@ -36,7 +36,10 @@ http://www.eclipse.org/legal/epl-v10.html
       <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates/"/>
    </url>
 
-  
+   <includes
+         id="org.eclipse.emf.ecoretools"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.emf.ecoretools.source"
          download-size="0"
@@ -57,7 +60,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.emf.ecoretools.properties.source"
          download-size="0"
@@ -65,7 +68,7 @@ http://www.eclipse.org/legal/epl-v10.html
          version="0.0.0"
          unpack="false"/>
 
-  <plugin
+   <plugin
          id="org.eclipse.emf.ecoretools.diagram.ui.outline.source"
          download-size="0"
          install-size="0"
