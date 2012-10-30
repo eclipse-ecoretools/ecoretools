@@ -18,8 +18,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
@@ -77,7 +79,7 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void run(IAction action) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
@@ -85,7 +87,7 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 		EObject diagramRoot = null;
 		try {
 			Resource resource = resourceSet.getResource(domainModelURI, true);
-			diagramRoot = (EObject) resource.getContents().get(0);
+			diagramRoot = (EObject) EcoreUtil.getObjectByType(resource.getContents(), EcorePackage.Literals.EPACKAGE);
 		} catch (WrappedException ex) {
 			EcoreDiagramEditorPlugin.getInstance().logError("Unable to load resource: " + domainModelURI, ex); //$NON-NLS-1$
 		}

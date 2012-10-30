@@ -14,9 +14,14 @@
 
 package org.eclipse.emf.ecoretools.diagram.part;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.provider.IWrapperItemProvider;
+import org.eclipse.emf.edit.provider.ItemProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -63,13 +68,13 @@ public class ModelElementSelectionPage extends WizardPage {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setModelElement(EObject modelElement) {
 		selectedModelElement = modelElement;
 		if (modelViewer != null) {
 			if (selectedModelElement != null) {
-				modelViewer.setInput(selectedModelElement.eResource());
+				setModelViewerInput();
 				modelViewer.setSelection(new StructuredSelection(selectedModelElement));
 			} else {
 				modelViewer.setInput(null);
@@ -78,8 +83,20 @@ public class ModelElementSelectionPage extends WizardPage {
 		}
 	}
 
+	protected void setModelViewerInput() {
+		if (modelViewer != null && selectedModelElement != null) {
+			List<EObject> roots = new ArrayList<EObject>();
+			for (EObject eObject : selectedModelElement.eResource().getContents()) {
+				if (eObject.eClass().getEPackage() == EcorePackage.eINSTANCE) {
+					roots.add(eObject);
+				}
+			}
+			modelViewer.setInput(new ItemProvider(roots));
+		}
+	}
+
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
@@ -103,7 +120,7 @@ public class ModelElementSelectionPage extends WizardPage {
 		modelViewer.setContentProvider(new AdapterFactoryContentProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory()));
 		modelViewer.setLabelProvider(new AdapterFactoryLabelProvider(EcoreDiagramEditorPlugin.getInstance().getItemProvidersAdapterFactory()));
 		if (selectedModelElement != null) {
-			modelViewer.setInput(selectedModelElement.eResource());
+			setModelViewerInput();
 			modelViewer.setSelection(new StructuredSelection(selectedModelElement));
 		}
 		modelViewer.addSelectionChangedListener(new ISelectionChangedListener() {

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceStatus;
@@ -43,12 +44,15 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.workspace.impl.WorkspaceCommandStackImpl;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
@@ -169,7 +173,45 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 
 		editingDomain = TransactionalEditingDomain.Registry.INSTANCE.getEditingDomain(getEditingDomainID());
 		if (editingDomain == null) {
-			editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
+			editingDomain = new DiagramEditingDomainFactory() {
+				@Override
+				public TransactionalEditingDomain createEditingDomain(IOperationHistory history)  {
+					WorkspaceCommandStackImpl stack = new WorkspaceCommandStackImpl(history);
+
+					TransactionalEditingDomain result = new DiagramEditingDomain(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE), stack) {
+						@Override
+						public boolean isReadOnly(Resource resource)  {
+							// Consider resource's loaded from the platform, Jvm Types resources, GenModel resources, and Xcore resources read only.
+							//
+							if (super.isReadOnly(resource) || resource == null) {
+								return true;
+							} else {
+								URI uri = resource.getURI();
+								boolean result =
+									uri.isPlatformPlugin() ||
+									"genmodel".equals(uri.fileExtension()) ||
+									"xcore".equals(uri.fileExtension()) ||
+									"java".equals(uri.scheme()) ||
+									uri.isPlatformResource() && !getResourceSet().getURIConverter().normalize(uri).isPlatformResource();
+								if (resourceToReadOnlyMap != null)
+								{
+								  resourceToReadOnlyMap.put(resource,  result);
+								}
+								return result;
+							}
+						}
+					};
+
+					result.getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+
+					mapResourceSet(result);
+
+					configure(result);
+
+					return result;
+				}
+			}.createEditingDomain();
+
 			editingDomain.setID(getEditingDomainID()); //$NON-NLS-1$
 			TransactionalEditingDomain.Registry.INSTANCE.add(editingDomain.getID(), editingDomain);
 		}

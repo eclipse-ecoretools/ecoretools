@@ -78,6 +78,21 @@
       </objectContribution>
    </extension>
 
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action-xcore">
+      <objectContribution
+            id="org.eclipse.emf.ecoretools.diagram.InitDiagram"
+            nameFilter="*.xcore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eclipse.emf.ecoretools.diagram.part.EcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eclipse.emf.ecoretools.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
       <?gmfgen generated="true"?>
       <GlobalActionHandlerProvider

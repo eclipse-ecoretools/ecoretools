@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -41,7 +42,6 @@ import org.eclipse.emf.edit.ui.action.CreateChildAction;
 import org.eclipse.emf.edit.ui.action.CreateSiblingAction;
 import org.eclipse.emf.edit.ui.action.CutAction;
 import org.eclipse.emf.edit.ui.action.DeleteAction;
-import org.eclipse.emf.edit.ui.action.LoadResourceAction;
 import org.eclipse.emf.edit.ui.action.PasteAction;
 import org.eclipse.emf.edit.ui.action.RedoAction;
 import org.eclipse.emf.edit.ui.action.UndoAction;
@@ -443,8 +443,9 @@ public abstract class AbstractModelNavigator extends Composite implements IMenuL
 			// manager.appendToGroup(IOutlineMenuConstants.EDIT_GROUP,
 			// deleteAction);
 
-			// Add load resource action
-			LoadResourceAction loadAction = new LoadResourceAction(domainProvider.getEditingDomain());
+			// Add a load resource action using Ecore's extended action.
+			EcoreActionBarContributor.ExtendedLoadResourceAction loadAction = new EcoreActionBarContributor.ExtendedLoadResourceAction();
+			loadAction.setEditingDomain(domainProvider.getEditingDomain());
 			manager.appendToGroup(IOutlineMenuConstants.ADDITIONS_END_GROUP, loadAction);
 		}
 	}

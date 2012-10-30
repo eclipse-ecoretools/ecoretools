@@ -49,12 +49,16 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.EMFCommandOperation;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gef.EditPartViewer;
+import org.eclipse.gef.commands.CommandStack;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramDropTargetListener;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocumentProvider;
@@ -533,5 +537,43 @@ public class EcoreDiagramEditor extends DiagramDocumentEditor implements IGotoMa
 		action = new NextDiagramAction(this);
 		registry.registerAction(action);
 
+	}
+
+	@Override
+	protected void configureDiagramEditDomain() {
+
+		DiagramEditDomain editDomain = (DiagramEditDomain)getEditDomain();
+
+		 if (editDomain != null) {
+			CommandStack stack = editDomain.getCommandStack();
+
+			if (stack != null) {
+				// dispose the old stack
+				stack.dispose();
+			}
+
+			// create and assign the new specialized stack that allows commands to execute only if the affected files aren't read only
+			//
+			DiagramCommandStack diagramStack = new DiagramCommandStack(getDiagramEditDomain()) {
+					@Override
+					protected void execute(ICommand command, IProgressMonitor progressMonitor) {
+					if (command != null) {
+						for (Object object : command.getAffectedFiles()) {
+							if ("xcore".equals(((IFile)object).getFileExtension())) {
+								return;
+							}
+						}
+					}
+					super.execute(command, progressMonitor);
+				}
+			};
+			diagramStack.setOperationHistory(getOperationHistory());
+
+			// changes made on the stack can be undone from this editor
+			diagramStack.setUndoContext(getUndoContext());
+
+			editDomain.setCommandStack(diagramStack);
+			editDomain.setActionManager(createActionManager());
+		}
 	}
 }

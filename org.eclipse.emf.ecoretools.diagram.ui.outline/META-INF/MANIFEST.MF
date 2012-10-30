@@ -2,11 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.diagram.ui.outline;singleton:=true
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: org.eclipse.emf.ecoretools.diagram.ui.outline.internal.Activator
 Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.emf.edit.ui,
+ org.eclipse.emf.ecore.editor,
  org.eclipse.core.expressions
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.emf.ecoretools.diagram.ui.outline,

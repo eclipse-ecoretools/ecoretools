@@ -14,6 +14,7 @@ package org.eclipse.emf.ecoretools.diagram.part;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.swt.widgets.Shell;
@@ -26,14 +27,14 @@ import org.eclipse.ui.handlers.HandlerUtil;
 public class LoadResourceAction extends AbstractHandler {
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart diagramEditor = HandlerUtil.getActiveEditorChecked(event);
 		Shell shell = diagramEditor.getEditorSite().getShell();
 		assert diagramEditor instanceof DiagramEditor;
 		TransactionalEditingDomain editingDomain = ((DiagramEditor) diagramEditor).getEditingDomain();
-		org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog loadResourceDialog = new org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog(shell, editingDomain);
+		org.eclipse.emf.edit.ui.action.LoadResourceAction.LoadResourceDialog loadResourceDialog = new EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog(shell, editingDomain);
 		loadResourceDialog.open();
 		return null;
 	}

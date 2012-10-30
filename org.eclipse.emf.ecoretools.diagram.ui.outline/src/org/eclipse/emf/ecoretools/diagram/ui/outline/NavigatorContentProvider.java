@@ -19,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -98,6 +99,16 @@ public class NavigatorContentProvider implements ITreeContentProvider {
 		// children = Arrays.asList(modelChildren);
 		for (int i = 0; i < modelChildren.length; i++) {
 			Object child = modelChildren[i];
+
+			// Filter out children that aren't from the Ecore model.
+			//
+			if (child instanceof EObject) {
+				EObject eObject = (EObject)child;
+				if (eObject.eClass().getEPackage() != EcorePackage.eINSTANCE) {
+					continue;
+				}
+			}
+
 			children.add(child);
 		}
 
@@ -157,7 +168,16 @@ public class NavigatorContentProvider implements ITreeContentProvider {
 	 */
 	public Object[] getElements(Object inputElement) {
 		if (inputElement instanceof Resource) {
-			List<Object> children = new ArrayList<Object>(((Resource) inputElement).getContents());
+			// Include only children from the Ecore model to exclude children for Xcore-based models.
+			// Use the content provider so that changes to the resource's children notify the view.
+			//
+			List<Object> children = new ArrayList<Object>();
+			Object[] objects = delegatedModelProvider.getChildren(inputElement);
+			for (Object object : objects) {
+				if (object instanceof EObject && ((EObject)object).eClass().getEPackage() == EcorePackage.eINSTANCE) {
+					children.add(object);
+				}
+			}
 			children.add(resources);
 			return children.toArray();
 		}

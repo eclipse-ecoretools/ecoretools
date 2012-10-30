@@ -17,6 +17,7 @@ package org.eclipse.emf.ecoretools.diagram.ui.outline;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
@@ -58,6 +59,14 @@ public class AdditionalResources {
 			if (resourceSet.getResources().get(1) == resource) {
 				continue;
 			}
+
+			// Filter out JvmTypes and GenModel resources that come from Xcore-based models.
+			//
+			URI uri = resource.getURI();
+			if ("java".equals(uri.scheme()) || "genmodel".equals(uri.fileExtension())) {
+				continue;
+			}
+
 			additionnalResources.add(resource);
 			// res.remove(res.size() - 1);
 			// res.remove(res.size() - 1);
