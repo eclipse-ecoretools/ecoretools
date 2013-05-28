@@ -22,11 +22,13 @@
   </properties>
     
  <repositories>
+ <!--
     <repository>
       <id>local-p2</id>
       <layout>p2</layout>
       <url>${local-p2-site}</url>
     </repository>
+    -->
   </repositories>
       
   <build>
