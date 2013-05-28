@@ -189,6 +189,12 @@
           <activeByDefault>true</activeByDefault>
       </activation>
       <repositories>
+        <repository><id>platform</id><layout>p2</layout>
+		<url>http://download.eclipse.org/releases/kepler</url>
+        </repository>
+      </repositories>
+      <!--
+      <repositories>
         <repository><id>emf</id><layout>p2</layout>
            <url>http://download.eclipse.org/modeling/emf/emf/updates/2.8-I-builds</url>          
         </repository>
@@ -220,6 +226,7 @@
           <url>http://download.eclipse.org/tools/gef/updates/milestones</url>
         </repository>	
       </repositories>
+      -->
     </profile>
     <profile>
       <id>juno</id>
