@@ -15,7 +15,7 @@
       provider-name="%providerName"
       image="modeling32.png">
 
-   <description url="http://www.eclipse.org/modeling/emft/?project=ecoretools">
+   <description url="http://wiki.eclipse.org/index.php/Ecore_Tools">
       %description
    </description>
 
@@ -30,11 +30,7 @@ http://www.eclipse.org/legal/epl-v10.html
    <license url="%licenseURL">
       %license
    </license>
-
-   <url>
-      <update label="%updateSiteName" url="http://www.eclipse.org/modeling/updates/"/>
-      <discovery label="%updateSiteName" url="http://www.eclipse.org/modeling/updates/"/>
-   </url>
+   
 
    <plugin
          id="org.eclipse.emf.ecoretools"
