@@ -13,13 +13,29 @@
  **********************************************************************/
 package org.eclipse.emf.ecoretools.diagram.providers;
 
+import org.eclipse.emf.ecoretools.diagram.edit.parts.EPackageEditPart;
 import org.eclipse.gef.ConnectionEditPart;
+import org.eclipse.gmf.runtime.common.core.service.IOperation;
 import org.eclipse.gmf.runtime.diagram.ui.providers.TopDownProvider;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * Override the default behavior until the bug#159558 is fixed
  */
 public class DownTopProvider extends TopDownProvider {
+
+	@Override
+	public boolean provides(IOperation operation) {
+		View cview = getContainer(operation);
+		if (cview == null)
+			return false;
+		Diagram diag = cview.getDiagram();
+		if (diag != null) {
+			return EPackageEditPart.MODEL_ID.equals(diag.getType());
+		}
+		return super.provides(operation);
+	}
 
 	/**
 	 * Code snippet to be added in the plugin.xml file : <extension
