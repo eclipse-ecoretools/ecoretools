@@ -40,6 +40,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
+import org.eclipse.sirius.business.api.helper.SiriusUtil;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.util.Option;
@@ -47,9 +48,11 @@ import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
 import org.eclipse.sirius.common.tools.api.util.StringUtil;
 import org.eclipse.sirius.common.ui.tools.api.util.EclipseUIUtil;
 import org.eclipse.sirius.ui.business.api.dialect.DialectUIManager;
+import org.eclipse.sirius.ui.tools.api.wizards.page.SiriussSelectionWizardPage;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DView;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
+import org.eclipse.sirius.viewpoint.provider.SiriusEditPlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -83,7 +86,7 @@ public class EcoreModelerWizard extends EmptyProjectWizard {
 
     private EcoreModelSpecPage modelPage;
 
-    private ViewpointsSelectionWizardPage viewpointsSelectionWizardPage;
+    private SiriussSelectionWizardPage viewpointsSelectionWizardPage;
 
     /**
      * Constructor.
@@ -105,7 +108,7 @@ public class EcoreModelerWizard extends EmptyProjectWizard {
      */
     @Override
     public void addPages() {
-        WizardNewProjectCreationPage wizardNewProjectCreationPage = new WizardNewProjectCreationPage(ViewpointEditPlugin.getPlugin().getString("_UI_ModelingProjectWizard_label")) {
+        WizardNewProjectCreationPage wizardNewProjectCreationPage = new WizardNewProjectCreationPage(SiriusEditPlugin.getPlugin().getString("_UI_ModelingProjectWizard_label")) {
 
             @Override
             public void createControl(Composite parent) {
@@ -155,7 +158,7 @@ public class EcoreModelerWizard extends EmptyProjectWizard {
         modelPage.setTitle("Model settings"); //$NON-NLS-1$ 
         modelPage.setDescription("Define the model settings"); //$NON-NLS-1$ 
 
-        viewpointsSelectionWizardPage = new ViewpointsSelectionWizardPage(null, Lists.newArrayList(DESIGN_VIEWPOINT_NAME)) {
+        viewpointsSelectionWizardPage = new SiriussSelectionWizardPage(null, Lists.newArrayList(DESIGN_VIEWPOINT_NAME)) {
             @Override
             protected Collection<String> computeSemanticFileExtensions(Session session) {
                 Set<String> fileExtensions = new HashSet<String>();
@@ -183,7 +186,7 @@ public class EcoreModelerWizard extends EmptyProjectWizard {
 
         if (finished && project != null) {
             final EcoreModelingProjectCreationOperation ecoreModelingProjectCreationOperation = new EcoreModelingProjectCreationOperation(project, modelPage.getEPackage(),
-                    modelPage.getEcoreFileName(), modelPage.getGenModelFileName(), modelPage.getRepresentationFileName(), new LinkedHashSet<Viewpoint>(viewpointsSelectionWizardPage.getViewpoints()));
+                    modelPage.getEcoreFileName(), modelPage.getGenModelFileName(), modelPage.getRepresentationFileName(), new LinkedHashSet<Viewpoint>(viewpointsSelectionWizardPage.getSiriuss()));
             try {
                 getContainer().run(true, false, ecoreModelingProjectCreationOperation);
             } catch (InvocationTargetException e) {
@@ -546,7 +549,7 @@ public class EcoreModelerWizard extends EmptyProjectWizard {
         }
 
         public String getRepresentationFileName() {
-            return getPackageName() + "." + ViewPointUtil.SESSION_RESOURCE_EXTENSION; //$NON-NLS-1$ 
+            return getPackageName() + "." + SiriusUtil.SESSION_RESOURCE_EXTENSION; //$NON-NLS-1$ 
         }
 
         public String getEcoreFileName() {

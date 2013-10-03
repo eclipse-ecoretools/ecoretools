@@ -191,8 +191,11 @@
           <activeByDefault>true</activeByDefault>
       </activation>
       <repositories>    
-          <repository><id>od</id><layout>p2</layout>
-		   <url>http://update.obeo.fr/maintenance/od/6.2/kepler/update/repository/</url>
+          <repository><id>sirius</id><layout>p2</layout>
+              <url>http://download.eclipse.org/sirius/updates/nightly/0.1/</url>
+        </repository>
+        <repository><id>rest-of-the-world</id><layout>p2</layout>
+		<url>http://download.eclipse.org/releases/kepler</url>
         </repository>
       </repositories>    
     </profile>   

@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.sirius.business.api.componentization.SiriusRegistry;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.osgi.framework.BundleContext;
 
@@ -57,7 +58,7 @@ public class EcoreToolsDesignPlugin extends Plugin {
     public void start(final BundleContext context) throws Exception {
         super.start(context);
         viewpoints = new HashSet<Viewpoint>();
-        viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/ecore.odesign"));
+        viewpoints.addAll(SiriusRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/ecore.odesign"));
     }
 
     /**
@@ -70,7 +71,7 @@ public class EcoreToolsDesignPlugin extends Plugin {
         plugin = null;
         if (viewpoints != null) {
             for (final Viewpoint viewpoint : viewpoints) {
-                ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
+            	SiriusRegistry.getInstance().disposeFromPlugin(viewpoint);
             }
             viewpoints.clear();
             viewpoints = null;

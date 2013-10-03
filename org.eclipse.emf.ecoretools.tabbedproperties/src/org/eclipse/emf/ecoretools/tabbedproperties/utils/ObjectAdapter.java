@@ -17,8 +17,7 @@ package org.eclipse.emf.ecoretools.tabbedproperties.utils;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-
-import fr.obeo.dsl.viewpoint.DSemanticDecorator;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 
 /**
  * Provides a single static method to adapt a given object in an EObject
@@ -46,7 +45,7 @@ public final class ObjectAdapter {
 	 */
 	public static EObject adaptObject(Object object) {
 		EObject eObj = (EObject) adaptObject(object, EObject.class);
-		if (eObj instanceof DSemanticDecorator) {
+		if (eObj instanceof org.eclipse.sirius.viewpoint.DSemanticDecorator) {
 			eObj = ((DSemanticDecorator) eObj).getTarget();
 		}
 		return eObj;
