@@ -18,6 +18,8 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 
+import fr.obeo.dsl.viewpoint.DSemanticDecorator;
+
 /**
  * Provides a single static method to adapt a given object in an EObject
  * 
@@ -43,9 +45,13 @@ public final class ObjectAdapter {
 	 *         if this object does not have any.
 	 */
 	public static EObject adaptObject(Object object) {
-		return (EObject) adaptObject(object, EObject.class);
+		EObject eObj = (EObject) adaptObject(object, EObject.class);
+		if (eObj instanceof DSemanticDecorator) {
+			eObj = ((DSemanticDecorator) eObj).getTarget();
+		}
+		return eObj;
 	}
-	
+
 	public static Object adaptObject(Object object, Class<?> adaptedClass) {
 		if (object == null) {
 			return null;
@@ -60,7 +66,8 @@ public final class ObjectAdapter {
 			}
 		} else {
 			// Try registered adapter
-			Object adapted = Platform.getAdapterManager().getAdapter(object, adaptedClass);
+			Object adapted = Platform.getAdapterManager().getAdapter(object,
+					adaptedClass);
 			if (adapted != null) {
 				return adapted;
 			}

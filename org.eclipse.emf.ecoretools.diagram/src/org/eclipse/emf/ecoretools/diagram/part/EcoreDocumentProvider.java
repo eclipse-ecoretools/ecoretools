@@ -202,7 +202,7 @@ public class EcoreDocumentProvider extends AbstractDocumentProvider implements I
 						}
 					};
 
-					result.getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+//					result.getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
 
 					mapResourceSet(result);
 

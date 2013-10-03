@@ -831,7 +831,7 @@
 	<!-- Bug 159558 : Layout diagram in a TopDown way -->
 	<extension id="presentationLayoutProvider" name="%ext.presentationLayoutProvider" point="org.eclipse.gmf.runtime.diagram.ui.layoutProviders">
 		<layoutProvider class="org.eclipse.emf.ecoretools.diagram.providers.DownTopProvider">
-			<Priority name="Medium"/>
+			<Priority name="High"/>
 		</layoutProvider>
 	</extension>
 	

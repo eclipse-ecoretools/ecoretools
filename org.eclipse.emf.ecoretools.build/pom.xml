@@ -47,6 +47,8 @@
     <module>../org.eclipse.emf.ecoretools.codegen</module>
     <module>../org.eclipse.emf.ecoretools.diagram</module>
     <module>../org.eclipse.emf.ecoretools.diagram.ui.outline</module>
+    <module>../org.eclipse.emf.ecoretools.design</module>
+    <module>../org.eclipse.emf.ecoretools.design.properties</module>
     <module>../org.eclipse.emf.ecoretools.doc</module>
     <module>../org.eclipse.emf.ecoretools.doc-feature</module>
     <module>../org.eclipse.emf.ecoretools.filters</module>
@@ -182,12 +184,20 @@
     </pluginManagement>
   </build>
   
-  <profiles>    
+  <profiles> 
     <profile>
-      <id>kepler</id>
+      <id>luna</id>
       <activation>
           <activeByDefault>true</activeByDefault>
       </activation>
+      <repositories>    
+          <repository><id>od</id><layout>p2</layout>
+		   <url>http://update.obeo.fr/maintenance/od/6.2/kepler/update/repository/</url>
+        </repository>
+      </repositories>    
+    </profile>   
+    <profile>
+      <id>kepler</id>
       <repositories>
         <repository><id>platform</id><layout>p2</layout>
 		<url>http://download.eclipse.org/releases/kepler</url>

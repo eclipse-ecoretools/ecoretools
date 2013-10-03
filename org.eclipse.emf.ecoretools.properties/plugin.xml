@@ -12,41 +12,62 @@
   $Id: plugin.xml,v 1.7 2009/05/06 13:16:50 jlescot Exp $
 -->
 <plugin>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="fr.obeo.dsl.viewpoint.diagram"            
+            typeMapper="org.eclipse.emf.ecoretools.tabbedproperties.TabbedPropertiesTypeMapper">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+         <propertyCategory category="documentation"/>
+         <propertyCategory category="advanced"/>
+            <propertyCategory
+               category="default">
+         </propertyCategory>
+         <propertyCategory
+               category="extended">
+         </propertyCategory>
+      </propertyContributor>
+   </extension>   
+
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
-      <propertyTabs contributorId="org.eclipse.emf.ecoretools.diagram">
+      <propertyTabs contributorId="fr.obeo.dsl.viewpoint.diagram">
          <propertyTab
-            category="domain"
+            category="semantic &amp; extension"
             id="org.eclipse.emf.ecoretools.diagram.modelTab"
             label="%propertyTab.model"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.modelTab"
-               category="domain"
-               id="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
+               category="semantic &amp; extension"
                indented="true"
+               id="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
                label="%propertyTab.parameter"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.modelTab.parameterTab"
-               category="domain"
+               category="semantic &amp; extension"
+               indented="true"
                id="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
                image="icons/view16/eannotation_tab.gif"
                label="%propertyTab.annotation">
          </propertyTab>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.eAnnotationTab"
-               category="domain"
+               category="semantic &amp; extension"
+               indented="true"               
                id="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
-               indented="true"
                label="%propertyTab.extended.metadata"/>
          <propertyTab
                afterTab="org.eclipse.emf.ecoretools.diagram.ecore.properties.extendedMetadata"
-               category="domain"
+               category="semantic &amp; extension"
+               indented="true"               
                id="org.eclipse.emf.ecoretools.diagram.genModelDoc"
                image="icons/view16/doc_tab.gif"
-               indented="true"
                label="%propertyTab.genmodel.doc">
          </propertyTab>
          <propertyTab
-               category="documentation"
+               category="semantic &amp; extension"
                id="org.eclipse.emf.ecoretools.diagram.genModel"
                label="%propertyTab.genmodel">
          </propertyTab>
@@ -54,7 +75,7 @@
    </extension>
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
-      <propertySections contributorId="org.eclipse.emf.ecoretools.diagram">
+      <propertySections contributorId="fr.obeo.dsl.viewpoint.diagram">
 	     <propertySection
 	        id="org.eclipse.emf.ecoretools.diagram.ecore.NameSection"
 	        class="org.eclipse.emf.ecoretools.properties.internal.sections.NamePropertySection"

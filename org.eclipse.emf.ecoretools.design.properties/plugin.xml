@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <!-- EEF extensions -->
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            uri="http://www.eclipse.org/emf/2002/Ecore"
+            class="org.eclipse.emf.ecoretools.design.properties.providers.EcoreEEFAdapterFactory"
+            supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.eef.runtime.PropertiesEditionPartProvider">
+      <PropertiesEditionPartProvider
+            providerClass="org.eclipse.emf.ecoretools.design.properties.providers.EcorePropertiesEditionPartProvider">
+      </PropertiesEditionPartProvider>
+   </extension>
+
+  <!-- Tabbed properties views extension -->
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="fr.obeo.dsl.viewpoint.diagram"
+            labelProvider="org.eclipse.emf.eef.runtime.ui.utils.EEFLabelProvider">
+         <propertyCategory
+               category="default">
+         </propertyCategory>
+         <propertyCategory
+               category="extended">
+         </propertyCategory>
+         <propertyCategory
+               category="advanced">
+         </propertyCategory>
+      </propertyContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="fr.obeo.dsl.viewpoint.diagram">
+         <propertyTab
+               id="Base"
+               label="Base"
+               category="default">
+         </propertyTab>
+
+         <propertyTab
+               id="Instanciation"
+               label="Instanciation"
+               category="extended"
+               afterTab="Base">
+         </propertyTab>
+
+         <propertyTab
+               id="Data Type"
+               label="Data Type"
+               category="default">
+         </propertyTab>
+
+         <propertyTab
+               id="Operation Element"
+               label="Operation Element"
+               category="default">
+         </propertyTab>
+
+         <propertyTab
+               id="Exceptions"
+               label="Exceptions"
+               category="extended"
+               afterTab="Operation Element">
+         </propertyTab>
+
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="fr.obeo.dsl.viewpoint.diagram">
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EAttributePropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EAttributePropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EAttribute"
+               tab="Base">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EAnnotationPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EAnnotationPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EAnnotation"
+               tab="Base">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EClassPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EClassPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EClass"
+               tab="Base">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EClassPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EClass"
+               tab="Instanciation">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.DataTypePropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EDataTypePropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EDataType"
+               tab="Data Type">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EDataTypePropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EDataType"
+               tab="Instanciation">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.DataTypePropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EEnum"
+               tab="Data Type">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EEnum"
+               tab="Instanciation">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EEnumLiteralPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumLiteralPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EEnumLiteral"
+               tab="Base">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.OperationElementPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EOperationPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EOperation"
+               tab="Operation Element">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.ExceptionsPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EOperationPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EOperation"
+               tab="Exceptions">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EPackagePropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EPackagePropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EPackage"
+               tab="Base">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.OperationElementPropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EParameterPropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EParameter"
+               tab="Operation Element">
+         </propertySection>
+         <propertySection
+               class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EReferencePropertiesEditionPartForm"
+               filter="org.eclipse.emf.ecoretools.design.properties.providers.EReferencePropertiesEditionProvider$EditionFilter"
+               id="org.eclipse.emf.ecore.section.EReference"
+               tab="Base">
+         </propertySection>
+      </propertySections>
+   </extension>
+</plugin>
