@@ -48,6 +48,7 @@
         <module>../org.eclipse.emf.ecoretools.diagram</module>
         <module>../org.eclipse.emf.ecoretools.diagram.ui.outline</module>
         <module>../org.eclipse.emf.ecoretools.design</module>
+        <module>../org.eclipse.emf.ecoretools.design.tests</module>
         <module>../org.eclipse.emf.ecoretools.design-feature</module>
         <module>../org.eclipse.emf.ecoretools.design.properties</module>
         <module>../org.eclipse.emf.ecoretools.doc</module>
