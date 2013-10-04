@@ -30,7 +30,12 @@ http://www.eclipse.org/legal/epl-v10.html
    <license url="%licenseURL">
       %license
    </license>
-   
+
+   <requires>
+      <import feature="org.eclipse.sirius.runtime" version="0.1.0.qualifier"/>
+      <import feature="org.eclipse.sirius.runtime.acceleo" version="0.1.0.qualifier"/>
+      <import feature="org.eclipse.sirius.runtime.ide.ui" version="0.1.0.qualifier"/>
+   </requires>
 
    <plugin
          id="org.eclipse.emf.ecoretools"
@@ -52,7 +57,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.emf.ecoretools.design.properties"
          download-size="0"
