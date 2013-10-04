@@ -566,7 +566,7 @@
             <elementView name="elementView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:ExternalJavaAction" name="Open EEF" id="fr.obeo.dsl.viewpoint.eef.actions.openPropertiesWizard"/>
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="Open EEF" id="org.eclipse.sirius.eef.actions.openPropertiesWizard"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
