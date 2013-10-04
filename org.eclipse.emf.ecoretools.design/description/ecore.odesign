@@ -327,7 +327,7 @@
             <containerViewVariable name="containerView"/>
             <representationNameVariable name="diagramName"/>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SuperType" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']" iconPath="/fr.obeo.dsl.viewpoint.ui/icons/full/obj16/EdgeMapping.gif">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SuperType" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -575,7 +575,7 @@
           <ownedTools xsi:type="tool:OperationAction" name="Open Entities User Guide" label="Open User Guide">
             <view name="views"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Entities User Guide Action" id="fr.obeo.dsl.viewpoint.ui.business.api.action.openHelpSection">
+              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Entities User Guide Action" id="org.eclipse.sirius.ui.business.api.action.openHelpSection">
                 <parameters name="href" value="/org.eclipse.emf.ecoretools.design/doc/user-guide.html#design.entities"/>
               </firstModelOperations>
             </initialOperation>
@@ -721,7 +721,7 @@
               <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/fr.obeo.dsl.viewpoint.ui/icons/full/obj16/EdgeMapping.gif">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -922,7 +922,7 @@
           <ownedTools xsi:type="tool:OperationAction" name="Open Dependencies User Guide" label="Open User Guide">
             <view name="views"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Dependencies User Guide Action" id="fr.obeo.dsl.viewpoint.ui.business.api.action.openHelpSection">
+              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Dependencies User Guide Action" id="org.eclipse.sirius.ui.business.api.action.openHelpSection">
                 <parameters name="href" value="/org.eclipse.emf.ecoretools.design/doc/user-guide.html#quality.dependencies"/>
               </firstModelOperations>
             </initialOperation>

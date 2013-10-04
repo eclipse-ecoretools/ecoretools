@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <eef-gen:EEFGenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eef-gen="http://www.eclipse.org/emf/eef/generation/1.0.0" genDirectory="/org.eclipse.emf.ecoretools.design.properties.eef/src-gen">
-  <editionContexts basePackage="org.eclipse.emf" descriptorsContributorID="fr.obeo.dsl.viewpoint.diagram" descriptorsGenericPropertiesViews="true">
+  <editionContexts basePackage="org.eclipse.emf" descriptorsContributorID="org.eclipse.sirius.diagram" descriptorsGenericPropertiesViews="true">
     <PropertiesEditionContext href="Ecore.components#_Km3b0QV5EeG22YzgVp-zWA"/>
   </editionContexts>
   <viewsRepositories basePackage="org.eclipse.emf.ecoretools.design.properties" swtViews="true" formViews="true">

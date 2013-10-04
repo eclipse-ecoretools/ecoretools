@@ -31,7 +31,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
    </extension>
 
    <extension
-         point="fr.obeo.dsl.viewpoint.componentization">
+         point="org.eclipse.sirius.componentization">
       <component
             class="org.eclipse.emf.ecoretools.design.service.EcoreToolsDesignPlugin"
             id="org.eclipse.emf.ecoretools.design"
@@ -39,7 +39,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
       </component>
    </extension>
    <extension
-         point="fr.obeo.dsl.viewpoint.externalJavaAction">
+         point="org.eclipse.sirius.externalJavaAction">
       <javaActions
             actionClass="org.eclipse.emf.ecoretools.design.action.CreateDynamicInstanceAction"
             id="org.eclipse.emf.ecoretools.design.action.createDynamicInstanceActionID">
@@ -49,7 +49,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.emf.ecoretools.design.editor.EcoreEntitiesReadOnlyEditor"
-            contributorClass="fr.obeo.dsl.viewpoint.diagram.part.ViewpointDiagramActionBarContributor"
+            contributorClass="org.eclipse.sirius.diagram.part.ViewpointDiagramActionBarContributor"
             default="false"
             extensions="ecore"
             icon="icons/full/obj16/EcoreModelFile.gif"
@@ -63,7 +63,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
    </extension>
     <!-- Extensions for the "Viewpoint" perspective -->
   <extension point="org.eclipse.ui.perspectiveExtensions">
-    <perspectiveExtension targetID="fr.obeo.dsl.viewpoint.ui.tools.perspective.design">
+    <perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.design">
       <newWizardShortcut id="org.eclipse.ecoretools.design.wizard" />
     </perspectiveExtension>
   </extension>
@@ -71,13 +71,13 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
   <extension
         point="org.eclipse.ui.navigator.navigatorContent">
      <commonWizard
-           menuGroupId="fr.obeo.dsl.viewpoint.category"
+           menuGroupId="org.eclipse.sirius.category"
            type="new"
            wizardId="org.eclipse.ecoretools.design.wizard">
         <enablement>
            <with variable="activeWorkbenchWindow.activePerspective">
               <or>
-                 <equals value="fr.obeo.dsl.viewpoint.ui.tools.perspective.design"/>
+                 <equals value="org.eclipse.sirius.ui.tools.perspective.design"/>
               </or>
            </with>
         </enablement>
