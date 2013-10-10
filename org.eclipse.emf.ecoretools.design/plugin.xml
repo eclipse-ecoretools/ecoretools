@@ -45,6 +45,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
             id="org.eclipse.emf.ecoretools.design.action.createDynamicInstanceActionID">
       </javaActions>
    </extension>
+   <!--
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -57,7 +58,8 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
             matchingStrategy="org.eclipse.emf.ecoretools.design.editor.EcoreEntitiesMatchingStrategy"
             name="Viewpoint Ecore Editor">
       </editor>
-   </extension>   
+   </extension>
+   -->   
    <extension point="org.eclipse.help.toc">
       <toc file="doc/user-guide-toc.xml" primary="true" />
    </extension>
