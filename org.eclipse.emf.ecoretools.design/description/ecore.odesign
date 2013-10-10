@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.obeo.fr/dsl/viewpoint/description/1.1.0" xmlns:description_1="http://www.obeo.fr/dsl/viewpoint/table/description/1.1.0" xmlns:filter="http://www.obeo.fr/dsl/viewpoint/description/filter/1.1.0" xmlns:style="http://www.obeo.fr/dsl/viewpoint/description/style/1.1.0" xmlns:tool="http://www.obeo.fr/dsl/viewpoint/description/tool/1.1.0" xmlns:validation="http://www.obeo.fr/dsl/viewpoint/description/validation/1.1.0" name="EcoreTools" version="6.7.0.201302071200">
-  <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/doc/screenshots/entities.png&quot;/>&#xA;&lt;img src=&quot;/doc/screenshots/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore">
-    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20external%20package']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' package entities'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="7.0.0">
+  <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/doc/screenshots/entities.png&quot;/>&#xA;&lt;img src=&quot;/doc/screenshots/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore">
+    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20external%20package']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' package entities'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <filters xsi:type="filter:CompositeFilterDescription" name="Hide class content">
         <filters xsi:type="filter:MappingFilter" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
@@ -36,7 +36,7 @@
       <defaultLayer name="Default">
         <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="[diagram.getDisplayedEClasses().oclAsType(ecore::EClass).eAllReferences->flatten()/]" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="feature:eType" sourceFinderExpression="feature:eContainer" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
           <style sizeComputationExpression="1" routingStyle="manhattan">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="service:render">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
@@ -60,7 +60,7 @@
         </edgeMappings>
         <edgeMappings name="Bi-directional EC_EReference " labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="[diagram.getEOppositeEReferences()/]" semanticElements="[eOpposite->including(self)->asSequence()->sortedBy(name)/]" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="[eType/]" sourceFinderExpression="[eContainer()/]" targetExpression="" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Target']">
           <style sourceArrow="InputArrow" sizeComputationExpression="1" routingStyle="manhattan">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service:render">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </beginLabelStyleDescription>
@@ -147,11 +147,11 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="&lt;%!$containerView.filter(&quot;DDiagram&quot;)%>" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="[containerView.oclIsKindOf(viewpoint::DDiagram)/]" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="&lt;%$elementView%>">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:elementView">
                 <subModelOperations xsi:type="tool:DeleteView"/>
               </firstModelOperations>
             </initialOperation>
@@ -561,7 +561,7 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[performEdit(arg0)/]"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:DoubleClickDescription" name="ShowPropertiesView" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
+          <ownedTools xsi:type="tool:DoubleClickDescription" name="ShowPropertiesView" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -604,7 +604,7 @@
           </vsmElementCustomizations>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:containment">
             <featureCustomizations xsi:type="description:EAttributeCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']/@style" attributeName="sourceArrow" value="[EdgeArrows::FillDiamond/]"/>
-            <featureCustomizations xsi:type="description:EAttributeCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']/@style" attributeName="sizeComputationExpression" value="2"/>
+            <featureCustomizations xsi:type="description:EAttributeCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']/@style" attributeName="sizeComputationExpression" value="1"/>
           </vsmElementCustomizations>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:derived">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']/@style" referenceName="strokeColor">
@@ -616,15 +616,15 @@
           </vsmElementCustomizations>
         </customization>
       </defaultLayer>
-      <optionalLayers endUserDocumentation="Add support for sub-packages." name="Package" activeByDefault="true">
-        <containerMappings name="Design Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="feature:eSubpackages" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']">
+      <additionalLayers endUserDocumentation="Add support for sub-packages." name="Package" activeByDefault="true">
+        <containerMappings name="Design Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="feature:eSubpackages" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']">
           <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="[name/]" labelAlignment="LEFT" widthComputationExpression="6" heightComputationExpression="3" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.0"/>
           </style>
         </containerMappings>
-        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" createElements="false" domainClass="EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
+        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" createElements="false" domainClass="EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
           <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="[name/]" labelAlignment="LEFT" widthComputationExpression="6" heightComputationExpression="3" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -632,7 +632,7 @@
           </style>
         </containerMappings>
         <toolSections name="Package">
-          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Package" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
+          <ownedTools xsi:type="tool:ContainerCreationDescription" name="Package" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -654,7 +654,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop external package" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="PROJECT_EXPLORER">
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop external package" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="PROJECT_EXPLORER">
             <oldContainer name="oldSemanticContainer"/>
             <newContainer name="newSemanticContainer"/>
             <element name="element"/>
@@ -663,7 +663,7 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop EPackage into EPackage" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="BOTH">
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop EPackage into EPackage" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="BOTH">
             <oldContainer name="oldSemanticContainer"/>
             <newContainer name="newSemanticContainer"/>
             <element name="element"/>
@@ -675,15 +675,15 @@
             </initialOperation>
           </ownedTools>
         </toolSections>
-      </optionalLayers>
-      <optionalLayers name="Documentation">
-        <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="[diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key = 'documentation')/]" domainClass="EStringToStringMapEntry">
+      </additionalLayers>
+      <additionalLayers name="Documentation">
+        <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="[diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key = 'documentation')/]" domainClass="EStringToStringMapEntry">
           <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
-        <edgeMappings name="EC Doc Assignment" semanticCandidatesExpression="[self.eAllContents()/]" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Package']/@containerMappings[name='Dropped%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" targetFinderExpression="[eContainer().eContainer()/]">
+        <edgeMappings name="EC Doc Assignment" semanticCandidatesExpression="[self.eAllContents()/]" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Design%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" targetFinderExpression="[eContainer().eContainer()/]">
           <style lineStyle="dot" sizeComputationExpression="1">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription showIcon="false">
@@ -692,7 +692,7 @@
           </style>
         </edgeMappings>
         <toolSections name="Documentation Tools">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -721,7 +721,7 @@
               <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@optionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -746,8 +746,8 @@
             </featureCustomizations>
           </vsmElementCustomizations>
         </customization>
-      </optionalLayers>
-      <optionalLayers name="Validation">
+      </additionalLayers>
+      <additionalLayers name="Validation">
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:hasError">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.0/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@style" referenceName="labelColor">
@@ -761,7 +761,7 @@
             </featureCustomizations>
           </vsmElementCustomizations>
         </customization>
-      </optionalLayers>
+      </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="['Classes in ' + name + ' package'/]" domainClass="EPackage">
       <ownedLineMappings name="Classes lines" domainClass="EClass" semanticCandidatesExpression="[eContents(ecore::EClass)/]">
@@ -796,7 +796,7 @@
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
-  <ownedViewpoints endUserDocumentation="Add support for archeypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore">
+  <ownedViewpoints endUserDocumentation="Add support for archeypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore xcore">
     <ownedRepresentationExtensions xsi:type="description:DiagramExtensionDescription" name="Entities With Archetypes" viewpointURI="viewpoint:/org.eclipse.emf.ecoretools.design/Design" representationName="Entities">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <layers name="Archetypes" activeByDefault="true">
@@ -892,7 +892,7 @@
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service..ArchetypeServices"/>
   </ownedViewpoints>
-  <ownedViewpoints endUserDocumentation="Provides representations to assess the quality of an Ecore model." name="Quality" modelFileExtension="ecore">
+  <ownedViewpoints endUserDocumentation="Provides representations to assess the quality of an Ecore model." name="Quality" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description:DiagramDescription" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <defaultLayer name="Default">
@@ -929,7 +929,7 @@
           </ownedTools>
         </toolSections>
       </defaultLayer>
-      <optionalLayers name="Content">
+      <additionalLayers name="Content">
         <containerMappings xsi:type="description:ContainerMappingImport" name="Package" semanticCandidatesExpression="[eAllContents()/]" domainClass="EPackage" importedMapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Dep%20Package']">
           <subContainerMappings name="PD EClass" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="[eClassifiers/]" domainClass="EClass" childrenPresentation="List">
             <subNodeMappings name="EC EAttribute" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="[eAttributes/]" domainClass="EAttribute">
@@ -955,24 +955,24 @@
             </conditionnalStyles>
           </subContainerMappings>
         </containerMappings>
-      </optionalLayers>
+      </additionalLayers>
     </ownedRepresentations>
   </ownedViewpoints>
-  <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore">
+  <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="['Documentation for name ' + ' package'/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
-      <ownedLineMappings name="Doc EClassifiers" semanticElements="[self/]" domainClass="EClassifier" semanticCandidatesExpression="[eClassifiers/]" headerLabelExpression="[eClass().name + ' : ' + name/]">
+      <ownedLineMappings name="Doc EClassifiers" semanticElements="var:self" domainClass="EClassifier" semanticCandidatesExpression="feature:eClassifiers" headerLabelExpression="[eClass().name + ' : ' + name/]">
         <defaultBackground>
           <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
         </defaultBackground>
-        <ownedSubLines name="Doc EStructural Features" domainClass="EStructuralFeature" headerLabelExpression="[eClass().name + ' : ' + name/]">
+        <ownedSubLines name="Doc EStructural Features" domainClass="EStructuralFeature" semanticCandidatesExpression="feature:eContents" headerLabelExpression="[eClass().name + ' : ' + name/]">
           <defaultBackground>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </defaultBackground>
         </ownedSubLines>
       </ownedLineMappings>
-      <ownedColumnMappings name="Doc Root" headerLabelExpression="Domain Documentation" domainClass="EPackage" semanticCandidatesExpression="[getRootContainer()/]"/>
-      <intersection name="EModelElements to Doc Annotation" semanticElements="[self/]" lineMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers'] //@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']" columnMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedColumnMappings.0" labelExpression="[value/]" useDomainClass="true" columnFinderExpression="[getRootContainer()/]" lineFinderExpression="[eContainer(ecore::EAnnotation).eContainer()/]" semanticCandidatesExpression="[eAllContents(ecore::EAnnotation)->select(source = 'http://www.eclipse.org/emf/2002/GenModel').details->select(key = 'documentation')/]" domainClass="EStringToStringMapEntry">
+      <ownedColumnMappings name="Doc Root" headerLabelExpression="Domain Documentation" domainClass="EPackage" semanticCandidatesExpression="service:getRootContainer"/>
+      <intersection name="EModelElements to Doc Annotation" semanticElements="var:self" lineMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers'] //@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']" columnMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedColumnMappings.0" labelExpression="[value/]" useDomainClass="true" columnFinderExpression="service:getRootContainer" lineFinderExpression="[eContainer(ecore::EAnnotation).eContainer()/]" semanticCandidatesExpression="[eAllContents(ecore::EAnnotation)->select(source = 'http://www.eclipse.org/emf/2002/GenModel').details->select(key = 'documentation')/]" domainClass="EStringToStringMapEntry">
         <directEdit>
           <variables name="element" documentation="The currently edited element."/>
           <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
