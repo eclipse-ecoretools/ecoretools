@@ -58,7 +58,7 @@
             </style>
           </conditionnalStyles>
         </edgeMappings>
-        <edgeMappings name="Bi-directional EC_EReference " labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="[diagram.getEOppositeEReferences()/]" semanticElements="[eOpposite->including(self)->asSequence()->sortedBy(name)/]" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="[eType/]" sourceFinderExpression="[eContainer()/]" targetExpression="" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Target']">
+        <edgeMappings name="Bi-directional EC_EReference " labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="[diagram.getEOppositeEReferences()/]" semanticElements="[eOpposite->including(self)->asSequence()->sortedBy(name)/]" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="feature:eType" sourceFinderExpression="feature:eContainer" targetExpression="" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Source'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectBiDirectionnalEReference%20Target']">
           <style sourceArrow="InputArrow" sizeComputationExpression="1" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service:render">
@@ -78,7 +78,7 @@
             </style>
           </subNodeMappings>
           <subNodeMappings name="Operation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Operation%20Name']" semanticCandidatesExpression="feature:eOperations" semanticElements="service:eOperationSemanticElements" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EOperation">
-            <style xsi:type="style:BundledImageDescription" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="2">
+            <style xsi:type="style:BundledImageDescription" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderEOperationTooltip" sizeComputationExpression="2">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -90,13 +90,13 @@
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
           <conditionnalStyles predicateExpression="feature:interface">
-            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="8" arcHeight="8" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EClass']" labelFormat="italic" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EClass']">
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="8" arcHeight="8" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EClass']" labelFormat="italic" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Abstract%20EClass']">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
           </conditionnalStyles>
           <conditionnalStyles predicateExpression="feature:abstract">
-            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="8" arcHeight="8" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EClass']" labelFormat="italic" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EClass']">
+            <style xsi:type="style:FlatContainerStyleDescription" arcWidth="8" arcHeight="8" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EClass']" labelFormat="italic" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Abstract%20EClass']">
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             </style>
@@ -196,7 +196,7 @@
         </toolSections>
         <toolSections name="Classifier">
           <ownedTools xsi:type="tool:ToolGroup" name="Classifier">
-            <tools xsi:type="tool:ContainerCreationDescription" name="Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
+            <tools xsi:type="tool:ContainerCreationDescription" documentation="M1+Y" name="Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
@@ -678,8 +678,8 @@
       </additionalLayers>
       <additionalLayers name="Documentation">
         <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="[diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key = 'documentation')/]" domainClass="EStringToStringMapEntry">
-          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" sizeComputationExpression="5" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']">
-            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          <style xsi:type="style:NoteDescription" showIcon="false" labelExpression="feature:value" sizeComputationExpression="8" labelPosition="node" resizeKind="NSEW" color="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EDataType']">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_yellow']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </nodeMappings>
@@ -1035,14 +1035,15 @@
     <entries xsi:type="description:UserFixedColor" red="180" green="200" blue="210" name="DescriptionColor"/>
     <entries xsi:type="description:UserFixedColor" red="255" green="245" blue="182" name="Package Color"/>
     <entries xsi:type="description:UserFixedColor" red="253" green="208" blue="142" name="External Package Color"/>
-    <entries xsi:type="description:UserFixedColor" red="248" green="249" blue="209" name="EClass"/>
-    <entries xsi:type="description:UserFixedColor" red="218" green="202" blue="228" name="EPackage"/>
+    <entries xsi:type="description:UserFixedColor" red="255" green="252" blue="216" name="EClass"/>
+    <entries xsi:type="description:UserFixedColor" red="217" green="210" blue="220" name="EPackage"/>
     <entries xsi:type="description:UserFixedColor" red="255" green="250" blue="191" name="EDataType"/>
-    <entries xsi:type="description:UserFixedColor" red="202" green="225" blue="173" name="EEnum"/>
+    <entries xsi:type="description:UserFixedColor" red="221" green="236" blue="202" name="EEnum"/>
     <entries xsi:type="description:UserFixedColor" name="Dark EClass"/>
     <entries xsi:type="description:UserFixedColor" name="Dark EPackage"/>
     <entries xsi:type="description:UserFixedColor" name="Dark EDataType"/>
     <entries xsi:type="description:UserFixedColor" name="Dark EEnum"/>
     <entries xsi:type="description:UserFixedColor" red="220" green="234" blue="183" name="Doc Annotation"/>
+    <entries xsi:type="description:UserFixedColor" red="228" green="228" blue="228" name="Abstract EClass"/>
   </userColorsPalettes>
 </description:Group>
