@@ -180,17 +180,42 @@ public class EcoreService {
 		return new EOperationServices().render(op);
 	}
 
-	public String getTooltip(EObject current) {
+	public String renderTooltip(EObject current) {
 		String result = "";
 		Optional<Diagnostic> diag = DiagnosticAttachment.get(current);
 		if (diag.isPresent()) {
-			for (Diagnostic child : diag.get().getChildren()) {
-				result += "\n " + child.getMessage();
-			}
+			result += prettyMessage(diag.get());
 		}
 		return result;
 	}
 
+	
+	private String prettyMessage(Diagnostic diag) {
+		String result = "";
+		for (Diagnostic child : diag.getChildren()) {
+			result += "\n"+ severityLabel(child.getSeverity()) + " : " + child.getMessage();			
+			result += prettyMessage(child); 
+		}
+		return result;
+	}
+
+	private String severityLabel(int severity) {
+		switch (severity) {
+		case Diagnostic.ERROR:
+			return "ERROR";
+		case Diagnostic.CANCEL:
+			return "CANCEL";
+		case Diagnostic.INFO:
+			return "INFO";
+		case Diagnostic.WARNING:
+			return "WARNING";
+		case Diagnostic.OK:
+			return "OK";
+
+		}
+		return "UNKNOWN";
+	}
+	
 	/**
 	 * Computes the tooltip of an EOperation.
 	 * 
@@ -198,8 +223,8 @@ public class EcoreService {
 	 *            the operation to get the tooltip from
 	 * @return the tooltip of the given EOperation.
 	 */
-	public String renderToolTip(EOperation op) {
-		return new EOperationServices().renderTooltip(op);
+	public String renderEOperationTooltip(EOperation op) {
+		return new EOperationServices().renderEOperationTooltip(op);
 	}
 
 	/**

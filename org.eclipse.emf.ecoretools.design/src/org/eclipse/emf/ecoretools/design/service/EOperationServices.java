@@ -53,7 +53,7 @@ public class EOperationServices {
      * @return the tooltip of the given EOperation (same as label but excluding
      *         the parameters Types)
      */
-    public String renderTooltip(EOperation op) {
+    public String renderEOperationTooltip(EOperation op) {
         StringBuilder sb = new StringBuilder();
         renderName(op, sb);
         renderParameters(op, sb, false);
