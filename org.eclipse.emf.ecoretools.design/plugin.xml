@@ -21,7 +21,7 @@
             category="org.eclipse.emf.codegen.ecore.ui.wizardCategory"
             class="org.eclipse.emf.ecoretools.design.wizard.EcoreModelerWizard"
             icon="icons/full/obj16/EcoreModelingProject.png"
-            id="org.eclipse.ecoretools.design.wizard"
+            id="org.eclipse.ecoretools.emf.design.wizardID"
             name="Ecore Modeling Project"
             project="true">
          <description>Create a new Modeling project to specify a domain model using the Ecore Language. 
@@ -66,7 +66,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
     <!-- Extensions for the "Viewpoint" perspective -->
   <extension point="org.eclipse.ui.perspectiveExtensions">
     <perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.design">
-      <newWizardShortcut id="org.eclipse.ecoretools.design.wizard" />
+      <newWizardShortcut id="org.eclipse.ecoretools.emf.design.wizardID" />
     </perspectiveExtension>
   </extension>
   
@@ -75,7 +75,7 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
      <commonWizard
            menuGroupId="org.eclipse.sirius.category"
            type="new"
-           wizardId="org.eclipse.ecoretools.design.wizard">
+           wizardId="org.eclipse.ecoretools.emf.design.wizardID">
         <enablement>
            <with variable="activeWorkbenchWindow.activePerspective">
               <or>
