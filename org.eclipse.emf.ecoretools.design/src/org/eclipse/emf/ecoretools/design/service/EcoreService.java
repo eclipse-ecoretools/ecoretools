@@ -34,15 +34,21 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.sirius.business.api.helper.SiriusUtil;
+import org.eclipse.sirius.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.common.tools.api.util.AllContents;
+import org.eclipse.sirius.viewpoint.DDiagram;
+import org.eclipse.sirius.viewpoint.DNodeList;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -76,8 +82,9 @@ public class EcoreService {
 	}
 
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
-		Iterator<DSemanticDecorator> it = Iterators.filter(
-				diagram.getOwnedDiagramElements().iterator(), DSemanticDecorator.class);
+		Iterator<DSemanticDecorator> it = Iterators
+				.filter(diagram.getOwnedDiagramElements().iterator(),
+						DSemanticDecorator.class);
 		while (it.hasNext()) {
 			DSemanticDecorator dec = it.next();
 			if (dec.getTarget() instanceof EClassifier)
@@ -85,7 +92,7 @@ public class EcoreService {
 		}
 		return false;
 	}
-	
+
 	public Collection<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
 		Iterator<DSemanticDecorator> it = Iterators.filter(
@@ -189,12 +196,12 @@ public class EcoreService {
 		return result;
 	}
 
-	
 	private String prettyMessage(Diagnostic diag) {
 		String result = "";
 		for (Diagnostic child : diag.getChildren()) {
-			result += "\n"+ severityLabel(child.getSeverity()) + " : " + child.getMessage();			
-			result += prettyMessage(child); 
+			result += "\n" + severityLabel(child.getSeverity()) + " : "
+					+ child.getMessage();
+			result += prettyMessage(child);
 		}
 		return result;
 	}
@@ -215,7 +222,7 @@ public class EcoreService {
 		}
 		return "UNKNOWN";
 	}
-	
+
 	/**
 	 * Computes the tooltip of an EOperation.
 	 * 
@@ -347,7 +354,8 @@ public class EcoreService {
 		return result;
 	}
 
-	public Boolean viewContainerNotSemanticContainer(DSemanticDiagram pview, EObject container) {
+	public Boolean viewContainerNotSemanticContainer(DSemanticDiagram pview,
+			EObject container) {
 		return pview.getTarget() != container;
 	}
 
@@ -362,5 +370,114 @@ public class EcoreService {
 			return EcoreUtil.getDocumentation((EModelElement) eObj) == null;
 		}
 		return true;
+	}
+
+	public Collection<EPackage> getPackageDependencies(EPackage source) {
+		// used to be
+		// [self->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass).eAllStructuralFeatures.eType->union(self->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass).eAllSuperTypes).eContainer(ecore::EPackage)->asOrderedSet()->asSequence()->excluding(self)/]
+		Set<EPackage> dependencies = Sets.newLinkedHashSet();
+
+		for (EClass containedClassifiers : Iterables.filter(
+				source.getEClassifiers(), EClass.class)) {
+			dependencies.addAll(externalDependencies(containedClassifiers));
+		}
+
+		dependencies.remove(source);
+		return dependencies;
+	}
+
+	private Set<EPackage> externalDependencies(EClass containedClassifiers) {
+		Set<EPackage> dependencies = Sets.newLinkedHashSet();
+		for (EStructuralFeature eRef : containedClassifiers
+				.getEAllStructuralFeatures()) {
+			if (eRef.getEType() != null
+					&& eRef.getEType().getEPackage() != null) {
+				dependencies.add(eRef.getEType().getEPackage());
+			}
+		}
+		for (EClass superClazz : containedClassifiers.getEAllSuperTypes()) {
+			if (superClazz.getEPackage() != null) {
+				dependencies.add(superClazz.getEPackage());
+			}
+		}
+		return dependencies;
+	}
+
+	public Integer getDependenciesAmount(EPackage a, EPackage b) {
+		// TODO
+		return 2;
+	}
+
+	public String getDependenciesTooltip(EClass clazz, DSemanticDecorator view) {
+		DDiagram diag = SiriusUtil.findDiagram(view);
+		Set<String> explanations = Sets.newLinkedHashSet();
+		if (diag != null) {
+			for (EPackage dep : externalDependencies(clazz)) {
+				explanations.add("Dependency to " + dep.getNsURI() + ": \n"
+						+ externalDependenciesExplanation(dep, clazz));
+			}
+		}
+		return Joiner.on('\n').join(explanations);
+	}
+
+	public String getDependenciesLabel(EClass clazz) {
+		return clazz.getName() + " (" + externalDependencies(clazz).size()
+				+ ")";
+	}
+	
+
+	public Collection<EClassifier> getElementsIntroducingDependencies(
+			EPackage source, DSemanticDiagram diagram) {
+		Set<EClassifier> classifiersIntroducingDependencies = Sets
+				.newLinkedHashSet();
+
+		Set<EPackage> otherPackages = Sets.newLinkedHashSet();
+		for (DNodeList list : Iterables.filter(
+				diagram.getOwnedDiagramElements(), DNodeList.class)) {
+			if (!new DDiagramElementQuery(list).isHidden()
+					&& list.getTarget() instanceof EPackage) {
+				otherPackages.add((EPackage) list.getTarget());
+			}
+		}
+		otherPackages.remove(source);
+
+		for (EClass containedClassifiers : Iterables.filter(
+				source.getEClassifiers(), EClass.class)) {
+			for (EStructuralFeature eRef : containedClassifiers
+					.getEAllStructuralFeatures()) {
+				if (eRef.getEType() != null
+						&& otherPackages
+								.contains(eRef.getEType().getEPackage())) {
+					classifiersIntroducingDependencies.add(eRef
+							.getEContainingClass());
+				}
+			}
+			for (EClass superClazz : containedClassifiers.getEAllSuperTypes()) {
+				if (otherPackages.contains(superClazz.getEPackage())) {
+					classifiersIntroducingDependencies
+							.add(containedClassifiers);
+				}
+			}
+		}
+		return classifiersIntroducingDependencies;
+	}
+
+	private String externalDependenciesExplanation(EPackage dep, EClass clazz) {
+		Set<String> explanations = Sets.newLinkedHashSet();
+		for (EStructuralFeature eRef : clazz.getEAllStructuralFeatures()) {
+			if (eRef.getEType() != null && eRef.getEType().getEPackage() == dep) {
+				explanations.add(" - " + eRef.eClass().getName() +" " + eRef.getName()
+						+ " refers to type " + eRef.getEType().getName()
+						+ " in package " + dep.getName());
+			}
+		}
+		for (EClass superClazz : clazz.getEAllSuperTypes()) {
+			if (superClazz.getEPackage() == dep) {
+				explanations.add(" - EClass" + clazz.getName()
+						+ " extends type " + superClazz.getName()
+						+ " in package " + dep.getName());
+			}
+		}
+		return Joiner.on('\n').join(explanations);
 	}
 }
