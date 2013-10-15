@@ -129,25 +129,25 @@
           </style>
         </containerMappings>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="[self.getValidsForDiagram(containerView)/]" multiple="true" tree="true" rootExpression="[self.allRoots()->select(oclIsKindOf(ecore::EPackage))/]" childrenExpression="[eContents()/]" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:For" expression="[element/]">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EClass)/]">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="[containerView/]"/>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsTypeOf(ecore::EDataType)/]">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="[containerView/]"/>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EEnum)/]">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="[containerView/]"/>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="[containerView.oclIsKindOf(viewpoint::DDiagram)/]" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="service:isDDiagram(containerView)" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -163,13 +163,13 @@
             <newViewContainer name="newContainerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EClass)/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsTypeOf(ecore::EDataType)/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EEnum)/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -196,33 +196,57 @@
         </toolSections>
         <toolSections name="Classifier">
           <ownedTools xsi:type="tool:ToolGroup" name="Classifier">
-            <tools xsi:type="tool:ContainerCreationDescription" documentation="M1+Y" name="Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
+            <tools xsi:type="tool:ContainerCreationDescription" documentation="M1+Y" name="Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewEClass'  + eContainer().eContents(ecore::EClass)->size()/]"/>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                    <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewEClass'  + eContainer().eContents(ecore::EClass)->size()/]"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="false"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="interface" valueExpression="false"/>
+                  </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
             </tools>
-            <tools xsi:type="tool:ContainerCreationDescription" name="Abstract Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif">
+            <tools xsi:type="tool:ContainerCreationDescription" name="Abstract Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewAbstractClass' + eContainer().eContents(ecore::EClass)->size()/]"/>
-                  <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                    <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewAbstractClass' + eContainer().eContents(ecore::EClass)->size()/]"/>
+                      <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="interface" valueExpression="false"/>
+                  </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
             </tools>
-            <tools xsi:type="tool:ContainerCreationDescription" name="Interface" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif">
+            <tools xsi:type="tool:ContainerCreationDescription" name="Interface" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
-                <firstModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewInterface' + eContainer().eContents(ecore::EClass)->size()/]"/>
-                  <subModelOperations xsi:type="tool:SetValue" featureName="interface" valueExpression="true"/>
-                  <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                    <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewInterface' + eContainer().eContents(ecore::EClass)->size()/]"/>
+                      <subModelOperations xsi:type="tool:SetValue" featureName="interface" valueExpression="true"/>
+                      <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="abstract" valueExpression="true"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="interface" valueExpression="true"/>
+                  </subModelOperations>
                 </firstModelOperations>
               </initialOperation>
             </tools>
@@ -593,7 +617,7 @@
           </ownedTools>
         </toolSections>
         <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" decoratorPath="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" preconditionExpression="[diagram.viewContainerNotSemanticContainer(self.eContainer())/]" domainClass="ecore.EClassifier"/>
+          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" decoratorPath="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" preconditionExpression="service:viewContainerNotSemanticContainer(diagram)" domainClass="ecore.EClassifier"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:required">
@@ -687,11 +711,11 @@
           </style>
         </edgeMappings>
         <toolSections name="Documentation Tools">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[container/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->size() = 0/]">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EAnnotation" referenceName="eAnnotations">
                     <subModelOperations xsi:type="tool:SetValue" featureName="source" valueExpression="['http://www.eclipse.org/emf/2002/GenModel'/]"/>
@@ -800,15 +824,15 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[container/]">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[container.oclIsTypeOf(ecore::EPackage)/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newMomentInterval' + eContainer()->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass)->size()/]">
                       <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[addArchetypeAnnotation('MomentInterval')/]"/>
                     </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[container.oclIsTypeOf(ecore::EClass)/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
                   <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[addArchetypeAnnotation('MomentInterval')/]"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -885,14 +909,17 @@
         </customization>
       </layers>
     </ownedRepresentationExtensions>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service..ArchetypeServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ArchetypeServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representations to assess the quality of an Ecore model." name="Quality" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <defaultLayer name="Default">
         <edgeMappings name="Package Dependency" semanticCandidatesExpression="service:getPackageDependencies" sourceMapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetMapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetFinderExpression="service:getPackageDependencies" sourceFinderExpression="[diagram.target/]" domainClass="EPackage">
-          <style lineStyle="dash" sizeComputationExpression="2">
+          <style lineStyle="dash" sizeComputationExpression="service:getDependenciesAmount()">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
             <centerLabelStyleDescription>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -907,7 +934,7 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="feature:nsURI" labelAlignment="LEFT" widthComputationExpression="8" heightComputationExpression="4" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
+          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="feature:nsURI" labelAlignment="LEFT" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
             <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.0"/>
@@ -924,14 +951,14 @@
           </ownedTools>
         </toolSections>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="[self.getValidsForDiagram(containerView)/]" multiple="true" tree="true" rootExpression="[self.allRoots()->select(oclIsKindOf(ecore::EPackage))/]" childrenExpression="[eContents()->filter(ecore::EPackage)/]" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="service:isEPackage" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:For" expression="[element/]">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EPackage)/]">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="[containerView/]"/>
+              <firstModelOperations xsi:type="tool:For" expression="var:element">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -952,7 +979,7 @@
             <newViewContainer name="newContainerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EPackage)/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -964,8 +991,8 @@
             </view>
             <initialOperation>
               <firstModelOperations xsi:type="tool:For" expression="var:selected">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[oclIsKindOf(ecore::EPackage)/]">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="[diagram/]"/>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:diagram"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -974,6 +1001,8 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="['Documentation for name ' + ' package'/]" domainClass="EPackage">
@@ -1046,6 +1075,9 @@
       <ownedColumnMappings name="Category" headerLabelExpression="Category" canEdit="[self.oclIsTypeOf(genmodel::GenFeature)/]" featureName="propertyCategory" labelExpression="[if (self.oclIsTypeOf(genmodel::GenFeature)) then self.oclAsType(genmodel::GenFeature).propertyCategory else ''endif/]"/>
       <ownedColumnMappings name="Decription" headerLabelExpression="Description" canEdit="[self.oclIsTypeOf(genmodel::GenFeature)/]" featureName="propertyDescription" labelExpression="[if (self.oclIsTypeOf(genmodel::GenFeature)) then self.oclAsType(genmodel::GenFeature).propertyDescription else '' endif/]"/>
     </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
   <userColorsPalettes name="Ecore Palette">
     <entries xsi:type="description:InterpolatedColor" name="Size Based Color" colorValueComputationExpression="[eContents()->size()/]" minValueComputationExpression="[0/]" maxValueComputationExpression="[10/]"/>

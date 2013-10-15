@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -83,6 +84,33 @@ public class EcoreService {
 		}
 	}
 
+	public Collection<EPackage> rootEPackages(EObject any) {
+		return Sets.newLinkedHashSet(Iterables.filter(allRoots(any),
+				EPackage.class));
+	}
+
+	public Boolean isEPackage(EObject any) {
+		return any instanceof EPackage;
+	}
+
+	public Boolean isEClass(EObject any) {
+		return any instanceof EClass;
+	}
+
+	public Boolean isEEnum(EObject any) {
+		return any instanceof EEnum;
+	}
+
+	private void addChildren(EPackage rootEPackage, Set<EPackage> result) {
+		if (!result.contains(rootEPackage)) {
+			result.add(rootEPackage);
+			for (EPackage ePackage : rootEPackage.getESubpackages()) {
+
+			}
+		}
+
+	}
+
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
 		Iterator<DSemanticDecorator> it = Iterators
 				.filter(diagram.getOwnedDiagramElements().iterator(),
@@ -118,7 +146,7 @@ public class EcoreService {
 		return eRefs;
 	}
 
-	public Boolean targetIsInterface(EClass clazz,EObject view) {
+	public Boolean targetIsInterface(EClass clazz, EObject view) {
 		if (view instanceof DEdge) {
 			EdgeTarget target = ((DEdge) view).getTargetNode();
 			if (target instanceof DSemanticDecorator
@@ -374,6 +402,10 @@ public class EcoreService {
 		return eObj.eClass() == EcorePackage.eINSTANCE.getEDataType();
 	}
 
+	public Boolean isDDiagram(EObject any, EObject view) {
+		return view instanceof DDiagram;
+	}
+
 	public List<EObject> eOperationSemanticElements(EOperation eOp) {
 		List result = Lists.newArrayList(Ordering.natural()
 				.onResultOf(new Function<EParameter, String>() {
@@ -386,9 +418,9 @@ public class EcoreService {
 		return result;
 	}
 
-	public Boolean viewContainerNotSemanticContainer(DSemanticDiagram pview,
-			EObject container) {
-		return pview.getTarget() != container;
+	public Boolean viewContainerNotSemanticContainer(EObject self,
+			DSemanticDiagram diag) {
+		return diag.getTarget() != self.eContainer();
 	}
 
 	public Boolean noEOpposite(EReference ref) {
@@ -435,21 +467,30 @@ public class EcoreService {
 		return dependencies;
 	}
 
-	public Integer getDependenciesAmount(EPackage a, EPackage b) {
+	public Integer getDependenciesAmount(EObject a) {
 		// TODO
 		return 2;
 	}
 
 	public String getDependenciesTooltip(EClass clazz, DSemanticDecorator view) {
 		DDiagram diag = SiriusUtil.findDiagram(view);
-		Set<String> explanations = Sets.newLinkedHashSet();
 		if (diag != null) {
-			for (EPackage dep : externalDependencies(clazz)) {
-				explanations.add("Dependency to " + dep.getNsURI() + ": \n"
-						+ externalDependenciesExplanation(dep, clazz));
+			Set<EPackage> displayedPackages = getDisplayedEPackages(diag);
+			// we don't want coupling errors with our own package.
+			displayedPackages.remove(clazz.getEPackage());
+			Set<String> explanations = Sets.newLinkedHashSet();
+			if (diag != null) {
+				for (EPackage dep : externalDependencies(clazz)) {
+					if (displayedPackages.contains(dep)) {
+						explanations.add("Dependency to " + dep.getNsURI()
+								+ ": \n"
+								+ externalDependenciesExplanation(dep, clazz));
+					}
+				}
 			}
+			return Joiner.on('\n').join(explanations);
 		}
-		return Joiner.on('\n').join(explanations);
+		return "";
 	}
 
 	public String getDependenciesLabel(EClass clazz) {
@@ -462,14 +503,7 @@ public class EcoreService {
 		Set<EClassifier> classifiersIntroducingDependencies = Sets
 				.newLinkedHashSet();
 
-		Set<EPackage> otherPackages = Sets.newLinkedHashSet();
-		for (DNodeList list : Iterables.filter(
-				diagram.getOwnedDiagramElements(), DNodeList.class)) {
-			if (!new DDiagramElementQuery(list).isHidden()
-					&& list.getTarget() instanceof EPackage) {
-				otherPackages.add((EPackage) list.getTarget());
-			}
-		}
+		Set<EPackage> otherPackages = getDisplayedEPackages(diagram);
 		otherPackages.remove(source);
 
 		for (EClass containedClassifiers : Iterables.filter(
@@ -491,6 +525,18 @@ public class EcoreService {
 			}
 		}
 		return classifiersIntroducingDependencies;
+	}
+
+	private Set<EPackage> getDisplayedEPackages(DDiagram diagram) {
+		Set<EPackage> otherPackages = Sets.newLinkedHashSet();
+		for (DNodeList list : Iterables.filter(
+				diagram.getOwnedDiagramElements(), DNodeList.class)) {
+			if (!new DDiagramElementQuery(list).isHidden()
+					&& list.getTarget() instanceof EPackage) {
+				otherPackages.add((EPackage) list.getTarget());
+			}
+		}
+		return otherPackages;
 	}
 
 	private String externalDependenciesExplanation(EPackage dep, EClass clazz) {
