@@ -40,9 +40,11 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.common.tools.api.util.AllContents;
 import org.eclipse.sirius.viewpoint.DDiagram;
+import org.eclipse.sirius.viewpoint.DEdge;
 import org.eclipse.sirius.viewpoint.DNodeList;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
+import org.eclipse.sirius.viewpoint.EdgeTarget;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -103,6 +105,29 @@ public class EcoreService {
 				result.add((EClass) dec.getTarget());
 		}
 		return result;
+	}
+
+	public Collection<EReference> getEReferencesToDisplay(EPackage root,
+			DSemanticDiagram diagram) {
+		// [diagram.getDisplayedEClasses().oclAsType(ecore::EClass).eAllReferences->flatten()/]
+		Collection<EClass> eClasses = getDisplayedEClasses(diagram);
+		Set<EReference> eRefs = Sets.newLinkedHashSet();
+		for (EClass clazz : eClasses) {
+			eRefs.addAll(clazz.getEAllReferences());
+		}
+		return eRefs;
+	}
+
+	public Boolean targetIsInterface(EClass clazz,EObject view) {
+		if (view instanceof DEdge) {
+			EdgeTarget target = ((DEdge) view).getTargetNode();
+			if (target instanceof DSemanticDecorator
+					&& ((DSemanticDecorator) target).getTarget() instanceof EClass) {
+				return ((EClass) ((DSemanticDecorator) target).getTarget())
+						.isInterface();
+			}
+		}
+		return false;
 	}
 
 	public Collection<EObject> getDisplayedEModelElements(
@@ -256,6 +281,13 @@ public class EcoreService {
 	 */
 	public String render(EReference ref) {
 		return new EReferenceServices().render(ref);
+	}
+
+	public String renderEOpposite(EReference ref) {
+		if (ref.getEOpposite() != null) {
+			return new EReferenceServices().render(ref.getEOpposite());
+		}
+		return "";
 	}
 
 	/**
@@ -424,7 +456,6 @@ public class EcoreService {
 		return clazz.getName() + " (" + externalDependencies(clazz).size()
 				+ ")";
 	}
-	
 
 	public Collection<EClassifier> getElementsIntroducingDependencies(
 			EPackage source, DSemanticDiagram diagram) {
@@ -466,9 +497,10 @@ public class EcoreService {
 		Set<String> explanations = Sets.newLinkedHashSet();
 		for (EStructuralFeature eRef : clazz.getEAllStructuralFeatures()) {
 			if (eRef.getEType() != null && eRef.getEType().getEPackage() == dep) {
-				explanations.add(" - " + eRef.eClass().getName() +" " + eRef.getName()
-						+ " refers to type " + eRef.getEType().getName()
-						+ " in package " + dep.getName());
+				explanations.add(" - " + eRef.eClass().getName() + " "
+						+ eRef.getName() + " refers to type "
+						+ eRef.getEType().getName() + " in package "
+						+ dep.getName());
 			}
 		}
 		for (EClass superClazz : clazz.getEAllSuperTypes()) {

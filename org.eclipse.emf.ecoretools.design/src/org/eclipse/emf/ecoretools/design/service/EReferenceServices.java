@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
@@ -50,7 +51,7 @@ public class EReferenceServices {
         }
     }
 
-    public List<EReference> getEOppositeEReferences(DSemanticDiagram diagram) {
+    public List<EReference> getEOppositeEReferences(EPackage context, DSemanticDiagram diagram) {
     	Collection<EClass> eClasses = new EcoreService().getDisplayedEClasses(diagram);
     	Set<EReference> references = Sets.newLinkedHashSet();
     	for (EClass clazz : eClasses) {

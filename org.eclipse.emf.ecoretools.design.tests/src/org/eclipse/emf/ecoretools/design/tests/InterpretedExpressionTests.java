@@ -87,9 +87,14 @@ public class InterpretedExpressionTests {
 	}
 
 	@Test
-	public void isNotAcceleo2() {
+	public void isNotAcceleo() {
 		if (underTest.getExpression().indexOf("<%") > -1) {
 			fail("Expression : " + underTest.getExpression() + " is Acceleo2, on attribute :"
+					+ underTest.getFeature().getName() + " of object "
+					+ EcoreUtil.getURI(underTest.getDeclaration()));
+		} 
+		if (underTest.getExpression().indexOf("[") > -1) {
+			fail("Expression : " + underTest.getExpression() + " is Acceleo, on attribute :"
 					+ underTest.getFeature().getName() + " of object "
 					+ EcoreUtil.getURI(underTest.getDeclaration()));
 		}
