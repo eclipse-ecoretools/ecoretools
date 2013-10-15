@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -44,6 +45,7 @@ import org.eclipse.sirius.viewpoint.DEdge;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.EdgeTarget;
+import org.eclipse.sirius.viewpoint.ViewpointPackage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -449,5 +451,12 @@ public class DesignServices  extends EReferenceServices{
             EcoreEditorPlugin.INSTANCE.log(exception);
         }
     }
+    
+    public EEnumLiteral arrowsFillDiamond(EObject any) {
+    	return ViewpointPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral("FillDiamond"); 
+    }
 
+    public EEnumLiteral fontFormatBold(EObject any) {
+    	return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral("bold"); 
+    }
 }
