@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 /**
  * Services usable from a VSM to deal with archetypes.
  */
-public class ArchetypeServices {
+public class ArchetypeServices extends DesignServices {
 	private static final String ARCHETYPE_URI = "http://www.obeo.fr/dsl/dnc/archetype";
 
 	public void addArchetypeAnnotation(EClass clazz, String archetype) {

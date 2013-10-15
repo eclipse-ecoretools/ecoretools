@@ -811,8 +811,6 @@
       </ownedCreateLine>
       <ownedColumnMappings name="Name" headerLabelExpression="Name" featureName="name" labelExpression="[(if (oclIsKindOf(ecore::EStructuralFeature) and oclAsType(ecore::EStructuralFeature).derived) then '/' else '' endif) + name/]"/>
     </ownedRepresentations>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Add support for archeypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore xcore">
@@ -910,9 +908,6 @@
       </layers>
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ArchetypeServices"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representations to assess the quality of an Ecore model." name="Quality" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
@@ -1000,9 +995,7 @@
         </toolSections>
       </defaultLayer>
     </ownedRepresentations>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.QualityServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="['Documentation for name ' + ' package'/]" domainClass="EPackage">
@@ -1055,9 +1048,7 @@
         </create>
       </intersection>
     </ownedRepresentations>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ReviewServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Adds support for EMF GenModel configuration." name="Generation" modelFileExtension="genmodel">
     <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="GenPackage Attributes" domainClass="GenPackage">
@@ -1075,9 +1066,7 @@
       <ownedColumnMappings name="Category" headerLabelExpression="Category" canEdit="[self.oclIsTypeOf(genmodel::GenFeature)/]" featureName="propertyCategory" labelExpression="[if (self.oclIsTypeOf(genmodel::GenFeature)) then self.oclAsType(genmodel::GenFeature).propertyCategory else ''endif/]"/>
       <ownedColumnMappings name="Decription" headerLabelExpression="Description" canEdit="[self.oclIsTypeOf(genmodel::GenFeature)/]" featureName="propertyDescription" labelExpression="[if (self.oclIsTypeOf(genmodel::GenFeature)) then self.oclAsType(genmodel::GenFeature).propertyDescription else '' endif/]"/>
     </ownedRepresentations>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EcoreService"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.EReferenceServices"/>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.GenerationServices"/>
   </ownedViewpoints>
   <userColorsPalettes name="Ecore Palette">
     <entries xsi:type="description:InterpolatedColor" name="Size Based Color" colorValueComputationExpression="[eContents()->size()/]" minValueComputationExpression="[0/]" maxValueComputationExpression="[10/]"/>

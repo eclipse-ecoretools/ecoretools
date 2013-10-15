@@ -52,7 +52,7 @@ public class EReferenceServices {
     }
 
     public List<EReference> getEOppositeEReferences(EPackage context, DSemanticDiagram diagram) {
-    	Collection<EClass> eClasses = new EcoreService().getDisplayedEClasses(diagram);
+    	Collection<EClass> eClasses = new DesignServices().getDisplayedEClasses(diagram);
     	Set<EReference> references = Sets.newLinkedHashSet();
     	for (EClass clazz : eClasses) {
 			references.addAll(clazz.getEReferences());

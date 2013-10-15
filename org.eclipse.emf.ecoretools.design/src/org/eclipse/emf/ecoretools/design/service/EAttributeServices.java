@@ -84,7 +84,7 @@ public class EAttributeServices {
             attr.setName(namePart);
         }
         if (setType) {
-            EClassifier type = new EcoreService().findTypeByName(attr, typePart);
+            EClassifier type = new DesignServices().findTypeByName(attr, typePart);
             if (type != null) {
                 attr.setEType(type);
             }

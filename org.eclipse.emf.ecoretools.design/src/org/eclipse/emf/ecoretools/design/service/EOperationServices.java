@@ -178,7 +178,7 @@ public class EOperationServices {
             param.setName(paramSpec[0]);
         }
         if (paramSpec[1] != null) {
-            EClassifier type = new EcoreService().findTypeByName(op, paramSpec[1]);
+            EClassifier type = new DesignServices().findTypeByName(op, paramSpec[1]);
             if (type != null) {
                 param.setEType(type);
             }
@@ -298,7 +298,7 @@ public class EOperationServices {
         if (typeStart != -1 && editString.length() > typeStart + 1) {
             String typeName = editString.substring(typeStart + 1).trim();
             if (!typeName.contains(")")) {
-                return new EcoreService().findTypeByName(receiver, typeName);
+                return new DesignServices().findTypeByName(receiver, typeName);
             }
         }
         return null;
