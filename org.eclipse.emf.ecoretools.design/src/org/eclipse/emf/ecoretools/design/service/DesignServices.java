@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
@@ -102,6 +104,39 @@ public class DesignServices extends EReferenceServices {
 		return any instanceof EEnum;
 	}
 
+	protected static final String GEN_MODEL_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/GenModel";
+
+	public EObject eContainerEContainer(EObject any) {
+		if (any.eContainer() != null)
+			return any.eContainer().eContainer();
+		return null;
+	}
+
+	public Collection<EStringToStringMapEntryImpl> getVisibleAnnotations(
+			EObject self, DSemanticDiagram diag) {
+		// [diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key
+		// = 'documentation')/]
+		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
+		for (EModelElement displayed : getDisplayedEModelElements(diag)) {
+			if (!(displayed instanceof EAttribute)
+					&& !(displayed instanceof EEnumLiteral)
+					&& !(displayed instanceof EOperation)) {
+				EAnnotation eAnnot = displayed
+						.getEAnnotation(GEN_MODEL_PACKAGE_NS_URI);
+				if (eAnnot != null) {
+					for (EStringToStringMapEntryImpl mapEntry : Iterables
+							.filter(eAnnot.getDetails(),
+									EStringToStringMapEntryImpl.class)) {
+						if ("documentation".equals(mapEntry.getKey())) {
+							result.add(mapEntry);
+						}
+					}
+				}
+			}
+
+		}
+		return result;
+	}
 
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
 		Iterator<DSemanticDecorator> it = Iterators
@@ -164,9 +199,9 @@ public class DesignServices extends EReferenceServices {
 				}).sortedCopy(allRefs);
 	}
 
-	public Collection<EObject> getDisplayedEModelElements(
+	public Collection<EModelElement> getDisplayedEModelElements(
 			DSemanticDiagram diagram) {
-		Set<EObject> modelelements = Sets.newLinkedHashSet();
+		Set<EModelElement> modelelements = Sets.newLinkedHashSet();
 		Iterator<DSemanticDecorator> it = Iterators.filter(
 				Iterators.concat(Iterators.singletonIterator(diagram),
 						diagram.eAllContents()), DSemanticDecorator.class);
@@ -191,7 +226,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public Collection<EObject> getRelated(EObject firstView,
-			List<EObject> allSelectedViews,DDiagram diag) {
+			List<EObject> allSelectedViews, DDiagram diag) {
 		Set<EObject> relateds = Sets.newLinkedHashSet();
 		for (DSemanticDecorator decorator : Iterables.filter(allSelectedViews,
 				DSemanticDecorator.class)) {
