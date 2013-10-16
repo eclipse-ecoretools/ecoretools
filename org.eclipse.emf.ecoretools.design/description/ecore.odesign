@@ -697,10 +697,9 @@
       </additionalLayers>
       <additionalLayers name="Documentation">
         <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="service:getVisibleAnnotations(diagram)" domainClass="EStringToStringMapEntry">
-          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" labelAlignment="LEFT" sizeComputationExpression="1" labelPosition="node" resizeKind="NSEW" width="12" height="10">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" labelAlignment="LEFT" sizeComputationExpression="1" labelPosition="node" resizeKind="NSEW" width="12" height="10" color="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
           </style>
         </nodeMappings>
         <edgeMappings name="EC Doc Assignment" semanticCandidatesExpression="[self.eAllContents()/]" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" targetFinderExpression="service:eContainerEContainer">
@@ -1021,9 +1020,7 @@
           <firstModelOperation xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
           <mask mask="{0}"/>
         </directEdit>
-        <defaultBackground>
-          <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='green']"/>
-        </defaultBackground>
+        <defaultBackground backgroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']"/>
         <create name="New Documentation" forceRefresh="true">
           <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
