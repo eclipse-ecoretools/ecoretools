@@ -16,7 +16,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
@@ -45,7 +47,6 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 
 	public RelatedElementsSwitch(ECrossReferenceAdapter xRef) {
 		this.referencer = xRef;
-
 	}
 
 	public List<EObject> getRelatedElements(EObject ctx) {
@@ -70,10 +71,26 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 			if (xRef.getEObject() instanceof EClass) {
 				relateds.add(xRef.getEObject());
 			} else if (xRef.getEObject() instanceof EReference) {
-				relateds.add(((EReference)xRef.getEObject()).getEContainingClass());
+				relateds.add(((EReference) xRef.getEObject())
+						.getEContainingClass());
 			}
 		}
 		return super.caseEClass(object);
+	}
+
+	@Override
+	public List<EObject> caseEOperation(EOperation object) {
+		if (object.getEType() != null) {
+			relateds.add(object.getEType());
+		}
+
+		for (EParameter param : object.getEParameters()) {
+			if (param.getEType() != null) {
+				relateds.add(param.getEType());
+			}
+		}
+
+		return super.caseEOperation(object);
 	}
 
 	@Override
@@ -81,7 +98,7 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 		relateds.add(object.getEType());
 		return super.caseEReference(object);
 	}
-	
+
 	@Override
 	public List<EObject> caseEPackage(EPackage object) {
 		relateds.addAll(object.getEClassifiers());

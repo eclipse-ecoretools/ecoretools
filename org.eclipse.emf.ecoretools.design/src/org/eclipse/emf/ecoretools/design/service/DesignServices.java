@@ -61,7 +61,7 @@ import com.google.common.collect.Sets;
 /**
  * Generic Ecore services usable from a VSM.
  */
-public class DesignServices  extends EReferenceServices{
+public class DesignServices extends EReferenceServices {
 	/**
 	 * Returns all the root objects of all the resources in the same
 	 * resource-set as the specified object.
@@ -102,15 +102,6 @@ public class DesignServices  extends EReferenceServices{
 		return any instanceof EEnum;
 	}
 
-	private void addChildren(EPackage rootEPackage, Set<EPackage> result) {
-		if (!result.contains(rootEPackage)) {
-			result.add(rootEPackage);
-			for (EPackage ePackage : rootEPackage.getESubpackages()) {
-
-			}
-		}
-
-	}
 
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
 		Iterator<DSemanticDecorator> it = Iterators
@@ -159,6 +150,20 @@ public class DesignServices  extends EReferenceServices{
 		return false;
 	}
 
+	public List<EReference> getEOppositeSemanticElements(EReference ref) {
+		Set<EReference> allRefs = Sets.newLinkedHashSet();
+		allRefs.add(ref);
+		if (ref.getEOpposite() != null)
+			allRefs.add(ref.getEOpposite());
+		return Ordering.natural()
+				.onResultOf(new Function<EReference, String>() {
+
+					public String apply(EReference input) {
+						return input.getName();
+					}
+				}).sortedCopy(allRefs);
+	}
+
 	public Collection<EObject> getDisplayedEModelElements(
 			DSemanticDiagram diagram) {
 		Set<EObject> modelelements = Sets.newLinkedHashSet();
@@ -185,8 +190,15 @@ public class DesignServices  extends EReferenceServices{
 		return allValidSessionElements(element, validForClassDiagram);
 	}
 
-	public List<EObject> getRelated(EObject root) {
-		return new RelatedElementsSwitch().getRelatedElements(root);
+	public Collection<EObject> getRelated(EObject firstView,
+			List<EObject> allSelectedViews,DDiagram diag) {
+		Set<EObject> relateds = Sets.newLinkedHashSet();
+		for (DSemanticDecorator decorator : Iterables.filter(allSelectedViews,
+				DSemanticDecorator.class)) {
+			relateds.addAll(new RelatedElementsSwitch()
+					.getRelatedElements(decorator.getTarget()));
+		}
+		return relateds;
 	}
 
 	private List<EObject> allValidSessionElements(EObject cur,
@@ -436,27 +448,30 @@ public class DesignServices  extends EReferenceServices{
 		}
 		return true;
 	}
-	
 
-    /**
-     * Shows the Properties View. (See Double Click Action in Design ViewPoint)
-     * 
-     * @param object
-     *            Any EObject
-     */
-    public void showPropertiesViewAction(EObject object) {
-        try {
-            PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.ui.views.PropertySheet");
-        } catch (PartInitException exception) {
-            EcoreEditorPlugin.INSTANCE.log(exception);
-        }
-    }
-    
-    public EEnumLiteral arrowsFillDiamond(EObject any) {
-    	return ViewpointPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral("FillDiamond"); 
-    }
+	/**
+	 * Shows the Properties View. (See Double Click Action in Design ViewPoint)
+	 * 
+	 * @param object
+	 *            Any EObject
+	 */
+	public void showPropertiesViewAction(EObject object) {
+		try {
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage()
+					.showView("org.eclipse.ui.views.PropertySheet");
+		} catch (PartInitException exception) {
+			EcoreEditorPlugin.INSTANCE.log(exception);
+		}
+	}
 
-    public EEnumLiteral fontFormatBold(EObject any) {
-    	return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral("bold"); 
-    }
+	public EEnumLiteral arrowsFillDiamond(EObject any) {
+		return ViewpointPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral(
+				"FillDiamond");
+	}
+
+	public EEnumLiteral fontFormatBold(EObject any) {
+		return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral(
+				"bold");
+	}
 }
