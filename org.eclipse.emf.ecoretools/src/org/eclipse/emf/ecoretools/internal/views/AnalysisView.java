@@ -24,8 +24,12 @@ import org.eclipse.emf.ecoretools.internal.actions.RefreshAction;
 import org.eclipse.emf.ecoretools.internal.actions.ToggleSynchronizeAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
@@ -40,6 +44,8 @@ import org.eclipse.ui.part.ViewPart;
  */
 public abstract class AnalysisView extends ViewPart implements ISelectionListener {
 
+	 private static final Transfer TRANSFER = LocalSelectionTransfer.getTransfer();
+	
 	private EObject lastValidObject;
 
 	private EObject analyzedObject;
@@ -241,6 +247,18 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	 */
 	public void refresh() {
 		setAnalyzedObject(lastValidObject);
+	}
+	
+
+	protected static void prepareViewerForDragToSirius(TreeViewer viewer) {
+		/* Configure viewer drag and drop behavior */
+        final int ops = DND.DROP_COPY | DND.DROP_MOVE;
+        final Transfer[] transfers = new Transfer[] { TRANSFER };        
+
+        final int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;
+        // final Transfer[] transfers = new Transfer[] {
+        // LocalTransfer.getInstance() };
+        viewer.addDragSupport(dndOperations, transfers, new EcoreToolsViewsDragTargetAdapter(viewer));
 	}
 
 	/**

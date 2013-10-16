@@ -21,8 +21,14 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecoretools.internal.Messages;
+import org.eclipse.jface.util.LocalSelectionTransfer;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.sirius.ui.tools.internal.views.sessionview.ModelDragTargetAdapter;
+import org.eclipse.sirius.ui.tools.internal.views.sessionview.ModelDropTargetAdapter;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.DND;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
@@ -40,6 +46,8 @@ public class EReferencesView extends AnalysisView {
 	 */
 	public static final String VIEW_ID = "org.eclipse.emf.ecoretools.internal.views.EReferencesView"; //$NON-NLS-1$
 
+
+	
 	private TreeViewer referencesTree;
 
 	/**
@@ -69,7 +77,11 @@ public class EReferencesView extends AnalysisView {
 				}
 			}
 		});
+		
+	      prepareViewerForDragToSirius(referencesTree);
+        
 	}
+
 
 	/**
 	 * @see org.eclipse.emf.ecoretools.internal.views.AnalysisView#refresh(org.eclipse.emf.ecore.EObject)
@@ -79,6 +91,9 @@ public class EReferencesView extends AnalysisView {
 		// cancel currently running job first, to prevent unnecessary redraw
 		if (refreshJob != null) {
 			refreshJob.cancel();
+		}
+		if (object instanceof DSemanticDecorator) {
+			object = ((DSemanticDecorator)object).getTarget();
 		}
 
 		if (object instanceof EClass) {

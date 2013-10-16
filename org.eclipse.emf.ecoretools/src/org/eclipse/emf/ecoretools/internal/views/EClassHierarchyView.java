@@ -28,6 +28,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -80,6 +81,7 @@ public class EClassHierarchyView extends AnalysisView {
 			}
 		});
 
+		prepareViewerForDragToSirius(hierarchyTree);
 		setKind(ASCENDANT);
 	}
 
@@ -115,6 +117,9 @@ public class EClassHierarchyView extends AnalysisView {
 		// cancel currently running job first, to prevent unnecessary redraw
 		if (refreshJob != null) {
 			refreshJob.cancel();
+		}
+		if (object instanceof DSemanticDecorator) {
+			object = ((DSemanticDecorator)object).getTarget();
 		}
 
 		if (object instanceof EClass) {
