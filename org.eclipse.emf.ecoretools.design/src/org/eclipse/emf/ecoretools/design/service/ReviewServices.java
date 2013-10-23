@@ -19,7 +19,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public class QualityServices extends DesignServices{
+public class ReviewServices extends DesignServices{
 
 	public Collection<EPackage> getPackageDependencies(EPackage source) {
 		// used to be

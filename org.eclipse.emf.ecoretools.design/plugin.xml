@@ -85,4 +85,12 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
         </enablement>
      </commonWizard>
   </extension>
+  
+    <extension
+        point="org.eclipse.help.contexts">
+        <contexts
+            file="doc/contexts.xml"
+            plugin="org.eclipse.emf.ecoretools.design">
+        </contexts>
+    </extension>
 </plugin>

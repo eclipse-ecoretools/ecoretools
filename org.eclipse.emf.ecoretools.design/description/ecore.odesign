@@ -33,6 +33,9 @@
           <audits auditExpression="[target.oclAsType(ecore::EClass).eAllSuperTypes->size() &lt; 4/]"/>
         </ownedRules>
       </validationSet>
+      <diagramInitialisation>
+        <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[self.openContextHelp('org.eclipse.emf.ecoretools.design.ClassDiagram')/]"/>
+      </diagramInitialisation>
       <defaultLayer name="Default">
         <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="service:getEReferencesToDisplay(diagram)" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="feature:eType" sourceFinderExpression="feature:eContainer" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
           <style sizeComputationExpression="1" routingStyle="manhattan">
@@ -351,7 +354,7 @@
             <containerViewVariable name="containerView"/>
             <representationNameVariable name="diagramName"/>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SuperType" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="SuperType" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/Inheritance.gif">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -711,7 +714,7 @@
           </style>
         </edgeMappings>
         <toolSections name="Documentation Tools">
-          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EAnnotation_24.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
@@ -740,7 +743,7 @@
               <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.sirius.ui/icons/full/obj16/EdgeMapping.gif">
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/AnnotationLink.gif">
             <sourceVariable name="source"/>
             <targetVariable name="target"/>
             <sourceViewVariable name="sourceView"/>
@@ -766,7 +769,7 @@
           </vsmElementCustomizations>
         </customization>
       </additionalLayers>
-      <additionalLayers name="Validation">
+      <additionalLayers name="Validation" activeByDefault="true">
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:hasError">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style/@centerLabelStyleDescription //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.0/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@style" referenceName="labelColor">
@@ -909,94 +912,6 @@
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ArchetypeServices"/>
   </ownedViewpoints>
-  <ownedViewpoints endUserDocumentation="Provides representations to assess the quality of an Ecore model." name="Quality" modelFileExtension="ecore xcore">
-    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
-      <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
-      <defaultLayer name="Default">
-        <edgeMappings name="Package Dependency" semanticCandidatesExpression="service:getPackageDependencies" sourceMapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetMapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetFinderExpression="service:getPackageDependencies" sourceFinderExpression="[diagram.target/]" domainClass="EPackage">
-          <style lineStyle="dash" sizeComputationExpression="service:getDependenciesAmount()">
-            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <centerLabelStyleDescription>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </centerLabelStyleDescription>
-          </style>
-        </edgeMappings>
-        <containerMappings name="Analyzed Package" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" domainClass="EPackage" childrenPresentation="List">
-          <subNodeMappings name="EClassfierIntroducingDependency" semanticCandidatesExpression="service:getElementsIntroducingDependencies(diagram)" domainClass="ecore.EClassifier">
-            <style xsi:type="style:BundledImageDescription" labelExpression="service:getDependenciesLabel" labelAlignment="LEFT" tooltipExpression="service:getDependenciesTooltip(view)" labelPosition="node" resizeKind="NSEW">
-              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            </style>
-          </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="feature:nsURI" labelAlignment="LEFT" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
-            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
-            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.0"/>
-          </style>
-        </containerMappings>
-        <toolSections name="Help" label="Help">
-          <ownedTools xsi:type="tool:OperationAction" name="Open Dependencies User Guide" label="Open User Guide">
-            <view name="views"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Dependencies User Guide Action" id="org.eclipse.sirius.ui.business.api.action.openHelpSection">
-                <parameters name="href" value="/org.eclipse.emf.ecoretools.design/doc/user-guide.html#quality.dependencies"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-        </toolSections>
-        <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="service:isEPackage" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
-            <element name="element"/>
-            <containerView name="containerView"/>
-            <container name="container"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:For" expression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:containerView"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="[containerView.oclIsKindOf(viewpoint::DDiagram)/]" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
-            <element name="element"/>
-            <elementView name="elementView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:elementView">
-                <subModelOperations xsi:type="tool:DeleteView"/>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:ContainerDropDescription" name="External EPackageTo Analyze from treeview" forceRefresh="true" dragSource="PROJECT_EXPLORER">
-            <oldContainer name="oldSemanticContainer"/>
-            <newContainer name="newSemanticContainer"/>
-            <element name="element"/>
-            <newViewContainer name="newContainerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Quality']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:newContainerView"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.search/icons/full/etool16/search.gif">
-            <view name="views">
-              <subVariables xsi:type="tool:SelectModelElementVariable" name="selected" candidatesExpression="service:getRelated(views,diagram)" multiple="true" message="Pick the Element you want to add to the diagram."/>
-            </view>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:For" expression="var:selected">
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:diagram"/>
-                </subModelOperations>
-              </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-        </toolSections>
-      </defaultLayer>
-    </ownedRepresentations>
-    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.QualityServices"/>
-  </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore">
     <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="['Documentation for name ' + ' package'/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -1045,6 +960,91 @@
           <mask mask="{0}"/>
         </create>
       </intersection>
+    </ownedRepresentations>
+    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
+      <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+      <defaultLayer name="Default">
+        <edgeMappings name="Package Dependency" semanticCandidatesExpression="service:getPackageDependencies" sourceMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetFinderExpression="service:getPackageDependencies" sourceFinderExpression="[diagram.target/]" domainClass="EPackage">
+          <style lineStyle="dash" sizeComputationExpression="service:getDependenciesAmount()">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+            <centerLabelStyleDescription>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="Analyzed Package" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" domainClass="EPackage" childrenPresentation="List">
+          <subNodeMappings name="EClassfierIntroducingDependency" semanticCandidatesExpression="service:getElementsIntroducingDependencies(diagram)" domainClass="ecore.EClassifier">
+            <style xsi:type="style:BundledImageDescription" labelExpression="service:getDependenciesLabel" labelAlignment="LEFT" tooltipExpression="service:getDependenciesTooltip(view)" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="feature:nsURI" labelAlignment="LEFT" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <labelBorderStyle href="environment:/viewpoint#//@labelBorderStyles/@labelBorderStyleDescriptions.0"/>
+          </style>
+        </containerMappings>
+        <toolSections name="Help" label="Help">
+          <ownedTools xsi:type="tool:OperationAction" name="Open Dependencies User Guide" label="Open User Guide">
+            <view name="views"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Dependencies User Guide Action" id="org.eclipse.sirius.ui.business.api.action.openHelpSection">
+                <parameters name="href" value="/org.eclipse.emf.ecoretools.design/doc/user-guide.html#quality.dependencies"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="Existing Elements">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="service:isEPackage" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
+            <element name="element"/>
+            <containerView name="containerView"/>
+            <container name="container"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:For" expression="var:element">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:containerView"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="[containerView.oclIsKindOf(viewpoint::DDiagram)/]" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:elementView">
+                <subModelOperations xsi:type="tool:DeleteView"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="External EPackageTo Analyze from treeview" forceRefresh="true" dragSource="PROJECT_EXPLORER">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" containerViewExpression="var:newContainerView"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.search/icons/full/etool16/search.gif">
+            <view name="views">
+              <subVariables xsi:type="tool:SelectModelElementVariable" name="selected" candidatesExpression="service:getRelated(views,diagram)" multiple="true" message="Pick the Element you want to add to the diagram."/>
+            </view>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:For" expression="var:selected">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:diagram"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ReviewServices"/>
   </ownedViewpoints>

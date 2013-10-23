@@ -11,6 +11,7 @@
 
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -508,5 +511,27 @@ public class DesignServices extends EReferenceServices {
 	public EEnumLiteral fontFormatBold(EObject any) {
 		return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral(
 				"bold");
+	}
+	
+
+	public void openContextHelp(EObject any, String contextID) throws IOException {
+		if (PlatformUI.getWorkbench() != null && PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null
+				&& PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell() != null) {
+			IPath path = Platform.getStateLocation(EcoreToolsDesignPlugin.getDefault().getBundle());
+			if (path != null) {
+				path = path.append(contextID);
+				if (!path.toFile().exists()) {
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			 		PlatformUI
+							.getWorkbench()
+							.getHelpSystem()
+							.setHelp(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+									contextID);
+					PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
+					path.toFile().createNewFile();
+				}
+			}
+
+		}
 	}
 }

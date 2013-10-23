@@ -14,11 +14,14 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateGraphicEditPartOperation;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.sirius.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.diagram.internal.edit.parts.DEdgeBeginNameEditPart;
 import org.eclipse.sirius.diagram.internal.edit.parts.DEdgeEndNameEditPart;
 import org.eclipse.sirius.diagram.part.SiriusVisualIDRegistry;
 import org.eclipse.sirius.diagram.tools.api.command.GMFCommandWrapper;
+import org.eclipse.sirius.viewpoint.DDiagramElement;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
 public class EcoreToolsSpecificEditPartProvider extends
 		AbstractEditPartProvider {
@@ -60,10 +63,10 @@ public class EcoreToolsSpecificEditPartProvider extends
 	public boolean provides(IOperation operation) {
 		if (operation instanceof CreateGraphicEditPartOperation) {
 			View view = ((IEditPartOperation) operation).getView();
-			if (view.getElement() instanceof DSemanticDecorator) {
+			if (view.getElement() instanceof DSemanticDecorator) {				
 				EObject semanticTarget = ((DSemanticDecorator) view
 						.getElement()).getTarget();
-				if (semanticTarget instanceof EReference
+				if (isFromEcoreToolsDesign((DSemanticDecorator)view.getElement()) && semanticTarget instanceof EReference
 						&& ((EReference) semanticTarget).getEOpposite() != null) {
 					switch (SiriusVisualIDRegistry.getVisualID(view)) {
 
@@ -78,6 +81,15 @@ public class EcoreToolsSpecificEditPartProvider extends
 
 		}
 		return false;
+	}
+
+	private boolean isFromEcoreToolsDesign(DSemanticDecorator element) {
+		return true;
+//		if (element instanceof DDiagramElement)
+//		{
+//			new DDiagramElementQuery(element).getMapping();
+//		}
+//		return false;
 	}
 
 	class EcoreToolsDirectEditForBeginRole extends LabelDirectEditPolicy {
