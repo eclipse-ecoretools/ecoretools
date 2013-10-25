@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contexts>
+   <context id="ClassDiagram" title="Using the Class Diagram">
+      <description>Welcome in EcoreTools. This is a Class diagram you can use to design your Ecore model.
+
+The class diagram starts as being empty, you can either create new elements using the palette or import existing ones drag and dropping them into the diagram or using the &quot;Add...&quot; action in the palette.
+
+You might want to have a look on a few help topics regarding this editor :</description>
+      <topic href="doc/user-guide.html" label="Using the Class Diagram"/>
+   </context>
+</contexts>
