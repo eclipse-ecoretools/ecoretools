@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="7.0.0">
   <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/doc/screenshots/entities.png&quot;/>&#xA;&lt;img src=&quot;/doc/screenshots/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore">
-    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20external%20package']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' package entities'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20external%20package']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' class diagram'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <filters xsi:type="filter:CompositeFilterDescription" name="Hide class content">
         <filters xsi:type="filter:MappingFilter" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
@@ -785,7 +785,7 @@
         </customization>
       </additionalLayers>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description_1:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="['Classes in ' + name + ' package'/]" domainClass="EPackage">
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="[name + ' class table'/]" domainClass="EPackage">
       <ownedLineMappings name="Classes lines" domainClass="EClass" semanticCandidatesExpression="[eContents(ecore::EClass)/]">
         <foregroundConditionalStyle predicateExpression="[abstract/]">
           <style labelSize="10" labelFormat="italic">
@@ -913,7 +913,7 @@
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ArchetypeServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore">
-    <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="['Documentation for name ' + ' package'/]" domainClass="EPackage">
+    <ownedRepresentations xsi:type="description_1:CrossTableDescription" endUserDocumentation="Document the concepts in a package." name="Documentation" titleExpression="[name + ' documentation table'/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <ownedLineMappings name="Doc EClassifiers" semanticElements="var:self" domainClass="EClassifier" semanticCandidatesExpression="feature:eClassifiers" headerLabelExpression="[eClass().name + ' : ' + name/]">
         <defaultBackground>
@@ -961,7 +961,7 @@
         </create>
       </intersection>
     </ownedRepresentations>
-    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="['Dependencies of package '+ name/]" domainClass="EPackage">
+    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@toolSections.1/@ownedTools[name='External%20EPackageTo%20Analyze%20from%20treeview']" name="Dependencies" titleExpression="[name + ' package dependencies'/]" domainClass="EPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <defaultLayer name="Default">
         <edgeMappings name="Package Dependency" semanticCandidatesExpression="service:getPackageDependencies" sourceMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Dependencies']/@defaultLayer/@containerMappings[name='Analyzed%20Package']" targetFinderExpression="service:getPackageDependencies" sourceFinderExpression="[diagram.target/]" domainClass="EPackage">
@@ -1049,7 +1049,7 @@
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ReviewServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Adds support for EMF GenModel configuration." name="Generation" modelFileExtension="genmodel">
-    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="GenPackage Attributes" domainClass="GenPackage">
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="GenPackage Attributes" titleExpression="[name + ' generation table'/]" domainClass="GenPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/GenModel#/"/>
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <ownedLineMappings name="GenClass" domainClass="GenClass" headerLabelExpression="[ecoreClass.name/]">
