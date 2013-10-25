@@ -51,6 +51,7 @@ import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.EdgeTarget;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -512,26 +513,32 @@ public class DesignServices extends EReferenceServices {
 		return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral(
 				"bold");
 	}
-	
 
-	public void openContextHelp(EObject any, String contextID) throws IOException {
-		if (PlatformUI.getWorkbench() != null && PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null
-				&& PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell() != null) {
-			IPath path = Platform.getStateLocation(EcoreToolsDesignPlugin.getDefault().getBundle());
-			if (path != null) {
-				path = path.append(contextID);
-				if (!path.toFile().exists()) {
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			 		PlatformUI
-							.getWorkbench()
-							.getHelpSystem()
-							.setHelp(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-									contextID);
-					PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
-					path.toFile().createNewFile();
+	public void openContextHelp(EObject any, final String contextID)
+			throws IOException {
+		if (Display.getDefault() != null)
+			Display.getDefault().asyncExec(new Runnable() {
+
+				public void run() {
+					if (PlatformUI.getWorkbench() != null
+							&& PlatformUI.getWorkbench()
+									.getActiveWorkbenchWindow() != null
+							&& PlatformUI.getWorkbench()
+									.getActiveWorkbenchWindow().getShell() != null) {
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+								.getShell();
+						PlatformUI
+								.getWorkbench()
+								.getHelpSystem()
+								.setHelp(
+										PlatformUI.getWorkbench()
+												.getActiveWorkbenchWindow()
+												.getShell(), contextID);
+						PlatformUI.getWorkbench().getHelpSystem()
+								.displayDynamicHelp();
+
+					}
 				}
-			}
-
-		}
+			});
 	}
 }

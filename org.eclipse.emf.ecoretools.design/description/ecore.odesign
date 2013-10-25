@@ -150,7 +150,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="service:isDDiagram(containerView)" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
