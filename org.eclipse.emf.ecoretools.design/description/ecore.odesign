@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="7.0.0">
   <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/doc/screenshots/entities.png&quot;/>&#xA;&lt;img src=&quot;/doc/screenshots/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore">
-    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20external%20package']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' class diagram'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
+    <ownedRepresentations xsi:type="description:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="[name + ' class diagram'/]" initialisation="true" domainClass="EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <filters xsi:type="filter:CompositeFilterDescription" name="Hide class content">
         <filters xsi:type="filter:MappingFilter" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
@@ -73,14 +73,14 @@
           </style>
         </edgeMappings>
         <containerMappings name="EC EClass" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Hierarchy%20Diagram'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Relation%20for%20class%20Diagram']" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.1/@ownedTools[name='Delete%20EClass']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EClass" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20attribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20operation']" childrenPresentation="List">
-          <subNodeMappings name="EC EAttribute" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20EAttribute%20Name']" semanticCandidatesExpression="feature:eAttributes" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EAttribute">
+          <subNodeMappings name="EC EAttribute" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20EAttribute%20Name']" semanticCandidatesExpression="feature:eAttributes" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EAttribute" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Drop%20EStructuralFeature%20into%20EClass']">
             <style xsi:type="style:BundledImageDescription" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <subNodeMappings name="Operation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Operation%20Name']" semanticCandidatesExpression="feature:eOperations" semanticElements="service:eOperationSemanticElements" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EOperation">
+          <subNodeMappings name="Operation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Operation%20Name']" semanticCandidatesExpression="feature:eOperations" semanticElements="service:eOperationSemanticElements" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="EOperation" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Drop%20EStructuralFeature%20into%20EClass']">
             <style xsi:type="style:BundledImageDescription" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderEOperationTooltip" sizeComputationExpression="2">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -175,6 +175,9 @@
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" containerViewExpression="var:newContainerView"/>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -192,6 +195,22 @@
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="[diagram/]"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop EStructuralFeature into EClass" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
+            <oldContainer name="oldSemanticContainer"/>
+            <newContainer name="newSemanticContainer"/>
+            <element name="element"/>
+            <newViewContainer name="newContainerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEOperation">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eOperations" valueExpression="var:element"/>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEStructuralFeature">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="var:element"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -567,7 +586,7 @@
           <ownedTools xsi:type="tool:DirectEditLabel" name="Edit Name">
             <mask mask="{0}"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[arg0/]"/>
+              <firstModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:arg0"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:DirectEditLabel" name="Edit EAttribute Name">
@@ -595,6 +614,12 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
                 <subModelOperations xsi:type="tool:ExternalJavaAction" name="Open EEF" id="org.eclipse.sirius.eef.actions.openPropertiesWizard"/>
               </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" documentation="- &quot;name&quot; : change the name of the operation" name="InstanceClassName" forceRefresh="true">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:SetValue" featureName="instanceClassName" valueExpression="var:arg0"/>
             </initialOperation>
           </ownedTools>
         </toolSections>
@@ -672,15 +697,6 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
                 <subModelOperations xsi:type="tool:SetValue" featureName="eClassifiers" valueExpression="[element/]"/>
               </firstModelOperations>
-            </initialOperation>
-          </ownedTools>
-          <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop external package" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="PROJECT_EXPLORER">
-            <oldContainer name="oldSemanticContainer"/>
-            <newContainer name="newSemanticContainer"/>
-            <element name="element"/>
-            <newViewContainer name="newContainerView"/>
-            <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:ContainerDropDescription" name="Drop EPackage into EPackage" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" dragSource="BOTH">

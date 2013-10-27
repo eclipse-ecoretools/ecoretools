@@ -13,8 +13,8 @@ package org.eclipse.emf.ecoretools.design.tests;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.sirius.viewpoint.description.EdgeMapping;
 import org.junit.Test;
@@ -24,30 +24,32 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 @RunWith(value = Parameterized.class)
 public class EdgeMappingConsistencyTests {
 
 	private EdgeMapping underTest;
 
-	public EdgeMappingConsistencyTests(EdgeMapping expression) {
-		this.underTest = expression;
+	public EdgeMappingConsistencyTests(EdgeMapping edgemapping) {
+		this.underTest = edgemapping;
 	}
 
 	@Test
 	public void hasReconnect() {
-		assertTrue(underTest.getReconnections().size() > 0);
+		assertTrue("Edge Mapping +" + underTest.getName()
+				+ "has no reconnect tool",
+				underTest.getReconnections().size() > 0);
 	}
 
 	@Parameters
 	public static Collection<Object[]> data() {
 		List<Object[]> parameters = Lists.newArrayList();
-		Set<EdgeMapping> allExpressions = Sets
-				.newLinkedHashSet();
 		EcoreToolsViewpointSpecificationModels spec = new EcoreToolsViewpointSpecificationModels();
-		allExpressions.addAll(Lists.newArrayList(Iterators.filter(
-				spec.eAllContents(), EdgeMapping.class)));
+		Iterator<EdgeMapping> it = Iterators.filter(spec.eAllContents(),
+				EdgeMapping.class);
+		while (it.hasNext()) {
+			parameters.add(new Object[] { it.next() });
+		}
 		return parameters;
 	}
 

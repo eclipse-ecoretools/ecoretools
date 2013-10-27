@@ -96,6 +96,14 @@ public class DesignServices extends EReferenceServices {
 				EPackage.class));
 	}
 
+	public Boolean isEOperation(EObject any) {
+		return any instanceof EOperation;
+	}
+
+	public Boolean isEStructuralFeature(EObject any) {
+		return any instanceof EStructuralFeature;
+	}
+
 	public Boolean isEPackage(EObject any) {
 		return any instanceof EPackage;
 	}
