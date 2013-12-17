@@ -194,7 +194,7 @@
             </activation>
             <repositories>    
                 <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/1.0.0/luna</url>
+                    <url>http://download.eclipse.org/sirius/updates/nightly/1.0.x/luna</url>
                 </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
                     <url>http://download.eclipse.org/releases/kepler</url>
