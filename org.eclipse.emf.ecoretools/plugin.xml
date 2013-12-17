@@ -70,6 +70,7 @@
 	</extension>
 
 	<!-- Add a new wizard used to create an Ecore Project -->
+	<!--
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard
 			id="org.eclipse.emf.ecoretools.ui.wizards.EcoreProjectWizardID"
@@ -86,5 +87,6 @@
 			id="org.eclipse.emf.ecoretools.diagram"
 			name="%ecore.tools.category"/>
 	</extension>
+	-->
 
 </plugin>
