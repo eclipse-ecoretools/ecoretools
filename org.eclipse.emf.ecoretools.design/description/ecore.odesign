@@ -34,7 +34,7 @@
         </ownedRules>
       </validationSet>
       <diagramInitialisation>
-        <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[self.openContextHelp('org.eclipse.emf.ecoretools.design.ClassDiagram')/]"/>
+        <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:openClassDiagramContextHelp"/>
       </diagramInitialisation>
       <defaultLayer name="Default">
         <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="service:getEReferencesToDisplay(diagram)" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="feature:eType" sourceFinderExpression="feature:eContainer" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
@@ -137,7 +137,7 @@
             <containerView name="containerView"/>
             <container name="container"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:For" expression="[element/]">
+              <firstModelOperations xsi:type="tool:For" expression="var:element">
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:containerView"/>
                 </subModelOperations>
@@ -188,13 +188,13 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:For" expression="var:selected">
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="[diagram/]"/>
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:diagram"/>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="[diagram/]"/>
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:diagram"/>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
-                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="[diagram/]"/>
+                  <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:diagram"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -205,7 +205,7 @@
             <element name="element"/>
             <newViewContainer name="newContainerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newSemanticContainer">
                 <subModelOperations xsi:type="tool:If" conditionExpression="service:isEOperation">
                   <subModelOperations xsi:type="tool:SetValue" featureName="eOperations" valueExpression="var:element"/>
                 </subModelOperations>
@@ -297,8 +297,8 @@
             <elementView name="elementView"/>
             <containerView name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[self/]">
-                <subModelOperations xsi:type="tool:For" expression="[eInverse(ecore::EReference)->asSequence()/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:For" expression="service:getInverseEReferences">
                   <subModelOperations xsi:type="tool:RemoveElement"/>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:RemoveElement"/>
@@ -340,8 +340,8 @@
             <element name="element"/>
             <newViewContainer name="newContainerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newSemanticContainer">
+                <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="var:element"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -351,8 +351,8 @@
             <element name="element"/>
             <newViewContainer name="newContainerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eOperations" valueExpression="[element/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newSemanticContainer">
+                <subModelOperations xsi:type="tool:SetValue" featureName="eOperations" valueExpression="var:element"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -379,8 +379,8 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="[target/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -390,9 +390,9 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newEReference' + eContainer(EClassifier).eAllContents(EReference)->size()/]"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -404,19 +404,19 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures" variableName="instanceTarget">
                   <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[source/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[source.name.toLower()/]"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures" variableName="instanceSource">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[target.name.toLower()/]"/>
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[instanceTarget/]"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:instanceTarget"/>
                   </subModelOperations>
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[instanceTarget/]">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[instanceSource/]"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:instanceTarget">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:instanceSource"/>
                   </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
@@ -428,9 +428,9 @@
             <sourceViewVariable name="sourceView"/>
             <targetViewVariable name="targetView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="newEReference"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="containment" valueExpression="[true/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="upperBound" valueExpression="[-1/]"/>
@@ -443,8 +443,8 @@
             <elementView name="elementView"/>
             <containerView name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[elementView.sourceNode.oclAsType(viewpoint::DSemanticDecorator).target/]">
-                <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="[elementView.targetNode.oclAsType(viewpoint::DSemanticDecorator).target/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:getEdgeSourceSemantic(elementView)">
+                <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="service:getEdgeTargetSemantic(elementView)"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -457,30 +457,30 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source &lt;> element.eContainer()/]">
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
                     <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
                   </subModelOperations>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source = element.eContainer()/]">
                   <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = sourceView/]">
                     <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                         <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
                       </subModelOperations>
                     </subModelOperations>
                     <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[edgeView.targetNode.oclAsType(viewpoint::DSemanticDecorator).target/]"/>
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                        <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="service:getEdgeTargetSemantic(edgeView)"/>
                       </subModelOperations>
                       <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[otherEnd.oclAsType(viewpoint::DSemanticDecorator).target/]">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
+                        <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="var:element"/>
                       </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> sourceView/]">
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                       <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
                     </subModelOperations>
                   </subModelOperations>
@@ -496,36 +496,36 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source &lt;> element/]">
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="[target/]"/>
-                    <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="[source/]"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
+                    <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:source"/>
                   </subModelOperations>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source = element/]">
                   <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = sourceView/]">
                     <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = edgeView.targetNode/]">
                       <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="[edgeView.targetNode.oclAsType(viewpoint::DSemanticDecorator).target/]"/>
-                        <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
-                          <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="[element/]"/>
+                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="service:getEdgeTargetSemantic(edgeView)"/>
+                        <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                          <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:element"/>
                         </subModelOperations>
                       </subModelOperations>
                     </subModelOperations>
                     <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="[target/]"/>
-                        <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="[source/]"/>
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
+                        <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:source"/>
                       </subModelOperations>
                     </subModelOperations>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> sourceView/]">
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
-                      <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="[edgeView.targetNode.oclAsType(viewpoint::DSemanticDecorator).target/]"/>
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="getEdgeTargetSemantic(edgeView)"/>
                     </subModelOperations>
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[source/]">
-                      <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="[edgeView.targetNode.oclAsType(viewpoint::DSemanticDecorator).target/]"/>
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
+                      <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="service:getEdgeTargetSemantic(edgeView)"/>
                     </subModelOperations>
                   </subModelOperations>
                 </subModelOperations>

@@ -19,8 +19,14 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.viewpoint.DEdge;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
 import com.google.common.collect.Lists;
@@ -50,6 +56,27 @@ public class EReferenceServices {
 		} else {
 			return "";
 		}
+	}
+
+	public List<EReference> getInverseEReferences(EObject ctx) {
+		Session sess = SessionManager.INSTANCE.getSession(ctx);
+		List<EReference> result = Lists.newArrayList();
+		if (sess != null) {
+			for (Setting setting : sess.getSemanticCrossReferencer()
+					.getInverseReferences(ctx)) {
+				if (setting.getEObject() instanceof EReference)
+					result.add((EReference) setting.getEObject());
+			}
+		}
+		return result;
+	}
+	
+	public EObject getEdgeTargetSemantic(EObject any,DEdge view) {
+		 return ((DSemanticDecorator)view.getTargetNode()).getTarget();
+	}
+	
+	public EObject getEdgeSourceSemantic(EObject any,DEdge view) {
+		 return ((DSemanticDecorator)view.getSourceNode()).getTarget();
 	}
 
 	public List<EReference> getEOppositeEReferences(EPackage context,

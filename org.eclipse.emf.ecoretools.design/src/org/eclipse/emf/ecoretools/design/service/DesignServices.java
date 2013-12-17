@@ -522,6 +522,16 @@ public class DesignServices extends EReferenceServices {
 				"bold");
 	}
 
+	public void openClassDiagramContextHelp(EObject any) {
+		try {
+			openContextHelp(any,
+					"org.eclipse.emf.ecoretools.design.ClassDiagram");
+		} catch (IOException e) {
+			EcoreEditorPlugin.INSTANCE.log(e);
+		}
+	}
+		
+
 	public void openContextHelp(EObject any, final String contextID)
 			throws IOException {
 		if (Display.getDefault() != null)
