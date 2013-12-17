@@ -15,10 +15,10 @@
       provider-name="%providerName"
       image="modeling32.png">
 
-  <description url="http://wiki.eclipse.org/index.php/Ecore_Tools">
+   <description url="http://wiki.eclipse.org/index.php/Ecore_Tools">
       %description
    </description>
-   
+
    <copyright url="http://www.eclipse.org/legal/epl-v10.html">
       Copyright (c) 2007, 2010 Anyware Technologies and others
 All rights reserved. This program and the accompanying materials
@@ -31,9 +31,8 @@ http://www.eclipse.org/legal/epl-v10.html
       %license
    </license>
 
-
    <includes
-         id="org.eclipse.emf.ecoretools"
+         id="org.eclipse.emf.ecoretools.design"
          version="0.0.0"/>
 
    <plugin
@@ -42,15 +41,6 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-     <!--
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.diagram.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         -->
 
    <plugin
          id="org.eclipse.emf.ecoretools.doc"
@@ -58,31 +48,6 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-     <!--
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.properties.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.diagram.ui.outline.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.filters.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         -->
 
    <plugin
          id="org.eclipse.emf.ecoretools.tabbedproperties.source"
