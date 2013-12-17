@@ -42,6 +42,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+     <!--
 
    <plugin
          id="org.eclipse.emf.ecoretools.diagram.source"
@@ -49,6 +50,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         -->
 
    <plugin
          id="org.eclipse.emf.ecoretools.doc"
@@ -56,6 +58,8 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
+     <!--
 
    <plugin
          id="org.eclipse.emf.ecoretools.properties.source"
@@ -70,6 +74,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
 
    <plugin
          id="org.eclipse.emf.ecoretools.filters.source"
@@ -77,6 +82,7 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         -->
 
    <plugin
          id="org.eclipse.emf.ecoretools.tabbedproperties.source"
