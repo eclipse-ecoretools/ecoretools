@@ -50,8 +50,6 @@ public class InterpretedExpressionTests {
 		collectExpressionFromEcoreToolsViewpoints(parameters, allExpressions,
 				"Archetype");
 		collectExpressionFromEcoreToolsViewpoints(parameters, allExpressions,
-				"Quality");
-		collectExpressionFromEcoreToolsViewpoints(parameters, allExpressions,
 				"Review");
 		collectExpressionFromEcoreToolsViewpoints(parameters, allExpressions,
 				"Generation");
