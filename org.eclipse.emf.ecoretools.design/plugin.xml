@@ -20,6 +20,7 @@
       <wizard
             category="org.eclipse.emf.codegen.ecore.ui.wizardCategory"
             class="org.eclipse.emf.ecoretools.design.wizard.EcoreModelerWizard"
+            finalPerspective="org.eclipse.sirius.ui.tools.perspective.modeling"
             icon="icons/full/obj16/EcoreModelingProject.png"
             id="org.eclipse.ecoretools.emf.design.wizardID"
             name="Ecore Modeling Project"
