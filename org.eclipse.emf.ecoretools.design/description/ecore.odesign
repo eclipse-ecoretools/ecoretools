@@ -460,7 +460,7 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source &lt;> element.eContainer()/]">
                   <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
+                    <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   </subModelOperations>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source = element.eContainer()/]">
@@ -506,7 +506,7 @@
                 <subModelOperations xsi:type="tool:If" conditionExpression="[source = element/]">
                   <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = sourceView/]">
                     <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                         <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="service:getEdgeTargetSemantic(edgeView)"/>
                         <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
                           <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:element"/>
@@ -540,17 +540,17 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures" variableName="newSource">
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[element.name/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[element.eType/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[element.eOpposite/]"/>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element.eOpposite/]">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[newSource/]"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
                   <subModelOperations xsi:type="tool:RemoveElement"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -564,18 +564,18 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[target/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures" variableName="newTarget">
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[element.eOpposite.name/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[element.eOpposite.eType/]"/>
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[element/]"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:element"/>
                 </subModelOperations>
                 <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element.eOpposite/]">
                   <subModelOperations xsi:type="tool:RemoveElement"/>
                 </subModelOperations>
-                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[element/]">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="[target/]"/>
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="[newTarget/]"/>
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:newTarget"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -592,19 +592,19 @@
           <ownedTools xsi:type="tool:DirectEditLabel" name="Edit EAttribute Name">
             <mask mask="{0}"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[performEdit(arg0)/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:performEdit(arg0)"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:DirectEditLabel" name="EReference Name">
             <mask mask="{0}"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[performEdit(arg0)/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:performEdit(arg0)"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:DirectEditLabel" documentation="- &quot;name&quot; : change the name of the operation" name="Operation Name" forceRefresh="true">
             <mask mask="{0}"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[performEdit(arg0)/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:performEdit(arg0)"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:DoubleClickDescription" name="ShowPropertiesView" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']">
@@ -682,7 +682,7 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:CreateInstance" typeName="EPackage" referenceName="eSubpackages" variableName="newPackage">
-                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[newPackage/]">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newPackage">
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newPackage' + eContainer().eContents(EPackage)->size()/]"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -694,8 +694,8 @@
             <element name="element"/>
             <newViewContainer name="newContainerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eClassifiers" valueExpression="[element/]"/>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newSemanticContainer">
+                <subModelOperations xsi:type="tool:SetValue" featureName="eClassifiers" valueExpression="var:element"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -705,8 +705,8 @@
             <element name="element"/>
             <newViewContainer name="newContainerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[newSemanticContainer/]">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eSubpackages" valueExpression="[element/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newSemanticContainer">
+                <subModelOperations xsi:type="tool:SetValue" featureName="eSubpackages" valueExpression="var:element">
                   <subModelOperations xsi:type="tool:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" containerViewExpression="var:newContainerView"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -756,7 +756,7 @@
           <ownedTools xsi:type="tool:DirectEditLabel" name="Edit Detail">
             <mask mask="{0}"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
+              <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:arg0"/>
             </initialOperation>
           </ownedTools>
           <ownedTools xsi:type="tool:EdgeCreationDescription" name="Doc Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@edgeMappings[name='EC%20Doc%20Assignment']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/AnnotationLink.gif">
@@ -766,7 +766,7 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source.eContainer(ecore::EAnnotation)/]">
-                <subModelOperations xsi:type="tool:MoveElement" newContainerExpression="[target/]" featureName="eAnnotations"/>
+                <subModelOperations xsi:type="tool:MoveElement" newContainerExpression="var:target" featureName="eAnnotations"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -803,14 +803,14 @@
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="[name + ' class table'/]" domainClass="EPackage">
       <ownedLineMappings name="Classes lines" domainClass="EClass" semanticCandidatesExpression="[eContents(ecore::EClass)/]">
-        <foregroundConditionalStyle predicateExpression="[abstract/]">
+        <foregroundConditionalStyle predicateExpression="feature:abstract">
           <style labelSize="10" labelFormat="italic">
             <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </style>
         </foregroundConditionalStyle>
         <ownedSubLines name="Feature" domainClass="EStructuralFeature"/>
       </ownedLineMappings>
-      <ownedLineMappings name="Package" domainClass="EPackage" headerLabelExpression="[name/]">
+      <ownedLineMappings name="Package" domainClass="EPackage" headerLabelExpression="feature:name">
         <defaultBackground>
           <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
         </defaultBackground>
@@ -822,7 +822,7 @@
         <variables name="root" documentation="The semantic element of the table."/>
         <variables name="element" documentation="The semantic currently edited element."/>
         <variables name="container" documentation="The semantic element corresponding to the view container."/>
-        <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="[container/]">
+        <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:container">
           <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
             <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['NewEClass'  + eContainer().eContents(ecore::EClass)->size()/]"/>
           </subModelOperations>
@@ -859,7 +859,7 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[container/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[container.oclIsTypeOf(ecore::EPackage)/]">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newDescription' + eContainer()->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass)->size()/]">
@@ -877,7 +877,7 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[container/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[container.oclIsTypeOf(ecore::EPackage)/]">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newRole' + eContainer()->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass)->size()/]">
@@ -895,7 +895,7 @@
             <variable name="container"/>
             <viewVariable name="containerView"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[container/]">
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
                 <subModelOperations xsi:type="tool:If" conditionExpression="[container.oclIsTypeOf(ecore::EPackage)/]">
                   <subModelOperations xsi:type="tool:CreateInstance" typeName="EClass" referenceName="eClassifiers">
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newThing' + eContainer()->filter(ecore::EPackage).eClassifiers->filter(ecore::EClass)->size()/]">
@@ -911,16 +911,16 @@
           </ownedTools>
         </toolSections>
         <customization>
-          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="[self.isMomentInterval()/]">
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:isMomentInterval">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style" referenceName="foregroundColor" value="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='MomentIntervalColor']"/>
           </vsmElementCustomizations>
-          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="[self.isDescription()/]">
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:isDescription">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style" referenceName="foregroundColor" value="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='DescriptionColor']"/>
           </vsmElementCustomizations>
-          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="[self.isThing()/]">
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:isThing">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style" referenceName="foregroundColor" value="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='PartyPlaceThingColor']"/>
           </vsmElementCustomizations>
-          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="[self.isRole()/]">
+          <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="service:isRole">
             <featureCustomizations xsi:type="description:EReferenceCustomization" appliedOn="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style" referenceName="foregroundColor" value="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='RoleColor']"/>
           </vsmElementCustomizations>
         </customization>
@@ -948,7 +948,7 @@
           <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column (only available for Intersection Mapping)."/>
           <variables name="root" documentation="The semantic element of the table."/>
-          <firstModelOperation xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
+          <firstModelOperation xsi:type="tool:SetValue" featureName="value" valueExpression="var:arg0"/>
           <mask mask="{0}"/>
         </directEdit>
         <defaultBackground backgroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']"/>
@@ -956,7 +956,7 @@
           <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column."/>
           <variables name="root" documentation="The semantic root element of the table."/>
-          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="[lineSemantic/]">
+          <firstModelOperation xsi:type="tool:ChangeContext" browseExpression="var:lineSemantic">
             <subModelOperations xsi:type="tool:If" conditionExpression="[lineSemantic.eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel')->size() = 0/]">
               <subModelOperations xsi:type="tool:CreateInstance" typeName="EAnnotation" referenceName="eAnnotations" variableName="newAnnotation">
                 <subModelOperations xsi:type="tool:SetValue" featureName="source" valueExpression="['http://www.eclipse.org/emf/2002/GenModel'/]"/>
@@ -970,7 +970,7 @@
               </subModelOperations>
             </subModelOperations>
             <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[lineSemantic.eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/GenModel').details->select(key = 'documentation')->asOrderedSet()->first()/]">
-              <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="[arg0/]"/>
+              <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:arg0"/>
             </subModelOperations>
           </firstModelOperation>
           <mask mask="{0}"/>
