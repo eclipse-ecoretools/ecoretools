@@ -21,8 +21,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.transaction,
  org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.gmf.runtime.diagram.ui.resources.editor,
- org.eclipse.ui.navigator, 
- com.google.guava;bundle-version="11.0.0"
+ org.eclipse.ui.navigator,
+ com.google.guava;bundle-version="11.0.0",
+ org.eclipse.sirius.ext.base;bundle-version="1.0.0",
+ org.eclipse.sirius.ext.emf;bundle-version="1.0.0"
 Bundle-ManifestVersion: 2
 Bundle-Vendor: %providerName
 Eclipse-LazyStart: true
