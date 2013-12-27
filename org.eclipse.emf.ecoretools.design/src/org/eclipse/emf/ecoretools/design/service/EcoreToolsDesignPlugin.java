@@ -14,7 +14,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.Plugin;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
+import org.eclipse.sirius.business.api.session.Session;
+import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.business.api.session.SessionManagerListener2;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.osgi.framework.BundleContext;
 
@@ -25,57 +30,77 @@ import org.osgi.framework.BundleContext;
  *         href="mailto:laurent.goubet@obeo.fr">laurent.goubet@obeo.fr</a>
  */
 public class EcoreToolsDesignPlugin extends Plugin {
-    /** The plug-in ID. */
-    public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.design"; //$NON-NLS-1$
+	/** The plug-in ID. */
+	public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.design"; //$NON-NLS-1$
 
-    /** This plug-in's shared instance. */
-    private static EcoreToolsDesignPlugin plugin;
+	/** This plug-in's shared instance. */
+	private static EcoreToolsDesignPlugin plugin;
 
-    private static Set<Viewpoint> viewpoints;
+	private static Set<Viewpoint> viewpoints;
 
-    /**
-     * Default constructor for the plugin.
-     */
-    public EcoreToolsDesignPlugin() {
-        plugin = this;
-    }
+	private SessionManagerListener2 notifWhenSessionAreCreated;
 
-    /**
-     * Returns the shared instance.
-     * 
-     * @return the shared instance
-     */
-    public static EcoreToolsDesignPlugin getDefault() {
-        return plugin;
-    }
+	/**
+	 * Default constructor for the plugin.
+	 */
+	public EcoreToolsDesignPlugin() {
+		plugin = this;
+	}
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-     */
-    @Override
-    public void start(final BundleContext context) throws Exception {
-        super.start(context);
-        viewpoints = new HashSet<Viewpoint>();
-        viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/ecore.odesign"));
-    }
+	/**
+	 * Returns the shared instance.
+	 * 
+	 * @return the shared instance
+	 */
+	public static EcoreToolsDesignPlugin getDefault() {
+		return plugin;
+	}
 
-    /**
-     * {@inheritDoc}
-     * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-     */
-    @Override
-    public void stop(final BundleContext context) throws Exception {
-        plugin = null;
-        if (viewpoints != null) {
-            for (final Viewpoint viewpoint : viewpoints) {
-            	ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
-            }
-            viewpoints.clear();
-            viewpoints = null;
-        }
-        super.stop(context);
-    }
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 */
+	@Override
+	public void start(final BundleContext context) throws Exception {
+		super.start(context);
+		viewpoints = new HashSet<Viewpoint>();
+		viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(
+				PLUGIN_ID + "/description/ecore.odesign"));
+
+		notifWhenSessionAreCreated = new SessionManagerListener2.Stub() {
+			
+			@Override
+			public void notifyAddSession(Session newSession) {
+				ResourceSet set = newSession.getTransactionalEditingDomain().getResourceSet();
+				set.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
+				
+			}
+		};
+		SessionManager.INSTANCE.addSessionsListener(notifWhenSessionAreCreated);
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 */
+	@Override
+	public void stop(final BundleContext context) throws Exception {
+		plugin = null;
+		if (viewpoints != null) {
+			for (final Viewpoint viewpoint : viewpoints) {
+				ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
+			}
+			viewpoints.clear();
+			viewpoints = null;
+		}
+		if (notifWhenSessionAreCreated != null) {
+			SessionManager.INSTANCE
+					.removeSessionsListener(notifWhenSessionAreCreated);
+		}
+
+		super.stop(context);
+	}
 }
