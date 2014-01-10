@@ -69,12 +69,21 @@ public class EcoreToolsDesignPlugin extends Plugin {
 				PLUGIN_ID + "/description/ecore.odesign"));
 
 		notifWhenSessionAreCreated = new SessionManagerListener2.Stub() {
-			
+
 			@Override
 			public void notifyAddSession(Session newSession) {
-				ResourceSet set = newSession.getTransactionalEditingDomain().getResourceSet();
-				set.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(true));
-				
+				ResourceSet set = newSession.getTransactionalEditingDomain()
+						.getResourceSet();
+				set.getURIConverter().getURIMap()
+						.putAll(EcorePlugin.computePlatformURIMap(true));
+				newSession.getEventBroker().addLocalTrigger(
+						GenModelAutoReload.SHOULD_RELOAD,
+						new GenModelAutoReload(newSession
+								.getTransactionalEditingDomain()));
+
+				newSession.getEventBroker().addLocalTrigger(
+						GenModelUpdateGenFeatureContainment.SHOULD_UPDATE,
+						new GenModelUpdateGenFeatureContainment(newSession));
 			}
 		};
 		SessionManager.INSTANCE.addSessionsListener(notifWhenSessionAreCreated);
