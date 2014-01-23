@@ -16,8 +16,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.sirius.viewpoint.BackgroundStyle;
-import org.eclipse.sirius.viewpoint.description.style.FlatContainerStyleDescription;
+import org.eclipse.sirius.diagram.BackgroundStyle;
+import org.eclipse.sirius.diagram.description.style.FlatContainerStyleDescription;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

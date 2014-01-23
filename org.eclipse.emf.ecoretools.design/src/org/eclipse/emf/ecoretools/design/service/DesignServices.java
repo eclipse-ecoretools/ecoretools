@@ -42,12 +42,13 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DEdge;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.diagram.DiagramPackage;
+import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.ext.emf.AllContents;
-import org.eclipse.sirius.viewpoint.DDiagram;
-import org.eclipse.sirius.viewpoint.DEdge;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.DSemanticDiagram;
-import org.eclipse.sirius.viewpoint.EdgeTarget;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
@@ -511,7 +512,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public EEnumLiteral arrowsFillDiamond(EObject any) {
-		return ViewpointPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral(
+		return DiagramPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral(
 				"FillDiamond");
 	}
 

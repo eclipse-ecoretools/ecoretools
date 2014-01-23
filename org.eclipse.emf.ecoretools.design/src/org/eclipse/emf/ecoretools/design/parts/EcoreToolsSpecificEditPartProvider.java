@@ -14,14 +14,11 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateGraphicEditPartOperation;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.sirius.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.diagram.internal.edit.parts.DEdgeBeginNameEditPart;
 import org.eclipse.sirius.diagram.internal.edit.parts.DEdgeEndNameEditPart;
 import org.eclipse.sirius.diagram.part.SiriusVisualIDRegistry;
 import org.eclipse.sirius.diagram.tools.api.command.GMFCommandWrapper;
-import org.eclipse.sirius.viewpoint.DDiagramElement;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
 public class EcoreToolsSpecificEditPartProvider extends
 		AbstractEditPartProvider {

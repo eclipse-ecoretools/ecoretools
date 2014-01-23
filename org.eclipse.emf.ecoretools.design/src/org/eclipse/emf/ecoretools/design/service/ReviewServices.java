@@ -10,10 +10,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.sirius.business.api.helper.SiriusUtil;
 import org.eclipse.sirius.business.api.query.DDiagramElementQuery;
-import org.eclipse.sirius.viewpoint.DDiagram;
-import org.eclipse.sirius.viewpoint.DNodeList;
+import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DNodeList;
+import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.DSemanticDiagram;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
