@@ -19,6 +19,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -30,6 +32,9 @@ import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -74,7 +79,8 @@ public class EReferenceServices {
 
 	public void setEType(EObject host, EObject target) {
 		if (host instanceof ETypedElement) {
-			EGenericsServices.setETypeWithGenerics((ETypedElement) host, target);
+			EGenericsServices
+					.setETypeWithGenerics((ETypedElement) host, target);
 		}
 	}
 
@@ -143,6 +149,40 @@ public class EReferenceServices {
 				sb.append(DERIVED_PREFIX);
 			}
 			sb.append(ref.getName());
+		}
+	}
+
+	public Collection<EObject> superTypeSemanticElements(EClass any) {
+		Set<EObject> result = Sets.newLinkedHashSet();
+		result.addAll(any.getEGenericSuperTypes());
+		for (EGenericType genType : any.getEGenericSuperTypes()) {
+			result.addAll(genType.getETypeArguments());
+		}
+		return result;
+	}
+
+	public String superTypesLabel(EClass any) {
+		Collection<EClassifier> reifiedTypes = Sets.newLinkedHashSet();
+		for (EGenericType genType : any.getEGenericSuperTypes()) {
+			for (EGenericType argument : genType.getETypeArguments()) {
+				if (argument.getEClassifier() != null
+						&& argument.getEClassifier().getName() != null) {
+					reifiedTypes.add(argument.getEClassifier());
+				}
+			}
+		}
+		if (reifiedTypes.size() > 0) {
+			return "<<bind>> "
+					+ Joiner.on(',').join(
+							Iterables.transform(reifiedTypes,
+									new Function<EClassifier, String>() {
+
+										public String apply(EClassifier from) {
+											return from.getName();
+										}
+									}));
+		} else {
+			return null;
 		}
 	}
 
