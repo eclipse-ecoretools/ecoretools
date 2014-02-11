@@ -403,7 +403,9 @@
             <targetViewVariable name="targetView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
+                <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target">
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:createTypeArgumentsIfNeeded(target)"/>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>

@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.sirius.business.api.session.Session;
@@ -162,27 +163,46 @@ public class EReferenceServices {
 	}
 
 	public String superTypesLabel(EClass any) {
-		Collection<EClassifier> reifiedTypes = Sets.newLinkedHashSet();
+		Collection<String> reifiedTypes = Lists.newArrayList();
 		for (EGenericType genType : any.getEGenericSuperTypes()) {
 			for (EGenericType argument : genType.getETypeArguments()) {
 				if (argument.getEClassifier() != null
 						&& argument.getEClassifier().getName() != null) {
-					reifiedTypes.add(argument.getEClassifier());
+					reifiedTypes.add(argument.getEClassifier().getName());
+				} else if (argument.getETypeParameter()!=null && argument.getETypeParameter().getName()!=null){
+					reifiedTypes.add(argument.getETypeParameter().getName());
+				}else {
+					reifiedTypes.add("?");
 				}
 			}
 		}
 		if (reifiedTypes.size() > 0) {
-			return "<<bind>> "
-					+ Joiner.on(',').join(
-							Iterables.transform(reifiedTypes,
-									new Function<EClassifier, String>() {
-
-										public String apply(EClassifier from) {
-											return from.getName();
-										}
-									}));
+			return "<<bind>> " + Joiner.on(',').join(reifiedTypes);
 		} else {
 			return null;
+		}
+	}
+
+	public void createTypeArgumentsIfNeeded(EClass host, EClass target) {
+		for (EGenericType genSuperType : host.getEGenericSuperTypes()) {
+			if (genSuperType.getEClassifier() != null) {
+				int parameters = genSuperType.getEClassifier()
+						.getETypeParameters().size();
+				if (genSuperType.getETypeArguments().size() > parameters) {
+					for (int i = genSuperType.getETypeArguments().size(); i > parameters; i--) {
+						genSuperType.getETypeArguments().remove(i);
+					}
+
+				} else if (genSuperType.getETypeArguments().size() < parameters) {
+					int delta = parameters
+							- genSuperType.getETypeArguments().size();
+					for (int i = 0; i < delta; i++) {
+						genSuperType.getETypeArguments().add(
+								EcoreFactory.eINSTANCE.createEGenericType());
+					}
+				}
+			}
+
 		}
 	}
 
