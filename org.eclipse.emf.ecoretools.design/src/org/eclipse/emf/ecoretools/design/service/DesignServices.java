@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
@@ -529,7 +530,6 @@ public class DesignServices extends EReferenceServices {
 			EcoreEditorPlugin.INSTANCE.log(e);
 		}
 	}
-		
 
 	public void openContextHelp(EObject any, final String contextID)
 			throws IOException {

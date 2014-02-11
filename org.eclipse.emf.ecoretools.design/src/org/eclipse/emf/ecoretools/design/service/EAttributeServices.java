@@ -11,7 +11,16 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
+import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
  * Services on EAttributes usable from a VSM.
@@ -54,7 +63,7 @@ public class EAttributeServices {
 		} else if ("11".equals(editString.trim())) {
 			attr.setLowerBound(1);
 			attr.setUpperBound(1);
-		}else if (EReferenceServices.CARDINALITY_UNBOUNDED.equals(editString
+		} else if (EReferenceServices.CARDINALITY_UNBOUNDED.equals(editString
 				.trim())) {
 			attr.setUpperBound(-1);
 		} else if (EReferenceServices.CARDINALITY_UNBOUNDED_ALTERNATIVE
@@ -101,11 +110,11 @@ public class EAttributeServices {
 				attr.setName(namePart);
 			}
 			if (setType) {
-				EClassifier type = new DesignServices().findTypeByName(attr,
-						typePart);
-				if (type != null) {
-					attr.setEType(type);
+				Object value = EGenericsServices.findGenericType(attr, typePart);
+				if (value == null) {
+					value = new DesignServices().findTypeByName(attr, typePart);
 				}
+				EGenericsServices.setETypeWithGenerics(attr, value);
 			}
 			if (setDefault && defaultPart.length() > 0) {
 				attr.setDefaultValueLiteral(defaultPart);
@@ -113,6 +122,10 @@ public class EAttributeServices {
 		}
 		return attr;
 	}
+
+	
+
+	
 
 	private void renderName(EAttribute attr, StringBuilder sb) {
 		if (attr.getName() != null) {
@@ -124,16 +137,16 @@ public class EAttributeServices {
 	}
 
 	private void renderType(EAttribute attr, StringBuilder sb) {
-		boolean hasNamedType = attr.getEType() != null
-				&& attr.getEType().getName() != null;
-		if (hasNamedType) {
+		String typeName = EGenericsServices.getETypeLabel(attr);
+		if (typeName != null) {
 			if (attr.getName() != null) {
 				sb.append(" ");
 			}
-			sb.append(TYPE_SEPARATOR).append(" ")
-					.append(attr.getEType().getName());
+			sb.append(TYPE_SEPARATOR).append(" ").append(typeName);
 		}
 	}
+
+	
 
 	private void renderDefaultValue(EAttribute attr, StringBuilder sb) {
 		if (attr.getDefaultValueLiteral() != null) {

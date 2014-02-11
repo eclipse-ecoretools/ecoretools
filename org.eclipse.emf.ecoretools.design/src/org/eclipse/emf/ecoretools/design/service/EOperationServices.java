@@ -15,9 +15,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 
@@ -111,9 +113,9 @@ public class EOperationServices {
      */
     private String renderParameter(EParameter parameter, boolean includeParameterType) {
         String name = parameter.getName();
-        EClassifier type = parameter.getEType();
-        if (name != null && type != null && includeParameterType) {
-            return parameter.getName() + " " + type.getName();
+        String typeName = EGenericsServices.getETypeLabel(parameter);
+        if (name != null && typeName != null && includeParameterType) {
+            return parameter.getName() + " " + typeName;
         } else if (name != null) {
             return parameter.getName();
         } else {
@@ -122,9 +124,10 @@ public class EOperationServices {
     }
 
     private void renderType(EOperation op, StringBuilder sb) {
-        if (op.getEType() != null) {
+    	String typeLabel = EGenericsServices.getETypeLabel(op);
+        if (typeLabel != null) {
             sb.append(" ").append(TYPE_SEPARATOR).append(" ");
-            sb.append(op.getEType().getName());
+            sb.append(typeLabel);
         }
     }
 
@@ -280,9 +283,9 @@ public class EOperationServices {
     }
 
     private void editType(EOperation op, String editString) {
-        EClassifier type = getSpecifiedType(op, editString);
-        if (type != null) {
-            op.setEType(type);
+        Object value = getSpecifiedType(op, editString);
+        if (value != null) {
+        	EGenericsServices.setETypeWithGenerics(op, value);
         } else {
             // Only reset the type to null if the ":" is explicitly present with
             // no type specified
@@ -293,12 +296,16 @@ public class EOperationServices {
         }
     }
 
-    private EClassifier getSpecifiedType(ETypedElement receiver, String editString) {
+    private Object getSpecifiedType(ETypedElement receiver, String editString) {
         int typeStart = editString.lastIndexOf(TYPE_SEPARATOR);
         if (typeStart != -1 && editString.length() > typeStart + 1) {
             String typeName = editString.substring(typeStart + 1).trim();
             if (!typeName.contains(")")) {
-                return new DesignServices().findTypeByName(receiver, typeName);
+            	Object value = EGenericsServices.findGenericType(receiver, typeName);
+				if (value == null) {
+					value = new DesignServices().findTypeByName(receiver, typeName);
+				}
+                return value;
             }
         }
         return null;
