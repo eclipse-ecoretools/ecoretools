@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
-import org.eclipse.sirius.business.api.session.SessionManagerListener2;
+import org.eclipse.sirius.business.api.session.SessionManagerListener;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
 import org.osgi.framework.BundleContext;
 
@@ -38,7 +38,7 @@ public class EcoreToolsDesignPlugin extends Plugin {
 
 	private static Set<Viewpoint> viewpoints;
 
-	private SessionManagerListener2 notifWhenSessionAreCreated;
+	private SessionManagerListener notifWhenSessionAreCreated;
 
 	/**
 	 * Default constructor for the plugin.
@@ -68,7 +68,7 @@ public class EcoreToolsDesignPlugin extends Plugin {
 		viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(
 				PLUGIN_ID + "/description/ecore.odesign"));
 
-		notifWhenSessionAreCreated = new SessionManagerListener2.Stub() {
+		notifWhenSessionAreCreated = new SessionManagerListener.Stub() {
 
 			@Override
 			public void notifyAddSession(Session newSession) {
