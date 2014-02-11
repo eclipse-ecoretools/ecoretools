@@ -37,7 +37,7 @@
         <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:openClassDiagramContextHelp"/>
       </diagramInitialisation>
       <defaultLayer name="Default">
-        <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="service:getEReferencesToDisplay(diagram)" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetFinderExpression="feature:eType" sourceFinderExpression="feature:eContainer" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
+        <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="service:getEReferencesToDisplay(diagram)" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']" targetFinderExpression="service:getEReferenceTarget" sourceFinderExpression="feature:eContainer" domainClass="EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
           <style sizeComputationExpression="1" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <centerLabelStyleDescription showIcon="false" labelExpression="service:render">
@@ -409,8 +409,8 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newEReference' + eContainer(EClassifier).eAllContents(EReference)->size()/]"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setEType(target)"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -447,10 +447,10 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="newEReference"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="containment" valueExpression="[true/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="upperBound" valueExpression="[-1/]"/>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setEType(target)"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>

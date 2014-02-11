@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -33,6 +34,17 @@ public class EGenericsServices {
 			typeName = attr.getEGenericType().getETypeParameter().getName();
 		}
 		return typeName;
+	}
+	
+	public static EObject getETypeOrParameter(ETypedElement attr) {	
+		if (attr.getEGenericType() != null
+				&& attr.getEGenericType().getETypeParameter() != null) {
+			return attr.getEGenericType().getETypeParameter();
+		}
+		if (attr.getEType() != null ) {
+			return attr.getEType();
+		}
+		return null;
 	}
 	
 	public static Object findGenericType(ENamedElement attr, String typePart) {

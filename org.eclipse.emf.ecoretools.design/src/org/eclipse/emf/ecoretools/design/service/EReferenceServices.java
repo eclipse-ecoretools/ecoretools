@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DEdge;
@@ -70,13 +71,23 @@ public class EReferenceServices {
 		}
 		return result;
 	}
-	
-	public EObject getEdgeTargetSemantic(EObject any,DEdge view) {
-		 return ((DSemanticDecorator)view.getTargetNode()).getTarget();
+
+	public void setEType(EObject host, EObject target) {
+		if (host instanceof ETypedElement) {
+			EGenericsServices.setETypeWithGenerics((ETypedElement) host, target);
+		}
 	}
-	
-	public EObject getEdgeSourceSemantic(EObject any,DEdge view) {
-		 return ((DSemanticDecorator)view.getSourceNode()).getTarget();
+
+	public EObject getEReferenceTarget(EReference ref) {
+		return EGenericsServices.getETypeOrParameter(ref);
+	}
+
+	public EObject getEdgeTargetSemantic(EObject any, DEdge view) {
+		return ((DSemanticDecorator) view.getTargetNode()).getTarget();
+	}
+
+	public EObject getEdgeSourceSemantic(EObject any, DEdge view) {
+		return ((DSemanticDecorator) view.getSourceNode()).getTarget();
 	}
 
 	public List<EReference> getEOppositeEReferences(EPackage context,
