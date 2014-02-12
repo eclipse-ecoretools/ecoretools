@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EGenericType;
@@ -83,6 +84,18 @@ public class EReferenceServices {
 			EGenericsServices
 					.setETypeWithGenerics((ETypedElement) host, target);
 		}
+	}
+
+	public String eKeysLabel(EReference ref) {
+		String result = "";
+		Collection<String> names = Lists.newArrayList();
+		for (EAttribute attr : ref.getEKeys()) {
+			if (attr.getName() != null) {
+				names.add(attr.getName());
+			}
+		}
+		result += Joiner.on(',').join(names);
+		return result;
 	}
 
 	public EObject getEReferenceTarget(EReference ref) {
@@ -169,9 +182,10 @@ public class EReferenceServices {
 				if (argument.getEClassifier() != null
 						&& argument.getEClassifier().getName() != null) {
 					reifiedTypes.add(argument.getEClassifier().getName());
-				} else if (argument.getETypeParameter()!=null && argument.getETypeParameter().getName()!=null){
+				} else if (argument.getETypeParameter() != null
+						&& argument.getETypeParameter().getName() != null) {
 					reifiedTypes.add(argument.getETypeParameter().getName());
-				}else {
+				} else {
 					reifiedTypes.add("?");
 				}
 			}
