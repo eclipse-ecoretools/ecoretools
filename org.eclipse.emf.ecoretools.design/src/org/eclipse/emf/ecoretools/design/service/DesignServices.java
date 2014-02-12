@@ -117,14 +117,16 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	protected static final String GEN_MODEL_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/GenModel";
-
+	
+	protected static final String ECORE_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/Ecore";
+	
 	public EObject eContainerEContainer(EObject any) {
 		if (any.eContainer() != null)
 			return any.eContainer().eContainer();
 		return null;
 	}
 
-	public Collection<EStringToStringMapEntryImpl> getVisibleAnnotations(
+	public Collection<EStringToStringMapEntryImpl> getVisibleDocAnnotations(
 			EObject self, DSemanticDiagram diag) {
 		// [diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key
 		// = 'documentation')/]
@@ -150,6 +152,30 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
+	public Collection<EStringToStringMapEntryImpl> getVisibleConstraintsAnnotations(
+			EObject self, DSemanticDiagram diag) {
+		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
+		for (EModelElement displayed : getDisplayedEModelElements(diag)) {
+			if (!(displayed instanceof EAttribute)
+					&& !(displayed instanceof EEnumLiteral)
+					&& !(displayed instanceof EOperation)) {
+				EAnnotation eAnnot = displayed
+						.getEAnnotation(ECORE_PACKAGE_NS_URI);
+				if (eAnnot != null) {
+					for (EStringToStringMapEntryImpl mapEntry : Iterables
+							.filter(eAnnot.getDetails(),
+									EStringToStringMapEntryImpl.class)) {
+						if ("constraints".equals(mapEntry.getKey())) {
+							result.add(mapEntry);
+						}
+					}
+				}
+			}
+
+		}
+		return result;
+	}
+	
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
 		Iterator<DSemanticDecorator> it = Iterators
 				.filter(diagram.getOwnedDiagramElements().iterator(),

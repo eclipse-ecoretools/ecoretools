@@ -743,7 +743,7 @@
         </toolSections>
       </additionalLayers>
       <additionalLayers name="Documentation">
-        <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="service:getVisibleAnnotations(diagram)" domainClass="EStringToStringMapEntry">
+        <nodeMappings name="EC Doc Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="service:getVisibleDocAnnotations(diagram)" domainClass="EStringToStringMapEntry">
           <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" labelAlignment="LEFT" sizeComputationExpression="1" labelPosition="node" resizeKind="NSEW" width="12" height="10" color="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Doc%20Annotation']">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -757,7 +757,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <toolSections name="Documentation Tools">
+        <toolSections name="Documentation">
           <ownedTools xsi:type="tool:NodeCreationDescription" name="Doc Annotation" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@nodeMappings[name='EC%20Doc%20Annotation']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EAnnotation_24.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
             <variable name="container"/>
             <viewVariable name="containerView"/>
@@ -827,6 +827,65 @@
             </featureCustomizations>
           </vsmElementCustomizations>
         </customization>
+      </additionalLayers>
+      <additionalLayers name="Constraint">
+        <nodeMappings name="EC Constraint Annotation" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Documentation']/@toolSections.0/@ownedTools[name='Edit%20Detail']" semanticCandidatesExpression="service:getVisibleConstraintsAnnotations(diagram)" domainClass="EStringToStringMapEntry">
+          <style xsi:type="style:SquareDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="feature:value" sizeComputationExpression="1" labelPosition="node" resizeKind="NSEW" width="12" height="5">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="EC Constraint Assignment" semanticCandidatesExpression="[self.eAllContents()/]" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Constraint']/@nodeMappings[name='EC%20Constraint%20Annotation']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" targetFinderExpression="service:eContainerEContainer">
+          <style lineStyle="dot" sizeComputationExpression="1">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <centerLabelStyleDescription showIcon="false">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <toolSections name="Constraints">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="Constraint" nodeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Constraint']/@nodeMappings[name='EC%20Constraint%20Annotation']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EAnnotation_24.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool:If" conditionExpression="[eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/Ecore')->size() = 0/]">
+                  <subModelOperations xsi:type="tool:CreateInstance" typeName="EAnnotation" referenceName="eAnnotations">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="source" valueExpression="['http://www.eclipse.org/emf/2002/Ecore'/]"/>
+                  </subModelOperations>
+                </subModelOperations>
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[eAnnotations->select(source = 'http://www.eclipse.org/emf/2002/Ecore')->asSequence()->first()/]">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="[details->select(key = 'constraints')->size() = 0/]">
+                    <subModelOperations xsi:type="tool:CreateInstance" typeName="EStringToStringMapEntry" referenceName="details">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="key" valueExpression="['constraints'/]"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[details->select(key = 'constraints')->asSequence()->first()/]">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="['Constraint1 Constraint2'/]"/>
+                  </subModelOperations>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="Edit Detail">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:arg0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="Constraint Assignment" forceRefresh="true" edgeMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Constraint']/@edgeMappings[name='EC%20Constraint%20Assignment']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/AnnotationLink.gif">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="[source.eContainer(ecore::EAnnotation)/]">
+                <subModelOperations xsi:type="tool:MoveElement" newContainerExpression="var:target" featureName="eAnnotations"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
       </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_1:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="[name + ' class table'/]" domainClass="EPackage">
