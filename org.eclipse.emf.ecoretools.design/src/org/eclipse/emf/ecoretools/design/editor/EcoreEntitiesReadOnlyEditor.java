@@ -20,15 +20,16 @@ import org.eclipse.sirius.diagram.tools.api.editor.AbstractSpecificDDiagramEdito
  */
 public class EcoreEntitiesReadOnlyEditor extends AbstractSpecificDDiagramEditor {
 
-    public String getDiagramDescriptionName() {
-        return "Entities";
-    }
+	public String getDiagramDescriptionName() {
+		return "Entities";
+	}
 
-    public URI getViewpointURI() {
-        return URI.createURI("viewpoint:/org.eclipse.emf.ecoretools.design/Design");
-    }
+	public URI getViewpointURI() {
+		return URI
+				.createURI("viewpoint:/org.eclipse.emf.ecoretools.design/Design");
+	}
 
-    public boolean isSessionStoredInWorkspace() {
-        return false;
-    }
+	public boolean isSessionStoredInWorkspace() {
+		return false;
+	}
 }

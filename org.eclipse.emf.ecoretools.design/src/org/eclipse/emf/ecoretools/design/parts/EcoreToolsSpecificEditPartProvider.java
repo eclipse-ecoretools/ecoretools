@@ -60,10 +60,12 @@ public class EcoreToolsSpecificEditPartProvider extends
 	public boolean provides(IOperation operation) {
 		if (operation instanceof CreateGraphicEditPartOperation) {
 			View view = ((IEditPartOperation) operation).getView();
-			if (view.getElement() instanceof DSemanticDecorator) {				
+			if (view.getElement() instanceof DSemanticDecorator) {
 				EObject semanticTarget = ((DSemanticDecorator) view
 						.getElement()).getTarget();
-				if (isFromEcoreToolsDesign((DSemanticDecorator)view.getElement()) && semanticTarget instanceof EReference
+				if (isFromEcoreToolsDesign((DSemanticDecorator) view
+						.getElement())
+						&& semanticTarget instanceof EReference
 						&& ((EReference) semanticTarget).getEOpposite() != null) {
 					switch (SiriusVisualIDRegistry.getVisualID(view)) {
 
@@ -82,11 +84,11 @@ public class EcoreToolsSpecificEditPartProvider extends
 
 	private boolean isFromEcoreToolsDesign(DSemanticDecorator element) {
 		return true;
-//		if (element instanceof DDiagramElement)
-//		{
-//			new DDiagramElementQuery(element).getMapping();
-//		}
-//		return false;
+		// if (element instanceof DDiagramElement)
+		// {
+		// new DDiagramElementQuery(element).getMapping();
+		// }
+		// return false;
 	}
 
 	class EcoreToolsDirectEditForBeginRole extends LabelDirectEditPolicy {

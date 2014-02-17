@@ -14,7 +14,7 @@ import org.eclipse.ui.part.EditorActionBarContributor;
 
 public class SpecificContributor extends EditorActionBarContributor {
 
-    public SpecificContributor() {
-    }
+	public SpecificContributor() {
+	}
 
 }

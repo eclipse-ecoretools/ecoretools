@@ -22,38 +22,45 @@ import org.eclipse.ui.PartInitException;
 
 public class EcoreEntitiesMatchingStrategy implements IEditorMatchingStrategy {
 
-    public boolean matches(IEditorReference editorRef, IEditorInput input) {
-        boolean result = false;
-        SessionSpecificEditorInput sseiRef = getSessionSpecificEditorInput(editorRef);
+	public boolean matches(IEditorReference editorRef, IEditorInput input) {
+		boolean result = false;
+		SessionSpecificEditorInput sseiRef = getSessionSpecificEditorInput(editorRef);
 
-        if (sseiRef != null) {
-            if (sseiRef.equals(input)) {
-                result = true;
-            } else if (input instanceof IFileEditorInput) {
-                Session sessionRef = sseiRef.getSession();
-                URI inputUri = URI.createPlatformResourceURI(((IFileEditorInput) input).getFile().getFullPath().toString(), true);
+		if (sseiRef != null) {
+			if (sseiRef.equals(input)) {
+				result = true;
+			} else if (input instanceof IFileEditorInput) {
+				Session sessionRef = sseiRef.getSession();
+				URI inputUri = URI.createPlatformResourceURI(
+						((IFileEditorInput) input).getFile().getFullPath()
+								.toString(), true);
 
-                if (sessionRef != null && sessionRef.isOpen()) {
-                    Resource currentRes = sessionRef.getTransactionalEditingDomain().getResourceSet().getResource(inputUri, false);
-                    result = currentRes != null && sessionRef.getSemanticResources().contains(currentRes);
-                }
-            }
-        }
+				if (sessionRef != null && sessionRef.isOpen()) {
+					Resource currentRes = sessionRef
+							.getTransactionalEditingDomain().getResourceSet()
+							.getResource(inputUri, false);
+					result = currentRes != null
+							&& sessionRef.getSemanticResources().contains(
+									currentRes);
+				}
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    private SessionSpecificEditorInput getSessionSpecificEditorInput(IEditorReference editorRef) {
-        SessionSpecificEditorInput ssei = null;
-        try {
-            IEditorInput editorInput = editorRef.getEditorInput();
-            if (editorInput instanceof SessionSpecificEditorInput) {
-                ssei = (SessionSpecificEditorInput) editorInput;
-            }
-        } catch (PartInitException e) {
-            // DO nothing.
-        }
-        return ssei;
-    }
+	private SessionSpecificEditorInput getSessionSpecificEditorInput(
+			IEditorReference editorRef) {
+		SessionSpecificEditorInput ssei = null;
+		try {
+			IEditorInput editorInput = editorRef.getEditorInput();
+			if (editorInput instanceof SessionSpecificEditorInput) {
+				ssei = (SessionSpecificEditorInput) editorInput;
+			}
+		} catch (PartInitException e) {
+			// DO nothing.
+		}
+		return ssei;
+	}
 
 }

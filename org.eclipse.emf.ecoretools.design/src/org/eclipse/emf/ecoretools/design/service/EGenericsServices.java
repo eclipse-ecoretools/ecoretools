@@ -35,18 +35,18 @@ public class EGenericsServices {
 		}
 		return typeName;
 	}
-	
-	public static EObject getETypeOrParameter(ETypedElement attr) {	
+
+	public static EObject getETypeOrParameter(ETypedElement attr) {
 		if (attr.getEGenericType() != null
 				&& attr.getEGenericType().getETypeParameter() != null) {
 			return attr.getEGenericType().getETypeParameter();
 		}
-		if (attr.getEType() != null ) {
+		if (attr.getEType() != null) {
 			return attr.getEType();
 		}
 		return null;
 	}
-	
+
 	public static Object findGenericType(ENamedElement attr, String typePart) {
 		EClass parentClass = null;
 		if (attr instanceof EStructuralFeature) {
@@ -67,15 +67,14 @@ public class EGenericsServices {
 		}
 		return value;
 	}
-	
-	public static  void setETypeWithGenerics(ETypedElement typed, Object value) {
+
+	public static void setETypeWithGenerics(ETypedElement typed, Object value) {
 		EGenericType eGenericType = null;
 		if (value instanceof EClassifier) {
 			EClassifier eClassifier = (EClassifier) value;
 			eGenericType = EcoreFactory.eINSTANCE.createEGenericType();
 			eGenericType.setEClassifier(eClassifier);
-			for (int i = 0, size = eClassifier.getETypeParameters()
-					.size(); i < size; ++i) {
+			for (int i = 0, size = eClassifier.getETypeParameters().size(); i < size; ++i) {
 				eGenericType.getETypeArguments().add(
 						EcoreFactory.eINSTANCE.createEGenericType());
 			}

@@ -97,9 +97,8 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
 	protected IPath genModelContainerPath;
 	protected String initialProjectName;
 	protected IStructuredSelection selection;
-	
-	private IProject createdProject;
 
+	private IProject createdProject;
 
 	/**
 	 * Constructor.
@@ -207,7 +206,6 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
 		addPage(modelPage);
 		addPage(viewpointsSelectionWizardPage);
 	}
-
 
 	/**
 	 * {@inheritDoc}

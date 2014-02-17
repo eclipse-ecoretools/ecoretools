@@ -11,16 +11,6 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EGenericType;
-import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypeParameter;
-import org.eclipse.emf.ecore.ETypedElement;
-import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
  * Services on EAttributes usable from a VSM.
@@ -110,7 +100,8 @@ public class EAttributeServices {
 				attr.setName(namePart);
 			}
 			if (setType) {
-				Object value = EGenericsServices.findGenericType(attr, typePart);
+				Object value = EGenericsServices
+						.findGenericType(attr, typePart);
 				if (value == null) {
 					value = new DesignServices().findTypeByName(attr, typePart);
 				}
@@ -122,10 +113,6 @@ public class EAttributeServices {
 		}
 		return attr;
 	}
-
-	
-
-	
 
 	private void renderName(EAttribute attr, StringBuilder sb) {
 		if (attr.getName() != null) {
@@ -145,8 +132,6 @@ public class EAttributeServices {
 			sb.append(TYPE_SEPARATOR).append(" ").append(typeName);
 		}
 	}
-
-	
 
 	private void renderDefaultValue(EAttribute attr, StringBuilder sb) {
 		if (attr.getDefaultValueLiteral() != null) {

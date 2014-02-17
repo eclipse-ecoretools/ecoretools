@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
@@ -117,9 +116,9 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	protected static final String GEN_MODEL_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/GenModel";
-	
+
 	protected static final String ECORE_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/Ecore";
-	
+
 	public EObject eContainerEContainer(EObject any) {
 		if (any.eContainer() != null)
 			return any.eContainer().eContainer();
@@ -175,7 +174,7 @@ public class DesignServices extends EReferenceServices {
 		}
 		return result;
 	}
-	
+
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
 		Iterator<DSemanticDecorator> it = Iterators
 				.filter(diagram.getOwnedDiagramElements().iterator(),

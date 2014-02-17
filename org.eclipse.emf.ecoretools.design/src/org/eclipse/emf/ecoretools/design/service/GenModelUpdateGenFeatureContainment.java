@@ -30,8 +30,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
- * a {@link ModelChangeTrigger} which update GenFeature children/notify/create child based on the EReference.containment change.
- * context.
+ * a {@link ModelChangeTrigger} which update GenFeature children/notify/create
+ * child based on the EReference.containment change. context.
  * 
  * @author Cedric Brun <cedric.brun@obeo.fr>
  * 

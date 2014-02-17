@@ -94,13 +94,13 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 		}
 		if (genModels.size() > 0) {
 			Command result = new RecordingCommand(domain) {
-				
+
 				@Override
 				protected void doExecute() {
 					for (GenModel genmodel : genModels) {
 						genmodel.reconcile();
 					}
-					
+
 				}
 			};
 			return Options.newSome(result);

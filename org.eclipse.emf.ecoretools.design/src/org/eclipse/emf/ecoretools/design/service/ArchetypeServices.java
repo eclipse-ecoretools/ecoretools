@@ -52,7 +52,8 @@ public class ArchetypeServices extends DesignServices {
 
 	private boolean hasArchetypeAnnotation(EObject clazz, String string) {
 		if (clazz instanceof EModelElement) {
-			EAnnotation annot = ((EModelElement) clazz).getEAnnotation(ARCHETYPE_URI);
+			EAnnotation annot = ((EModelElement) clazz)
+					.getEAnnotation(ARCHETYPE_URI);
 			if (annot != null) {
 				for (Map.Entry<String, String> entry : annot.getDetails()
 						.entrySet()) {

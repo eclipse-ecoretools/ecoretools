@@ -38,52 +38,57 @@ import org.eclipse.ui.PlatformUI;
  * @author pcdavid
  */
 public class CreateDynamicInstanceAction implements IExternalJavaAction {
-    private static final URI PLATFORM_RESOURCE = URI.createPlatformResourceURI("/", false);
+	private static final URI PLATFORM_RESOURCE = URI.createPlatformResourceURI(
+			"/", false);
 
-    /**
-     * The action expects a single EClass as input.
-     */
-    public boolean canExecute(Collection<? extends EObject> selections) {
-        return getSemanticTarget(selections) != null;
-    }
+	/**
+	 * The action expects a single EClass as input.
+	 */
+	public boolean canExecute(Collection<? extends EObject> selections) {
+		return getSemanticTarget(selections) != null;
+	}
 
-    private EClass getSemanticTarget(Collection<? extends EObject> selections) {
-        if (selections == null || selections.size() != 1) {
-            return null;
-        } else {
-            final EObject selection = selections.iterator().next();
-            final EObject semanticTarget;
-            if (selection instanceof DSemanticDecorator) {
-                semanticTarget = ((DSemanticDecorator) selection).getTarget();
-            } else {
-                semanticTarget = selection;
-            }
-            if (semanticTarget instanceof EClass) {
-                return (EClass) semanticTarget;
-            } else {
-                return null;
-            }
-        }
-    }
+	private EClass getSemanticTarget(Collection<? extends EObject> selections) {
+		if (selections == null || selections.size() != 1) {
+			return null;
+		} else {
+			final EObject selection = selections.iterator().next();
+			final EObject semanticTarget;
+			if (selection instanceof DSemanticDecorator) {
+				semanticTarget = ((DSemanticDecorator) selection).getTarget();
+			} else {
+				semanticTarget = selection;
+			}
+			if (semanticTarget instanceof EClass) {
+				return (EClass) semanticTarget;
+			} else {
+				return null;
+			}
+		}
+	}
 
-    public void execute(Collection<? extends EObject> selections, Map<String, Object> parameters) {
-        EClass eClass = getSemanticTarget(selections);
-        URI uri = eClass.eResource().getURI();
-        IStructuredSelection selection = StructuredSelection.EMPTY;
-        if (uri != null && uri.isHierarchical()) {
-            if (uri.isRelative() || (uri = uri.deresolve(PLATFORM_RESOURCE)).isRelative()) {
-                IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toString()));
-                if (file.exists()) {
-                    selection = new StructuredSelection(file);
-                }
-            }
-        }
+	public void execute(Collection<? extends EObject> selections,
+			Map<String, Object> parameters) {
+		EClass eClass = getSemanticTarget(selections);
+		URI uri = eClass.eResource().getURI();
+		IStructuredSelection selection = StructuredSelection.EMPTY;
+		if (uri != null && uri.isHierarchical()) {
+			if (uri.isRelative()
+					|| (uri = uri.deresolve(PLATFORM_RESOURCE)).isRelative()) {
+				IFile file = ResourcesPlugin.getWorkspace().getRoot()
+						.getFile(new Path(uri.toString()));
+				if (file.exists()) {
+					selection = new StructuredSelection(file);
+				}
+			}
+		}
 
-        DynamicModelWizard dynamicModelWizard = new DynamicModelWizard(eClass);
-        dynamicModelWizard.init(PlatformUI.getWorkbench(), selection);
-        dynamicModelWizard.setWindowTitle("Create Dynamic Instance");
-        WizardDialog wizardDialog = new WizardDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), dynamicModelWizard);
+		DynamicModelWizard dynamicModelWizard = new DynamicModelWizard(eClass);
+		dynamicModelWizard.init(PlatformUI.getWorkbench(), selection);
+		dynamicModelWizard.setWindowTitle("Create Dynamic Instance");
+		WizardDialog wizardDialog = new WizardDialog(PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getShell(), dynamicModelWizard);
 
-        wizardDialog.open();
-    }
+		wizardDialog.open();
+	}
 }
