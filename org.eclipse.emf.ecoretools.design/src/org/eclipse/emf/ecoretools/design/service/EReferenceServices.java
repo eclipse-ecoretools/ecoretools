@@ -230,13 +230,6 @@ public class EReferenceServices {
 		}
 	}
 	
-	public EGenericType performEdit(EGenericType ref, String editString) {
-		System.out.println("EReferenceServices.performEdit() " + editString);
-		return ref;
-	}
-
-	
-
 	public EReference performEdit(EReference ref, String editString) {
 		if ("0".equals(editString.trim())) {
 			ref.setLowerBound(0);
