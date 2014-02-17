@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.sirius.business.api.session.Session;
@@ -174,7 +175,18 @@ public class EReferenceServices {
 
 	public String superTypesLabel(EClass any) {
 		Collection<String> reifiedTypes = Lists.newArrayList();
+		Collection<String> typeParameters = Lists.newArrayList();
 		for (EGenericType genType : any.getEGenericSuperTypes()) {
+			if (genType.getEClassifier() != null) {
+				for (ETypeParameter param : genType.getEClassifier()
+						.getETypeParameters()) {
+					if (param.getName()!=null) {
+						typeParameters.add(param.getName());
+					} else {
+						typeParameters.add("?");
+					}
+				}
+			}
 			for (EGenericType argument : genType.getETypeArguments()) {
 				if (argument.getEClassifier() != null
 						&& argument.getEClassifier().getName() != null) {
@@ -188,7 +200,8 @@ public class EReferenceServices {
 			}
 		}
 		if (reifiedTypes.size() > 0) {
-			return "<<bind>> " + Joiner.on(',').join(reifiedTypes);
+			return "<<bind " + Joiner.on(',').join(typeParameters) + ">> "
+					+ Joiner.on(',').join(reifiedTypes);
 		} else {
 			return null;
 		}
@@ -216,6 +229,13 @@ public class EReferenceServices {
 
 		}
 	}
+	
+	public EGenericType performEdit(EGenericType ref, String editString) {
+		System.out.println("EReferenceServices.performEdit() " + editString);
+		return ref;
+	}
+
+	
 
 	public EReference performEdit(EReference ref, String editString) {
 		if ("0".equals(editString.trim())) {
