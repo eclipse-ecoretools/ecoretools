@@ -134,7 +134,7 @@
           </style>
         </containerMappings>
         <containerMappings name="EC EDataType" preconditionExpression="service:isEDataType" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EDataType" childrenPresentation="List">
-          <subNodeMappings name="EC_DataType_InstanceClassName" semanticCandidatesExpression="var:self" domainClass="ecore.EDataType">
+          <subNodeMappings name="EC_DataType_InstanceClassName" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='InstanceClassName']" semanticCandidatesExpression="var:self" domainClass="ecore.EDataType">
             <style xsi:type="style:BundledImageDescription" labelFormat="italic" showIcon="false" labelExpression="feature:instanceClassName" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
