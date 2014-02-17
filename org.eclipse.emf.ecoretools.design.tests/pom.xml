@@ -40,6 +40,7 @@
         <configuration>
            <includes>
             <include>org/eclipse/emf/ecoretools/design/tests/InterpretedExpressionTests.class</include>
+            <include>org/eclipse/emf/ecoretools/design/tests/TypeNameTests.class</include>
           </includes>
           <useUIHarness>true</useUIHarness>
           <useUIThread>true</useUIThread>
