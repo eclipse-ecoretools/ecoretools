@@ -1152,11 +1152,11 @@
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ReviewServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Adds support for EMF GenModel configuration." name="Generation" modelFileExtension="genmodel">
-    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="GenPackage Attributes" titleExpression="[name + ' generation table'/]" domainClass="GenPackage">
+    <ownedRepresentations xsi:type="description_1:EditionTableDescription" name="GenPackage Attributes" titleExpression="[name + ' generation table'/]" domainClass="genmodel.GenPackage">
       <metamodel href="http://www.eclipse.org/emf/2002/GenModel#/"/>
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
-      <ownedLineMappings name="GenClass" domainClass="GenClass" headerLabelExpression="[ecoreClass.name/]">
-        <ownedSubLines name="GenFeature" domainClass="GenFeature" semanticCandidatesExpression="[eAllContents(genmodel::GenFeature)->select(ecoreFeature.oclIsTypeOf(ecore::EAttribute) or ecoreFeature.oclIsTypeOf(ecore::EReference) and not(ecoreFeature.oclAsType(ecore::EReference).containment) and not(ecoreFeature.oclAsType(ecore::EReference).derived))/]" headerLabelExpression="[ecoreFeature.name/]">
+      <ownedLineMappings name="GenClass" domainClass="genmodel.GenClass" headerLabelExpression="[ecoreClass.name/]">
+        <ownedSubLines name="GenFeature" domainClass="genmodel.GenFeature" semanticCandidatesExpression="[eAllContents(genmodel::GenFeature)->select(ecoreFeature.oclIsTypeOf(ecore::EAttribute) or ecoreFeature.oclIsTypeOf(ecore::EReference) and not(ecoreFeature.oclAsType(ecore::EReference).containment) and not(ecoreFeature.oclAsType(ecore::EReference).derived))/]" headerLabelExpression="[ecoreFeature.name/]">
           <backgroundConditionalStyle predicateExpression="[propertyCategory = ''/]">
             <style>
               <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
