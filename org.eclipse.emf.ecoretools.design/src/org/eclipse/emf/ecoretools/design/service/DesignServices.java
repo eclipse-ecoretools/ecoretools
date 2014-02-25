@@ -54,9 +54,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import com.google.common.base.Ascii;
+import com.google.common.base.CaseFormat;
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -302,6 +306,35 @@ public class DesignServices extends EReferenceServices {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * Replace spaces by camel case value.
+	 * 
+	 * @param any
+	 * @param from
+	 * @return
+	 */
+	public String toCamelCase(EObject any, String from) {
+		if (from != null) {
+			StringBuffer buffer = new StringBuffer(from.length());
+			for (String word : Splitter.on(CharMatcher.WHITESPACE)
+					.trimResults().split(from)) {
+				buffer.append(toU1Case(word));
+			}
+			return buffer.toString();
+		}
+		return from;
+	}
+
+	private String toU1Case(String word) {
+		if (word != null && word.length() > 0) {
+			return new StringBuilder(word.length())
+	        .append(Ascii.toUpperCase(word.charAt(0)))
+	        .append(word.substring(1))
+	        .toString();
+		}
+		return word;
 	}
 
 	/**
