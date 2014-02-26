@@ -5,13 +5,13 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
             uri="http://www.eclipse.org/emf/2002/Ecore"
-            class="org.eclipse.emf.ecoretools.design.properties.providers.EcoreEEFAdapterFactory"
+            class="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EcoreEEFAdapterFactory"
             supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
    </extension>
    <extension
          point="org.eclipse.emf.eef.runtime.PropertiesEditionPartProvider">
       <PropertiesEditionPartProvider
-            providerClass="org.eclipse.emf.ecoretools.design.properties.providers.EcorePropertiesEditionPartProvider">
+            providerClass="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EcorePropertiesEditionPartProvider">
       </PropertiesEditionPartProvider>
    </extension>
 
@@ -114,85 +114,85 @@
             contributorId="org.eclipse.sirius.diagram">
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EAttributePropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EAttributePropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EAttributePropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EAttribute"
                tab="Base">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EAnnotationPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EAnnotationPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EAnnotationPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EAnnotation"
                tab="Base">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EClassPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EClassPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EClassPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EClass"
                tab="Base">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EClassPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EClassPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EClass"
                tab="Instanciation">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.DataTypePropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EDataTypePropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EDataTypePropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EDataType"
                tab="Data Type">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EDataTypePropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EDataTypePropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EDataType"
                tab="Instanciation">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.DataTypePropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EEnumPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EEnum"
                tab="Data Type">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.InstanciationPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EEnumPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EEnum"
                tab="Instanciation">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EEnumLiteralPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EEnumLiteralPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EEnumLiteralPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EEnumLiteral"
                tab="Base">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.OperationElementPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EOperationPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EOperationPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EOperation"
                tab="Operation Element">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.ExceptionsPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EOperationPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EOperationPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EOperation"
                tab="Exceptions">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EPackagePropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EPackagePropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EPackagePropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EPackage"
                tab="Base">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.OperationElementPropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EParameterPropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EParameterPropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EParameter"
                tab="Operation Element">
          </propertySection>
          <propertySection
                class="org.eclipse.emf.ecoretools.design.properties.parts.forms.EReferencePropertiesEditionPartForm"
-               filter="org.eclipse.emf.ecoretools.design.properties.providers.EReferencePropertiesEditionProvider$EditionFilter"
+               filter="org.eclipse.emf.ecoretools.design.properties.ecore.providers.EReferencePropertiesEditionProvider$EditionFilter"
                id="org.eclipse.emf.ecore.section.EReference"
                tab="Base">
          </propertySection>

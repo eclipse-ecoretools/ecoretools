@@ -213,7 +213,7 @@ public class DataTypePropertiesEditionPartImpl extends CompositePropertiesEditio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.DataTypePropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.DataTypePropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -223,7 +223,7 @@ public class DataTypePropertiesEditionPartImpl extends CompositePropertiesEditio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.DataTypePropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.DataTypePropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -245,7 +245,7 @@ public class DataTypePropertiesEditionPartImpl extends CompositePropertiesEditio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.DataTypePropertiesEditionPart#getSerializable()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.DataTypePropertiesEditionPart#getSerializable()
 	 * 
 	 */
 	public Boolean getSerializable() {
@@ -255,7 +255,7 @@ public class DataTypePropertiesEditionPartImpl extends CompositePropertiesEditio
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.DataTypePropertiesEditionPart#setSerializable(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.DataTypePropertiesEditionPart#setSerializable(Boolean newValue)
 	 * 
 	 */
 	public void setSerializable(Boolean newValue) {

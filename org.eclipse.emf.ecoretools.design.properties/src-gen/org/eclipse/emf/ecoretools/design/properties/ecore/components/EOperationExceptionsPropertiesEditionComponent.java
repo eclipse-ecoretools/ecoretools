@@ -60,8 +60,8 @@ public class EOperationExceptionsPropertiesEditionComponent extends SinglePartPr
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.eef.runtime.api.component.IPropertiesEditionComponent#initPart(java.lang.Object, int, org.eclipse.emf.ecoretools.design.properties.EObject, 
-	 *      org.eclipse.emf.ecoretools.design.properties.resource.ResourceSet)
+	 * @see org.eclipse.emf.eef.runtime.api.component.IPropertiesEditionComponent#initPart(java.lang.Object, int, org.eclipse.emf.ecore.EObject, 
+	 *      org.eclipse.emf.ecore.resource.ResourceSet)
 	 * 
 	 */
 	public void initPart(Object key, int kind, EObject elt, ResourceSet allResource) {
@@ -194,6 +194,8 @@ public class EOperationExceptionsPropertiesEditionComponent extends SinglePartPr
 		return ret;
 	}
 
+
+	
 
 	
 

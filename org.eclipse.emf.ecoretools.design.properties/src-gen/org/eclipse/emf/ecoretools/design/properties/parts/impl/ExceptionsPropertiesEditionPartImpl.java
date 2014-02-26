@@ -222,7 +222,7 @@ public class ExceptionsPropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.ExceptionsPropertiesEditionPart#initEExceptions(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.ExceptionsPropertiesEditionPart#initEExceptions(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
 	 */
 	public void initEExceptions(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -243,7 +243,7 @@ public class ExceptionsPropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.ExceptionsPropertiesEditionPart#updateEExceptions()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.ExceptionsPropertiesEditionPart#updateEExceptions()
 	 * 
 	 */
 	public void updateEExceptions() {
@@ -253,7 +253,7 @@ public class ExceptionsPropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.ExceptionsPropertiesEditionPart#addFilterEExceptions(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.ExceptionsPropertiesEditionPart#addFilterEExceptions(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEExceptions(ViewerFilter filter) {
@@ -263,7 +263,7 @@ public class ExceptionsPropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.ExceptionsPropertiesEditionPart#addBusinessFilterEExceptions(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.ExceptionsPropertiesEditionPart#addBusinessFilterEExceptions(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEExceptions(ViewerFilter filter) {
@@ -273,7 +273,7 @@ public class ExceptionsPropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.ExceptionsPropertiesEditionPart#isContainedInEExceptionsTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.ExceptionsPropertiesEditionPart#isContainedInEExceptionsTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInEExceptionsTable(EObject element) {

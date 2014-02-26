@@ -254,7 +254,7 @@ public class InstanciationPropertiesEditionPartForm extends SectionPropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.InstanciationPropertiesEditionPart#getInstanceClassName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.InstanciationPropertiesEditionPart#getInstanceClassName()
 	 * 
 	 */
 	public String getInstanceClassName() {
@@ -264,7 +264,7 @@ public class InstanciationPropertiesEditionPartForm extends SectionPropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.InstanciationPropertiesEditionPart#setInstanceClassName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.InstanciationPropertiesEditionPart#setInstanceClassName(String newValue)
 	 * 
 	 */
 	public void setInstanceClassName(String newValue) {
@@ -286,7 +286,7 @@ public class InstanciationPropertiesEditionPartForm extends SectionPropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.InstanciationPropertiesEditionPart#getInstanceTypeName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.InstanciationPropertiesEditionPart#getInstanceTypeName()
 	 * 
 	 */
 	public String getInstanceTypeName() {
@@ -296,7 +296,7 @@ public class InstanciationPropertiesEditionPartForm extends SectionPropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.InstanciationPropertiesEditionPart#setInstanceTypeName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.InstanciationPropertiesEditionPart#setInstanceTypeName(String newValue)
 	 * 
 	 */
 	public void setInstanceTypeName(String newValue) {

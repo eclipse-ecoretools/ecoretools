@@ -351,7 +351,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -361,7 +361,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -383,7 +383,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#getNsURI()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#getNsURI()
 	 * 
 	 */
 	public String getNsURI() {
@@ -393,7 +393,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#setNsURI(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#setNsURI(String newValue)
 	 * 
 	 */
 	public void setNsURI(String newValue) {
@@ -415,7 +415,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#getNsPrefix()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#getNsPrefix()
 	 * 
 	 */
 	public String getNsPrefix() {
@@ -425,7 +425,7 @@ public class EPackagePropertiesEditionPartForm extends SectionPropertiesEditingP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart#setNsPrefix(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EPackagePropertiesEditionPart#setNsPrefix(String newValue)
 	 * 
 	 */
 	public void setNsPrefix(String newValue) {

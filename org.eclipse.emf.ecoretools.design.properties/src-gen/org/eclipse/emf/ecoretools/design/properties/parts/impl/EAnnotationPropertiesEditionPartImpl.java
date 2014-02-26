@@ -435,7 +435,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#getSource()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#getSource()
 	 * 
 	 */
 	public String getSource() {
@@ -445,7 +445,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#setSource(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#setSource(String newValue)
 	 * 
 	 */
 	public void setSource(String newValue) {
@@ -469,7 +469,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#initDetails(EObject current, EReference containingFeature, EReference feature)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#initDetails(EObject current, EReference containingFeature, EReference feature)
 	 */
 	public void initDetails(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -490,7 +490,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#updateDetails()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#updateDetails()
 	 * 
 	 */
 	public void updateDetails() {
@@ -500,7 +500,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addFilterDetails(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addFilterDetails(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToDetails(ViewerFilter filter) {
@@ -513,7 +513,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addBusinessFilterDetails(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addBusinessFilterDetails(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToDetails(ViewerFilter filter) {
@@ -523,7 +523,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#isContainedInDetailsTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#isContainedInDetailsTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInDetailsTable(EObject element) {
@@ -533,7 +533,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#getEModelElement()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#getEModelElement()
 	 * 
 	 */
 	public EObject getEModelElement() {
@@ -548,7 +548,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#initEModelElement(EObjectFlatComboSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#initEModelElement(EObjectFlatComboSettings)
 	 */
 	public void initEModelElement(EObjectFlatComboSettings settings) {
 		eModelElement.setInput(settings);
@@ -568,7 +568,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#setEModelElement(EObject newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#setEModelElement(EObject newValue)
 	 * 
 	 */
 	public void setEModelElement(EObject newValue) {
@@ -590,7 +590,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#setEModelElementButtonMode(ButtonsModeEnum newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#setEModelElementButtonMode(ButtonsModeEnum newValue)
 	 */
 	public void setEModelElementButtonMode(ButtonsModeEnum newValue) {
 		eModelElement.setButtonMode(newValue);
@@ -599,7 +599,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addFilterEModelElement(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addFilterEModelElement(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEModelElement(ViewerFilter filter) {
@@ -609,7 +609,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addBusinessFilterEModelElement(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addBusinessFilterEModelElement(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEModelElement(ViewerFilter filter) {
@@ -621,7 +621,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#initContents(EObject current, EReference containingFeature, EReference feature)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#initContents(EObject current, EReference containingFeature, EReference feature)
 	 */
 	public void initContents(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -642,7 +642,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#updateContents()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#updateContents()
 	 * 
 	 */
 	public void updateContents() {
@@ -652,7 +652,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addFilterContents(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addFilterContents(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToContents(ViewerFilter filter) {
@@ -665,7 +665,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addBusinessFilterContents(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addBusinessFilterContents(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToContents(ViewerFilter filter) {
@@ -675,7 +675,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#isContainedInContentsTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#isContainedInContentsTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInContentsTable(EObject element) {
@@ -687,7 +687,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#initReferences(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#initReferences(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
 	 */
 	public void initReferences(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -708,7 +708,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#updateReferences()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#updateReferences()
 	 * 
 	 */
 	public void updateReferences() {
@@ -718,7 +718,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addFilterReferences(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addFilterReferences(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToReferences(ViewerFilter filter) {
@@ -728,7 +728,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#addBusinessFilterReferences(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#addBusinessFilterReferences(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToReferences(ViewerFilter filter) {
@@ -738,7 +738,7 @@ public class EAnnotationPropertiesEditionPartImpl extends CompositePropertiesEdi
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart#isContainedInReferencesTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAnnotationPropertiesEditionPart#isContainedInReferencesTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInReferencesTable(EObject element) {

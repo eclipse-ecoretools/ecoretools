@@ -15,7 +15,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEAttributeAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEAttributeAdapter()
 	 * 
 	 */
 	public Adapter createEAttributeAdapter() {
@@ -23,7 +23,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEAnnotationAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEAnnotationAdapter()
 	 * 
 	 */
 	public Adapter createEAnnotationAdapter() {
@@ -31,7 +31,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEClassAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEClassAdapter()
 	 * 
 	 */
 	public Adapter createEClassAdapter() {
@@ -39,7 +39,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEDataTypeAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEDataTypeAdapter()
 	 * 
 	 */
 	public Adapter createEDataTypeAdapter() {
@@ -47,7 +47,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEEnumAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEEnumAdapter()
 	 * 
 	 */
 	public Adapter createEEnumAdapter() {
@@ -55,7 +55,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEEnumLiteralAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEEnumLiteralAdapter()
 	 * 
 	 */
 	public Adapter createEEnumLiteralAdapter() {
@@ -63,7 +63,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEOperationAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEOperationAdapter()
 	 * 
 	 */
 	public Adapter createEOperationAdapter() {
@@ -71,7 +71,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEPackageAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEPackageAdapter()
 	 * 
 	 */
 	public Adapter createEPackageAdapter() {
@@ -79,7 +79,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEParameterAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEParameterAdapter()
 	 * 
 	 */
 	public Adapter createEParameterAdapter() {
@@ -87,7 +87,7 @@ public class EcoreEEFAdapterFactory extends EcoreAdapterFactory {
 	}
 	/**
 	 * {@inheritDoc}
-	 * @see org.eclipse.emf.ecoretools.design.properties.util.EcoreAdapterFactory#createEReferenceAdapter()
+	 * @see org.eclipse.emf.ecore.util.EcoreAdapterFactory#createEReferenceAdapter()
 	 * 
 	 */
 	public Adapter createEReferenceAdapter() {

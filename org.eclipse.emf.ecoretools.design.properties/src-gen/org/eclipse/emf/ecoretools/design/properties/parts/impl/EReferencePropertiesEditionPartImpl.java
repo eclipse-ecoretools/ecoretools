@@ -974,7 +974,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -984,7 +984,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -1006,7 +1006,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getEType()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getEType()
 	 * 
 	 */
 	public EObject getEType() {
@@ -1021,7 +1021,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#initEType(EObjectFlatComboSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#initEType(EObjectFlatComboSettings)
 	 */
 	public void initEType(EObjectFlatComboSettings settings) {
 		eType.setInput(settings);
@@ -1041,7 +1041,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setEType(EObject newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setEType(EObject newValue)
 	 * 
 	 */
 	public void setEType(EObject newValue) {
@@ -1063,7 +1063,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
 	 */
 	public void setETypeButtonMode(ButtonsModeEnum newValue) {
 		eType.setButtonMode(newValue);
@@ -1072,7 +1072,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEType(ViewerFilter filter) {
@@ -1082,7 +1082,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEType(ViewerFilter filter) {
@@ -1092,7 +1092,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getDefaultValueLiteral()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getDefaultValueLiteral()
 	 * 
 	 */
 	public String getDefaultValueLiteral() {
@@ -1102,7 +1102,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setDefaultValueLiteral(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setDefaultValueLiteral(String newValue)
 	 * 
 	 */
 	public void setDefaultValueLiteral(String newValue) {
@@ -1124,7 +1124,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getEOpposite()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getEOpposite()
 	 * 
 	 */
 	public EObject getEOpposite() {
@@ -1139,7 +1139,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#initEOpposite(EObjectFlatComboSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#initEOpposite(EObjectFlatComboSettings)
 	 */
 	public void initEOpposite(EObjectFlatComboSettings settings) {
 		eOpposite.setInput(settings);
@@ -1159,7 +1159,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setEOpposite(EObject newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setEOpposite(EObject newValue)
 	 * 
 	 */
 	public void setEOpposite(EObject newValue) {
@@ -1181,7 +1181,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setEOppositeButtonMode(ButtonsModeEnum newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setEOppositeButtonMode(ButtonsModeEnum newValue)
 	 */
 	public void setEOppositeButtonMode(ButtonsModeEnum newValue) {
 		eOpposite.setButtonMode(newValue);
@@ -1190,7 +1190,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addFilterEOpposite(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addFilterEOpposite(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEOpposite(ViewerFilter filter) {
@@ -1200,7 +1200,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addBusinessFilterEOpposite(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addBusinessFilterEOpposite(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEOpposite(ViewerFilter filter) {
@@ -1212,7 +1212,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#initEKeys(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#initEKeys(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
 	 */
 	public void initEKeys(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -1233,7 +1233,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#updateEKeys()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#updateEKeys()
 	 * 
 	 */
 	public void updateEKeys() {
@@ -1243,7 +1243,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addFilterEKeys(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addFilterEKeys(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEKeys(ViewerFilter filter) {
@@ -1253,7 +1253,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#addBusinessFilterEKeys(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#addBusinessFilterEKeys(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEKeys(ViewerFilter filter) {
@@ -1263,7 +1263,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#isContainedInEKeysTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#isContainedInEKeysTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInEKeysTable(EObject element) {
@@ -1273,7 +1273,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getContainment()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getContainment()
 	 * 
 	 */
 	public Boolean getContainment() {
@@ -1283,7 +1283,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setContainment(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setContainment(Boolean newValue)
 	 * 
 	 */
 	public void setContainment(Boolean newValue) {
@@ -1305,7 +1305,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getUnique()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getUnique()
 	 * 
 	 */
 	public Boolean getUnique() {
@@ -1315,7 +1315,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setUnique(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setUnique(Boolean newValue)
 	 * 
 	 */
 	public void setUnique(Boolean newValue) {
@@ -1337,7 +1337,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getOrdered()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getOrdered()
 	 * 
 	 */
 	public Boolean getOrdered() {
@@ -1347,7 +1347,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setOrdered(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setOrdered(Boolean newValue)
 	 * 
 	 */
 	public void setOrdered(Boolean newValue) {
@@ -1369,7 +1369,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getResolveProxies()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getResolveProxies()
 	 * 
 	 */
 	public Boolean getResolveProxies() {
@@ -1379,7 +1379,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setResolveProxies(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setResolveProxies(Boolean newValue)
 	 * 
 	 */
 	public void setResolveProxies(Boolean newValue) {
@@ -1401,7 +1401,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getLowerBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getLowerBound()
 	 * 
 	 */
 	public String getLowerBound() {
@@ -1411,7 +1411,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setLowerBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setLowerBound(String newValue)
 	 * 
 	 */
 	public void setLowerBound(String newValue) {
@@ -1433,7 +1433,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getUpperBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getUpperBound()
 	 * 
 	 */
 	public String getUpperBound() {
@@ -1443,7 +1443,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setUpperBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setUpperBound(String newValue)
 	 * 
 	 */
 	public void setUpperBound(String newValue) {
@@ -1465,7 +1465,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getDerived()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getDerived()
 	 * 
 	 */
 	public Boolean getDerived() {
@@ -1475,7 +1475,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setDerived(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setDerived(Boolean newValue)
 	 * 
 	 */
 	public void setDerived(Boolean newValue) {
@@ -1497,7 +1497,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getChangeable()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getChangeable()
 	 * 
 	 */
 	public Boolean getChangeable() {
@@ -1507,7 +1507,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setChangeable(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setChangeable(Boolean newValue)
 	 * 
 	 */
 	public void setChangeable(Boolean newValue) {
@@ -1529,7 +1529,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getUnsettable()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getUnsettable()
 	 * 
 	 */
 	public Boolean getUnsettable() {
@@ -1539,7 +1539,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setUnsettable(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setUnsettable(Boolean newValue)
 	 * 
 	 */
 	public void setUnsettable(Boolean newValue) {
@@ -1561,7 +1561,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getTransient_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getTransient_()
 	 * 
 	 */
 	public Boolean getTransient_() {
@@ -1571,7 +1571,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setTransient_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setTransient_(Boolean newValue)
 	 * 
 	 */
 	public void setTransient_(Boolean newValue) {
@@ -1593,7 +1593,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#getVolatile_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#getVolatile_()
 	 * 
 	 */
 	public Boolean getVolatile_() {
@@ -1603,7 +1603,7 @@ public class EReferencePropertiesEditionPartImpl extends CompositePropertiesEdit
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart#setVolatile_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EReferencePropertiesEditionPart#setVolatile_(Boolean newValue)
 	 * 
 	 */
 	public void setVolatile_(Boolean newValue) {

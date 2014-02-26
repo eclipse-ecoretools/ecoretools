@@ -491,7 +491,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -501,7 +501,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -523,7 +523,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getEType()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getEType()
 	 * 
 	 */
 	public EObject getEType() {
@@ -538,7 +538,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#initEType(EObjectFlatComboSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#initEType(EObjectFlatComboSettings)
 	 */
 	public void initEType(EObjectFlatComboSettings settings) {
 		eType.setInput(settings);
@@ -558,7 +558,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setEType(EObject newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setEType(EObject newValue)
 	 * 
 	 */
 	public void setEType(EObject newValue) {
@@ -580,7 +580,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
 	 */
 	public void setETypeButtonMode(ButtonsModeEnum newValue) {
 		eType.setButtonMode(newValue);
@@ -589,7 +589,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#addFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#addFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEType(ViewerFilter filter) {
@@ -599,7 +599,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEType(ViewerFilter filter) {
@@ -609,7 +609,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getOrdered()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getOrdered()
 	 * 
 	 */
 	public Boolean getOrdered() {
@@ -619,7 +619,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setOrdered(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setOrdered(Boolean newValue)
 	 * 
 	 */
 	public void setOrdered(Boolean newValue) {
@@ -641,7 +641,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getUnique()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getUnique()
 	 * 
 	 */
 	public Boolean getUnique() {
@@ -651,7 +651,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setUnique(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setUnique(Boolean newValue)
 	 * 
 	 */
 	public void setUnique(Boolean newValue) {
@@ -673,7 +673,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getLowerBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getLowerBound()
 	 * 
 	 */
 	public String getLowerBound() {
@@ -683,7 +683,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setLowerBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setLowerBound(String newValue)
 	 * 
 	 */
 	public void setLowerBound(String newValue) {
@@ -705,7 +705,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#getUpperBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#getUpperBound()
 	 * 
 	 */
 	public String getUpperBound() {
@@ -715,7 +715,7 @@ public class OperationElementPropertiesEditionPartForm extends SectionProperties
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart#setUpperBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.OperationElementPropertiesEditionPart#setUpperBound(String newValue)
 	 * 
 	 */
 	public void setUpperBound(String newValue) {

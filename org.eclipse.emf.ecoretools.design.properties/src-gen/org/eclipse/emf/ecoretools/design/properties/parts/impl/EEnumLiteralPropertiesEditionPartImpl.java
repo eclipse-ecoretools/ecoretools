@@ -283,7 +283,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -293,7 +293,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -315,7 +315,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#getValue()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#getValue()
 	 * 
 	 */
 	public String getValue() {
@@ -325,7 +325,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#setValue(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#setValue(String newValue)
 	 * 
 	 */
 	public void setValue(String newValue) {
@@ -347,7 +347,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#getLiteral()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#getLiteral()
 	 * 
 	 */
 	public String getLiteral() {
@@ -357,7 +357,7 @@ public class EEnumLiteralPropertiesEditionPartImpl extends CompositePropertiesEd
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EEnumLiteralPropertiesEditionPart#setLiteral(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EEnumLiteralPropertiesEditionPart#setLiteral(String newValue)
 	 * 
 	 */
 	public void setLiteral(String newValue) {

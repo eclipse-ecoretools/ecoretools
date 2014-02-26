@@ -452,7 +452,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -462,7 +462,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -484,7 +484,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#getAbstract_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#getAbstract_()
 	 * 
 	 */
 	public Boolean getAbstract_() {
@@ -494,7 +494,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#setAbstract_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#setAbstract_(Boolean newValue)
 	 * 
 	 */
 	public void setAbstract_(Boolean newValue) {
@@ -516,7 +516,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#getInterface_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#getInterface_()
 	 * 
 	 */
 	public Boolean getInterface_() {
@@ -526,7 +526,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#setInterface_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#setInterface_(Boolean newValue)
 	 * 
 	 */
 	public void setInterface_(Boolean newValue) {
@@ -550,7 +550,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#initESuperTypes(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#initESuperTypes(org.eclipse.emf.eef.runtime.ui.widgets.referencestable.ReferencesTableSettings)
 	 */
 	public void initESuperTypes(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -571,7 +571,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#updateESuperTypes()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#updateESuperTypes()
 	 * 
 	 */
 	public void updateESuperTypes() {
@@ -581,7 +581,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#addFilterESuperTypes(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#addFilterESuperTypes(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToESuperTypes(ViewerFilter filter) {
@@ -591,7 +591,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#addBusinessFilterESuperTypes(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#addBusinessFilterESuperTypes(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToESuperTypes(ViewerFilter filter) {
@@ -601,7 +601,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#isContainedInESuperTypesTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#isContainedInESuperTypesTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInESuperTypesTable(EObject element) {
@@ -613,7 +613,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#initEGenericSuperTypes(EObject current, EReference containingFeature, EReference feature)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#initEGenericSuperTypes(EObject current, EReference containingFeature, EReference feature)
 	 */
 	public void initEGenericSuperTypes(ReferencesTableSettings settings) {
 		if (current.eResource() != null && current.eResource().getResourceSet() != null)
@@ -634,7 +634,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#updateEGenericSuperTypes()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#updateEGenericSuperTypes()
 	 * 
 	 */
 	public void updateEGenericSuperTypes() {
@@ -644,7 +644,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#addFilterEGenericSuperTypes(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#addFilterEGenericSuperTypes(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEGenericSuperTypes(ViewerFilter filter) {
@@ -657,7 +657,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#addBusinessFilterEGenericSuperTypes(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#addBusinessFilterEGenericSuperTypes(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEGenericSuperTypes(ViewerFilter filter) {
@@ -667,7 +667,7 @@ public class EClassPropertiesEditionPartImpl extends CompositePropertiesEditionP
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EClassPropertiesEditionPart#isContainedInEGenericSuperTypesTable(EObject element)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EClassPropertiesEditionPart#isContainedInEGenericSuperTypesTable(EObject element)
 	 * 
 	 */
 	public boolean isContainedInEGenericSuperTypesTable(EObject element) {

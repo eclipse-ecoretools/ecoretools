@@ -8,14 +8,21 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcorePackage;
+
 import org.eclipse.emf.ecoretools.design.properties.ecore.components.EOperationExceptionsPropertiesEditionComponent;
 import org.eclipse.emf.ecoretools.design.properties.ecore.components.EOperationOperationElementPropertiesEditionComponent;
 import org.eclipse.emf.ecoretools.design.properties.ecore.components.EOperationPropertiesEditionComponent;
+
 import org.eclipse.emf.eef.runtime.api.component.IPropertiesEditionComponent;
+
 import org.eclipse.emf.eef.runtime.context.PropertiesEditingContext;
+
 import org.eclipse.emf.eef.runtime.impl.utils.EEFUtils;
+
 import org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider;
+
 import org.eclipse.emf.eef.runtime.providers.impl.PropertiesEditingProviderImpl;
+
 import org.eclipse.jface.viewers.IFilter;
 
 /**
@@ -126,7 +133,7 @@ public class EOperationPropertiesEditionProvider extends PropertiesEditingProvid
 	 * Provides the filter used by the plugin.xml to assign part forms.
 	 */
 	public static class EditionFilter implements IFilter {
-		
+	
 		/**
 		 * {@inheritDoc}
 		 * 

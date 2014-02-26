@@ -857,7 +857,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getName()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getName()
 	 * 
 	 */
 	public String getName() {
@@ -867,7 +867,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setName(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setName(String newValue)
 	 * 
 	 */
 	public void setName(String newValue) {
@@ -889,7 +889,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getEType()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getEType()
 	 * 
 	 */
 	public EObject getEType() {
@@ -904,7 +904,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#initEType(EObjectFlatComboSettings)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#initEType(EObjectFlatComboSettings)
 	 */
 	public void initEType(EObjectFlatComboSettings settings) {
 		eType.setInput(settings);
@@ -924,7 +924,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setEType(EObject newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setEType(EObject newValue)
 	 * 
 	 */
 	public void setEType(EObject newValue) {
@@ -946,7 +946,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setETypeButtonMode(ButtonsModeEnum newValue)
 	 */
 	public void setETypeButtonMode(ButtonsModeEnum newValue) {
 		eType.setButtonMode(newValue);
@@ -955,7 +955,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#addFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#addFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addFilterToEType(ViewerFilter filter) {
@@ -965,7 +965,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#addBusinessFilterEType(ViewerFilter filter)
 	 * 
 	 */
 	public void addBusinessFilterToEType(ViewerFilter filter) {
@@ -975,7 +975,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getDefaultValueLiteral()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getDefaultValueLiteral()
 	 * 
 	 */
 	public String getDefaultValueLiteral() {
@@ -985,7 +985,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setDefaultValueLiteral(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setDefaultValueLiteral(String newValue)
 	 * 
 	 */
 	public void setDefaultValueLiteral(String newValue) {
@@ -1007,7 +1007,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getID()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getID()
 	 * 
 	 */
 	public Boolean getID() {
@@ -1017,7 +1017,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setID(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setID(Boolean newValue)
 	 * 
 	 */
 	public void setID(Boolean newValue) {
@@ -1039,7 +1039,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getLowerBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getLowerBound()
 	 * 
 	 */
 	public String getLowerBound() {
@@ -1049,7 +1049,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setLowerBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setLowerBound(String newValue)
 	 * 
 	 */
 	public void setLowerBound(String newValue) {
@@ -1071,7 +1071,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getUpperBound()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getUpperBound()
 	 * 
 	 */
 	public String getUpperBound() {
@@ -1081,7 +1081,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setUpperBound(String newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setUpperBound(String newValue)
 	 * 
 	 */
 	public void setUpperBound(String newValue) {
@@ -1103,7 +1103,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getUnique()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getUnique()
 	 * 
 	 */
 	public Boolean getUnique() {
@@ -1113,7 +1113,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setUnique(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setUnique(Boolean newValue)
 	 * 
 	 */
 	public void setUnique(Boolean newValue) {
@@ -1135,7 +1135,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getOrdered()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getOrdered()
 	 * 
 	 */
 	public Boolean getOrdered() {
@@ -1145,7 +1145,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setOrdered(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setOrdered(Boolean newValue)
 	 * 
 	 */
 	public void setOrdered(Boolean newValue) {
@@ -1167,7 +1167,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getDerived()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getDerived()
 	 * 
 	 */
 	public Boolean getDerived() {
@@ -1177,7 +1177,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setDerived(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setDerived(Boolean newValue)
 	 * 
 	 */
 	public void setDerived(Boolean newValue) {
@@ -1199,7 +1199,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getChangeable()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getChangeable()
 	 * 
 	 */
 	public Boolean getChangeable() {
@@ -1209,7 +1209,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setChangeable(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setChangeable(Boolean newValue)
 	 * 
 	 */
 	public void setChangeable(Boolean newValue) {
@@ -1231,7 +1231,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getUnsettable()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getUnsettable()
 	 * 
 	 */
 	public Boolean getUnsettable() {
@@ -1241,7 +1241,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setUnsettable(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setUnsettable(Boolean newValue)
 	 * 
 	 */
 	public void setUnsettable(Boolean newValue) {
@@ -1263,7 +1263,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getTransient_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getTransient_()
 	 * 
 	 */
 	public Boolean getTransient_() {
@@ -1273,7 +1273,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setTransient_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setTransient_(Boolean newValue)
 	 * 
 	 */
 	public void setTransient_(Boolean newValue) {
@@ -1295,7 +1295,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#getVolatile_()
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#getVolatile_()
 	 * 
 	 */
 	public Boolean getVolatile_() {
@@ -1305,7 +1305,7 @@ public class EAttributePropertiesEditionPartForm extends SectionPropertiesEditin
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @see org.eclipse.emf.ecoretools.design.properties.parts.EAttributePropertiesEditionPart#setVolatile_(Boolean newValue)
+	 * @see org.eclipse.emf.ecoretools.design.properties.ecore.parts.EAttributePropertiesEditionPart#setVolatile_(Boolean newValue)
 	 * 
 	 */
 	public void setVolatile_(Boolean newValue) {
