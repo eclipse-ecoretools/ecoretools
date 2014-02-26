@@ -9,9 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.design.properties.ecore.providers.EcoreMessages;
 import org.eclipse.emf.ecoretools.design.properties.parts.EReferencePropertiesEditionPart;
 import org.eclipse.emf.ecoretools.design.properties.parts.EcoreViewsRepository;
-import org.eclipse.emf.ecoretools.design.properties.providers.EcoreMessages;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.eef.runtime.api.component.IPropertiesEditionComponent;
 import org.eclipse.emf.eef.runtime.api.notify.IPropertiesEditionEvent;
