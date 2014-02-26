@@ -81,8 +81,8 @@
             </endLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings name="EC EClass" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Hierarchy%20Diagram'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Relation%20for%20class%20Diagram']" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.1/@ownedTools[name='Delete%20EClass']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EClass" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20attribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20operation']" childrenPresentation="List">
-          <borderedNodeMappings name="EC ETypeParameter" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="feature:eTypeParameters" domainClass="ecore.ETypeParameter">
+        <containerMappings name="EC EClass" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Hierarchy%20Diagram'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Relation%20for%20class%20Diagram']" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.1/@ownedTools[name='Delete%20EClass']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20with%20CamelCase']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EClass" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20attribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.2/@ownedTools[name='Drop%20operation']" childrenPresentation="List">
+          <borderedNodeMappings name="EC ETypeParameter" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20with%20CamelCase']" semanticCandidatesExpression="feature:eTypeParameters" domainClass="ecore.ETypeParameter">
             <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelPosition="node" resizeKind="NSEW" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/generic.svg">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -120,8 +120,8 @@
             </style>
           </conditionnalStyles>
         </containerMappings>
-        <containerMappings name="EC EEnum" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EEnum" childrenPresentation="List">
-          <subNodeMappings name="EC EEnumLiteral" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" semanticCandidatesExpression="feature:eLiterals" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EEnumLiteral">
+        <containerMappings name="EC EEnum" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20with%20CamelCase']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EEnum" childrenPresentation="List">
+          <subNodeMappings name="EC EEnumLiteral" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20no%20CamelCase']" semanticCandidatesExpression="feature:eLiterals" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EEnumLiteral">
             <style xsi:type="style:BundledImageDescription" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -133,7 +133,7 @@
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
         </containerMappings>
-        <containerMappings name="EC EDataType" preconditionExpression="service:isEDataType" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EDataType" childrenPresentation="List">
+        <containerMappings name="EC EDataType" preconditionExpression="service:isEDataType" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20with%20CamelCase']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EDataType" childrenPresentation="List">
           <subNodeMappings name="EC_DataType_InstanceClassName" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='InstanceClassName']" semanticCandidatesExpression="var:self" domainClass="ecore.EDataType">
             <style xsi:type="style:BundledImageDescription" labelFormat="italic" showIcon="false" labelExpression="feature:instanceClassName" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -611,7 +611,7 @@
           </ownedTools>
         </toolSections>
         <toolSections name="Direct Edit">
-          <ownedTools xsi:type="tool_1:DirectEditLabel" name="Edit Name">
+          <ownedTools xsi:type="tool_1:DirectEditLabel" name="Edit Name with CamelCase">
             <mask mask="{0}"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="service:toCamelCase(arg0)"/>
@@ -648,6 +648,12 @@
             <mask mask="{0}"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:SetValue" featureName="instanceClassName" valueExpression="var:arg0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:DirectEditLabel" name="Edit Name no CamelCase">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:arg0"/>
             </initialOperation>
           </ownedTools>
         </toolSections>
@@ -697,7 +703,7 @@
         </customization>
       </defaultLayer>
       <additionalLayers endUserDocumentation="Add support for sub-packages." name="Package" activeByDefault="true">
-        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" domainClass="ecore.EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']">
+        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20no%20CamelCase']" createElements="false" domainClass="ecore.EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']">
           <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="[name/]" labelAlignment="LEFT" widthComputationExpression="6" heightComputationExpression="3" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -1075,7 +1081,7 @@
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
-        <containerMappings name="Analyzed Package" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name']" createElements="false" domainClass="ecore.EPackage" childrenPresentation="List">
+        <containerMappings name="Analyzed Package" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20no%20CamelCase']" createElements="false" domainClass="ecore.EPackage" childrenPresentation="List">
           <subNodeMappings name="EClassfierIntroducingDependency" semanticCandidatesExpression="service:getElementsIntroducingDependencies(diagram)" domainClass="ecore.EClassifier">
             <style xsi:type="style:BundledImageDescription" labelExpression="service:getDependenciesLabel" labelAlignment="LEFT" tooltipExpression="service:getDependenciesTooltip(view)" labelPosition="node" resizeKind="NSEW">
               <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
