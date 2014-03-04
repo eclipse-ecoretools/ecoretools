@@ -330,9 +330,8 @@ public class DesignServices extends EReferenceServices {
 	private String toU1Case(String word) {
 		if (word != null && word.length() > 0) {
 			return new StringBuilder(word.length())
-	        .append(Ascii.toUpperCase(word.charAt(0)))
-	        .append(word.substring(1))
-	        .toString();
+					.append(Ascii.toUpperCase(word.charAt(0)))
+					.append(word.substring(1)).toString();
 		}
 		return word;
 	}
@@ -402,7 +401,14 @@ public class DesignServices extends EReferenceServices {
 	 * @return the tooltip of the given EOperation.
 	 */
 	public String renderEOperationTooltip(EOperation op) {
-		return new EOperationServices().renderEOperationTooltip(op);
+		String validationTooltip = renderTooltip(op);
+		String operationSignature = new EOperationServices()
+				.renderEOperationTooltip(op);
+		if (validationTooltip != null && validationTooltip.length() > 0) {
+			return validationTooltip + "\n" + operationSignature;
+		} else {
+			return operationSignature;
+		}
 	}
 
 	/**
@@ -414,12 +420,6 @@ public class DesignServices extends EReferenceServices {
 
 	public List<ENamedElement> getAllAssociatedElements(EOperation op) {
 		return new EOperationServices().getAllAssociatedElements(op);
-	}
-
-	public String renderTooltip(EClass klass) {
-		// [eContainer()->filter(ecore::ENamedElement).name + '.' + name/]
-		return ((EPackage) klass.eContainer()).getName() + "."
-				+ klass.getName();
 	}
 
 	/**
