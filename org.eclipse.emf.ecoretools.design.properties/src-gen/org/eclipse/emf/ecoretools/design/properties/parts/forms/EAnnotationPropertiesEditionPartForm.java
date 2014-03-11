@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecoretools.design.properties.EcoreToolsPropertiesEditingPart;
 import org.eclipse.emf.ecoretools.design.properties.ecore.providers.EcoreMessages;
 import org.eclipse.emf.ecoretools.design.properties.parts.EAnnotationPropertiesEditionPart;
 import org.eclipse.emf.ecoretools.design.properties.parts.EcoreViewsRepository;
@@ -18,7 +19,6 @@ import org.eclipse.emf.eef.runtime.api.notify.IPropertiesEditionEvent;
 import org.eclipse.emf.eef.runtime.api.parts.IFormPropertiesEditionPart;
 import org.eclipse.emf.eef.runtime.context.impl.EObjectPropertiesEditionContext;
 import org.eclipse.emf.eef.runtime.impl.notify.PropertiesEditionEvent;
-import org.eclipse.emf.eef.runtime.part.impl.SectionPropertiesEditingPart;
 import org.eclipse.emf.eef.runtime.policies.PropertiesEditingPolicy;
 import org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider;
 import org.eclipse.emf.eef.runtime.ui.parts.PartComposer;
@@ -55,6 +55,7 @@ import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
+import org.eclipse.ui.views.properties.tabbed.ISection;
 
 // End of user code
 
@@ -62,7 +63,7 @@ import org.eclipse.ui.forms.widgets.Section;
  * 
  * 
  */
-public class EAnnotationPropertiesEditionPartForm extends SectionPropertiesEditingPart implements IFormPropertiesEditionPart, EAnnotationPropertiesEditionPart {
+public class EAnnotationPropertiesEditionPartForm extends EcoreToolsPropertiesEditingPart implements IFormPropertiesEditionPart, EAnnotationPropertiesEditionPart {
 
 	protected Text source;
 	protected ReferencesTable details;

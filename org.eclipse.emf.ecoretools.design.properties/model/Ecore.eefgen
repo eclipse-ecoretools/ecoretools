@@ -3,7 +3,7 @@
   <editionContexts basePackage="org.eclipse.emf.ecoretools.design.properties" descriptorsContributorID="org.eclipse.sirius.diagram" descriptorsGenericPropertiesViews="true">
     <PropertiesEditionContext href="Ecore.components#_Km3b0QV5EeG22YzgVp-zWA"/>
   </editionContexts>
-  <viewsRepositories basePackage="org.eclipse.emf.ecoretools.design.properties" swtViews="true" formViews="true">
+  <viewsRepositories basePackage="org.eclipse.emf.ecoretools.design.properties" swtViews="true" formViews="true" formsSuperClass="org.eclipse.emf.ecoretools.design.properties.EcoreToolsPropertiesEditingPart">
     <viewsRepository href="Ecore.components#_Km4p_gV5EeG22YzgVp-zWA"/>
   </viewsRepositories>
 </eef-gen:EEFGenModel>

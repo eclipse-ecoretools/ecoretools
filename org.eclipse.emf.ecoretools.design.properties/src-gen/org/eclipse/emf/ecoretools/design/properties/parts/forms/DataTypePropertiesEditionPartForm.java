@@ -4,6 +4,7 @@
 package org.eclipse.emf.ecoretools.design.properties.parts.forms;
 
 // Start of user code for imports
+import org.eclipse.emf.ecoretools.design.properties.EcoreToolsPropertiesEditingPart;
 import org.eclipse.emf.ecoretools.design.properties.ecore.providers.EcoreMessages;
 import org.eclipse.emf.ecoretools.design.properties.parts.DataTypePropertiesEditionPart;
 import org.eclipse.emf.ecoretools.design.properties.parts.EcoreViewsRepository;
@@ -11,7 +12,6 @@ import org.eclipse.emf.eef.runtime.api.component.IPropertiesEditionComponent;
 import org.eclipse.emf.eef.runtime.api.notify.IPropertiesEditionEvent;
 import org.eclipse.emf.eef.runtime.api.parts.IFormPropertiesEditionPart;
 import org.eclipse.emf.eef.runtime.impl.notify.PropertiesEditionEvent;
-import org.eclipse.emf.eef.runtime.part.impl.SectionPropertiesEditingPart;
 import org.eclipse.emf.eef.runtime.ui.parts.PartComposer;
 import org.eclipse.emf.eef.runtime.ui.parts.sequence.BindingCompositionSequence;
 import org.eclipse.emf.eef.runtime.ui.parts.sequence.CompositionSequence;
@@ -42,7 +42,7 @@ import org.eclipse.ui.views.properties.tabbed.ISection;
  * 
  * 
  */
-public class DataTypePropertiesEditionPartForm extends SectionPropertiesEditingPart implements IFormPropertiesEditionPart, DataTypePropertiesEditionPart {
+public class DataTypePropertiesEditionPartForm extends EcoreToolsPropertiesEditingPart implements IFormPropertiesEditionPart, DataTypePropertiesEditionPart {
 
 	protected Text name;
 	protected Button serializable;
