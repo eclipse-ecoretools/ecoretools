@@ -18,7 +18,7 @@
         <relativePath>../org.eclipse.emf.ecoretools.build</relativePath>
     </parent>
 
-    <artifactId>org.eclipse.emf.ecoretools.update.all</artifactId>
+    <artifactId>org.eclipse.emf.ecoretools.update-all</artifactId>
     <packaging>eclipse-repository</packaging>
 
     <!-- see http://issues.sonatype.org/browse/TYCHO-313 -->
