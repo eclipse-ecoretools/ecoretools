@@ -12,9 +12,6 @@
    <feature  id="org.eclipse.emf.ecoretools.sdk" version="2.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>   
-   <feature  id="org.eclipse.sirius.doc.feature" version="0.0.0.0">
-      <category name="deps"/>
-   </feature>   
    <feature  id="org.eclipse.sirius.runtime.acceleo" version="0.0.0.0">
       <category name="deps"/>
    </feature>   
