@@ -27,7 +27,7 @@
    <feature  id="org.eclipse.sirius.runtime" >
       <category name="deps"/>
    </feature>   
-   <feature  id="org.eclipse.eef.runtime-feature" >
+   <feature  id="org.eclipse.emf.eef.runtime-feature" >
       <category name="deps"/>
    </feature>   
    <category-def name="ecoretools" label="Ecore Tools 2.x">
