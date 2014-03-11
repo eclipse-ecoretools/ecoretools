@@ -63,6 +63,7 @@
         <module>../org.eclipse.emf.ecoretools.ui.capabilities</module>
         <module>../org.eclipse.emf.ecoretools.ui.capabilities-feature</module>
         <module>../org.eclipse.emf.ecoretools.update</module>
+        <module>../org.eclipse.emf.ecoretools.update-all</module>
     </modules>
 
     <build>
