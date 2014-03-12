@@ -198,7 +198,7 @@
                     <url>http://download.eclipse.org/sirius/updates/nightly/1.0.x/luna</url>
                 </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/luna</url>
+                    <url>http://download.eclipse.org/releases/staging</url>
                 </repository>
                 <repository><id>eef</id><layout>p2</layout>
                     <url>http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.3</url>
