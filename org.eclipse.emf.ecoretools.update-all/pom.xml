@@ -33,7 +33,7 @@
                 <configuration>
                     <createArtifactRepository>true</createArtifactRepository>
                     <includeAllDependencies>true</includeAllDependencies>
-                    <finalName>${project.artifactId}-all-in-one</finalName>
+                    <finalName>${project.artifactId}-in-one</finalName>
                     <compress>true</compress>
                 </configuration>
             </plugin>
