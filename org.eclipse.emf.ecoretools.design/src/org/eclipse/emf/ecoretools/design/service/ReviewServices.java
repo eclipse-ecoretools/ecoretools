@@ -8,11 +8,11 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.sirius.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.business.api.query.EObjectQuery;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
+import org.eclipse.sirius.diagram.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 
@@ -59,7 +59,7 @@ public class ReviewServices extends DesignServices {
 	}
 
 	public String getDependenciesTooltip(EClass clazz, DSemanticDecorator view) {
-		Option<DDiagram> diag = new EObjectQuery(view).getParentDiagram();
+		Option<DDiagram> diag = new org.eclipse.sirius.diagram.business.api.query.EObjectQuery(view).getParentDiagram();
 		if (diag.some()) {
 			Set<EPackage> displayedPackages = getDisplayedEPackages(diag.get());
 			// we don't want coupling errors with our own package.
