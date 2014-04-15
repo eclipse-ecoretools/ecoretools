@@ -94,4 +94,33 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
             plugin="org.eclipse.emf.ecoretools.design">
         </contexts>
     </extension>
+    
+     <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.eclipse.emf.ecoretools.design.action.InitDiagram"
+            nameFilter="*.ecore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eclipse.emf.ecoretools.design.action.EcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eclipse.emf.ecoretools.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.eclipse.emf.ecoretools.design.action.InitDiagram"
+            nameFilter="*.xcore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eclipse.emf.ecoretools.design.action.EcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eclipse.emf.ecoretools.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+    
 </plugin>
