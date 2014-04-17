@@ -37,6 +37,12 @@
         <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:openClassDiagramContextHelp"/>
       </diagramInitialisation>
       <defaultLayer name="Default">
+        <nodeMappings name="Empty Diagram" preconditionExpression="[containerView.ownedDiagramElements.target->excluding(containerView.target)->size() = 0/]" semanticCandidatesExpression="var:self" domainClass="ecore.EPackage">
+          <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="" sizeComputationExpression="-1" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
         <edgeMappings name="EC_EReference" preconditionExpression="service:noEOpposite" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='EReference%20Name']" semanticCandidatesExpression="service:getEReferencesToDisplay(diagram)" semanticElements="var:self" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@borderedNodeMappings[name='EC%20ETypeParameter']" targetFinderExpression="service:getEReferenceTarget" sourceFinderExpression="feature:eContainer" domainClass="ecore.EReference" useDomainElement="true" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectEReference']">
           <style sizeComputationExpression="1" routingStyle="manhattan">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -1176,7 +1182,7 @@
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.GenerationServices"/>
   </ownedViewpoints>
   <userColorsPalettes name="Ecore Palette">
-    <entries xsi:type="description:InterpolatedColor" name="Size Based Color" colorValueComputationExpression="[eContents()->size()/]" minValueComputationExpression="[0/]" maxValueComputationExpression="[10/]"/>
+    <entries xsi:type="description:InterpolatedColor" name="Size Based Color" minValueComputationExpression="[0/]" maxValueComputationExpression="[10/]"/>
     <entries xsi:type="description:UserFixedColor" red="250" green="190" blue="190" name="MomentIntervalColor"/>
     <entries xsi:type="description:UserFixedColor" red="250" green="240" blue="180" name="RoleColor"/>
     <entries xsi:type="description:UserFixedColor" red="180" green="230" blue="180" name="PartyPlaceThingColor"/>
