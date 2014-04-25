@@ -37,7 +37,7 @@ public class EcoreToolsSpecificEditPartProvider extends
 			};
 			dEdgePart.installEditPolicy(
 					org.eclipse.gef.RequestConstants.REQ_DIRECT_EDIT,
-					new EcoreToolsDirectEditForBeginRole());
+					new EcoreToolsDirectEditForEndRole());
 			return dEdgePart;
 
 		case DEdgeEndNameEditPart.VISUAL_ID:
@@ -50,7 +50,7 @@ public class EcoreToolsSpecificEditPartProvider extends
 			};
 			dEdgeEndPart.installEditPolicy(
 					org.eclipse.gef.RequestConstants.REQ_DIRECT_EDIT,
-					new EcoreToolsDirectEditForEndRole());
+					new EcoreToolsDirectEditForBeginRole());
 			return dEdgeEndPart;
 		}
 		return null;
