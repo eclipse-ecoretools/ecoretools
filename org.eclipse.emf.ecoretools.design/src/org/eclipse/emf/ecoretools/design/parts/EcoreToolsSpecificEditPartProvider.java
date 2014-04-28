@@ -1,5 +1,6 @@
 package org.eclipse.emf.ecoretools.design.parts;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecoretools.design.service.EReferenceServices;
@@ -16,6 +17,7 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeBeginNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeEndNameEditPart;
+import org.eclipse.sirius.diagram.ui.internal.edit.parts.DNodeListEditPart;
 import org.eclipse.sirius.diagram.ui.part.SiriusVisualIDRegistry;
 import org.eclipse.sirius.diagram.ui.tools.api.command.GMFCommandWrapper;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
@@ -52,6 +54,9 @@ public class EcoreToolsSpecificEditPartProvider extends
 					org.eclipse.gef.RequestConstants.REQ_DIRECT_EDIT,
 					new EcoreToolsDirectEditForBeginRole());
 			return dEdgeEndPart;
+
+		case DNodeListEditPart.VISUAL_ID:
+			return new DNodeListEditPartWithAlpha(view);
 		}
 		return null;
 	}
@@ -64,18 +69,25 @@ public class EcoreToolsSpecificEditPartProvider extends
 				EObject semanticTarget = ((DSemanticDecorator) view
 						.getElement()).getTarget();
 				if (isFromEcoreToolsDesign((DSemanticDecorator) view
-						.getElement())
-						&& semanticTarget instanceof EReference
-						&& ((EReference) semanticTarget).getEOpposite() != null) {
-					switch (SiriusVisualIDRegistry.getVisualID(view)) {
+						.getElement()))
+					if (semanticTarget instanceof EReference
+							&& ((EReference) semanticTarget).getEOpposite() != null) {
+						switch (SiriusVisualIDRegistry.getVisualID(view)) {
 
-					case DEdgeBeginNameEditPart.VISUAL_ID:
-						return true;
+						case DEdgeBeginNameEditPart.VISUAL_ID:
+							return true;
 
-					case DEdgeEndNameEditPart.VISUAL_ID:
-						return true;
+						case DEdgeEndNameEditPart.VISUAL_ID:
+							return true;
+						}
+					} else if (semanticTarget instanceof EClass) {
+						switch (SiriusVisualIDRegistry.getVisualID(view)) {
+
+						case DNodeListEditPart.VISUAL_ID:
+							return true;
+						}
+
 					}
-				}
 			}
 
 		}
