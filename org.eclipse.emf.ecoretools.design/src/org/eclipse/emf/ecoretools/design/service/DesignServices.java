@@ -196,6 +196,19 @@ public class DesignServices extends EReferenceServices {
 
 	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
+		Iterator<DSemanticDecorator> it = Iterators.filter(diagram.eAllContents(),
+				DSemanticDecorator.class);
+		while (it.hasNext()) {
+			DSemanticDecorator dec = it.next();
+			if (dec.getTarget() instanceof EClass) {
+				result.add((EClass) dec.getTarget());
+			}
+		}
+		return result;
+	}
+
+	private Set<EClass> getInternalEClasses(DSemanticDiagram diagram) {
+		Set<EClass> result = Sets.newLinkedHashSet();
 		Iterator<DNodeList> it = Iterators.filter(diagram.eAllContents(),
 				DNodeList.class);
 		while (it.hasNext()) {
@@ -215,7 +228,7 @@ public class DesignServices extends EReferenceServices {
 			DSemanticDiagram diagram) {
 
 		Set<EClass> related = Sets.newLinkedHashSet();
-		Set<EClass> eClasses = getDisplayedEClasses(diagram);
+		Set<EClass> eClasses = getInternalEClasses(diagram);
 		RelatedElementsSwitch relations = new RelatedElementsSwitch();
 		for (EClass eClass : eClasses) {
 			for (EClass other : Iterables.filter(

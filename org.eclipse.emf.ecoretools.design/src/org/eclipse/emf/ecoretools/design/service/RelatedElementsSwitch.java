@@ -75,6 +75,11 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 						.getEContainingClass());
 			}
 		}
+		for (EReference eRef : object.getEAllReferences()) {
+			if (eRef.getEType()!=null) {
+				relateds.add(eRef.getEType());
+			}
+		}
 		return super.caseEClass(object);
 	}
 
