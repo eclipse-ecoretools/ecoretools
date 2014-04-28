@@ -18,15 +18,13 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -44,34 +42,35 @@ public class GenModelUpdateGenFeatureContainment implements ModelChangeTrigger {
 		this.session = set;
 	}
 
-	public static final Predicate<Notification> IS_EREFENCE_CONTAINMENT = new Predicate<Notification>() {
+	public static final NotificationFilter IS_EREFENCE_CONTAINMENT = new NotificationFilter.Custom() {
 
-		public boolean apply(Notification input) {
-			return (input.getFeature() == EcorePackage.eINSTANCE
+		public boolean matches(Notification notification) {
+			return (notification.getFeature() == EcorePackage.eINSTANCE
 					.getEReference_Containment());
-
 		}
 	};
 
-	public static final Predicate<Notification> SHOULD_UPDATE = Predicates.and(
-			Predicates.not(GenModelAutoReload.IS_TOUCH),
-			GenModelAutoReload.IS_ECORE, IS_EREFENCE_CONTAINMENT);
+	//
+	public static final NotificationFilter SHOULD_UPDATE = GenModelAutoReload.IS_TOUCH
+			.negated().and(
+					GenModelAutoReload.IS_ECORE.and(IS_EREFENCE_CONTAINMENT));
 
 	public Option<Command> localChangesAboutToCommit(
 			Collection<Notification> notifications) {
 
 		final Collection<GenFeature> toBeUpdated = Lists.newArrayList();
-		for (Notification notif : Iterables
-				.filter(notifications, SHOULD_UPDATE)) {
-			/*
-			 * this is an EReference now being containment or no more.
-			 */
-			EReference updatedRef = (EReference) notif.getNotifier();
-			for (Setting xRef : session.getSemanticCrossReferencer()
-					.getInverseReferences(updatedRef)) {
+		for (Notification notif : notifications) {
+			if (SHOULD_UPDATE.matches(notif)) {
+				/*
+				 * this is an EReference now being containment or no more.
+				 */
+				EReference updatedRef = (EReference) notif.getNotifier();
+				for (Setting xRef : session.getSemanticCrossReferencer()
+						.getInverseReferences(updatedRef)) {
 
-				if (xRef.getEObject() instanceof GenFeature) {
-					toBeUpdated.add((GenFeature) xRef.getEObject());
+					if (xRef.getEObject() instanceof GenFeature) {
+						toBeUpdated.add((GenFeature) xRef.getEObject());
+					}
 				}
 			}
 		}

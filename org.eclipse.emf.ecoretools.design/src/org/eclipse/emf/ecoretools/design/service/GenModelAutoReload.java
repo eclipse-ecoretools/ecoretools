@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
@@ -44,41 +45,41 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 		this.domain = set;
 	}
 
-	public static final Predicate<Notification> IS_TOUCH = new Predicate<Notification>() {
+	public static final NotificationFilter IS_TOUCH = new NotificationFilter.Custom() {
 
-		public boolean apply(Notification input) {
+		public boolean matches(Notification input) {
 			return input.isTouch();
 		}
 	};
 
-	public static final Predicate<Notification> IS_ECORE = new Predicate<Notification>() {
+	public static final NotificationFilter IS_ECORE = new NotificationFilter.Custom() {
 
-		public boolean apply(Notification input) {
+		public boolean matches(Notification input) {
 			return (input.getNotifier() instanceof EObject)
 					&& ((EObject) input.getNotifier()).eClass().getEPackage() == EcorePackage.eINSTANCE;
 		}
 	};
 
-	public static final Predicate<Notification> IS_ATTACHMENT = new Predicate<Notification>() {
+	public static final NotificationFilter IS_ATTACHMENT = new NotificationFilter.Custom() {
 
-		public boolean apply(Notification input) {
+		public boolean matches(Notification input) {
 			return (input.getFeature() instanceof EReference && ((EReference) input
 					.getFeature()).isContainment() == true);
 
 		}
 	};
 
-	public static final Predicate<Notification> IS_EREFENCE_CONTAINMENT = new Predicate<Notification>() {
+	public static final NotificationFilter IS_EREFENCE_CONTAINMENT = new NotificationFilter.Custom() {
 
-		public boolean apply(Notification input) {
+		public boolean matches(Notification input) {
 			return (input.getFeature() == EcorePackage.eINSTANCE
 					.getEReference_Containment());
 
 		}
 	};
 
-	public static final Predicate<Notification> SHOULD_RELOAD = Predicates.and(
-			Predicates.not(IS_TOUCH), IS_ECORE, IS_ATTACHMENT);
+	public static final NotificationFilter SHOULD_RELOAD = IS_TOUCH.negated()
+			.and(IS_ECORE.and(IS_ATTACHMENT));
 
 	public static final int PRIORITY = 0;
 
