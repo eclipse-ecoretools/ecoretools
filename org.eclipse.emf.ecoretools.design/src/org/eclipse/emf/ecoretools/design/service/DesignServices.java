@@ -44,6 +44,7 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DEdge;
+import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
@@ -55,12 +56,12 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
 import com.google.common.base.Ascii;
-import com.google.common.base.CaseFormat;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -71,6 +72,8 @@ import com.google.common.collect.Sets;
  * Generic Ecore services usable from a VSM.
  */
 public class DesignServices extends EReferenceServices {
+	private static final String CLASS_DIAGRAM_CLASS_MAPPINGID = "EC EClass";
+
 	/**
 	 * Returns all the root objects of all the resources in the same
 	 * resource-set as the specified object.
@@ -191,16 +194,37 @@ public class DesignServices extends EReferenceServices {
 		return false;
 	}
 
-	public Collection<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
+	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
-		Iterator<DSemanticDecorator> it = Iterators.filter(
-				diagram.eAllContents(), DSemanticDecorator.class);
+		Iterator<DNodeList> it = Iterators.filter(diagram.eAllContents(),
+				DNodeList.class);
 		while (it.hasNext()) {
-			DSemanticDecorator dec = it.next();
-			if (dec.getTarget() instanceof EClass)
-				result.add((EClass) dec.getTarget());
+			DNodeList dec = it.next();
+			if (dec.getTarget() instanceof EClass) {
+				if (dec.getActualMapping() != null
+						&& CLASS_DIAGRAM_CLASS_MAPPINGID.equals(dec
+								.getActualMapping().getName())) {
+					result.add((EClass) dec.getTarget());
+				}
+			}
 		}
 		return result;
+	}
+
+	public Collection<EClass> getExternalEClasses(EPackage root,
+			DSemanticDiagram diagram) {
+
+		Set<EClass> related = Sets.newLinkedHashSet();
+		Set<EClass> eClasses = getDisplayedEClasses(diagram);
+		RelatedElementsSwitch relations = new RelatedElementsSwitch();
+		for (EClass eClass : eClasses) {
+			for (EClass other : Iterables.filter(
+					relations.getRelatedElements(eClass), EClass.class)) {
+				related.add(other);
+			}
+		}
+
+		return Sets.difference(related, eClasses);
 	}
 
 	public Collection<EReference> getEReferencesToDisplay(EPackage root,
