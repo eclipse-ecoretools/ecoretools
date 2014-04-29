@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.sirius.business.api.session.Session;
@@ -70,12 +71,12 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 		for (Setting xRef : xRefs) {
 			if (xRef.getEObject() instanceof EClass) {
 				relateds.add(xRef.getEObject());
-			} else if (xRef.getEObject() instanceof EReference) {
+			} else if (xRef.getEObject() instanceof EReference && xRef.getEStructuralFeature() == EcorePackage.eINSTANCE.getEReference_EReferenceType()) {
 				relateds.add(((EReference) xRef.getEObject())
 						.getEContainingClass());
 			}
 		}
-		for (EReference eRef : object.getEAllReferences()) {
+		for (EReference eRef : object.getEReferences()) {
 			if (eRef.getEType()!=null) {
 				relateds.add(eRef.getEType());
 			}
