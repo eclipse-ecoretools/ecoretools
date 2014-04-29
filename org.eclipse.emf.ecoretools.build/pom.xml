@@ -194,6 +194,9 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <repositories>    
+                <repository><id>cbi</id><layout>p2</layout>
+                    <url>http://download.eclipse.org/cbi/updates/license</url>
+                </repository>
                 <repository><id>sirius</id><layout>p2</layout>
                     <url>http://download.eclipse.org/sirius/updates/nightly/1.0.x/luna</url>
                 </repository>
