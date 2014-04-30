@@ -159,14 +159,16 @@
             <container name="container"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:For" expression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:containerView"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:containerView"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:containerView"/>
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:markForAutosize">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:containerView"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:containerView"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:containerView"/>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
@@ -187,17 +189,19 @@
             <newViewContainer name="newContainerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:newContainerView"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:newContainerView"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:newContainerView"/>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
-                  <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" containerViewExpression="var:newContainerView"/>
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:markForAutosize">
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEClass">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" containerViewExpression="var:newContainerView"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEDataType">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']" containerViewExpression="var:newContainerView"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEEnum">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']" containerViewExpression="var:newContainerView"/>
+                  </subModelOperations>
+                  <subModelOperations xsi:type="tool:If" conditionExpression="service:isEPackage">
+                    <subModelOperations xsi:type="tool_1:CreateView" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']" containerViewExpression="var:newContainerView"/>
+                  </subModelOperations>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>

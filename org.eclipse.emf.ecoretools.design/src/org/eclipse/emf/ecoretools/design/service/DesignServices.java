@@ -48,6 +48,7 @@ import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
+import org.eclipse.sirius.diagram.ui.tools.internal.layout.AutoSizeAndRegionAwareGraphLayout;
 import org.eclipse.sirius.ext.emf.AllContents;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
@@ -126,6 +127,13 @@ public class DesignServices extends EReferenceServices {
 
 	protected static final String ECORE_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/Ecore";
 
+	public EObject markForAutosize(EObject any) {
+		if (any != null) {
+			any.eAdapters().add(AutosizeTrigger.AUTO_SIZE_MARKER);
+		}
+		return any;
+	}
+
 	public EObject eContainerEContainer(EObject any) {
 		if (any.eContainer() != null)
 			return any.eContainer().eContainer();
@@ -196,8 +204,8 @@ public class DesignServices extends EReferenceServices {
 
 	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
-		Iterator<DSemanticDecorator> it = Iterators.filter(diagram.eAllContents(),
-				DSemanticDecorator.class);
+		Iterator<DSemanticDecorator> it = Iterators.filter(
+				diagram.eAllContents(), DSemanticDecorator.class);
 		while (it.hasNext()) {
 			DSemanticDecorator dec = it.next();
 			if (dec.getTarget() instanceof EClass) {

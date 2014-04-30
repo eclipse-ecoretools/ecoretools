@@ -109,8 +109,8 @@ public class EcoreToolsDesignPlugin extends Plugin {
                 }
 
                 newSession.getEventBroker().addLocalTrigger(GenModelAutoReload.SHOULD_RELOAD, new GenModelAutoReload(newSession.getTransactionalEditingDomain()));
-
                 newSession.getEventBroker().addLocalTrigger(GenModelUpdateGenFeatureContainment.SHOULD_UPDATE, new GenModelUpdateGenFeatureContainment(newSession));
+                newSession.getEventBroker().addLocalTrigger(AutosizeTrigger.IS_GMF_NODE_ATTACHMENT, new AutosizeTrigger(newSession.getTransactionalEditingDomain()));
             }
         };
         SessionManager.INSTANCE.addSessionsListener(notifWhenSessionAreCreated);
