@@ -1,5 +1,7 @@
 h1. Designing Ecore Models
 
+!pasted-images/35ed765cb8af3fb4ab1a95cd3803fe94.png!
+
 h2. Getting Started
 
 Once EcoreTools is installed in your environment, you can start using it either to create a new Ecore model from scratch or to edit an already existing model.
@@ -10,11 +12,15 @@ EcoreTools provide a wizard setting up your Ecore project. Click on File->New->O
 
 !screenshots/step1.png!
 
-The next page request a project name. The general convention is to use a java namespace notation for your project name. The project which is going to be created actually is an Eclipse plugin project, the name will be used for the plugin identification. Changing the project name afterward is possible though error-prone and not without impact. Its better to get it right from the beginning.
+The next page request a project name. The general convention is to use a java namespace notation for your project name. The project which is going to be created actually is an Eclipse plugin project, the name will be used for the plugin identification. 
+
+bq. Changing the project name afterward is possible though error-prone and not without impact. Its better to get it right from the beginning.
 
 !screenshots/step2.png!
 
-The next page request information about your Ecore model. Here again, you can keep the default nsURI but keep in mind that its going to be the identifier of your domain within the EMF world. Changing it afterward might requires to update several files.
+The next page request information about your Ecore model. 
+
+bq. Here again, you can keep the default nsURI but keep in mind that its going to be the identifier of your domain within the EMF world. Changing it afterward might requires to update several files.
 
 !screenshots/step3.png!
 
@@ -28,13 +34,96 @@ Once you clicked on Finish and the wizard prepared the project, this is what you
 
 h3. Working with the Modeling Project
 
+h4. What is it ?
+
+The *Modeling Project* is a facility provided by Sirius which handles models within the scope of a project. What does that mean ? Any model which is in the project is going to be loaded by Sirius behind the scene and its elements will be available in your editors.
+
+This mode of usage is designed so that you can work with your models easily, but you might want to have more control. In this case, you can use EcoreTools just by creating *Representations Files*.
+
+
+
+
+h4. Selecting Viewpoints
+
+Each modeling project has a set of viewpoints which are _enabled_. This controls what kind of representations you can create on the Ecore models inside the project. 
+
+To select which viewpoints are enabled on your project, simply use the _Viewpoints Selection_ action in the context menu of the project itself.
+
+!pasted-images/6706c17e3282d8ad8953861ac645b081.png!
+
+ A dialog box will open which will show you all the viewpoints which are compatible with your project (depending on the kind of models it contains). You can check or un-check each viewpoint individually to enable or disable it, and click _OK_ to validate your choice.
+
+!pasted-images/d08d23dd487524da5c8ddc2b94c8ca63.png!
+
+h4. Creating a Representation
+
+Once the @Viewpoints@ are selected you can create representations : diagrams or tables. All these representations are stored in the @.aird@ file within the project.
+
+There are several ways to create a representation. You can browse a model in a modeling project and right click on _New Representation_.  
+
+Depending on the type of model element you clicked on, different types or representations might be provided. For instance if you right-click on an @EPackage@ you will have :
+
+!pasted-images/6e7b3308b892cb4fee811e4991ec4b87.png!
+
+And other representations might be created on a @GenPackage@ :
+
+!pasted-images/5f7afbc265b07ed59c8f543d607fffb9.png!
+
+You can also create a new representation by clicking on the @Modeling Project@ itself :
+
+!pasted-images/a0efe2337a4e8f32c1fb429555649174.png!
+
+And then select the kind of representation you want to create. 
+
+!pasted-images/b7e2d60ffc9d0bf815493dba5d538125.png!
+
+In this case the tool will guide you to select a model element for which this representation makes sense. 
+
+!pasted-images/9564b3011878c22b1bd2236ea63e762d.png!
+
+h4. Loading External Models
+
+It is possible to load models which are not in the current project by adding @Project Dependencies@.  You can right click on the @Project Dependencies@ item and add another Ecore file (or type the complete URI)
+
+!pasted-images/02b4636be8ad44ff5e8f0f699eea4e80.png!
+
 h3. Creating diagrams from an existing Ecore
+
+!pasted-images/d357d09ef05edd724b88a10681350182.png!
+
+!pasted-images/3439547e2392f4436fcef49b6bc3543f.png!
+
+!pasted-images/8052cc935a95b635e65a0ed3384ce9b1.png!
+
+!pasted-images/f20119893451c23f3afb1ff3796e51df.png!
+
+!pasted-images/0693d417971137ff01e2864ba838e3c8.png!
+
+!pasted-images/c5f7dabe8549cd2cfc4457ba6512b42b.png!
+
+!pasted-images/004266fe1a19937c4e9d577634d2d6fb.png!
+
+!pasted-images/ef3df56cd674a82d1b09f1e8a5012d15.png!
+
+!pasted-images/55c869b1fa7ba6a813acbcb3e868ebd4.png!
 
 h2. Entities Diagram Editor
 
 h3. Overview of the editor
 
 !screenshots/step6.png!
+
+h3. Modeling Classifiers
+
+h3. Modeling References
+
+h3. Modeling Operations
+
+h3. Validating the model 
+
+If the layer @Validation@ is enabled, then any invalid element will have red borders. To understand what is the error exactly, just keep your mouse pointer above the element and the tooltip will provide you a textual feedback.
+
+!pasted-images/9e62e7e1fca7675f7ad752de2a1d5942.png!
 
 h3. Editing Shortcuts
 
@@ -44,13 +133,21 @@ h3. Setting properties
 
 h3. Modeling Generics
 
+!pasted-images/2634caf68113d7bd3b1e85e1df5c4aff.png!
+
 h3. Modeling Constraints
+
+!pasted-images/a4a96011f4f1acbd0331e2a4e258a3bb.png!
 
 h3. Documentation Annotations
 
-Dependencies Diagram Editor
+!pasted-images/8f3460ca33c1991c8dfdc7caa7152371.png!
 
 h2. Documentation Table Editor
+
+h3. Dependencies Diagram Editor
+
+!pasted-images/ae061e611b11578818a2e2a2c4c847d8.png!
 
 h1. Leveraging Ecore Model
 

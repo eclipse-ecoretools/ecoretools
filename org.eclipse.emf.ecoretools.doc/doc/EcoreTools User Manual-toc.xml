@@ -3,7 +3,9 @@
 	<topic href="doc/EcoreTools User Manual.html" label="Designing Ecore Models">
 		<topic href="doc/EcoreTools User Manual.html#GettingStarted" label="Getting Started">
 			<topic href="doc/EcoreTools User Manual.html#CreatinganewEcore" label="Creating a new Ecore"></topic>
-			<topic href="doc/EcoreTools User Manual.html#WorkingwiththeModelingProject" label="Working with the Modeling Project"></topic>
+			<topic href="doc/EcoreTools User Manual.html#WorkingwiththeModelingProject" label="Working with the Modeling Project">
+				<topic href="doc/EcoreTools User Manual.html#LoadingExternalModels" label="Loading External Models"></topic>
+			</topic>
 			<topic href="doc/EcoreTools User Manual.html#CreatingdiagramsfromanexistingEcore" label="Creating diagrams from an existing Ecore"></topic>
 		</topic>
 		<topic href="doc/EcoreTools User Manual.html#EntitiesDiagramEditor" label="Entities Diagram Editor">
