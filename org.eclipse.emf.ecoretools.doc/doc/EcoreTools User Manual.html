@@ -1,1 +1,54 @@
-<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body><h1 id="DesigningEcoreModels">Designing Ecore Models</h1><h2 id="GettingStarted">Getting Started</h2><p>Once EcoreTools is installed in your environment, you can start using it either to create a new Ecore model from scratch or to edit an already existing model.</p><h3 id="CreatinganewEcore">Creating a new Ecore</h3><p>EcoreTools provide a wizard setting up your Ecore project. Click on File-&gt;New-&gt;Others... and then select Ecore Modeling Project.</p><p><img border="0" src="https://lh4.googleusercontent.com/ibdB6LGQa4M02iJq45ujOMjB-u85THKqj3nIsqXnJ5TnMsxE_ll7HQ-Hl0qhDKAcQ2kazSXXpiLgVRJ-C_DvT9j1U__klZP12AWo9-Fue_Dwn_rOC9ArhkEWlElbr-iT8A"/></p><p>The next page request a project name. The general convention is to use a java namespace notation for your project name. The project which is going to be created actually is an Eclipse plugin project, the name will be used for the plugin identification. Changing the project name afterward is possible though error-prone and not without impact. Its better to get it right from the beginning.</p><p><img border="0" src="https://docs.google.com/drawings/d/s1XztfBMRMDK6jKpLu-vCoQ/image?w=677&amp;h=440&amp;rev=82&amp;ac=1"/></p><p>The next page request information about your Ecore model. Here again, you can keep the default nsURI but keep in mind that its going to be the identifier of your domain within the EMF world. Changing it afterward might requires to update several files.</p><p><img border="0" src="https://docs.google.com/drawings/d/ssQD5AFha7RhC4cOtjh_7jw/image?w=723&amp;h=443&amp;rev=132&amp;ac=1"/></p><p>The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling &#8211; here EcoreTools itself &#8211; regarding your current activity for instance Designing or Reviewing your Ecore model. If you are really getting started, Design is a good choice, in case of doubt, select everything.</p><p><img border="0" src="https://docs.google.com/drawings/d/swTJvtj3py7k6Ja3qOzxZbw/image?w=422&amp;h=450&amp;rev=5&amp;ac=1"/></p><p>Once you clicked on Finish and the wizard prepared the project, this is what you should have.</p><p><img border="0" src="https://lh6.googleusercontent.com/k75xW1gbQO5UNAA-cqUdDocAP3c_DOJ6NgcFRQSvWpAb7k8zjAajAa_-DyBUDswSJYz9oS9Oji1g0rcn66od7m-WIukqgYQPVQHbR-QwJMmRsWIG3W43CwASreXF4eo4vA"/></p><h3 id="WorkingwiththeModelingProject">Working with the Modeling Project</h3><h3 id="CreatingdiagramsfromanexistingEcore">Creating diagrams from an existing Ecore</h3><h2 id="EntitiesDiagramEditor">Entities Diagram Editor</h2><h3 id="Overviewoftheeditor">Overview of the editor</h3><p><img border="0" src="https://lh4.googleusercontent.com/sD1CZJOE88YPhxiBiHTrlVKb3qHRH2-ndp-k9egUmNXdGuhLc8-czSVx9FitIgyqBiHZm6ZVTYKTFcLPmYNVJAeWiNVmJuGNeJ5zhL7ZlD1hB9rL7d4gD6OrCdYml1Q2xA"/></p><h3 id="EditingShortcuts">Editing Shortcuts</h3><h3 id="ExploringExistingModels">Exploring Existing Models</h3><h3 id="Settingproperties">Setting properties</h3><h3 id="ModelingGenerics">Modeling Generics</h3><h3 id="ModelingConstraints">Modeling Constraints</h3><h3 id="DocumentationAnnotations">Documentation Annotations</h3><p>Dependencies Diagram Editor</p><h2 id="DocumentationTableEditor">Documentation Table Editor</h2><h1 id="LeveragingEcoreModel">Leveraging Ecore Model</h1><h1 id="GeneratingCode">Generating Code</h1><p>Editing the genmodel</p><p>Launching</p><h1 id="ExportingDiagrams">Exporting Diagrams</h1></body></html>
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>EcoreTools User Manual</title>
+		<link type="text/css" rel="stylesheet" href="/help/topic/org.eclipse.emf.ecoretools.doc/doc/css/custom.css"/>
+	</head>
+	<body>
+		<h1 id="DesigningEcoreModels">Designing Ecore Models</h1>
+		<h2 id="GettingStarted">Getting Started</h2>
+		<p>Once EcoreTools is installed in your environment, you can start using it either to create a new Ecore model from scratch or to edit an already existing model.</p>
+		<h3 id="CreatinganewEcore">Creating a new Ecore</h3>
+		<p>EcoreTools provide a wizard setting up your Ecore project. Click on File-&gt;New-&gt;Others... and then select Ecore Modeling Project.</p>
+		<p>
+			<img border="0" src="screenshots/step1.png"/>
+		</p>
+		<p>The next page request a project name. The general convention is to use a java namespace notation for your project name. The project which is going to be created actually is an Eclipse plugin project, the name will be used for the plugin identification. Changing the project name afterward is possible though error-prone and not without impact. Its better to get it right from the beginning.</p>
+		<p>
+			<img border="0" src="screenshots/step2.png"/>
+		</p>
+		<p>The next page request information about your Ecore model. Here again, you can keep the default nsURI but keep in mind that its going to be the identifier of your domain within the EMF world. Changing it afterward might requires to update several files.</p>
+		<p>
+			<img border="0" src="screenshots/step3.png"/>
+		</p>
+		<p>The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling &#8211; here EcoreTools itself &#8211; regarding your current activity for instance Designing or Reviewing your Ecore model. If you are really getting started, Design is a good choice, in case of doubt, select everything.</p>
+		<p>
+			<img border="0" src="screenshots/step4.png"/>
+		</p>
+		<p>Once you clicked on Finish and the wizard prepared the project, this is what you should have.</p>
+		<p>
+			<img border="0" src="screenshots/step5.png"/>
+		</p>
+		<h3 id="WorkingwiththeModelingProject">Working with the Modeling Project</h3>
+		<h3 id="CreatingdiagramsfromanexistingEcore">Creating diagrams from an existing Ecore</h3>
+		<h2 id="EntitiesDiagramEditor">Entities Diagram Editor</h2>
+		<h3 id="Overviewoftheeditor">Overview of the editor</h3>
+		<p>
+			<img border="0" src="screenshots/step6.png"/>
+		</p>
+		<h3 id="EditingShortcuts">Editing Shortcuts</h3>
+		<h3 id="ExploringExistingModels">Exploring Existing Models</h3>
+		<h3 id="Settingproperties">Setting properties</h3>
+		<h3 id="ModelingGenerics">Modeling Generics</h3>
+		<h3 id="ModelingConstraints">Modeling Constraints</h3>
+		<h3 id="DocumentationAnnotations">Documentation Annotations</h3>
+		<p>Dependencies Diagram Editor</p>
+		<h2 id="DocumentationTableEditor">Documentation Table Editor</h2>
+		<h1 id="LeveragingEcoreModel">Leveraging Ecore Model</h1>
+		<h1 id="GeneratingCode">Generating Code</h1>
+		<p>Editing the genmodel</p>
+		<p>Launching</p>
+		<h1 id="ExportingDiagrams">Exporting Diagrams</h1>
+	</body>
+</html>

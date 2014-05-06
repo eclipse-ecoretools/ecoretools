@@ -25,9 +25,9 @@
 			<fileset dir="${basedir}">
 				<include name="doc/**/*.textile" />
 			</fileset>
+			<stylesheet url="/help/topic/org.eclipse.emf.ecoretools.doc/doc/css/custom.css" />
 			<!-- We don't have any CQ tracked yet for bootstrap & co
 			<stylesheet url="/help/topic/org.eclipse.sirius.doc/doc/resources/bootstrap.css" />
-			<stylesheet url="/help/topic/org.eclipse.sirius.doc/doc/resources/custom.css" />
 			-->
 		</wikitext-to-html>
 	</target>
@@ -36,7 +36,7 @@
 		<wikitext-to-html markupLanguage="Textile" formatOutput="true">
 			<fileset dir="${basedir}">
 				<include name="doc/**/*.textile" />
-			</fileset>
+			</fileset>			
 			<!-- We don't have any CQ tracked yet for bootstrap & co
 			<stylesheet url="/sirius/doc/resources/bootstrap.css" />
 			<stylesheet url="/sirius/doc/resources/custom.css" />
