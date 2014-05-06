@@ -8,7 +8,7 @@ Once EcoreTools is installed in your environment, you can start using it either 
 
 h3. Creating a new Ecore
 
-EcoreTools provide a wizard setting up your Ecore project. Click on File->New->Others... and then select Ecore Modeling Project.
+EcoreTools provide a wizard setting up your Ecore project. Click on __File->New->Others...__ and then select Ecore Modeling Project.
 
 !screenshots/step1.png!
 
@@ -28,7 +28,7 @@ The next wizard page request which Viewpoints should be enabled. Viewpoints are 
 
 !screenshots/step4.png!
 
-Once you clicked on Finish and the wizard prepared the project, this is what you should have.
+Once you clicked on __Finish__ and the wizard prepared the project, this is what you should have.
 
 !screenshots/step5.png!
 
@@ -39,8 +39,6 @@ h4. What is it ?
 The *Modeling Project* is a facility provided by Sirius which handles models within the scope of a project. What does that mean ? Any model which is in the project is going to be loaded by Sirius behind the scene and its elements will be available in your editors.
 
 This mode of usage is designed so that you can work with your models easily, but you might want to have more control. In this case, you can use EcoreTools just by creating *Representations Files*.
-
-
 
 
 h4. Selecting Viewpoints
@@ -113,6 +111,20 @@ h3. Overview of the editor
 
 !screenshots/step6.png!
 
+h3. Working with Layers
+
+Several layers are provided by the editor. When activating a layer some shapes and colors will changes and specific tools will be available to address your current concern.
+ 
+!pasted-images/9496bdbf6570c41c40fdc84c34520726.png!
+
+!pasted-images/152133d0d06941c79992c9be5098ecfc.png!
+
+For example, activating the __Documentation__ layer will transform the shape of all the model elements to add a red border if it is not documented. Two new tools are appearing then in the palette so that you can create the doc annotations.  
+
+ 
+ 
+ !pasted-images/590a4be95a110bd5cd35c959dd9ebc76.png!
+
 h3. Modeling Classifiers
 
 h3. Modeling References
@@ -127,7 +139,27 @@ If the layer @Validation@ is enabled, then any invalid element will have red bor
 
 h3. Editing Shortcuts
 
+A lot of shortcuts are available to be more efficient when editing an Ecore model. From a general point of view, just edit the label of a given shape and the diagram editor will try to figure out what you want to edit. For instance:
+* typing @1@ on an @EAttribute@ or @EReference@ will switch the cardinality to @1..x@ without updating anything else.
+* typing @*@ on an @EAttribute@ or @EReference@ will switch the cardinality to @x..*@
+* typing @:SomeTypeName@ will set the type of an @EAttribute@ without updating the name.
+* typing @someName@ will update the name, keeping the type and cardinality as-is.
+ 
+Shortcuts appearing contextually to a given @EClass@ will allow you to quickly switch the @EClass@ to being *abstract* or *interface*
+ 
+!pasted-images/971a854713ef86708b9e112a0b7264e7.png!
+
 h3. Exploring Existing Models
+
+!pasted-images/08ba8354ba19d7de6c89920fecda9d36.png!
+
+
+!pasted-images/78b4f8fdbd42aac552d7b092a75cfe70.png!
+
+
+!pasted-images/ca65ed257a9b2e0433f422811196f8da.png!
+
+!pasted-images/c97a4efe6fbd11a2c40c1046f3684fbb.png!
 
 h3. Setting properties
 
@@ -136,6 +168,8 @@ h3. Modeling Generics
 !pasted-images/2634caf68113d7bd3b1e85e1df5c4aff.png!
 
 h3. Modeling Constraints
+
+!pasted-images/3f3ad17c7591c30e8a0b1037b7a3a35b.png!
 
 !pasted-images/a4a96011f4f1acbd0331e2a4e258a3bb.png!
 
@@ -162,3 +196,6 @@ Launching
  
 h1. Exporting Diagrams
 
+h1. Getting Help
+
+You can interact with the team behind *EcoreTools* by using the "Eclipse Forum":http://www.eclipse.org/forums/index.php/f/165/ 

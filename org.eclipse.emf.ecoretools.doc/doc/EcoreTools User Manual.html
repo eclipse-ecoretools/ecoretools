@@ -13,7 +13,9 @@
 		<h2 id="GettingStarted">Getting Started</h2>
 		<p>Once EcoreTools is installed in your environment, you can start using it either to create a new Ecore model from scratch or to edit an already existing model.</p>
 		<h3 id="CreatinganewEcore">Creating a new Ecore</h3>
-		<p>EcoreTools provide a wizard setting up your Ecore project. Click on File-&gt;New-&gt;Others... and then select Ecore Modeling Project.</p>
+		<p>EcoreTools provide a wizard setting up your Ecore project. Click on 
+			<i>File-&gt;New-&gt;Others...</i> and then select Ecore Modeling Project.
+		</p>
 		<p>
 			<img border="0" src="screenshots/step1.png"/>
 		</p>
@@ -35,7 +37,9 @@
 		<p>
 			<img border="0" src="screenshots/step4.png"/>
 		</p>
-		<p>Once you clicked on Finish and the wizard prepared the project, this is what you should have.</p>
+		<p>Once you clicked on 
+			<i>Finish</i> and the wizard prepared the project, this is what you should have.
+		</p>
 		<p>
 			<img border="0" src="screenshots/step5.png"/>
 		</p>
@@ -136,6 +140,18 @@
 		<p>
 			<img border="0" src="screenshots/step6.png"/>
 		</p>
+		<h3 id="WorkingwithLayers">Working with Layers</h3>
+		<p>Several layers are provided by the editor. When activating a layer some shapes and colors will changes and specific tools will be available to address your current concern.</p>
+		<p>
+			<img border="0" src="pasted-images/9496bdbf6570c41c40fdc84c34520726.png"/>
+		</p>
+		<p>
+			<img border="0" src="pasted-images/152133d0d06941c79992c9be5098ecfc.png"/>
+		</p>
+		<p>For example, activating the 
+			<i>Documentation</i> layer will transform the shape of all the model elements to add a red border if it is not documented. Two new tools are appearing then in the palette so that you can create the doc annotations.  
+		</p>
+		<img border="0" src="pasted-images/590a4be95a110bd5cd35c959dd9ebc76.png"/>
 		<h3 id="ModelingClassifiers">Modeling Classifiers</h3>
 		<h3 id="ModelingReferences">Modeling References</h3>
 		<h3 id="ModelingOperations">Modeling Operations</h3>
@@ -147,13 +163,59 @@
 			<img border="0" src="pasted-images/9e62e7e1fca7675f7ad752de2a1d5942.png"/>
 		</p>
 		<h3 id="EditingShortcuts">Editing Shortcuts</h3>
+		<p>A lot of shortcuts are available to be more efficient when editing an Ecore model. From a general point of view, just edit the label of a given shape and the diagram editor will try to figure out what you want to edit. For instance:</p>
+		<ul>
+			<li>typing 
+				<code>1</code> on an 
+				<code>EAttribute</code> or 
+				<code>EReference</code> will switch the cardinality to 
+				<code>1..x</code> without updating anything else.
+			</li>
+			<li>typing 
+				<code>*</code> on an 
+				<code>EAttribute</code> or 
+				<code>EReference</code> will switch the cardinality to 
+				<code>x..*</code>
+			</li>
+			<li>typing 
+				<code>:SomeTypeName</code> will set the type of an 
+				<code>EAttribute</code> without updating the name.
+			</li>
+			<li>typing 
+				<code>someName</code> will update the name, keeping the type and cardinality as-is.
+			</li>
+		</ul>
+		<p>Shortcuts appearing contextually to a given 
+			<code>EClass</code> will allow you to quickly switch the 
+			<code>EClass</code> to being 
+			<strong>abstract</strong> or 
+			<strong>interface</strong>
+		</p>
+		<p>
+			<img border="0" src="pasted-images/971a854713ef86708b9e112a0b7264e7.png"/>
+		</p>
 		<h3 id="ExploringExistingModels">Exploring Existing Models</h3>
+		<p>
+			<img border="0" src="pasted-images/08ba8354ba19d7de6c89920fecda9d36.png"/>
+		</p>
+		<p>
+			<img border="0" src="pasted-images/78b4f8fdbd42aac552d7b092a75cfe70.png"/>
+		</p>
+		<p>
+			<img border="0" src="pasted-images/ca65ed257a9b2e0433f422811196f8da.png"/>
+		</p>
+		<p>
+			<img border="0" src="pasted-images/c97a4efe6fbd11a2c40c1046f3684fbb.png"/>
+		</p>
 		<h3 id="Settingproperties">Setting properties</h3>
 		<h3 id="ModelingGenerics">Modeling Generics</h3>
 		<p>
 			<img border="0" src="pasted-images/2634caf68113d7bd3b1e85e1df5c4aff.png"/>
 		</p>
 		<h3 id="ModelingConstraints">Modeling Constraints</h3>
+		<p>
+			<img border="0" src="pasted-images/3f3ad17c7591c30e8a0b1037b7a3a35b.png"/>
+		</p>
 		<p>
 			<img border="0" src="pasted-images/a4a96011f4f1acbd0331e2a4e258a3bb.png"/>
 		</p>
@@ -171,5 +233,10 @@
 		<p>Editing the genmodel</p>
 		<p>Launching</p>
 		<h1 id="ExportingDiagrams">Exporting Diagrams</h1>
+		<h1 id="GettingHelp">Getting Help</h1>
+		<p>You can interact with the team behind 
+			<strong>EcoreTools</strong> by using the 
+			<a href="http://www.eclipse.org/forums/index.php/f/165/">Eclipse Forum</a> 
+		</p>
 	</body>
 </html>
