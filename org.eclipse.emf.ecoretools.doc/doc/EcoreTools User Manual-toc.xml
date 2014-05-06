@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="doc/EcoreTools User Manual.html" label="EcoreTools User Manual">
+	<topic href="doc/EcoreTools User Manual.html" label="Designing Ecore Models">
+		<topic href="doc/EcoreTools User Manual.html#GettingStarted" label="Getting Started">
+			<topic href="doc/EcoreTools User Manual.html#CreatinganewEcore" label="Creating a new Ecore"></topic>
+			<topic href="doc/EcoreTools User Manual.html#WorkingwiththeModelingProject" label="Working with the Modeling Project"></topic>
+			<topic href="doc/EcoreTools User Manual.html#CreatingdiagramsfromanexistingEcore" label="Creating diagrams from an existing Ecore"></topic>
+		</topic>
+		<topic href="doc/EcoreTools User Manual.html#EntitiesDiagramEditor" label="Entities Diagram Editor">
+			<topic href="doc/EcoreTools User Manual.html#Overviewoftheeditor" label="Overview of the editor"></topic>
+			<topic href="doc/EcoreTools User Manual.html#EditingShortcuts" label="Editing Shortcuts"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ExploringExistingModels" label="Exploring Existing Models"></topic>
+			<topic href="doc/EcoreTools User Manual.html#Settingproperties" label="Setting properties"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingGenerics" label="Modeling Generics"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingConstraints" label="Modeling Constraints"></topic>
+			<topic href="doc/EcoreTools User Manual.html#DocumentationAnnotations" label="Documentation Annotations"></topic>
+		</topic>
+		<topic href="doc/EcoreTools User Manual.html#DocumentationTableEditor" label="Documentation Table Editor"></topic>
+	</topic>
+	<topic href="doc/EcoreTools User Manual.html#LeveragingEcoreModel" label="Leveraging Ecore Model"></topic>
+	<topic href="doc/EcoreTools User Manual.html#GeneratingCode" label="Generating Code"></topic>
+	<topic href="doc/EcoreTools User Manual.html#ExportingDiagrams" label="Exporting Diagrams"></topic>
+</toc>

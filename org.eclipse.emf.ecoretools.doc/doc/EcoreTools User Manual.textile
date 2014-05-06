@@ -1,0 +1,67 @@
+h1. Designing Ecore Models
+
+h2. Getting Started
+
+Once EcoreTools is installed in your environment, you can start using it either to create a new Ecore model from scratch or to edit an already existing model.
+
+h3. Creating a new Ecore
+
+EcoreTools provide a wizard setting up your Ecore project. Click on File->New->Others... and then select Ecore Modeling Project.
+
+!https://lh4.googleusercontent.com/ibdB6LGQa4M02iJq45ujOMjB-u85THKqj3nIsqXnJ5TnMsxE_ll7HQ-Hl0qhDKAcQ2kazSXXpiLgVRJ-C_DvT9j1U__klZP12AWo9-Fue_Dwn_rOC9ArhkEWlElbr-iT8A!
+
+The next page request a project name. The general convention is to use a java namespace notation for your project name. The project which is going to be created actually is an Eclipse plugin project, the name will be used for the plugin identification. Changing the project name afterward is possible though error-prone and not without impact. Its better to get it right from the beginning.
+
+!https://docs.google.com/drawings/d/s1XztfBMRMDK6jKpLu-vCoQ/image?w=677&h=440&rev=82&ac=1!
+
+The next page request information about your Ecore model. Here again, you can keep the default nsURI but keep in mind that its going to be the identifier of your domain within the EMF world. Changing it afterward might requires to update several files.
+
+!https://docs.google.com/drawings/d/ssQD5AFha7RhC4cOtjh_7jw/image?w=723&h=443&rev=132&ac=1!
+
+The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling - here EcoreTools itself - regarding your current activity for instance Designing or Reviewing your Ecore model. If you are really getting started, Design is a good choice, in case of doubt, select everything.
+
+!https://docs.google.com/drawings/d/swTJvtj3py7k6Ja3qOzxZbw/image?w=422&h=450&rev=5&ac=1!
+
+Once you clicked on Finish and the wizard prepared the project, this is what you should have.
+
+!https://lh6.googleusercontent.com/k75xW1gbQO5UNAA-cqUdDocAP3c_DOJ6NgcFRQSvWpAb7k8zjAajAa_-DyBUDswSJYz9oS9Oji1g0rcn66od7m-WIukqgYQPVQHbR-QwJMmRsWIG3W43CwASreXF4eo4vA!
+
+h3. Working with the Modeling Project
+
+h3. Creating diagrams from an existing Ecore
+
+h2. Entities Diagram Editor
+
+h3. Overview of the editor
+
+!https://lh4.googleusercontent.com/sD1CZJOE88YPhxiBiHTrlVKb3qHRH2-ndp-k9egUmNXdGuhLc8-czSVx9FitIgyqBiHZm6ZVTYKTFcLPmYNVJAeWiNVmJuGNeJ5zhL7ZlD1hB9rL7d4gD6OrCdYml1Q2xA!
+
+h3. Editing Shortcuts
+
+h3. Exploring Existing Models
+
+h3. Setting properties
+
+h3. Modeling Generics
+
+h3. Modeling Constraints
+
+h3. Documentation Annotations
+
+Dependencies Diagram Editor
+
+h2. Documentation Table Editor
+
+h1. Leveraging Ecore Model
+
+h1. Generating Code
+
+
+
+Editing the genmodel
+
+Launching
+
+ 
+h1. Exporting Diagrams
+
