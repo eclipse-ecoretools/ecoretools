@@ -25,12 +25,16 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateGraphicEditPartOperation;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.diagram.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeBeginNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeEndNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DNodeListEditPart;
 import org.eclipse.sirius.diagram.ui.part.SiriusVisualIDRegistry;
 import org.eclipse.sirius.diagram.ui.tools.api.command.GMFCommandWrapper;
+import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.eclipse.sirius.viewpoint.description.RepresentationElementMapping;
 
 public class EcoreToolsSpecificEditPartProvider extends
 		AbstractEditPartProvider {
@@ -105,12 +109,13 @@ public class EcoreToolsSpecificEditPartProvider extends
 	}
 
 	private boolean isFromEcoreToolsDesign(DSemanticDecorator element) {
+//		if (element instanceof DDiagramElement) {
+//			Option<? extends RepresentationElementMapping> mapping = new DDiagramElementQuery((DDiagramElement)element).get;
+//			if (mapping.some()) {
+//				mapping.get().g
+//			}
+//		}
 		return true;
-		// if (element instanceof DDiagramElement)
-		// {
-		// new DDiagramElementQuery(element).getMapping();
-		// }
-		// return false;
 	}
 
 	class EcoreToolsDirectEditForBeginRole extends LabelDirectEditPolicy {
