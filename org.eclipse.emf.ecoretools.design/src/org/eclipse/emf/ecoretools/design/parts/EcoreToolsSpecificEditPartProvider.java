@@ -13,6 +13,7 @@ package org.eclipse.emf.ecoretools.design.parts;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecoretools.design.service.EReferenceServices;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -109,13 +110,15 @@ public class EcoreToolsSpecificEditPartProvider extends
 	}
 
 	private boolean isFromEcoreToolsDesign(DSemanticDecorator element) {
-//		if (element instanceof DDiagramElement) {
-//			Option<? extends RepresentationElementMapping> mapping = new DDiagramElementQuery((DDiagramElement)element).get;
-//			if (mapping.some()) {
-//				mapping.get().g
-//			}
-//		}
-		return true;
+		/*
+		 * At least only provide our editparts if the semantic element is from Ecore.ecore
+		 */
+		if (element.getTarget() instanceof EObject
+				&& element.getTarget().eClass() != null
+				&& element.getTarget().eClass().getEPackage() == EcorePackage.eINSTANCE) {
+			return true;
+		}
+		return false;
 	}
 
 	class EcoreToolsDirectEditForBeginRole extends LabelDirectEditPolicy {
