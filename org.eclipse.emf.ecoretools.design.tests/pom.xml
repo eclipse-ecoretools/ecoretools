@@ -44,7 +44,6 @@
           </includes>
           <useUIHarness>true</useUIHarness>
           <useUIThread>true</useUIThread>
-          <product>org.eclipse.e4.ide.application.product</product>
           <argLine>${ui.test.vmargs}</argLine>
           <application>org.eclipse.ui.ide.workbench</application>
           <dependencies>
