@@ -24,7 +24,16 @@ bq. Here again, you can keep the default nsURI but keep in mind that its going t
 
 !screenshots/step3.png!
 
-The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling - here EcoreTools itself - regarding your current activity for instance Designing or Reviewing your Ecore model. If you are really getting started, Design is a good choice, in case of doubt, select everything.
+The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling regarding your current activity for instance Designing or Reviewing your Ecore model. 
+The Viewpoints you might enable are :
+* *Design* : when you want to create or adapt an Ecore model. This Viewpoint will enable the __Entities__ diagram to display, create and edit EClasses, EDatatypes and 
+EReferences graphically.
+* *Review* : for all the tools which are supporting further analysis of your Ecore model. It contributes a new layer on the __Entities__ diagram to display and edit documentation annotations. 
+It also provides a table editor to fill the documentation for every model elements and at last but not least it provides a __Dependencies__ diagram you can use to inspect cross EPackage dependencies.
+* *Generation* : is available if a __GenModel__ is loaded. It provides a table editor for __GenPackage__ instances to tweak some attributes which are visible in the generated editor : the property category and the end user documentation.
+ 
+
+If you are really getting started, Design is a good choice, in case of doubt, select everything.
 
 !screenshots/step4.png!
 
@@ -39,7 +48,6 @@ h4. What is it ?
 The *Modeling Project* is a facility provided by Sirius which handles models within the scope of a project. What does that mean ? Any model which is in the project is going to be loaded by Sirius behind the scene and its elements will be available in your editors.
 
 This mode of usage is designed so that you can work with your models easily, but you might want to have more control. In this case, you can use EcoreTools just by creating *Representations Files*.
-
 
 h4. Selecting Viewpoints
 
@@ -107,7 +115,25 @@ h3. Creating diagrams from an existing Ecore
 
 h2. Entities Diagram Editor
 
+The __Entities__ diagram editor has several purpose :
+* this is the main tool to create and edit an Ecore model.
+* this is the main tool to explore and annotate an existing Ecore model.
+
+This diagram editor is *unsynchronized* meaning it will not automatically display all the __EClasses__ of the current __EPackage__ but only those that you 
+explicitely select either by drag&dropping an __EClass__ instance from the *Model Explorer* into the diagram, by using the *Add* tool from the palette or
+using the *Add Related Elements* contextual action.
+
+bq. When clicking on *Add Related Elements*  from the background of the diagram, all the __EClasses__ which are contained in the current __EPackage__ will be proposed. This is a convenient way to import
+all the __EClasses__ of a given __EPackage__ into a diagram.
+
+References, super types, attributes and operations are automatically imported in the diagram, if you want to remove some of them from a diagram you can either use the 
+*Hide* contextual action or leverage one of the filters to hide, for instance, all the *derived references*. 
+
 h3. Overview of the editor
+
+!screenshots/overview.png!
+
+Here is the palette of the __Entities__ diagram editor when both the *Design* and *Review* Viewpoints have been enabled. 
 
 !screenshots/step6.png!
 
@@ -122,20 +148,69 @@ Several layers are provided by the editor. When activating a layer some shapes a
 For example, activating the __Documentation__ layer will transform the shape of all the model elements to add a red border if it is not documented. Two new tools are appearing then in the palette so that you can create the doc annotations.  
 
  
- 
  !pasted-images/590a4be95a110bd5cd35c959dd9ebc76.png!
+
+h3. Navigating in the Diagram
+
+Once your diagram gets populated it might get harder to find a specific EClass. Just like in most of the other Eclipse editors, @CTRL-O@ will summon a small popup which is very convenient to 
+find an element. You can select the element in the list and when validating with @ENTER@ the diagram editor will select and reveal this element.
 
 h3. Modeling Classifiers
 
+You can use the tools defined in the palette to create new __EClasses__ or __EDatatypes__ :
+* *Class* will create an __EClass__ instance 
+* *Abstract Class* will create an __EClass__ instance with @abstract=true@
+* *Interface* will create an __EClass__ instance with @interface=true@ and @abstract=true@
+* *Datatype* will create an __EDatatype__ instance
+* *Enumeration* will create an __EEnum__ instance
+
+Each one of the Class related tools might also be used to change some properties : Using  the tool *Abstract Class* by clicking on an existing __EClass__ will set @abstract=true@, 
+Using the tool *Interface* by clicking on an existing __EClass__ will set @interface=true@ and @abstract=true@
+
+bq. This is especially convenient when using the graphical modeler in full-screen with no other view and clicking on the contextual shortcut which appears 
+a few milliseconds after you select an __EClass__.
+
 h3. Modeling References
 
+Shortcuts are available in the palette to create different kind of __EReferences__ :
+* *Reference* will create a non contained __EReference__ with a @0..*@ cardinality.
+* *Bi-directional Reference* will create two __EReference__ instances each one being specified as the @eOpposite@ of the other one.
+* *Containment* will create a containment __EReference__ with a @0..*@ cardinality.
+
+You can adapt the __EReference__ properties at any time and the diagram will reflect your changes. If a non-contained reference is changed into a containment reference then the decorator 
+at the source of the __EReference__ will be adapted.
+
+h3. Modeling Attributes
+
+Shorcuts are available in the palette to create difference kind of __EStructuralFeatures__, notably:
+* *Attribute* will create an __EAttribute__ with a default name when used on an __EClass__.
+* *Literal* will create an __EEnumLiteral__ with a default name and valud when used on an __EEnum__.
+
+bq. I the case of __EAttribute__ instances, some typing shortcuts are available. See the "Editing Shortcuts" section.
+
 h3. Modeling Operations
+
+Using the *Operation* tool from the palette and clicking on an __EClass__ in the diagram you can create a new __EOperation__ instance.
+To edit the EOperation signature you have several choices, you can directly type it in the diagram, EcoreTools expects a format like :
+
+*name* @(@ param1 : TypeOfParam1, param2 TypeOfParam2 @) :@ *returnType*
+
+You can also directly set the values and create new __EParameter__ instances through the __Properties View__.
+
+
+h3. Deleting elements
+
+Hitting __DEL__ on the keyboard will delete the selected model element and reset all the cross references to it. If you want to remove an element from 
+a given diagram without actually deleting the element, you can either use the @Remove@ tool which is available in the palette or the @Delete from Diagram@ 
+contextual action available with a right click.
+
 
 h3. Validating the model 
 
 If the layer @Validation@ is enabled, then any invalid element will have red borders. To understand what is the error exactly, just keep your mouse pointer above the element and the tooltip will provide you a textual feedback.
 
 !pasted-images/9e62e7e1fca7675f7ad752de2a1d5942.png!
+
 
 h3. Editing Shortcuts
 
@@ -151,8 +226,10 @@ Shortcuts appearing contextually to a given @EClass@ will allow you to quickly s
 
 h3. Exploring Existing Models
 
-!pasted-images/08ba8354ba19d7de6c89920fecda9d36.png!
+EcoreTools provides features which are specifically designed to ease the exploration of an existing Ecore model and assit you in 
+creating a diagram to document this exploration.
 
+!pasted-images/08ba8354ba19d7de6c89920fecda9d36.png!
 
 !pasted-images/78b4f8fdbd42aac552d7b092a75cfe70.png!
 
@@ -163,13 +240,31 @@ h3. Exploring Existing Models
 
 h3. Setting properties
 
+At any time you have several means to edit the element properties. You can either use the contextual action @Show Properties View@ and then edit from this view or
+double-click on an element to open a wizard dedicated to the edition of the properties.
+
 h3. Modeling Generics
+
+You can model EGenerics using the __ETypeParameter__ tool in the palette. When used on an EClass this tool will create a new Type parameter. Once it is created 
+you can directly use it in __EOperation__ signatures or even create an EReference targeting this parameter.
 
 !pasted-images/2634caf68113d7bd3b1e85e1df5c4aff.png!
 
+Subclasses will have to specify bounds for this __ETypeParameter__, either by binding to an __ETypeParameter__ of their own or by specifying another EClass.
+
 h3. Modeling Constraints
 
+You can specify domain constraints on an __EClass__. To do so you need to enable the *Constraints* layer. Any constraint which is already defined 
+in the model will be automatically imported in the diagram. You can add a new one and bind it to an __EClass__ using the *Constraint* and *Constraint Assignment*
+tools available then in the palette.
+
+
+Constraints are stored in the model using the __EAnnotation__ format supported by the EMF code generation and runtime. The input which is expected when 
+you edit a constraint note is a comma separated list of names representing those constraints. For instance : @isWrittenByAnAuthorizedAuthor, isAvailable@
+
 !pasted-images/3f3ad17c7591c30e8a0b1037b7a3a35b.png!
+
+EMF will detect these annotations and generate dedicated Java methods based on this name, you will have to implement them then.
 
 !pasted-images/a4a96011f4f1acbd0331e2a4e258a3bb.png!
 
@@ -179,22 +274,42 @@ h3. Documentation Annotations
 
 h2. Documentation Table Editor
 
+The documentation table displays all the __EPackage__ elements as a hieararchy in the first column and the corresponding documentation annotation in the second one.
+
+To edit an existing annotation or to create a new one, select the corresponding cell and type using the keyboard.
+
+!images/documentation_table.png!
+
+
 h3. Dependencies Diagram Editor
+
+A *Depdencies* diagram can be created from en __EPackage__ when the *Review* viewpoint is enabled for your project.
+
+This diagram is helpfull to visualize and analyze the direct dependencies between two __EPackage__.
+
+To leverage it, use the *Add...* tool from the palette to import the __EPackage__ instances you want to inspect. These instances will be displayed as list containers.
+If any dependency exist between two __EPackages__ then an edge appears in the diagram. Within the __EPackage__ representation list the __EClasses__ instances which 
+are involved in this dependency will automatically be displayed by the tool.
 
 !pasted-images/ae061e611b11578818a2e2a2c4c847d8.png!
 
+Hovering your mouse over such an __EClass__ to have an explanation of the dependency.
+
 h1. Leveraging Ecore Model
 
-h1. Generating Code
+EcoreTools directly edits the Ecore model in a standard way, no special operation is required to leverage the model itself.
+You can open a __GenModel__ instance and launch the EMF code generation for instance.
 
-
-
-Editing the genmodel
-
-Launching
+A specific tool in the palette named *Dynamic Instance* allows you to quickly create an instance of your domain model without requiring any code generation.
+To use it select the tool *Dynamic Instance* and apply it on the __EClass__ of your choice in your diagram. A wizard will be opened to guide you through the process of 
+creating this XMI file, once the file is created the *EMF Reflective Editor* will be opened to edit it.
 
  
 h1. Exporting Diagrams
+
+You can export an existing diagram in several format by right-clicking on the diagram itself.
+You can also export all the representations stored in a @.aird@ file by right-clicking on the file in the *Explorer* and selecting @Export as images...@.
+
 
 h1. Getting Help
 

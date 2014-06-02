@@ -33,7 +33,33 @@
 		<p>
 			<img border="0" src="screenshots/step3.png"/>
 		</p>
-		<p>The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling &#8211; here EcoreTools itself &#8211; regarding your current activity for instance Designing or Reviewing your Ecore model. If you are really getting started, Design is a good choice, in case of doubt, select everything.</p>
+		<p>The next wizard page request which Viewpoints should be enabled. Viewpoints are a way to adapt the tooling regarding your current activity for instance Designing or Reviewing your Ecore model. 
+			<br/>The Viewpoints you might enable are :
+		</p>
+		<ul>
+			<li>
+				<strong>Design</strong> : when you want to create or adapt an Ecore model. This Viewpoint will enable the 
+				<i>Entities</i> diagram to display, create and edit EClasses, EDatatypes and 
+			</li>
+		</ul>
+		<p>EReferences graphically.</p>
+		<ul>
+			<li>
+				<strong>Review</strong> : for all the tools which are supporting further analysis of your Ecore model. It contributes a new layer on the 
+				<i>Entities</i> diagram to display and edit documentation annotations. 
+			</li>
+		</ul>
+		<p>It also provides a table editor to fill the documentation for every model elements and at last but not least it provides a 
+			<i>Dependencies</i> diagram you can use to inspect cross EPackage dependencies.
+		</p>
+		<ul>
+			<li>
+				<strong>Generation</strong> : is available if a 
+				<i>GenModel</i> is loaded. It provides a table editor for 
+				<i>GenPackage</i> instances to tweak some attributes which are visible in the generated editor : the property category and the end user documentation.
+			</li>
+		</ul>
+		<p>If you are really getting started, Design is a good choice, in case of doubt, select everything.</p>
 		<p>
 			<img border="0" src="screenshots/step4.png"/>
 		</p>
@@ -136,7 +162,48 @@
 			<img border="0" src="pasted-images/55c869b1fa7ba6a813acbcb3e868ebd4.png"/>
 		</p>
 		<h2 id="EntitiesDiagramEditor">Entities Diagram Editor</h2>
+		<p>The 
+			<i>Entities</i> diagram editor has several purpose :
+		</p>
+		<ul>
+			<li>this is the main tool to create and edit an Ecore model.</li>
+			<li>this is the main tool to explore and annotate an existing Ecore model.</li>
+		</ul>
+		<p>This diagram editor is 
+			<strong>unsynchronized</strong> meaning it will not automatically display all the 
+			<i>EClasses</i> of the current 
+			<i>EPackage</i> but only those that you 
+			<br/>explicitely select either by drag&amp;dropping an 
+			<i>EClass</i> instance from the 
+			<strong>Model Explorer</strong> into the diagram, by using the 
+			<strong>Add</strong> tool from the palette or
+			<br/>using the 
+			<strong>Add Related Elements</strong> contextual action.
+		</p>
+		<blockquote>
+			<p>When clicking on 
+				<strong>Add Related Elements</strong>  from the background of the diagram, all the 
+				<i>EClasses</i> which are contained in the current 
+				<i>EPackage</i> will be proposed. This is a convenient way to import
+				<br/>all the 
+				<i>EClasses</i> of a given 
+				<i>EPackage</i> into a diagram.
+			</p>
+		</blockquote>
+		<p>References, super types, attributes and operations are automatically imported in the diagram, if you want to remove some of them from a diagram you can either use the 
+			<br/>
+			<strong>Hide</strong> contextual action or leverage one of the filters to hide, for instance, all the 
+			<strong>derived references</strong>. 
+		</p>
 		<h3 id="Overviewoftheeditor">Overview of the editor</h3>
+		<p>
+			<img border="0" src="screenshots/overview.png"/>
+		</p>
+		<p>Here is the palette of the 
+			<i>Entities</i> diagram editor when both the 
+			<strong>Design</strong> and 
+			<strong>Review</strong> Viewpoints have been enabled. 
+		</p>
 		<p>
 			<img border="0" src="screenshots/step6.png"/>
 		</p>
@@ -152,9 +219,130 @@
 			<i>Documentation</i> layer will transform the shape of all the model elements to add a red border if it is not documented. Two new tools are appearing then in the palette so that you can create the doc annotations.  
 		</p>
 		<img border="0" src="pasted-images/590a4be95a110bd5cd35c959dd9ebc76.png"/>
+		<h3 id="NavigatingintheDiagram">Navigating in the Diagram</h3>
+		<p>Once your diagram gets populated it might get harder to find a specific EClass. Just like in most of the other Eclipse editors, 
+			<code>CTRL-O</code> will summon a small popup which is very convenient to 
+			<br/>find an element. You can select the element in the list and when validating with 
+			<code>ENTER</code> the diagram editor will select and reveal this element.
+		</p>
 		<h3 id="ModelingClassifiers">Modeling Classifiers</h3>
+		<p>You can use the tools defined in the palette to create new 
+			<i>EClasses</i> or 
+			<i>EDatatypes</i> :
+		</p>
+		<ul>
+			<li>
+				<strong>Class</strong> will create an 
+				<i>EClass</i> instance 
+			</li>
+			<li>
+				<strong>Abstract Class</strong> will create an 
+				<i>EClass</i> instance with 
+				<code>abstract=true</code>
+			</li>
+			<li>
+				<strong>Interface</strong> will create an 
+				<i>EClass</i> instance with 
+				<code>interface=true</code> and 
+				<code>abstract=true</code>
+			</li>
+			<li>
+				<strong>Datatype</strong> will create an 
+				<i>EDatatype</i> instance
+			</li>
+			<li>
+				<strong>Enumeration</strong> will create an 
+				<i>EEnum</i> instance
+			</li>
+		</ul>
+		<p>Each one of the Class related tools might also be used to change some properties : Using  the tool 
+			<strong>Abstract Class</strong> by clicking on an existing 
+			<i>EClass</i> will set 
+			<code>abstract=true</code>, 
+			<br/>Using the tool 
+			<strong>Interface</strong> by clicking on an existing 
+			<i>EClass</i> will set 
+			<code>interface=true</code> and 
+			<code>abstract=true</code>
+		</p>
+		<blockquote>
+			<p>This is especially convenient when using the graphical modeler in full-screen with no other view and clicking on the contextual shortcut which appears 
+				<br/>a few milliseconds after you select an 
+				<i>EClass</i>.
+			</p>
+		</blockquote>
 		<h3 id="ModelingReferences">Modeling References</h3>
+		<p>Shortcuts are available in the palette to create different kind of 
+			<i>EReferences</i> :
+		</p>
+		<ul>
+			<li>
+				<strong>Reference</strong> will create a non contained 
+				<i>EReference</i> with a 
+				<code>0..*</code> cardinality.
+			</li>
+			<li>
+				<strong>Bi-directional Reference</strong> will create two 
+				<i>EReference</i> instances each one being specified as the 
+				<code>eOpposite</code> of the other one.
+			</li>
+			<li>
+				<strong>Containment</strong> will create a containment 
+				<i>EReference</i> with a 
+				<code>0..*</code> cardinality.
+			</li>
+		</ul>
+		<p>You can adapt the 
+			<i>EReference</i> properties at any time and the diagram will reflect your changes. If a non-contained reference is changed into a containment reference then the decorator 
+			<br/>at the source of the 
+			<i>EReference</i> will be adapted.
+		</p>
+		<h3 id="ModelingAttributes">Modeling Attributes</h3>
+		<p>Shorcuts are available in the palette to create difference kind of 
+			<i>EStructuralFeatures</i>, notably:
+		</p>
+		<ul>
+			<li>
+				<strong>Attribute</strong> will create an 
+				<i>EAttribute</i> with a default name when used on an 
+				<i>EClass</i>.
+			</li>
+			<li>
+				<strong>Literal</strong> will create an 
+				<i>EEnumLiteral</i> with a default name and valud when used on an 
+				<i>EEnum</i>.
+			</li>
+		</ul>
+		<blockquote>
+			<p>I the case of 
+				<i>EAttribute</i> instances, some typing shortcuts are available. See the &#171;Editing Shortcuts&#187; section.
+			</p>
+		</blockquote>
 		<h3 id="ModelingOperations">Modeling Operations</h3>
+		<p>Using the 
+			<strong>Operation</strong> tool from the palette and clicking on an 
+			<i>EClass</i> in the diagram you can create a new 
+			<i>EOperation</i> instance.
+			<br/>To edit the EOperation signature you have several choices, you can directly type it in the diagram, EcoreTools expects a format like :
+		</p>
+		<p>
+			<strong>name</strong> 
+			<code>(</code> param1 : TypeOfParam1, param2 TypeOfParam2 
+			<code>) :</code> 
+			<strong>returnType</strong>
+		</p>
+		<p>You can also directly set the values and create new 
+			<i>EParameter</i> instances through the 
+			<i>Properties View</i>.
+		</p>
+		<h3 id="Deletingelements">Deleting elements</h3>
+		<p>Hitting 
+			<i>DEL</i> on the keyboard will delete the selected model element and reset all the cross references to it. If you want to remove an element from 
+			<br/>a given diagram without actually deleting the element, you can either use the 
+			<code>Remove</code> tool which is available in the palette or the 
+			<code>Delete from Diagram</code> 
+			<br/>contextual action available with a right click.
+		</p>
 		<h3 id="Validatingthemodel">Validating the model </h3>
 		<p>If the layer 
 			<code>Validation</code> is enabled, then any invalid element will have red borders. To understand what is the error exactly, just keep your mouse pointer above the element and the tooltip will provide you a textual feedback.
@@ -195,6 +383,9 @@
 			<img border="0" src="pasted-images/971a854713ef86708b9e112a0b7264e7.png"/>
 		</p>
 		<h3 id="ExploringExistingModels">Exploring Existing Models</h3>
+		<p>EcoreTools provides features which are specifically designed to ease the exploration of an existing Ecore model and assit you in 
+			<br/>creating a diagram to document this exploration.
+		</p>
 		<p>
 			<img border="0" src="pasted-images/08ba8354ba19d7de6c89920fecda9d36.png"/>
 		</p>
@@ -208,14 +399,42 @@
 			<img border="0" src="pasted-images/c97a4efe6fbd11a2c40c1046f3684fbb.png"/>
 		</p>
 		<h3 id="Settingproperties">Setting properties</h3>
+		<p>At any time you have several means to edit the element properties. You can either use the contextual action 
+			<code>Show Properties View</code> and then edit from this view or
+			<br/>double-click on an element to open a wizard dedicated to the edition of the properties.
+		</p>
 		<h3 id="ModelingGenerics">Modeling Generics</h3>
+		<p>You can model EGenerics using the 
+			<i>ETypeParameter</i> tool in the palette. When used on an EClass this tool will create a new Type parameter. Once it is created 
+			<br/>you can directly use it in 
+			<i>EOperation</i> signatures or even create an EReference targeting this parameter.
+		</p>
 		<p>
 			<img border="0" src="pasted-images/2634caf68113d7bd3b1e85e1df5c4aff.png"/>
 		</p>
+		<p>Subclasses will have to specify bounds for this 
+			<i>ETypeParameter</i>, either by binding to an 
+			<i>ETypeParameter</i> of their own or by specifying another EClass.
+		</p>
 		<h3 id="ModelingConstraints">Modeling Constraints</h3>
+		<p>You can specify domain constraints on an 
+			<i>EClass</i>. To do so you need to enable the 
+			<strong>Constraints</strong> layer. Any constraint which is already defined 
+			<br/>in the model will be automatically imported in the diagram. You can add a new one and bind it to an 
+			<i>EClass</i> using the 
+			<strong>Constraint</strong> and 
+			<strong>Constraint Assignment</strong>
+			<br/>tools available then in the palette.
+		</p>
+		<p>Constraints are stored in the model using the 
+			<i>EAnnotation</i> format supported by the EMF code generation and runtime. The input which is expected when 
+			<br/>you edit a constraint note is a comma separated list of names representing those constraints. For instance : 
+			<code>isWrittenByAnAuthorizedAuthor, isAvailable</code>
+		</p>
 		<p>
 			<img border="0" src="pasted-images/3f3ad17c7591c30e8a0b1037b7a3a35b.png"/>
 		</p>
+		<p>EMF will detect these annotations and generate dedicated Java methods based on this name, you will have to implement them then.</p>
 		<p>
 			<img border="0" src="pasted-images/a4a96011f4f1acbd0331e2a4e258a3bb.png"/>
 		</p>
@@ -224,15 +443,57 @@
 			<img border="0" src="pasted-images/8f3460ca33c1991c8dfdc7caa7152371.png"/>
 		</p>
 		<h2 id="DocumentationTableEditor">Documentation Table Editor</h2>
+		<p>The documentation table displays all the 
+			<i>EPackage</i> elements as a hieararchy in the first column and the corresponding documentation annotation in the second one.
+		</p>
+		<p>To edit an existing annotation or to create a new one, select the corresponding cell and type using the keyboard.</p>
+		<p>
+			<img border="0" src="images/documentation_table.png"/>
+		</p>
 		<h3 id="DependenciesDiagramEditor">Dependencies Diagram Editor</h3>
+		<p>A 
+			<strong>Depdencies</strong> diagram can be created from en 
+			<i>EPackage</i> when the 
+			<strong>Review</strong> viewpoint is enabled for your project.
+		</p>
+		<p>This diagram is helpfull to visualize and analyze the direct dependencies between two 
+			<i>EPackage</i>.
+		</p>
+		<p>To leverage it, use the 
+			<strong>Add...</strong> tool from the palette to import the 
+			<i>EPackage</i> instances you want to inspect. These instances will be displayed as list containers.
+			<br/>If any dependency exist between two 
+			<i>EPackages</i> then an edge appears in the diagram. Within the 
+			<i>EPackage</i> representation list the 
+			<i>EClasses</i> instances which 
+			<br/>are involved in this dependency will automatically be displayed by the tool.
+		</p>
 		<p>
 			<img border="0" src="pasted-images/ae061e611b11578818a2e2a2c4c847d8.png"/>
 		</p>
+		<p>Hovering your mouse over such an 
+			<i>EClass</i> to have an explanation of the dependency.
+		</p>
 		<h1 id="LeveragingEcoreModel">Leveraging Ecore Model</h1>
-		<h1 id="GeneratingCode">Generating Code</h1>
-		<p>Editing the genmodel</p>
-		<p>Launching</p>
+		<p>EcoreTools directly edits the Ecore model in a standard way, no special operation is required to leverage the model itself.
+			<br/>You can open a 
+			<i>GenModel</i> instance and launch the EMF code generation for instance.
+		</p>
+		<p>A specific tool in the palette named 
+			<strong>Dynamic Instance</strong> allows you to quickly create an instance of your domain model without requiring any code generation.
+			<br/>To use it select the tool 
+			<strong>Dynamic Instance</strong> and apply it on the 
+			<i>EClass</i> of your choice in your diagram. A wizard will be opened to guide you through the process of 
+			<br/>creating this XMI file, once the file is created the 
+			<strong>EMF Reflective Editor</strong> will be opened to edit it.
+		</p>
 		<h1 id="ExportingDiagrams">Exporting Diagrams</h1>
+		<p>You can export an existing diagram in several format by right-clicking on the diagram itself.
+			<br/>You can also export all the representations stored in a 
+			<code>.aird</code> file by right-clicking on the file in the 
+			<strong>Explorer</strong> and selecting 
+			<code>Export as images...</code>.
+		</p>
 		<h1 id="GettingHelp">Getting Help</h1>
 		<p>You can interact with the team behind 
 			<strong>EcoreTools</strong> by using the 
