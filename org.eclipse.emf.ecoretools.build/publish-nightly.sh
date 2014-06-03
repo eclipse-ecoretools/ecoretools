@@ -38,7 +38,7 @@ export BUILD_TYPE="nightly"
 export BUILD_TYPE_PREFIX="N"
 
 # The root folder for all Sirius udpate sites
-export SIRIUS_UPDATES_ROOT="/home/data/httpd/download.eclipse.org/modeling/ecoretools/updates/"
+export SIRIUS_UPDATES_ROOT="/home/data/httpd/download.eclipse.org/ecoretools/updates/"
 
 # Streams are of the form 1.0.x: only keep major and minor version number parts
 export STREAM=$(echo "$VERSION" | sed -r -e 's/^([0-9]+\.[0-9]+\.).*$/\1x/')
@@ -92,7 +92,7 @@ create_redirect() {
     <property name='p2.timestamp' value='$P2_TIMESTAMP'/>
   </properties>
   <children size='1'>
-    <child location='http://download.eclipse.org/modeling/ecoretools/updates/$TO'/>
+    <child location='http://download.eclipse.org/ecoretools/updates/$TO'/>
   </children>
 </repository>
 EOF
@@ -105,7 +105,7 @@ EOF
     <property name='p2.timestamp' value='$P2_TIMESTAMP'/>
   </properties>
   <children size='1'>
-    <child location='http://download.eclipse.org/modeling/ecoretools/updates/$TO'/>
+    <child location='http://download.eclipse.org/ecoretools/updates/$TO'/>
   </children>
 </repository>
 EOF
