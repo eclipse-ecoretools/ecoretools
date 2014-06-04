@@ -460,6 +460,9 @@
                     <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
                     <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[target.name.toLower()/]"/>
                     <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:instanceTarget"/>
+                    <subModelOperations xsi:type="tool:If" conditionExpression="[source = target/]">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[target.name.toLower() + 'eOpposite'/]"/>
+                    </subModelOperations>
                   </subModelOperations>
                   <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:instanceTarget">
                     <subModelOperations xsi:type="tool:SetValue" featureName="eOpposite" valueExpression="var:instanceSource"/>
