@@ -40,26 +40,16 @@
         <configuration>
           <testSuite>org.eclipse.emf.ecoretools.tests</testSuite>      
           <testClass>org.eclipse.emf.ecoretools.tests.testsuites.AllTests</testClass>
-          <useUIHarness>true</useUIHarness>
-          <useUIThread>true</useUIThread>
+          <useUIHarness>false</useUIHarness>
+          <useUIThread>false</useUIThread>
           <argLine>${ui.test.vmargs}</argLine>
           <application>org.eclipse.ui.ide.workbench</application>
-          <dependencies>
-            <dependency>
-              <type>p2-installable-unit</type>
-              <artifactId>org.eclipse.pde.feature.group</artifactId>
-              <version>${platform-version}</version>
-            </dependency>
+          <dependencies>           
             <dependency>
               <type>eclipse-feature</type>
               <artifactId>org.eclipse.emf.ecoretools</artifactId>
               <version>0.0.0</version>
-            </dependency>
-            <dependency>
-              <type>p2-installable-unit</type>
-              <artifactId>org.eclipse.cvs.feature.group</artifactId>
-              <version>[1.1.2,2.0.0)</version>
-            </dependency>
+            </dependency>            
           </dependencies>
         </configuration>
     </plugin>         
