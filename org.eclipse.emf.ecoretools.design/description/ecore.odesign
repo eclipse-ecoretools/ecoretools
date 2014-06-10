@@ -506,34 +506,8 @@
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool:If" conditionExpression="[source &lt;> element.eContainer()/]">
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="var:target"/>
-                  </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="[source = element.eContainer()/]">
-                  <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = sourceView/]">
-                    <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd = edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
-                      </subModelOperations>
-                    </subModelOperations>
-                    <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> edgeView.targetNode/]">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="service:getEdgeTargetSemantic(edgeView)"/>
-                      </subModelOperations>
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="[otherEnd.oclAsType(viewpoint::DSemanticDecorator).target/]">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="var:element"/>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </subModelOperations>
-                  <subModelOperations xsi:type="tool:If" conditionExpression="[otherEnd &lt;> sourceView/]">
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
-                      <subModelOperations xsi:type="tool:SetValue" featureName="eStructuralFeatures" valueExpression="[element/]"/>
-                    </subModelOperations>
-                  </subModelOperations>
-                </subModelOperations>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:reconnectEReference(edgeView)"/>
               </firstModelOperations>
             </initialOperation>
             <edgeView name="edgeView"/>

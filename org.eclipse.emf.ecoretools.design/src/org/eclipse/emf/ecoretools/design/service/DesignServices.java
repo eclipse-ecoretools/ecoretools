@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
@@ -48,7 +49,6 @@ import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
-import org.eclipse.sirius.diagram.ui.tools.internal.layout.AutoSizeAndRegionAwareGraphLayout;
 import org.eclipse.sirius.ext.emf.AllContents;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
@@ -62,7 +62,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Splitter;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -660,5 +659,40 @@ public class DesignServices extends EReferenceServices {
 					}
 				}
 			});
+	}
+
+	public void reconnectEReference(EObject element, DEdge edgeAfterReconnect) {
+		if (edgeAfterReconnect.getSourceNode() instanceof DSemanticDecorator
+				&& edgeAfterReconnect.getTargetNode() instanceof DSemanticDecorator) {
+
+			EObject newSource = ((DSemanticDecorator) edgeAfterReconnect
+					.getSourceNode()).getTarget();
+			EObject newTarget = ((DSemanticDecorator) edgeAfterReconnect
+					.getTargetNode()).getTarget();
+			if (element instanceof EReference) {
+				EReference eRef = (EReference) element;
+				if (newSource instanceof EClass) {
+					EClass srcClass = (EClass) newSource;
+
+					if (eRef.eContainer() != srcClass) {
+						srcClass.getEStructuralFeatures().add(eRef);
+					}
+
+					if (newTarget instanceof EClass) {
+						EClass targetClass = (EClass) newTarget;
+						if (eRef.getEType() != newTarget) {
+							eRef.setEType(targetClass);
+						}
+					} else if (newTarget instanceof ETypeParameter) {
+						if (eRef.getEType() != newTarget) {
+							EGenericsServices.setETypeWithGenerics(eRef,
+									newTarget);
+						}
+					}
+
+				}
+
+			}
+		}
 	}
 }
