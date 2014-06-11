@@ -12,7 +12,7 @@
   $Id: plugin.xml,v 1.3 2008/04/28 10:59:51 jlescot Exp $
 -->
 <plugin>
-
+<!--
 	<extension point="org.eclipse.ui.newWizards">
 		<category
 			id="org.eclipse.emf.ecoretools.examples.category"
@@ -28,5 +28,5 @@
 				<description>%EcoreTools_Ecore_description</description>
 			</wizard>
 		</extension>
-
+-->
 </plugin>
