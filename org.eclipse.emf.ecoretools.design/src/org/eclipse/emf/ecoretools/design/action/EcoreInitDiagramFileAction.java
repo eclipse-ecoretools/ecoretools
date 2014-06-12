@@ -24,6 +24,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.ui.business.api.session.IEditingSession;
+import org.eclipse.sirius.ui.business.api.session.SessionUIManager;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
 import org.eclipse.sirius.ui.tools.internal.wizards.CreateRepresentationWizard;
 import org.eclipse.sirius.ui.tools.internal.wizards.CreateSessionResourceWizard;
@@ -122,7 +124,18 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 	}
 
 	protected void openCreateRepresentationWizard(final Session existingSession) {
-
+		/*
+		 * Workaround to last minute NPE in
+		 * org.eclipse.sirius.ui.tools.internal.
+		 * actions.creation.CreateRepresentationAction$1
+		 * .run(CreateRepresentationAction.java:126)
+		 * 
+		 * We are forcing to create the uiSession so that the wizard does not
+		 * fail. To reproduce the problem you have to use this action on an
+		 * .ecore file from the Java perspective.
+		 */
+		IEditingSession uiSession = SessionUIManager.INSTANCE
+				.getOrCreateUISession(existingSession);
 		existingSession
 				.getTransactionalEditingDomain()
 				.getCommandStack()
