@@ -136,6 +136,7 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 		 */
 		IEditingSession uiSession = SessionUIManager.INSTANCE
 				.getOrCreateUISession(existingSession);
+		uiSession.open();
 		existingSession
 				.getTransactionalEditingDomain()
 				.getCommandStack()
