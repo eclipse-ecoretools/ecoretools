@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
@@ -41,15 +42,30 @@ import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagram;
+import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
+import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
+import org.eclipse.sirius.diagram.business.internal.metamodel.spec.DNodeContainerSpec;
+import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
+import org.eclipse.sirius.diagram.description.DiagramElementMapping;
+import org.eclipse.sirius.diagram.description.tool.CreateView;
+import org.eclipse.sirius.diagram.description.tool.ToolFactory;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.ModelAccessor;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.exception.FeatureNotFoundException;
+import org.eclipse.sirius.ecore.extender.business.api.accessor.exception.MetaClassNotFoundException;
 import org.eclipse.sirius.ext.emf.AllContents;
+import org.eclipse.sirius.tools.api.command.CommandContext;
+import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
 import org.eclipse.swt.widgets.Display;
@@ -625,12 +641,12 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public void openClassDiagramContextHelp(EObject any) {
-//		try {
-//			openContextHelp(any,
-//					"org.eclipse.emf.ecoretools.design.ClassDiagram");
-//		} catch (IOException e) {
-//			EcoreEditorPlugin.INSTANCE.log(e);
-//		}
+		// try {
+		// openContextHelp(any,
+		// "org.eclipse.emf.ecoretools.design.ClassDiagram");
+		// } catch (IOException e) {
+		// EcoreEditorPlugin.INSTANCE.log(e);
+		// }
 	}
 
 	public void openContextHelp(EObject any, final String contextID)
@@ -695,4 +711,163 @@ public class DesignServices extends EReferenceServices {
 			}
 		}
 	}
+
+	/**
+	 * Create view.
+	 * 
+	 * @param semanticElement
+	 *            Semantic element
+	 * @param containerView
+	 *            Container view
+	 * @param session
+	 *            Session
+	 * @param containerViewVariable
+	 *            Name of the container view variable
+	 */
+	private void createView(final EObject semanticElement,
+			final DSemanticDecorator containerView, final Session session,
+			final String containerViewVariable) {
+		// Get all available mappings applicable for the copiedElement in the
+		// current container
+		List<DiagramElementMapping> semanticElementMappings = getMappings(
+				semanticElement, containerView, session);
+
+		// Build a createView tool
+		final CreateView createViewOp = ToolFactory.eINSTANCE
+				.createCreateView();
+		for (DiagramElementMapping copiedElementMapping : semanticElementMappings) {
+			final DiagramElementMapping tmpCopiedElementMapping = copiedElementMapping;
+			createViewOp.setMapping(tmpCopiedElementMapping);
+			final String containerViewExpression = "var:"
+					+ containerViewVariable;
+			createViewOp.setContainerViewExpression(containerViewExpression);
+
+			session.getTransactionalEditingDomain()
+					.getCommandStack()
+					.execute(
+							new RecordingCommand(session
+									.getTransactionalEditingDomain()) {
+
+								@SuppressWarnings("restriction")
+								@Override
+								protected void doExecute() {
+									try {
+										// Get the command context
+										DRepresentation representation = null;
+										if (containerView instanceof DRepresentation) {
+											representation = (DRepresentation) containerView;
+										} else if (containerView instanceof DDiagramElement) {
+											representation = ((DDiagramElement) containerView)
+													.getParentDiagram();
+										}
+
+										final CommandContext context = new CommandContext(
+												semanticElement, representation);
+
+										// Execute the create view task
+										new CreateViewTask(context, session
+												.getModelAccessor(),
+												createViewOp, session
+														.getInterpreter())
+												.execute();
+									} catch (MetaClassNotFoundException e) {
+										EcoreEditorPlugin.INSTANCE.log(e);
+									} catch (FeatureNotFoundException e) {
+										EcoreEditorPlugin.INSTANCE.log(e);
+									}
+								}
+							});
+		}
+	}
+
+	/**
+	 * Paste a semantic element and create the corresponding view in the given
+	 * container
+	 * 
+	 * @param container
+	 *            Semantic container
+	 * @param semanticElement
+	 *            Element to paste
+	 * @param containerView
+	 *            Container view
+	 */
+	public void paste(final EObject container, final EObject semanticElement,
+			final DSemanticDecorator elementView,
+			final DSemanticDecorator containerView) {
+		// Paste the semantic element from the clipboard to the selected
+		// container
+		final Session session = SessionManager.INSTANCE.getSession(container);
+		TransactionalEditingDomain domain = session
+				.getTransactionalEditingDomain();
+		// The feature is set to null because the domain will deduce it
+		Command cmd = AddCommand.create(domain, container, null,
+				semanticElement);
+		if (cmd.canExecute()) {
+			cmd.execute();
+		}
+		// Create the view for the pasted element
+		createView(semanticElement, containerView, session, "containerView");
+	}
+
+	/**
+	 * Get mappings available for a semantic element and a given container view.
+	 * 
+	 * @param semanticElement
+	 *            Semantic element
+	 * @param containerView
+	 *            Container view
+	 * @param session
+	 *            Session
+	 * @return List of mappings which could not be null
+	 */
+	@SuppressWarnings("restriction")
+	private List<DiagramElementMapping> getMappings(
+			final EObject semanticElement,
+			final DSemanticDecorator containerView, Session session) {
+		ModelAccessor modelAccessor = session.getModelAccessor();
+		List<DiagramElementMapping> mappings = new ArrayList<DiagramElementMapping>();
+
+		if (containerView instanceof DSemanticDiagram) {
+
+			for (DiagramElementMapping mapping : (((DSemanticDiagram) containerView)
+					.getDescription().getAllContainerMappings())) {
+				String domainClass = ((AbstractNodeMapping) mapping)
+						.getDomainClass();
+				if (modelAccessor.eInstanceOf(semanticElement, domainClass)
+						&& !mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+			for (DiagramElementMapping mapping : (((DSemanticDiagram) containerView)
+					.getDescription().getAllNodeMappings())) {
+				String domainClass = ((AbstractNodeMapping) mapping)
+						.getDomainClass();
+				if (modelAccessor.eInstanceOf(semanticElement, domainClass)
+						&& !mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+		} else if (containerView instanceof DNodeContainerSpec) {
+			for (DiagramElementMapping mapping : (((DNodeContainerSpec) containerView)
+					.getActualMapping().getAllContainerMappings())) {
+				String domainClass = ((AbstractNodeMapping) mapping)
+						.getDomainClass();
+				if (modelAccessor.eInstanceOf(semanticElement, domainClass)
+						&& !mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+			for (DiagramElementMapping mapping : (((DNodeContainerSpec) containerView)
+					.getActualMapping().getAllNodeMappings())) {
+				String domainClass = ((AbstractNodeMapping) mapping)
+						.getDomainClass();
+				if (modelAccessor.eInstanceOf(semanticElement, domainClass)
+						&& !mapping.isCreateElements()) {
+					mappings.add(mapping);
+				}
+			}
+		}
+		return mappings;
+	}
+
 }
