@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.tests;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.0.1.qualifier
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Bundle-ActivationPolicy: lazy
@@ -27,15 +27,14 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide
 Bundle-Activator: org.eclipse.emf.ecoretools.tests.internal.Activator
 Bundle-ClassPath: .
-Export-Package: org.eclipse.emf.ecoretools.tests.internal;x-internal:=true,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.connector,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.shape,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.deletion.shape,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.dragndrop,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.fixture,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.helpers,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.multidiagram,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.openclose,
- org.eclipse.emf.ecoretools.tests.testcases.diagram.util,
- org.eclipse.emf.ecoretools.tests.testsuites
+Export-Package: org.eclipse.emf.ecoretools.tests.internal;x-internal:=
+ true,org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.conn
+ ector,org.eclipse.emf.ecoretools.tests.testcases.diagram.creation.sha
+ pe,org.eclipse.emf.ecoretools.tests.testcases.diagram.deletion.shape,
+ org.eclipse.emf.ecoretools.tests.testcases.diagram.dragndrop,org.ecli
+ pse.emf.ecoretools.tests.testcases.diagram.fixture,org.eclipse.emf.ec
+ oretools.tests.testcases.diagram.helpers,org.eclipse.emf.ecoretools.t
+ ests.testcases.diagram.multidiagram,org.eclipse.emf.ecoretools.tests.
+ testcases.diagram.openclose,org.eclipse.emf.ecoretools.tests.testcase
+ s.diagram.util,org.eclipse.emf.ecoretools.tests.testsuites
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.emf.ecoretools.design.properties
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.design.properties;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.0.1.qualifier
 Bundle-Vendor: %providerName
 Bundle-Copyright: %copyright 
 Bundle-Localization: plugin
@@ -15,9 +15,9 @@ Require-Bundle: org.eclipse.emf.ecoretools.design,
  org.eclipse.sirius;bundle-version="0.1.0",
  org.eclipse.emf.ecoretools.properties;bundle-version="2.0.0",
  org.eclipse.emf.ecoretools.tabbedproperties;bundle-version="1.2.0"
-Export-Package: org.eclipse.emf.ecoretools.design.properties.ecore.components,
- org.eclipse.emf.ecoretools.design.properties.ecore.providers,
- org.eclipse.emf.ecoretools.design.properties.parts,
- org.eclipse.emf.ecoretools.design.properties.parts.forms,
- org.eclipse.emf.ecoretools.design.properties.parts.impl
+Export-Package: org.eclipse.emf.ecoretools.design.properties.ecore.com
+ ponents,org.eclipse.emf.ecoretools.design.properties.ecore.providers,
+ org.eclipse.emf.ecoretools.design.properties.parts,org.eclipse.emf.ec
+ oretools.design.properties.parts.forms,org.eclipse.emf.ecoretools.des
+ ign.properties.parts.impl
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.0.1.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.emf.ecoretools.internal;x-internal:=true,
- org.eclipse.emf.ecoretools.internal.actions;x-internal:=true,
- org.eclipse.emf.ecoretools.internal.ui;x-internal:=true,
- org.eclipse.emf.ecoretools.internal.views;x-internal:=true
+Export-Package: org.eclipse.emf.ecoretools.internal;x-internal:=true,o
+ rg.eclipse.emf.ecoretools.internal.actions;x-internal:=true,org.eclip
+ se.emf.ecoretools.internal.ui;x-internal:=true,org.eclipse.emf.ecoret
+ ools.internal.views;x-internal:=true
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.emf.ecore,

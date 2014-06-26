@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.design;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 2.0.1.qualifier
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.sirius.common,
@@ -32,9 +32,8 @@ Bundle-ManifestVersion: 2
 Bundle-Vendor: %providerName
 Eclipse-LazyStart: true
 Bundle-Activator: org.eclipse.emf.ecoretools.design.service.EcoreToolsDesignPlugin
-Export-Package: org.eclipse.emf.ecoretools.design.action,
- org.eclipse.emf.ecoretools.design.editor,
- org.eclipse.emf.ecoretools.design.service,
- org.eclipse.emf.ecoretools.design.wizard
+Export-Package: org.eclipse.emf.ecoretools.design.action,org.eclipse.e
+ mf.ecoretools.design.editor,org.eclipse.emf.ecoretools.design.service
+ ,org.eclipse.emf.ecoretools.design.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
