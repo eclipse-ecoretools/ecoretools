@@ -11,6 +11,7 @@
 package org.eclipse.emf.ecoretools.design.action;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,8 +23,10 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
+import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ui.business.api.session.IEditingSession;
 import org.eclipse.sirius.ui.business.api.session.SessionUIManager;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
@@ -41,6 +44,8 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 
 	private URI domainModelURI;
 
+	private IProject containingProject;
+
 	private IStructuredSelection selection;
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
@@ -55,11 +60,13 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 			return;
 		}
 		this.selection = (IStructuredSelection) selection;
-		IFile file = (IFile) ((IStructuredSelection) selection)
-				.getFirstElement();
-		domainModelURI = URI.createPlatformResourceURI(file.getFullPath()
-				.toString(), true);
-		action.setEnabled(true);
+		if (this.selection.getFirstElement() instanceof IFile) {
+			IFile file = (IFile) this.selection.getFirstElement();
+			containingProject = file.getProject();
+			domainModelURI = URI.createPlatformResourceURI(file.getFullPath()
+					.toString(), true);
+			action.setEnabled(true);
+		}
 	}
 
 	private Shell getShell() {
@@ -68,6 +75,7 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 
 	public void run(IAction action) {
 		Session existingSession = null;
+
 		for (Session session : SessionManager.INSTANCE.getSessions()) {
 			ResourceSet set = session.getTransactionalEditingDomain()
 					.getResourceSet();
@@ -82,6 +90,39 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 				}
 			}
 		}
+		if (existingSession == null) {
+			/*
+			 * we could not find a session already having this file in its
+			 * resources. We will use the containing project if it is a modeling
+			 * project but we have to add the resource as a semantic resource.
+			 */
+			final Option<ModelingProject> prj = ModelingProject
+					.asModelingProject(containingProject);
+			if (prj.some()) {
+				existingSession = prj.get().getSession();
+				existingSession
+						.getTransactionalEditingDomain()
+						.getCommandStack()
+						.execute(
+								new RecordingCommand(existingSession
+										.getTransactionalEditingDomain()) {
+
+									@Override
+									protected void doExecute() {
+										prj.get()
+												.getSession()
+												.addSemanticResource(
+														domainModelURI,
+														new NullProgressMonitor());
+
+									}
+								});
+				existingSession.addSemanticResource(domainModelURI,
+						new NullProgressMonitor());
+
+			}
+		}
+
 		if (existingSession == null) {
 			existingSession = createSession();
 		}
