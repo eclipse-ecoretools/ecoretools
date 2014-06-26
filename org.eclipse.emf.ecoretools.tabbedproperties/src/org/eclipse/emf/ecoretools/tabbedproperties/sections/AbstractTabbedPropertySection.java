@@ -344,8 +344,8 @@ public abstract class AbstractTabbedPropertySection extends AbstractPropertySect
 				return ((IEditingDomainProvider) page).getEditingDomain();
 			}
 		}
+		return null;
 
-		throw new IllegalArgumentException();
 	}
 
 	/**
