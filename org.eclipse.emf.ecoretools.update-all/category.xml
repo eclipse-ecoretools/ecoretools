@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature id="org.eclipse.emf.ecoretools.design" version="2.0.1.qualifier">
+   <feature id="org.eclipse.emf.ecoretools.design" version="3.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>     
-   <feature  id="org.eclipse.emf.ecoretools.sdk" version="2.0.1.qualifier">
+   <feature  id="org.eclipse.emf.ecoretools.sdk" version="3.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>   
    <!--
@@ -26,7 +26,7 @@
       <category name="deps"/>
    </feature>   
    -->
-   <category-def name="ecoretools" label="Ecore Tools 2.x">
+   <category-def name="ecoretools" label="Ecore Tools">
       <description>
          Ecore Tools features.
       </description>

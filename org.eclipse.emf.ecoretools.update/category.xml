@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-    <feature id="org.eclipse.emf.ecoretools" version="2.0.1.qualifier">
-      <category name="ecoretools-legacy"/>
-   </feature>     
-   <feature id="org.eclipse.emf.ecoretools.design" version="2.0.1.qualifier">
+   <feature id="org.eclipse.emf.ecoretools.design" version="3.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>     
-   <feature  id="org.eclipse.emf.ecoretools.ui.capabilities" version="2.0.1.qualifier">
-      <category name="ecoretools-legacy"/>
-   </feature>
-   <feature  id="org.eclipse.emf.ecoretools.sdk" version="2.0.1.qualifier">
+   <feature  id="org.eclipse.emf.ecoretools.sdk" version="3.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>   
-   <category-def name="ecoretools" label="Ecore Tools 2.x">
+   <category-def name="ecoretools" label="Ecore Tools">
       <description>
          Ecore Tools features.
-      </description>
-   </category-def>
-   <category-def name="ecoretools-legacy" label="Ecore Tools 1.x (Legacy)">
-      <description>
-         Legacy plugins and features for Ecore Tools. These will be discontinued after the 2.0 final release.
       </description>
    </category-def>
 </site>
