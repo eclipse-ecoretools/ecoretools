@@ -30,6 +30,8 @@ import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ui.business.api.session.IEditingSession;
 import org.eclipse.sirius.ui.business.api.session.SessionUIManager;
 import org.eclipse.sirius.ui.business.api.viewpoint.ViewpointSelectionCallback;
+import org.eclipse.sirius.ui.tools.api.project.ModelingProjectManager;
+import org.eclipse.sirius.ui.tools.internal.views.common.modelingproject.OpenRepresentationsFileJob;
 import org.eclipse.sirius.ui.tools.internal.wizards.CreateRepresentationWizard;
 import org.eclipse.sirius.ui.tools.internal.wizards.CreateSessionResourceWizard;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
@@ -100,25 +102,45 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 					.asModelingProject(containingProject);
 			if (prj.some()) {
 				existingSession = prj.get().getSession();
-				existingSession
-						.getTransactionalEditingDomain()
-						.getCommandStack()
-						.execute(
-								new RecordingCommand(existingSession
-										.getTransactionalEditingDomain()) {
+				if (existingSession == null) {
+					Option<URI> optionalMainSessionFileURI = prj.get()
+							.getMainRepresentationsFileURI(
+									new NullProgressMonitor(), false, false);
+					if (optionalMainSessionFileURI.some()) {
+						// Load the main representations file of this modeling
+						// project if it's not already loaded or during loading.
+						ModelingProjectManager.INSTANCE
+								.loadAndOpenRepresentationsFile(optionalMainSessionFileURI
+										.get());
+					}
+				}
+				if (OpenRepresentationsFileJob.shouldWaitOtherJobs()) {
+					// We are loading session(s), wait loading is finished
+					// before continuing.
+					OpenRepresentationsFileJob.waitOtherJobs();
+				}
+				existingSession = prj.get().getSession();
+				if (existingSession != null) {
+					existingSession
+							.getTransactionalEditingDomain()
+							.getCommandStack()
+							.execute(
+									new RecordingCommand(existingSession
+											.getTransactionalEditingDomain()) {
 
-									@Override
-									protected void doExecute() {
-										prj.get()
-												.getSession()
-												.addSemanticResource(
-														domainModelURI,
-														new NullProgressMonitor());
+										@Override
+										protected void doExecute() {
+											prj.get()
+													.getSession()
+													.addSemanticResource(
+															domainModelURI,
+															new NullProgressMonitor());
 
-									}
-								});
-				existingSession.addSemanticResource(domainModelURI,
-						new NullProgressMonitor());
+										}
+									});
+					existingSession.addSemanticResource(domainModelURI,
+							new NullProgressMonitor());
+				}
 
 			}
 		}
