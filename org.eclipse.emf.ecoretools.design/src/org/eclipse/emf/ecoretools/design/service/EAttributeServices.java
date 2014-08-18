@@ -92,6 +92,9 @@ public class EAttributeServices {
 			if (setName) {
 				if (namePart.startsWith(DERIVED_ATTRIBUTE_PREFIX)) {
 					attr.setDerived(true);
+					attr.setTransient(true);
+					attr.setVolatile(true);
+					attr.setChangeable(false);
 					namePart = namePart.substring(DERIVED_ATTRIBUTE_PREFIX
 							.length());
 				} else {
