@@ -597,8 +597,8 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public Boolean viewContainerNotSemanticContainer(EObject self,
-			DSemanticDiagram diag) {
-		return diag.getTarget() != self.eContainer();
+			DSemanticDiagram diag, DSemanticDiagram containerView) {
+		return containerView.getTarget() != self.eContainer();
 	}
 
 	public Boolean noEOpposite(EReference ref) {

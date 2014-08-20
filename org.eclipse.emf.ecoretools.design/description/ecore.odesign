@@ -683,7 +683,7 @@
           </ownedTools>
         </toolSections>
         <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" decoratorPath="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" preconditionExpression="service:viewContainerNotSemanticContainer(diagram)" domainClass="ecore.EClassifier"/>
+          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" decoratorPath="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" preconditionExpression="service:viewContainerNotSemanticContainer(diagram,containerView)" domainClass="ecore.EClassifier"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:required">
