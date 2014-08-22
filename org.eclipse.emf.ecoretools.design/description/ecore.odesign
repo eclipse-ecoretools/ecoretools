@@ -924,7 +924,7 @@
       </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" titleExpression="[name + ' class table'/]" domainClass="ecore.EPackage">
-      <ownedLineMappings name="Classes lines" domainClass="ecore.EClass" semanticCandidatesExpression="[eContents(ecore::EClass)/]">
+      <ownedLineMappings name="Classes lines" reusedInMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Classes']/@ownedLineMappings[name='Package']" domainClass="ecore.EClass" semanticCandidatesExpression="feature:eContents">
         <foregroundConditionalStyle predicateExpression="feature:abstract">
           <style labelSize="10" labelFormat="italic">
             <foreGroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
@@ -932,13 +932,10 @@
         </foregroundConditionalStyle>
         <ownedSubLines name="Feature" domainClass="ecore.EStructuralFeature"/>
       </ownedLineMappings>
-      <ownedLineMappings name="Package" domainClass="ecore.EPackage" headerLabelExpression="feature:name">
+      <ownedLineMappings name="Package" reusedSubLines="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Classes']/@ownedLineMappings[name='Classes%20lines']" domainClass="ecore.EPackage" headerLabelExpression="feature:name">
         <defaultBackground>
           <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
         </defaultBackground>
-        <ownedSubLines name="Classes lines" domainClass="ecore.EClass" semanticCandidatesExpression="[eContents(EClass)/]">
-          <ownedSubLines name="Feature" domainClass="ecore.EStructuralFeature"/>
-        </ownedSubLines>
       </ownedLineMappings>
       <ownedCreateLine name="Create Class" forceRefresh="true" mapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Classes']/@ownedLineMappings[name='Classes%20lines']">
         <variables name="root" documentation="The semantic element of the table."/>
@@ -950,7 +947,7 @@
           </subModelOperations>
         </firstModelOperation>
       </ownedCreateLine>
-      <ownedColumnMappings name="Name" headerLabelExpression="Name" featureName="name" labelExpression="[(if (oclIsKindOf(ecore::EStructuralFeature) and oclAsType(ecore::EStructuralFeature).derived) then '/' else '' endif) + name/]"/>
+      <ownedColumnMappings name="Name" headerLabelExpression="Name" featureName="name" labelExpression="service:getClassesTableName"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
