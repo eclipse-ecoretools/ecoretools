@@ -597,7 +597,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public Boolean viewContainerNotSemanticContainer(EObject self,
-			DSemanticDiagram diag, DSemanticDiagram containerView) {
+			DSemanticDiagram diag, DSemanticDecorator containerView) {
 		return containerView.getTarget() != self.eContainer();
 	}
 
@@ -869,10 +869,11 @@ public class DesignServices extends EReferenceServices {
 		}
 		return mappings;
 	}
-	
-	
+
 	public String getClassesTableName(EObject cur) {
-		//[(if (oclIsKindOf(ecore::EStructuralFeature) and oclAsType(ecore::EStructuralFeature).derived) then '/' else '' endif) + name/]
+		// [(if (oclIsKindOf(ecore::EStructuralFeature) and
+		// oclAsType(ecore::EStructuralFeature).derived) then '/' else '' endif)
+		// + name/]
 		if (cur instanceof EStructuralFeature) {
 			if (((EStructuralFeature) cur).isDerived()) {
 				return "/" + ((EStructuralFeature) cur).getName();
