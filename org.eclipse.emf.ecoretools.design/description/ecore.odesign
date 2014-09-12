@@ -30,7 +30,7 @@
           </fixes>
         </ownedRules>
         <ownedRules xsi:type="validation:ViewValidationRule" level="ERROR" message="['The ' + target.oclAsType(ecore::EClass).name +' class has more than 3 super types'/]" targets="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
-          <audits auditExpression="[target.oclAsType(ecore::EClass).eAllSuperTypes->size() &lt; 4/]"/>
+          <audits auditExpression="[target.oclAsType(ecore::EClass).eAllSuperTypes->size() &lt; 10/]"/>
         </ownedRules>
       </validationSet>
       <diagramInitialisation>
