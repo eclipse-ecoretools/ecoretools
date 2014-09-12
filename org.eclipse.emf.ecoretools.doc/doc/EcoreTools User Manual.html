@@ -494,6 +494,22 @@
 			<strong>Explorer</strong> and selecting 
 			<code>Export as images...</code>.
 		</p>
+		<h1 id="FAQ">FAQ</h1>
+		<h2 id="WhatshouldIdowithmy.ecorediagdiagrams">What should I do with my .ecorediag diagrams ?</h2>
+		<p>Indeed from version 2.0 EcoreTools moved from GMF Tool to Sirius as a backend technology and that meant adopting the .aird file format for diagrams and other representations.</p>
+		<p>Writing a migration tool from .ecorediag to .aird is possible though we&#8217;ve seen that in practice if you have a .ecorediag opened and want to reproduce the corresponding diagram using Sirius 2.0, you can do so quite quickly.</p>
+		<blockquote>
+			<p>As I said, this is technically doable so if you have hundreds of diagrams and want a financial quote related to this work feel free to ask.</p>
+		</blockquote>
+		<p>To ease the transition both implementations have been provided with EcoreTools 2.0 but only the Sirius based one has been aggregated in the Eclipse Luna update-site. You can install the legacy editor which supports the .ecorediag format using the 
+			<a href="http://www.eclipse.org/ecoretools/downloads">EcoreTools update site</a> .
+		</p>
+		<h2 id="ThismarkerisbotheringmeinthediagramhowcanIremoveit">This marker is bothering me in the diagram, how can I remove it ?</h2>
+		<p>You can remove the validation marker by using the &#171;Problems&#187; view, select the error which bothers you, right-click, and delete. It will disappear from the diagram then.</p>
+		<h2 id="Mydiagramisgettingbighowtofindanelement">My diagram is getting big, how to find an element ?</h2>
+		<p>To quickly find something in a diagram just type 
+			<code>CTRL+O</code>, type a partial name and select it. The editor will reveal it for you.
+		</p>
 		<h1 id="GettingHelp">Getting Help</h1>
 		<p>You can interact with the team behind 
 			<strong>EcoreTools</strong> by using the 
