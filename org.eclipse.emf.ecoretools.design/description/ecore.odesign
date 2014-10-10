@@ -957,7 +957,7 @@
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
   </ownedViewpoints>
-  <ownedViewpoints endUserDocumentation="Add support for archeypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore xcore">
+  <ownedViewpoints endUserDocumentation="Add support for archetypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore xcore">
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Entities With Archetypes" viewpointURI="viewpoint:/org.eclipse.emf.ecoretools.design/Design" representationName="Entities">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <layers name="Archetypes" activeByDefault="true">
