@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -22,6 +23,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecoretools.design.internal.GenModelMissingPackageHandler;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
@@ -78,7 +81,7 @@ public class EcoreToolsDesignPlugin extends Plugin {
             @SuppressWarnings("unchecked")
             @Override
             public void notifyAddSession(Session newSession) {
-                ResourceSet set = newSession.getTransactionalEditingDomain().getResourceSet();
+                final ResourceSet set = newSession.getTransactionalEditingDomain().getResourceSet();
                 Map<URI, URI> result = null;
                 // Invoke computePlatformURIMap by reflection because this API
                 // change in EMF
@@ -107,6 +110,19 @@ public class EcoreToolsDesignPlugin extends Plugin {
                     EcoreToolsDesignPlugin.getDefault().getLog().log(status);
 
                 }
+                
+                
+                try {
+                    Field f = XMLResource.class.getField("OPTION_MISSING_PACKAGE_HANDLER");
+                    /*
+                     * we are in EMF 2.9 or superior, we can setup the missing package handler.
+                     */
+                    GenModelMissingPackageHandler.setupPackageHandler(set);
+                } catch (NoSuchFieldException e) {
+                } catch (SecurityException e) {
+                }
+                
+               
 
                 newSession.getEventBroker().addLocalTrigger(GenModelAutoReload.SHOULD_RELOAD, new GenModelAutoReload(newSession.getTransactionalEditingDomain()));
                 newSession.getEventBroker().addLocalTrigger(GenModelUpdateGenFeatureContainment.SHOULD_UPDATE, new GenModelUpdateGenFeatureContainment(newSession));
