@@ -112,5 +112,11 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
          </action>
       </objectContribution>
    </extension>
+     <extension
+           point="org.eclipse.sirius.sessionManagerListener">
+        <listener
+              class="org.eclipse.emf.ecoretools.design.internal.EcoreToolsSessionListener">
+        </listener>
+     </extension>
     
 </plugin>
