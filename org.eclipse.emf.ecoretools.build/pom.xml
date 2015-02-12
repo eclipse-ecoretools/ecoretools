@@ -44,6 +44,7 @@
     <modules>
         <module>../org.eclipse.emf.ecoretools</module>        
         <module>../org.eclipse.emf.ecoretools.design</module>
+        <module>../org.eclipse.emf.ecoretools.design.ui</module>
         <module>../org.eclipse.emf.ecoretools.design.tests</module>
         <module>../org.eclipse.emf.ecoretools.design-feature</module>
         <module>../org.eclipse.emf.ecoretools.design.properties</module>

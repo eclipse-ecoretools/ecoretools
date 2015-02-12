@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package org.eclipse.emf.ecoretools.design.action;
+package org.eclipse.emf.ecoretools.design.ui.action;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecoretools.design.editor.EcoreToolsViewpoints;
+import org.eclipse.emf.ecoretools.design.EcoreToolsViewpoints;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.Dialog;

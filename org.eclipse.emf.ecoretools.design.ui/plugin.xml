@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+
+       <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+	      <editpartProvider class="org.eclipse.emf.ecoretools.design.ui.parts.EcoreToolsSpecificEditPartProvider">
+	         <Priority name="High"/>
+	      </editpartProvider>
+	   </extension>
+  
+
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.emf.codegen.ecore.ui.wizardCategory"
+            class="org.eclipse.emf.ecoretools.design.ui.wizard.EcoreModelerWizard"
+            finalPerspective="org.eclipse.sirius.ui.tools.perspective.modeling"
+            icon="icons/full/obj16/EcoreModelingProject.png"
+            id="org.eclipse.ecoretools.emf.design.wizardID"
+            name="Ecore Modeling Project"
+            project="true">
+         <description>Create a new Modeling project to specify a domain model using the Ecore Language. 
+The created project is a Java plug-in project with EMF dependencies and EMF models.</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+
+   <extension
+         point="org.eclipse.sirius.externalJavaAction">
+      <javaActions
+            actionClass="org.eclipse.emf.ecoretools.design.ui.action.CreateDynamicInstanceAction"
+            id="org.eclipse.emf.ecoretools.design.action.createDynamicInstanceActionID">
+      </javaActions>
+   </extension>
+   <!--
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.eclipse.emf.ecoretools.design.editor.EcoreEntitiesReadOnlyEditor"
+            contributorClass="org.eclipse.sirius.diagram.part.ViewpointDiagramActionBarContributor"
+            default="false"
+            extensions="ecore"
+            icon="icons/full/obj16/EcoreModelFile.gif"
+            id="org.eclipse.emf.ecoretools.design.editor.entities"
+            matchingStrategy="org.eclipse.emf.ecoretools.design.editor.EcoreEntitiesMatchingStrategy"
+            name="Viewpoint Ecore Editor">
+      </editor>
+   </extension>
+   -->   
+   
+    <!-- Extensions for the "Viewpoint" perspective -->
+  <extension point="org.eclipse.ui.perspectiveExtensions">
+    <perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.design">
+      <newWizardShortcut id="org.eclipse.ecoretools.emf.design.wizardID" />
+    </perspectiveExtension>
+  </extension>
+  
+  <extension
+        point="org.eclipse.ui.navigator.navigatorContent">
+     <commonWizard
+           menuGroupId="org.eclipse.sirius.category"
+           type="new"
+           wizardId="org.eclipse.ecoretools.emf.design.wizardID">
+        <enablement>
+           <with variable="activeWorkbenchWindow.activePerspective">
+              <or>
+                 <equals value="org.eclipse.sirius.ui.tools.perspective.design"/>
+              </or>
+           </with>
+        </enablement>
+     </commonWizard>
+  </extension>
+    
+     <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.eclipse.emf.ecoretools.design.action.InitDiagram"
+            nameFilter="*.ecore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eclipse.emf.ecoretools.design.ui.action.EcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eclipse.emf.ecoretools.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            id="org.eclipse.emf.ecoretools.design.action.InitDiagram"
+            nameFilter="*.xcore"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.eclipse.emf.ecoretools.design.ui.action.EcoreInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.eclipse.emf.ecoretools.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+
+</plugin>

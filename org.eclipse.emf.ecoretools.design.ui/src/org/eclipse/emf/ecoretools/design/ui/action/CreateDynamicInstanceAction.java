@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package org.eclipse.emf.ecoretools.design.action;
+package org.eclipse.emf.ecoretools.design.ui.action;
 
 import java.util.Collection;
 import java.util.Map;

@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package org.eclipse.emf.ecoretools.design.wizard;
+package org.eclipse.emf.ecoretools.design.ui.wizard;
 
 import java.io.IOException;
 import java.io.PrintStream;
