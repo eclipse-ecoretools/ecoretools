@@ -447,7 +447,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="ecore.EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="['newEReference' + eContainer(EClassifier).eAllContents(EReference)->size()/]"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[target.name.toLower()/]"/>
                   <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setEType(target)"/>
                 </subModelOperations>
               </firstModelOperations>
@@ -488,7 +488,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
                 <subModelOperations xsi:type="tool:CreateInstance" typeName="ecore.EReference" referenceName="eStructuralFeatures">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="newEReference"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="[target.name.toLower()/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="containment" valueExpression="[true/]"/>
                   <subModelOperations xsi:type="tool:SetValue" featureName="upperBound" valueExpression="[-1/]"/>
                   <subModelOperations xsi:type="tool:ChangeContext" browseExpression="service:setEType(target)"/>
