@@ -21,39 +21,41 @@ import com.google.common.collect.Iterators;
 
 public class DiagnosticAttachment extends AdapterImpl {
 
-	private Diagnostic diagnostic;
+    private Diagnostic diagnostic;
 
-	public Diagnostic getDiagnostic() {
-		return diagnostic;
-	}
+    public Diagnostic getDiagnostic() {
+        return diagnostic;
+    }
 
-	public void setDiagnostic(Diagnostic diagnostic) {
-		this.diagnostic = diagnostic;
-	}
+    public void setDiagnostic(Diagnostic diagnostic) {
+        this.diagnostic = diagnostic;
+    }
 
-	public static DiagnosticAttachment getOrCreate(EObject cur, Diagnostic diag) {
-		Iterator<DiagnosticAttachment> it = Iterators.filter(cur.eAdapters()
-				.iterator(), DiagnosticAttachment.class);
-		DiagnosticAttachment found = null;
-		if (it.hasNext()) {
-			found = it.next();
-		} else {
-			found = new DiagnosticAttachment();
-			cur.eAdapters().add(found);
-			found.setDiagnostic(diag);
-		}
-		return found;
-	}
+    public static DiagnosticAttachment getAttachment(EObject cur) {
+        Iterator<DiagnosticAttachment> it = Iterators.filter(cur.eAdapters().iterator(), DiagnosticAttachment.class);
+        DiagnosticAttachment found = null;
+        if (it.hasNext()) {
+            found = it.next();
+        }
+        return found;
+    }
 
-	public static Optional<Diagnostic> get(EObject cur) {
-		Iterator<DiagnosticAttachment> it = Iterators.filter(cur.eAdapters()
-				.iterator(), DiagnosticAttachment.class);
-		DiagnosticAttachment found = null;
-		if (it.hasNext()) {
-			found = it.next();
-			return Optional.fromNullable(found.getDiagnostic());
-		}
-		return Optional.absent();
-	}
+    public static DiagnosticAttachment getOrCreate(EObject cur, Diagnostic diag) {
+        DiagnosticAttachment found = getAttachment(cur);
+        if (found == null) {
+            found = new DiagnosticAttachment();
+            cur.eAdapters().add(found);
+            found.setDiagnostic(diag);
+        }
+        return found;
+    }
+
+    public static Optional<Diagnostic> get(EObject cur) {
+        DiagnosticAttachment found = getAttachment(cur);
+        if (found != null) {
+            return Optional.fromNullable(found.getDiagnostic());
+        }
+        return Optional.absent();
+    }
 
 }

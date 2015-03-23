@@ -26,6 +26,7 @@ import org.eclipse.emf.ecoretools.design.service.EOppositeSetUnset;
 import org.eclipse.emf.ecoretools.design.service.EcoreToolsDesignPlugin;
 import org.eclipse.emf.ecoretools.design.service.GenModelAutoReload;
 import org.eclipse.emf.ecoretools.design.service.GenModelUpdateGenFeatureContainment;
+import org.eclipse.emf.ecoretools.design.service.LiveValidationTrigger;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManagerListener;
 
@@ -78,5 +79,7 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
         newSession.getEventBroker().addLocalTrigger(GenModelUpdateGenFeatureContainment.SHOULD_UPDATE, new GenModelUpdateGenFeatureContainment(newSession));
         newSession.getEventBroker().addLocalTrigger(AutosizeTrigger.IS_GMF_NODE_ATTACHMENT, new AutosizeTrigger(newSession.getTransactionalEditingDomain()));
         newSession.getEventBroker().addLocalTrigger(EOppositeSetUnset.SHOULD_UPDATE, new EOppositeSetUnset(newSession));
+        newSession.getEventBroker().addLocalTrigger(LiveValidationTrigger.IS_ECORE_CHANGE, new LiveValidationTrigger(newSession.getTransactionalEditingDomain()));
     }
+
 }
