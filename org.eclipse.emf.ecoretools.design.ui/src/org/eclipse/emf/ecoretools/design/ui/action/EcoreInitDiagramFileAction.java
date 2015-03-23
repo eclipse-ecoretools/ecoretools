@@ -181,10 +181,16 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
                         selection.deselectViewpoint(previouslySelected, existingSession, new NullProgressMonitor());
                     }
                 }
-                selection.selectViewpoint(EcoreToolsViewpoints.fromViewpointRegistry().design(), existingSession, new NullProgressMonitor());
-                selection.selectViewpoint(EcoreToolsViewpoints.fromViewpointRegistry().review(), existingSession, new NullProgressMonitor());
-                selection.selectViewpoint(EcoreToolsViewpoints.fromViewpointRegistry().archetype(), existingSession, new NullProgressMonitor());
-                selection.selectViewpoint(EcoreToolsViewpoints.fromViewpointRegistry().generation(), existingSession, new NullProgressMonitor());
+                selectViewpoint(selection, EcoreToolsViewpoints.fromViewpointRegistry().design(), existingSession, new NullProgressMonitor());
+                selectViewpoint(selection, EcoreToolsViewpoints.fromViewpointRegistry().review(), existingSession, new NullProgressMonitor());
+                selectViewpoint(selection, EcoreToolsViewpoints.fromViewpointRegistry().archetype(), existingSession, new NullProgressMonitor());
+                selectViewpoint(selection, EcoreToolsViewpoints.fromViewpointRegistry().generation(), existingSession, new NullProgressMonitor());
+            }
+
+            private void selectViewpoint(ViewpointSelectionCallback selection, Viewpoint vp, Session session, NullProgressMonitor progressMonitor) {
+                if (vp != null) {
+                    selection.selectViewpoint(vp, session, progressMonitor);
+                }
             }
         });
 
