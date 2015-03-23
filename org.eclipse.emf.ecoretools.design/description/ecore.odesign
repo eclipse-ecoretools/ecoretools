@@ -134,7 +134,7 @@
               <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </style>
           </subNodeMappings>
-          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EEnum']" tooltipExpression="service:renderTooltip" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EEnum']">
+          <style xsi:type="style:FlatContainerStyleDescription" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EEnum']" tooltipExpression="service:renderTooltip" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EEnum']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
           </style>
@@ -367,7 +367,8 @@
             <viewVariable name="containerView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:CreateInstance" typeName="ecore.EEnumLiteral" referenceName="eLiterals">
-                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'newLiteral' + self.eContainer().eContents(ecore::EEnumLiteral)->size()"/>
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:('literal' +( self.eContainer().eContents(ecore::EEnumLiteral)->size() -1)).toUpper()"/>
+                <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="aql:self.eContainer().eContents(ecore::EEnumLiteral)->size()-1"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
