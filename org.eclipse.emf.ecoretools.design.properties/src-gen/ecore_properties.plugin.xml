@@ -46,7 +46,7 @@
 
          <propertyTab
                id="Instanciation"
-               label="Instanciation"
+               label="Instantiation"
                category="extended"
                afterTab="Base">
          </propertyTab>
