@@ -7,7 +7,7 @@
       <category name="ecoretools"/>
    </feature>   
    <!--
-   <feature  id="org.eclipse.sirius.runtime.acceleo" >
+   <feature  id="org.eclipse.sirius.runtime.aql" >
       <category name="deps"/>
    </feature>   
    <feature  id="org.eclipse.sirius.runtime.ide.eef" >
