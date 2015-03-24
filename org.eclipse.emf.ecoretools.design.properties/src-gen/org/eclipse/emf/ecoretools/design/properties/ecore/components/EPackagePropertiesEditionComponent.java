@@ -15,13 +15,13 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecoretools.design.properties.components.SiriusAwarePropertiesEditingComponent;
 import org.eclipse.emf.ecoretools.design.properties.parts.EPackagePropertiesEditionPart;
 import org.eclipse.emf.ecoretools.design.properties.parts.EcoreViewsRepository;
 import org.eclipse.emf.eef.runtime.api.notify.EStructuralFeatureNotificationFilter;
 import org.eclipse.emf.eef.runtime.api.notify.IPropertiesEditionEvent;
 import org.eclipse.emf.eef.runtime.api.notify.NotificationFilter;
 import org.eclipse.emf.eef.runtime.context.PropertiesEditingContext;
-import org.eclipse.emf.eef.runtime.impl.components.SinglePartPropertiesEditingComponent;
 import org.eclipse.emf.eef.runtime.impl.utils.EEFConverterUtil;
 
 
@@ -31,7 +31,7 @@ import org.eclipse.emf.eef.runtime.impl.utils.EEFConverterUtil;
  * 
  * 
  */
-public class EPackagePropertiesEditionComponent extends SinglePartPropertiesEditingComponent {
+public class EPackagePropertiesEditionComponent extends SiriusAwarePropertiesEditingComponent {
 
 	
 	public static String BASE_PART = "Base"; //$NON-NLS-1$

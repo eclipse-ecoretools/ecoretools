@@ -196,7 +196,7 @@
                     <url>http://download.eclipse.org/releases/staging</url>
                 </repository>
                 <repository><id>eef</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.3</url>
+                    <url>http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.5/S201412231052/</url>
                 </repository>
             </repositories>    
         </profile>   

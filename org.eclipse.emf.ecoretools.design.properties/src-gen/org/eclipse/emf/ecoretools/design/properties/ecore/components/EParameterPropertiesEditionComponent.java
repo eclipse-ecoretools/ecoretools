@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecoretools.design.properties.components.SiriusAwarePropertiesEditingComponent;
 import org.eclipse.emf.ecoretools.design.properties.parts.EcoreViewsRepository;
 import org.eclipse.emf.ecoretools.design.properties.parts.OperationElementPropertiesEditionPart;
 import org.eclipse.emf.eef.runtime.api.notify.EStructuralFeatureNotificationFilter;
@@ -23,7 +24,6 @@ import org.eclipse.emf.eef.runtime.api.notify.IPropertiesEditionEvent;
 import org.eclipse.emf.eef.runtime.api.notify.NotificationFilter;
 import org.eclipse.emf.eef.runtime.context.PropertiesEditingContext;
 import org.eclipse.emf.eef.runtime.context.impl.EReferencePropertiesEditionContext;
-import org.eclipse.emf.eef.runtime.impl.components.SinglePartPropertiesEditingComponent;
 import org.eclipse.emf.eef.runtime.impl.notify.PropertiesEditionEvent;
 import org.eclipse.emf.eef.runtime.impl.utils.EEFConverterUtil;
 import org.eclipse.emf.eef.runtime.policies.PropertiesEditingPolicy;
@@ -41,7 +41,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
  * 
  * 
  */
-public class EParameterPropertiesEditionComponent extends SinglePartPropertiesEditingComponent {
+public class EParameterPropertiesEditionComponent extends SiriusAwarePropertiesEditingComponent {
 
 	
 	public static String OPERATIONELEMENT_PART = "Operation Element"; //$NON-NLS-1$
