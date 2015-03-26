@@ -304,6 +304,10 @@ public class DesignServices extends EReferenceServices {
         return relateds;
     }
 
+    public Collection<EObject> getRelated(EObject firstView, EObject aView, DDiagram diag) {
+        return getRelated(firstView, Lists.newArrayList(aView), diag);
+    }
+
     private List<EObject> allValidSessionElements(EObject cur, Predicate<EObject> validForClassDiagram) {
         Session found = SessionManager.INSTANCE.getSession(cur);
         List<EObject> result = Lists.newArrayList();
