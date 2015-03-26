@@ -13,7 +13,6 @@ package org.eclipse.emf.ecoretools.design.service;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 public class ArchetypeServices extends DesignServices {
 	private static final String ARCHETYPE_URI = "http://www.obeo.fr/dsl/dnc/archetype";
 
-	public void addArchetypeAnnotation(EClass clazz, String archetype) {
+	public void addArchetypeAnnotation(EModelElement clazz, String archetype) {
 		EAnnotation annot = clazz.getEAnnotation(ARCHETYPE_URI);
 		if (annot == null) {
 			annot = EcoreFactory.eINSTANCE.createEAnnotation();
