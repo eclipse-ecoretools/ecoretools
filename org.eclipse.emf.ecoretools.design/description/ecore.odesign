@@ -37,7 +37,7 @@
         <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:openClassDiagramContextHelp"/>
       </diagramInitialisation>
       <defaultLayer name="Default">
-        <nodeMappings name="Empty Diagram" preconditionExpression="aql:containerView.oclAsType(diagram::DDiagram).ownedDiagramElements.target->excluding(containerView.oclAsType(diagram::DSemanticDiagram).target)->size() = 0" semanticCandidatesExpression="var:self" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Import%20Current%20EClasses']" domainClass="ecore.EPackage">
+        <nodeMappings name="Empty Diagram" preconditionExpression="aql:containerView.oclAsType(diagram::DDiagram).ownedDiagramElements.target->excluding(containerView.oclAsType(diagram::DSemanticDiagram).target)->size() = 0" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.1/@ownedTools[name='NoOp']" semanticCandidatesExpression="var:self" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Import%20Current%20EClasses']" domainClass="ecore.EPackage">
           <style xsi:type="style:WorkspaceImageDescription" showIcon="false" labelExpression="" sizeComputationExpression="-1" labelPosition="node" workspacePath="/org.eclipse.emf.ecoretools.design/icons/full/back/empty.svg">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
