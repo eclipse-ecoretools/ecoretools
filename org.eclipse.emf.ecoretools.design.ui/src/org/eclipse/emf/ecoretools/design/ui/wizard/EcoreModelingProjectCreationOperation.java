@@ -149,7 +149,7 @@ public class EcoreModelingProjectCreationOperation extends
 		final IStatus status = new Status(IStatus.ERROR,
 				EcoreToolsDesignPlugin.PLUGIN_ID, IStatus.ERROR,
 				e.getMessage(), e);
-		EcoreToolsDesignPlugin.getDefault().getLog().log(status);
+		EcoreToolsDesignPlugin.INSTANCE.log(status);
 	}
 
 	public void modifyWorkspace(IProgressMonitor progressMonitor)
@@ -323,7 +323,7 @@ public class EcoreModelingProjectCreationOperation extends
 					EcoreToolsDesignPlugin.PLUGIN_ID,
 					IStatus.ERROR,
 					"Error occurs during generating the genmodel file.", exception);//$NON-NLS-1$
-			EcoreToolsDesignPlugin.getDefault().getLog().log(status);
+			EcoreToolsDesignPlugin.INSTANCE.log(status);
 		} finally {
 			monitor.done();
 		}

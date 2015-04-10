@@ -13,11 +13,13 @@ package org.eclipse.emf.ecoretools.design.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.eclipse.core.runtime.Plugin;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.business.api.session.SessionManagerListener;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
+import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -26,64 +28,122 @@ import org.osgi.framework.BundleContext;
  * @author Laurent Goubet <a
  *         href="mailto:laurent.goubet@obeo.fr">laurent.goubet@obeo.fr</a>
  */
-public class EcoreToolsDesignPlugin extends Plugin {
+public class EcoreToolsDesignPlugin extends EMFPlugin {
+
+    public static final EcoreToolsDesignPlugin INSTANCE = new EcoreToolsDesignPlugin();
+
+    /**
+     * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc
+     * -->
+     * 
+     * @generated
+     */
+    private static Implementation plugin;
+
     /** The plug-in ID. */
     public static final String PLUGIN_ID = "org.eclipse.emf.ecoretools.design"; //$NON-NLS-1$
 
-    /** This plug-in's shared instance. */
-    private static EcoreToolsDesignPlugin plugin;
-
     private static Set<Viewpoint> viewpoints;
-
-    private SessionManagerListener notifWhenSessionAreCreated;
 
     /**
      * Default constructor for the plugin.
      */
     public EcoreToolsDesignPlugin() {
-        plugin = this;
+        super(new ResourceLocator[] {});
     }
 
     /**
-     * Returns the shared instance.
+     * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+     * --> <!-- end-user-doc -->
      * 
-     * @return the shared instance
+     * @return the singleton instance.
+     * @generated
      */
-    public static EcoreToolsDesignPlugin getDefault() {
+    @Override
+    public ResourceLocator getPluginResourceLocator() {
         return plugin;
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+     * --> <!-- end-user-doc -->
      * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+     * @return the singleton instance.
+     * @generated
      */
-    @Override
-    public void start(final BundleContext context) throws Exception {
-        super.start(context);
-        viewpoints = new HashSet<Viewpoint>();
-        viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/ecore.odesign"));
+    public static Implementation getPlugin() {
+        return plugin;
     }
 
     /**
-     * {@inheritDoc}
+     * The actual implementation of the Eclipse <b>Plugin</b>. <!--
+     * begin-user-doc --> <!-- end-user-doc -->
      * 
-     * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+     * @generated
      */
-    @Override
-    public void stop(final BundleContext context) throws Exception {
-        plugin = null;
-        if (viewpoints != null) {
-            for (final Viewpoint viewpoint : viewpoints) {
-                ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
-            }
-            viewpoints.clear();
-            viewpoints = null;
-        }
-        if (notifWhenSessionAreCreated != null) {
-            SessionManager.INSTANCE.removeSessionsListener(notifWhenSessionAreCreated);
+    public static class Implementation extends EclipsePlugin {
+
+        private SessionManagerListener notifWhenSessionAreCreated;
+
+        /**
+         * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
+         * 
+         * @generated
+         */
+        public Implementation() {
+            super();
+
+            // Remember the static instance.
+            //
+            plugin = this;
         }
 
-        super.stop(context);
+        /**
+         * The actual implementation of the purely OSGi-compatible <b>Bundle
+         * Activator</b>. <!-- begin-user-doc --> <!-- end-user-doc -->
+         * 
+         * @generated
+         */
+        public static final class Activator extends EMFPlugin.OSGiDelegatingBundleActivator {
+            @Override
+            protected BundleActivator createBundle() {
+                return new Implementation();
+            }
+        }
+
+        /**
+         * {@inheritDoc}
+         * 
+         * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+         */
+        @Override
+        public void start(final BundleContext context) throws Exception {
+            super.start(context);
+            viewpoints = new HashSet<Viewpoint>();
+            viewpoints.addAll(ViewpointRegistry.getInstance().registerFromPlugin(PLUGIN_ID + "/description/ecore.odesign"));
+        }
+
+        /**
+         * {@inheritDoc}
+         * 
+         * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+         */
+        @Override
+        public void stop(final BundleContext context) throws Exception {
+            plugin = null;
+            if (viewpoints != null) {
+                for (final Viewpoint viewpoint : viewpoints) {
+                    ViewpointRegistry.getInstance().disposeFromPlugin(viewpoint);
+                }
+                viewpoints.clear();
+                viewpoints = null;
+            }
+            if (notifWhenSessionAreCreated != null) {
+                SessionManager.INSTANCE.removeSessionsListener(notifWhenSessionAreCreated);
+            }
+
+            super.stop(context);
+        }
     }
+
 }

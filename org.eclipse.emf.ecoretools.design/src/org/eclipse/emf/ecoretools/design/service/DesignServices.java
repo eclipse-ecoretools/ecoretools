@@ -11,7 +11,6 @@
 
 package org.eclipse.emf.ecoretools.design.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -38,7 +37,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
-import org.eclipse.emf.ecore.presentation.EcoreEditorPlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -68,9 +66,6 @@ import org.eclipse.sirius.tools.api.command.CommandContext;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.ViewpointPackage;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import com.google.common.base.Ascii;
 import com.google.common.base.CharMatcher;
@@ -579,50 +574,12 @@ public class DesignServices extends EReferenceServices {
         return true;
     }
 
-    /**
-     * Shows the Properties View. (See Double Click Action in Design ViewPoint)
-     * 
-     * @param object
-     *            Any EObject
-     */
-    public void showPropertiesViewAction(EObject object) {
-        try {
-            PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.eclipse.ui.views.PropertySheet");
-        } catch (PartInitException exception) {
-            EcoreEditorPlugin.INSTANCE.log(exception);
-        }
-    }
-
     public EEnumLiteral arrowsFillDiamond(EObject any) {
         return DiagramPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral("FillDiamond");
     }
 
     public EEnumLiteral fontFormatBold(EObject any) {
         return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral("bold");
-    }
-
-    public void openClassDiagramContextHelp(EObject any) {
-        // try {
-        // openContextHelp(any,
-        // "org.eclipse.emf.ecoretools.design.ClassDiagram");
-        // } catch (IOException e) {
-        // EcoreEditorPlugin.INSTANCE.log(e);
-        // }
-    }
-
-    public void openContextHelp(EObject any, final String contextID) throws IOException {
-        if (Display.getDefault() != null)
-            Display.getDefault().asyncExec(new Runnable() {
-
-                public void run() {
-                    if (PlatformUI.getWorkbench() != null && PlatformUI.getWorkbench().getActiveWorkbenchWindow() != null && PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell() != null) {
-                        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-                        PlatformUI.getWorkbench().getHelpSystem().setHelp(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), contextID);
-                        PlatformUI.getWorkbench().getHelpSystem().displayDynamicHelp();
-
-                    }
-                }
-            });
     }
 
     public void reconnectEReference(EObject element, DEdge edgeAfterReconnect) {
@@ -700,9 +657,9 @@ public class DesignServices extends EReferenceServices {
                         // Execute the create view task
                         new CreateViewTask(context, session.getModelAccessor(), createViewOp, session.getInterpreter()).execute();
                     } catch (MetaClassNotFoundException e) {
-                        EcoreEditorPlugin.INSTANCE.log(e);
+                        EcoreToolsDesignPlugin.INSTANCE.log(e);
                     } catch (FeatureNotFoundException e) {
-                        EcoreEditorPlugin.INSTANCE.log(e);
+                        EcoreToolsDesignPlugin.INSTANCE.log(e);
                     }
                 }
             });

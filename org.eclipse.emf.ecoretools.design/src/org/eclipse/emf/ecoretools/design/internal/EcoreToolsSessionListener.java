@@ -60,7 +60,7 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
             set.getURIConverter().getURIMap().putAll(result);
         } else {
             IStatus status = new Status(IStatus.WARNING, EcoreToolsDesignPlugin.PLUGIN_ID, "The EMF API EcorePlugin.computePlatformURIMap has probably changed and is not supported yet by EcoreTools.");
-            EcoreToolsDesignPlugin.getDefault().getLog().log(status);
+            EcoreToolsDesignPlugin.INSTANCE.log(status);
 
         }
 
