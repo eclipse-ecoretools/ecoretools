@@ -74,6 +74,7 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * Wizard to create an EMF project with the {@link ModelingProject} nature, an
@@ -294,10 +295,14 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
             Session session = opionalModelingProject.get().getSession();
             if (session != null) {
                 if (!session.getSelectedViews().isEmpty()) {
-                    DView view = session.getSelectedViews().iterator().next();
-                    if (!view.getOwnedRepresentations().isEmpty()) {
-                        DRepresentation representationToOpen = view.getOwnedRepresentations().get(0);
-                        DialectUIManager.INSTANCE.openEditor(session, representationToOpen, monitor);
+                    Set<DRepresentation> representationsToOpen = Sets.newLinkedHashSet();
+                    for (DView view : session.getSelectedViews()) {
+                        for (DRepresentation dRepresentation : view.getOwnedRepresentations()) {
+                            representationsToOpen.add(dRepresentation);
+                        }
+                    }
+                    for (DRepresentation dRepresentation : representationsToOpen) {
+                        DialectUIManager.INSTANCE.openEditor(session, dRepresentation, monitor);
                     }
                 }
             }
