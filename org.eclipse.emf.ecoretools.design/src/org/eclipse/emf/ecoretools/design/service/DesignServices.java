@@ -52,6 +52,7 @@ import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
+import org.eclipse.sirius.diagram.business.api.query.DDiagramQuery;
 import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
 import org.eclipse.sirius.diagram.business.internal.metamodel.spec.DNodeContainerSpec;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
@@ -199,9 +200,9 @@ public class DesignServices extends EReferenceServices {
 
     public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
         Set<EClass> result = Sets.newLinkedHashSet();
-        Iterator<DSemanticDecorator> it = Iterators.filter(diagram.eAllContents(), DSemanticDecorator.class);
+        Iterator<DDiagramElement> it = new DDiagramQuery(diagram).getAllDiagramElements().iterator();
         while (it.hasNext()) {
-            DSemanticDecorator dec = it.next();
+            DDiagramElement dec = it.next();
             if (dec.getTarget() instanceof EClass) {
                 result.add((EClass) dec.getTarget());
             }
@@ -211,7 +212,7 @@ public class DesignServices extends EReferenceServices {
 
     private Set<EClass> getInternalEClasses(DSemanticDiagram diagram) {
         Set<EClass> result = Sets.newLinkedHashSet();
-        Iterator<DNodeList> it = Iterators.filter(diagram.eAllContents(), DNodeList.class);
+        Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(), DNodeList.class);
         while (it.hasNext()) {
             DNodeList dec = it.next();
             if (dec.getTarget() instanceof EClass) {
@@ -272,7 +273,7 @@ public class DesignServices extends EReferenceServices {
 
     public Collection<EModelElement> getDisplayedEModelElements(DSemanticDiagram diagram) {
         Set<EModelElement> modelelements = Sets.newLinkedHashSet();
-        Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram), diagram.eAllContents()), DSemanticDecorator.class);
+        Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram), new DDiagramQuery(diagram).getAllDiagramElements().iterator()), DSemanticDecorator.class);
         while (it.hasNext()) {
             DSemanticDecorator dec = it.next();
             if (dec.getTarget() instanceof EModelElement)
