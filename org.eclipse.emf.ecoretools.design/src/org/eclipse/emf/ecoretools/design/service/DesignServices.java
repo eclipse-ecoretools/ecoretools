@@ -48,13 +48,13 @@ import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DEdge;
+import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.diagram.DiagramPackage;
 import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.api.query.DDiagramQuery;
 import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
-import org.eclipse.sirius.diagram.business.internal.metamodel.spec.DNodeContainerSpec;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.tool.CreateView;
@@ -722,14 +722,14 @@ public class DesignServices extends EReferenceServices {
                     mappings.add(mapping);
                 }
             }
-        } else if (containerView instanceof DNodeContainerSpec) {
-            for (DiagramElementMapping mapping : (((DNodeContainerSpec) containerView).getActualMapping().getAllContainerMappings())) {
+        } else if (containerView instanceof DNodeContainer) {
+            for (DiagramElementMapping mapping : (((DNodeContainer) containerView).getActualMapping().getAllContainerMappings())) {
                 String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
                 if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
                     mappings.add(mapping);
                 }
             }
-            for (DiagramElementMapping mapping : (((DNodeContainerSpec) containerView).getActualMapping().getAllNodeMappings())) {
+            for (DiagramElementMapping mapping : (((DNodeContainer) containerView).getActualMapping().getAllNodeMappings())) {
                 String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
                 if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
                     mappings.add(mapping);
