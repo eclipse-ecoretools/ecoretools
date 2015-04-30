@@ -47,13 +47,8 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
         } catch (IllegalArgumentException e) {
         } catch (InvocationTargetException e) {
         }
-        try {
-            Method computePlatformURIMap = EcorePlugin.class.getMethod("computePlatformURIMap");
-            result = (Map<URI, URI>) computePlatformURIMap.invoke(null);
-        } catch (NoSuchMethodException e) {
-        } catch (IllegalAccessException e) {
-        } catch (IllegalArgumentException e) {
-        } catch (InvocationTargetException e) {
+        if (result == null) {
+            result = EcorePlugin.computePlatformURIMap();
         }
 
         if (result != null) {
