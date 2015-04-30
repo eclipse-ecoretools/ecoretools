@@ -43,6 +43,7 @@
            <includes>
             <include>org/eclipse/emf/ecoretools/design/tests/InterpretedExpressionTests.class</include>
             <include>org/eclipse/emf/ecoretools/design/tests/TypeNameTests.class</include>
+            <include>org/eclipse/emf/ecoretools/design/tests/VsmValidationTests.class</include>
           </includes>
           <useUIHarness>false</useUIHarness>
           <useUIThread>false</useUIThread>
