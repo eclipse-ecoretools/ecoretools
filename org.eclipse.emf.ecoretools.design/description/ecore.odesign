@@ -153,7 +153,7 @@
           </style>
         </containerMappings>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
@@ -173,7 +173,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" forceRefresh="true" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/dtool16/search.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -206,7 +206,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.search/icons/full/etool16/search.gif">
+          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.emf.ecoretools.design/icons/full/etool16/search.gif">
             <view name="views">
               <subVariables xsi:type="tool:SelectModelElementVariable" name="selected" candidatesExpression="service:getRelated(views,diagram)" multiple="true" message="Pick the Element you want to add to the diagram."/>
             </view>
@@ -1156,7 +1156,7 @@
           </ownedTools>
         </toolSections>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="service:isEPackage" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.search/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="service:isEPackage" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etool16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
@@ -1168,7 +1168,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="aql:containerView.oclIsKindOf(diagram::DDiagram)" forceRefresh="true" iconPath="/org.eclipse.search/icons/full/dtool16/search.gif">
+          <ownedTools xsi:type="tool:ToolDescription" name="RemoveExistingElements" label="Remove" precondition="aql:containerView.oclIsKindOf(diagram::DDiagram)" forceRefresh="true" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/dtool16/search.gif">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
@@ -1190,7 +1190,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.search/icons/full/etool16/search.gif">
+          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.emf.ecoretools.design/icons/full/etool16/search.gif">
             <view name="views">
               <subVariables xsi:type="tool:SelectModelElementVariable" name="selected" candidatesExpression="service:getRelated(views,diagram)" multiple="true" message="Pick the Element you want to add to the diagram."/>
             </view>
