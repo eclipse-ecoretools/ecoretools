@@ -74,6 +74,12 @@ cp -a "$WORKSPACE"/org.eclipse.emf.ecoretools.update/target/repository/* "$TARGE
 # Also publish a dump of the build environment, may be useful to debug
 env | sort > "$TARGET_DIR/build_env.txt"
 
+# copy the "all in one" update site 
+mkdir -p "$TARGET_DIR/all-in-one"
+cp -a "$WORKSPACE"/org.eclipse.emf.ecoretools.update-all/target/repository/* "$TARGET_DIR/all-in-one"
+
+
+
 ######################################################################
 # Setup or update the redirects (implemented as composite repos)
 ######################################################################
@@ -114,8 +120,13 @@ EOF
 
 # First, a link for the $VERSION (e.g. "1.2.0/luna" => "1.2.0-NYYYYMMDD-HHMM/luna")
 create_redirect "$TARGET_ROOT/$VERSION/$PLATFORM" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM"
+create_redirect "$TARGET_ROOT/$VERSION/$PLATFORM/all-in-one" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM/all-in-one"
 # Also create a link for the $STREAM (e.g. "1.2.x/luna" => "1.2.0-NYYYYMMDD-HHMM/luna")
 create_redirect "$TARGET_ROOT/$STREAM/$PLATFORM" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM"
+#copy the zips at a stable URL
+
+cp -a "$WORKSPACE"org.eclipse.emf.ecoretools.update/target/target/org.eclipse.emf.ecoretools.update*.zip "$TARGET_ROOT/$STREAM/org.eclipse.emf.ecoretools-$VERSION-$PLATFORM.zip"
+
 # Also update the global "latest" links if we are building master
 if [ "master" = "$GIT_BRANCH" ]; then
     create_redirect "$TARGET_ROOT/latest/$PLATFORM" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM"
