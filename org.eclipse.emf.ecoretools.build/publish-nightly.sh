@@ -125,7 +125,7 @@ create_redirect "$TARGET_ROOT/$VERSION/$PLATFORM/all-in-one" "$BUILD_TYPE/$FULL_
 create_redirect "$TARGET_ROOT/$STREAM/$PLATFORM" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM"
 #copy the zips at a stable URL
 
-cp -a "$WORKSPACE"org.eclipse.emf.ecoretools.update/target/org.eclipse.emf.ecoretools.update*.zip "$TARGET_ROOT/$STREAM/org.eclipse.emf.ecoretools-$VERSION-$PLATFORM.zip"
+cp -a "$WORKSPACE"/org.eclipse.emf.ecoretools.update/target/org.eclipse.emf.ecoretools.update*.zip "$TARGET_ROOT/$STREAM/org.eclipse.emf.ecoretools-$VERSION-$PLATFORM.zip"
 
 # Also update the global "latest" links if we are building master
 if [ "master" = "$GIT_BRANCH" ]; then
