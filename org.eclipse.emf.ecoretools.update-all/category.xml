@@ -6,7 +6,6 @@
    <feature  id="org.eclipse.emf.ecoretools.sdk" version="3.0.0.qualifier">
       <category name="ecoretools"/>
    </feature>   
-   <!--
    <feature  id="org.eclipse.sirius.runtime.aql" >
       <category name="deps"/>
    </feature>   
@@ -25,17 +24,17 @@
    <feature  id="org.eclipse.emf.eef.runtime-feature" >
       <category name="deps"/>
    </feature>   
-   -->
+   <feature  id="org.eclipse.acceleo.query" >
+      <category name="deps"/>
+   </feature>   
    <category-def name="ecoretools" label="Ecore Tools">
       <description>
          Ecore Tools features.
       </description>
   </category-def>
-  <!--
    <category-def name="deps" label="EcoreTools Dependencies">
       <description>
          Ecore Tools Dependencies
       </description>
    </category-def>
-   -->
 </site>
