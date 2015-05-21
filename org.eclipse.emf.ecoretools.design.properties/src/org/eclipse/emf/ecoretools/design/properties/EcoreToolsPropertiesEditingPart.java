@@ -295,12 +295,23 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 			Object tab = descriptor.get(key);
 			Method getSectionAtIndex = getMethod(tab, "getSectionAtIndex", int.class); //$NON-NLS-1$
 			if (getSectionAtIndex != null) {
-				Object result = callMethod(tab, getSectionAtIndex, new Integer(0));
-				if (result == this) {
-					Method getId = getMethod(key, "getId"); //$NON-NLS-1$
-					if (getId != null) {
-						String id = (String)callMethod(key, getId);
-						return id;
+				Method getSections = getMethod(tab, "getSections"); //$NON-NLS-1$
+				Object tabSections = callMethod(tab, getSections);
+				if (tabSections != null)
+				{
+					final ISection[] sections = (ISection[])tabSections;
+					for (int i = 0; i < sections.length; i++) 
+					{
+						Object result = callMethod(tab, getSectionAtIndex, new Integer(i));
+						if (result == this) 
+						{
+							Method getId = getMethod(key, "getId"); //$NON-NLS-1$
+							if (getId != null) 
+							{
+								String id = (String)callMethod(key, getId); 
+								return id;
+							}
+						}
 					}
 				}
 			}
