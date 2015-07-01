@@ -11,7 +11,9 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
@@ -138,11 +140,13 @@ public class EAttributeServices {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ").append(attr.getDefaultValueLiteral());
             }
         } else if (attr.getDefaultValue() != null) {
-            if (attr.getEAttributeType() instanceof EEnum) {
+            EDataType dataType = attr.getEAttributeType();
+            if (dataType instanceof EEnum) {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ").append(attr.getDefaultValue());
             } else {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ");
-                String serializable = EcoreFactory.eINSTANCE.convertToString(attr.getEAttributeType(), attr.getDefaultValue());
+                EFactory factory = dataType.getEPackage() != null ? dataType.getEPackage().getEFactoryInstance() : EcoreFactory.eINSTANCE;  
+                String serializable = factory.convertToString(dataType, attr.getDefaultValue());
                 if (!"0".equals(serializable)) {
                     // Ignore this default value and consider it as blank default
                     // value. This is the result of the '\u0000' (default value for
