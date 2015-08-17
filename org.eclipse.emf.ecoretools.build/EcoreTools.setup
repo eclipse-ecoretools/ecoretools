@@ -157,6 +157,12 @@
         <operand
             xsi:type="predicates:NamePredicate"
             pattern=".*doc"/>
+        <operand
+            xsi:type="predicates:NamePredicate"
+            pattern=".*build"/>
+        <operand
+            xsi:type="predicates:NamePredicate"
+            pattern=".*update.*"/>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>
