@@ -4,12 +4,23 @@
 		<topic href="doc/EcoreTools User Manual.html#GettingStarted" label="Getting Started">
 			<topic href="doc/EcoreTools User Manual.html#CreatinganewEcore" label="Creating a new Ecore"></topic>
 			<topic href="doc/EcoreTools User Manual.html#WorkingwiththeModelingProject" label="Working with the Modeling Project">
+				<topic href="doc/EcoreTools User Manual.html#Whatisit" label="What is it ?"></topic>
+				<topic href="doc/EcoreTools User Manual.html#SelectingViewpoints" label="Selecting Viewpoints"></topic>
+				<topic href="doc/EcoreTools User Manual.html#CreatingaRepresentation" label="Creating a Representation"></topic>
 				<topic href="doc/EcoreTools User Manual.html#LoadingExternalModels" label="Loading External Models"></topic>
 			</topic>
 			<topic href="doc/EcoreTools User Manual.html#CreatingdiagramsfromanexistingEcore" label="Creating diagrams from an existing Ecore"></topic>
 		</topic>
 		<topic href="doc/EcoreTools User Manual.html#EntitiesDiagramEditor" label="Entities Diagram Editor">
 			<topic href="doc/EcoreTools User Manual.html#Overviewoftheeditor" label="Overview of the editor"></topic>
+			<topic href="doc/EcoreTools User Manual.html#WorkingwithLayers" label="Working with Layers"></topic>
+			<topic href="doc/EcoreTools User Manual.html#NavigatingintheDiagram" label="Navigating in the Diagram"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingClassifiers" label="Modeling Classifiers"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingReferences" label="Modeling References"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingAttributes" label="Modeling Attributes"></topic>
+			<topic href="doc/EcoreTools User Manual.html#ModelingOperations" label="Modeling Operations"></topic>
+			<topic href="doc/EcoreTools User Manual.html#Deletingelements" label="Deleting elements"></topic>
+			<topic href="doc/EcoreTools User Manual.html#Validatingthemodel" label="Validating the model "></topic>
 			<topic href="doc/EcoreTools User Manual.html#EditingShortcuts" label="Editing Shortcuts"></topic>
 			<topic href="doc/EcoreTools User Manual.html#ExploringExistingModels" label="Exploring Existing Models"></topic>
 			<topic href="doc/EcoreTools User Manual.html#Settingproperties" label="Setting properties"></topic>
@@ -17,9 +28,16 @@
 			<topic href="doc/EcoreTools User Manual.html#ModelingConstraints" label="Modeling Constraints"></topic>
 			<topic href="doc/EcoreTools User Manual.html#DocumentationAnnotations" label="Documentation Annotations"></topic>
 		</topic>
-		<topic href="doc/EcoreTools User Manual.html#DocumentationTableEditor" label="Documentation Table Editor"></topic>
+		<topic href="doc/EcoreTools User Manual.html#DocumentationTableEditor" label="Documentation Table Editor">
+			<topic href="doc/EcoreTools User Manual.html#DependenciesDiagramEditor" label="Dependencies Diagram Editor"></topic>
+		</topic>
 	</topic>
 	<topic href="doc/EcoreTools User Manual.html#LeveragingEcoreModel" label="Leveraging Ecore Model"></topic>
-	<topic href="doc/EcoreTools User Manual.html#GeneratingCode" label="Generating Code"></topic>
 	<topic href="doc/EcoreTools User Manual.html#ExportingDiagrams" label="Exporting Diagrams"></topic>
+	<topic href="doc/EcoreTools User Manual.html#FAQ" label="FAQ">
+		<topic href="doc/EcoreTools User Manual.html#WhatshouldIdowithmy.ecorediagdiagrams" label="What should I do with my .ecorediag diagrams ?"></topic>
+		<topic href="doc/EcoreTools User Manual.html#ThismarkerisbotheringmeinthediagramhowcanIremoveit" label="This marker is bothering me in the diagram, how can I remove it ?"></topic>
+		<topic href="doc/EcoreTools User Manual.html#Mydiagramisgettingbighowtofindanelement" label="My diagram is getting big, how to find an element ?"></topic>
+	</topic>
+	<topic href="doc/EcoreTools User Manual.html#GettingHelp" label="Getting Help"></topic>
 </toc>
