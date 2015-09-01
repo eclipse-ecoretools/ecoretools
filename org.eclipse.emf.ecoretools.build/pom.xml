@@ -203,7 +203,7 @@
         <profile>
             <id>luna</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <repositories>    
                 <repository><id>cbi</id><layout>p2</layout>
