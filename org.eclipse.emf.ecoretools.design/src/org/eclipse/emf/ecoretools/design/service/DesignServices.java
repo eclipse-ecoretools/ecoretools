@@ -583,34 +583,35 @@ public class DesignServices extends EReferenceServices {
         return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral("bold");
     }
 
-    public void reconnectEReference(EObject element, DEdge edgeAfterReconnect) {
-        if (edgeAfterReconnect.getSourceNode() instanceof DSemanticDecorator && edgeAfterReconnect.getTargetNode() instanceof DSemanticDecorator) {
+    public void reconnectEReferenceSource(EObject element, EObject newValue) {
+        if (newValue instanceof EClass && element instanceof EReference) {
 
-            EObject newSource = ((DSemanticDecorator) edgeAfterReconnect.getSourceNode()).getTarget();
-            EObject newTarget = ((DSemanticDecorator) edgeAfterReconnect.getTargetNode()).getTarget();
-            if (element instanceof EReference) {
-                EReference eRef = (EReference) element;
-                if (newSource instanceof EClass) {
-                    EClass srcClass = (EClass) newSource;
+            EReference eRef = (EReference) element;
+            EClass srcClass = (EClass) newValue;
 
-                    if (eRef.eContainer() != srcClass) {
-                        srcClass.getEStructuralFeatures().add(eRef);
-                    }
-
-                    if (newTarget instanceof EClass) {
-                        EClass targetClass = (EClass) newTarget;
-                        if (eRef.getEType() != newTarget) {
-                            eRef.setEType(targetClass);
-                        }
-                    } else if (newTarget instanceof ETypeParameter) {
-                        if (eRef.getEType() != newTarget) {
-                            EGenericsServices.setETypeWithGenerics(eRef, newTarget);
-                        }
-                    }
-
-                }
-
+            if (eRef.eContainer() != srcClass) {
+                srcClass.getEStructuralFeatures().add(eRef);
             }
+
+        }
+    }
+
+    public void reconnectEReferenceTarget(EObject element, EObject newValue) {
+        if (newValue != null && element instanceof EReference) {
+
+            EReference eRef = (EReference) element;
+
+            if (newValue instanceof EClass) {
+                EClass targetClass = (EClass) newValue;
+                if (eRef.getEType() != newValue) {
+                    eRef.setEType(targetClass);
+                }
+            } else if (newValue instanceof ETypeParameter) {
+                if (eRef.getEType() != newValue) {
+                    EGenericsServices.setETypeWithGenerics(eRef, newValue);
+                }
+            }
+
         }
     }
 
