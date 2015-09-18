@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EFactory;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
@@ -49,7 +50,7 @@ public class EAttributeServices {
      * @param editString
      *            the edit string entered by the user.
      */
-    public EAttribute performEdit(EAttribute attr, String editString) {
+    public EStructuralFeature performEdit(EStructuralFeature attr, String editString) {
         if ("0".equals(editString.trim())) {
             attr.setLowerBound(0);
         } else if ("1".equals(editString.trim())) {
@@ -145,11 +146,13 @@ public class EAttributeServices {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ").append(attr.getDefaultValue());
             } else {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ");
-                EFactory factory = dataType.getEPackage() != null ? dataType.getEPackage().getEFactoryInstance() : EcoreFactory.eINSTANCE;  
+                EFactory factory = dataType.getEPackage() != null ? dataType.getEPackage().getEFactoryInstance() : EcoreFactory.eINSTANCE;
                 String serializable = factory.convertToString(dataType, attr.getDefaultValue());
                 if (!"0".equals(serializable)) {
-                    // Ignore this default value and consider it as blank default
-                    // value. This is the result of the '\u0000' (default value for
+                    // Ignore this default value and consider it as blank
+                    // default
+                    // value. This is the result of the '\u0000' (default value
+                    // for
                     // EChar data type) to string.
                     sb.append(serializable);
                 }

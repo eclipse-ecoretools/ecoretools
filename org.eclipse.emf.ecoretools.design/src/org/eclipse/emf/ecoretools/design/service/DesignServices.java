@@ -198,6 +198,36 @@ public class DesignServices extends EReferenceServices {
         return false;
     }
 
+    public Set<EReference> getNonDisplayedEReferences(EClass self, DSemanticDiagram diag) {
+        Set<EReference> result = Sets.newLinkedHashSet();
+        Set<EClass> displayedEClasses = null;
+        for (EReference eReference : self.getEAllReferences()) {
+            if (eReference.getEType() != null) {
+                if (displayedEClasses == null) {
+                    displayedEClasses = getDisplayedEClasses(diag);
+                }
+                /*
+                 * if the target of the EReference is not visible, we *have* to
+                 * display it as a node except if it iis from a supertype which
+                 * is visible itself, then the reference will be already
+                 * displayed. but if the reference is owned by a super type and
+                 * this supertype is not visible, even if the target is visible,
+                 * then we have to display it as a node to!
+                 */
+                boolean targetTypeIsVisible = displayedEClasses.contains(eReference.getEType());
+                boolean referenceIsInherited = eReference.getEContainingClass() != self;
+                boolean referenceHostIsVisible = displayedEClasses.contains(eReference.getEContainingClass());
+                if (!referenceIsInherited && !targetTypeIsVisible) {
+                    result.add(eReference);
+                }
+                if (referenceIsInherited && (!referenceHostIsVisible)) {
+                    result.add(eReference);
+                }
+            }
+        }
+        return result;
+    }
+
     public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
         Set<EClass> result = Sets.newLinkedHashSet();
         Iterator<DDiagramElement> it = new DDiagramQuery(diagram).getAllDiagramElements().iterator();
@@ -219,6 +249,34 @@ public class DesignServices extends EReferenceServices {
                 if (dec.getActualMapping() != null && CLASS_DIAGRAM_CLASS_MAPPINGID.equals(dec.getActualMapping().getName())) {
                     result.add((EClass) dec.getTarget());
                 }
+            }
+        }
+        return result;
+    }
+
+    public Set<EClass> getDirectSuperTypesOrMostSpecificVisibleOnes(EClass self, DSemanticDiagram diagram) {
+        Set<EClass> result = Sets.newLinkedHashSet();
+        Set<EClass> displayed = getDisplayedEClasses(diagram);
+        for (EClass directSuperType : self.getESuperTypes()) {
+            if (displayed.contains(directSuperType)) {
+                result.add(directSuperType);
+            } else {
+                Set<EClass> mostSpecificDisplayed = findMostSpecificAndVisible(directSuperType.getESuperTypes(), displayed);
+                if (mostSpecificDisplayed != null) {
+                    result.addAll(mostSpecificDisplayed);
+                }
+            }
+        }
+        return result;
+    }
+
+    private Set<EClass> findMostSpecificAndVisible(Collection<EClass> superTypes, Set<EClass> displayed) {
+        Set<EClass> result = Sets.newLinkedHashSet();
+        for (EClass eClass : superTypes) {
+            if (displayed.contains(eClass)) {
+                result.add(eClass);
+            } else {
+                result.addAll(findMostSpecificAndVisible(eClass.getESuperTypes(), displayed));
             }
         }
         return result;
@@ -273,7 +331,8 @@ public class DesignServices extends EReferenceServices {
 
     public Collection<EModelElement> getDisplayedEModelElements(DSemanticDiagram diagram) {
         Set<EModelElement> modelelements = Sets.newLinkedHashSet();
-        Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram), new DDiagramQuery(diagram).getAllDiagramElements().iterator()), DSemanticDecorator.class);
+        Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram), new DDiagramQuery(diagram).getAllDiagramElements().iterator()),
+                DSemanticDecorator.class);
         while (it.hasNext()) {
             DSemanticDecorator dec = it.next();
             if (dec.getTarget() instanceof EModelElement)
@@ -367,7 +426,14 @@ public class DesignServices extends EReferenceServices {
     /**
      * Performs a "direct edit" operation on an EAttribute.
      */
-    public EAttribute performEdit(EAttribute attr, String editString) {
+    public EStructuralFeature performEdit(EAttribute attr, String editString) {
+        return new EAttributeServices().performEdit(attr, editString);
+    }
+
+    /**
+     * Performs a "direct edit" operation on an EAttribute.
+     */
+    public EStructuralFeature performEditAsAttribute(EStructuralFeature attr, String editString) {
         return new EAttributeServices().performEdit(attr, editString);
     }
 
@@ -444,8 +510,17 @@ public class DesignServices extends EReferenceServices {
     /**
      * Computes the label of an EReference.
      */
+    @Override
     public String render(EReference ref) {
         return new EReferenceServices().render(ref);
+    }
+
+    /**
+     * Computes the label of an EReference.
+     */
+    @Override
+    public String renderAsNode(EReference ref) {
+        return new EReferenceServices().renderAsNode(ref);
     }
 
     public String renderEOpposite(EReference ref) {
@@ -458,6 +533,7 @@ public class DesignServices extends EReferenceServices {
     /**
      * Performs a "direct edit" operation on an EReference.
      */
+    @Override
     public EReference performEdit(EReference ref, String editString) {
         return new EReferenceServices().performEdit(ref, editString);
     }
