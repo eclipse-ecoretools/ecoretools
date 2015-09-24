@@ -20,16 +20,7 @@
          point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
       <propertyContributor
             contributorId="org.eclipse.sirius.diagram.ui"
-            labelProvider="org.eclipse.emf.eef.runtime.ui.utils.EEFLabelProvider">
-         <propertyCategory
-               category="default">
-         </propertyCategory>
-         <propertyCategory
-               category="extended">
-         </propertyCategory>
-         <propertyCategory
-               category="advanced">
-         </propertyCategory>
+            labelProvider="org.eclipse.sirius.diagram.ui.internal.sheet.SiriusSheetLabelProvider">               
       </propertyContributor>
    </extension>
    <extension
@@ -38,43 +29,45 @@
             contributorId="org.eclipse.sirius.diagram.ui">
          <propertyTab
                id="Base"
-               label="Base"
-               category="default">
+               label="Model"
+               category="semantic &amp; extension"
+               >
          </propertyTab>
 
          <propertyTab
                id="Instanciation"
                label="Instantiation"
-               category="extended"
+               indented="true"
+               category="semantic &amp; extension"
                afterTab="Base">
          </propertyTab>
 
          <propertyTab
                id="Data Type"
                label="Data Type"
-               category="default">
+               indented="true"
+               category="semantic &amp; extension">
          </propertyTab>
 
          <propertyTab
                id="Operation Element"
+               indented="true"
                label="Operation Element"
-               category="default">
+               category="semantic &amp; extension">
          </propertyTab>
 
          <propertyTab
                id="Exceptions"
                label="Exceptions"
-               category="extended"
+               indented="true"
+               category="semantic &amp; extension"
                afterTab="Operation Element">
          </propertyTab>
 <!-- tabs from EcoreTools 1.x -->
 
-  <propertyTab
-            category="semantic &amp; extension"
-            id="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            label="%propertyTab.model"/>
+
          <propertyTab
-               afterTab="org.eclipse.emf.ecoretools.design.properties.modelTab"
+               afterTab="Base"
                category="semantic &amp; extension"
                indented="true"
                id="org.eclipse.emf.ecoretools.design.properties.modelTab.parameterTab"
@@ -223,125 +216,7 @@
 
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
-      <propertySections contributorId="org.eclipse.sirius.diagram.ui">
-	     <propertySection
-	        id="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection"
-	        class="org.eclipse.emf.ecoretools.properties.internal.sections.NamePropertySection"
-	        tab="org.eclipse.emf.ecoretools.design.properties.modelTab">
-	        <input type="org.eclipse.emf.ecore.ENamedElement"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.LowerBoundSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.LowerBoundPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection">
-	        <input type="org.eclipse.emf.ecore.ETypedElement"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.UpperBoundSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.UpperBoundPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.LowerBoundSection">
-	        <input type="org.eclipse.emf.ecore.ETypedElement"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.ETypeSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.ETypePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.UpperBoundSection">
-            <input type="org.eclipse.emf.ecore.EAttribute"/>
-            <input type="org.eclipse.emf.ecore.EOperation"/>
-            <input type="org.eclipse.emf.ecore.EParameter"/>
-	     </propertySection>	
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.NsPrefixSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.NsPrefixPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection">
-	        <input type="org.eclipse.emf.ecore.EPackage"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.NsURISection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.NsURIPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NsPrefixSection">
-	        <input type="org.eclipse.emf.ecore.EPackage"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.IsContainmentSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.IsContainmentPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.UpperBoundSection">
-	        <input type="org.eclipse.emf.ecore.EReference"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.EOppositeSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.EOppositePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.IsContainmentSection">
-	        <input type="org.eclipse.emf.ecore.EReference"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.IsAbstractSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.IsAbstractPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection">
-	        <input type="org.eclipse.emf.ecore.EClass"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.IsInterfaceSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.IsInterfacePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-            afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.IsAbstractSection">
-	        <input type="org.eclipse.emf.ecore.EClass"/>
-	     </propertySection>
-	     <propertySection
-	        id="org.eclipse.emf.ecoretools.design.properties.ecore.InstanceClassNameSection"
-	        class="org.eclipse.emf.ecoretools.properties.internal.sections.InstanceClassNamePropertySection"
-	        tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection">
-	        <input type="org.eclipse.emf.ecore.EClassifier"/>
-	     </propertySection>
-	     <propertySection
-             id="org.eclipse.emf.ecoretools.design.properties.ecore.IsSerializableSection"
-             class="org.eclipse.emf.ecoretools.properties.internal.sections.IsSerializablePropertySection"
-             tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.InstanceClassNameSection">
-            <input type="org.eclipse.emf.ecore.EDataType"/>
-	     </propertySection>	      
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.EAnnotationSourceSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.EAnnotationSourcePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab">
-            <input type="org.eclipse.emf.ecore.EAnnotation"/>
-	     </propertySection>	
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.EEnumLiteralLiteralSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.EEnumLiteralLiteralPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.NameSection">
-            <input type="org.eclipse.emf.ecore.EEnumLiteral"/>
-	     </propertySection>	      
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.EEnumLiteralValueSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.EEnumLiteralValuePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.EEnumLiteralLiteralSection">
-            <input type="org.eclipse.emf.ecore.EEnumLiteral"/>
-	     </propertySection>
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.DetailEntryKeySection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.DetailEntryKeyPropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab">
-            <input type="org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl"/>
-	     </propertySection>	     
-	     <propertySection
-            id="org.eclipse.emf.ecoretools.design.properties.ecore.DetailEntryValueSection"
-            class="org.eclipse.emf.ecoretools.properties.internal.sections.DetailEntryValuePropertySection"
-            tab="org.eclipse.emf.ecoretools.design.properties.modelTab"
-	        afterSection="org.eclipse.emf.ecoretools.design.properties.ecore.DetailEntryValueSection">
-            <input type="org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl"/>
-	     </propertySection>
+      <propertySections contributorId="org.eclipse.sirius.diagram.ui">	    
       <propertySection
             class="org.eclipse.emf.ecoretools.properties.internal.sections.EOperationParameterSection"
             id="org.eclipse.emf.ecoretools.design.properties.ecore.parameterSection"
