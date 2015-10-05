@@ -145,8 +145,7 @@ public class EAttributeServices {
             if (dataType instanceof EEnum) {
                 sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ").append(attr.getDefaultValue());
             } else {
-                sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ");
-                EFactory factory = dataType.getEPackage() != null ? dataType.getEPackage().getEFactoryInstance() : EcoreFactory.eINSTANCE;
+                EFactory factory = dataType.getEPackage() != null ? dataType.getEPackage().getEFactoryInstance() : EcoreFactory.eINSTANCE;  
                 String serializable = factory.convertToString(dataType, attr.getDefaultValue());
                 if (!"0".equals(serializable)) {
                     // Ignore this default value and consider it as blank
@@ -154,6 +153,7 @@ public class EAttributeServices {
                     // value. This is the result of the '\u0000' (default value
                     // for
                     // EChar data type) to string.
+                    sb.append(" ").append(DEFAULT_VALUE_SEPARATOR).append(" ");
                     sb.append(serializable);
                 }
             }
