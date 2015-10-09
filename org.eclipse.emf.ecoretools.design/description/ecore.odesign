@@ -798,7 +798,7 @@
             <initialOperation>
               <firstModelOperations xsi:type="tool:CreateInstance" typeName="ecore.EPackage" referenceName="eSubpackages" variableName="newPackage">
                 <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:newPackage">
-                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'newPackage' + self.eContainer().eContents(EPackage)->size()"/>
+                  <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'newPackage' + self.eContainer().eContents(ecore::EPackage)->size()"/>
                 </subModelOperations>
               </firstModelOperations>
             </initialOperation>
