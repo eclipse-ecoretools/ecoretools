@@ -230,10 +230,10 @@ public class DesignServices extends EReferenceServices {
 
     public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
         Set<EClass> result = Sets.newLinkedHashSet();
-        Iterator<DDiagramElement> it = new DDiagramQuery(diagram).getAllDiagramElements().iterator();
+        Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(), DNodeList.class);
         while (it.hasNext()) {
-            DDiagramElement dec = it.next();
-            if (dec.getTarget() instanceof EClass) {
+            DNodeList dec = it.next();
+            if (dec.getTarget() instanceof EClass && dec.isVisible()) {
                 result.add((EClass) dec.getTarget());
             }
         }
