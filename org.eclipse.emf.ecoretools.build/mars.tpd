@@ -1,5 +1,5 @@
-target "Luna Target Platform For EcoreTools" with source requirements
-location "http://download.eclipse.org/sirius/updates/nightly/3.1.x/luna" Sirius {
+target "Mars Target Platform For EcoreTools" with source requirements
+location "http://download.eclipse.org/sirius/updates/nightly/3.1.x/mars" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
@@ -12,7 +12,7 @@ location "http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.5/S
 location "http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321" Acceleo {
 	org.eclipse.acceleo.query.feature.group lazy
 }
-location "http://download.eclipse.org/releases/luna/201502271000" {
+location "http://download.eclipse.org/releases/mars" {
 	org.eclipse.sdk.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
 	org.eclipse.gmf.runtime.diagram.ui lazy
