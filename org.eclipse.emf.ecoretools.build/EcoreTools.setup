@@ -57,6 +57,11 @@
       value="Luna"
       defaultValue="None"/>
   <setupTask
+      xsi:type="projects:ProjectsImportTask">
+    <sourceLocator
+        rootFolder="${git.clone.ecoretools.location}"/>
+  </setupTask>      
+  <setupTask
       xsi:type="setup:VariableTask"
       id="ecoretools.target.platform"
       name="ecoretools.target.platform"
