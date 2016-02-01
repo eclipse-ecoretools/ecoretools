@@ -54,6 +54,8 @@
         <module>../org.eclipse.emf.ecoretools.registration</module>    
         <module>../org.eclipse.emf.ecoretools.sdk-feature</module>
         <module>../org.eclipse.emf.ecoretools.tabbedproperties</module>
+        <module>../org.eclipse.emf.ecoretools.explorer.contextual</module>
+        <module>../org.eclipse.emf.ecoretools.explorer.contextual-feature</module>
         <module>../org.eclipse.emf.ecoretools.update</module>
         <module>../org.eclipse.emf.ecoretools.update-all</module>
     </modules>
@@ -195,6 +197,9 @@
                  <repository><id>acceleo for AQL</id><layout>p2</layout>
                      <url>http://download.eclipse.org/acceleo/updates/milestones/3.6</url>
                 </repository>
+                <repository><id>amalgam</id><layout>p2</layout>
+                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
+                </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
                     <url>http://download.eclipse.org/releases/staging</url>
                 </repository>
@@ -215,6 +220,9 @@
                  <repository><id>acceleo for AQL</id><layout>p2</layout>
                      <url>http://download.eclipse.org/acceleo/updates/milestones/3.6</url>
                 </repository>
+                <repository><id>amalgam</id><layout>p2</layout>
+                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
+                </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
                     <url>http://download.eclipse.org/releases/mars</url>
                 </repository>
@@ -234,6 +242,9 @@
                 </repository>
                  <repository><id>acceleo for AQL</id><layout>p2</layout>
                     <url>http://download.eclipse.org/sirius/updates/stable/3.0.0-S20150504-101721/mars</url>
+                </repository>
+                <repository><id>amalgam</id><layout>p2</layout>
+                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
                 </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
                     <url>http://download.eclipse.org/releases/staging</url>
