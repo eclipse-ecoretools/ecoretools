@@ -62,14 +62,17 @@
       xsi:type="setup:VariableTask"
       id="ecoretools.target.platform"
       name="ecoretools.target.platform"
-      defaultValue="Luna Target Platform For EcoreTools"
+      defaultValue="Mars Target Platform For EcoreTools"
       label="Target Platform - EcoreTools">
     <choice
         value="Luna Target Platform For EcoreTools"
         label="Eclipse Luna - 4.4"/>
     <choice
         value="Mars Target Platform For EcoreTools"
-        label="Eclipse Luna - 4.5"/>
+        label="Eclipse Mars - 4.5"/>
+    <choice
+        value="Neon Target Platform For EcoreTools"
+        label="Eclipse Neon - 4.6"/>
     <choice
         value="No"
         label="No target plaform"/>
@@ -101,7 +104,7 @@
     <repository
         url="http://download.eclipse.org/mylyn/releases/3.13"/>
     <repository
-        url="http://download.eclipse.org/sirius/updates/nightly/3.1.x/mars"/>
+        url="http://download.eclipse.org/sirius/updates/nightly/4.0.x/mars"/>
     <repository
         url="http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>

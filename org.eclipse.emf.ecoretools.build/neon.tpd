@@ -1,0 +1,17 @@
+target "Neon Target Platform For EcoreTools" with source requirements
+location "http://download.eclipse.org/sirius/updates/nightly/4.0.x/neon" {
+	org.eclipse.sirius.runtime.aql.feature.group lazy
+	org.eclipse.sirius.runtime.feature.group lazy
+	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
+	org.eclipse.sirius.runtime.ide.eef.feature.group lazy
+}
+
+location "http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321" Acceleo {
+	org.eclipse.acceleo.query.feature.group lazy
+}
+location "http://download.eclipse.org/releases/neon" {
+	org.eclipse.sdk.feature.group lazy
+	org.eclipse.emf.sdk.feature.group lazy
+	org.eclipse.gmf.runtime.diagram.ui lazy
+	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
+}
