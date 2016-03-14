@@ -6,7 +6,7 @@ location "http://download.eclipse.org/sirius/updates/nightly/4.0.x/neon" {
 	org.eclipse.sirius.runtime.ide.eef.feature.group lazy
 }
 
-location "http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321" Acceleo {
+location "http://download.eclipse.org/acceleo/updates/nightly/latest" Acceleo {
 	org.eclipse.acceleo.query.feature.group lazy
 }
 location "http://download.eclipse.org/releases/neon" {

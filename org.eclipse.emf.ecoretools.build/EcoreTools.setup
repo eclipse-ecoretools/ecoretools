@@ -106,7 +106,7 @@
     <repository
         url="http://download.eclipse.org/sirius/updates/nightly/4.0.x/mars"/>
     <repository
-        url="http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321"/>
+        url="http://download.eclipse.org/acceleo/updates/nightly/latest"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask

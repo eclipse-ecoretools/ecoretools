@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/mbarbero/fr.obeo.releng.targetplatform -->
-<target name="Neon Target Platform For EcoreTools" sequenceNumber="1457973720">
+<target name="Neon Target Platform For EcoreTools" sequenceNumber="1457974424">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sirius.runtime.aql.feature.group" version="0.0.0"/>
@@ -12,7 +12,7 @@
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.acceleo.query.feature.group" version="0.0.0"/>
-      <repository id="Acceleo" location="http://download.eclipse.org/acceleo/updates/milestones/3.6/S201601191321"/>
+      <repository id="Acceleo" location="http://download.eclipse.org/acceleo/updates/nightly/latest"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
