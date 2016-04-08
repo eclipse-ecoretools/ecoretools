@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -25,6 +26,7 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.sirius.business.api.modelingproject.AbstractRepresentationsFileJob;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
@@ -108,7 +110,11 @@ public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
                 if (OpenRepresentationsFileJob.shouldWaitOtherJobs()) {
                     // We are loading session(s), wait loading is finished
                     // before continuing.
-                    OpenRepresentationsFileJob.waitOtherJobs();
+                    try {
+                        Job.getJobManager().join(AbstractRepresentationsFileJob.FAMILY, new NullProgressMonitor());
+                    } catch (InterruptedException e) {
+                        // Do nothing
+                    }
                 }
                 existingSession = prj.get().getSession();
                 if (existingSession != null) {
