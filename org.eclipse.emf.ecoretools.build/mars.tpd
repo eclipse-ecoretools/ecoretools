@@ -18,3 +18,6 @@ location "http://download.eclipse.org/releases/mars" {
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 }
+location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/neon/" {
+	org.eclipse.amalgam.explorer.contextual.feature.group lazy
+}
