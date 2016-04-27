@@ -8,6 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.amalgam.explorer.contextual.core,
  org.eclipse.amalgam.explorer.contextual.ui,
+ org.eclipse.amalgam.explorer.contextual.sirius,
+ org.eclipse.amalgam.explorer.contextual.sirius.ui,
  org.eclipse.emf.ecore.editor
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
