@@ -1,5 +1,5 @@
 target "Luna Target Platform For EcoreTools" with source requirements
-location "http://download.eclipse.org/sirius/updates/nightly/3.1.x/luna" Sirius {
+location "http://download.eclipse.org/sirius/updates/nightly/4.0.x/neon" Sirius {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
