@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2016 THALES GLOBAL SERVICES and Others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -51,7 +51,7 @@ import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
-import org.eclipse.sirius.diagram.DiagramPackage;
+import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.api.query.DDiagramQuery;
 import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
@@ -66,7 +66,7 @@ import org.eclipse.sirius.ext.emf.AllContents;
 import org.eclipse.sirius.tools.api.command.CommandContext;
 import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.ViewpointPackage;
+import org.eclipse.sirius.viewpoint.FontFormat;
 
 import com.google.common.base.Ascii;
 import com.google.common.base.CharMatcher;
@@ -651,12 +651,12 @@ public class DesignServices extends EReferenceServices {
         return true;
     }
 
-    public EEnumLiteral arrowsFillDiamond(EObject any) {
-        return DiagramPackage.eINSTANCE.getEdgeArrows().getEEnumLiteral("FillDiamond");
+    public EdgeArrows arrowsFillDiamond(EObject any) {
+        return EdgeArrows.FILL_DIAMOND_LITERAL;
     }
 
-    public EEnumLiteral fontFormatBold(EObject any) {
-        return ViewpointPackage.eINSTANCE.getFontFormat().getEEnumLiteral("bold");
+    public FontFormat fontFormatBold(EObject any) {
+        return FontFormat.BOLD_LITERAL;
     }
 
     public void reconnectEReferenceSource(EObject element, EObject newValue) {
