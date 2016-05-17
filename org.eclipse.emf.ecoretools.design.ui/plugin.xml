@@ -18,6 +18,7 @@
             icon="icons/full/obj16/EcoreModelingProject.png"
             id="org.eclipse.ecoretools.emf.design.wizardID"
             name="Ecore Modeling Project"
+            preferredPerspectives="org.eclipse.sirius.ui.tools.perspective.design"
             project="true">
          <description>Create a new Modeling project to specify a domain model using the Ecore Language. 
 The created project is a Java plug-in project with EMF dependencies and EMF models.</description>
@@ -49,11 +50,14 @@ The created project is a Java plug-in project with EMF dependencies and EMF mode
    </extension>
    -->   
    
-    <!-- Extensions for the "Viewpoint" perspective -->
+    <!-- Extensions for the "Sirius" and "Modeling" perspectives -->
   <extension point="org.eclipse.ui.perspectiveExtensions">
-    <perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.design">
+  	<perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.modeling">
       <newWizardShortcut id="org.eclipse.ecoretools.emf.design.wizardID" />
     </perspectiveExtension>
+    <perspectiveExtension targetID="org.eclipse.sirius.ui.tools.perspective.design">
+      <newWizardShortcut id="org.eclipse.ecoretools.emf.design.wizardID" />
+    </perspectiveExtension>    
   </extension>
   
   <extension
