@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="10.1.0.201507271600">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="11.0.0.201601261200">
   <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/doc/screenshots/entities.png&quot;/>&#xA;&lt;img src=&quot;/doc/screenshots/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore ecorebin">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage']" endUserDocumentation="A graphical modeler for Ecore model similar to a UML class diagram." name="Entities" titleExpression="aql:self.name + ' class diagram'" pasteDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Paste%20Anything']" domainClass="ecore.EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -63,7 +63,7 @@
             </endLabelStyleDescription>
           </style>
         </edgeMappings>
-        <edgeMappings name="EC ESupertypes" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Delete%20ESuperType']" semanticCandidatesExpression="" semanticElements="service:superTypeSemanticElements" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Related%20EClasses']/@containerMappings[name='EC%20External%20EClasses']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Related%20EClasses']/@containerMappings[name='EC%20External%20EClasses']" targetFinderExpression="service:getDirectSuperTypesOrMostSpecificVisibleOnes(diagram)" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectESupertype']">
+        <edgeMappings name="EC ESupertypes" deletionDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='Delete%20ESuperType']" semanticCandidatesExpression="" semanticElements="service:superTypeSemanticElements" synchronizationLock="true" sourceMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Related%20EClasses']/@containerMappings[name='EC%20External%20EClasses']" targetMapping="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Related%20EClasses']/@containerMappings[name='EC%20External%20EClasses']" targetFinderExpression="service:getDirectSuperTypesOrMostSpecificVisibleOnes(diagram)" reconnections="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectESupertypeSource'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.4/@ownedTools[name='ReconnectESupertypeTarget']">
           <style targetArrow="InputClosedArrow" routingStyle="tree">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <beginLabelStyleDescription showIcon="false" labelExpression="service:superTypesLabel">
@@ -591,46 +591,28 @@
             </initialOperation>
             <edgeView name="edgeView"/>
           </ownedTools>
-          <ownedTools xsi:type="tool_1:ReconnectEdgeDescription" name="ReconnectESupertype" reconnectionKind="RECONNECT_BOTH">
+          <ownedTools xsi:type="tool_1:ReconnectEdgeDescription" name="ReconnectESupertypeSource" reconnectionKind="RECONNECT_SOURCE">
             <source name="source"/>
             <target name="target"/>
             <sourceView name="sourceView"/>
             <targetView name="targetView"/>
             <element name="element"/>
             <initialOperation>
-              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                <subModelOperations xsi:type="tool:If" conditionExpression="aql:source &lt;> element">
-                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                    <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
-                    <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:source"/>
-                  </subModelOperations>
-                </subModelOperations>
-                <subModelOperations xsi:type="tool:If" conditionExpression="aql:source = element">
-                  <subModelOperations xsi:type="tool:If" conditionExpression="aql:otherEnd = sourceView">
-                    <subModelOperations xsi:type="tool:If" conditionExpression="aql:otherEnd = edgeView.targetNode">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="service:getEdgeTargetSemantic(edgeView)"/>
-                        <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                          <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:element"/>
-                        </subModelOperations>
-                      </subModelOperations>
-                    </subModelOperations>
-                    <subModelOperations xsi:type="tool:If" conditionExpression="aql:otherEnd &lt;> edgeView.targetNode">
-                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                        <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="var:target"/>
-                        <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="var:source"/>
-                      </subModelOperations>
-                    </subModelOperations>
-                  </subModelOperations>
-                  <subModelOperations xsi:type="tool:If" conditionExpression="aql:otherEnd &lt;> sourceView">
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:target">
-                      <subModelOperations xsi:type="tool:SetValue" featureName="eSuperTypes" valueExpression="getEdgeTargetSemantic(edgeView)"/>
-                    </subModelOperations>
-                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="var:source">
-                      <subModelOperations xsi:type="tool:Unset" featureName="eSuperTypes" elementExpression="service:getEdgeTargetSemantic(edgeView)"/>
-                    </subModelOperations>
-                  </subModelOperations>
-                </subModelOperations>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.reconnectESuperTypeSource(target,source,otherEnd,edgeView,sourceView)"/>
+              </firstModelOperations>
+            </initialOperation>
+            <edgeView name="edgeView"/>
+          </ownedTools>
+          <ownedTools xsi:type="tool_1:ReconnectEdgeDescription" name="ReconnectESupertypeTarget">
+            <source name="source"/>
+            <target name="target"/>
+            <sourceView name="sourceView"/>
+            <targetView name="targetView"/>
+            <element name="element"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.reconnectESuperTypeTarget(target,source,otherEnd,edgeView,sourceView)"/>
               </firstModelOperations>
             </initialOperation>
             <edgeView name="edgeView"/>

@@ -659,6 +659,39 @@ public class DesignServices extends EReferenceServices {
         return FontFormat.BOLD_LITERAL;
     }
 
+    public void reconnectESuperTypeSource(EObject element, EObject target, EObject source, EObject otherEnd, EObject edgeView, EObject sourceView) {
+        if (edgeView instanceof DEdge && ((DEdge) edgeView).getSourceNode() instanceof DSemanticDecorator && ((DEdge) edgeView).getTargetNode() instanceof DSemanticDecorator) {
+            EObject newSource = ((DSemanticDecorator) ((DEdge) edgeView).getSourceNode()).getTarget();
+            EObject newTarget = ((DSemanticDecorator) ((DEdge) edgeView).getTargetNode()).getTarget();
+
+            /*
+             * reconnect source:
+             */
+            if (newSource instanceof EClass && newTarget instanceof EClass && source instanceof EClass) {
+                ((EClass) source).getESuperTypes().remove(newTarget);
+                ((EClass) newSource).getESuperTypes().add((EClass) newTarget);
+
+            }
+        }
+
+    }
+
+    public void reconnectESuperTypeTarget(EObject element, EObject target, EObject source, EObject otherEnd, EObject edgeView, EObject sourceView) {
+        if (edgeView instanceof DEdge && ((DEdge) edgeView).getSourceNode() instanceof DSemanticDecorator && ((DEdge) edgeView).getTargetNode() instanceof DSemanticDecorator) {
+            EObject newTarget = ((DSemanticDecorator) ((DEdge) edgeView).getTargetNode()).getTarget();
+
+            /*
+             * reconnect target:
+             */
+            if (newTarget instanceof EClass && target instanceof EClass && element instanceof EClass) {
+                ((EClass) element).getESuperTypes().remove(newTarget);
+                ((EClass) element).getESuperTypes().add((EClass) target);
+
+            }
+        }
+
+    }
+
     public void reconnectEReferenceSource(EObject element, EObject newValue) {
         if (newValue instanceof EClass && element instanceof EReference) {
 
