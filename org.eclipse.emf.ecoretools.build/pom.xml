@@ -201,7 +201,7 @@
                     <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
                 </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/staging</url>
+                    <url>http://download.eclipse.org/staging/neon</url>
                 </repository>
             </repositories>    
         </profile>   
@@ -247,7 +247,7 @@
                     <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
                 </repository>
                 <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/staging</url>
+                    <url>http://download.eclipse.org/releases/luna</url>
                 </repository>
                 <repository><id>eef</id><layout>p2</layout>
                     <url>http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.5/S201412231052/</url>
