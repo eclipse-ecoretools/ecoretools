@@ -131,4 +131,16 @@
             class="org.eclipse.emf.ecoretools.explorer.contextual.focus.FocusInEcoreEditor"></focusManager>
    </extension>
 
+    <!-- Extensions for the "Sirius" and "Modeling" perspectives -->
+  <extension point="org.eclipse.ui.perspectiveExtensions">  	   
+    <perspectiveExtension targetID="org.eclipse.emf.ecoretools.perspective">
+    <view
+            id="org.eclipse.amalgam.explorer.contextual.ui.view.ExplorerContextualID"
+            minimized="false"
+            relationship="right"
+            relative="org.eclipse.ui.views.PropertySheet">
+      </view>
+    </perspectiveExtension>    
+  </extension>
+
 </plugin>
