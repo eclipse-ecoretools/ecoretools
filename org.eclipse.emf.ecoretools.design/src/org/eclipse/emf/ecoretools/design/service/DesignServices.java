@@ -456,7 +456,18 @@ public class DesignServices extends EReferenceServices {
     private String prettyMessage(Diagnostic diag) {
         String result = "";
         for (Diagnostic child : diag.getChildren()) {
-            result += "\n" + severityLabel(child.getSeverity()) + " : " + child.getMessage();
+            String message = child.getMessage();
+            /*
+             * we remove any substring which could be the toString of some data
+             * and replace it with something which will not change on subsequent
+             * executions.
+             */
+            for (EObject data : Iterables.filter(child.getData(), EObject.class)) {
+                String instanceVariableString = data.getClass().getName() + "@" + Integer.toHexString(data.hashCode());
+                message = message.replace(instanceVariableString, data.eClass().getName());
+            }
+
+            result += "\n" + severityLabel(child.getSeverity()) + " : " + message;
             result += prettyMessage(child);
         }
         return result;
