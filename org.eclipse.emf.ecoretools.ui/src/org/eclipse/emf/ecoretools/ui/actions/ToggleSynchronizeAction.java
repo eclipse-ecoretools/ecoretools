@@ -12,11 +12,11 @@
  * $Id: ToggleSynchronizeAction.java,v 1.5 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.actions;
+package org.eclipse.emf.ecoretools.ui.actions;
 
-import org.eclipse.emf.ecoretools.internal.Activator;
-import org.eclipse.emf.ecoretools.internal.Messages;
-import org.eclipse.emf.ecoretools.internal.views.AnalysisView;
+import org.eclipse.emf.ecoretools.ui.Activator;
+import org.eclipse.emf.ecoretools.ui.Messages;
+import org.eclipse.emf.ecoretools.ui.views.AnalysisView;
 import org.eclipse.jface.action.Action;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 

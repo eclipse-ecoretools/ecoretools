@@ -12,16 +12,15 @@
  * $Id: AnalysisView.java,v 1.5 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.views;
+package org.eclipse.emf.ecoretools.ui.views;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.internal.Activator;
-import org.eclipse.emf.ecoretools.internal.Messages;
-import org.eclipse.emf.ecoretools.internal.actions.RefreshAction;
-import org.eclipse.emf.ecoretools.internal.actions.ToggleSynchronizeAction;
+import org.eclipse.emf.ecoretools.ui.Activator;
+import org.eclipse.emf.ecoretools.ui.actions.RefreshAction;
+import org.eclipse.emf.ecoretools.ui.actions.ToggleSynchronizeAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.util.LocalSelectionTransfer;
@@ -97,9 +96,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 		if (obj != null) {
 			analyzedObject = obj;
 			refresh(analyzedObject);
-		} else {
-			getViewSite().getActionBars().getStatusLineManager().setErrorMessage(Messages.AnalysisView_InvalidSelection);
-		}
+		} 
 	}
 
 	/**
@@ -171,9 +168,11 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart,
 	 *      org.eclipse.jface.viewers.ISelection)
 	 */
+	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		if (selection instanceof IStructuredSelection) {
 			EObject selectedObject = getSelection((IStructuredSelection) selection);
+			
 			if (selectedObject != null) {
 				lastValidObject = selectedObject;
 			}
@@ -252,7 +251,6 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 
 	protected static void prepareViewerForDragToSirius(TreeViewer viewer) {
 		/* Configure viewer drag and drop behavior */
-        final int ops = DND.DROP_COPY | DND.DROP_MOVE;
         final Transfer[] transfers = new Transfer[] { TRANSFER };        
 
         final int dndOperations = DND.DROP_COPY | DND.DROP_MOVE | DND.DROP_LINK;

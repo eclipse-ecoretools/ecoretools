@@ -56,6 +56,7 @@
         <module>../org.eclipse.emf.ecoretools.tabbedproperties</module>
         <module>../org.eclipse.emf.ecoretools.explorer.contextual</module>
         <module>../org.eclipse.emf.ecoretools.explorer.contextual-feature</module>
+        <module>../org.eclipse.emf.ecoretools.ui</module>
         <module>../org.eclipse.emf.ecoretools.update</module>
         <module>../org.eclipse.emf.ecoretools.update-all</module>
     </modules>

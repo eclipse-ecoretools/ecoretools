@@ -13,47 +13,6 @@
 -->
 <plugin>
 
-	<extension point="org.eclipse.ui.views">
-		<view
-			id="org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView"
-			class="org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView"
-			name="%ecore.class.hierarchy.view.title"
-			icon="icons/eview16/eclass_hi_nav.gif"/>
-		<view
-			id="org.eclipse.emf.ecoretools.internal.views.EReferencesView"
-			class="org.eclipse.emf.ecoretools.internal.views.EReferencesView"
-			name="%ecore.class.reference.view.title"
-			icon="icons/eview16/eref_nav.gif"/>
-	</extension>
-
-	<extension point="org.eclipse.ui.popupMenus">
-		<objectContribution
-			id="org.eclipse.emf.ecoretools.EClassAnalysis"
-			adaptable="true"
-			objectClass="org.eclipse.emf.ecore.EClass">
-			<action
-				id="org.eclipse.emf.ecoretools.internal.actions.ShowReferencesAction"
-				class="org.eclipse.emf.ecoretools.internal.actions.ShowReferencesAction"
-				enablesFor="1"
-				icon="icons/eview16/eref_nav.gif"
-				label="%menu.show.references"/>
-			<action
-				id="org.eclipse.emf.ecoretools.internal.actions.ShowHierarchyAction"
-				class="org.eclipse.emf.ecoretools.internal.actions.ShowHierarchyAction"
-				enablesFor="1"
-				icon="icons/eview16/eclass_hi_nav.gif"
-				label="%menu.show.hierarchy"/>
-		</objectContribution>
-	</extension>
-
-	<extension point="org.eclipse.ui.perspectives">
-		<perspective
-			id="org.eclipse.emf.ecoretools.perspective"
-			class="org.eclipse.emf.ecoretools.internal.ui.EcoreToolsPerspective"
-			name="%ecore.perspective.name"
-			icon="icons/eview16/etools_persp.gif"/>
-	</extension>
-
 	<!-- Add the Ecore Nature -->
 	<extension id="ecorenature" name="%ecore.nature.name" point="org.eclipse.core.resources.natures">
 		<runtime>

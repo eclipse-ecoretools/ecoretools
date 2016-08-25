@@ -21,20 +21,6 @@ public class Messages extends NLS {
 
 	public static String Activator_Error;
 
-	public static String AnalysisView_InvalidSelection;
-
-	public static String EClassHierarchyView_Ascendant;
-
-	public static String EClassHierarchyView_Descendant;
-
-	public static String EClassHierarchyView_InvalidSelection;
-
-	public static String EClassHierarchyView_RefreshHierarchy;
-
-	public static String EReferencesView_InvalidSelection;
-
-	public static String EReferencesView_RefreshReferences;
-
 	public static String NewEcoreProjectWizard_CaseSensitive_warning;
 
 	public static String NewEcoreProjectWizard_CreationProblems;
@@ -46,18 +32,6 @@ public class Messages extends NLS {
 	public static String NewEcoreProjectWizard_InternalError;
 
 	public static String NewEcoreProjectWizard_NewEcoreProject;
-
-	public static String RefreshAction_Refresh;
-
-	public static String RefreshAction_Refresh_description;
-
-	public static String RefreshAction_Refresh_tooltip;
-
-	public static String ToggleSynchronizeAction_Synchronize;
-
-	public static String ToggleSynchronizeAction_Synchronize_description;
-
-	public static String ToggleSynchronizeAction_Synchronize_tooltip;
 
 	static {
 		// initialize resource bundle

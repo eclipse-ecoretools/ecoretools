@@ -11,10 +11,10 @@
  *
  * $Id: EcoreToolsPerspective.java,v 1.5 2008/04/28 15:49:07 jlescot Exp $
  **********************************************************************/
-package org.eclipse.emf.ecoretools.internal.ui;
+package org.eclipse.emf.ecoretools.ui;
 
-import org.eclipse.emf.ecoretools.internal.views.EClassHierarchyView;
-import org.eclipse.emf.ecoretools.internal.views.EReferencesView;
+import org.eclipse.emf.ecoretools.ui.views.EClassHierarchyView;
+import org.eclipse.emf.ecoretools.ui.views.EReferencesView;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;

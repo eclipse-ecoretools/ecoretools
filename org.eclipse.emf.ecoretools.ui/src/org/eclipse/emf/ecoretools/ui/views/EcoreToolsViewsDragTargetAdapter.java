@@ -8,14 +8,14 @@
  * Contributors:
  *    Obeo - initial API and implementation
  *******************************************************************************/
-package org.eclipse.emf.ecoretools.internal.views;
+package org.eclipse.emf.ecoretools.ui.views;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.internal.views.EReferencesContentProvider.WrappedEClass;
+import org.eclipse.emf.ecoretools.ui.views.EReferencesContentProvider.WrappedEClass;
 import org.eclipse.jface.util.TransferDragSourceListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;

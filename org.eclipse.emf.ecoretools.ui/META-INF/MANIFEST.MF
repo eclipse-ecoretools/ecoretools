@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.emf.ecoretools.ui;singleton:=true
+Bundle-Version: 3.2.0.qualifier
+Bundle-Activator: org.eclipse.emf.ecoretools.ui.Activator
+Bundle-Vendor: %Bundle-Vendor
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.sirius.diagram,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.navigator.resources
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.emf.ecoretools.ui.views

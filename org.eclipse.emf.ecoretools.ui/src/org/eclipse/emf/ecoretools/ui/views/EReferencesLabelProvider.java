@@ -12,10 +12,10 @@
  * $Id: EReferencesLabelProvider.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.views;
+package org.eclipse.emf.ecoretools.ui.views;
 
 import org.eclipse.emf.ecore.provider.EcoreItemProviderAdapterFactory;
-import org.eclipse.emf.ecoretools.internal.views.EReferencesContentProvider.WrappedEClass;
+import org.eclipse.emf.ecoretools.ui.views.EReferencesContentProvider.WrappedEClass;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;

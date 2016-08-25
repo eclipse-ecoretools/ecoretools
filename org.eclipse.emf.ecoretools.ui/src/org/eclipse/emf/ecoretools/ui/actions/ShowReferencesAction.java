@@ -12,15 +12,15 @@
  * $Id: ShowReferencesAction.java,v 1.2 2008/04/28 08:41:20 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.actions;
+package org.eclipse.emf.ecoretools.ui.actions;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.internal.Activator;
-import org.eclipse.emf.ecoretools.internal.views.EReferencesView;
+import org.eclipse.emf.ecoretools.ui.Activator;
+import org.eclipse.emf.ecoretools.ui.views.EReferencesView;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;

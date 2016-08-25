@@ -12,7 +12,7 @@
  * $Id: EReferencesContentProvider.java,v 1.3 2008/04/28 08:41:19 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.views;
+package org.eclipse.emf.ecoretools.ui.views;
 
 import java.util.ArrayList;
 import java.util.Iterator;

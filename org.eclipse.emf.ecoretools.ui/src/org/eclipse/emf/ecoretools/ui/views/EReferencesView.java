@@ -12,7 +12,7 @@
  * $Id: EReferencesView.java,v 1.6 2008/05/19 09:26:31 jlescot Exp $
  **********************************************************************/
 
-package org.eclipse.emf.ecoretools.internal.views;
+package org.eclipse.emf.ecoretools.ui.views;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.internal.Messages;
+import org.eclipse.emf.ecoretools.ui.Messages;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.swt.SWT;
@@ -79,7 +79,7 @@ public class EReferencesView extends AnalysisView {
 
 
 	/**
-	 * @see org.eclipse.emf.ecoretools.internal.views.AnalysisView#refresh(org.eclipse.emf.ecore.EObject)
+	 * @see org.eclipse.emf.ecoretools.ui.views.AnalysisView#refresh(org.eclipse.emf.ecore.EObject)
 	 */
 	@Override
 	protected void refresh(EObject object) {
@@ -96,13 +96,7 @@ public class EReferencesView extends AnalysisView {
 			if (selectedEClass != null) {
 				refreshJob = createRefreshJob(selectedEClass);
 				refreshJob.schedule(200);
-			} else {
-				getViewSite().getActionBars().getStatusLineManager().setErrorMessage(Messages.EReferencesView_InvalidSelection);
-			}
-			// // TODO see whether we want to refresh the view even if the
-			// selected element is not an EClass
-			// } else {
-			// referencesTree.setInput(object);
+			} 
 		}
 	}
 
