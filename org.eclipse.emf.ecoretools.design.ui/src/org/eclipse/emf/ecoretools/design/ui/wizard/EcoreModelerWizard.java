@@ -43,6 +43,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.sirius.business.api.helper.SiriusUtil;
 import org.eclipse.sirius.business.api.modelingproject.ModelingProject;
+import org.eclipse.sirius.business.api.query.DViewQuery;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.common.tools.api.util.ReflectionHelper;
 import org.eclipse.sirius.common.tools.api.util.StringUtil;
@@ -297,7 +298,7 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
                 if (!session.getSelectedViews().isEmpty()) {
                     Set<DRepresentation> representationsToOpen = Sets.newLinkedHashSet();
                     for (DView view : session.getSelectedViews()) {
-                        for (DRepresentation dRepresentation : view.getOwnedRepresentations()) {
+                        for (DRepresentation dRepresentation : new DViewQuery(view).getLoadedRepresentations()) {
                             representationsToOpen.add(dRepresentation);
                         }
                     }
