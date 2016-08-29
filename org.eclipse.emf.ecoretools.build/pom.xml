@@ -215,7 +215,7 @@
                     <url>http://download.eclipse.org/cbi/updates/license</url>
                 </repository>
                 <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/4.0.x/neon</url>
+                    <url>http://download.eclipse.org/sirius/updates/nightly/4.1.x/neon</url>
                 </repository>
                  <repository><id>acceleo for AQL</id><layout>p2</layout>
                      <url>http://download.eclipse.org/acceleo/updates/nightly/latest</url>
