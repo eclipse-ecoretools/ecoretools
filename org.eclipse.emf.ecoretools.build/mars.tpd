@@ -20,4 +20,5 @@ location "http://download.eclipse.org/releases/mars" {
 }
 location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/neon/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
+	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
