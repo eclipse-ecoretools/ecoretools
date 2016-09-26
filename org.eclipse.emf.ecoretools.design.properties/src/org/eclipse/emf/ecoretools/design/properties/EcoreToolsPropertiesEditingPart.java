@@ -47,7 +47,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 /**
  * @author <a href="mailto:goulwen.lefur@obeo.fr">Goulwen Le Fur</a>
  */
-public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertiesEditionPart implements IFormPropertiesEditionPart, ISection {
+public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertiesEditionPart
+		implements IFormPropertiesEditionPart, ISection {
 
 	/**
 	 * The tabbed property sheet page
@@ -60,7 +61,8 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 	private EditingDomain editingDomain;
 
 	/**
-	 * The current selected object or the first object in the selection when multiple objects are selected.
+	 * The current selected object or the first object in the selection when
+	 * multiple objects are selected.
 	 */
 	protected EObject eObject;
 
@@ -118,8 +120,8 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 		if (!(selection instanceof IStructuredSelection)) {
 			return;
 		}
-		if (resolveSemanticObject(((IStructuredSelection)selection).getFirstElement()) != null) {
-			EObject newEObject = resolveSemanticObject(((IStructuredSelection)selection).getFirstElement());
+		if (resolveSemanticObject(((IStructuredSelection) selection).getFirstElement()) != null) {
+			EObject newEObject = resolveSemanticObject(((IStructuredSelection) selection).getFirstElement());
 			if (newEObject != eObject) {
 				eObject = newEObject;
 				if (eObject != null) {
@@ -153,7 +155,7 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 				}
 			}
 		}
-		eObjectList = ((IStructuredSelection)selection).toList();
+		eObjectList = ((IStructuredSelection) selection).toList();
 		this.usedAsPropertySection = true;
 	}
 
@@ -182,27 +184,26 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 	}
 
 	private void refreshComponent() {
-		DomainPropertiesEditionContext propertiesEditingContext = new DomainPropertiesEditionContext(null,
-				null, editingDomain, adapterFactory, eObject);
-		propertiesEditionComponent = propertiesEditingContext.createPropertiesEditingComponent(
-				IPropertiesEditionComponent.LIVE_MODE, getDescriptor());
+		DomainPropertiesEditionContext propertiesEditingContext = new DomainPropertiesEditionContext(null, null,
+				editingDomain, adapterFactory, eObject);
+		propertiesEditionComponent = propertiesEditingContext
+				.createPropertiesEditingComponent(IPropertiesEditionComponent.LIVE_MODE, getDescriptor());
 		if (propertiesEditionComponent != null) {
 			this.adapterFactory = propertiesEditionComponent.getEditingContext().getAdapterFactory();
-			propertiesEditingContext.setHelper(new BindingViewHelper(propertiesEditingContext,
-					tabbedPropertySheetPage.getWidgetFactory()));
-			propertiesEditionComponent.setPropertiesEditionPart(
-					propertiesEditionComponent.translatePart(getDescriptor()), 0, this);
+			propertiesEditingContext.setHelper(
+					new BindingViewHelper(propertiesEditingContext, tabbedPropertySheetPage.getWidgetFactory()));
+			propertiesEditionComponent
+					.setPropertiesEditionPart(propertiesEditionComponent.translatePart(getDescriptor()), 0, this);
 			propertiesEditionComponent.setLiveEditingDomain(editingDomain);
-			if (this.editingComposite==null) {
-			   editingComposite = this.createFigure(container, tabbedPropertySheetPage.getWidgetFactory());
+			if (this.editingComposite == null) {
+				editingComposite = this.createFigure(container, tabbedPropertySheetPage.getWidgetFactory());
 			}
 			if (editingComposite != null) {
 				editingComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
 				container.layout();
 			}
 			if (messageManager != null) {
-				messageManager.processMessage(new PropertiesValidationEditionEvent(null,
-						Diagnostic.OK_INSTANCE));
+				messageManager.processMessage(new PropertiesValidationEditionEvent(null, Diagnostic.OK_INSTANCE));
 				propertiesEditionComponent.addListener(new IPropertiesEditionListener() {
 
 					public void firePropertiesChanged(IPropertiesEditionEvent event) {
@@ -218,8 +219,7 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 	 * @param descriptor
 	 */
 	protected void initSemanticContents() {
-		propertiesEditionComponent.initPart(propertiesEditionComponent.translatePart(getDescriptor()), 1,
-				eObject);
+		propertiesEditionComponent.initPart(propertiesEditionComponent.translatePart(getDescriptor()), 1, eObject);
 	}
 
 	/**
@@ -295,21 +295,41 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 			Object tab = descriptor.get(key);
 			Method getSectionAtIndex = getMethod(tab, "getSectionAtIndex", int.class); //$NON-NLS-1$
 			if (getSectionAtIndex != null) {
-				Method getSections = getMethod(tab, "getSections"); //$NON-NLS-1$
-				Object tabSections = callMethod(tab, getSections);
-				if (tabSections != null)
-				{
-					final ISection[] sections = (ISection[])tabSections;
-					for (int i = 0; i < sections.length; i++) 
-					{
-						Object result = callMethod(tab, getSectionAtIndex, new Integer(i));
-						if (result == this) 
-						{
-							Method getId = getMethod(key, "getId"); //$NON-NLS-1$
-							if (getId != null) 
-							{
-								String id = (String)callMethod(key, getId); 
-								return id;
+				Object result = callMethod(tab, getSectionAtIndex, new Integer(0));
+				if (result == this) {
+					Method getId = getMethod(key, "getId"); //$NON-NLS-1$
+					if (getId != null) {
+						String id = (String) callMethod(key, getId);
+						return id;
+					}
+				} else {
+					if (result != null) {
+						boolean oldLegacySectionAccessible = false;
+						Field legacySectionField = null;
+						try {
+							Class<?> cls = result.getClass();
+							legacySectionField = cls.getDeclaredField("legacySection"); //$NON-NLS-1$
+							oldLegacySectionAccessible = legacySectionField.isAccessible();
+							legacySectionField.setAccessible(true);
+							result = legacySectionField.get(result);
+							if (result == this) {
+								Method getId = getMethod(key, "getId"); //$NON-NLS-1$
+								if (getId != null) {
+									String id = (String) callMethod(key, getId);
+									return id;
+								}
+							}
+						} catch (NoSuchFieldException e) {
+							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
+						} catch (SecurityException e) {
+							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
+						} catch (IllegalArgumentException e) {
+							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
+						} catch (IllegalAccessException e) {
+							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
+						} finally {
+							if (legacySectionField != null) {
+								legacySectionField.setAccessible(oldLegacySectionAccessible);
 							}
 						}
 					}
@@ -321,36 +341,51 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 
 	private Map<?, ?> getPageDescriptor(TabbedPropertySheetPage propertySheetPage) {
 		Field descriptorToTabField = null;
-		boolean oldAccessible = false;
+		Field pageField = null;
+		Object page = propertySheetPage;
+		boolean oldDescriptorToTabAccessible = false;
+		boolean oldPageAccessible = false;
 		try {
 			Class<?> cls = propertySheetPage.getClass();
-			while (!cls.equals(TabbedPropertySheetPage.class)) {
+			while (!cls.getName().contains("TabbedPropertySheetPage")) {
 				cls = cls.getSuperclass();
 			}
-			descriptorToTabField = cls.getDeclaredField("descriptorToTab"); //$NON-NLS-1$
-			oldAccessible = descriptorToTabField.isAccessible();
+			try {
+				descriptorToTabField = cls.getDeclaredField("descriptorToTab"); //$NON-NLS-1$
+			} catch (NoSuchFieldException e) {
+				pageField = cls.getDeclaredField("page"); //$NON-NLS-1$
+				cls = pageField.getType();
+				oldPageAccessible = pageField.isAccessible();
+				pageField.setAccessible(true);
+				page = pageField.get(propertySheetPage);
+				descriptorToTabField = cls.getDeclaredField("descriptorToTab"); //$NON-NLS-1$
+			}
+			oldDescriptorToTabAccessible = descriptorToTabField.isAccessible();
 			descriptorToTabField.setAccessible(true);
-			return (Map<?, ?>)descriptorToTabField.get(propertySheetPage);
+			return (Map<?, ?>) descriptorToTabField.get(page);
 
 		} catch (SecurityException e) {
 
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
+			EEFRuntimePlugin.getDefault()
+					.logError(EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
 		} catch (NoSuchFieldException e) {
 
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
+			EEFRuntimePlugin.getDefault()
+					.logError(EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
 		} catch (IllegalArgumentException e) {
 
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
+			EEFRuntimePlugin.getDefault()
+					.logError(EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
 		} catch (IllegalAccessException e) {
 
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
+			EEFRuntimePlugin.getDefault()
+					.logError(EEFRuntimeUIMessages.PropertiesEditionSection_descriptorToTab_not_found, e);
 		} finally {
 			if (descriptorToTabField != null) {
-				descriptorToTabField.setAccessible(oldAccessible);
+				descriptorToTabField.setAccessible(oldDescriptorToTabAccessible);
+			}
+			if (pageField != null) {
+				pageField.setAccessible(oldPageAccessible);
 			}
 		}
 		return null;
@@ -369,8 +404,8 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 		try {
 			return source.getClass().getDeclaredMethod(name, argsType);
 		} catch (Exception e) {
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_method_not_found + name, e);
+			EEFRuntimePlugin.getDefault()
+					.logError(EEFRuntimeUIMessages.PropertiesEditionSection_method_not_found + name, e);
 		}
 		return null;
 	}
@@ -388,9 +423,8 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 		try {
 			return method.invoke(source, args);
 		} catch (Exception e) {
-			EEFRuntimePlugin.getDefault().logError(
-					EEFRuntimeUIMessages.PropertiesEditionSection_error_occured_on + method.getName()
-							+ EEFRuntimeUIMessages.PropertiesEditionSection_call, e);
+			EEFRuntimePlugin.getDefault().logError(EEFRuntimeUIMessages.PropertiesEditionSection_error_occured_on
+					+ method.getName() + EEFRuntimeUIMessages.PropertiesEditionSection_call, e);
 		}
 		return null;
 	}
