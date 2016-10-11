@@ -20,8 +20,7 @@
             name="Ecore Modeling Project"
             preferredPerspectives="org.eclipse.sirius.ui.tools.perspective.design,org.eclipse.emf.ecoretools.perspective"
             project="true">
-         <description>Create a new Modeling project to specify a domain model using the Ecore Language. 
-The created project is a Java plug-in project with EMF dependencies and EMF models.</description>
+         <description>Create a new Modeling project to specify a domain model using the Ecore Language.</description>
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
