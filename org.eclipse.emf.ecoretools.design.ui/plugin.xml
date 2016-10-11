@@ -32,6 +32,10 @@
             actionClass="org.eclipse.emf.ecoretools.design.ui.action.CreateDynamicInstanceAction"
             id="org.eclipse.emf.ecoretools.design.action.createDynamicInstanceActionID">
       </javaActions>
+      <javaActions
+            actionClass="org.eclipse.emf.ecoretools.design.ui.action.GenerateAllAction"
+            id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+      </javaActions>
    </extension>
    <!--
    <extension
