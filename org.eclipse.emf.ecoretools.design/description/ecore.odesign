@@ -3,6 +3,7 @@
   <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/entities.png&quot;/>&#xA;&lt;img src=&quot;/icons/full/wizban/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore ecorebin">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage']" documentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides a class diagram to represent EClasses, EDatatypes, EAttributes and their relationships.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/entities.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" endUserDocumentation="A class diagram to represent EClasses, EDatatypes, EAttributes and their relationships." name="Entities" label="Entities in a Class Diagram" titleExpression="aql:self.name + ' class diagram'" pasteDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Paste%20Anything']" domainClass="ecore.EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+      <metamodel href="http://www.eclipse.org/emf/2002/GenModel#/"/>
       <filters xsi:type="filter:CompositeFilterDescription" name="Hide class content">
         <filters xsi:type="filter:MappingFilter" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation']"/>
       </filters>
@@ -192,7 +193,7 @@
           </style>
         </containerMappings>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="service:getValidsForDiagram(containerView)" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="aql:self.getValidsForDiagram(containerView)->asSet() - diagram.getDisplayedEClassifiers()" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
@@ -333,7 +334,7 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
-            <tools xsi:type="tool_1:ContainerCreationDescription" name="Abstract Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
+            <tools xsi:type="tool_1:ContainerCreationDescription" name="Abstract Class" precondition="aql:(not container.oclIsKindOf(ecore::EClass)) or (not container.abstract)" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>

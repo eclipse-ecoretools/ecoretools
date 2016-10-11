@@ -239,6 +239,18 @@ public class DesignServices extends EReferenceServices {
         }
         return result;
     }
+    
+    public Set<EClassifier> getDisplayedEClassifiers(DSemanticDiagram diagram) {
+        Set<EClassifier> result = Sets.newLinkedHashSet();
+        Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(), DNodeList.class);
+        while (it.hasNext()) {
+            DNodeList dec = it.next();
+            if (dec.getTarget() instanceof EClassifier && dec.isVisible()) {
+                result.add((EClassifier) dec.getTarget());
+            }
+        }
+        return result;
+    }
 
     private Set<EClass> getInternalEClasses(DSemanticDiagram diagram) {
         Set<EClass> result = Sets.newLinkedHashSet();
