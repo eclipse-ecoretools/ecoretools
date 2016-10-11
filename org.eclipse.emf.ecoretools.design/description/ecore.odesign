@@ -193,8 +193,8 @@
           </style>
         </containerMappings>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:PopupMenu" name="Generate" precondition="aql:OrderedSet{self.target}->select(e | e.eInverse().eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))">
-            <menuItemDescription xsi:type="tool:OperationAction" name="Generate Model Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.modelDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+          <ownedTools xsi:type="tool:PopupMenu" name="Generate">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Model Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.modelDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
@@ -203,7 +203,7 @@
                 </firstModelOperations>
               </initialOperation>
             </menuItemDescription>
-            <menuItemDescription xsi:type="tool:OperationAction" name="Generate Edit Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.editDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Edit Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.editDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
@@ -212,7 +212,7 @@
                 </firstModelOperations>
               </initialOperation>
             </menuItemDescription>
-            <menuItemDescription xsi:type="tool:OperationAction" name="Generate Editor Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.editorDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Editor Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.editorDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
@@ -221,7 +221,7 @@
                 </firstModelOperations>
               </initialOperation>
             </menuItemDescription>
-            <menuItemDescription xsi:type="tool:OperationAction" name="Generate Tests Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.testsDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Tests Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.testsDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
@@ -230,7 +230,7 @@
                 </firstModelOperations>
               </initialOperation>
             </menuItemDescription>
-            <menuItemDescription xsi:type="tool:OperationAction" name="Generate All" precondition="aql:OrderedSet{self.target}->select(e | e.eInverse().eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+            <menuItemDescription xsi:type="tool:OperationAction" name=" All" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">

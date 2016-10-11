@@ -60,52 +60,54 @@ public class GenerateAllAction implements IExternalJavaAction {
 		final List<GenModel> gens = Lists
 				.newArrayList(Iterables.filter((Collection<?>) genmodelsParamValue, GenModel.class));
 
-		Display.getDefault().syncExec(new Runnable() {
+		if (gens.size() > 0) {
+			Display.getDefault().syncExec(new Runnable() {
 
-			public void run() {
-				IEditorPart activeEditorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-						.getActiveEditor();
-				GeneratorUIUtil.GeneratorOperation operation = new GeneratorUIUtil.GeneratorOperation(
-						activeEditorPart.getSite().getShell());
-				for (GenModel genModel : gens) {
-					genModel.reconcile();
-					genModel.setCanGenerate(true);
-					Generator generator = new Generator();
-					generator.setInput(genModel);
-					if (scope.contains("model")) {
-						operation.addGeneratorAndArguments(generator, genModel,
-								GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
-								CodeGenEcorePlugin.INSTANCE.getString("_UI_ModelProject_name"));
+				public void run() {
+					IEditorPart activeEditorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+							.getActiveEditor();
+					GeneratorUIUtil.GeneratorOperation operation = new GeneratorUIUtil.GeneratorOperation(
+							activeEditorPart.getSite().getShell());
+					for (GenModel genModel : gens) {
+						genModel.reconcile();
+						genModel.setCanGenerate(true);
+						Generator generator = new Generator();
+						generator.setInput(genModel);
+						if (scope.contains("model")) {
+							operation.addGeneratorAndArguments(generator, genModel,
+									GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
+									CodeGenEcorePlugin.INSTANCE.getString("_UI_ModelProject_name"));
+						}
+						if (scope.contains("edit")) {
+							operation.addGeneratorAndArguments(generator, genModel,
+									GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE,
+									CodeGenEcorePlugin.INSTANCE.getString("_UI_EditProject_name"));
+						}
+						if (scope.contains("editor")) {
+							operation.addGeneratorAndArguments(generator, genModel,
+									GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE,
+									CodeGenEcorePlugin.INSTANCE.getString("_UI_EditorProject_name"));
+						}
+						if (scope.contains("tests")) {
+							operation.addGeneratorAndArguments(generator, genModel,
+									GenBaseGeneratorAdapter.TESTS_PROJECT_TYPE,
+									CodeGenEcorePlugin.INSTANCE.getString("_UI_TestsProject_name"));
+						}
 					}
-					if (scope.contains("edit")) {
-						operation.addGeneratorAndArguments(generator, genModel,
-								GenBaseGeneratorAdapter.EDIT_PROJECT_TYPE,
-								CodeGenEcorePlugin.INSTANCE.getString("_UI_EditProject_name"));
-					}
-					if (scope.contains("editor")) {
-						operation.addGeneratorAndArguments(generator, genModel,
-								GenBaseGeneratorAdapter.EDITOR_PROJECT_TYPE,
-								CodeGenEcorePlugin.INSTANCE.getString("_UI_EditorProject_name"));
-					}
-					if (scope.contains("tests")) {
-						operation.addGeneratorAndArguments(generator, genModel,
-								GenBaseGeneratorAdapter.TESTS_PROJECT_TYPE,
-								CodeGenEcorePlugin.INSTANCE.getString("_UI_TestsProject_name"));
+					try {
+
+						IWorkbench wb = PlatformUI.getWorkbench();
+						IProgressService ps = wb.getProgressService();
+						ps.busyCursorWhile(operation);
+
+					} catch (Exception exception) {
+						// Something went wrong that shouldn't.
+						//
+						GenModelEditPlugin.INSTANCE.log(exception);
 					}
 				}
-				try {
-
-					IWorkbench wb = PlatformUI.getWorkbench();
-					IProgressService ps = wb.getProgressService();
-					ps.busyCursorWhile(operation);
-
-				} catch (Exception exception) {
-					// Something went wrong that shouldn't.
-					//
-					GenModelEditPlugin.INSTANCE.log(exception);
-				}
-			}
-		});
+			});
+		}
 	}
 
 }
