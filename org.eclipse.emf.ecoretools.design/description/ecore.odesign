@@ -193,7 +193,7 @@
           </style>
         </containerMappings>
         <toolSections name="Existing Elements">
-          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" forceRefresh="true" candidatesExpression="aql:self.getValidsForDiagram(containerView)->asSet() - diagram.getDisplayedEClassifiers()" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif" windowTitle="Select element to add in diagram">
+          <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="aql:container.oclIsKindOf(ecore::EPackage)" forceRefresh="true" candidatesExpression="aql:self.getValidsForDiagram(containerView)->asSet() - diagram.getDisplayedEClassifiers()" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
             <container name="container"/>
@@ -317,7 +317,7 @@
         </toolSections>
         <toolSections name="Classifier">
           <ownedTools xsi:type="tool_1:ToolGroup" name="Classifier">
-            <tools xsi:type="tool_1:ContainerCreationDescription" documentation="M1+Y" name="Class" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
+            <tools xsi:type="tool_1:ContainerCreationDescription" documentation="M1+Y" name="Class" precondition="aql:(not container.oclIsKindOf(ecore::EClass)) or (container.abstract) or (container.interface)" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
@@ -352,7 +352,7 @@
                 </firstModelOperations>
               </initialOperation>
             </tools>
-            <tools xsi:type="tool_1:ContainerCreationDescription" name="Interface" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
+            <tools xsi:type="tool_1:ContainerCreationDescription" name="Interface" precondition="aql:(not container.oclIsKindOf(ecore::EClass)) or (not container.interface)" containerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_interface.gif" extraMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']">
               <variable name="container"/>
               <viewVariable name="containerView"/>
               <initialOperation>
