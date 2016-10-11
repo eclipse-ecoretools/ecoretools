@@ -772,7 +772,7 @@
             <view name="views"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Open Entities User Guide Action" id="org.eclipse.sirius.ui.business.api.action.openHelpSection">
-                <parameters name="href" value="/org.eclipse.emf.ecoretools.design/doc/user-guide.html#design.entities"/>
+                <parameters name="href" value="/org.eclipse.emf.ecoretools.doc/doc/EcoreTools User Manual.html#EntitiesDiagramEditor"/>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
