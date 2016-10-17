@@ -196,23 +196,40 @@
    
    
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
       <propertyContributor
-            contributorId="org.eclipse.sirius.diagram.ui"            
+            contributorId="org.eclipse.sirius.diagram.ui"
+            labelProvider="org.eclipse.sirius.diagram.ui.internal.sheet.SiriusSheetLabelProvider" 
             typeMapper="org.eclipse.emf.ecoretools.tabbedproperties.TabbedPropertiesTypeMapper">
-         <propertyCategory category="domain"/>
-         <propertyCategory category="visual"/>
-         <propertyCategory category="extra"/>
-         <propertyCategory category="documentation"/>
-         <propertyCategory category="advanced"/>
-            <propertyCategory
-               category="default">
+         <propertyCategory
+               category="semantic &amp; extension">
          </propertyCategory>
          <propertyCategory
-               category="extended">
+               category="semantic">
+         </propertyCategory>
+         <propertyCategory
+               category="extension">
+         </propertyCategory>
+         <propertyCategory
+               category="behaviors">
+         </propertyCategory>
+         <propertyCategory
+               category="documentation">
+         </propertyCategory>
+         <!--
+         <propertyCategory category="validation"/>
+         -->
+         <propertyCategory
+               category="style">
+         </propertyCategory>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="domain"/>
+         <propertyCategory category="extra"/>
+         <propertyCategory
+               category="misc">
          </propertyCategory>
       </propertyContributor>
-   </extension>   
+   </extension>
 
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
