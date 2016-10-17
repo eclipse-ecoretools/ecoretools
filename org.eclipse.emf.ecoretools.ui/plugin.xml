@@ -45,10 +45,11 @@
                   <with
                      variable="activeMenuSelection">
                   <iterate
+                        ifEmpty="false"
                         operator="and">
-                     <instanceof
-                           value="org.eclipse.emf.ecore.EObject">
-                     </instanceof>
+                     <adapt
+                           type="org.eclipse.emf.ecore.EObject">
+                     </adapt>
                   </iterate>
                </with>
             </visibleWhen>
@@ -58,6 +59,19 @@
                icon="icons/eview16/eclass_hi_nav.gif"
                label="%ecoretools.menu.eclass.information.command"
                style="push">
+               <visibleWhen
+                  checkEnabled="false">
+                  <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <adapt
+                           type="org.eclipse.emf.ecore.EObject">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
       <menuContribution
@@ -69,13 +83,14 @@
                label="%ecoretools.menu.eclass.references.command">
             <visibleWhen
                   checkEnabled="false">
-               <with
+                  <with
                      variable="activeMenuSelection">
                   <iterate
+                        ifEmpty="false"
                         operator="and">
-                     <instanceof
-                           value="org.eclipse.emf.ecore.EObject">
-                     </instanceof>
+                     <adapt
+                           type="org.eclipse.emf.ecore.EObject">
+                     </adapt>
                   </iterate>
                </with>
             </visibleWhen>
@@ -85,6 +100,19 @@
                icon="icons/eview16/eref_nav.gif"
                label="%ecoretools.menu.eclass.references.command"
                style="push">
+               <visibleWhen
+                  checkEnabled="false">
+                  <with
+                     variable="activeMenuSelection">
+                  <iterate
+                        ifEmpty="false"
+                        operator="and">
+                     <adapt
+                           type="org.eclipse.emf.ecore.EObject">
+                     </adapt>
+                  </iterate>
+               </with>
+            </visibleWhen>
          </command>
       </menuContribution>
    </extension>
