@@ -320,7 +320,9 @@ public abstract class EcoreToolsPropertiesEditingPart extends CompositePropertie
 								}
 							}
 						} catch (NoSuchFieldException e) {
-							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
+							/*
+							 * this is expected when using the new property framework
+							 */							
 						} catch (SecurityException e) {
 							EEFRuntimePlugin.getDefault().logError("Error while getting legacySection.", e);
 						} catch (IllegalArgumentException e) {
