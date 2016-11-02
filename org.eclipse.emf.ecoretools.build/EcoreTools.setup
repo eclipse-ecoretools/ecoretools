@@ -283,7 +283,7 @@
   </setupTask>
   <setupTask
       xsi:type="pde:TargetPlatformTask"
-      id="Target Platform - EcoreTools"
+      id="ecoretools-target-platform"
       name="${ecoretools.target.platform}">
     <description>Target Platform used for the new install.</description>
   </setupTask>
