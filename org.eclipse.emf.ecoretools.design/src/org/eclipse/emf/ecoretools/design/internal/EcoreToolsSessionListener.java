@@ -70,7 +70,7 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
         } catch (SecurityException e) {
         }
 
-        newSession.getEventBroker().addLocalTrigger(GenModelAutoReload.SHOULD_RELOAD, new GenModelAutoReload(newSession.getTransactionalEditingDomain()));
+        newSession.getEventBroker().addLocalTrigger(GenModelAutoReload.SHOULD_RELOAD, new GenModelAutoReload(newSession));
         newSession.getEventBroker().addLocalTrigger(GenModelUpdateGenFeatureContainment.SHOULD_UPDATE, new GenModelUpdateGenFeatureContainment(newSession));
         newSession.getEventBroker().addLocalTrigger(AutosizeTrigger.IS_GMF_NODE_ATTACHMENT, new AutosizeTrigger(newSession.getTransactionalEditingDomain()));
         newSession.getEventBroker().addLocalTrigger(EOppositeSetUnset.SHOULD_UPDATE, new EOppositeSetUnset(newSession));

@@ -11,8 +11,13 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.Collection;
+import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenBase;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -21,14 +26,13 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.RecordingCommand;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
+import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * a {@link ModelChangeTrigger} which reconcile any gemodel in the editing
@@ -39,10 +43,10 @@ import com.google.common.collect.Lists;
  */
 public class GenModelAutoReload implements ModelChangeTrigger {
 
-	private TransactionalEditingDomain domain;
+	private Session session;
 
-	public GenModelAutoReload(TransactionalEditingDomain set) {
-		this.domain = set;
+	public GenModelAutoReload(Session newSession) {
+		this.session = newSession;
 	}
 
 	public static final NotificationFilter IS_TOUCH = new NotificationFilter.Custom() {
@@ -63,8 +67,8 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 	public static final NotificationFilter IS_ATTACHMENT = new NotificationFilter.Custom() {
 
 		public boolean matches(Notification input) {
-			return (input.getFeature() instanceof EReference && ((EReference) input
-					.getFeature()).isContainment() == true);
+			return (input.getFeature() instanceof EReference
+					&& ((EReference) input.getFeature()).isContainment() == true);
 
 		}
 	};
@@ -72,21 +76,18 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 	public static final NotificationFilter IS_EREFENCE_CONTAINMENT = new NotificationFilter.Custom() {
 
 		public boolean matches(Notification input) {
-			return (input.getFeature() == EcorePackage.eINSTANCE
-					.getEReference_Containment());
+			return (input.getFeature() == EcorePackage.eINSTANCE.getEReference_Containment());
 
 		}
 	};
 
-	public static final NotificationFilter SHOULD_RELOAD = IS_TOUCH.negated()
-			.and(IS_ECORE.and(IS_ATTACHMENT));
+	public static final NotificationFilter SHOULD_RELOAD = IS_TOUCH.negated().and(IS_ECORE.and(IS_ATTACHMENT));
 
 	public static final int PRIORITY = 0;
 
-	public Option<Command> localChangesAboutToCommit(
-			Collection<Notification> notifications) {
+	public Option<Command> localChangesAboutToCommit(Collection<Notification> notifications) {
 		final Collection<GenModel> genModels = Lists.newArrayList();
-		for (Resource res : domain.getResourceSet().getResources()) {
+		for (Resource res : session.getTransactionalEditingDomain().getResourceSet().getResources()) {
 			for (EObject root : res.getContents()) {
 				if (root instanceof GenModel) {
 					genModels.add((GenModel) root);
@@ -94,16 +95,7 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 			}
 		}
 		if (genModels.size() > 0) {
-			Command result = new RecordingCommand(domain) {
-
-				@Override
-				protected void doExecute() {
-					for (GenModel genmodel : genModels) {
-						genmodel.reconcile();
-					}
-
-				}
-			};
+			Command result = new ProcessGenModels(session, genModels);
 			return Options.newSome(result);
 		}
 		return Options.newNone();
@@ -111,6 +103,84 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 
 	public int priority() {
 		return PRIORITY;
+	}
+
+}
+
+class ProcessGenModels extends RecordingCommand {
+
+	private Session session;
+
+	private Collection<GenModel> genmodels;
+
+	public ProcessGenModels(Session session, Collection<GenModel> genmodels) {
+		super(session.getTransactionalEditingDomain());
+		this.session = session;
+		this.genmodels = genmodels;
+	}
+
+	@Override
+	protected void doExecute() {
+
+		/*
+		 * The genXXX.reconcile() methods are relying on the fact that the
+		 * ecoreXXX reference is an unresolvable proxy to cleanup the
+		 * corresponding element. This is not the case when the model is being
+		 * edited "in live" as the Java reference still holds.
+		 */
+		Set<GenBase> toDelete = Sets.newLinkedHashSet();
+		for (GenModel genmodel : genmodels) {
+
+			for (GenPackage genpackage : genmodel.getGenPackages()) {
+				cleanupGenPackages(toDelete, genpackage);
+
+				cleanupGenClasses(toDelete, genpackage);
+
+			}
+
+		}
+		for (GenBase genFeature : toDelete) {
+			session.getModelAccessor().eDelete(genFeature, session.getSemanticCrossReferencer());
+		}
+
+		for (GenModel genmodel : genmodels) {
+			if (!genmodel.reconcile()) {
+				System.out.println("Genmodel reconcile was not successful");
+			}
+		}
+
+	}
+
+	private void cleanupGenPackages(Set<GenBase> toDelete, GenPackage genpackage) {
+		for (GenPackage subpackage : genpackage.getSubGenPackages()) {
+			if (subpackage.getEcorePackage() != null
+					&& subpackage.getEcorePackage().getESuperPackage() != genpackage.getEcorePackage()) {
+				toDelete.add(subpackage);
+			} else {
+				cleanupGenClasses(toDelete, subpackage);
+			}
+		}
+	}
+
+	private void cleanupGenClasses(Set<GenBase> toDelete, GenPackage genpackage) {
+		for (GenClass genclass : genpackage.getGenClasses()) {
+
+			if (genclass.getEcoreClass() != null
+					&& genclass.getEcoreClass().getEPackage() != genpackage.getEcorePackage()) {
+				toDelete.add(genclass);
+			} else {
+				/*
+				 * any feature/eclass vs genfeature/genclass mismatch should be
+				 * fixed by deleting the corresponding genfeature.
+				 */
+				for (GenFeature feat : genclass.getGenFeatures()) {
+					if (feat.getEcoreFeature() != null && feat.getEcoreFeature().getEContainingClass() != feat
+							.getGenClass().getEcoreClassifier()) {
+						toDelete.add(feat);
+					}
+				}
+			}
+		}
 	}
 
 }
