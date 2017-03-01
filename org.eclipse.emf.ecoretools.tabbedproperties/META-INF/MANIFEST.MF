@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.tabbedproperties;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.2.1.qualifier
 Bundle-Activator: org.eclipse.emf.ecoretools.tabbedproperties.internal.TabbedPropertiesPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.views.properties.tabbed;visibility:=reexport,
