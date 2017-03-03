@@ -22,4 +22,4 @@ Export-Package: org.eclipse.emf.ecoretools.design.properties.ecore.com
  org.eclipse.emf.ecoretools.design.properties.parts,org.eclipse.emf.ec
  oretools.design.properties.parts.forms,org.eclipse.emf.ecoretools.des
  ign.properties.parts.impl
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

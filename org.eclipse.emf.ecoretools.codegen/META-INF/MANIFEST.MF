@@ -20,5 +20,5 @@ Require-Bundle: org.eclipse.core.resources,
 Export-Package: org.eclipse.emf.ecoretools.codegen.builder,org.eclipse
  .emf.ecoretools.codegen.builder.genmodelBuilder,org.eclipse.emf.ecore
  tools.codegen.builder.ui
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .

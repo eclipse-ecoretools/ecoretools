@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.ui,
 Export-Package: org.eclipse.emf.ecoretools.registration,org.eclipse.em
  f.ecoretools.registration.popup.actions,org.eclipse.emf.ecoretools.re
  gistration.view
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
