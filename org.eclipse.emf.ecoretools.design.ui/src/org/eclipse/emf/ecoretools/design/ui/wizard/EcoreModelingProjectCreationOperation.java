@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -31,6 +32,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.codegen.ecore.Generator;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.util.BasicMonitor;
@@ -44,7 +47,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecoretools.design.EcoreToolsViewpoints;
 import org.eclipse.emf.ecoretools.design.service.EcoreToolsDesignPlugin;
 import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.emf.transaction.RecordingCommand;
@@ -65,7 +67,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -77,305 +82,356 @@ import com.google.common.collect.Sets;
 @SuppressWarnings("restriction")
 public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperation {
 
-    private IProject project;
+	private IProject project;
 
-    private EObject rootObject;
+	private EObject rootObject;
 
-    private String ecoreResourceName;
+	private String ecoreResourceName;
 
-    private String genModelResourceName;
+	private String genModelResourceName;
 
-    private String representationsResourceName;
+	private String representationsResourceName;
 
-    private Set<Viewpoint> selectedViewpoints;
+	private Set<Viewpoint> selectedViewpoints;
 
-    private IFile ecoreModel;
+	private IFile ecoreModel;
 
-    private IWorkbench workbench;
+	private IWorkbench workbench;
 
-    private IPath genModelContainerPath;
+	private IPath genModelContainerPath;
 
-    private IPath genModelProjectLocation;
+	private IPath genModelProjectLocation;
 
-    private IWorkingSet[] selectedWorkingSets;
+	private IWorkingSet[] selectedWorkingSets;
 
-    private Set<DRepresentation> createdRepresentations = Sets.newLinkedHashSet();
+	private Set<DRepresentation> createdRepresentations = Sets.newLinkedHashSet();
 
-    /**
-     * Default constructor.
-     * 
-     * @param project
-     *            the empty EMF project
-     * @param rootObject
-     *            the root object of the semantic resource (i.e. the metamodel)
-     * @param representationsResourceName
-     *            the name of the representations resource
-     * @param selectedViewpoints
-     *            the set of {@link Viewpoint} to have selected on this created
-     *            Modeling Project
-     */
-    public EcoreModelingProjectCreationOperation(EObject rootObject, String ecoreResourceName, String genModelResourceName, String representationsResourceName, Set<Viewpoint> selectedViewpoints,
-            IWorkbench workbench, IPath genModelContainerPath, IPath genModelProjectLocation, IWorkingSet[] selectedWorkingSets) {
-        super();
-        this.workbench = workbench;
-        this.rootObject = rootObject;
-        this.ecoreResourceName = ecoreResourceName;
-        this.genModelContainerPath = genModelContainerPath;
-        this.genModelProjectLocation = genModelProjectLocation;
-        this.genModelResourceName = genModelResourceName;
-        this.representationsResourceName = representationsResourceName;
-        this.selectedViewpoints = selectedViewpoints;
-        this.selectedWorkingSets = selectedWorkingSets;
-    }
+	/**
+	 * Default constructor.
+	 * 
+	 * @param project
+	 *            the empty EMF project
+	 * @param rootObject
+	 *            the root object of the semantic resource (i.e. the metamodel)
+	 * @param representationsResourceName
+	 *            the name of the representations resource
+	 * @param selectedViewpoints
+	 *            the set of {@link Viewpoint} to have selected on this created
+	 *            Modeling Project
+	 */
+	public EcoreModelingProjectCreationOperation(EObject rootObject, String ecoreResourceName,
+			String genModelResourceName, String representationsResourceName, Set<Viewpoint> selectedViewpoints,
+			IWorkbench workbench, IPath genModelContainerPath, IPath genModelProjectLocation,
+			IWorkingSet[] selectedWorkingSets) {
+		super();
+		this.workbench = workbench;
+		this.rootObject = rootObject;
+		this.ecoreResourceName = ecoreResourceName;
+		this.genModelContainerPath = genModelContainerPath;
+		this.genModelProjectLocation = genModelProjectLocation;
+		this.genModelResourceName = genModelResourceName;
+		this.representationsResourceName = representationsResourceName;
+		this.selectedViewpoints = selectedViewpoints;
+		this.selectedWorkingSets = selectedWorkingSets;
+	}
 
-    @Override
-    protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-        try {
-            monitor.beginTask("Create modeling resources: ", 100); //$NON-NLS-1$
-            try {
-                modifyWorkspace(monitor);
-            } catch (UnsupportedEncodingException e) {
-                logError(e);
-            } catch (IOException e) {
-                logError(e);
-            }
-            /*
-             * Create modeling resources: ecore, genmodel and aird : 50
-             */
-            final Session createdSession = createModelingResources(project, monitor);
-            if (createdSession != null) {
-                /*
-                 * Create an entities diagram for the EPackage we just created.
-                 */
+	@Override
+	protected void execute(final IProgressMonitor monitor)
+			throws CoreException, InvocationTargetException, InterruptedException {
+		try {
+			monitor.beginTask("Create modeling resources: ", 100); //$NON-NLS-1$
+			try {
+				modifyWorkspace(monitor);
+			} catch (UnsupportedEncodingException e) {
+				logError(e);
+			} catch (IOException e) {
+				logError(e);
+			}
+			/*
+			 * Create modeling resources: ecore, genmodel and aird : 50
+			 */
+			final Session createdSession = createModelingResources(project, monitor);
+			if (createdSession != null) {
+				/*
+				 * Create an entities diagram for the EPackage we just created.
+				 */
 
-                URI ecoreUri = URI.createPlatformResourceURI(ecoreModel.getFullPath().toOSString(), true);
-                Resource ecoreRes = null;
-                Iterator<Resource> it = createdSession.getSemanticResources().iterator();
-                while (ecoreRes == null && it.hasNext()) {
-                    Resource sem = it.next();
-                    if (ecoreUri.equals(sem.getURI())) {
-                        ecoreRes = sem;
-                    }
-                }
-                if (ecoreRes != null) {
-                    for (final EPackage root : Iterables.filter(ecoreRes.getContents(), EPackage.class)) {
-                        final RepresentationDescription entities = findRepresentationDescription(root, "Entities", createdSession);
-                        if (entities != null) {
-                            createdSession.getTransactionalEditingDomain().getCommandStack().execute(new RecordingCommand(createdSession.getTransactionalEditingDomain()) {
+				URI ecoreUri = URI.createPlatformResourceURI(ecoreModel.getFullPath().toOSString(), true);
+				Resource ecoreRes = null;
+				Iterator<Resource> it = createdSession.getSemanticResources().iterator();
+				while (ecoreRes == null && it.hasNext()) {
+					Resource sem = it.next();
+					if (ecoreUri.equals(sem.getURI())) {
+						ecoreRes = sem;
+					}
+				}
+				if (ecoreRes != null) {
+					for (final EPackage root : Iterables.filter(ecoreRes.getContents(), EPackage.class)) {
+						final RepresentationDescription entities = findRepresentationDescription(root, "Entities",
+								createdSession);
+						if (entities != null) {
+							createdSession.getTransactionalEditingDomain().getCommandStack()
+									.execute(new RecordingCommand(createdSession.getTransactionalEditingDomain()) {
 
-                                @Override
-                                protected void doExecute() {
-                                    DRepresentation created = DialectManager.INSTANCE.createRepresentation(root.getName(), root, entities, createdSession, monitor);
-                                    if (created != null) {
-                                        createdRepresentations.add(created);
-                                    }
-                                }
-                            });
-                            createdSession.save(monitor);
-                        }
-                    }
-                }
-            }
-            monitor.subTask("prepare the modeling project..."); //$NON-NLS-1$ 
-            convertToModelingProject(new SubProgressMonitor(monitor, 20));
-        } finally {
-            monitor.done();
-        }
-    }
+										@Override
+										protected void doExecute() {
+											DRepresentation created = DialectManager.INSTANCE.createRepresentation(
+													root.getName(), root, entities, createdSession, monitor);
+											if (created != null) {
+												createdRepresentations.add(created);
+											}
+										}
+									});
+							createdSession.save(monitor);
+						}
+					}
+				}
+			}
+			monitor.subTask("prepare the modeling project..."); //$NON-NLS-1$
+			convertToModelingProject(new SubProgressMonitor(monitor, 20));
+		} finally {
+			monitor.done();
+		}
+	}
 
-    private RepresentationDescription findRepresentationDescription(final EPackage ePackage, String descriptionName, Session session) {
-        RepresentationDescription found = null;
-        Iterator<RepresentationDescription> it = DialectManager.INSTANCE.getAvailableRepresentationDescriptions(session.getSelectedViewpoints(true), ePackage).iterator();
-        while (found == null && it.hasNext()) {
-            RepresentationDescription desc = it.next();
-            if (descriptionName.equals(desc.getName())) {
-                found = desc;
-            }
-        }
-        return found;
-    }
+	private RepresentationDescription findRepresentationDescription(final EPackage ePackage, String descriptionName,
+			Session session) {
+		RepresentationDescription found = null;
+		Iterator<RepresentationDescription> it = DialectManager.INSTANCE
+				.getAvailableRepresentationDescriptions(session.getSelectedViewpoints(true), ePackage).iterator();
+		while (found == null && it.hasNext()) {
+			RepresentationDescription desc = it.next();
+			if (descriptionName.equals(desc.getName())) {
+				found = desc;
+			}
+		}
+		return found;
+	}
 
-    protected void logError(Throwable e) {
-        final IStatus status = new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, IStatus.ERROR, e.getMessage(), e);
-        EcoreToolsDesignPlugin.INSTANCE.log(status);
-    }
+	protected void logError(Throwable e) {
+		final IStatus status = new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, IStatus.ERROR,
+				e.getMessage(), e);
+		EcoreToolsDesignPlugin.INSTANCE.log(status);
+	}
 
-    public void modifyWorkspace(IProgressMonitor progressMonitor) throws CoreException, UnsupportedEncodingException, IOException {
-        project = Generator.createEMFProject(new Path(genModelContainerPath.toString()), genModelProjectLocation, Collections.<IProject> emptyList(), progressMonitor,
-                Generator.EMF_MODEL_PROJECT_STYLE | Generator.EMF_PLUGIN_PROJECT_STYLE);
+	public void modifyWorkspace(IProgressMonitor progressMonitor)
+			throws CoreException, UnsupportedEncodingException, IOException {
+		project = Generator.createEMFProject(new Path(genModelContainerPath.toString()), genModelProjectLocation,
+				Collections.<IProject>emptyList(), progressMonitor,
+				Generator.EMF_MODEL_PROJECT_STYLE | Generator.EMF_PLUGIN_PROJECT_STYLE);
 
-        if (selectedWorkingSets != null) {
-            workbench.getWorkingSetManager().addToWorkingSets(project, selectedWorkingSets);
-        }
+		if (selectedWorkingSets != null) {
+			workbench.getWorkingSetManager().addToWorkingSets(project, selectedWorkingSets);
+		}
 
-        CodeGenUtil.EclipseUtil.findOrCreateContainer(new Path("/" + genModelContainerPath.segment(0) + "/model"), true, genModelProjectLocation, progressMonitor);
+		CodeGenUtil.EclipseUtil.findOrCreateContainer(new Path("/" + genModelContainerPath.segment(0) + "/model"), true,
+				genModelProjectLocation, progressMonitor);
 
-        PrintStream manifest = new PrintStream(URIConverter.INSTANCE.createOutputStream(URI.createPlatformResourceURI("/" + genModelContainerPath.segment(0) + "/META-INF/MANIFEST.MF", true), null),
-                false, "UTF-8");
-        manifest.println("Manifest-Version: 1.0");
-        manifest.println("Bundle-ManifestVersion: 2");
-        manifest.print("Bundle-Name: ");
-        manifest.println(genModelContainerPath.segment(0));
-        manifest.print("Bundle-SymbolicName: ");
-        manifest.print(CodeGenUtil.validPluginID(genModelContainerPath.segment(0)));
-        manifest.println("; singleton:=true");
-        manifest.println("Bundle-Version: 0.1.0.qualifier");
-        manifest.print("Require-Bundle: ");
-        String[] requiredBundles = getRequiredBundles();
-        for (int i = 0, size = requiredBundles.length; i < size;) {
-            manifest.print(requiredBundles[i]);
-            if (++i == size) {
-                manifest.println();
-                break;
-            } else {
-                manifest.println(",");
-                manifest.print(" ");
-            }
-        }
-        manifest.close();
-    }
+		PrintStream manifest = new PrintStream(URIConverter.INSTANCE.createOutputStream(
+				URI.createPlatformResourceURI("/" + genModelContainerPath.segment(0) + "/META-INF/MANIFEST.MF", true),
+				null), false, "UTF-8");
+		manifest.println("Manifest-Version: 1.0");
+		manifest.println("Bundle-ManifestVersion: 2");
+		manifest.print("Bundle-Name: ");
+		manifest.println(genModelContainerPath.segment(0));
+		manifest.print("Bundle-SymbolicName: ");
+		manifest.print(CodeGenUtil.validPluginID(genModelContainerPath.segment(0)));
+		manifest.println("; singleton:=true");
+		manifest.println("Bundle-Version: 0.1.0.qualifier");
+		manifest.print("Require-Bundle: ");
+		String[] requiredBundles = getRequiredBundles();
+		for (int i = 0, size = requiredBundles.length; i < size;) {
+			manifest.print(requiredBundles[i]);
+			if (++i == size) {
+				manifest.println();
+				break;
+			} else {
+				manifest.println(",");
+				manifest.print(" ");
+			}
+		}
+		manifest.close();
+	}
 
-    protected String[] getRequiredBundles() {
-        return new String[] { "org.eclipse.emf.ecore" };
-    }
+	protected String[] getRequiredBundles() {
+		return new String[] { "org.eclipse.emf.ecore;visibility:=reexport","org.eclipse.core.runtime" };
+	}
 
-    /**
-     * .
-     * 
-     * @param project
-     * @return the semantic ecore model.
-     */
-    private Session createModelingResources(IProject project, IProgressMonitor monitor) {
+	/**
+	 * .
+	 * 
+	 * @param project
+	 * @return the semantic ecore model.
+	 */
+	private Session createModelingResources(IProject project, IProgressMonitor monitor) {
 
-        /* create the ecore file */
-        monitor.subTask("create the ecore model."); //$NON-NLS-1$ 
-        String modelPath = '/' + project.getName() + "/model/"; //$NON-NLS-1$ 
-        String ecorePath = createEcoreResource(modelPath);
-        IFile ecoreFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(ecorePath));
-        monitor.worked(10);
+		/* create the ecore file */
+		monitor.subTask("create the ecore model."); //$NON-NLS-1$
+		String modelPath = '/' + project.getName() + "/model/"; //$NON-NLS-1$
+		String ecorePath = createEcoreResource(modelPath);
+		IFile ecoreFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(ecorePath));
+		monitor.worked(10);
 
-        /* create the genmodel file */
-        monitor.subTask("create the genmodel..."); //$NON-NLS-1$ 
-        createGenModel(ecoreFile, modelPath, new SubProgressMonitor(monitor, 15));
+		/* create the genmodel file */
+		monitor.subTask("create the genmodel..."); //$NON-NLS-1$
+		createGenModel(project, ecoreFile, modelPath, new SubProgressMonitor(monitor, 15));
 
-        /*
-         * Create the aird file and create a Session from the session model URI
-         */
-        monitor.subTask("create the representation model..."); //$NON-NLS-1$ 
-        final Session session = createAird(project, URI.createPlatformResourceURI(modelPath + representationsResourceName, true), monitor);
-        monitor.worked(15);
+		/*
+		 * Create the aird file and create a Session from the session model URI
+		 */
+		monitor.subTask("create the representation model..."); //$NON-NLS-1$
+		final Session session = createAird(project,
+				URI.createPlatformResourceURI(modelPath + representationsResourceName, true), monitor);
+		monitor.worked(15);
 
-        if (session == null) {
-            return null;
-        } else {
-            /* prepare session ressource set for ecore models */
-            session.getTransactionalEditingDomain().getResourceSet().getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
-        }
+		if (session == null) {
+			return null;
+		} else {
+			/* prepare session ressource set for ecore models */
+			session.getTransactionalEditingDomain().getResourceSet().getURIConverter().getURIMap()
+					.putAll(EcorePlugin.computePlatformURIMap());
+		}
 
-        monitor.subTask("prepare ecore modeling project..."); //$NON-NLS-1$
-        CompoundCommand cc = new CompoundCommand("Prepare Ecore Modeling Project"); //$NON-NLS-1$ 
-        cc.append(new AddSemanticResourceCommand(session, URI.createPlatformResourceURI(ecorePath, true), new SubProgressMonitor(monitor, 1)));
-        cc.append(new ChangeViewpointSelectionCommand(session, new ViewpointSelectionCallback(), selectedViewpoints, Collections.<Viewpoint> emptySet(), new SubProgressMonitor(monitor, 1)));
+		monitor.subTask("prepare ecore modeling project..."); //$NON-NLS-1$
+		CompoundCommand cc = new CompoundCommand("Prepare Ecore Modeling Project"); //$NON-NLS-1$
+		cc.append(new AddSemanticResourceCommand(session, URI.createPlatformResourceURI(ecorePath, true),
+				new SubProgressMonitor(monitor, 1)));
+		cc.append(new ChangeViewpointSelectionCommand(session, new ViewpointSelectionCallback(), selectedViewpoints,
+				Collections.<Viewpoint>emptySet(), new SubProgressMonitor(monitor, 1)));
 
-        monitor.subTask("link the created models..."); //$NON-NLS-1$ 
-        session.getTransactionalEditingDomain().getCommandStack().execute(cc);
-        monitor.worked(10);
+		monitor.subTask("link the created models..."); //$NON-NLS-1$
+		session.getTransactionalEditingDomain().getCommandStack().execute(cc);
+		monitor.worked(10);
 
-        session.save(monitor);
-        monitor.worked(15);
+		session.save(monitor);
+		monitor.worked(15);
 
-        ecoreModel = ecoreFile;
-        return session;
-    }
+		ecoreModel = ecoreFile;
+		return session;
+	}
 
-    private void convertToModelingProject(IProgressMonitor monitor) {
-        /* Convert the created emf project to a modeling project. */
-        try {
-            ModelingProjectManager.INSTANCE.convertToModelingProject(project, monitor);
-        } catch (CoreException e) {
-            logError(e);
-        }
-    }
+	private void convertToModelingProject(IProgressMonitor monitor) {
+		/* Convert the created emf project to a modeling project. */
+		try {
+			ModelingProjectManager.INSTANCE.convertToModelingProject(project, monitor);
+		} catch (CoreException e) {
+			logError(e);
+		}
+	}
 
-    private Session createAird(IProject project, URI representationsURI, IProgressMonitor monitor) {
-        final Session session;
-        Option<ModelingProject> modelingProject = ModelingProject.asModelingProject(project);
-        if (modelingProject.some()) {
-            session = modelingProject.get().getSession();
-        } else {
-            Session tempSession = null;
-            SessionCreationOperation sessionCreationOperation = new DefaultLocalSessionCreationOperation(representationsURI, monitor);
-            try {
-                sessionCreationOperation.execute();
-                tempSession = sessionCreationOperation.getCreatedSession();
-            } catch (CoreException e) {
-                logError(e);
-            }
-            if (tempSession != null) {
-                session = tempSession;
-            } else {
-                session = null;
-            }
-        }
-        return session;
-    }
+	private Session createAird(IProject project, URI representationsURI, IProgressMonitor monitor) {
+		final Session session;
+		Option<ModelingProject> modelingProject = ModelingProject.asModelingProject(project);
+		if (modelingProject.some()) {
+			session = modelingProject.get().getSession();
+		} else {
+			Session tempSession = null;
+			SessionCreationOperation sessionCreationOperation = new DefaultLocalSessionCreationOperation(
+					representationsURI, monitor);
+			try {
+				sessionCreationOperation.execute();
+				tempSession = sessionCreationOperation.getCreatedSession();
+			} catch (CoreException e) {
+				logError(e);
+			}
+			if (tempSession != null) {
+				session = tempSession;
+			} else {
+				session = null;
+			}
+		}
+		return session;
+	}
 
-    private void createGenModel(IFile ecoreModel, String modelPath, IProgressMonitor progressMonitor) {
-        final EcoreImporter genModelCreator = new EcoreImporter();
+	private void createGenModel(IProject project, IFile ecoreModel, String modelPath,
+			IProgressMonitor progressMonitor) {
+		final EcoreImporter genModelCreator = new EcoreImporter();
 
-        genModelCreator.setGenModelContainerPath(new Path(modelPath));
-        genModelCreator.setGenModelFileName(genModelResourceName);
-        genModelCreator.setModelFile(ecoreModel);
-        genModelCreator.getFileExtensions().clear();
-        genModelCreator.getFileExtensions().add(ecoreModel.getFileExtension());
+		genModelCreator.setGenModelContainerPath(new Path(modelPath));
+		genModelCreator.setGenModelFileName(genModelResourceName);
+		genModelCreator.setModelFile(ecoreModel);
+		genModelCreator.getFileExtensions().clear();
+		genModelCreator.getFileExtensions().add(ecoreModel.getFileExtension());
 
-        Monitor monitor = BasicMonitor.toMonitor(progressMonitor);
-        try {
-            genModelCreator.computeEPackages(monitor);
-            genModelCreator.adjustEPackages(monitor);
-            genModelCreator.prepareGenModelAndEPackages(monitor);
-            genModelCreator.saveGenModelAndEPackages(monitor);
-        } catch (Exception exception) {
-            IStatus status = new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, IStatus.ERROR, "Error occurs during generating the genmodel file.", exception);//$NON-NLS-1$
-            EcoreToolsDesignPlugin.INSTANCE.log(status);
-        } finally {
-            monitor.done();
-        }
+		Monitor monitor = BasicMonitor.toMonitor(progressMonitor);
+		try {
+			genModelCreator.computeEPackages(monitor);
+			genModelCreator.adjustEPackages(monitor);
+			genModelCreator.prepareGenModelAndEPackages(monitor);
+			if (genModelCreator.getGenModel() != null && project.getName() != null) {
+				changeDefaultSettings(project.getName(), genModelCreator.getGenModel());
+			}
 
-    }
+			genModelCreator.saveGenModelAndEPackages(monitor);
+		} catch (Exception exception) {
+			IStatus status = new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, IStatus.ERROR,
+					"Error occurs during generating the genmodel file.", exception);//$NON-NLS-1$
+			EcoreToolsDesignPlugin.INSTANCE.log(status);
+		} finally {
+			monitor.done();
+		}
 
-    private String createEcoreResource(String modelPath) {
-        /*
-         * Create a resource for this file. Don't specify acontent type, as it
-         * could be Ecore or EMOF.Create in a other resourceset and let the
-         * workspace monitor for modeling project add it as semantic resource.
-         */
-        final ResourceSet rs = new ResourceSetImpl();
-        rs.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
-        String platformPath = modelPath + ecoreResourceName;
-        final URI semanticModelURI = URI.createPlatformResourceURI(platformPath, true);
-        final Resource resource = rs.createResource(semanticModelURI);
+	}
 
-        /* Add the initial model object to the contents. */
-        if (rootObject != null) {
-            resource.getContents().add(rootObject);
-        }
+	private void changeDefaultSettings(String projectName, GenModel genModel) {
 
-        try {
-            Map<Object, Object> options = new HashMap<Object, Object>();
-            options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
-            resource.save(options);
-        } catch (IOException e) {
-            /* do nothing it should always work */
-        }
-        return platformPath;
-    }
+		if (genModel.getModelDirectory() != null && genModel.getModelDirectory().endsWith("/src")) {
+			genModel.setModelDirectory(genModel.getModelDirectory() + "-gen");
+		}
+		if (genModel.getEditDirectory() != null && genModel.getEditDirectory().endsWith("/src")) {
+			genModel.setEditDirectory(genModel.getEditDirectory() + "-gen");
+		}
+		if (genModel.getEditorDirectory() != null && genModel.getEditorDirectory().endsWith("/src")) {
+			genModel.setEditorDirectory(genModel.getEditorDirectory() + "-gen");
+		}
 
-    public IFile getEcoreModel() {
-        return ecoreModel;
-    }
+		genModel.setTestsDirectory(null);
+		genModel.setCodeFormatting(true);
 
-    public IProject getNewProject() {
-        return this.project;
-    }
+		List<String> prjNameSegments = Lists.newArrayList(Splitter.on('.').split(projectName.toLowerCase()));
+		for (GenPackage p : genModel.getGenPackages()) {
+			if (prjNameSegments.size() > 0 && p.getEcorePackage() != null && p.getEcorePackage().getName() != null
+					&& Iterables.getLast(prjNameSegments).toLowerCase()
+							.equals(p.getEcorePackage().getName().toLowerCase())) {
+				prjNameSegments.remove(prjNameSegments.size() - 1);
+			}
+			p.setBasePackage(Joiner.on('.').join(prjNameSegments));
+		}
+
+	}
+
+	private String createEcoreResource(String modelPath) {
+		/*
+		 * Create a resource for this file. Don't specify acontent type, as it
+		 * could be Ecore or EMOF.Create in a other resourceset and let the
+		 * workspace monitor for modeling project add it as semantic resource.
+		 */
+		final ResourceSet rs = new ResourceSetImpl();
+		rs.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
+		String platformPath = modelPath + ecoreResourceName;
+		final URI semanticModelURI = URI.createPlatformResourceURI(platformPath, true);
+		final Resource resource = rs.createResource(semanticModelURI);
+
+		/* Add the initial model object to the contents. */
+		if (rootObject != null) {
+			resource.getContents().add(rootObject);
+		}
+
+		try {
+			Map<Object, Object> options = new HashMap<Object, Object>();
+			options.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
+			resource.save(options);
+		} catch (IOException e) {
+			/* do nothing it should always work */
+		}
+		return platformPath;
+	}
+
+	public IFile getEcoreModel() {
+		return ecoreModel;
+	}
+
+	public IProject getNewProject() {
+		return this.project;
+	}
 }

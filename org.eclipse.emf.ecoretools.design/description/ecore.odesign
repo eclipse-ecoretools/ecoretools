@@ -194,6 +194,15 @@
         </containerMappings>
         <toolSections name="Existing Elements">
           <ownedTools xsi:type="tool:PopupMenu" name="Generate">
+            <menuItemDescription xsi:type="tool:OperationAction" name=" All" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+                  <parameters name="genmodels" value="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
+                  <parameters name="scope" value="model, edit, editor, tests"/>
+                </firstModelOperations>
+              </initialOperation>
+            </menuItemDescription>
             <menuItemDescription xsi:type="tool:OperationAction" name="Model Code" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->select(m | m.modelDirectory.size() > 0)->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
               <view name="views"/>
               <initialOperation>
@@ -227,15 +236,6 @@
                 <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
                   <parameters name="genmodels" value="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
                   <parameters name="scope" value="tests"/>
-                </firstModelOperations>
-              </initialOperation>
-            </menuItemDescription>
-            <menuItemDescription xsi:type="tool:OperationAction" name=" All" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->size() > 0" icon="/org.eclipse.emf.ecoretools.design/icons/full/obj16/GenModel.gif">
-              <view name="views"/>
-              <initialOperation>
-                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
-                  <parameters name="genmodels" value="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
-                  <parameters name="scope" value="model, edit, editor, tests"/>
                 </firstModelOperations>
               </initialOperation>
             </menuItemDescription>
