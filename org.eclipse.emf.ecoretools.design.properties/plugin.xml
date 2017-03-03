@@ -196,7 +196,6 @@
    
    
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
-      <?gmfgen generated="false"?>
       <propertyContributor
             contributorId="org.eclipse.sirius.diagram.ui"
             labelProvider="org.eclipse.sirius.diagram.ui.internal.sheet.SiriusSheetLabelProvider" 

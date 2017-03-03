@@ -87,7 +87,6 @@
   </extension>
     
      <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
-      <?gmfgen generated="true"?>
       <objectContribution
             id="org.eclipse.emf.ecoretools.design.action.InitDiagram"
             nameFilter="*.ecore"
