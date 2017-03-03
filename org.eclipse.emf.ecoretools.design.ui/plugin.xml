@@ -36,6 +36,10 @@
             actionClass="org.eclipse.emf.ecoretools.design.ui.action.GenerateAllAction"
             id="org.eclipse.emf.ecoretools.design.action.generateAllID">
       </javaActions>
+      <javaActions
+            actionClass="org.eclipse.emf.ecoretools.design.ui.action.OpenConfirmationDialogAction"
+            id="org.eclipse.emf.ecoretools.design.action.openConfirmationDialogID">
+      </javaActions>
    </extension>
    <!--
    <extension

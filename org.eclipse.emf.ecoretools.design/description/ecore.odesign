@@ -240,6 +240,28 @@
               </initialOperation>
             </menuItemDescription>
           </ownedTools>
+          <ownedTools xsi:type="tool:PopupMenu" name="CDO Native" precondition="aql:self.hasCDOBundle()">
+            <menuItemDescription xsi:type="tool:OperationAction" name="Enable support" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->size() > 0">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="OpenConfirmationDialog" id="org.eclipse.emf.ecoretools.design.action.openConfirmationDialogID">
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.enableCDOGen(OrderedSet{views->filter(viewpoint::DSemanticDecorator).target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet())"/>
+                  <parameters name="message" value="The selected generator model will be updated:&#xA;&#xA;Set Feature Delegation = Reflective&#xA;Set Root Extends Class = org.eclipse.emf.internal.cdo.CDOObjectImpl&#xA;Set Root Extends Interface = org.eclipse.emf.cdo.CDOObject&#xA;Added Model Plugin Variables = CDO=org.eclipse.emf.cdo &#xA;Created CDO.MF marker file&#xA;&#xA;You need to regenerate the code to make these changes effective. &#xA;"/>
+                  <parameters name="title" value="The selected generator model will be updated:&#xA;&#xA;Set Feature Delegation = Reflective&#xA;Set Root Extends Class = org.eclipse.emf.internal.cdo.CDOObjectImpl&#xA;Set Root Extends Interface = org.eclipse.emf.cdo.CDOObject&#xA;Add Model Plugin Variables = CDO=org.eclipse.emf.cdo &#xA;Create CDO.MF marker file&#xA;&#xA;You need to regenerate the code to make these changes effective. "/>
+                </firstModelOperations>
+              </initialOperation>
+            </menuItemDescription>
+            <menuItemDescription xsi:type="tool:OperationAction" name="Disable support" precondition="aql:OrderedSet{views.target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet()->size() > 0">
+              <view name="views"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ExternalJavaAction" name="OpenConfirmationDialog" id="org.eclipse.emf.ecoretools.design.action.openConfirmationDialogID">
+                  <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.disableCDOGen(OrderedSet{views->filter(viewpoint::DSemanticDecorator).target}.eInverse().eContainerOrSelf(genmodel::GenModel)->asSet())"/>
+                  <parameters name="message" value="The selected generator model will be updated:..."/>
+                  <parameters name="title" value="Disable CDO Native support in .genmodel ?"/>
+                </firstModelOperations>
+              </initialOperation>
+            </menuItemDescription>
+          </ownedTools>
           <ownedTools xsi:type="tool:SelectionWizardDescription" name="Add" precondition="aql:container.oclIsKindOf(ecore::EPackage)" forceRefresh="true" candidatesExpression="aql:self.getValidsForDiagram(containerView)->asSet() - diagram.getDisplayedEClassifiers()" multiple="true" tree="true" rootExpression="service:rootEPackages" childrenExpression="feature:eContents" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif" windowTitle="Select element to add in diagram">
             <element name="element"/>
             <containerView name="containerView"/>
