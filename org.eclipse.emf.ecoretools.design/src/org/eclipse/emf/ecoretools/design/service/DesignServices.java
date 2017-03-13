@@ -14,7 +14,6 @@ package org.eclipse.emf.ecoretools.design.service;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,9 +21,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenDelegationKind;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -49,6 +53,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -980,6 +985,18 @@ public class DesignServices extends EReferenceServices {
 			}
 		}
 		return cur;
+	}
+
+	public String getEClassItemIconPath(GenClass cur) throws IOException {
+		String r = "/org.eclipse.emf.ecoretools.design/icons/full/obj16/empty.gif";
+		if (cur != null && EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {
+			String icon = cur.getItemIconFileName();
+			IFile f = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(icon));
+			if (f.exists() && f.isAccessible()) {
+				r = icon;
+			}
+		}
+		return r;
 	}
 
 }
