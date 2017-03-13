@@ -387,6 +387,7 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 
 		genModel.setTestsDirectory(null);
 		genModel.setCodeFormatting(true);
+		genModel.setCreationIcons(false);
 
 		List<String> prjNameSegments = Lists.newArrayList(Splitter.on('.').split(projectName.toLowerCase()));
 		for (GenPackage p : genModel.getGenPackages()) {
