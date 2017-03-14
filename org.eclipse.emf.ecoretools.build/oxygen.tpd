@@ -1,5 +1,5 @@
 target "Oxygen Target Platform For EcoreTools" with source requirements
-location "http://download.eclipse.org/sirius/updates/nightly/4.1.x/neon" {
+location "http://download.eclipse.org/sirius/updates/nightly/5.0.x/oxygen" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
@@ -9,13 +9,13 @@ location "http://download.eclipse.org/sirius/updates/nightly/4.1.x/neon" {
 location "http://download.eclipse.org/acceleo/updates/nightly/latest" Acceleo {
 	org.eclipse.acceleo.query.feature.group lazy
 }
-location "http://download.eclipse.org/releases/neon" {
+location "http://download.eclipse.org/releases/oxygen" {
 	org.eclipse.sdk.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 }
-location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/neon/" {
+location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.8.x/neon/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
