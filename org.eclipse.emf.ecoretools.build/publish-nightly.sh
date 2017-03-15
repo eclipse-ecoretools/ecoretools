@@ -133,6 +133,7 @@ if [ "master" = "$GIT_BRANCH" ]; then
 fi
 
 echo "############################################################################"
-echo "Promoted into folder:  " $TARGET_DIR
-echo "http://" `echo $TARGET_DIR | cut -c17-`
+echo "[PUBLISH] Promoted into folder:  " $TARGET_DIR
+echo "[PUBLISH] Build accessible at http:/"`echo $TARGET_DIR | cut -c17-`
+echo "############################################################################"
 
