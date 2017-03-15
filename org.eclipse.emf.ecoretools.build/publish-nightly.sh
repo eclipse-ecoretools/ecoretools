@@ -131,3 +131,8 @@ cp -a "$WORKSPACE"/org.eclipse.emf.ecoretools.update/target/org.eclipse.emf.ecor
 if [ "master" = "$GIT_BRANCH" ]; then
     create_redirect "$TARGET_ROOT/latest/$PLATFORM" "$BUILD_TYPE/$FULL_VERSION/$PLATFORM"
 fi
+
+echo "############################################################################"
+echo "Promoted into folder:  " $TARGET_DIR
+echo "http://" `echo $TARGET_DIR | cut -c17-`
+
