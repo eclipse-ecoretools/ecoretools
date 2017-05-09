@@ -40,6 +40,14 @@
             actionClass="org.eclipse.emf.ecoretools.design.ui.action.OpenConfirmationDialogAction"
             id="org.eclipse.emf.ecoretools.design.action.openConfirmationDialogID">
       </javaActions>
+      <javaActions
+            actionClass="org.eclipse.emf.ecoretools.design.ui.action.OpenFileInEditorAction"
+            id="org.eclipse.emf.ecoretools.design.action.openFileInEditorID">
+      </javaActions>
+      <javaActions
+            actionClass="org.eclipse.emf.ecoretools.design.ui.action.OpenSelectModelElementAction"
+            id="org.eclipse.emf.ecoretools.design.action.openSelectModelElementID">
+      </javaActions>
    </extension>
    <!--
    <extension

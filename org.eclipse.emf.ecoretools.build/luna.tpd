@@ -4,6 +4,7 @@ location "http://download.eclipse.org/sirius/updates/nightly/4.0.x/neon" Sirius 
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group lazy
+	org.eclipse.sirius.properties.feature.feature.group lazy
 	
 }
 location "http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.5/S201412231052/" EEF {

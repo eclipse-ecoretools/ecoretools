@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" documentation="FORCE_LEGACY_PROPERTIES" name="EcoreTools" version="11.1.1.201610211630">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:description_2="http://www.eclipse.org/sirius/table/description/1.1.0" xmlns:filter="http://www.eclipse.org/sirius/diagram/description/filter/1.1.0" xmlns:properties="http://www.eclipse.org/sirius/properties/1.0.0" xmlns:properties-ext-widgets-reference="http://www.eclipse.org/sirius/properties/1.0.0/ext/widgets/reference" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:validation="http://www.eclipse.org/sirius/description/validation/1.1.0" name="EcoreTools" version="12.0.0.2017041100">
   <ownedViewpoints endUserDocumentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides graphical and tabular representation to design an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/entities.png&quot;/>&#xA;&lt;img src=&quot;/icons/full/wizban/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Design" modelFileExtension="ecore xcore ecorebin">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='External%20EClass%20from%20treeview'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage']" documentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Provides a class diagram to represent EClasses, EDatatypes, EAttributes and their relationships.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/entities.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" endUserDocumentation="A class diagram to represent EClasses, EDatatypes, EAttributes and their relationships." name="Entities" label="Entities in a Class Diagram" titleExpression="aql:self.name + ' class diagram'" pasteDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Paste%20Anything']" domainClass="ecore.EPackage" enablePopupBars="true">
       <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
@@ -761,12 +761,24 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:performEdit(arg0)"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool_1:DoubleClickDescription" name="ShowPropertiesView" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']">
+          <ownedTools xsi:type="tool_1:DoubleClickDescription" name="ShowPropertiesView" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='Operation'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@containerMappings[name='Dropped%20Package']">
             <element name="element"/>
             <elementView name="elementView"/>
             <initialOperation>
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:element">
-                <subModelOperations xsi:type="tool:ExternalJavaAction" name="Open EEF" id="org.eclipse.sirius.eef.actions.openPropertiesWizard"/>
+                <subModelOperations xsi:type="properties:DialogModelOperation" titleExpression="aql:'Properties for '  + input.emfEditServices(self).getText()">
+                  <buttons labelExpression="Cancel" closeDialogOnClick="true" rollbackChangesOnClose="true">
+                    <initialOperation>
+                      <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+                    </initialOperation>
+                  </buttons>
+                  <buttons labelExpression="OK" default="true" closeDialogOnClick="true">
+                    <initialOperation>
+                      <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+                    </initialOperation>
+                  </buttons>
+                  <page name="Default Page" labelExpression="aql:input.emfEditServices(self).getText()" semanticCandidateExpression="var:self" extends="//@extensions.0/@categories.0/@pages.0"/>
+                </subModelOperations>
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
@@ -811,7 +823,7 @@
           </ownedTools>
         </toolSections>
         <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" decoratorPath="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" preconditionExpression="service:viewContainerNotSemanticContainer(diagram,containerView)" domainClass="ecore.EClassifier"/>
+          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" preconditionExpression="service:viewContainerNotSemanticContainer(diagram,containerView)" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" domainClass="ecore.EClassifier"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:required">
@@ -839,7 +851,7 @@
         </customization>
       </defaultLayer>
       <additionalLayers endUserDocumentation="Add support for sub-packages." name="Package" activeByDefault="true">
-        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" pasteDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Paste%20Anything']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20no%20CamelCase']" createElements="false" domainClass="ecore.EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']">
+        <containerMappings name="Dropped Package" detailDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.3/@ownedTools[name='New%20Package%20Entities']" pasteDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.0/@ownedTools[name='Paste%20Anything']" labelDirectEdit="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='Edit%20Name%20no%20CamelCase']" createElements="false" doubleClickDescription="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@toolSections.5/@ownedTools[name='ShowPropertiesView']" domainClass="ecore.EPackage" dropDescriptions="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EClassifier%20into%20EPackage'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@additionalLayers[name='Package']/@toolSections.0/@ownedTools[name='Drop%20EPackage%20into%20EPackage']" reusedContainerMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType'] //@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']">
           <style xsi:type="style:FlatContainerStyleDescription" arcWidth="1" arcHeight="1" borderSizeComputationExpression="1" borderColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='Dark%20EPackage']" labelExpression="aql:self.name" labelAlignment="LEFT" widthComputationExpression="24" heightComputationExpression="16" backgroundStyle="Liquid" foregroundColor="//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EPackage']">
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
@@ -1061,6 +1073,8 @@
       </additionalLayers>
     </ownedRepresentations>
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" documentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>A tabular editor (spreadsheet-like) of the entities in an Ecore model.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/classes.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" endUserDocumentation="A tabular editor (spreadsheet-like) of the entities in an Ecore model." name="Classes" label="Classes in a spreadsheet" titleExpression="aql:self.name + ' class table'" domainClass="ecore.EPackage">
+      <metamodel href="http://www.eclipse.org/emf/2002/GenModel#/"/>
+      <metamodel href="http://www.eclipse.org/emf/2002/Ecore#/"/>
       <ownedLineMappings name="Classes lines" reusedInMappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Classes']/@ownedLineMappings[name='Package']" domainClass="ecore.EClass" semanticCandidatesExpression="feature:eContents">
         <foregroundConditionalStyle predicateExpression="feature:abstract">
           <style labelSize="10">
@@ -1089,6 +1103,8 @@
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.DesignServices"/>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.sirius.common.tools.api.interpreter.StandardServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.PropertiesServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ALEServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Add support for archetypes-based modeling to the Entities modeler." name="Archetype" modelFileExtension="ecore xcore ecorebin">
     <ownedRepresentationExtensions xsi:type="description_1:DiagramExtensionDescription" name="Entities With Archetypes" viewpointURI="viewpoint:/org.eclipse.emf.ecoretools.design/Design" representationName="Entities">
@@ -1185,6 +1201,8 @@
       </layers>
     </ownedRepresentationExtensions>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ArchetypeServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.PropertiesServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ALEServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Provides representation to document and review Ecore models." name="Review" modelFileExtension="ecore xcore ecorebin">
     <ownedRepresentations xsi:type="description_2:CrossTableDescription" documentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>Document the concepts in a package.&lt;/p>&#xA;&lt;br>&#xA;&lt;img src=&quot;/icons/full/wizban/documentation_table.png&quot;/>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="Documentation" label="Documentation annotations in a spreadsheet" titleExpression="aql:self.name + ' documentation table'" domainClass="ecore.EPackage">
@@ -1202,6 +1220,8 @@
       <ownedColumnMappings name="Doc Root" headerLabelExpression="Domain Documentation" domainClass="ecore.EPackage" semanticCandidatesExpression="service:getRootContainer"/>
       <intersection name="EModelElements to Doc Annotation" semanticElements="var:self" lineMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers'] //@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedLineMappings[name='Doc%20EClassifiers']/@ownedSubLines[name='Doc%20EStructural%20Features']" columnMapping="//@ownedViewpoints[name='Review']/@ownedRepresentations[name='Documentation']/@ownedColumnMappings.0" labelExpression="aql:self.value" useDomainClass="true" columnFinderExpression="service:getRootContainer" lineFinderExpression="aql:self.eContainer(ecore::EAnnotation).eContainer()" semanticCandidatesExpression="aql:self.eAllContents(ecore::EAnnotation)->select(a | a.source = 'http://www.eclipse.org/emf/2002/GenModel').details->select(a | a.key = 'documentation')" domainClass="ecore.EStringToStringMapEntry">
         <directEdit>
+          <variables name="table" documentation="The current DTable."/>
+          <variables name="line" documentation="The DLine of the current DCell."/>
           <variables name="element" documentation="The currently edited element."/>
           <variables name="lineSemantic" documentation="The semantic element corresponding to the line."/>
           <variables name="columnSemantic" documentation="The semantic element corresponding to the column (only available for Intersection Mapping)."/>
@@ -1321,6 +1341,8 @@
       </defaultLayer>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ReviewServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.PropertiesServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ALEServices"/>
   </ownedViewpoints>
   <ownedViewpoints endUserDocumentation="Adds support for EMF GenModel configuration." name="Generation" modelFileExtension="genmodel">
     <ownedRepresentations xsi:type="description_2:EditionTableDescription" documentation="&lt;html>&#xA;&lt;head>&#xA;&lt;/head>&#xA;&lt;body>&#xA;&lt;p>To set generation related parameters:&lt;/p>&#xA;&lt;ul>&#xA;  &lt;li>the property category&lt;/li>&#xA;  &lt;li>the user facing documentation for each property&lt;/li>&#xA;&lt;/ul>&#xA;&lt;br>&#xA;&lt;/body>&#xA;&lt;/html>&#xA;&#xA;&#xA;" name="GenPackage Attributes" label="Properties attributes and categories" titleExpression="aql:self.prefix + ' generation table'" domainClass="genmodel.GenPackage">
@@ -1339,6 +1361,8 @@
       <ownedColumnMappings name="Decription" headerLabelExpression="Description" canEdit="aql:self.oclIsTypeOf(genmodel::GenFeature)" featureName="propertyDescription" labelExpression="aql:self->filter(genmodel::GenFeature).propertyDescription->first()"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.GenerationServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.PropertiesServices"/>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.ALEServices"/>
   </ownedViewpoints>
   <userColorsPalettes name="Ecore Palette">
     <entries xsi:type="description:InterpolatedColor" name="Size Based Color" minValueComputationExpression="aql:0" maxValueComputationExpression="aql:10"/>
@@ -1360,4 +1384,449 @@
     <entries xsi:type="description:UserFixedColor" red="228" green="228" blue="228" name="Abstract EClass"/>
     <entries xsi:type="description:UserFixedColor" name="Inherited"/>
   </userColorsPalettes>
+  <extensions xsi:type="properties:ViewExtensionDescription" name="ecoretools">
+    <metamodels href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    <metamodels href="http://www.eclipse.org/emf/2002/GenModel#/"/>
+    <categories name="Default">
+      <pages name="ecore_page" labelExpression="Ecore" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.0 //@extensions.0/@categories.0/@groups.5">
+        <validationSet>
+          <semanticValidationRules name="NoNameOrInvalid" level="ERROR" message="aql:' The '  + self.eClass().name +  ' should have a name which is a valid Java identifier.'" targetClass="ecore::ENamedElement">
+            <audits auditExpression="aql: (not self.oclIsKindOf(ecore::ENamedElement) ) or (self.name &lt;> null and self.name.size() > 0)"/>
+          </semanticValidationRules>
+        </validationSet>
+      </pages>
+      <pages name="parameters_page" labelExpression="Parameters" domainClass="ecore::EOperation" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.9" indented="true">
+        <validationSet>
+          <semanticValidationRules name="NoNameOrInvalid" level="ERROR" message="aql:' The '  + self.eClass().name +  ' should have a name which is a valid Java identifier.'" targetClass="ecore::ENamedElement">
+            <audits auditExpression="aql:(not self.oclIsKindOf(ecore::ENamedElement) ) or self.name &lt;> null and self.name.size() > 0"/>
+          </semanticValidationRules>
+        </validationSet>
+      </pages>
+      <pages name="documentation_page" labelExpression="Documentation" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.2" indented="true"/>
+      <pages name="annotation_page" labelExpression="Annotation" semanticCandidateExpression="var:self" groups="//@extensions.0/@categories.0/@groups.10" indented="true">
+        <actions tooltipExpression="Add EAnnotation" imageExpression="/org.eclipse.emf.ecore.edit/icons/full/ctool16/CreateEModelElement_eAnnotations_EAnnotation.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="ecore::EAnnotation" referenceName="eAnnotations"/>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+      </pages>
+      <pages name="generation_page" labelExpression="Generation" semanticCandidateExpression="aql:self" preconditionExpression="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet()->size() > 0" groups="//@extensions.0/@categories.0/@groups.4 //@extensions.0/@categories.0/@groups.1 //@extensions.0/@categories.0/@groups.3 //@extensions.0/@categories.0/@groups.6">
+        <actions tooltipExpression="Generate Model" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/generate_single.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:ExternalJavaAction" name="Generate Model Properties" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+                <parameters name="genmodels" value="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
+                <parameters name="scope" value="model"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+        <actions tooltipExpression="Generate Edit" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/generate_single.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:ExternalJavaAction" name="Generate Edit Properties" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+                <parameters name="genmodels" value="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
+                <parameters name="scope" value="edit"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+        <actions tooltipExpression="Generate Editor" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/generate_single.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:ExternalJavaAction" name="Generate Editor Properties" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+                <parameters name="genmodels" value="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
+                <parameters name="scope" value="editor"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+        <actions tooltipExpression="Generate All" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/generate.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:ExternalJavaAction" name="Generate All Properties" id="org.eclipse.emf.ecoretools.design.action.generateAllID">
+                <parameters name="genmodels" value="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet().eContainerOrSelf(genmodel::GenModel)->asSet()"/>
+                <parameters name="scope" value="model, edit, editor, tests"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+      </pages>
+      <pages name="execution_page" labelExpression="Execution" semanticCandidateExpression="var:self" preconditionExpression="aql:self.eContainerOrSelf(ecore::EPackage).isConfiguredForALE()" groups="//@extensions.0/@categories.0/@groups.7 //@extensions.0/@categories.0/@groups.8"/>
+      <groups name="default rules" labelExpression="aql:input.emfEditServices(self).getText()" semanticCandidateExpression="aql:self.removeSemanticElementsToHide(input.getAllSemanticElements())" preconditionExpression="">
+        <controls xsi:type="properties:DynamicMappingForDescription" name="sirius_default_rules_structural_features_for" iterator="eStructuralFeature" iterableExpression="aql:self.removeFeaturesToHide(input.emfEditServices(self).getEStructuralFeatures())">
+          <ifs name="sirius_default_rules_mono_string_if" predicateExpression="aql:input.emfEditServices(self).needsTextWidget(eStructuralFeature) and not input.emfEditServices(self).isMultiline(eStructuralFeature)">
+            <widget xsi:type="properties:TextDescription" name="sirius_default_rules_mono_string" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" isEnabledExpression="aql:eStructuralFeature.changeable" valueExpression="aql:if eStructuralFeature.name = 'upperBound' and self.oclIsKindOf(ecore::ETypedElement) then self.upperBoundDisplay() else self.eGet(eStructuralFeature.name) endif">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                  <subModelOperations xsi:type="tool:Switch">
+                    <cases conditionExpression="aql:eStructuralFeature.name = 'upperBound' and self.oclIsKindOf(ecore::ETypedElement)">
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.setUpperBound(newValue)"/>
+                    </cases>
+                    <default>
+                      <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:input.emfEditServices(self).setValue(eStructuralFeature, newValue)"/>
+                    </default>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+              <conditionalStyles preconditionExpression="aql:eStructuralFeature.lowerBound==1">
+                <style>
+                  <labelFontFormat>bold</labelFontFormat>
+                </style>
+              </conditionalStyles>
+            </widget>
+          </ifs>
+          <ifs name="sirius_default_rules_multi_string_if" predicateExpression="aql:input.emfEditServices(self).needsTextWidget(eStructuralFeature) and input.emfEditServices(self).isMultiline(eStructuralFeature)">
+            <widget xsi:type="properties:TextAreaDescription" name="sirius_default_rules_multi_string" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" isEnabledExpression="aql:eStructuralFeature.changeable" valueExpression="aql:self.eGet(eStructuralFeature.name)">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:input.emfEditServices(self).setValue(eStructuralFeature, newValue)"/>
+              </initialOperation>
+              <conditionalStyles preconditionExpression="aql:eStructuralFeature.lowerBound==1">
+                <style>
+                  <labelFontFormat>bold</labelFontFormat>
+                </style>
+              </conditionalStyles>
+            </widget>
+          </ifs>
+          <ifs name="sirius_default_rules_mono_boolean" predicateExpression="aql:input.emfEditServices(self).needsCheckboxWidget(eStructuralFeature)">
+            <widget xsi:type="properties:CheckboxDescription" name="sirius_default_rules_mono_boolean" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" isEnabledExpression="aql:eStructuralFeature.changeable" valueExpression="aql:self.eGet(eStructuralFeature.name)">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:input.emfEditServices(self).setValue(eStructuralFeature, newValue)"/>
+              </initialOperation>
+              <conditionalStyles preconditionExpression="aql:eStructuralFeature.lowerBound==1">
+                <style>
+                  <labelFontFormat>bold</labelFontFormat>
+                </style>
+              </conditionalStyles>
+            </widget>
+          </ifs>
+          <ifs name="sirius_default_rules_enum_if" predicateExpression="aql:eStructuralFeature.eType.oclIsKindOf(ecore::EEnum) and not(eStructuralFeature.many)">
+            <widget xsi:type="properties:RadioDescription" name="sirius_default_rules_enum" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" isEnabledExpression="aql:eStructuralFeature.changeable" valueExpression="aql:eStructuralFeature.eType.oclAsType(ecore::EEnum).getEEnumLiteralByLiteral(self.eGet(eStructuralFeature.name).toString())" candidatesExpression="aql:eStructuralFeature.eType.oclAsType(ecore::EEnum).eLiterals" candidateDisplayExpression="aql:candidate.name" numberOfColumns="5">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:input.emfEditServices(self).setValue(eStructuralFeature, newValue.instance)"/>
+              </initialOperation>
+              <conditionalStyles preconditionExpression="aql:eStructuralFeature.lowerBound==1">
+                <style>
+                  <labelFontFormat>bold</labelFontFormat>
+                </style>
+              </conditionalStyles>
+            </widget>
+          </ifs>
+          <ifs name="sirius_default_rules_eattribute_many_if" predicateExpression="aql:eStructuralFeature.oclIsKindOf(ecore::EAttribute) and eStructuralFeature.many">
+            <widget xsi:type="properties:ListDescription" name="sirius_default_rules_eattribute_many" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" isEnabledExpression="aql:eStructuralFeature.changeable" valueExpression="aql:self.eGet(eStructuralFeature.name)" displayExpression="var:value"/>
+          </ifs>
+          <ifs name="sirius_default_rules_ereference_if" predicateExpression="aql:eStructuralFeature.oclIsKindOf(ecore::EReference) and eStructuralFeature.many = true">
+            <widget xsi:type="properties-ext-widgets-reference:ExtReferenceDescription" name="sirius_default_rules_ereference" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" referenceNameExpression="aql:eStructuralFeature.name"/>
+          </ifs>
+          <ifs name="ecoretools_etype_ereference" predicateExpression="aql:eStructuralFeature.oclIsKindOf(ecore::EReference) and eStructuralFeature.many = false">
+            <widget xsi:type="properties:LabelDescription" name="etype label" labelExpression="aql:input.emfEditServices(self).getText(eStructuralFeature)+':'" helpExpression="aql:input.emfEditServices(self).getDescription(eStructuralFeature)" valueExpression="aql:self.eGetMonoRef(eStructuralFeature)" displayExpression="aql:if self.eGetMonoRef(eStructuralFeature) &lt;> null then input.emfEditServices(self.eGetMonoRef(eStructuralFeature)).getText() else '' endif">
+              <actions labelExpression="...">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ExternalJavaAction" name="open select etype dialog" id="org.eclipse.emf.ecoretools.design.action.openSelectModelElementID">
+                    <parameters name="message" value="aql:'Select an ' + eStructuralFeature.eType.name +  ' for the ' + eStructuralFeature.name +  ' reference.'"/>
+                    <parameters name="title" value="aql:'Select ' + eStructuralFeature.eType.name "/>
+                    <parameters name="candidates" value="aql:input.emfEditServices(self).getChoiceOfValues(eStructuralFeature)"/>
+                    <parameters name="feature" value="var:eStructuralFeature"/>
+                    <parameters name="host" value="var:self"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </actions>
+              <actions labelExpression="&#x2205;">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:input.emfEditServices(self).setValue(eStructuralFeature, null)"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </actions>
+            </widget>
+          </ifs>
+        </controls>
+        <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
+      </groups>
+      <groups name="genmodel opposite instance" labelExpression="aql:self.eClass().name" semanticCandidateExpression="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet()" preconditionExpression="" extends="//@extensions.0/@categories.0/@groups.0">
+        <style expandedByDefault="true"/>
+      </groups>
+      <groups name="documentation" labelExpression="Documentation" domainClass="ecore::EModelElement">
+        <controls xsi:type="properties:ContainerDescription" name="documentation_container">
+          <controls xsi:type="properties:TextAreaDescription" name="doc_area" lineCount="16" valueExpression="aql:self.getVisibleDocAnnotations().value">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.setDocAnnotation(newValue)"/>
+            </initialOperation>
+          </controls>
+        </controls>
+        <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
+      </groups>
+      <groups name="generation_navigation" semanticCandidateExpression="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet()">
+        <controls xsi:type="properties:ContainerDescription" name="generation_navigation_container">
+          <controls xsi:type="properties:HyperlinkDescription" name="goto sourcecode" isEnabledExpression="aql:self.isJavaFileGenerated()" valueExpression="aql:self" displayExpression="aql:if self.isJavaFileGenerated() then 'Open Java Implementation' else '' endif">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ExternalJavaAction" name="open java editor" id="org.eclipse.emf.ecoretools.design.action.openFileInEditorID">
+                <parameters name="path" value="aql:self.getJavaImplementationPath()"/>
+              </firstModelOperations>
+            </initialOperation>
+          </controls>
+        </controls>
+        <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
+      </groups>
+      <groups name="genmodel_directories" labelExpression="Directories" domainClass="genmodel.GenModel" semanticCandidateExpression="aql:(OrderedSet{self} + self.eInverse()  + self.eInverse().eContainer()- self.eContents()- OrderedSet{self.eContainer()})->select(e | e.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet()">
+        <controls xsi:type="properties:TextDescription" name="modelDirectory" labelExpression="Model" valueExpression="aql:self.modelDirectory">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:SetValue" featureName="modelDirectory" valueExpression="var:newValue"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="editDirectory" labelExpression="Edit" valueExpression="feature:editDirectory">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:SetValue" featureName="editDirectory" valueExpression="var:newValue"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:TextDescription" name="editorDirectory" labelExpression="Editor" valueExpression="feature:editorDirectory">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:SetValue" featureName="editorDirectory" valueExpression="var:newValue"/>
+          </initialOperation>
+        </controls>
+        <style barStyle="SHORT_TITLE_BAR" expandedByDefault="true"/>
+      </groups>
+      <groups name="egeneric supertypes-TBD" labelExpression="aql:'EGenericType : ' + input.emfEditServices(self).getText()" domainClass="ecore::EGenericType" semanticCandidateExpression="aql: input.getSemanticElement()->filter(ecore::EClass).eGenericSuperTypes" preconditionExpression="aql:false and self.oclIsKindOf(ecore::EClass)">
+        <controls xsi:type="properties:LabelDescription" name="etypeparameter label" labelExpression="EType Parameter:" valueExpression="aql:self.eTypeArguments->first().eTypeParameter" displayExpression="aql:self.eTypeArguments->first().eTypeParameter.name">
+          <actions labelExpression="...">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:Let" variableName="eStructuralFeature" valueExpression="aql:self.eClass().getEStructuralFeature('eTypeParameter')">
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="open select etype dialog" id="org.eclipse.emf.ecoretools.design.action.openSelectModelElementID">
+                  <parameters name="message" value="aql:'Select an ' + eStructuralFeature.eType.name +  ' for the ' + eStructuralFeature.name +  ' reference.'"/>
+                  <parameters name="title" value="aql:'Select ' + eStructuralFeature.eType.name "/>
+                  <parameters name="candidates" value="aql:input.emfEditServices(self).getChoiceOfValues(eStructuralFeature)"/>
+                  <parameters name="feature" value="var:eStructuralFeature"/>
+                  <parameters name="host" value="var:self"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
+        </controls>
+        <controls xsi:type="properties:LabelDescription" name="EClassifier label" labelExpression="Classifier:" valueExpression="aql:self.eTypeArguments->at(2).eClassifier" displayExpression="aql:self.eTypeArguments->at(2).eClassifier.name">
+          <actions labelExpression="...">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:Let" variableName="eStructuralFeature" valueExpression="aql:self.eClass().getEStructuralFeature('eClassifier')">
+                <subModelOperations xsi:type="tool:ExternalJavaAction" name="open select etype dialog" id="org.eclipse.emf.ecoretools.design.action.openSelectModelElementID">
+                  <parameters name="message" value="aql:'Select an ' + eStructuralFeature.eType.name +  ' for the ' + eStructuralFeature.name +  ' reference.'"/>
+                  <parameters name="title" value="aql:'Select ' + eStructuralFeature.eType.name "/>
+                  <parameters name="candidates" value="aql:input.emfEditServices(self).getChoiceOfValues(eStructuralFeature)"/>
+                  <parameters name="feature" value="var:eStructuralFeature"/>
+                  <parameters name="host" value="var:self"/>
+                </subModelOperations>
+              </firstModelOperations>
+            </initialOperation>
+          </actions>
+        </controls>
+      </groups>
+      <groups name="genmodel root" labelExpression="aql:self.eClass().name" semanticCandidateExpression="aql:self->select(e | e.oclIsKindOf(ecore::EPackage)).eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel')).eContainer(genmodel::GenModel)->asSet()" preconditionExpression="" extends="//@extensions.0/@categories.0/@groups.0">
+        <style expandedByDefault="true"/>
+      </groups>
+      <groups name="execution_body" labelExpression="aql:self.getExecutableName()" semanticCandidateExpression="aql:OrderedSet{self}->filter(ecore::EClassifier).getAllExecutables()">
+        <controls xsi:type="properties:ContainerDescription" name="container_execution_body">
+          <controls xsi:type="properties:TextAreaDescription" name="executable_body" lineCount="14" valueExpression="aql:self.getExecutableBody()">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.setExecutableBody(newValue)"/>
+              </firstModelOperations>
+            </initialOperation>
+          </controls>
+        </controls>
+        <validationSet>
+          <semanticValidationRules name="isValidSyntax" level="ERROR" message="Syntax error in body" targetClass="EObject">
+            <audits auditExpression="aql:self.isValidBody()"/>
+          </semanticValidationRules>
+        </validationSet>
+        <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
+      </groups>
+      <groups name="execution_imports" labelExpression="Imports" domainClass="ecore::EModelElement" semanticCandidateExpression="aql:OrderedSet{self}->filter(ecore::EPackage)->select(p | p.getJavaImports()->size() > 0)">
+        <controls xsi:type="properties:ButtonDescription" name="execution_button_addimport" buttonLabelExpression="Add New Import">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties:ContainerDescription" name="execution_imports_container">
+          <controls xsi:type="properties:DynamicMappingForDescription" name="iterate over imports" iterator="jImport" iterableExpression="aql:self.getJavaImports()">
+            <ifs name="true" predicateExpression="aql:true">
+              <widget xsi:type="properties:TextDescription" name="java_import" labelExpression="Qualified Class Name: " valueExpression="aql:jImport.getQualifiedName()">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:jImport.setQualifiedName(newValue)"/>
+                </initialOperation>
+              </widget>
+            </ifs>
+            <ifs name="true" predicateExpression="aql:true">
+              <widget xsi:type="properties:ButtonDescription" name="execution_remove_import" buttonLabelExpression="Remove Import">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:jImport">
+                    <subModelOperations xsi:type="tool:RemoveElement"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+          </controls>
+          <layout xsi:type="properties:FillLayoutDescription" orientation="HORIZONTAL"/>
+        </controls>
+        <style expandedByDefault="true"/>
+      </groups>
+      <groups name="eoperation parameters dynamic mapping" labelExpression="Parameters" domainClass="ecore::EOperation" semanticCandidateExpression="var:self">
+        <controls xsi:type="properties:ContainerDescription" name="parameters_container">
+          <controls xsi:type="properties:DynamicMappingForDescription" name="foreach parameter" iterator="self" iterableExpression="aql:self.eParameters" forceRefresh="true">
+            <ifs name="always true" predicateExpression="aql:true">
+              <widget xsi:type="properties:TextDescription" name="param_name" labelExpression="Name: " valueExpression="aql:self.name">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="var:newValue"/>
+                  </firstModelOperations>
+                </initialOperation>
+                <style labelFontSizeExpression="8">
+                  <labelFontFormat>italic</labelFontFormat>
+                </style>
+              </widget>
+            </ifs>
+            <ifs name="always true" predicateExpression="aql:true">
+              <widget xsi:type="properties:LabelDescription" name="etype label" labelExpression="EType: " valueExpression="aql:self.eGet('eType')" displayExpression="aql:self.eGet('eType').name">
+                <style labelFontSizeExpression="8">
+                  <labelFontFormat>italic</labelFontFormat>
+                </style>
+                <actions labelExpression="...">
+                  <initialOperation>
+                    <firstModelOperations xsi:type="tool:ExternalJavaAction" name="open select etype dialog" id="org.eclipse.emf.ecoretools.design.action.openSelectModelElementID">
+                      <parameters name="message" value="aql:'Select an EClass for the eType reference.'"/>
+                      <parameters name="title" value="aql:'Select EClass'"/>
+                      <parameters name="candidates" value="aql:input.emfEditServices(self).getChoiceOfValues(self.eClass().getEStructuralFeature('eType'))"/>
+                      <parameters name="feature" value="aql:self.eClass().getEStructuralFeature('eType')"/>
+                      <parameters name="host" value="var:self"/>
+                    </firstModelOperations>
+                  </initialOperation>
+                </actions>
+                <actions labelExpression="&#x2205;">
+                  <initialOperation>
+                    <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                      <subModelOperations xsi:type="tool:SetValue" featureName="eType" valueExpression="aql:null"/>
+                    </firstModelOperations>
+                  </initialOperation>
+                </actions>
+              </widget>
+            </ifs>
+            <ifs name="always true" predicateExpression="aql:true">
+              <widget xsi:type="properties:ButtonDescription" name="up" isEnabledExpression="aql:self.precedingSiblings()->filter(ecore::EParameter)->size() > 0" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/up.gif">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.moveUpInContainer()"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+            <ifs name="always true" predicateExpression="aql:true">
+              <widget xsi:type="properties:ButtonDescription" name="down" isEnabledExpression="aql:self.precedingSiblings()->filter(ecore::EParameter)->size() +1 &lt; self.eContainer(ecore::EOperation).eParameters->size()" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/down.gif">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.moveDownInContainer()"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+            <ifs name="always true" predicateExpression="aql:true">
+              <widget xsi:type="properties:ButtonDescription" name="del" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/unset.gif">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:RemoveElement"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+          </controls>
+          <layout xsi:type="properties:GridLayoutDescription" numberOfColumns="5"/>
+        </controls>
+        <controls xsi:type="properties:DynamicMappingForDescription" name="dummy_workaround_bug515586" iterator="d" iterableExpression="aql:self" forceRefresh="true">
+          <ifs name="always false" predicateExpression="aql:false">
+            <widget xsi:type="properties:TextDescription" name="dummy">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+              </initialOperation>
+            </widget>
+          </ifs>
+        </controls>
+        <style expandedByDefault="true"/>
+        <actions tooltipExpression="Add New Parameter" imageExpression="/org.eclipse.emf.ecore.edit/icons/full/ctool16/CreateEOperation_eParameters_EParameter.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:CreateInstance" typeName="ecore::EParameter" referenceName="eParameters">
+                <subModelOperations xsi:type="tool:SetValue" featureName="name" valueExpression="aql:'param' + self.eContainer().eContents()->filter(ecore::EParameter)->size()"/>
+              </subModelOperations>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+      </groups>
+      <groups name="eannotation dynamic" labelExpression="aql:'EAnnotation ' + self.source" domainClass="ecore::EAnnotation" semanticCandidateExpression="aql:input.getSemanticElement()->filter(ecore::EModelElement).eAnnotations">
+        <controls xsi:type="properties:TextDescription" name="source" labelExpression="Source:" helpExpression="aql:input.emfEditServices(self).getDescription(self.eClass().getEStructuralFeature('source'))" valueExpression="aql:self.source">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:SetValue" featureName="source" valueExpression="var:newValue"/>
+            </firstModelOperations>
+          </initialOperation>
+        </controls>
+        <controls xsi:type="properties-ext-widgets-reference:ExtReferenceDescription" name="references ref" labelExpression="aql:input.emfEditServices(self).getText(self.eClass().getEStructuralFeature('references'))+':'" helpExpression="aql:input.emfEditServices(self).getDescription(self.eClass().getEStructuralFeature('references'))" referenceNameExpression="references" referenceOwnerExpression="aql:self"/>
+        <controls xsi:type="properties:ContainerDescription" name="eannota_buttons">
+          <controls xsi:type="properties:ButtonDescription" name="eannotation_add_entry" buttonLabelExpression="Add Entry">
+            <initialOperation>
+              <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                <subModelOperations xsi:type="tool:CreateInstance" typeName="ecore.EStringToStringMapEntry" referenceName="details"/>
+              </firstModelOperations>
+            </initialOperation>
+          </controls>
+        </controls>
+        <controls xsi:type="properties:ContainerDescription" name="eannotation_conainer_entries">
+          <controls xsi:type="properties:DynamicMappingForDescription" name="iterate over entries" iterator="self" iterableExpression="aql:self.details" forceRefresh="true">
+            <ifs name="always_true" predicateExpression="aql:true">
+              <widget xsi:type="properties:TextDescription" name="detail_key" labelExpression="Key:" valueExpression="aql:self.key">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="key" valueExpression="var:newValue"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+            <ifs name="always_true" predicateExpression="aql:true">
+              <widget xsi:type="properties:TextDescription" name="detail_value" labelExpression="Value:" valueExpression="aql:self.value">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:SetValue" featureName="value" valueExpression="var:newValue"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+            <ifs name="always_true" predicateExpression="aql:true">
+              <widget xsi:type="properties:ButtonDescription" name="del" helpExpression="Delete the entry" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/unset.gif">
+                <initialOperation>
+                  <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+                    <subModelOperations xsi:type="tool:RemoveElement"/>
+                  </firstModelOperations>
+                </initialOperation>
+              </widget>
+            </ifs>
+          </controls>
+          <layout xsi:type="properties:GridLayoutDescription" numberOfColumns="3"/>
+        </controls>
+        <controls xsi:type="properties:DynamicMappingForDescription" name="dummy_workaround_bug515586" iterator="d" iterableExpression="aql:self" forceRefresh="true">
+          <ifs name="always false" predicateExpression="aql:false">
+            <widget xsi:type="properties:TextDescription" name="dummy_text">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self"/>
+              </initialOperation>
+            </widget>
+          </ifs>
+        </controls>
+        <style toggleStyle="TREE_NODE" expandedByDefault="true"/>
+        <actions tooltipExpression="Delete EAnnotation" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/etools16/unset.gif">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="var:self">
+              <subModelOperations xsi:type="tool:RemoveElement"/>
+            </firstModelOperations>
+          </initialOperation>
+        </actions>
+      </groups>
+    </categories>
+  </extensions>
 </description:Group>

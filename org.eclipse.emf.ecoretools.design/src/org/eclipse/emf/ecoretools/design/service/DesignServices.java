@@ -110,20 +110,20 @@ public class DesignServices extends EReferenceServices {
 	 *         or an empty collection if <code>any</code> is not inside a
 	 *         resource-set.
 	 */
-	public Collection<EObject> allRoots(EObject any) {
+	public List<EObject> allRoots(EObject any) {
 		Resource res = any.eResource();
 		if (res != null && res.getResourceSet() != null) {
-			Collection<EObject> roots = new ArrayList<EObject>();
+			List<EObject> roots = new ArrayList<EObject>();
 			for (Resource childRes : res.getResourceSet().getResources()) {
 				roots.addAll(childRes.getContents());
 			}
 			return roots;
 		} else {
-			return Collections.emptySet();
+			return Collections.emptyList();
 		}
 	}
 
-	public Collection<EPackage> rootEPackages(EObject any) {
+	public Set<EPackage> rootEPackages(EObject any) {
 		return Sets.newLinkedHashSet(Iterables.filter(allRoots(any), EPackage.class));
 	}
 
@@ -164,7 +164,7 @@ public class DesignServices extends EReferenceServices {
 		return null;
 	}
 
-	public Collection<EStringToStringMapEntryImpl> getVisibleDocAnnotations(EObject self, DSemanticDiagram diag) {
+	public Set<EStringToStringMapEntryImpl> getVisibleDocAnnotations(EObject self, DSemanticDiagram diag) {
 		// [diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key
 		// = 'documentation')/]
 		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
@@ -186,7 +186,7 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
-	public Collection<EStringToStringMapEntryImpl> getVisibleConstraintsAnnotations(EObject self,
+	public Set<EStringToStringMapEntryImpl> getVisibleConstraintsAnnotations(EObject self,
 			DSemanticDiagram diag) {
 		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
 		for (EModelElement displayed : getDisplayedEModelElements(diag)) {
@@ -319,7 +319,7 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
-	public Collection<EClass> getExternalEClasses(EPackage root, DSemanticDiagram diagram) {
+	public Set<EClass> getExternalEClasses(EPackage root, DSemanticDiagram diagram) {
 
 		Set<EClass> related = Sets.newLinkedHashSet();
 		Set<EClass> eClasses = getInternalEClasses(diagram);
@@ -333,7 +333,7 @@ public class DesignServices extends EReferenceServices {
 		return Sets.difference(related, eClasses);
 	}
 
-	public Collection<EReference> getEReferencesToDisplay(EPackage root, DSemanticDiagram diagram) {
+	public Set<EReference> getEReferencesToDisplay(EPackage root, DSemanticDiagram diagram) {
 		// [diagram.getDisplayedEClasses().oclAsType(ecore::EClass).eAllReferences->flatten()/]
 		Collection<EClass> eClasses = getDisplayedEClasses(diagram);
 		Set<EReference> eRefs = Sets.newLinkedHashSet();
@@ -366,7 +366,7 @@ public class DesignServices extends EReferenceServices {
 		}).sortedCopy(allRefs);
 	}
 
-	public Collection<EModelElement> getDisplayedEModelElements(DSemanticDiagram diagram) {
+	public Set<EModelElement> getDisplayedEModelElements(DSemanticDiagram diagram) {
 		Set<EModelElement> modelelements = Sets.newLinkedHashSet();
 		Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram),
 				new DDiagramQuery(diagram).getAllDiagramElements().iterator()), DSemanticDecorator.class);
@@ -388,7 +388,7 @@ public class DesignServices extends EReferenceServices {
 		return allValidSessionElements(element, validForClassDiagram);
 	}
 
-	public Collection<EObject> getRelated(EObject firstView, List<EObject> allSelectedViews, DDiagram diag) {
+	public Set<EObject> getRelated(EObject firstView, List<EObject> allSelectedViews, DDiagram diag) {
 		Set<EObject> relateds = Sets.newLinkedHashSet();
 		for (DSemanticDecorator decorator : Iterables.filter(allSelectedViews, DSemanticDecorator.class)) {
 			relateds.addAll(new RelatedElementsSwitch().getRelatedElements(decorator.getTarget()));
@@ -396,7 +396,7 @@ public class DesignServices extends EReferenceServices {
 		return relateds;
 	}
 
-	public Collection<EObject> getRelated(EObject firstView, EObject aView, DDiagram diag) {
+	public Set<EObject> getRelated(EObject firstView, EObject aView, DDiagram diag) {
 		return getRelated(firstView, Lists.newArrayList(aView), diag);
 	}
 

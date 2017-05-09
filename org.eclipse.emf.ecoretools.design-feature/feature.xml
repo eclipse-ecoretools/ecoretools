@@ -34,9 +34,10 @@ http://www.eclipse.org/legal/epl-v10.html
    </license>
 
    <requires>
-      <import feature="org.eclipse.sirius.runtime" version="2.0.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.sirius.runtime.aql" version="2.0.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.sirius.runtime.ide.ui" version="2.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.sirius.runtime" version="5.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.sirius.runtime.aql" version="5.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.sirius.runtime.ide.ui" version="5.0.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.sirius.properties.feature" version="5.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -59,13 +60,13 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.emf.ecoretools.design.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>         
+         unpack="false"/>
 
    <plugin
          id="org.eclipse.emf.ecoretools.doc"
@@ -73,26 +74,6 @@ http://www.eclipse.org/legal/epl-v10.html
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.properties"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.tabbedproperties"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.design.properties"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+ 
 
 </feature>

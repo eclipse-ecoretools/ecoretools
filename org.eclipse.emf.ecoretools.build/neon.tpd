@@ -5,6 +5,7 @@ location "http://download.eclipse.org/sirius/updates/nightly/4.1.x/neon" {
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
 	org.eclipse.sirius.runtime.ide.eef.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group lazy
+	org.eclipse.sirius.properties.feature.feature.group lazy
 }
 
 location "http://download.eclipse.org/acceleo/updates/nightly/latest" Acceleo {
