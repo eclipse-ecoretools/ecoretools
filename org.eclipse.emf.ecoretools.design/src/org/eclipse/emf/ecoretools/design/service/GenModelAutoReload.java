@@ -17,7 +17,9 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenBase;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenOperation;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.codegen.ecore.genmodel.GenParameter;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -144,9 +146,7 @@ class ProcessGenModels extends RecordingCommand {
 		}
 
 		for (GenModel genmodel : genmodels) {
-			if (!genmodel.reconcile()) {
-				System.out.println("Genmodel reconcile was not successful");
-			}
+			genmodel.reconcile();			
 		}
 
 	}
@@ -179,6 +179,19 @@ class ProcessGenModels extends RecordingCommand {
 						toDelete.add(feat);
 					}
 				}
+				for (GenOperation op : genclass.getGenOperations()) {
+					if (op.getEcoreOperation() != null
+							&& op.getEcoreOperation().getEContainingClass() != op.getGenClass().getEcoreClassifier()) {
+						toDelete.add(op);
+					}
+					for (GenParameter param : op.getGenParameters()) {
+						if (param.getEcoreParameter() != null
+								&& param.getEcoreParameter().getEOperation() != op.getEcoreOperation()) {
+							toDelete.add(param);
+						}
+					}
+				}
+
 			}
 		}
 	}
