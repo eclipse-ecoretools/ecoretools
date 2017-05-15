@@ -21,6 +21,6 @@ Export-Package: org.eclipse.emf.ecoretools.tabbedproperties,org.eclips
  es.providers,org.eclipse.emf.ecoretools.tabbedproperties.sections,org
  .eclipse.emf.ecoretools.tabbedproperties.sections.widgets,org.eclipse
  .emf.ecoretools.tabbedproperties.utils
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Bundle-Localization: plugin

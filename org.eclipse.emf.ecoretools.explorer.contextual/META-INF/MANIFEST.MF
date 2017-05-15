@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.amalgam.explorer.contextual.sirius.ui,
  org.eclipse.emf.ecore.editor
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Localization: plugin
 Bundle-Vendor: %providerName
 Export-Package: org.eclipse.emf.ecoretools.explorer.contextual,
