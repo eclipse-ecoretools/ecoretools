@@ -4,6 +4,7 @@ location "http://download.eclipse.org/sirius/updates/nightly/5.0.x/oxygen" {
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
 	org.eclipse.sirius.runtime.ide.eef.feature.group lazy
+	org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group lazy
 }
 
 location "http://download.eclipse.org/acceleo/updates/nightly/latest" Acceleo {
@@ -14,8 +15,13 @@ location "http://download.eclipse.org/releases/oxygen" {
 	org.eclipse.emf.sdk.feature.group lazy
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
+	org.eclipse.emf.eef.runtime-feature.feature.group lazy
 }
-location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.8.x/neon/" {
+location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.8.x/oxygen/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
+}
+
+location "http://download.eclipse.org/cbi/updates/license" {
+	org.eclipse.license.feature.group lazy
 }

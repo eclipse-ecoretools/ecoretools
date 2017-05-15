@@ -77,6 +77,15 @@
                 <version>${tycho-version}</version>
                 <configuration>
                     <resolver>p2</resolver>
+                    <ignoreTychoRepositories>true</ignoreTychoRepositories>
+                    <target>
+                        <artifact>
+                            <groupId>org.eclipse.emf.ecoretools</groupId>
+    						<artifactId>emf.ecoretools-parent</artifactId>
+    						<version>3.3.0-SNAPSHOT</version>
+                            <classifier>${PLATFORM}</classifier>
+                        </artifact>
+                    </target>
                     <environments>
                         <environment>
                             <os>linux</os>
@@ -84,27 +93,17 @@
                             <arch>x86</arch>
                         </environment>
                         <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86</arch>
-                        </environment>
-                        <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
                             <os>linux</os>
                             <ws>gtk</ws>
                             <arch>x86_64</arch>
                         </environment>
                         <environment>
-                            <os>macosx</os>
-                            <ws>cocoa</ws>
-                            <arch>x86_64</arch>
+                            <os>win32</os>
+                            <ws>win32</ws>
+                            <arch>x86</arch>
                         </environment>
                     </environments>
-                </configuration>	          
+                </configuration>
             </plugin>
             <plugin>
 			   <groupId>org.eclipse.tycho</groupId>
@@ -200,120 +199,58 @@
         </pluginManagement>
     </build>
 
-    <profiles>
+    
+	 <profiles>
        <profile>
             <id>oxygen</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <repositories>    
-                <repository><id>cbi</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/cbi/updates/license</url>
-                </repository>
-                <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/5.0.x/oxygen</url>
-                </repository>
-                 <repository><id>acceleo for AQL</id><layout>p2</layout>
-                     <url>http://download.eclipse.org/acceleo/updates/nightly/latest</url>
-                </repository>
-                <repository><id>amalgam</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.8.x/mars/</url>
-                </repository>
-                <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/oxygen</url>
-                </repository>
-            </repositories>    
+           <properties>
+        		<PLATFORM>oxygen</PLATFORM>        
+    	    </properties>   
         </profile> 
         <profile>
             <id>neon</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <repositories>    
-                <repository><id>cbi</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/cbi/updates/license</url>
-                </repository>
-                <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/4.1.x/neon</url>
-                </repository>
-                 <repository><id>acceleo for AQL</id><layout>p2</layout>
-                     <url>http://download.eclipse.org/acceleo/updates/nightly/latest</url>
-                </repository>
-                <repository><id>amalgam</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
-                </repository>
-                <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/neon</url>
-                </repository>
-            </repositories>    
+            <properties>
+        		<PLATFORM>neon</PLATFORM>        
+    	    </properties>    
         </profile>   
         <profile>
             <id>mars</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <repositories>    
-                <repository><id>cbi</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/cbi/updates/license</url>
-                </repository>
-                <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/3.0.x/mars</url>
-                </repository>
-                 <repository><id>acceleo for AQL</id><layout>p2</layout>
-                     <url>http://download.eclipse.org/acceleo/updates/milestones/3.6</url>
-                </repository>
-                <repository><id>amalgam</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
-                </repository>
-                <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/mars</url>
-                </repository>
-            </repositories>    
+            <properties>
+        		<PLATFORM>mars</PLATFORM>        
+    	    </properties>   
         </profile>   
         <profile>
             <id>luna</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <repositories>    
-                <repository><id>cbi</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/cbi/updates/license</url>
-                </repository>
-                <repository><id>sirius</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/nightly/3.0.x/luna</url>
-                </repository>
-                 <repository><id>acceleo for AQL</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/sirius/updates/stable/3.0.0-S20150504-101721/mars</url>
-                </repository>
-                <repository><id>amalgam</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/amalgam/updates/nightly/1.7.x/mars/</url>
-                </repository>
-                <repository><id>rest-of-the-world</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/luna</url>
-                </repository>
-                <repository><id>eef</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/modeling/emft/eef/updates/milestones/1.5/S201412231052/</url>
-                </repository>
-            </repositories>    
+            <properties>
+        		<PLATFORM>luna</PLATFORM>        
+    	    </properties>   
         </profile>   
         <profile>
             <id>kepler</id>
-            <repositories>
-                <repository><id>platform</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/kepler</url>
-                </repository>
-            </repositories>
+            <properties>
+        		<PLATFORM>kepler</PLATFORM>        
+    	    </properties>
         </profile>
         <profile>
             <id>juno</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <repositories>
-                <repository><id>platform</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/juno</url>
-                </repository>
-            </repositories>
+            <properties>
+        		<PLATFORM>juno</PLATFORM>        
+    	    </properties>
         </profile>
 
         <profile>
@@ -321,13 +258,10 @@
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
-            <repositories>
-                <repository><id>indigo</id><layout>p2</layout>
-                    <url>http://download.eclipse.org/releases/indigo</url>          
-                </repository>        
-            </repositories>
+            <properties>
+        		<PLATFORM>indigo</PLATFORM>        
+    	    </properties>
         </profile>
-
         <profile>
             <id>sign</id>
             <activation>
