@@ -85,7 +85,7 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 
 	public static final NotificationFilter SHOULD_RELOAD = IS_TOUCH.negated().and(IS_ECORE.and(IS_ATTACHMENT));
 
-	public static final int PRIORITY = 0;
+	public static final int PRIORITY = -2;
 
 	public Option<Command> localChangesAboutToCommit(Collection<Notification> notifications) {
 		final Collection<GenModel> genModels = Lists.newArrayList();
