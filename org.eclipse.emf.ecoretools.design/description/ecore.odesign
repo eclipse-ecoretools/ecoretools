@@ -1544,6 +1544,9 @@
           </ifs>
         </controls>
         <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
+        <conditionalStyles preconditionExpression="aql:self.removeSemanticElementsToHide(input.getAllSemanticElements(),input.context().semanticDecorator())->size() > 1">
+          <style toggleStyle="NONE" expandedByDefault="true"/>
+        </conditionalStyles>
       </groups>
       <groups name="genmodel opposite instance" labelExpression="aql:self.eClass().name" semanticCandidateExpression="aql:self.eInverse()->select( g | g.eClass().ePackage.nsURI->includes('http://www.eclipse.org/emf/2002/GenModel'))->asSet()" preconditionExpression="" extends="//@extensions.0/@categories.0/@groups.0">
         <style expandedByDefault="true"/>
