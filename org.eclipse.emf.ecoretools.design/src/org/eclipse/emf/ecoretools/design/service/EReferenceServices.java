@@ -176,15 +176,6 @@ public class EReferenceServices {
         }
     }
 
-    public Collection<EObject> superTypeSemanticElements(EClass any) {
-        Set<EObject> result = Sets.newLinkedHashSet();
-        result.addAll(any.getEGenericSuperTypes());
-        for (EGenericType genType : any.getEGenericSuperTypes()) {
-            result.addAll(genType.getETypeArguments());
-        }
-        return result;
-    }
-
     public String superTypesLabel(EClass any) {
         Collection<String> reifiedTypes = Lists.newArrayList();
         Collection<String> typeParameters = Lists.newArrayList();

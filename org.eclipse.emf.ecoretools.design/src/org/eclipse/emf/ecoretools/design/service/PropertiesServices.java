@@ -24,6 +24,8 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EParameter;
@@ -33,6 +35,9 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
+import org.eclipse.sirius.diagram.DEdge;
+import org.eclipse.sirius.diagram.description.EdgeMapping;
+import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -92,13 +97,23 @@ public class PropertiesServices {
 		}
 	}
 
-	public List<EObject> removeSemanticElementsToHide(EObject ctx, Collection<EObject> unfiltered) {
+	public List<EObject> removeSemanticElementsToHide(EObject ctx, Collection<EObject> unfiltered,
+			DSemanticDecorator selection) {
 		List<EObject> filtered = Lists.newArrayList();
 		for (EObject eObject : unfiltered) {
 			if (!(eObject instanceof EParameter)) {
 				filtered.add(eObject);
 			}
 		}
+		if (selection instanceof DEdge && ctx instanceof EClass
+				&& ((DEdge) selection).getActualMapping() instanceof EdgeMapping
+				&& "EC ESupertypes".equals(((EdgeMapping) ((DEdge) selection).getActualMapping()).getName())) {
+			filtered.addAll(((EClass) ctx).getEGenericSuperTypes());
+			for (EGenericType genType : ((EClass) ctx).getEGenericSuperTypes()) {
+				filtered.addAll(genType.getETypeArguments());
+			}
+		}
+
 		return filtered;
 	}
 
