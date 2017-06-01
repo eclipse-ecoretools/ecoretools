@@ -315,7 +315,7 @@
               </firstModelOperations>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" icon="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif">
+          <ownedTools xsi:type="tool:OperationAction" name="Add Related Elements" forceRefresh="true" icon="/org.eclipse.emf.ecoretools.design/icons/full/etools16/search.gif">
             <view name="views">
               <subVariables xsi:type="tool:SelectModelElementVariable" name="selected" candidatesExpression="service:getRelated(views,diagram)" multiple="true" message="Pick the Element you want to add to the diagram."/>
             </view>
@@ -360,7 +360,7 @@
               <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="service:container.paste(copiedElement, copiedView, containerView)"/>
             </initialOperation>
           </ownedTools>
-          <ownedTools xsi:type="tool_1:DoubleClickDescription" name="Import Current EClasses" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']">
+          <ownedTools xsi:type="tool_1:DoubleClickDescription" name="Import Current EClasses" forceRefresh="true" mappings="//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@nodeMappings[name='Empty%20Diagram']">
             <element name="element"/>
             <elementView name="elementView">
               <subVariables xsi:type="tool:AcceleoVariable" name="diagram" computationExpression="feature:eContainer"/>
