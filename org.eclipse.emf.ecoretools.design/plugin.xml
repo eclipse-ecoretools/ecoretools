@@ -31,5 +31,10 @@
               type="ecorebin">
         </parser>
      </extension>
-    
+
+  <extension point="org.eclipse.sirius.common.package_meta_data">
+     <ePackageMetaData nsURI="http://www.eclipse.org/emf/2002/Ecore" displayName="Ecore" documentation="The EMF meta-meta-model.">
+        <suggestedRoot className="EPackage" />
+     </ePackageMetaData>    
+   </extension>
 </plugin>
