@@ -67,9 +67,7 @@ public class OpenSelectModelElementAction implements IExternalJavaAction {
 							((EObject) hostObj).eSet((EStructuralFeature) featureObj, wizard.getSelectedEObject());
 						}
 
-					} else {
-						throw new OperationCanceledException("user canceled");
-					}
+					} 
 
 				}
 			});
