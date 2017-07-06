@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2017 Obeo
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,12 +12,12 @@ package org.eclipse.emf.ecoretools.design.ui.parts;
 
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.sirius.diagram.DDiagramElement;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DNodeListEditPart;
+import org.eclipse.sirius.ext.gmf.runtime.gef.ui.figures.SiriusDefaultSizeNodeFigure;
 
 /**
  * An editpart which change the alpha level based on the mapping of the element.
@@ -52,7 +52,7 @@ public class DNodeListEditPartWithAlpha extends DNodeListEditPart {
 				.DPtoLP(40));
 	}
 
-	class TransparencyFigure extends DefaultSizeNodeFigure {
+    class TransparencyFigure extends SiriusDefaultSizeNodeFigure {
 
 		private int alpha = 255;
 
