@@ -69,6 +69,7 @@ import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.api.query.DDiagramQuery;
 import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
+import org.eclipse.sirius.diagram.business.internal.query.DDiagramInternalQuery;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
 import org.eclipse.sirius.diagram.description.tool.CreateView;
@@ -250,7 +251,7 @@ public class DesignServices extends EReferenceServices {
 
 	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
-		Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(),
+		Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
 				DNodeList.class);
 		while (it.hasNext()) {
 			DNodeList dec = it.next();
@@ -263,9 +264,9 @@ public class DesignServices extends EReferenceServices {
 
 	public Set<EClassifier> getDisplayedEClassifiers(DSemanticDiagram diagram) {
 		Set<EClassifier> result = Sets.newLinkedHashSet();
-		Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(),
-				DNodeList.class);
-		while (it.hasNext()) {
+        Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
+                DNodeList.class);
+        while (it.hasNext()) {
 			DNodeList dec = it.next();
 			if (dec.getTarget() instanceof EClassifier && dec.isVisible()) {
 				result.add((EClassifier) dec.getTarget());
@@ -276,8 +277,8 @@ public class DesignServices extends EReferenceServices {
 
 	private Set<EClass> getInternalEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
-		Iterator<DNodeList> it = Iterators.filter(new DDiagramQuery(diagram).getAllDiagramElements().iterator(),
-				DNodeList.class);
+        Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
+                DNodeList.class);
 		while (it.hasNext()) {
 			DNodeList dec = it.next();
 			if (dec.getTarget() instanceof EClass) {
