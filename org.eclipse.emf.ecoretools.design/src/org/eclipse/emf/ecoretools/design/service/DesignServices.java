@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2016 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2019 THALES GLOBAL SERVICES and Others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -69,6 +69,8 @@ import org.eclipse.sirius.diagram.EdgeArrows;
 import org.eclipse.sirius.diagram.EdgeTarget;
 import org.eclipse.sirius.diagram.business.api.query.DDiagramQuery;
 import org.eclipse.sirius.diagram.business.internal.helper.task.operations.CreateViewTask;
+import org.eclipse.sirius.diagram.business.internal.metamodel.helper.ContainerMappingHelper;
+import org.eclipse.sirius.diagram.business.internal.metamodel.helper.ContentHelper;
 import org.eclipse.sirius.diagram.business.internal.query.DDiagramInternalQuery;
 import org.eclipse.sirius.diagram.description.AbstractNodeMapping;
 import org.eclipse.sirius.diagram.description.DiagramElementMapping;
@@ -880,30 +882,26 @@ public class DesignServices extends EReferenceServices {
 
 		if (containerView instanceof DSemanticDiagram) {
 
-			for (DiagramElementMapping mapping : (((DSemanticDiagram) containerView).getDescription()
-					.getAllContainerMappings())) {
+            for (DiagramElementMapping mapping : ContentHelper.getAllContainerMappings((((DSemanticDiagram) containerView).getDescription()), false)) {
 				String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
 				if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
 					mappings.add(mapping);
 				}
 			}
-			for (DiagramElementMapping mapping : (((DSemanticDiagram) containerView).getDescription()
-					.getAllNodeMappings())) {
+            for (DiagramElementMapping mapping : ContentHelper.getAllNodeMappings((((DSemanticDiagram) containerView).getDescription()), false)) {
 				String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
 				if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
 					mappings.add(mapping);
 				}
 			}
 		} else if (containerView instanceof DNodeContainer) {
-			for (DiagramElementMapping mapping : (((DNodeContainer) containerView).getActualMapping()
-					.getAllContainerMappings())) {
+            for (DiagramElementMapping mapping : ContainerMappingHelper.getAllContainerMappings((((DNodeContainer) containerView).getActualMapping()))) {
 				String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
 				if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
 					mappings.add(mapping);
 				}
 			}
-			for (DiagramElementMapping mapping : (((DNodeContainer) containerView).getActualMapping()
-					.getAllNodeMappings())) {
+            for (DiagramElementMapping mapping : ContainerMappingHelper.getAllNodeMappings((((DNodeContainer) containerView).getActualMapping()))) {
 				String domainClass = ((AbstractNodeMapping) mapping).getDomainClass();
 				if (modelAccessor.eInstanceOf(semanticElement, domainClass) && !mapping.isCreateElements()) {
 					mappings.add(mapping);
