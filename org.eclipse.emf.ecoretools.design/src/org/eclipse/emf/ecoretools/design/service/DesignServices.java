@@ -53,7 +53,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.edit.EMFEditPlugin;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -440,8 +439,8 @@ public class DesignServices extends EReferenceServices {
 	 */
 	public String toCamelCase(EObject any, String from) {
 		if (from != null) {
-			StringBuffer buffer = new StringBuffer(from.length());
-			for (String word : Splitter.on(CharMatcher.WHITESPACE).trimResults().split(from)) {
+			StringBuilder buffer = new StringBuilder(from.length());
+			for (String word : Splitter.on(CharMatcher.whitespace()).trimResults().split(from)) {
 				buffer.append(toU1Case(word));
 			}
 			return buffer.toString();
