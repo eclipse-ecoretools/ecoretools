@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.registration;singleton:=true
 Bundle-Vendor: %providerName
-Bundle-Version: 3.3.1.qualifier
+Bundle-Version: 3.3.2.qualifier
 Bundle-Activator: org.eclipse.emf.ecoretools.registration.RegistrationPlugin
 Bundle-ClassPath: .
 Require-Bundle: org.eclipse.ui,
