@@ -1,5 +1,5 @@
 target "Oxygen Target Platform For EcoreTools" with source requirements
-location "http://download.eclipse.org/sirius/updates/nightly/5.0.x/oxygen" {
+location "http://download.eclipse.org/sirius/updates/releases/5.0.2/oxygen/" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
