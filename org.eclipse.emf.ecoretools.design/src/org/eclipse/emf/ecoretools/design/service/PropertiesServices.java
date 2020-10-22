@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Obeo.
+ * Copyright (c) 2017, 2020 Obeo.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,11 +10,26 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClassifier;
 import org.eclipse.emf.codegen.ecore.genmodel.GenEnum;
@@ -35,9 +50,16 @@ import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.description.EdgeMapping;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -274,4 +296,77 @@ public class PropertiesServices {
 		return cur;
 	}
 
+	public boolean isAccessible(String path) {
+		final boolean res;
+
+		if (path != null) {
+			final IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
+			res = file.exists() && file.isAccessible();
+		} else {
+			res = false;
+		}
+
+		return res;
+	}
+
+	public String selectIcon(String targetPath) {
+		final IFile targetFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(targetPath));
+		final Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+
+		final FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
+		fileDialog.setText("Select icon");
+		fileDialog.setFileName(targetFile.getLocation().toOSString());
+		final String[] filterExt = { "*.gif", "*.png", "*.jpg", "*.jpeg" };
+		fileDialog.setFilterExtensions(filterExt);
+		final String source = fileDialog.open();
+		if (source != null) {
+			try {
+				Files.copy(new File(source).toPath(), targetFile.getLocation().toFile().toPath(),
+						StandardCopyOption.REPLACE_EXISTING);
+				targetFile.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (IOException | CoreException e) {
+				final String message = String.format("An error occurred while copying %s to %s", source,
+						targetFile.getLocation().toFile().toPath().toString());
+				EcoreToolsDesignPlugin.getPlugin()
+						.log(new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, message, e));
+			}
+		}
+
+		removeImageFromCache(ExtendedImageRegistry.INSTANCE, targetFile.getLocation());
+
+		return targetPath;
+	}
+
+	/**
+	 * Removes the {@link Image} from the cache used by EEF2 to ensure loading of
+	 * the new content.
+	 * 
+	 * @param registry   the {@link ExtendedImageRegistry}
+	 * @param targetPath the image {@link IPath}
+	 */
+	private void removeImageFromCache(ExtendedImageRegistry registry, IPath targetPath) {
+		try {
+			final ImageDescriptor descriptor = ImageDescriptor
+					.createFromURL(targetPath.toFile().toURI().toURL());
+
+			for (Field field : registry.getClass().getDeclaredFields()) {
+				if ("table".equals(field.getName())) {
+					field.setAccessible(true);
+					@SuppressWarnings("unchecked")
+					final Map<Object, Image> table = (Map<Object, Image>) field.get(registry);
+					final Image image = table.remove(descriptor);
+					if (image != null) {
+						image.dispose();
+					}
+					field.setAccessible(false);
+					break;
+				}
+			}
+
+		} catch (MalformedURLException | IllegalArgumentException | IllegalAccessException e) {
+			EcoreToolsDesignPlugin.getPlugin()
+					.log(new Status(IStatus.ERROR, EcoreToolsDesignPlugin.PLUGIN_ID, "Couldn't reload icon.", e));
+		}
+	}
+	
 }

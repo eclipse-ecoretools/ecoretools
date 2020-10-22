@@ -1830,6 +1830,13 @@
           </initialOperation>
         </actions>
       </groups>
+      <overrides xsi:type="properties:GroupOverrideDescription" name="eclass icon" domainClass="ecore::EClassifier" overrides="//@extensions.0/@categories.0/@groups.0">
+        <controls xsi:type="properties:ButtonDescription" name="selectIcon" labelExpression="Associated Icon:" helpExpression="Click on button to select a 16x16 icon. Note that the edit plugin must be generated before." isEnabledExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().isAccessible()" imageExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first()">
+          <initialOperation>
+            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().selectIcon()"/>
+          </initialOperation>
+        </controls>
+      </overrides>
     </categories>
   </extensions>
 </description:Group>
