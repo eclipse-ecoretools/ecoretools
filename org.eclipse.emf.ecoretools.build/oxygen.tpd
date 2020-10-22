@@ -8,7 +8,7 @@ location "http://download.eclipse.org/sirius/updates/releases/5.0.2/oxygen/" {
 	org.eclipse.sirius.properties.feature.feature.group lazy
 }
 
-location "http://download.eclipse.org/acceleo/updates/nightly/latest" Acceleo {
+location "https://download.eclipse.org/acceleo/updates/releases/3.7/R201902261618/" Acceleo {
 	org.eclipse.acceleo.query.feature.group lazy
 }
 location "http://download.eclipse.org/releases/oxygen" {
@@ -18,7 +18,7 @@ location "http://download.eclipse.org/releases/oxygen" {
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 	org.eclipse.emf.eef.runtime-feature.feature.group lazy
 }
-location "http://download.eclipse.org/modeling/amalgam/updates/nightly/1.8.x/oxygen/" {
+location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
