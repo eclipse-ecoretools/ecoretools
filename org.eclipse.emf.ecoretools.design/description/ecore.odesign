@@ -1358,7 +1358,7 @@
         </ownedSubLines>
       </ownedLineMappings>
       <ownedColumnMappings name="Category" headerLabelExpression="Category" canEdit="aql:self.oclIsTypeOf(genmodel::GenFeature)" featureName="propertyCategory" labelExpression="aql:self->filter(genmodel::GenFeature).propertyCategory->first()"/>
-      <ownedColumnMappings name="Decription" headerLabelExpression="Description" canEdit="aql:self.oclIsTypeOf(genmodel::GenFeature)" featureName="propertyDescription" labelExpression="aql:self->filter(genmodel::GenFeature).propertyDescription->first()"/>
+      <ownedColumnMappings name="Description" headerLabelExpression="Description" canEdit="aql:self.oclIsTypeOf(genmodel::GenFeature)" featureName="propertyDescription" labelExpression="aql:self->filter(genmodel::GenFeature).propertyDescription->first()"/>
     </ownedRepresentations>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.GenerationServices"/>
     <ownedJavaExtensions qualifiedClassName="org.eclipse.emf.ecoretools.design.service.PropertiesServices"/>
