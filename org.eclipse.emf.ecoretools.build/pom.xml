@@ -19,7 +19,7 @@
 
   <groupId>org.eclipse.emf.ecoretools</groupId>
   <artifactId>emf.ecoretools-parent</artifactId>
-  <version>3.3.3-SNAPSHOT</version>
+  <version>3.4.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <licenses>
@@ -82,7 +82,7 @@
             <artifact>
               <groupId>org.eclipse.emf.ecoretools</groupId>
     	      <artifactId>emf.ecoretools-parent</artifactId>
-    	      <version>3.3.3-SNAPSHOT</version>
+    	      <version>3.4.0-SNAPSHOT</version>
               <classifier>${PLATFORM}</classifier>
             </artifact>
           </target>
