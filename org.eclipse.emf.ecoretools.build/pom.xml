@@ -37,7 +37,7 @@
   </licenses>
 
   <properties>
-    <tycho-version>1.4.0</tycho-version>
+    <tycho-version>2.4.0</tycho-version>
     <tycho.scmUrl>scm:git:https://git.eclipse.org/r/ecoretools/org.eclipse.ecoretools</tycho.scmUrl>
   </properties>
 
@@ -90,17 +90,17 @@
             <environment>
               <os>linux</os>
               <ws>gtk</ws>
-              <arch>x86</arch>
-            </environment>
-            <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
               <arch>x86_64</arch>
             </environment>
             <environment>
               <os>win32</os>
               <ws>win32</ws>
-              <arch>x86</arch>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
             </environment>
           </environments>
         </configuration>
