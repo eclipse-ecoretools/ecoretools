@@ -56,23 +56,17 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      value="Luna"
+      value="2021-06"
       defaultValue="None"/>
   <setupTask
       xsi:type="setup:VariableTask"
       id="ecoretools.target.platform"
       name="ecoretools.target.platform"
-      defaultValue="Mars Target Platform For EcoreTools"
+      defaultValue="2021-06 Target Platform For EcoreTools"
       label="Target Platform - EcoreTools">
     <choice
-        value="Luna Target Platform For EcoreTools"
-        label="Eclipse Luna - 4.4"/>
-    <choice
-        value="Mars Target Platform For EcoreTools"
-        label="Eclipse Mars - 4.5"/>
-    <choice
-        value="Neon Target Platform For EcoreTools"
-        label="Eclipse Neon - 4.6"/>
+        value="2021-06 Target Platform For EcoreTools"
+        label="Eclipse 2021-06"/>
     <choice
         value="No"
         label="No target plaform"/>
@@ -104,7 +98,7 @@
     <repository
         url="http://download.eclipse.org/mylyn/releases/3.13"/>
     <repository
-        url="http://download.eclipse.org/sirius/updates/nightly/4.0.x/mars"/>
+        url="http://download.eclipse.org/sirius/updates/nightly/7.0.x/2021-06"/>
     <repository
         url="http://download.eclipse.org/acceleo/updates/nightly/latest"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
@@ -146,7 +140,7 @@
             project="org.eclipse.emf.ecoretools"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.10/@workingSets.3 //@setupTasks.10/@workingSets.1 //@setupTasks.10/@workingSets.2"/>
+            excludedWorkingSet="//@setupTasks.10/@workingSets[name='EcoreTools%20Packaging'] //@setupTasks.10/@workingSets[name='EcoreTools%20Tests'] //@setupTasks.10/@workingSets[name='EcoreTools%20Properties']"/>
       </predicate>
     </workingSet>
     <workingSet

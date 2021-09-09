@@ -202,66 +202,15 @@
   
   <profiles>
     <profile>
-      <id>oxygen</id>
+      <id>2021-06</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <PLATFORM>oxygen</PLATFORM>        
+        <PLATFORM>2021-06</PLATFORM>        
       </properties>   
     </profile> 
-    <profile>
-      <id>neon</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>neon</PLATFORM>        
-      </properties>    
-    </profile>   
-    <profile>
-      <id>mars</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>mars</PLATFORM>        
-      </properties>   
-    </profile>   
-    <profile>
-      <id>luna</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>luna</PLATFORM>        
-      </properties>   
-    </profile>   
-    <profile>
-      <id>kepler</id>
-      <properties>
-        <PLATFORM>kepler</PLATFORM>        
-      </properties>
-    </profile>
-    <profile>
-      <id>juno</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>juno</PLATFORM>        
-      </properties>
-    </profile>
-
-    <profile>
-      <id>indigo</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>indigo</PLATFORM>        
-      </properties>
-    </profile>
+    
     <profile>
       <id>sign</id>
       <activation>

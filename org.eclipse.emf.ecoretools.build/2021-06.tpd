@@ -1,5 +1,6 @@
-target "Oxygen Target Platform For EcoreTools" with source requirements
-location "http://download.eclipse.org/sirius/updates/releases/5.0.2/oxygen/" {
+target "2021-06 Target Platform For EcoreTools" with source requirements
+
+location "https://download.eclipse.org/sirius/updates/stable/7.0.0-S20210908-102403/2021-06/" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
@@ -8,16 +9,20 @@ location "http://download.eclipse.org/sirius/updates/releases/5.0.2/oxygen/" {
 	org.eclipse.sirius.properties.feature.feature.group lazy
 }
 
-location "https://download.eclipse.org/acceleo/updates/releases/3.7/R201902261618/" Acceleo {
+location Acceleo "https://download.eclipse.org/acceleo/updates/releases/3.7/R202102190929" {
 	org.eclipse.acceleo.query.feature.group lazy
 }
-location "http://download.eclipse.org/releases/oxygen" {
+location "https://download.eclipse.org/releases/2021-06/" {
 	org.eclipse.sdk.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
-	org.eclipse.gmf.runtime.diagram.ui lazy
-	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 	org.eclipse.emf.eef.runtime-feature.feature.group lazy
 }
+
+location GMF-Runtime-1.14.0 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/R202107090702/" {
+	org.eclipse.gmf.runtime.diagram.ui lazy
+	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
+}
+
 location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
@@ -25,4 +30,11 @@ location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S2
 
 location "http://download.eclipse.org/cbi/updates/license" {
 	org.eclipse.license.feature.group lazy
+}
+
+location Orbit "https://download.eclipse.org/tools/orbit/downloads/drops/R20210602031627/repository" {
+	org.apache.batik.ext [1.14.0,1.14.1)
+	org.apache.batik.codec [1.14.0,1.14.1)
+	org.apache.batik.bridge [1.14.0,1.14.1)
+	org.apache.batik.script [1.14.0,1.14.1)
 }
