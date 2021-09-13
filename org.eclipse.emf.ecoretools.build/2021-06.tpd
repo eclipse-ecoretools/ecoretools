@@ -23,7 +23,7 @@ location GMF-Runtime-1.14.0 "https://download.eclipse.org/modeling/gmp/gmf-runti
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 }
 
-location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.11.0-S20191007/capella/" {
+location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.13.0-S20210909/capella/" {
 	org.eclipse.amalgam.explorer.contextual.feature.group lazy
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
