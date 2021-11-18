@@ -11,7 +11,7 @@
    <parent>
     <groupId>org.eclipse.emf.ecoretools</groupId>
     <artifactId>emf.ecoretools-parent</artifactId>
-    <version>3.3.3-SNAPSHOT</version>
+    <version>3.3.4-SNAPSHOT</version>
     <relativePath>../org.eclipse.emf.ecoretools.build</relativePath>
   </parent>
         
@@ -19,7 +19,7 @@
   <artifactId>org.eclipse.emf.ecoretools.design.ui</artifactId>
   <packaging>eclipse-plugin</packaging>
   
-  <version>3.3.3-SNAPSHOT</version>
+  <version>3.3.4-SNAPSHOT</version>
 
  <build>
      <!-- workaround for https://issues.sonatype.org/browse/TYCHO-168 -->
