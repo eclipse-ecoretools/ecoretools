@@ -1543,6 +1543,15 @@
             </widget>
           </ifs>
         </controls>
+        <controls xsi:type="properties:DynamicMappingForDescription" name="conditional_select_icon" iterator="element" iterableExpression="aql:self">
+          <ifs name="show_select_icon_on_eclassifier" predicateExpression="aql:element.oclIsKindOf(ecore::EClassifier)">
+            <widget xsi:type="properties:ButtonDescription" name="selectIcon" labelExpression="Associated Icon:" helpExpression="Click on button to select a 16x16 icon. Note that the edit plugin must be generated before." isEnabledExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().isAccessible()" imageExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first()">
+              <initialOperation>
+                <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().selectIcon()"/>
+              </initialOperation>
+            </widget>
+          </ifs>
+        </controls>
         <style barStyle="NO_TITLE" toggleStyle="NONE" expandedByDefault="true"/>
         <conditionalStyles preconditionExpression="aql:self.removeSemanticElementsToHide(input.getAllSemanticElements(),input.context().semanticDecorator())->size() > 1">
           <style toggleStyle="NONE" expandedByDefault="true"/>
@@ -1830,13 +1839,6 @@
           </initialOperation>
         </actions>
       </groups>
-      <overrides xsi:type="properties:GroupOverrideDescription" name="eclass icon" domainClass="ecore::EClassifier" overrides="//@extensions.0/@categories.0/@groups.0">
-        <controls xsi:type="properties:ButtonDescription" name="selectIcon" labelExpression="Associated Icon:" helpExpression="Click on button to select a 16x16 icon. Note that the edit plugin must be generated before." isEnabledExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().isAccessible()" imageExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first()">
-          <initialOperation>
-            <firstModelOperations xsi:type="tool:ChangeContext" browseExpression="aql:self.eInverse(genmodel::GenClass).getEClassItemIconPath()->first().selectIcon()"/>
-          </initialOperation>
-        </controls>
-      </overrides>
     </categories>
   </extensions>
 </description:Group>
