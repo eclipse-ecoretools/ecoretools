@@ -10,7 +10,7 @@
       <unit id="org.eclipse.sirius.runtime.ide.eef.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.sirius.properties.feature.feature.group" version="0.0.0"/>
-      <repository location="https://download.eclipse.org/sirius/updates/stable/7.0.0-S20210908-102403/2021-06/"/>
+      <repository location="https://download.eclipse.org/sirius/updates/milestones/7.0.0M2/2021-06/"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.acceleo.query.feature.group" version="0.0.0"/>
