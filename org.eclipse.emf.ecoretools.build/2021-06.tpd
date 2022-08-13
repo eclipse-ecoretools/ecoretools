@@ -1,6 +1,6 @@
 target "2021-06 Target Platform For EcoreTools" with source requirements
 
-location "https://download.eclipse.org/sirius/updates/milestones/7.0.0M2/2021-06/" {
+location "https://download.eclipse.org/sirius/updates/releases/7.0.0/2021-06/" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
@@ -29,7 +29,7 @@ location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.13.0-S2
 	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
 
-location "http://download.eclipse.org/cbi/updates/license" {
+location "https://download.eclipse.org/cbi/updates/license" {
 	org.eclipse.license.feature.group lazy
 }
 
