@@ -19,7 +19,7 @@ location "https://download.eclipse.org/releases/2021-06/" {
 	org.eclipse.emf.eef.runtime-feature.feature.group lazy
 }
 
-location GMF-Runtime-1.14.0 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/R202107090702/" {
+location GMF-Runtime-1.14.1 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/R202202190902" {
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
 }
