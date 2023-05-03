@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: org.eclipse.emf.ecoretools
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools;singleton:=true
 Bundle-Version: 3.4.0.qualifier
@@ -11,5 +12,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-Activator: org.eclipse.emf.ecoretools.internal.Activator

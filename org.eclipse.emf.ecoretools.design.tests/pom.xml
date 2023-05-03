@@ -16,7 +16,7 @@
 
   <properties>
     <local-p2-site>file:/${basedir}/../org.eclipse.emf.ecoretools.update/target/repository</local-p2-site>
-    <ui.test.vmargs.all>-Xmx512m -XX:MaxPermSize=256m</ui.test.vmargs.all>
+    <ui.test.vmargs.all>-Xmx512m</ui.test.vmargs.all>
     <ui.test.vmargs.mac>-XstartOnFirstThread</ui.test.vmargs.mac>
     <ui.test.vmargs>${ui.test.vmargs.all}</ui.test.vmargs>
   </properties>
