@@ -48,18 +48,9 @@
     <module>../org.eclipse.emf.ecoretools.design.ui</module>
     <module>../org.eclipse.emf.ecoretools.design.tests</module>
     <module>../org.eclipse.emf.ecoretools.design-feature</module>
-    <module>../org.eclipse.emf.ecoretools.design.properties</module>
     <module>../org.eclipse.emf.ecoretools.doc</module>
-    <module>../org.eclipse.emf.ecoretools.doc-feature</module>
-    <module>../org.eclipse.emf.ecoretools.properties</module>
-    <module>../org.eclipse.emf.ecoretools.registration</module>    
-    <module>../org.eclipse.emf.ecoretools.sdk-feature</module>
-    <module>../org.eclipse.emf.ecoretools.tabbedproperties</module>
-    <module>../org.eclipse.emf.ecoretools.explorer.contextual</module>
-    <module>../org.eclipse.emf.ecoretools.explorer.contextual-feature</module>
     <module>../org.eclipse.emf.ecoretools.ui</module>
     <module>../org.eclipse.emf.ecoretools.update</module>
-    <module>../org.eclipse.emf.ecoretools.update-all</module>
   </modules>
 
   <build>

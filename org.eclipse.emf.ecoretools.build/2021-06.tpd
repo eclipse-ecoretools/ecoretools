@@ -4,8 +4,6 @@ location "https://download.eclipse.org/sirius/updates/releases/7.0.0/2021-06/" {
 	org.eclipse.sirius.runtime.aql.feature.group lazy
 	org.eclipse.sirius.runtime.feature.group lazy
 	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
-	org.eclipse.sirius.runtime.ide.eef.feature.group lazy
-	org.eclipse.sirius.runtime.ide.ui.acceleo.feature.group lazy
 	org.eclipse.sirius.properties.feature.feature.group lazy
 }
 
@@ -16,17 +14,11 @@ location Acceleo "https://download.eclipse.org/acceleo/updates/releases/3.7/R202
 location "https://download.eclipse.org/releases/2021-06/" {
 	org.eclipse.sdk.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
-	org.eclipse.emf.eef.runtime-feature.feature.group lazy
 }
 
 location GMF-Runtime-1.14.1 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/releases/R202202190902" {
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
-}
-
-location "https://download.eclipse.org/modeling/amalgam/updates/stable/1.13.0-S20210909/capella/" {
-	org.eclipse.amalgam.explorer.contextual.feature.group lazy
-	org.eclipse.amalgam.explorer.contextual.sirius.feature.group lazy
 }
 
 location "https://download.eclipse.org/cbi/updates/license" {
