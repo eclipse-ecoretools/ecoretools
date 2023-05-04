@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Obeo.
+ * Copyright (c) 2016, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -14,7 +14,6 @@ package org.eclipse.emf.ecoretools.design.ui.action;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.CodeGenEcorePlugin;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
@@ -24,7 +23,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.presentation.GeneratorUIUtil;
 import org.eclipse.emf.codegen.ecore.genmodel.provider.GenModelEditPlugin;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.tools.api.ui.IExternalJavaAction;
-import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -33,7 +31,6 @@ import org.eclipse.ui.progress.IProgressService;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class GenerateAllAction implements IExternalJavaAction {
 

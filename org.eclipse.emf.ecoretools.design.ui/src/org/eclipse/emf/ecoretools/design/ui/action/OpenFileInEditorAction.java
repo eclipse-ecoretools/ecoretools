@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Obeo.
+ * Copyright (c) 2017, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.tools.api.ui.IExternalJavaAction;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -28,33 +27,28 @@ import org.eclipse.ui.ide.IDE;
 
 public class OpenFileInEditorAction implements IExternalJavaAction {
 
-	public boolean canExecute(Collection<? extends EObject> selections) {
-		return true;
-	}
+    public boolean canExecute(Collection<? extends EObject> selections) {
+        return true;
+    }
 
-	public void execute(Collection<? extends EObject> selections, final Map<String, Object> parameters) {
+    public void execute(Collection<? extends EObject> selections, final Map<String, Object> parameters) {
 
-		Object wksPath = parameters.get("path");
+        Object wksPath = parameters.get("path");
 
-		if (wksPath instanceof String) {
-			final String path = (String) wksPath;
-			Display.getDefault().syncExec(new Runnable() {
+        if (wksPath instanceof String path) {
+            Display.getDefault().syncExec(() -> {
+                IFile workspaceFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
+                if (workspaceFile != null) {
+                    IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+                    try {
+                        IDE.openEditor(page, workspaceFile);
+                    } catch (PartInitException e) {
+                    }
+                }
+            });
 
-				public void run() {
+        }
 
-					IFile workspaceFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path.toString()));
-					if (workspaceFile != null) {
-						IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-						try {
-							IEditorPart openEditor = IDE.openEditor(page, workspaceFile);
-						} catch (PartInitException e) {
-						}
-					}
-				}
-			});
-
-		}
-
-	}
+    }
 
 }

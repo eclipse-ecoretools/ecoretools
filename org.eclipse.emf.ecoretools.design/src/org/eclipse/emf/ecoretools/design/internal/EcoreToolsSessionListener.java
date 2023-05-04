@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.internal;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -43,13 +42,10 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
         try {
             Method computePlatformURIMap = EcorePlugin.class.getMethod("computePlatformURIMap", Boolean.TYPE);
             result = (Map<URI, URI>) computePlatformURIMap.invoke(null, true);
-        } catch (NoSuchMethodException e) {
-        } catch (IllegalAccessException e) {
-        } catch (IllegalArgumentException e) {
-        } catch (InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         }
         if (result == null) {
-            result = EcorePlugin.computePlatformURIMap();
+            result = EcorePlugin.computePlatformURIMap(false);
         }
 
         if (result != null) {
@@ -61,15 +57,14 @@ public class EcoreToolsSessionListener extends SessionManagerListener.Stub {
         }
 
         try {
-            Field f = XMLResource.class.getField("OPTION_MISSING_PACKAGE_HANDLER");
+            XMLResource.class.getField("OPTION_MISSING_PACKAGE_HANDLER");
             /*
              * we are in EMF 2.9 or superior, we can setup the missing package
              * handler.
              */
             GenModelMissingPackageHandler.setupPackageHandler(set);
-        } catch (NoSuchFieldException e) {
-        } catch (SecurityException e) {
-        }
+        } catch (NoSuchFieldException | SecurityException e) {
+        } 
 
         newSession.getEventBroker().addLocalTrigger(GenModelAutoReload.SHOULD_RELOAD, new GenModelAutoReload(newSession));
         newSession.getEventBroker().addLocalTrigger(GenModelUpdateGenFeatureContainment.SHOULD_UPDATE, new GenModelUpdateGenFeatureContainment(newSession));

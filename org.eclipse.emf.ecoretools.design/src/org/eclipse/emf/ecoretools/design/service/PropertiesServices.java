@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2020 Obeo.
+ * Copyright (c) 2017, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -272,7 +272,8 @@ public class PropertiesServices {
 	public EObject moveUpInContainer(EObject cur) {
 		EObject container = cur.eContainer();
 		if (container != null) {
-			EList<EObject> siblings = (EList<EObject>) container.eGet(cur.eContainingFeature());
+			@SuppressWarnings("unchecked")
+            EList<EObject> siblings = (EList<EObject>) container.eGet(cur.eContainingFeature());
 			int oldPosition = siblings.indexOf(cur);
 			int newPosition = oldPosition - 1;
 			if (newPosition < 0) {
@@ -286,6 +287,7 @@ public class PropertiesServices {
 	public EObject moveDownInContainer(EObject cur) {
 		EObject container = cur.eContainer();
 		if (container != null) {
+            @SuppressWarnings("unchecked")
 			EList<EObject> siblings = (EList<EObject>) container.eGet(cur.eContainingFeature());
 			int oldPosition = siblings.indexOf(cur);
 			int newPosition = oldPosition + 1;

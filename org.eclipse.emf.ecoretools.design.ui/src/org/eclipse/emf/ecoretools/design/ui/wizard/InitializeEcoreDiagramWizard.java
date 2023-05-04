@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Obeo
+ * Copyright (c) 2016, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -67,6 +67,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Sets;
 
+@SuppressWarnings("restriction")
 public class InitializeEcoreDiagramWizard extends Wizard {
 
 	private SelectAirdWizardPage airdFilePage;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Obeo.
+ * Copyright (c) 2017, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -14,7 +14,6 @@ package org.eclipse.emf.ecoretools.design.ui.action;
 import java.util.Collection;
 import java.util.Map;
 
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.window.Window;
@@ -44,7 +43,7 @@ public class OpenSelectModelElementAction implements IExternalJavaAction {
 		if (candidates instanceof EObject) {
 			toSelectFrom.add((EObject) candidates);
 		} else if (candidates instanceof Iterable) {
-			for (EObject eObject : Iterables.filter((Iterable) candidates, EObject.class)) {
+			for (EObject eObject : Iterables.filter((Iterable<?>) candidates, EObject.class)) {
 				toSelectFrom.add(eObject);
 			}
 		}

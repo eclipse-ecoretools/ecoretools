@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2021 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2023 THALES GLOBAL SERVICES and Others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -100,6 +100,7 @@ import com.google.common.collect.Sets;
 /**
  * Generic Ecore services usable from a VSM.
  */
+@SuppressWarnings("restriction")
 public class DesignServices extends EReferenceServices {
 	private static final String CLASS_DIAGRAM_CLASS_MAPPINGID = "EC EClass";
 
@@ -251,7 +252,7 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
-	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
+    public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
 		Set<EClass> result = Sets.newLinkedHashSet();
 		Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
 				DNodeList.class);
@@ -676,12 +677,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public List<EObject> eOperationSemanticElements(EOperation eOp) {
-		List result = Lists.newArrayList(Ordering.natural().onResultOf(new Function<EParameter, String>() {
-
-			public String apply(EParameter arg0) {
-				return arg0.getName();
-			}
-		}).sortedCopy(eOp.getEParameters()));
+		List<EObject> result = Lists.newArrayList(Ordering.natural().onResultOf(EParameter::getName).sortedCopy(eOp.getEParameters()));
 		result.add(0, eOp);
 		return result;
 	}
@@ -810,7 +806,6 @@ public class DesignServices extends EReferenceServices {
 			session.getTransactionalEditingDomain().getCommandStack()
 					.execute(new RecordingCommand(session.getTransactionalEditingDomain()) {
 
-						@SuppressWarnings("restriction")
 						@Override
 						protected void doExecute() {
 							try {
@@ -827,11 +822,9 @@ public class DesignServices extends EReferenceServices {
 								// Execute the create view task
 								new CreateViewTask(context, session.getModelAccessor(), createViewOp,
 										session.getInterpreter()).execute();
-							} catch (MetaClassNotFoundException e) {
+							} catch (MetaClassNotFoundException | FeatureNotFoundException e) {
 								EcoreToolsDesignPlugin.INSTANCE.log(e);
-							} catch (FeatureNotFoundException e) {
-								EcoreToolsDesignPlugin.INSTANCE.log(e);
-							}
+							} 
 						}
 					});
 		}
@@ -874,7 +867,6 @@ public class DesignServices extends EReferenceServices {
 	 *            Session
 	 * @return List of mappings which could not be null
 	 */
-	@SuppressWarnings("restriction")
 	private List<DiagramElementMapping> getMappings(final EObject semanticElement,
 			final DSemanticDecorator containerView, Session session) {
 		ModelAccessor modelAccessor = session.getModelAccessor();

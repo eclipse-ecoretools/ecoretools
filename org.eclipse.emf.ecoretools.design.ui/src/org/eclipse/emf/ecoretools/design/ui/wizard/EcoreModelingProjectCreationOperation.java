@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2023 THALES GLOBAL SERVICES and others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -290,7 +290,7 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 		} else {
 			/* prepare session ressource set for ecore models */
 			session.getTransactionalEditingDomain().getResourceSet().getURIConverter().getURIMap()
-					.putAll(EcorePlugin.computePlatformURIMap());
+					.putAll(EcorePlugin.computePlatformURIMap(false));
 		}
 
 		monitor.subTask("prepare ecore modeling project..."); //$NON-NLS-1$
@@ -409,7 +409,7 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 		 * workspace monitor for modeling project add it as semantic resource.
 		 */
 		final ResourceSet rs = new ResourceSetImpl();
-		rs.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
+		rs.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap(false));
 		String platformPath = modelPath + ecoreResourceName;
 		final URI semanticModelURI = URI.createPlatformResourceURI(platformPath, true);
 		final Resource resource = rs.createResource(semanticModelURI);

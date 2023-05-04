@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -27,21 +27,18 @@ import org.eclipse.gmf.runtime.diagram.ui.services.editpart.AbstractEditPartProv
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.CreateGraphicEditPartOperation;
 import org.eclipse.gmf.runtime.diagram.ui.services.editpart.IEditPartOperation;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.sirius.diagram.DDiagramElement;
-import org.eclipse.sirius.diagram.business.api.query.DDiagramElementQuery;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeBeginNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DEdgeEndNameEditPart;
 import org.eclipse.sirius.diagram.ui.internal.edit.parts.DNodeListEditPart;
 import org.eclipse.sirius.diagram.ui.part.SiriusVisualIDRegistry;
 import org.eclipse.sirius.diagram.ui.tools.api.command.GMFCommandWrapper;
-import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-import org.eclipse.sirius.viewpoint.description.RepresentationElementMapping;
 
+@SuppressWarnings("restriction")
 public class EcoreToolsSpecificEditPartProvider extends
 		AbstractEditPartProvider {
 
-	public synchronized IGraphicalEditPart createGraphicEditPart(View view) {
+    public synchronized IGraphicalEditPart createGraphicEditPart(View view) {
 		switch (SiriusVisualIDRegistry.getVisualID(view)) {
 
 		case DEdgeBeginNameEditPart.VISUAL_ID:

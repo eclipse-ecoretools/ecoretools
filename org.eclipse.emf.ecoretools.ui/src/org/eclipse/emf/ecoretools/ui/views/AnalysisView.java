@@ -1,6 +1,6 @@
 /***********************************************************************
- * Copyright (c) 2007 Anyware Technologies
- * 
+ * Copyright (c) 2007, 2023 Anyware Technologies and others
+ *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IAdapterManager;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecoretools.ui.Activator;
 import org.eclipse.emf.ecoretools.ui.actions.RefreshAction;
 import org.eclipse.emf.ecoretools.ui.actions.ToggleSynchronizeAction;
 import org.eclipse.jface.action.IMenuManager;
@@ -35,6 +34,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -60,7 +60,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	 * Constructor
 	 */
 	public AnalysisView() {
-		ISelectionService selService = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getSelectionService();
+		ISelectionService selService = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 		selService.addSelectionListener(this);
 
 		toggleSynchroAction = new ToggleSynchronizeAction(this);
@@ -72,7 +72,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	 */
 	@Override
 	public void dispose() {
-		ISelectionService selService = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getSelectionService();
+		ISelectionService selService = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 		selService.removeSelectionListener(this);
 
 		super.dispose();
@@ -125,7 +125,7 @@ public abstract class AnalysisView extends ViewPart implements ISelectionListene
 	 * @return the selected EObject
 	 */
 	protected EObject getActiveSelection() {
-		ISelectionService selService = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getSelectionService();
+		ISelectionService selService = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService();
 
 		if (selService.getSelection() instanceof IStructuredSelection) {
 			return getSelection((IStructuredSelection) selService.getSelection());
