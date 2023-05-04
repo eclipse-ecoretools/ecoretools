@@ -11,7 +11,7 @@
 <feature
       id="org.eclipse.emf.ecoretools.design"
       label="%featureName"
-      version="3.4.0.qualifier"
+      version="3.5.0.qualifier"
       provider-name="%providerName"
       image="modeling32.png"
       license-feature="org.eclipse.license"
@@ -40,40 +40,10 @@ http://www.eclipse.org/legal/epl-v10.html
       <import feature="org.eclipse.sirius.properties.feature" version="5.0.0" match="greaterOrEqual"/>
    </requires>
 
-   <plugin
-         id="org.eclipse.emf.ecoretools"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.design"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.design.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.emf.ecoretools.doc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
- 
+   <plugin id="org.eclipse.emf.ecoretools" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+   <plugin id="org.eclipse.emf.ecoretools.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+   <plugin id="org.eclipse.emf.ecoretools.design" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+   <plugin id="org.eclipse.emf.ecoretools.design.ui" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
+   <plugin id="org.eclipse.emf.ecoretools.doc" download-size="0" install-size="0" version="0.0.0" unpack="false"/>
 
 </feature>
