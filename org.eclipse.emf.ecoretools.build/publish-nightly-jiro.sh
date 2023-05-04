@@ -80,8 +80,8 @@ scp build_env.txt "$SSH_ACCOUNT:$TARGET_DIR/build_env.txt"
 rm build_env.txt
 
 # copy the "all in one" update site 
-ssh "$SSH_ACCOUNT" mkdir -p "$TARGET_DIR/all-in-one"
-scp -r "$WORKSPACE"/org.eclipse.emf.ecoretools.update-all/target/repository/* "$SSH_ACCOUNT:$TARGET_DIR/all-in-one"
+#ssh "$SSH_ACCOUNT" mkdir -p "$TARGET_DIR/all-in-one"
+#scp -r "$WORKSPACE"/org.eclipse.emf.ecoretools.update-all/target/repository/* "$SSH_ACCOUNT:$TARGET_DIR/all-in-one"
 
 ######################################################################
 # Setup or update the redirects (implemented as composite repos)
@@ -101,7 +101,7 @@ create_redirect() {
     <property name='p2.timestamp' value='$P2_TIMESTAMP'/>
   </properties>
   <children size='1'>
-    <child location='http://download.eclipse.org/ecoretools/updates/$TO'/>
+    <child location='https://download.eclipse.org/ecoretools/updates/$TO'/>
   </children>
 </repository>
 EOF
@@ -115,7 +115,7 @@ EOF
     <property name='p2.timestamp' value='$P2_TIMESTAMP'/>
   </properties>
   <children size='1'>
-    <child location='http://download.eclipse.org/ecoretools/updates/$TO'/>
+    <child location='https://download.eclipse.org/ecoretools/updates/$TO'/>
   </children>
 </repository>
 EOF
@@ -138,6 +138,6 @@ fi
 
 echo "############################################################################"
 echo "[PUBLISH] Promoted into folder:  " $TARGET_DIR
-echo "[PUBLISH] Build accessible at http:/"`echo $TARGET_DIR | cut -c17-`
+echo "[PUBLISH] Build accessible at https:/"`echo $TARGET_DIR | cut -c17-`
 echo "############################################################################"
 
