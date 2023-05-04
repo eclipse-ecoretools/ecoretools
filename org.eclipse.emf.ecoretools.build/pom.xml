@@ -38,7 +38,7 @@
 
   <properties>
     <tycho-version>2.7.5</tycho-version>
-    <tycho.scmUrl>scm:git:https://git.eclipse.org/r/ecoretools/org.eclipse.ecoretools</tycho.scmUrl>
+    <tycho.scmUrl>scm:git:https://github.com/eclipse-ecoretools/ecoretools.git</tycho.scmUrl>
   </properties>
 
 
