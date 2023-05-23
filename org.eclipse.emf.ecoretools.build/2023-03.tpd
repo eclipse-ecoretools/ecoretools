@@ -1,0 +1,28 @@
+target "2023-03 Target Platform For EcoreTools" with source requirements
+
+location "https://download.eclipse.org/releases/2023-03/" {
+	org.eclipse.sdk.feature.group lazy
+	org.eclipse.emf.sdk.feature.group lazy
+}
+
+location "https://download.eclipse.org/cbi/updates/license" {
+	org.eclipse.license.feature.group lazy
+}
+
+location "https://download.eclipse.org/sirius/updates/milestones/7.2.0rc1/2023-03/" {
+	org.eclipse.sirius.runtime.aql.feature.group lazy
+	org.eclipse.sirius.runtime.feature.group lazy
+	org.eclipse.sirius.runtime.ide.ui.feature.group lazy
+	org.eclipse.sirius.properties.feature.feature.group lazy
+	org.eclipse.acceleo.query.feature.group lazy
+}
+
+location GMF-Runtime-1.16.0rc1 "https://download.eclipse.org/modeling/gmp/gmf-runtime/updates/milestones/S202305230839" {
+	org.eclipse.gmf.runtime.diagram.ui lazy
+	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
+	org.apache.batik.ext [1.16.0,1.16.1)
+	org.apache.batik.codec [1.16.0,1.16.1)
+	org.apache.batik.bridge [1.16.0,1.16.1)
+	org.apache.batik.script [1.16.0,1.16.1)
+}
+
