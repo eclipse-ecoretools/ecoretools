@@ -823,7 +823,7 @@
           </ownedTools>
         </toolSections>
         <decorationDescriptionsSet>
-          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" preconditionExpression="service:viewContainerNotSemanticContainer(diagram,containerView)" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" domainClass="ecore.EClassifier"/>
+          <decorationDescriptions xsi:type="description:SemanticBasedDecoration" name="External" position="NORTH_EAST" preconditionExpression="aql:self.viewContainerNotSemanticContainer(diagram,containerView) and (not view.oclIsKindOf(diagram::DEdge) or view.actualMapping.useDomainElement)" imageExpression="/org.eclipse.emf.ecoretools.design/icons/full/ovr16/shortcut.gif" domainClass="ecore.EClassifier"/>
         </decorationDescriptionsSet>
         <customization>
           <vsmElementCustomizations xsi:type="description:VSMElementCustomization" predicateExpression="feature:required">
