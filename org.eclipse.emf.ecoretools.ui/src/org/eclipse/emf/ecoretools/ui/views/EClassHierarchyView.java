@@ -2,11 +2,12 @@
  * Copyright (c) 2007 Anyware Technologies
  * Copyright (c) 2015 IRT AESE (IRT Saint Exupery)
  * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
  * Contributors:
  *    David Sciamma / Jacques Lescot (Anyware Technologies) - initial API and implementation
  *    Pierre Gaufillet (IRT Saint Exupery)                  - Extension to a general purpose 

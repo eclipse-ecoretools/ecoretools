@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2013 Obeo
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Contributors:
+ *     Obeo - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.Collection;
@@ -8,7 +19,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.sirius.business.api.query.EObjectQuery;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DNodeList;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
