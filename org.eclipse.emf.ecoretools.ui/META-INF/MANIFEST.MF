@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.emf.ecoretools.ui
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: org.eclipse.emf.ecoretools.ui;singleton:=true
-Bundle-Version: 3.5.0.qualifier
+Bundle-Version: 3.5.1.qualifier
 Bundle-Activator: org.eclipse.emf.ecoretools.ui.Activator
 Bundle-Vendor: %Bundle-Vendor
 Require-Bundle: org.eclipse.core.runtime,
