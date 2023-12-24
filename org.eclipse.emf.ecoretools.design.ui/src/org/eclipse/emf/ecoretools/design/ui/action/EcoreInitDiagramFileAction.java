@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.ui.action;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.core.resources.IFile;
@@ -24,13 +25,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.google.common.collect.Lists;
-
 public class EcoreInitDiagramFileAction implements IObjectActionDelegate {
 
 	private IWorkbenchPart targetPart;
 
-	private Collection<URI> domainModelURI = Lists.newArrayList();
+	private Collection<URI> domainModelURI = new ArrayList<>();
 
 	private IProject containingProject;
 

@@ -14,6 +14,7 @@ package org.eclipse.emf.ecoretools.design.ui.wizard;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -63,9 +64,6 @@ import org.eclipse.sirius.viewpoint.provider.SiriusEditPlugin;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-
-import com.google.common.base.Supplier;
-import com.google.common.collect.Sets;
 
 @SuppressWarnings("restriction")
 public class InitializeEcoreDiagramWizard extends Wizard {
@@ -119,6 +117,7 @@ public class InitializeEcoreDiagramWizard extends Wizard {
 		}
 		Supplier<Session> sSupplier = new Supplier<Session>() {
 
+		    @Override
 			public Session get() {
 				if (existingSession == null) {
 					for (Session session : SessionManager.INSTANCE.getSessions()) {
@@ -291,7 +290,7 @@ public class InitializeEcoreDiagramWizard extends Wizard {
 
 		};
 		representationWizardPage = new SelectRepresentationDescriptionWizardPage(sSupplier,
-				Sets.newHashSet("Entities"));
+				Set.of("Entities"));
 		selectElementPage = new SelectRootSemanticElementWizardPage(sSupplier, representationWizardPage);
 
 		addPage(representationWizardPage);

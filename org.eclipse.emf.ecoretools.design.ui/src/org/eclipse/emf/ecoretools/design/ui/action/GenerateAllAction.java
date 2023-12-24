@@ -29,9 +29,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.IProgressService;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 public class GenerateAllAction implements IExternalJavaAction {
 
 	/**
@@ -47,16 +44,13 @@ public class GenerateAllAction implements IExternalJavaAction {
 		if (scope == null) {
 			scope = "model, edit, editor, tests";
 		}
-		if (genmodelsParamValue != null && genmodelsParamValue instanceof Collection) {
+		if (genmodelsParamValue instanceof Collection) {
 			launchEMFGeneration(genmodelsParamValue, scope);
-
 		}
-
 	}
 
 	private void launchEMFGeneration(Object genmodelsParamValue, final String scope) {
-		final List<GenModel> gens = Lists
-				.newArrayList(Iterables.filter((Collection<?>) genmodelsParamValue, GenModel.class));
+		List<GenModel> gens = ((Collection<?>) genmodelsParamValue).stream().filter(GenModel.class::isInstance).map(GenModel.class::cast).toList();
 
 		if (gens.size() > 0) {
 			Display.getDefault().syncExec(new Runnable() {

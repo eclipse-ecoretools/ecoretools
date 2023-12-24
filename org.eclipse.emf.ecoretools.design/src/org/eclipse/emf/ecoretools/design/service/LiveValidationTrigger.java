@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 Obeo
+ * Copyright (c) 2015, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -13,6 +13,7 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.command.Command;
@@ -31,8 +32,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
-
-import com.google.common.collect.Sets;
 
 public class LiveValidationTrigger implements ModelChangeTrigger {
 
@@ -58,7 +57,7 @@ public class LiveValidationTrigger implements ModelChangeTrigger {
 	}
 
 	public Option<Command> localChangesAboutToCommit(Collection<Notification> notifications) {
-		final Set<EObject> changedEcoreObjects = Sets.newLinkedHashSet();
+		final Set<EObject> changedEcoreObjects = new LinkedHashSet<>();
 		for (Notification notif : notifications) {
 			Object obj = notif.getNotifier();
 			if (obj instanceof EObject && ((EObject) obj).eClass() != null
@@ -72,7 +71,7 @@ public class LiveValidationTrigger implements ModelChangeTrigger {
 
 				@Override
 				protected void doExecute() {
-					Set<EObject> containers = Sets.newLinkedHashSet();
+					Set<EObject> containers = new LinkedHashSet<>();
 					for (EObject eObj : changedEcoreObjects) {
 						revalidate(eObj);
 						EObject container = eObj.eContainer();

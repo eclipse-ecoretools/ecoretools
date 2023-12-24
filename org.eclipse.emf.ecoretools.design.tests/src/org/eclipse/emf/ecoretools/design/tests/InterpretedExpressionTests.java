@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 Obeo.
+ * Copyright (c) 2013, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -13,6 +13,7 @@ package org.eclipse.emf.ecoretools.design.tests;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.SortedMultiset;
 import com.google.common.collect.TreeMultiset;
 
@@ -44,7 +44,7 @@ public class InterpretedExpressionTests {
 
 	@Parameters
 	public static Collection<Object[]> data() {
-		List<Object[]> parameters = Lists.newArrayList();
+		List<Object[]> parameters = new ArrayList<>();
 		SortedMultiset<String> allExpressions = TreeMultiset.create();
 		collectExpressionFromEcoreToolsViewpoints(parameters, allExpressions,
 				"Design");

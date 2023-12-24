@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Obeo.
+ * Copyright (c) 2017, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,14 +11,13 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
-import com.google.common.collect.Lists;
 
 public class ALEServices {
 
@@ -37,7 +36,7 @@ public class ALEServices {
 	 * @return
 	 */
 	public static List<? extends EObject> getAllExecutables(EClassifier clazz) {
-		return Lists.newArrayList(clazz);
+		return List.of(clazz);
 	}
 
 	public static EObject addExecutable(EClassifier clazz) {
@@ -99,7 +98,7 @@ public class ALEServices {
 	}
 
 	public static List<EObject> getJavaImports(EModelElement e) {
-		List<EObject> result = Lists.newArrayList();
+		List<EObject> result = new ArrayList<>();
 		if (e instanceof EPackage) {
 			result.add(e);
 		}
