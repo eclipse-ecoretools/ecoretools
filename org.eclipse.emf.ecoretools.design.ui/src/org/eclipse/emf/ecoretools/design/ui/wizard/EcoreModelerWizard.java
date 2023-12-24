@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2023 THALES GLOBAL SERVICES and Others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -74,9 +75,6 @@ import org.eclipse.ui.part.ISetSelectionTarget;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * Wizard to create an EMF project with the {@link ModelingProject} nature, an
@@ -181,7 +179,7 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
         modelPage.setTitle("Model settings"); //$NON-NLS-1$ 
         modelPage.setDescription("Define the model settings"); //$NON-NLS-1$ 
 
-        viewpointsSelectionWizardPage = new ViewpointsSelectionWizardPage(null, Lists.newArrayList(DESIGN_VIEWPOINT_NAME)) {
+        viewpointsSelectionWizardPage = new ViewpointsSelectionWizardPage(null, List.of(DESIGN_VIEWPOINT_NAME)) {
             @Override
             protected Collection<String> computeSemanticFileExtensions(Session session) {
                 Set<String> fileExtensions = new HashSet<String>();
@@ -297,7 +295,7 @@ public class EcoreModelerWizard extends BasicNewProjectResourceWizard {
             Session session = opionalModelingProject.get().getSession();
             if (session != null) {
                 if (!session.getSelectedViews().isEmpty()) {
-                    Set<DRepresentation> representationsToOpen = Sets.newLinkedHashSet();
+                    Set<DRepresentation> representationsToOpen = new LinkedHashSet<>();
                     for (DView view : session.getSelectedViews()) {
                         for (DRepresentation dRepresentation : new DViewQuery(view).getLoadedRepresentations()) {
                             representationsToOpen.add(dRepresentation);

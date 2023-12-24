@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.ui.action;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -25,63 +26,59 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 public class OpenSelectModelElementAction implements IExternalJavaAction {
 
-	public boolean canExecute(Collection<? extends EObject> selections) {
-		return true;
-	}
+    public boolean canExecute(Collection<? extends EObject> selections) {
+        return true;
+    }
 
-	public void execute(Collection<? extends EObject> selections, final Map<String, Object> parameters) {
+    public void execute(Collection<? extends EObject> selections, final Map<String, Object> parameters) {
+        Object messageObj = parameters.get("message");
+        Object titleObj = parameters.get("title");
+        Object candidates = parameters.get("candidates");
+        final Collection<EObject> toSelectFrom = new ArrayList<>();
+        if (candidates instanceof EObject) {
+            toSelectFrom.add((EObject) candidates);
+        } else if (candidates instanceof Iterable<?> iterable) {
+            for (Object candidate : iterable) {
+                if (candidate instanceof EObject eObject) {
+                    toSelectFrom.add(eObject);
+                }
+            }
+        }
+        if (messageObj instanceof String) {
+            final String message = (String) messageObj;
+            final String title = getTitleFromParameter(titleObj);
+            Display.getDefault().syncExec(new Runnable() {
 
-		Object messageObj = parameters.get("message");
-		Object titleObj = parameters.get("title");
-		Object candidates = parameters.get("candidates");
-		final Collection<EObject> toSelectFrom = Lists.newArrayList();
-		if (candidates instanceof EObject) {
-			toSelectFrom.add((EObject) candidates);
-		} else if (candidates instanceof Iterable) {
-			for (EObject eObject : Iterables.filter((Iterable<?>) candidates, EObject.class)) {
-				toSelectFrom.add(eObject);
-			}
-		}
-		if (messageObj instanceof String) {
-			final String message = (String) messageObj;
-			final String title = getTitleFromParameter(titleObj);
-			Display.getDefault().syncExec(new Runnable() {
+                public void run() {
+                    Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+                    final EObjectSelectionWizard wizard = new EObjectSelectionWizard(title, message, null, toSelectFrom, DiagramUIPlugin.getPlugin().getItemProvidersAdapterFactory());
+                    wizard.setMany(false);
+                    final WizardDialog dlg = new WizardDialog(shell, wizard);
+                    final int result = dlg.open();
+                    if (result == Window.OK) {
 
-				public void run() {
-					Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-					final EObjectSelectionWizard wizard = new EObjectSelectionWizard(title, message, null, toSelectFrom,
-							DiagramUIPlugin.getPlugin().getItemProvidersAdapterFactory());
-					wizard.setMany(false);
-					final WizardDialog dlg = new WizardDialog(shell, wizard);
-					final int result = dlg.open();
-					if (result == Window.OK) {
+                        Object featureObj = parameters.get("feature");
+                        Object hostObj = parameters.get("host");
+                        if (featureObj instanceof EStructuralFeature && hostObj instanceof EObject) {
+                            ((EObject) hostObj).eSet((EStructuralFeature) featureObj, wizard.getSelectedEObject());
+                        }
 
-						Object featureObj = parameters.get("feature");
-						Object hostObj = parameters.get("host");
-						if (featureObj instanceof EStructuralFeature && hostObj instanceof EObject) {
-							((EObject) hostObj).eSet((EStructuralFeature) featureObj, wizard.getSelectedEObject());
-						}
+                    }
 
-					} 
+                }
+            });
+        }
 
-				}
-			});
+    }
 
-		}
-
-	}
-
-	private String getTitleFromParameter(Object titleObj) {
-		String title = "Select Model Element";
-		if (titleObj instanceof String) {
-			title = (String) titleObj;
-		}
-		return title;
-	}
+    private String getTitleFromParameter(Object titleObj) {
+        String title = "Select Model Element";
+        if (titleObj instanceof String) {
+            title = (String) titleObj;
+        }
+        return title;
+    }
 
 }

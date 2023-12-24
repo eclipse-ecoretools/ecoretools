@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,7 +11,9 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenBase;
@@ -33,9 +35,6 @@ import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * a {@link ModelChangeTrigger} which reconcile any gemodel in the editing
@@ -89,7 +88,7 @@ public class GenModelAutoReload implements ModelChangeTrigger {
 	public static final int PRIORITY = -2;
 
 	public Option<Command> localChangesAboutToCommit(Collection<Notification> notifications) {
-		final Collection<GenModel> genModels = Lists.newArrayList();
+		final Collection<GenModel> genModels = new ArrayList<>();
 		for (Resource res : session.getTransactionalEditingDomain().getResourceSet().getResources()) {
 			for (EObject root : res.getContents()) {
 				if (root instanceof GenModel) {
@@ -131,7 +130,7 @@ class ProcessGenModels extends RecordingCommand {
 		 * corresponding element. This is not the case when the model is being
 		 * edited "in live" as the Java reference still holds.
 		 */
-		Set<GenBase> toDelete = Sets.newLinkedHashSet();
+		Set<GenBase> toDelete = new LinkedHashSet<>();
 		for (GenModel genmodel : genmodels) {
 
 			for (GenPackage genpackage : genmodel.getGenPackages()) {

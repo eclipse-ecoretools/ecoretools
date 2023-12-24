@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo.
+ * Copyright (c) 2014, 2023 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,13 +11,12 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
-
-import com.google.common.collect.Sets;
 
 public class EcoreToolsViewpoints {
 
@@ -57,7 +56,7 @@ public class EcoreToolsViewpoints {
     }
 
     public Set<Viewpoint> all() {
-        Set<Viewpoint> ecoreToolsViewpoints = Sets.newLinkedHashSet();
+        Set<Viewpoint> ecoreToolsViewpoints = new LinkedHashSet<>();
         Viewpoint vp = design();
         if (vp != null)
             ecoreToolsViewpoints.add(vp);

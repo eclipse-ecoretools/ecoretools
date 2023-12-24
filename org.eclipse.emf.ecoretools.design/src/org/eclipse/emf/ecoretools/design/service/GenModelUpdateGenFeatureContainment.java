@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2023 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
@@ -25,8 +26,6 @@ import org.eclipse.sirius.business.api.session.ModelChangeTrigger;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
-
-import com.google.common.collect.Lists;
 
 /**
  * a {@link ModelChangeTrigger} which update GenFeature children/notify/create
@@ -59,7 +58,7 @@ public class GenModelUpdateGenFeatureContainment implements ModelChangeTrigger {
 	public Option<Command> localChangesAboutToCommit(
 			Collection<Notification> notifications) {
 
-		final Collection<GenFeature> toBeUpdated = Lists.newArrayList();
+		final Collection<GenFeature> toBeUpdated = new ArrayList<>();
 		for (Notification notif : notifications) {
 			if (SHOULD_UPDATE.matches(notif)) {
 				/*
