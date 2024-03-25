@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2023 Obeo
+ * Copyright (c) 2016, 2024 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -13,7 +13,10 @@ package org.eclipse.emf.ecoretools.design.ui.wizard.pages;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -58,10 +61,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.osgi.framework.Bundle;
 
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 /**
  * A wizard page to select representation descriptions based on the Viewpoints
  * currently availables.
@@ -71,19 +70,12 @@ import com.google.common.collect.Sets;
 public class SelectRepresentationDescriptionWizardPage extends WizardPage
 		implements Supplier<RepresentationDescription> {
 
-	/**
-	 * 
-	 * @author mchauvin
-	 */
 	private class ViewpointsTableLabelProvider extends AdapterFactoryLabelProvider implements ITableLabelProvider {
 
 		public ViewpointsTableLabelProvider() {
 			super(ViewHelper.INSTANCE.createAdapterFactory());
 		}
 
-		/**
-		 * {@inheritDoc}
-		 */
 		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			Image image = null;
@@ -166,8 +158,8 @@ public class SelectRepresentationDescriptionWizardPage extends WizardPage
 		this.setTitle(PAGE_TITLE);
 		this.setMessage(PAGE_MESSAGE);
 		this.sessionSupplier = supplier;
-		this.descriptions = Sets.newLinkedHashSet();
-		this.representationsURIsToActivateByDefault = Sets.newHashSet(representationsToSelectByDefault);
+		this.descriptions = new LinkedHashSet<>();
+		this.representationsURIsToActivateByDefault = new HashSet<>(representationsToSelectByDefault);
 	}
 
 	private StringBuilder appendCss(StringBuilder content) {
@@ -275,10 +267,13 @@ public class SelectRepresentationDescriptionWizardPage extends WizardPage
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
-				if (event.getSelection() instanceof IStructuredSelection) {
+				if (event.getSelection() instanceof IStructuredSelection selection) {
 					descriptions.clear();
-					Iterators.addAll(descriptions, Iterators.filter(
-							((IStructuredSelection) event.getSelection()).iterator(), RepresentationDescription.class));
+					for (Object selectedElement : selection) {
+                        if (selectedElement instanceof RepresentationDescription representationDescription) {
+                            descriptions.add(representationDescription);
+                        }
+                    }
 				}
 			}
 		});
@@ -326,7 +321,7 @@ public class SelectRepresentationDescriptionWizardPage extends WizardPage
 	}
 
 	private Collection<RepresentationDescription> getAvailableDescriptions(Session session) {
-		List<RepresentationDescription> result = Lists.newArrayList();
+		List<RepresentationDescription> result = new ArrayList<>();
 		for (Viewpoint vp : session.getSelectedViewpoints(false)) {
 			result.addAll(vp.getOwnedRepresentations());
 		}
@@ -338,7 +333,7 @@ public class SelectRepresentationDescriptionWizardPage extends WizardPage
 
 		final String document = viewpoint.getDocumentation();
 
-		Set<String> urlToRewrite = Sets.newLinkedHashSet();
+		Set<String> urlToRewrite = new LinkedHashSet<>();
 		extractUrlToRewrite(document, urlToRewrite);
 
 		return rewriteURLs(viewpoint, document, urlToRewrite);

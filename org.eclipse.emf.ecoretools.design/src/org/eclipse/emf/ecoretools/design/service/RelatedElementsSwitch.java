@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2024 THALES GLOBAL SERVICES and Others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -12,6 +12,7 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,9 +28,6 @@ import org.eclipse.emf.ecore.util.ECrossReferenceAdapter;
 import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Sets;
 
 /**
  * A switch implementation retrieving all the elements which might be related to
@@ -53,7 +51,7 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 
 	public List<EObject> getRelatedElements(EObject ctx) {
 		Session sess = SessionManager.INSTANCE.getSession(ctx);
-		relateds = Sets.newLinkedHashSet();
+		relateds = new LinkedHashSet<>();
 		if (sess != null) {
 			xRefs = sess.getSemanticCrossReferencer().getInverseReferences(ctx);
 		} else if (referencer != null) {
@@ -63,7 +61,7 @@ public class RelatedElementsSwitch extends EcoreSwitch<List<EObject>> {
 		relateds.remove(ctx);
 		// hack to prevent some null element in relateds for a unknown reason.
 		relateds.remove(null);
-		return ImmutableList.copyOf(relateds);
+		return List.copyOf(relateds);
 	}
 
 	@Override
