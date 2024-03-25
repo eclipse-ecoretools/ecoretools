@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2024 THALES GLOBAL SERVICES and Others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -11,14 +11,11 @@
  *******************************************************************************/
 package org.eclipse.emf.ecoretools.design.service;
 
-import java.util.Iterator;
+import java.util.Optional;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-
-import com.google.common.base.Optional;
-import com.google.common.collect.Iterators;
 
 public class DiagnosticAttachment extends AdapterImpl {
 
@@ -33,12 +30,11 @@ public class DiagnosticAttachment extends AdapterImpl {
     }
 
     public static DiagnosticAttachment getAttachment(EObject cur) {
-        Iterator<DiagnosticAttachment> it = Iterators.filter(cur.eAdapters().iterator(), DiagnosticAttachment.class);
-        DiagnosticAttachment found = null;
-        if (it.hasNext()) {
-            found = it.next();
-        }
-        return found;
+        return cur.eAdapters().stream()
+                .filter(DiagnosticAttachment.class::isInstance)
+                .map(DiagnosticAttachment.class::cast)
+                .findFirst()
+                .orElse(null);
     }
 
     public static DiagnosticAttachment getOrCreate(EObject cur, Diagnostic diag) {
@@ -54,9 +50,9 @@ public class DiagnosticAttachment extends AdapterImpl {
     public static Optional<Diagnostic> get(EObject cur) {
         DiagnosticAttachment found = getAttachment(cur);
         if (found != null) {
-            return Optional.fromNullable(found.getDiagnostic());
+            return Optional.ofNullable(found.getDiagnostic());
         }
-        return Optional.absent();
+        return Optional.empty();
     }
 
 }

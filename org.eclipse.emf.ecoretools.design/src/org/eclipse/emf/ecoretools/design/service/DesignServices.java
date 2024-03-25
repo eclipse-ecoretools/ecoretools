@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2023 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2024 THALES GLOBAL SERVICES and others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -16,11 +16,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -61,6 +69,7 @@ import org.eclipse.sirius.business.api.session.Session;
 import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DDiagram;
 import org.eclipse.sirius.diagram.DDiagramElement;
+import org.eclipse.sirius.diagram.DDiagramElementContainer;
 import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.DNodeContainer;
 import org.eclipse.sirius.diagram.DNodeList;
@@ -85,18 +94,6 @@ import org.eclipse.sirius.viewpoint.DRepresentation;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 import org.eclipse.sirius.viewpoint.FontFormat;
 
-import com.google.common.base.Ascii;
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
-
 /**
  * Generic Ecore services usable from a VSM.
  */
@@ -117,7 +114,7 @@ public class DesignServices extends EReferenceServices {
 	public List<EObject> allRoots(EObject any) {
 		Resource res = any.eResource();
 		if (res != null && res.getResourceSet() != null) {
-			List<EObject> roots = new ArrayList<EObject>();
+			List<EObject> roots = new ArrayList<>();
 			for (Resource childRes : res.getResourceSet().getResources()) {
 				roots.addAll(childRes.getContents());
 			}
@@ -128,7 +125,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public Set<EPackage> rootEPackages(EObject any) {
-		return Sets.newLinkedHashSet(Iterables.filter(allRoots(any), EPackage.class));
+	    return allRoots(any).stream().filter(EPackage.class::isInstance).map(EPackage.class::cast).collect(Collectors.toSet());
 	}
 
 	public Boolean isEOperation(EObject any) {
@@ -171,18 +168,17 @@ public class DesignServices extends EReferenceServices {
 	public Set<EStringToStringMapEntryImpl> getVisibleDocAnnotations(EObject self, DSemanticDiagram diag) {
 		// [diagram.getDisplayedEModelElements().oclAsType(ecore::EModelElement).eAnnotations.details->select(key
 		// = 'documentation')/]
-		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
+		Set<EStringToStringMapEntryImpl> result = new LinkedHashSet<>();
 		for (EModelElement displayed : getDisplayedEModelElements(diag)) {
 			if (!(displayed instanceof EAttribute) && !(displayed instanceof EEnumLiteral)
 					&& !(displayed instanceof EOperation)) {
 				EAnnotation eAnnot = displayed.getEAnnotation(GEN_MODEL_PACKAGE_NS_URI);
 				if (eAnnot != null) {
-					for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(eAnnot.getDetails(),
-							EStringToStringMapEntryImpl.class)) {
-						if ("documentation".equals(mapEntry.getKey())) {
-							result.add(mapEntry);
-						}
-					}
+				    for (var detail : eAnnot.getDetails()) {
+				        if (detail instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
+                            result.add(mapEntry);
+                        }
+				    }
 				}
 			}
 
@@ -190,20 +186,18 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
-	public Set<EStringToStringMapEntryImpl> getVisibleConstraintsAnnotations(EObject self,
-			DSemanticDiagram diag) {
-		Set<EStringToStringMapEntryImpl> result = Sets.newLinkedHashSet();
+    public Set<EStringToStringMapEntryImpl> getVisibleConstraintsAnnotations(EObject self, DSemanticDiagram diag) {
+		Set<EStringToStringMapEntryImpl> result = new LinkedHashSet<>();
 		for (EModelElement displayed : getDisplayedEModelElements(diag)) {
 			if (!(displayed instanceof EAttribute) && !(displayed instanceof EEnumLiteral)
 					&& !(displayed instanceof EOperation)) {
 				EAnnotation eAnnot = displayed.getEAnnotation(ECORE_PACKAGE_NS_URI);
 				if (eAnnot != null) {
-					for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(eAnnot.getDetails(),
-							EStringToStringMapEntryImpl.class)) {
-						if ("constraints".equals(mapEntry.getKey())) {
-							result.add(mapEntry);
-						}
-					}
+				    for (var detail : eAnnot.getDetails()) {
+                        if (detail instanceof EStringToStringMapEntryImpl mapEntry && "constraints".equals(mapEntry.getKey())) {
+                            result.add(mapEntry);
+                        }
+                    }
 				}
 			}
 
@@ -212,18 +206,18 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public boolean hasNoClassifier(DSemanticDiagram diagram) {
-		Iterator<DSemanticDecorator> it = Iterators.filter(diagram.getOwnedDiagramElements().iterator(),
-				DSemanticDecorator.class);
+		Iterator<DDiagramElement> it = diagram.getOwnedDiagramElements().iterator();
 		while (it.hasNext()) {
 			DSemanticDecorator dec = it.next();
-			if (dec.getTarget() instanceof EClassifier)
+			if (dec.getTarget() instanceof EClassifier) {
 				return true;
+			}
 		}
 		return false;
 	}
 
 	public Set<EReference> getNonDisplayedEReferences(EClass self, DSemanticDiagram diag) {
-		Set<EReference> result = Sets.newLinkedHashSet();
+		Set<EReference> result = new LinkedHashSet<>();
 		Set<EClass> displayedEClasses = null;
 		for (EReference eReference : self.getEAllReferences()) {
 			if (eReference.getEType() != null) {
@@ -252,36 +246,34 @@ public class DesignServices extends EReferenceServices {
 		return result;
 	}
 
-    public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
-		Set<EClass> result = Sets.newLinkedHashSet();
-		Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
-				DNodeList.class);
-		while (it.hasNext()) {
-			DNodeList dec = it.next();
-			if (dec.getTarget() instanceof EClass && dec.isVisible()) {
-				result.add((EClass) dec.getTarget());
-			}
-		}
+	public Set<EClass> getDisplayedEClasses(DSemanticDiagram diagram) {
+		Set<EClass> result = new LinkedHashSet<>();
+		Iterator<DDiagramElementContainer> it = new DDiagramInternalQuery(diagram).getContainers().iterator();
+        while (it.hasNext()) {
+            DDiagramElementContainer container = it.next();
+            if (container instanceof DNodeList dec && dec.getTarget() instanceof EClass && dec.isVisible()) {
+                result.add((EClass) dec.getTarget());
+            }
+        }
 		return result;
 	}
 
 	public Set<EClassifier> getDisplayedEClassifiers(DSemanticDiagram diagram) {
-		Set<EClassifier> result = Sets.newLinkedHashSet();
-        Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
-                DNodeList.class);
+		Set<EClassifier> result = new LinkedHashSet<>();
+		Iterator<DDiagramElementContainer> it = new DDiagramInternalQuery(diagram).getContainers().iterator();
         while (it.hasNext()) {
-			DNodeList dec = it.next();
-			if (dec.getTarget() instanceof EClassifier && dec.isVisible()) {
-				result.add((EClassifier) dec.getTarget());
-			}
-		}
+            DDiagramElementContainer container = it.next();
+            if (container instanceof DNodeList dec && dec.getTarget() instanceof EClassifier target && dec.isVisible()) {
+                result.add(target);
+            }
+        }
 		return result;
 	}
 
 	private Set<EClass> getInternalEClasses(DSemanticDiagram diagram) {
-		Set<EClass> result = Sets.newLinkedHashSet();
-        Iterator<DNodeList> it = Iterators.filter(new DDiagramInternalQuery(diagram).getContainers().iterator(),
-                DNodeList.class);
+		Set<EClass> result = new LinkedHashSet<>();
+        Iterator<DNodeList> it = filterByType(new DDiagramInternalQuery(diagram).getContainers(),
+                DNodeList.class).iterator();
 		while (it.hasNext()) {
 			DNodeList dec = it.next();
 			if (dec.getTarget() instanceof EClass) {
@@ -295,7 +287,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public Set<EClass> getDirectSuperTypesOrMostSpecificVisibleOnes(EClass self, DSemanticDiagram diagram) {
-		Set<EClass> result = Sets.newLinkedHashSet();
+		Set<EClass> result = new LinkedHashSet<>();
 		Set<EClass> displayed = getDisplayedEClasses(diagram);
 		for (EClass directSuperType : self.getESuperTypes()) {
 			if (displayed.contains(directSuperType)) {
@@ -312,7 +304,7 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	private Set<EClass> findMostSpecificAndVisible(Collection<EClass> superTypes, Set<EClass> displayed) {
-		Set<EClass> result = Sets.newLinkedHashSet();
+		Set<EClass> result = new LinkedHashSet<>();
 		for (EClass eClass : superTypes) {
 			if (displayed.contains(eClass)) {
 				result.add(eClass);
@@ -325,22 +317,23 @@ public class DesignServices extends EReferenceServices {
 
 	public Set<EClass> getExternalEClasses(EPackage root, DSemanticDiagram diagram) {
 
-		Set<EClass> related = Sets.newLinkedHashSet();
+		Set<EClass> related = new LinkedHashSet<>();
 		Set<EClass> eClasses = getInternalEClasses(diagram);
 		RelatedElementsSwitch relations = new RelatedElementsSwitch();
 		for (EClass eClass : eClasses) {
-			for (EClass other : Iterables.filter(relations.getRelatedElements(eClass), EClass.class)) {
-				related.add(other);
-			}
+		    for (var relatedElement : relations.getRelatedElements(eClass)) {
+                if (relatedElement instanceof EClass other) {
+                    related.add(other);
+                }
+            }
 		}
-
-		return Sets.difference(related, eClasses);
+		return related.stream().filter(c -> !eClasses.contains(c)).collect(Collectors.toSet());
 	}
 
 	public Set<EReference> getEReferencesToDisplay(EPackage root, DSemanticDiagram diagram) {
 		// [diagram.getDisplayedEClasses().oclAsType(ecore::EClass).eAllReferences->flatten()/]
 		Collection<EClass> eClasses = getDisplayedEClasses(diagram);
-		Set<EReference> eRefs = Sets.newLinkedHashSet();
+		Set<EReference> eRefs = new LinkedHashSet<>();
 		for (EClass clazz : eClasses) {
 			eRefs.addAll(clazz.getEAllReferences());
 		}
@@ -358,59 +351,51 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public List<EReference> getEOppositeSemanticElements(EReference ref) {
-		Set<EReference> allRefs = Sets.newLinkedHashSet();
+		Set<EReference> allRefs = new LinkedHashSet<>();
 		allRefs.add(ref);
-		if (ref.getEOpposite() != null)
+		if (ref.getEOpposite() != null) {
 			allRefs.add(ref.getEOpposite());
-		return Ordering.natural().onResultOf(new Function<EReference, String>() {
-
-			public String apply(EReference input) {
-				return input.getName();
-			}
-		}).sortedCopy(allRefs);
+		}
+		return allRefs.stream().sorted(Comparator.comparing(EReference::getName)).toList();
 	}
 
 	public Set<EModelElement> getDisplayedEModelElements(DSemanticDiagram diagram) {
-		Set<EModelElement> modelelements = Sets.newLinkedHashSet();
-		Iterator<DSemanticDecorator> it = Iterators.filter(Iterators.concat(Iterators.singletonIterator(diagram),
-				new DDiagramQuery(diagram).getAllDiagramElements().iterator()), DSemanticDecorator.class);
-		while (it.hasNext()) {
-			DSemanticDecorator dec = it.next();
-			if (dec.getTarget() instanceof EModelElement)
-				modelelements.add((EModelElement) dec.getTarget());
-		}
-		return modelelements;
+		return Stream.concat(Stream.of(diagram), new DDiagramQuery(diagram).getAllDiagramElements().stream())
+		        .map(DSemanticDecorator::getTarget)
+		        .filter(EModelElement.class::isInstance)
+		        .map(EModelElement.class::cast)
+		        .collect(Collectors.toCollection(LinkedHashSet::new));
 	}
 
 	public List<EObject> getValidsForDiagram(final EObject element, final DSemanticDecorator containerView) {
-		Predicate<EObject> validForClassDiagram = new Predicate<EObject>() {
-
-			public boolean apply(EObject input) {
-				return input instanceof EPackage || input instanceof EClassifier;
-			}
-		};
-		return allValidSessionElements(element, validForClassDiagram);
+		return allValidSessionElements(element, input -> input instanceof EPackage || input instanceof EClassifier);
 	}
 
 	public Set<EObject> getRelated(EObject firstView, List<EObject> allSelectedViews, DDiagram diag) {
-		Set<EObject> relateds = Sets.newLinkedHashSet();
-		for (DSemanticDecorator decorator : Iterables.filter(allSelectedViews, DSemanticDecorator.class)) {
-			relateds.addAll(new RelatedElementsSwitch().getRelatedElements(decorator.getTarget()));
-		}
+		Set<EObject> relateds = new LinkedHashSet<>();
+		for (EObject view : allSelectedViews) {
+		    if (view instanceof DSemanticDecorator decorator) {
+		        relateds.addAll(new RelatedElementsSwitch().getRelatedElements(decorator.getTarget()));
+		    }
+        }
 		return relateds;
 	}
 
 	public Set<EObject> getRelated(EObject firstView, EObject aView, DDiagram diag) {
-		return getRelated(firstView, Lists.newArrayList(aView), diag);
+		return getRelated(firstView, List.of(aView), diag);
 	}
 
 	private List<EObject> allValidSessionElements(EObject cur, Predicate<EObject> validForClassDiagram) {
-		Session found = SessionManager.INSTANCE.getSession(cur);
-		List<EObject> result = Lists.newArrayList();
-		if (found != null) {
-			for (Resource res : found.getSemanticResources()) {
+		Session session = SessionManager.INSTANCE.getSession(cur);
+		List<EObject> result = new ArrayList<>();
+		if (session != null) {
+			for (Resource res : session.getSemanticResources()) {
 				if (res.getURI().isPlatformResource() || res.getURI().isPlatformPlugin()) {
-					Iterators.addAll(result, Iterators.filter(res.getAllContents(), validForClassDiagram));
+				    res.getAllContents().forEachRemaining(eObject -> {
+				        if (validForClassDiagram.test(eObject)) {
+				            result.add(eObject);
+				        }
+				    });
 				}
 			}
 		}
@@ -442,9 +427,7 @@ public class DesignServices extends EReferenceServices {
 	public String toCamelCase(EObject any, String from) {
 		if (from != null) {
 			StringBuilder buffer = new StringBuilder(from.length());
-			for (String word : Splitter.on(CharMatcher.whitespace()).trimResults().split(from)) {
-				buffer.append(toU1Case(word));
-			}
+			Arrays.stream(Pattern.compile("\\s").split(from)).map(String::trim).map(this::toU1Case).forEach(buffer::append);
 			return buffer.toString();
 		}
 		return from;
@@ -452,8 +435,7 @@ public class DesignServices extends EReferenceServices {
 
 	private String toU1Case(String word) {
 		if (word != null && word.length() > 0) {
-			return new StringBuilder(word.length()).append(Ascii.toUpperCase(word.charAt(0))).append(word.substring(1))
-					.toString();
+			return new StringBuilder(word.length()).append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).toString();
 		}
 		return word;
 	}
@@ -504,10 +486,13 @@ public class DesignServices extends EReferenceServices {
 			 * and replace it with something which will not change on subsequent
 			 * executions.
 			 */
-			for (EObject data : Iterables.filter(child.getData(), EObject.class)) {
-				String instanceVariableString = data.getClass().getName() + "@" + Integer.toHexString(data.hashCode());
-				message = message.replace(instanceVariableString, data.eClass().getName());
-			}
+			for (var data : child.getData()) {
+			    if (data instanceof EObject eObject) {
+			        String instanceVariableString = eObject.getClass().getName() + "@" + Integer.toHexString(eObject.hashCode());
+	                message = message.replace(instanceVariableString, eObject.eClass().getName());
+			    }
+                
+            }
 
 			result += "\n" + severityLabel(child.getSeverity()) + " : " + message;
 			result += prettyMessage(child);
@@ -677,8 +662,9 @@ public class DesignServices extends EReferenceServices {
 	}
 
 	public List<EObject> eOperationSemanticElements(EOperation eOp) {
-		List<EObject> result = Lists.newArrayList(Ordering.natural().onResultOf(EParameter::getName).sortedCopy(eOp.getEParameters()));
-		result.add(0, eOp);
+	    List<EObject> result = new ArrayList<>();
+	    eOp.getEParameters().stream().sorted(Comparator.comparing(EParameter::getName)).forEachOrdered(result::add);
+	    result.add(0, eOp);
 		return result;
 	}
 
@@ -988,6 +974,10 @@ public class DesignServices extends EReferenceServices {
 			}
 		}
 		return r;
+	}
+	
+	protected <T> Iterable<T> filterByType(Collection<?> input, Class<T> expectedType) {
+	    return () -> input.stream().filter(expectedType::isInstance).map(expectedType::cast).iterator();
 	}
 
 }

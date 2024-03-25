@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2023 Obeo.
+ * Copyright (c) 2017, 2024 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -62,11 +63,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-
 /**
  * The services class used by the Properties View support.
  */
@@ -75,7 +71,7 @@ public class PropertiesServices {
 	protected static final String GEN_MODEL_PACKAGE_NS_URI = "http://www.eclipse.org/emf/2002/GenModel";
 
 	public List<EStructuralFeature> removeFeaturesToHide(EObject ctx, Collection<EStructuralFeature> unfiltered) {
-		List<EStructuralFeature> toBeFilterd = Lists.newArrayList(unfiltered);
+		List<EStructuralFeature> toBeFilterd = new ArrayList<>(unfiltered);
 		toBeFilterd.remove(GenModelPackage.Literals.GEN_CLASS__ECORE_CLASS);
 		toBeFilterd.remove(GenModelPackage.Literals.GEN_PACKAGE__ECORE_PACKAGE);
 		toBeFilterd.remove(GenModelPackage.Literals.GEN_CLASS__ECORE_CLASS);
@@ -86,7 +82,7 @@ public class PropertiesServices {
 		toBeFilterd.remove(GenModelPackage.Literals.GEN_ENUM__ECORE_ENUM);
 		toBeFilterd.remove(GenModelPackage.Literals.GEN_TYPE_PARAMETER__ECORE_TYPE_PARAMETER);
 
-		PriorityComparator<EStructuralFeature> comparator = new PriorityComparator<EStructuralFeature>(ImmutableList.of(
+		PriorityComparator<EStructuralFeature> comparator = new PriorityComparator<>(List.of(
 				EcorePackage.Literals.ENAMED_ELEMENT__NAME, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE,
 				EcorePackage.Literals.ETYPED_ELEMENT__LOWER_BOUND, EcorePackage.Literals.ETYPED_ELEMENT__UPPER_BOUND,
 				EcorePackage.Literals.ECLASSIFIER__INSTANCE_CLASS_NAME,
@@ -98,8 +94,7 @@ public class PropertiesServices {
 		/*
 		 * reorder features
 		 */
-
-		return Ordering.from(comparator).sortedCopy(toBeFilterd);
+		return toBeFilterd.stream().sorted(comparator).toList();
 	}
 
 	class PriorityComparator<T> implements Comparator<T> {
@@ -122,7 +117,7 @@ public class PropertiesServices {
 
 	public List<EObject> removeSemanticElementsToHide(EObject ctx, Collection<EObject> unfiltered,
 			DSemanticDecorator selection) {
-		List<EObject> filtered = Lists.newArrayList();
+		List<EObject> filtered = new ArrayList<>();
 		for (EObject eObject : unfiltered) {
 			if (!(eObject instanceof EParameter)) {
 				filtered.add(eObject);
@@ -144,25 +139,22 @@ public class PropertiesServices {
 		if (self instanceof EModelElement) {
 			EAnnotation eAnnot = ((EModelElement) self).getEAnnotation(GEN_MODEL_PACKAGE_NS_URI);
 			if (eAnnot != null) {
-				for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(eAnnot.getDetails(),
-						EStringToStringMapEntryImpl.class)) {
-					if ("documentation".equals(mapEntry.getKey())) {
+			    for (var details : eAnnot.getDetails()) {
+                    if (details instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
 						return mapEntry;
 					}
 				}
 			}
 
-		} else if (self instanceof EAnnotation) {
-			for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(((EAnnotation) self).getDetails(),
-					EStringToStringMapEntryImpl.class)) {
-				if ("documentation".equals(mapEntry.getKey())) {
-					return mapEntry;
-				}
-			}
-		} else if (self instanceof EStringToStringMapEntryImpl) {
-			if ("documentation".equals(((EStringToStringMapEntryImpl) self).getKey())) {
+		} else if (self instanceof EAnnotation annotation) {
+            for (var details : annotation.getDetails()) {
+                if (details instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
+                    return mapEntry;
+                }
+            }
+		} else if (self instanceof EStringToStringMapEntryImpl &&  ("documentation".equals(((EStringToStringMapEntryImpl) self).getKey()))) {
 				return (EStringToStringMapEntryImpl) self;
-			}
+			
 		}
 		return null;
 	}
@@ -171,12 +163,11 @@ public class PropertiesServices {
 		if (self instanceof EModelElement) {
 			EAnnotation eAnnot = ((EModelElement) self).getEAnnotation(GEN_MODEL_PACKAGE_NS_URI);
 			if (eAnnot != null) {
-				for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(eAnnot.getDetails(),
-						EStringToStringMapEntryImpl.class)) {
-					if ("documentation".equals(mapEntry.getKey())) {
-						mapEntry.setValue(value);
-					}
-				}
+			    for (var details : eAnnot.getDetails()) {
+			        if (details instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
+			            mapEntry.setValue(value);
+			        }
+			    }
 			} else {
 				EAnnotation newAnnot = EcoreFactory.eINSTANCE.createEAnnotation();
 				newAnnot.setSource(GEN_MODEL_PACKAGE_NS_URI);
@@ -184,18 +175,15 @@ public class PropertiesServices {
 				((EModelElement) self).getEAnnotations().add(newAnnot);
 			}
 
-		} else if (self instanceof EAnnotation) {
-			for (EStringToStringMapEntryImpl mapEntry : Iterables.filter(((EAnnotation) self).getDetails(),
-					EStringToStringMapEntryImpl.class)) {
-				if ("documentation".equals(mapEntry.getKey())) {
-					mapEntry.setValue(value);
-				}
-			}
+		} else if (self instanceof EAnnotation annotation) {
+		    for (var details : annotation.getDetails()) {
+		        if (details instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
+                    mapEntry.setValue(value);
+		        }
+            }
 
-		} else if (self instanceof EStringToStringMapEntryImpl) {
-			if ("documentation".equals(((EStringToStringMapEntryImpl) self).getKey())) {
-				((EStringToStringMapEntryImpl) self).setValue(value);
-			}
+		} else if (self instanceof EStringToStringMapEntryImpl mapEntry && "documentation".equals(mapEntry.getKey())) {
+			mapEntry.setValue(value);
 		}
 		return self;
 	}
