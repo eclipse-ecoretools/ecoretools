@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 Obeo.
+ * Copyright (c) 2013, 2024 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -12,13 +12,15 @@
 package org.eclipse.emf.ecoretools.design.tests;
 
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.sirius.business.api.componentization.ViewpointRegistry;
 import org.eclipse.sirius.viewpoint.description.Viewpoint;
-
-import com.google.common.collect.Iterators;
 
 public class EcoreToolsViewpointSpecificationModels {
 
@@ -34,15 +36,14 @@ public class EcoreToolsViewpointSpecificationModels {
 		this.generation = getEcoreToolsViewpointRegisteredInstance("Generation");
 	}
 
-	public static Viewpoint getEcoreToolsViewpointRegisteredInstance(String name) {
-		return ViewpointRegistry.getInstance().getViewpoint(
-				URI.createURI("viewpoint:/org.eclipse.emf.ecoretools.design/"
-						+ name));
-	}
+    public static Viewpoint getEcoreToolsViewpointRegisteredInstance(String name) {
+        return ViewpointRegistry.getInstance().getViewpoint(URI.createURI("viewpoint:/org.eclipse.emf.ecoretools.design/" + name));
+    }
 
 	Iterator<EObject> eAllContents() {
-		return Iterators.concat(design.eAllContents(), review.eAllContents(),
-				archetype.eAllContents(), generation.eAllContents());
+	    return Stream.of(design, review, archetype, generation).flatMap(vsm -> {
+	        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(vsm.eAllContents(), Spliterator.ORDERED), false);
+	    }).iterator();
 	}
 
 }

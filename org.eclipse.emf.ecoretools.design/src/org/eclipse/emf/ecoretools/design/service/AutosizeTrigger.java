@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Obeo
+ * Copyright (c) 2014, 2024 Obeo
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -12,6 +12,7 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.notify.Adapter;
@@ -29,64 +30,31 @@ import org.eclipse.sirius.ext.base.Option;
 import org.eclipse.sirius.ext.base.Options;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Sets;
-import com.google.common.collect.UnmodifiableIterator;
-
 public class AutosizeTrigger implements ModelChangeTrigger {
 
 	public static final Adapter AUTO_SIZE_MARKER = new AdapterImpl();
 	private TransactionalEditingDomain domain;
 
 	public AutosizeTrigger(TransactionalEditingDomain domain) {
-		super();
 		this.domain = domain;
 	}
 
 	public static final NotificationFilter IS_GMF_NODE_ATTACHMENT = new NotificationFilter.Custom() {
-
 		public boolean matches(Notification input) {
-			return input.getNewValue() instanceof Node
-					&& input.getFeature() instanceof EReference
-					&& ((EReference) input.getFeature()).isContainment();
-
+			return input.getNewValue() instanceof Node && input.getFeature() instanceof EReference ref && ref.isContainment();
 		}
 	};
 
-	public Option<Command> localChangesAboutToCommit(
-			Collection<Notification> notifications) {
-		final Collection<Node> toMakeAutosize = Sets.newLinkedHashSet();
-		for (Notification notif : notifications) {
-			Node nd = (Node) notif.getNewValue();
-			if (nd.getElement() instanceof DSemanticDecorator) {
-				EObject semanticObject = ((DSemanticDecorator) nd.getElement())
-						.getTarget();
-				if (semanticObject instanceof EObject) {
-					UnmodifiableIterator<Adapter> filter = Iterators.filter(
-							semanticObject.eAdapters().iterator(),
-							new Predicate<Adapter>() {
-								public boolean apply(Adapter input) {
-									return input == AUTO_SIZE_MARKER;
-								}
-							});
-
-					if (filter.hasNext()) {
-						semanticObject.eAdapters().remove(filter.next());
-						toMakeAutosize.add(nd);
-					}
-				}
-			}
-		}
-		if (toMakeAutosize.size() > 0) {
+	public Option<Command> localChangesAboutToCommit(Collection<Notification> notifications) {
+		Collection<Node> toMakeAutosize = collectElementsToAutoSize(notifications);
+		if (!toMakeAutosize.isEmpty()) {
 			Command result = new RecordingCommand(domain) {
-
 				@Override
 				protected void doExecute() {
 					for (Node node : toMakeAutosize) {
-						if (node.getLayoutConstraint() instanceof Bounds) {
-							((Bounds) node.getLayoutConstraint()).setWidth(-1);
-							((Bounds) node.getLayoutConstraint()).setHeight(-1);
+						if (node.getLayoutConstraint() instanceof Bounds bounds) {
+						    bounds.setWidth(-1);
+						    bounds.setHeight(-1);
 						}
 					}
 				}
@@ -95,6 +63,28 @@ public class AutosizeTrigger implements ModelChangeTrigger {
 		}
 		return Options.newNone();
 	}
+
+    private Collection<Node> collectElementsToAutoSize(Collection<Notification> notifications) {
+        Collection<Node> toMakeAutosize = new LinkedHashSet<>();
+		for (Notification notif : notifications) {
+			Node nd = (Node) notif.getNewValue();
+            if (nd.getElement() instanceof DSemanticDecorator semanticDecorator) {
+                EObject semanticObject = semanticDecorator.getTarget();
+                if (semanticObject != null) {
+                    var iter = semanticObject.eAdapters().iterator();
+                    while (iter.hasNext()) {
+                        Adapter adapter = iter.next();
+                        if (adapter == AUTO_SIZE_MARKER) {
+                            iter.remove();
+                            toMakeAutosize.add(nd);
+                            break;
+                        }
+                    }
+                }
+            }
+		}
+        return toMakeAutosize;
+    }
 
 	public int priority() {
 		return 0;

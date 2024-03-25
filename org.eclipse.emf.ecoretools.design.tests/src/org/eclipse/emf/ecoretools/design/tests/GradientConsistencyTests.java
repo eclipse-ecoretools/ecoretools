@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2023 Obeo.
+ * Copyright (c) 2013, 2024 Obeo.
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,10 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 @RunWith(value = Parameterized.class)
 public class GradientConsistencyTests {
@@ -46,11 +43,13 @@ public class GradientConsistencyTests {
 	@Parameters
 	public static Collection<Object[]> data() {
 		List<Object[]> parameters = new ArrayList<>();
-		Set<FlatContainerStyleDescription> allExpressions = Sets
-				.newLinkedHashSet();
+		Set<FlatContainerStyleDescription> allExpressions = new LinkedHashSet<>();
 		EcoreToolsViewpointSpecificationModels spec = new EcoreToolsViewpointSpecificationModels();
-		allExpressions.addAll(Lists.newArrayList(Iterators.filter(
-				spec.eAllContents(), FlatContainerStyleDescription.class)));
+		spec.eAllContents().forEachRemaining(eObject -> {
+		    if (eObject instanceof FlatContainerStyleDescription style) {
+		        allExpressions.add(style);
+		    }
+		});
 		return parameters;
 	}
 
