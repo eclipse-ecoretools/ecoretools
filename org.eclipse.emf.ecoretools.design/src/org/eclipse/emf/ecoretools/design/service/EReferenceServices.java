@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 THALES GLOBAL SERVICES and Others
+ * Copyright (c) 2013, 2024 THALES GLOBAL SERVICES and Others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -12,8 +12,10 @@
 package org.eclipse.emf.ecoretools.design.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,10 +36,6 @@ import org.eclipse.sirius.business.api.session.SessionManager;
 import org.eclipse.sirius.diagram.DEdge;
 import org.eclipse.sirius.diagram.DSemanticDiagram;
 import org.eclipse.sirius.viewpoint.DSemanticDecorator;
-
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * Services dealing with EReferences usable from a VSM.
@@ -68,7 +66,7 @@ public class EReferenceServices {
 
     public List<EReference> getInverseEReferences(EObject ctx) {
         Session sess = SessionManager.INSTANCE.getSession(ctx);
-        List<EReference> result = Lists.newArrayList();
+        List<EReference> result = new ArrayList<>();
         if (sess != null) {
             for (Setting setting : sess.getSemanticCrossReferencer().getInverseReferences(ctx)) {
                 if (setting.getEObject() instanceof EReference)
@@ -86,13 +84,13 @@ public class EReferenceServices {
 
     public String eKeysLabel(EReference ref) {
         String result = "";
-        Collection<String> names = Lists.newArrayList();
+        Collection<String> names = new ArrayList<>();
         for (EAttribute attr : ref.getEKeys()) {
             if (attr.getName() != null) {
                 names.add(attr.getName());
             }
         }
-        result += Joiner.on(',').join(names);
+        result += String.join(",", names);
         return result;
     }
 
@@ -110,7 +108,7 @@ public class EReferenceServices {
 
     public List<EReference> getEOppositeEReferences(EPackage context, DSemanticDiagram diagram) {
         Collection<EClass> eClasses = new DesignServices().getDisplayedEClasses(diagram);
-        Set<EReference> references = Sets.newLinkedHashSet();
+        Set<EReference> references = new LinkedHashSet<>();
         for (EClass clazz : eClasses) {
             references.addAll(clazz.getEReferences());
         }
@@ -178,8 +176,8 @@ public class EReferenceServices {
     }
 
     public String superTypesLabel(EClass any) {
-        Collection<String> reifiedTypes = Lists.newArrayList();
-        Collection<String> typeParameters = Lists.newArrayList();
+        Collection<String> reifiedTypes = new ArrayList<>();
+        Collection<String> typeParameters = new ArrayList<>();
         for (EGenericType genType : any.getEGenericSuperTypes()) {
             if (genType.getEClassifier() != null) {
                 for (ETypeParameter param : genType.getEClassifier().getETypeParameters()) {
@@ -201,7 +199,7 @@ public class EReferenceServices {
             }
         }
         if (reifiedTypes.size() > 0) {
-            return "<<bind " + Joiner.on(',').join(typeParameters) + ">> " + Joiner.on(',').join(reifiedTypes);
+            return "<<bind " + String.join(",", typeParameters) + ">> " + String.join(",", reifiedTypes);
         } else {
             return null;
         }
@@ -280,7 +278,7 @@ public class EReferenceServices {
      * interpret as a service, but it does not handle arrays.
      */
     public List<Integer> parseCardinality(String editString) {
-        List<Integer> result = Lists.newArrayList(null, null);
+        Integer[]  result = new Integer[2];
         String spec = extractCardinalityPart(editString);
         if (spec != null) {
             if (spec.contains(CARDINALITY_SEPARATOR)) {
@@ -290,18 +288,18 @@ public class EReferenceServices {
                     break;
                 case 1:
                     if (spec.startsWith(CARDINALITY_SEPARATOR)) {
-                        result.set(1, parseBound(parts[0]));
+                        result[1] = parseBound(parts[0]);
                     } else if (spec.endsWith(CARDINALITY_SEPARATOR)) {
-                        result.set(0, parseBound(parts[0]));
+                        result[0] = parseBound(parts[0]);
                     }
                     break;
                 default: // 2 (or more, but only the first 2 are considered)
-                    result.set(0, parseBound(parts[0]));
-                    result.set(1, parseBound(parts[1]));
+                    result[0] = parseBound(parts[0]);
+                    result[1] = parseBound(parts[1]);
                 }
             }
         }
-        return result;
+        return Arrays.asList(result);
     }
 
     private Integer parseBound(String bound) {

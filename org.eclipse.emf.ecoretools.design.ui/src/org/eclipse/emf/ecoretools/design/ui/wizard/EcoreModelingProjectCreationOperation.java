@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2023 THALES GLOBAL SERVICES and others
+ * Copyright (c) 2013, 2024 THALES GLOBAL SERVICES and others
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -15,12 +15,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -68,12 +71,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 /**
  * A {@link WorkspaceModifyOperation} to create a new Ecore Modeling Project
  * from a Empty EMF project.
@@ -105,7 +102,7 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 
 	private IWorkingSet[] selectedWorkingSets;
 
-	private Set<DRepresentation> createdRepresentations = Sets.newLinkedHashSet();
+	private Set<DRepresentation> createdRepresentations =  new LinkedHashSet<>();
 
 	/**
 	 * Default constructor.
@@ -167,25 +164,24 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 					}
 				}
 				if (ecoreRes != null) {
-					for (final EPackage root : Iterables.filter(ecoreRes.getContents(), EPackage.class)) {
-						final RepresentationDescription entities = findRepresentationDescription(root, "Entities",
-								createdSession);
-						if (entities != null) {
-							createdSession.getTransactionalEditingDomain().getCommandStack()
-									.execute(new RecordingCommand(createdSession.getTransactionalEditingDomain()) {
+                    for (EObject root : ecoreRes.getContents()) {
+                        if (root instanceof EPackage ePackage) {
+                            final RepresentationDescription entities = findRepresentationDescription(ePackage, "Entities", createdSession);
+                            if (entities != null) {
+                                createdSession.getTransactionalEditingDomain().getCommandStack().execute(new RecordingCommand(createdSession.getTransactionalEditingDomain()) {
 
-										@Override
-										protected void doExecute() {
-											DRepresentation created = DialectManager.INSTANCE.createRepresentation(
-													root.getName(), root, entities, createdSession, monitor);
-											if (created != null) {
-												createdRepresentations.add(created);
-											}
-										}
-									});
-							createdSession.save(monitor);
-						}
-					}
+                                    @Override
+                                    protected void doExecute() {
+                                        DRepresentation created = DialectManager.INSTANCE.createRepresentation(ePackage.getName(), ePackage, entities, createdSession, monitor);
+                                        if (created != null) {
+                                            createdRepresentations.add(created);
+                                        }
+                                    }
+                                });
+                                createdSession.save(monitor);
+                            }
+                        }
+                    }
 				}
 			}
 			monitor.subTask("prepare the modeling project..."); //$NON-NLS-1$
@@ -390,16 +386,14 @@ public class EcoreModelingProjectCreationOperation extends WorkspaceModifyOperat
 		genModel.setCodeFormatting(true);
 		genModel.setCreationIcons(false);
 
-		List<String> prjNameSegments = Lists.newArrayList(Splitter.on('.').split(projectName.toLowerCase()));
+		List<String> prjNameSegments = new ArrayList<>(List.of(projectName.toLowerCase().split(Pattern.quote("."))));
 		for (GenPackage p : genModel.getGenPackages()) {
-			if (prjNameSegments.size() > 0 && p.getEcorePackage() != null && p.getEcorePackage().getName() != null
-					&& Iterables.getLast(prjNameSegments).toLowerCase()
-							.equals(p.getEcorePackage().getName().toLowerCase())) {
+			if (!prjNameSegments.isEmpty() && p.getEcorePackage() != null && p.getEcorePackage().getName() != null
+					&& prjNameSegments.get(prjNameSegments.size() - 1).equalsIgnoreCase(p.getEcorePackage().getName())) {
 				prjNameSegments.remove(prjNameSegments.size() - 1);
 			}
-			p.setBasePackage(Joiner.on('.').join(prjNameSegments));
+			p.setBasePackage(String.join(".", prjNameSegments));
 		}
-
 	}
 
 	private String createEcoreResource(String modelPath) {
