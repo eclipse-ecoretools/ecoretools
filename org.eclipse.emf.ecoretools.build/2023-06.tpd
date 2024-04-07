@@ -10,10 +10,6 @@ location "https://download.eclipse.org/releases/2023-06/" {
 	org.eclipse.acceleo.query.feature.group lazy
 	org.eclipse.gmf.runtime.diagram.ui lazy
 	org.eclipse.gmf.runtime.diagram.ui.resources.editor lazy
-	org.apache.batik.ext [1.16.0,1.16.1)
-	org.apache.batik.codec [1.16.0,1.16.1)
-	org.apache.batik.bridge [1.16.0,1.16.1)
-	org.apache.batik.script [1.16.0,1.16.1)
 }
 
 location "https://download.eclipse.org/cbi/updates/license" {

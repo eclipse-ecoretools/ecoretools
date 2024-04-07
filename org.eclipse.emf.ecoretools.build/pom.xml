@@ -38,8 +38,9 @@
   </licenses>
 
   <properties>
-    <tycho-version>2.7.5</tycho-version>
+    <tycho-version>4.0.7</tycho-version>
     <tycho.scmUrl>scm:git:https://github.com/eclipse-ecoretools/ecoretools.git</tycho.scmUrl>
+    <platform>2023-03</platform>
   </properties>
 
   <modules>
@@ -67,14 +68,12 @@
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho-version}</version>
         <configuration>
-          <resolver>p2</resolver>
-          <ignoreTychoRepositories>true</ignoreTychoRepositories>
           <target>
             <artifact>
               <groupId>org.eclipse.emf.ecoretools</groupId>
     	      <artifactId>emf.ecoretools-parent</artifactId>
     	      <version>3.5.1-SNAPSHOT</version>
-              <classifier>${PLATFORM}</classifier>
+              <classifier>${platform}</classifier>
             </artifact>
           </target>
           <environments>
@@ -192,16 +191,6 @@
 
   
   <profiles>
-    <profile>
-      <id>2021-06</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <properties>
-        <PLATFORM>2021-06</PLATFORM>        
-      </properties>   
-    </profile> 
-    
     <profile>
       <id>sign</id>
       <activation>
