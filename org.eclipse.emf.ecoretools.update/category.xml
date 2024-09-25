@@ -3,6 +3,9 @@
    <feature id="org.eclipse.emf.ecoretools.design" version="3.5.1.qualifier">
       <category name="ecoretools"/>
    </feature>     
+   <feature id="org.eclipse.emf.ecoretools.design.source" version="3.5.1.qualifier">
+      <category name="ecoretools"/>
+   </feature>     
    <category-def name="ecoretools" label="Ecore Tools">
       <description>
          Ecore Tools features.
