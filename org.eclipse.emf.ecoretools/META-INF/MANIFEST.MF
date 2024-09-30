@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: org.eclipse.emf.ecoretools
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.emf.ecoretools;singleton:=true
-Bundle-Version: 3.5.1.qualifier
+Bundle-Version: 3.5.2.qualifier
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.emf.ecoretools.internal;x-internal:=true
