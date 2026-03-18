@@ -30,5 +30,5 @@ Eclipse-LazyStart: true
 Bundle-Activator: org.eclipse.emf.ecoretools.design.service.EcoreToolsDesignPlugin$Implementation
 Export-Package: org.eclipse.emf.ecoretools.design,
  org.eclipse.emf.ecoretools.design.service
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
