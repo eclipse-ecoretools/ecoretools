@@ -26,4 +26,4 @@ Require-Bundle: org.junit,
  org.eclipse.emf.transaction,
  org.eclipse.gmf.runtime.notation
 Import-Package: org.eclipse.sirius.ecore.extender.tool.api
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21

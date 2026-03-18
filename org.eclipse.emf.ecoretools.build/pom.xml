@@ -197,7 +197,7 @@
                     <version>3.28.0</version>
                     <configuration>
                         <minimumTokens>100</minimumTokens>
-                        <targetJdk>17</targetJdk>
+                        <targetJdk>21</targetJdk>
                         <format>xml</format>
                         <failOnViolation>false</failOnViolation>
                     </configuration>
