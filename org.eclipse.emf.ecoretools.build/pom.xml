@@ -123,7 +123,7 @@
                         <environment>
                             <os>macosx</os>
                             <ws>cocoa</ws>
-                            <arch>x86_64</arch>
+                            <arch>aarch64</arch>
                         </environment>
                     </environments>
                 </configuration>
@@ -165,7 +165,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.5.0</version>
                     <configuration>
                         <encoding>ISO-8859-1</encoding>
                     </configuration>
@@ -173,12 +173,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>findbugs-maven-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>3.0.5</version>
                     <configuration>
                         <findbugsXmlOutput>true</findbugsXmlOutput>
                         <failOnError>false</failOnError>
@@ -194,9 +194,8 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.28.0</version>
                     <configuration>
-                        <sourceEncoding>utf-8</sourceEncoding>
                         <minimumTokens>100</minimumTokens>
                         <targetJdk>17</targetJdk>
                         <format>xml</format>
@@ -229,7 +228,7 @@
                     <plugin>
                         <groupId>org.eclipse.cbi.maven.plugins</groupId>
                         <artifactId>eclipse-jarsigner-plugin</artifactId>
-                        <version>1.3.2</version>
+                        <version>1.5.2</version>
                         <executions>
                             <execution>
                                 <id>sign</id>
@@ -268,7 +267,14 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>3.4.0</version>
+                        <version>3.6.0</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.puppycrawl.tools</groupId>
+                                <artifactId>checkstyle</artifactId>
+                                <version>13.4.0</version>
+                            </dependency>
+                        </dependencies>
                         <executions>
                             <execution>
                                 <id>check my sources</id>
