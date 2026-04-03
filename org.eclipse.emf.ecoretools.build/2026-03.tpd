@@ -1,6 +1,6 @@
-target "2023-12 Target Platform For EcoreTools" with source requirements
+target "2026-03 Target Platform For EcoreTools" with source requirements
 
-location "https://download.eclipse.org/releases/2023-12/" {
+location "https://download.eclipse.org/releases/2026-03/" {
 	org.eclipse.sdk.feature.group lazy
 	org.eclipse.emf.sdk.feature.group lazy
 	org.eclipse.sirius.runtime.aql.feature.group lazy
