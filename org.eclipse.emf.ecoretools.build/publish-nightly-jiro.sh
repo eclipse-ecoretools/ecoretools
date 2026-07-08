@@ -74,10 +74,6 @@ export TARGET_DIR="$TARGET_ROOT/$FULL_VERSION/$PLATFORM"
 ssh "$SSH_ACCOUNT" mkdir -p "$TARGET_DIR"
 # The actual publication of the p2 repo produced by the build
 scp -r "$WORKSPACE"/org.eclipse.emf.ecoretools.update/target/repository/* "$SSH_ACCOUNT:$TARGET_DIR"
-# Publish a dump of the build environment, may be useful to debug
-env | sort > build_env.txt
-scp build_env.txt "$SSH_ACCOUNT:$TARGET_DIR/build_env.txt"
-rm build_env.txt
 
 # copy the "all in one" update site 
 #ssh "$SSH_ACCOUNT" mkdir -p "$TARGET_DIR/all-in-one"
